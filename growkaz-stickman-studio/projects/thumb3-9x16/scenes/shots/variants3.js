@@ -1,0 +1,1 @@
+../../../thumb3-shared/variants3.js
