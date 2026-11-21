@@ -1,9 +1,11 @@
-# Dari Sekarung Beras ke Satu Sentuhan — script
+# Dari Sekarung Beras ke Satu Sentuhan / From a Sack of Rice to a Single Tap — script
+
+Two narrations, same 11 shots and same pictures: Indonesian (ID) and English (EN). In-world labels are painted in the language of each version (see the label table).
 
 Vertical 9:16, Bahasa Indonesia. 148 words, 11 shots. Estimated ~55 s at 2.7 words/s
 (Indonesian TTS pace; the rulebook's 3.35 w/s is for English). Cuts are re-timed from the real voice-over.
 
-## Shot table
+## Shot table (ID)
 
 | # | Start | Words | Line | On screen (3D world) | SFX |
 |---|---|---|---|---|---|
@@ -19,15 +21,51 @@ Vertical 9:16, Bahasa Indonesia. 148 words, 11 shots. Estimated ~55 s at 2.7 wor
 | 10 | 45.2 s | 12 | Jadi, dari sekarung beras sampai satu sentuhan, uang terus berubah mengikuti kita. | Kembali ke pasar yang sama, kini dengan koin & ponsel; camera pulls back across the timeline of props. | smooth-transition-whoosh |
 | 11 | 49.6 s | 14 | Kalau uang hilang besok, apa yang kamu tukar untuk makan siang? Tulis di komentar! | Petani di depan papan kapur bertuliskan "TUKAR APA?"; karung beras di satu tangan, ponsel di lain. Slow push, ends at rest. | soft-success-chime |
 
-## Voice-over
+## Voice-over (ID)
 
 Dulu, untuk membeli seekor ayam, kamu harus memanggul sekarung beras ke pasar. Belum ada uang. Orang saling menukar barang: beras dengan ikan, garam dengan kain, kambing dengan gandum. Petani kita lapar ikan. Ia berjalan jauh ke dermaga, menemui seorang nelayan. Tapi nelayan itu menggeleng. Ia tidak butuh beras. Ia butuh sepasang sepatu. Lalu petani mencari tukang sepatu. Tukang sepatu malah minta seekor kambing. Setengah hari habis, kakinya pegal, berasnya masih utuh, dan ikan yang ia mau belum juga didapat. Kamu lihat, barter hanya berhasil kalau dua orang saling butuh di saat yang sama. Maka orang memakai kerang, garam, dan logam. Sekitar 2.600 tahun lalu, Lydia di Turki mencetak koin paling awal. Seribu tahun lalu, China membuat uang kertas. Sekarang, cukup tempelkan ponsel. Jadi, dari sekarung beras sampai satu sentuhan, uang terus berubah mengikuti kita. Kalau uang hilang besok, apa yang kamu tukar untuk makan siang? Tulis di komentar!
 
+## Shot table (EN)
+
+155 words, estimated ~46 s at 3.35 words/s.
+
+| # | Start | Words | Line |
+|---|---|---|---|
+| 1 | 0.0 s | 16 | Long ago, to buy one chicken, you had to haul a sack of rice to market. |
+| 2 | 4.8 s | 15 | No money yet. People swapped goods: rice for fish, salt for cloth, goats for wheat. |
+| 3 | 9.3 s | 16 | Our farmer wants fish. He walks all the way to the docks to find a fisherman. |
+| 4 | 14.0 s | 11 | But the fisherman shakes his head. He needs shoes, not rice. |
+| 5 | 17.3 s | 10 | Then the farmer finds a shoemaker, who wants a goat. |
+| 6 | 20.3 s | 15 | Half a day gone, sore feet, a full sack of rice, and still no fish. |
+| 7 | 24.8 s | 14 | You see, barter only works when two people want each other's things at once. |
+| 8 | 29.0 s | 20 | Instead, people used shells, salt and metal. Around 2,600 years ago, Lydia, now Turkey, struck some of the earliest coins. |
+| 9 | 34.9 s | 14 | A thousand years ago, China printed paper money. Now we just tap a phone. |
+| 10 | 39.1 s | 12 | So from rice to a single tap, money keeps changing with us. |
+| 11 | 42.7 s | 12 | If money vanished tomorrow, what would you trade for lunch? Comment below. |
+
+On screen and SFX: same as the ID table.
+
+## Voice-over (EN)
+
+Long ago, to buy one chicken, you had to haul a sack of rice to market. No money yet. People swapped goods: rice for fish, salt for cloth, goats for wheat. Our farmer wants fish. He walks all the way to the docks to find a fisherman. But the fisherman shakes his head. He needs shoes, not rice. Then the farmer finds a shoemaker, who wants a goat. Half a day gone, sore feet, a full sack of rice, and still no fish. You see, barter only works when two people want each other's things at once. Instead, people used shells, salt and metal. Around 2,600 years ago, Lydia, now Turkey, struck some of the earliest coins. A thousand years ago, China printed paper money. Now we just tap a phone. So from rice to a single tap, money keeps changing with us. If money vanished tomorrow, what would you trade for lunch? Comment below.
+
+## In-world labels per version
+
+| Where | ID | EN |
+|---|---|---|
+| Sack | BERAS | RICE |
+| Market gate | PASAR | MARKET |
+| Docks sign | DERMAGA | DOCKS |
+| Shoe shop | SEPATU | SHOES |
+| Signpost (shot 6) | PASAR / DERMAGA / SEPATU | MARKET / DOCKS / SHOES |
+| Coin workshop banner | LYDIA | LYDIA |
+| Museum case | JIAOZI · 1024 | JIAOZI · 1024 |
+| Chalkboard (shot 11) | TUKAR APA? | TRADE WHAT? |
+
 ## Rulebook check
 
-- First word at t=0, premise in sentence 1; hook 12 words, ends ~4.4 s. ✓
-- 11 shots, 148 words, ~55 s. ✓
-- But = shot 4 ✓, Then (Lalu) = shot 5 ✓, complaint = shot 6 ✓, pivot "Kamu lihat" at 53 % ✓, "Jadi…" at 82 % ✓, closing 14 words ✓.
+- ID: hook 12 words, ends ~4.4 s; 11 shots, 148 words, ~55 s; Tapi = shot 4, Lalu = shot 5, complaint = shot 6, "Kamu lihat" at 53 %, "Jadi…" at 82 %, closing 14 words. ✓
+- EN: hook 16 words, ends ~4.8 s; 11 shots, 155 words (5 over the 150 aim), ~46 s; But = shot 4, Then = shot 5, complaint = shot 6, "You see" at 54 %, "So…" at 85 %, closing 12 words. ✓
 - Deviation (asked by the user): the closing line is a discussion question plus "Tulis di komentar!" instead of a plain closing line.
 
 ## Fact map
