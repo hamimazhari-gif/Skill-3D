@@ -5,7 +5,7 @@ A = Image.open("stills/thA/f0023.jpg").convert("RGB"); Bm = Image.open("stills/t
 INK, YEL, PINK, CYAN, RED, WHITE = (24, 16, 26), (255, 210, 58), (255, 79, 160), (79, 224, 255), (224, 52, 48), (255, 255, 255)
 TXT = {
   "id": dict(top="GTA 6", sub="$3,79 MILIAR / 1 HARI", bot1="GAME PERTAMA?", bot2="DIBUAT CUMA 2 MINGGU"),
-  "en": dict(top="GTA 6", sub="$3.79 BILLION IN 1 DAY", bot1="THE FIRST GAME?", bot2="BUILT IN JUST 2 WEEKS"),
+  "en": dict(top="GTA 6", sub="$3.79 BILLION IN 1 DAY", bot1="FIRST GAME?", bot2="BUILT IN JUST 2 WEEKS"),
 }
 def F(size): return ImageFont.truetype(FONT, size)
 def fit(text, maxw, size):
@@ -44,12 +44,9 @@ def vertical(lang):
     g2 = Image.new("L", (1, H)); [g2.putpixel((0, y), int(200 * max(0, (y - 1520) / 400) ** 1.2)) for y in range(H)]
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 12)] * 3 + [g2.resize((W, H))]))
     d = ImageDraw.Draw(im); d.line([p0, p1], fill=INK, width=30); d.line([p0, p1], fill=YEL, width=16)
-    text(im, (W / 2, 170), T["top"], F(250), WHITE, 16, glow=PINK)
-    text(im, (W / 2, 350), T["sub"], fit(T["sub"], W - 90, 88), YEL, 10)
-    badge(im, (40, 830), "2026", 92, (138, 91, 255)); badge(im, (W - 250, 975), "1958", 92, (176, 120, 60))
-    vs(im, (W / 2, 970), 105)
-    text(im, (W / 2, 1700), T["bot1"], fit(T["bot1"], W - 80, 150), WHITE, 14)
-    text(im, (W / 2, 1840), T["bot2"], fit(T["bot2"], W - 120, 84), YEL, 10)
+    text(im, (W / 2, 200), T["top"], F(280), WHITE, 18, glow=PINK)
+    vs(im, (W / 2, 970), 115)
+    text(im, (W / 2, 1760), T["bot1"], fit(T["bot1"], W - 70, 170), YEL, 16, glow=(255, 150, 40))
     im.convert("RGB").save(f"out/thumbnail_{lang}_vertical.jpg", quality=93)
 
 def landscape(lang):
@@ -61,13 +58,11 @@ def landscape(lang):
     R = Image.new("RGB", (W, H)); R.paste(right, (W - 760, 0)); im.paste(R, (0, 0), m)
     g = Image.new("L", (1, H)); [g.putpixel((0, y), int(170 * max(0, 1 - y / 230) ** 1.2)) for y in range(H)]
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 12)] * 3 + [g.resize((W, H))]))
-    g2 = Image.new("L", (1, H)); [g2.putpixel((0, y), int(190 * max(0, (y - 520) / 200) ** 1.2)) for y in range(H)]
+    g2 = Image.new("L", (1, H)); [g2.putpixel((0, y), int(170 * max(0, (y - 540) / 180) ** 1.2)) for y in range(H)]
     im.alpha_composite(Image.merge("RGBA", [Image.new("L", (W, H), 12)] * 3 + [g2.resize((W, H))]))
     d = ImageDraw.Draw(im); d.line([(700, 0), (580, H)], fill=INK, width=24); d.line([(700, 0), (580, H)], fill=YEL, width=12)
-    text(im, (330, 95), T["top"], F(140), WHITE, 12, glow=PINK, shadow=7)
-    text(im, (960, 95), "1958", F(140), WHITE, 12, glow=(255, 170, 80), shadow=7)
-    text(im, (320, 650), T["sub"], fit(T["sub"], 560, 60), YEL, 8, shadow=6)
-    text(im, (950, 650), T["bot2"], fit(T["bot2"], 560, 60), YEL, 8, shadow=6)
+    text(im, (320, 100), T["top"], F(150), WHITE, 12, glow=PINK, shadow=7)
+    text(im, (965, 640), T["bot1"], fit(T["bot1"], 590, 100), YEL, 10, glow=(255, 150, 40), shadow=7)
     vs(im, (640, 370), 78)
     im.convert("RGB").save(f"out/thumbnail_{lang}_landscape.jpg", quality=93)
 
