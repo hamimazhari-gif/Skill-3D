@@ -1,0 +1,187 @@
+{
+ "duration": 36.96,
+ "frames30": 1109,
+ "source": "silence-align (cost 1.98)",
+ "segments": [
+  [
+   0.122833,
+   2.97058
+  ],
+  [
+   3.30163,
+   4.57112
+  ],
+  [
+   5.01087,
+   6.24633
+  ],
+  [
+   6.43633,
+   8.89075
+  ],
+  [
+   9.10379,
+   10.5687
+  ],
+  [
+   10.9168,
+   11.0559
+  ],
+  [
+   11.274,
+   13.5768
+  ],
+  [
+   13.9462,
+   15.2435
+  ],
+  [
+   15.6273,
+   16.1442
+  ],
+  [
+   16.7476,
+   16.9712
+  ],
+  [
+   17.0918,
+   17.7852
+  ],
+  [
+   18.21,
+   19.877
+  ],
+  [
+   20.2554,
+   20.9985
+  ],
+  [
+   21.2262,
+   22.8691
+  ],
+  [
+   23.2863,
+   23.7843
+  ],
+  [
+   23.9835,
+   26.6703
+  ],
+  [
+   26.9459,
+   28.8436
+  ],
+  [
+   29.3488,
+   31.2658
+  ],
+  [
+   31.4399,
+   32.7369
+  ],
+  [
+   33.366,
+   33.6306
+  ],
+  [
+   33.8259,
+   34.7327
+  ],
+  [
+   35.1685,
+   36.6878
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Your microwave is a piece of war radar.",
+   "s": 0.123,
+   "e": 2.971
+  },
+  {
+   "text": "A candy bar gave it away.",
+   "s": 3.302,
+   "e": 4.571
+  },
+  {
+   "text": "In the nineteen-forties,",
+   "s": 5.011,
+   "e": 6.246
+  },
+  {
+   "text": "Percy Spencer built radar for the military.",
+   "s": 6.436,
+   "e": 8.891
+  },
+  {
+   "text": "He never finished grade school.",
+   "s": 9.104,
+   "e": 10.569
+  },
+  {
+   "text": "One day,",
+   "s": 10.917,
+   "e": 11.056
+  },
+  {
+   "text": "he stood beside a humming radar tube.",
+   "s": 11.274,
+   "e": 13.577
+  },
+  {
+   "text": "The candy bar in his pocket melted.",
+   "s": 13.946,
+   "e": 16.144
+  },
+  {
+   "text": "So he brought popcorn.",
+   "s": 16.748,
+   "e": 17.785
+  },
+  {
+   "text": "It exploded all over the lab.",
+   "s": 18.21,
+   "e": 19.877
+  },
+  {
+   "text": "Then an egg.",
+   "s": 20.255,
+   "e": 20.998
+  },
+  {
+   "text": "It burst in a coworker's face.",
+   "s": 21.226,
+   "e": 22.869
+  },
+  {
+   "text": "You see,",
+   "s": 23.286,
+   "e": 23.784
+  },
+  {
+   "text": "those invisible waves make the water in food shake,",
+   "s": 23.983,
+   "e": 26.67
+  },
+  {
+   "text": "like tiny hands rubbing together.",
+   "s": 26.946,
+   "e": 28.844
+  },
+  {
+   "text": "His first oven was as tall as a man and as heavy as a piano.",
+   "s": 29.349,
+   "e": 32.737
+  },
+  {
+   "text": "Today it fits on your counter.",
+   "s": 33.366,
+   "e": 34.733
+  },
+  {
+   "text": "And we still use it for popcorn.",
+   "s": 35.169,
+   "e": 36.688
+  }
+ ]
+}

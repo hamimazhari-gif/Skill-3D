@@ -1,0 +1,190 @@
+{
+ "duration": 36.36,
+ "frames30": 1091,
+ "source": "silence-align (cost 2.48)",
+ "segments": [
+  [
+   0.248583,
+   2.22337
+  ],
+  [
+   2.39275,
+   2.888
+  ],
+  [
+   3.27679,
+   4.84987
+  ],
+  [
+   5.64292,
+   6.58662
+  ],
+  [
+   6.91008,
+   8.97642
+  ],
+  [
+   9.33467,
+   10.8027
+  ],
+  [
+   11.2292,
+   13.5047
+  ],
+  [
+   13.9735,
+   15.483
+  ],
+  [
+   15.9732,
+   17.0637
+  ],
+  [
+   17.3123,
+   18.0022
+  ],
+  [
+   18.1677,
+   18.8197
+  ],
+  [
+   19.4577,
+   20.0515
+  ],
+  [
+   20.3965,
+   21.7302
+  ],
+  [
+   22.3677,
+   25.0287
+  ],
+  [
+   25.2321,
+   25.9221
+  ],
+  [
+   26.0521,
+   26.9416
+  ],
+  [
+   27.8737,
+   29.5919
+  ],
+  [
+   29.9042,
+   30.66
+  ],
+  [
+   30.8073,
+   31.1892
+  ],
+  [
+   31.7063,
+   32.0738
+  ],
+  [
+   32.3237,
+   33.0521
+  ],
+  [
+   33.5563,
+   34.2265
+  ],
+  [
+   34.354,
+   35.4473
+  ],
+  [
+   35.5694,
+   36.0802
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Microwave Anda adalah radar perang.",
+   "s": 0.249,
+   "e": 2.888
+  },
+  {
+   "text": "Sebatang permen yang membongkarnya.",
+   "s": 3.277,
+   "e": 4.85
+  },
+  {
+   "text": "Tahun empat puluhan,",
+   "s": 5.643,
+   "e": 6.587
+  },
+  {
+   "text": "Percy Spencer membuat radar untuk militer.",
+   "s": 6.91,
+   "e": 8.976
+  },
+  {
+   "text": "Dia bahkan tak tamat SD.",
+   "s": 9.335,
+   "e": 10.803
+  },
+  {
+   "text": "Suatu hari, dia berdiri di dekat tabung radar.",
+   "s": 11.229,
+   "e": 13.505
+  },
+  {
+   "text": "Permen di sakunya meleleh.",
+   "s": 13.973,
+   "e": 15.483
+  },
+  {
+   "text": "Dia pun membawa jagung.",
+   "s": 15.973,
+   "e": 17.064
+  },
+  {
+   "text": "Jagungnya meletus ke seluruh lab.",
+   "s": 17.312,
+   "e": 18.82
+  },
+  {
+   "text": "Lalu telur.",
+   "s": 19.458,
+   "e": 20.052
+  },
+  {
+   "text": "Meledak di wajah rekannya.",
+   "s": 20.396,
+   "e": 21.73
+  },
+  {
+   "text": "Ternyata, gelombang itu membuat air dalam makanan bergetar,",
+   "s": 22.368,
+   "e": 25.029
+  },
+  {
+   "text": "seperti tangan kecil yang saling menggosok.",
+   "s": 25.232,
+   "e": 26.942
+  },
+  {
+   "text": "Oven pertamanya setinggi manusia,",
+   "s": 27.874,
+   "e": 29.592
+  },
+  {
+   "text": "dan seberat piano.",
+   "s": 29.904,
+   "e": 31.189
+  },
+  {
+   "text": "Kini muat di dapur.",
+   "s": 31.706,
+   "e": 33.052
+  },
+  {
+   "text": "Dan kita masih memakainya untuk popcorn.",
+   "s": 33.556,
+   "e": 36.08
+  }
+ ]
+}
