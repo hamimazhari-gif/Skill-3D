@@ -2,3 +2,5 @@ node_modules
 out
 .DS_Store
 .env
+growkaz-stickman-studio/**/build/
+__pycache__
