@@ -20,7 +20,7 @@ export const SHOTS = [
   { id: 'today', a: B.today, light: 'kday' },
 ];
 SHOTS.forEach((s, i) => { s.b = i < SHOTS.length - 1 ? SHOTS[i + 1].a - 1 : TOTAL - 1; s.n = s.b - s.a + 1; });
-export const shotAt = (f) => SHOTS.find((s) => f >= s.a && f <= s.b) || SHOTS[SHOTS.length - 1];
+const _shotAt = (f) => SHOTS.find((s) => f >= s.a && f <= s.b) || SHOTS[SHOTS.length - 1];
 const smooth = M.smooth;
 const at = (S, u) => Math.round(S.a + u * S.n); // fraction of the shot -> frame
 
@@ -106,8 +106,8 @@ const camKeys = (S) => {
 };
 const KICKS = [{ f: B.melt, a: 0.03 }, { f: B.pop, a: 0.05 }, { f: B.burst, a: 0.05 }, { f: B.piano, a: 0.07 }, { f: B.popcorn, a: 0.05 }];
 const TP = [0.3, 0, -0.75];
-export const camAt = (f) => {
-  const S = shotAt(f), c = camFromKeys(camKeys(S), f, { kicks: KICKS });
+const _camAt = (f) => {
+  const S = _shotAt(f), c = camFromKeys(camKeys(S), f, { kicks: KICKS });
   const fl = (a, n = 6, k = 0.85) => (f >= a && f < a + n ? (1 - (f - a) / n) * k : 0);
   c.flash = Math.max(fl(B.candy), fl(B.oven), fl(B.today), fl(B.wave, 5, 0.4), fl(B.popcorn, 4, 0.3));
   if (S.id === 'oven') c.shadowAt = [1.8, 1, 0.3];
@@ -117,8 +117,8 @@ export const camAt = (f) => {
 
 // ---------- lens ----------
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-export const dofAt = (f) => {
-  const S = shotAt(f), C = camAt(f);
+const _dofAt = (f) => {
+  const S = _shotAt(f), C = _camAt(f);
   switch (S.id) {
     case 'hook': return { focus: dist(C.pos, MWC), cinf: 10 };
     case 'today': return { focus: dist(C.pos, MWC), cinf: lerp(4, 10, smooth(ramp(f, S.a, B.popcorn - 8))) };
@@ -137,8 +137,8 @@ export const dofAt = (f) => {
 
 // ---------- world state ----------
 const TILT0 = Math.asin(0.35 / 1.8);
-export const worldAt = (f) => {
-  const S = shotAt(f);
+const _worldAt = (f) => {
+  const S = _shotAt(f);
   const W = { seesaw: S.id === 'oven', tube: 0, blue: S.light === 'blue', mwOn: 0, mwDoor: 0, tilt: TILT0, piano: -1, pianoUp: 0, pianoSpin: 0, lid: 0, popped: false };
   if (['lab', 'tube', 'melt', 'corn', 'egg', 'wave'].includes(S.id)) W.tube = S.id === 'lab' ? smooth(ramp(f, B.built + 10, B.built + 20)) : 1;
   if (S.id === 'hook') W.mwOn = 1;
@@ -160,8 +160,8 @@ export const worldAt = (f) => {
 const R = (T, who, o, pos, extra = {}) => ({ key: who + JSON.stringify(o), draw: (p) => T.romanFront(p, who, o), x: pos[0], y: pos[1], z: pos[2], ...extra });
 const life = (f, seed) => { const i = idle(f, seed); return { bob: q(i.bob, 3), tilt: q(i.tilt, 1), headTilt: q(i.headTilt, 1), blink: blinkAt(f, seed) }; };
 
-export const actorsAt = (f, T) => {
-  const S = shotAt(f), out = [];
+const _actorsAt = (f, T) => {
+  const S = _shotAt(f), out = [];
   const tint = S.light === 'blue' ? '#9fb2ff' : '#ffffff';
   const spencer = (o, pos = SP, extra = {}) => out.push(R(T, 'spencer', { seed: 3, ...life(f, 3), ...o }, pos, { tint, ...extra }));
   const cowork = (o, pos = CWP, extra = {}) => out.push(R(T, 'cowork', { seed: 8, ...life(f, 8), ...o }, pos, { tint, ...extra }));
@@ -209,8 +209,8 @@ export const actorsAt = (f, T) => {
 // ---------- 2D effects ----------
 const FX = (key, draw, c, s, extra = {}) => ({ key, draw, x: c[0], y: c[1] - (975 - 500) * U * s, z: c[2], s, blob: false, shadow: false, order: 5, ...extra });
 const hash = (i) => ((Math.sin(i * 91.17) * 43758.5453) % 1 + 1) % 1;
-export const fxAt = (f, T) => {
-  const S = shotAt(f), out = [];
+const _fxAt = (f, T) => {
+  const S = _shotAt(f), out = [];
   const tint = S.light === 'blue' ? '#c4d0ff' : '#ffffff';
   if (S.id === 'candy') { const t = q(ramp(f, S.a + 6, S.a + 22), 2); if (t > 0 && t < 1) { const P = pocketWorld(T, SP); out.push(FX('glint' + t, (p) => T.fxGlint(p, t), [P[0] + 0.03, P[1] + 0.1, P[2] + 0.05], 0.06)); } }
   if (S.id === 'lab') for (const k of [B.built + 12, B.built + 34]) { const t = q(ramp(f, k, k + 10), 2); if (t > 0 && t < 1) out.push(FX('spark' + t, (p) => T.fxSpark(p, t), [TUBE[0] - 0.2, TUBE[1] + 0.55, TUBE[2] + 0.4], 0.12)); }
@@ -249,5 +249,31 @@ export const fxAt = (f, T) => {
     if (y < 0.95 && z < -1.95) y = 0.95;
     out.push(FX('kp' + (i % 5), (p) => T.fxPopcorn(p, i % 5 + 1), [x, y, z], 0.1 + hash(i + 1) * 0.04, { roll: q(t * 7 * (i % 2 ? 1 : -1), 1), order: 6 }));
   }
+  return out;
+};
+
+// ---------- thumbnail mode (#thumb): one composed hero frame ----------
+const THUMB = typeof location !== 'undefined' && /thumb/.test(location.hash);
+const TS = { id: 'thumb', light: 'lab', a: 0, b: 0, n: 1 };
+const TCAM = { pos: [-0.12, 1.3, 2.7], look: [-0.18, 1.55, -0.5], fov: 44, roll: -3, flash: 0, shadowAt: [-0.2, 1, -0.6] };
+export const shotAt = (f) => THUMB ? TS : _shotAt(f);
+export const camAt = (f) => THUMB ? { ...TCAM } : _camAt(f);
+export const dofAt = (f) => THUMB ? { focus: dist(TCAM.pos, [-0.25, 1.6, -0.5]), cinf: 9 } : _dofAt(f);
+export const worldAt = (f) => THUMB ? { seesaw: false, tube: 1, blue: false, mwOn: 0, mwDoor: 0, tilt: TILT0, piano: -1, pianoUp: 0, pianoSpin: 0, lid: 0, popped: true } : _worldAt(f);
+export const actorsAt = (f, T) => {
+  if (!THUMB) return _actorsAt(f, T);
+  return [
+    R(T, 'cowork', { seed: 8, expr: 'shock', L: 'cheek', R: 'cheek', look: -0.4, facing: -1 }, [0.42, 0, -1.7]),
+    R(T, 'spencer', { seed: 3, expr: 'shock', L: 'up', R: 'up', look: 0, melt: 1, tilt: -3 }, SP),
+  ];
+};
+export const fxAt = (f, T) => {
+  if (!THUMB) return _fxAt(f, T);
+  const out = [];
+  const pc = [[-0.78, 2.05, 0.1, 0.3], [0.32, 2.15, 0.05, 0.28], [-0.7, 1.2, 0.6, 0.3], [0.38, 1.05, 0.7, 0.34], [-0.25, 2.45, -0.1, 0.2], [0.48, 1.6, 0.3, 0.24],
+    [-0.95, 1.65, 0.3, 0.22], [0.05, 0.55, 1.0, 0.38], [-0.55, 0.6, 1.0, 0.36], [0.62, 2.5, -0.3, 0.2], [-0.05, 2.75, -0.4, 0.18], [0.2, 2.6, 0.2, 0.22]];
+  pc.forEach(([x, y, z, s], i) => out.push(FX('tp' + (i % 5), (p) => T.fxPopcorn(p, i % 5 + 1), [x, y, z], s, { roll: (i * 1.3) % 6.28, order: 6 })));
+  { const P = pocketWorld(T, SP); out.push(FX('tsteam', (p) => T.fxSteam(p, 0.4), [P[0], P[1] + 0.2, P[2] + 0.05], 0.13)); }
+  out.push(FX('twaves', (p) => T.fxWaves(p, 0.3), [0.45, 1.2, -1.2], 0.2, { flip: true }));
   return out;
 };
