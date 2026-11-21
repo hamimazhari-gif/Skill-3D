@@ -195,7 +195,7 @@ const labQueue = (f, T, out, tint) => {
     const o = near ? { seed: 40 + i, ...life(f, 40 + i), expr: i % 2 ? 'grin' : 'smile', look: -0.3 } : { seed: 40 + i, expr: 'smile', look: -0.3 };
     out.push(R(T, who[i], o, [0.15 + (i % 2 ? 0.35 : -0.25), 0, -0.1 + i * 0.75], { tint, s: who[i] === 'kid58' ? 0.74 : 1 })); }
 };
-export const actorsAt = (f, T) => {
+const _actorsAt = (f, T) => {
   const S = _shotAt(f), out = [];
   const tint = S.light === NIGHT ? '#d6ccff' : '#ffffff';
   const hig = (o, pos = HIG, extra = {}) => out.push(R(T, 'higgy', { seed: 5, ...life(f, 5), ...o }, pos, { tint, ...extra }));
@@ -268,7 +268,7 @@ export const actorsAt = (f, T) => {
 // ---------- 2D effects ----------
 const U = 0.00225;
 const FX = (key, draw, c, s, extra = {}) => ({ key, draw, x: c[0], y: c[1] - (975 - 500) * U * s, z: c[2], s, blob: false, shadow: false, order: 5, ...extra });
-export const fxAt = (f, T) => {
+const _fxAt = (f, T) => {
   const S = _shotAt(f), out = [];
   if (S.id === 'weeks') { const d = Math.min(14, 1 + Math.floor(ramp(f, S.a + 4, S.b - 4) * 13)); out.push(FX('cal' + d, (p) => T.fxCalendar(p, d), [0.05, 2.25, -2.6], 0.42)); }
   if (S.id === 'argue') { const k = smooth(ramp(f, S.a + 8, S.a + 18)); if (k > 0) { out.push(FX('q?', (p) => T.fxGlyph(p, '?'), [QX(3) + 0.1, 2.35, QZ(3)], 0.22 * k)); out.push(FX('q!', (p) => T.fxGlyph(p, '!', '#ff4fa0'), [QX(4) - 0.1, 2.35, QZ(4)], 0.22 * k)); } }
@@ -284,4 +284,26 @@ export const fxAt = (f, T) => {
   return out;
 };
 
-export const shotAt = _shotAt, camAt = _camAt, dofAt = _dofAt, worldAt = _worldAt;
+
+// ---------- thumbnail modes (#thumbA city, #thumbB lab) ----------
+const TH = typeof location !== 'undefined' ? (location.hash.match(/thumb([AB])/) || [])[1] : null;
+const TS = { A: { id: 'thA', light: NIGHT, a: 0, b: 0, n: 1 }, B: { id: 'thB', light: LAB, a: 0, b: 0, n: 1 } };
+const TC = { A: { pos: [C - 2.5, 1.75, -1.4], look: [C - 2.52, 1.7, -5.7], fov: 50, roll: 3 }, B: { pos: [0.0, 1.4, 2.1], look: [0.0, 1.8, -1.3], fov: 54, roll: -3 } };
+export const shotAt = (f) => TH ? TS[TH] : _shotAt(f);
+export const camAt = (f) => { if (!TH) return _camAt(f); const c = { ...TC[TH], flash: 0 }; c.shadowAt = TH === 'A' ? [C - 1.5, 0, -5.8] : [-0.2, 1, -1]; return c; };
+export const dofAt = (f) => TH ? { focus: TH === 'A' ? 4.0 : 2.0, cinf: 7 } : _dofAt(f);
+export const worldAt = (f) => { const W = _worldAt(TH ? B.boxes : f); if (TH) { W.on = true; W.net = 1; W.ball = 1; W.money = 1; W.coins = 0; W.ctrlVis = true; W.scopeVis = true; W.scopeS = TH === 'B' ? 2.1 : 1; } return W; };
+export const actorsAt = (f, T) => {
+  if (!TH) return _actorsAt(f, T);
+  const out = [];
+  if (TH === 'A') {
+    const P = [['youB', { expr: 'shock', L: 'up', R: 'up', look: 0.2 }], ['youA', { expr: 'laugh', L: 'wave', R: 'up', look: -0.3 }], ['youC', { expr: 'grin', L: 'point', R: 'hip', look: 0.5 }], ['youE', { expr: 'shock', L: 'cheek', R: 'cheek', look: 0 }], ['youD', { expr: 'grin', look: 0.3 }]];
+    P.forEach(([who, o], i) => out.push(R(T, who, { seed: 20 + i, ...o }, [QX(i), SW, QZ(i)], { tint: '#e6dcff', ground: SW })));
+  } else {
+    out.push(R(T, 'higgy', { seed: 5, expr: 'grin', L: 'hip', R: 'point', look: 0.6, tilt: -4 }, [-0.62, 0, -0.75]));
+    out.push(R(T, 'kid58', { seed: 43, expr: 'shock', L: 'cheek', R: 'cheek', look: -0.5, facing: -1 }, [0.62, 0, -0.8], { s: 0.74 }));
+  }
+  return out;
+};
+export const fxAt = (f, T) => TH ? [] : _fxAt(f, T);
+
