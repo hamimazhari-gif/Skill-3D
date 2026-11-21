@@ -29,7 +29,7 @@ export function useStory(lang) {
   }, [lang]);
 }
 
-function Scene({lang}) {
+function Scene({lang, thumb}) {
   const frame = useCurrentFrame();
   const {T, EVt, L} = useStory(lang);
   const {gl, scene, camera, size} = useThree();
@@ -67,9 +67,10 @@ function Scene({lang}) {
 
   const fref = useRef(frame); fref.current = frame;
   useFrame(() => {
-    const t = fref.current / FPS;
+    const t = thumb ? thumb.t : fref.current / FPS;
     const shot = T.shotOf(t);
-    const {pos, look, loc} = camAt(built.cams, shot, t);
+    let {pos, look, loc} = camAt(built.cams, shot, t);
+    if (thumb) { pos = new THREE.Vector3(...thumb.pos).add(new THREE.Vector3(LOC[loc], 0, 0)); look = new THREE.Vector3(...thumb.look).add(new THREE.Vector3(LOC[loc], 0, 0)); }
     camera.position.copy(pos); camera.lookAt(look);
     camera.fov = 80; camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
     for (const [name, g] of Object.entries(built.locGroups)) g.visible = name === loc;
@@ -143,6 +144,34 @@ export const Story = ({lang}) => {
           <Audio src={staticFile(`sfx/${f}`)} volume={v} />
         </Sequence>
       ))}
+    </AbsoluteFill>
+  );
+};
+
+const TH = {
+  id: {top: 'BELI AYAM', mid: 'PAKAI BERAS?', tag: 'SEJARAH UANG'},
+  en: {top: 'BUY A CHICKEN', mid: 'WITH RICE?', tag: 'HISTORY OF MONEY'},
+};
+export const Thumb = ({lang}) => {
+  const {width, height} = useVideoConfig();
+  const tx = TH[lang];
+  const ink = '#351f22';
+  const word = (txt, size, bg, fg, rot) => (
+    <div style={{display: 'inline-block', background: bg, color: fg, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: size, lineHeight: 1.05,
+      padding: '14px 34px 20px', border: `10px solid ${ink}`, borderRadius: 28, transform: `rotate(${rot}deg)`, boxShadow: `12px 14px 0 ${ink}`, letterSpacing: -1, whiteSpace: 'nowrap'}}>{txt}</div>
+  );
+  return (
+    <AbsoluteFill style={{backgroundColor: CREAM}}>
+      <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
+        <Scene lang={lang} thumb={{t: lang === 'id' ? 4.95 : 4.15, pos: [1.4, 1.0, 3.75], look: [1.4, 1.15, 0.9]}} />
+      </ThreeCanvas>
+      <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
+        {word(tx.top, 118, '#fff3df', ink, -3)}
+        {word(tx.mid, 132, '#e8a83a', ink, 2)}
+      </AbsoluteFill>
+      <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 170}}>
+        {word(tx.tag, 72, '#c75b5b', '#fff3df', -2)}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
