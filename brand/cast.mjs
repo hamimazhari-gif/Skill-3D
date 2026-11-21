@@ -4,7 +4,12 @@ const srv = http.createServer((q, s) => { const p = path.join(root, q.url.split(
 await new Promise(r => srv.on('listening', r));
 const b = await chromium.launch(); const pg = await b.newPage(); pg.on('pageerror', e => console.log('ERR', e.message));
 await pg.goto(`http://localhost:${srv.address().port}/index.html`); await pg.waitForFunction(() => window.ready);
-const JOBS = {
+const JOBS = process.env.ONLY ? {
+  explorer: ['char', 'explorer', { seed: 7, expr: 'grin', L: 'wave', R: 'thumb', wv: 0.6, goggles: true }],
+  prof: ['char', 'prof', { seed: 11, expr: 'grin', L: 'up', R: 'point', look: 0 }],
+  mascotQ: ['char', 'mascot', { seed: 7, expr: 'whistle', L: 'temple', R: 'hip', swirl: 1, look: 0.4 }],
+  magnifier: ['fx', 'magnifier', []], bulb: ['fx', 'bulb', []], clock: ['fx', 'clockFx', []],
+} : {
   mascot: ['char', 'mascot', { seed: 7, expr: 'grin', L: 'wave', R: 'thumb', wv: 0.6, look: 0 }],
   mascot2: ['char', 'mascot', { seed: 7, expr: 'laugh', L: 'up', R: 'up', look: 0 }],
   spencer: ['char', 'spencer', { seed: 3, expr: 'shock', L: 'cheek', R: 'cheek', melt: 1 }],
