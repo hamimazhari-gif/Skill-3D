@@ -1,0 +1,1 @@
+../../../thumb-shared/thumb.js
