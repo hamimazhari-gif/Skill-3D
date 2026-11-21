@@ -1,0 +1,986 @@
+{
+ "title": "Kisah Nabi Musa - Part 2",
+ "duration": 113.2,
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0.0,
+   "end": 3.25,
+   "line": "Dia dibesarkan di dalam istana Firaun…",
+   "scene": "Istana Firaun: aula tiang lotus, obor, jendela besar ke piramida senja; Musa kecil (baju linen, kalung emas) berjalan di antara tiang, kamera mendorong pelan",
+   "set": "palace",
+   "in": {
+    "type": "fade",
+    "dur": 0.6
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s02",
+   "start": 3.25,
+   "end": 5.15,
+   "line": "Dan kini, dia kembali.",
+   "scene": "Siluet Musa dewasa berjalan ke arah kamera di padang pasir, membawa tongkat, matahari di belakang",
+   "set": "desert",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "whoosh",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s03",
+   "start": 5.15,
+   "end": 6.55,
+   "line": "Bukan sebagai pangeran,",
+   "scene": "Close-up wajah Musa (ikat kepala biru), tatapan tegas, debu pasir tertiup",
+   "set": "desert",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s04",
+   "start": 6.55,
+   "end": 9.45,
+   "line": "tapi untuk menantang raja paling sombong di muka bumi!",
+   "scene": "Low angle: Firaun di singgasana emas, nemes emas-biru, tersenyum sinis, kamera naik",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s05",
+   "start": 9.45,
+   "end": 10.65,
+   "line": "",
+   "scene": "Kartu judul: KISAH NABI MUSA / PART 2 di atas istana yang buram",
+   "set": "palace",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "start": 10.65,
+   "end": 13.45,
+   "line": "Setelah sebuah peristiwa yang mengguncang Mesir,",
+   "scene": "Kota Mesir malam: tembok, gerbang, obor bergoyang; para penjaga bertombak berlari, kamera berguncang",
+   "set": "city",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -10
+    },
+    {
+     "at": 1.2,
+     "name": "footstep",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s07",
+   "start": 13.45,
+   "end": 15.55,
+   "line": "Musa terpaksa melarikan diri.",
+   "scene": "Musa berlari keluar gerbang kota, jejak bayangan, kamera mengikuti",
+   "set": "city",
+   "in": {
+    "type": "whip",
+    "dur": 0.3,
+    "dir": 1
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "whoosh",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s08",
+   "start": 15.55,
+   "end": 16.45,
+   "line": "Sendirian.",
+   "scene": "Wide: padang pasir luas, Musa kecil sendirian di tengah bukit pasir",
+   "set": "desert",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s09",
+   "start": 16.45,
+   "end": 17.95,
+   "line": "Tanpa bekal.",
+   "scene": "Musa berlutut kelelahan di bawah matahari terik, tangan kosong, kantong air kosong",
+   "set": "desert",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s10",
+   "start": 17.95,
+   "end": 21.55,
+   "line": "Menembus padang pasir menuju negeri Madyan.",
+   "scene": "Peta papirus: garis putus-putus dari MESIR melintasi Sinai menuju MADYAN",
+   "set": "map",
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -12
+    },
+    {
+     "at": 3.0,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   }
+  },
+  {
+   "id": "s11",
+   "start": 21.55,
+   "end": 23.15,
+   "line": "Di sebuah sumur, ia melihat",
+   "scene": "Establishing: sumur batu Madyan saat senja keemasan, pohon kurma, para penggembala berkerumun",
+   "set": "well",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s12",
+   "start": 23.15,
+   "end": 26.15,
+   "line": "dua perempuan yang tak mampu memberi minum ternaknya,",
+   "scene": "Dua perempuan (kerudung merah muda & ungu) menahan domba-domba mereka, cemas, di tepi",
+   "set": "well",
+   "amb": {
+    "name": "murmur",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s13",
+   "start": 26.15,
+   "end": 28.75,
+   "line": "terdesak di antara para penggembala.",
+   "scene": "Para penggembala mendorong ke sumur, kedua perempuan terdesak mundur",
+   "set": "well",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s14",
+   "start": 28.75,
+   "end": 29.95,
+   "line": "Tanpa ragu,",
+   "scene": "Close-up Musa: tegas, cahaya keemasan",
+   "set": "well",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "swish",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "s15",
+   "start": 29.95,
+   "end": 32.15,
+   "line": "Musa menolong mereka.",
+   "scene": "Musa menarik tali timba sumur, air mengalir ke palung, domba minum",
+   "set": "well",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "whoosh",
+     "gain": -14
+    },
+    {
+     "at": 1.4,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s16",
+   "start": 32.15,
+   "end": 34.95,
+   "line": "Kebaikan kecil itu mengubah hidupnya.",
+   "scene": "Musa beristirahat di bawah pohon kurma, salah satu perempuan menghampiri dengan malu, cahaya hangat",
+   "set": "well",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s17",
+   "start": 34.95,
+   "end": 37.25,
+   "line": "Musa diterima tinggal di Madyan,",
+   "scene": "Perkemahan Madyan senja: orang tua berjubah putih menyambut Musa di depan tenda",
+   "set": "camp",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s18",
+   "start": 37.25,
+   "end": 38.15,
+   "line": "menikah,",
+   "scene": "Musa dan istrinya (kerudung merah muda) berdiri berdampingan di depan tenda, lampu hangat",
+   "set": "camp",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "s19",
+   "start": 38.15,
+   "end": 41.45,
+   "line": "dan menetap di sana selama bertahun-tahun.",
+   "scene": "Selang waktu: Musa menggembala domba, matahari & bulan berputar cepat, tahun berganti",
+   "set": "camp",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s20",
+   "start": 41.45,
+   "end": 45.25,
+   "line": "Hingga suatu malam, dalam perjalanan bersama keluarganya,",
+   "scene": "Malam berbintang: Musa memimpin keluarganya dan domba menembus padang pasir dingin",
+   "set": "desertNight",
+   "in": {
+    "type": "dip",
+    "dur": 0.5
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s21",
+   "start": 45.25,
+   "end": 48.15,
+   "line": "Musa melihat cahaya api di kejauhan…",
+   "scene": "Over-the-shoulder: siluet Musa buram di depan, nyala api kecil di lereng gunung jauh",
+   "set": "tur",
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s22",
+   "start": 48.15,
+   "end": 50.45,
+   "line": "dari arah Gunung Thur.",
+   "scene": "3D: Gunung Thur low-poly di malam hari, api di lereng, kamera mengorbit",
+   "set": "tur3d",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s23",
+   "start": 50.45,
+   "end": 51.85,
+   "line": "Ia mendekat.",
+   "scene": "Musa berjalan mendekat ke arah cahaya api, wajahnya tersinari",
+   "set": "tur",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "footstep",
+     "gain": -14
+    },
+    {
+     "at": 0.7,
+     "name": "footstep",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s24",
+   "start": 51.85,
+   "end": 55.75,
+   "line": "Dan di lembah suci itu, sebuah seruan memanggilnya.",
+   "scene": "Lembah suci: pohon menyala yang tidak terbakar, Musa berhenti, cincin cahaya memancar",
+   "set": "tur",
+   "sfx": [
+    {
+     "at": 2.0,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s25",
+   "start": 55.75,
+   "end": 57.75,
+   "line": "Allah memanggil Musa,",
+   "scene": "Musa berlutut, tiang cahaya ilahi turun dari langit (tidak ada sosok)",
+   "set": "tur",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "impact",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "s26",
+   "start": 57.75,
+   "end": 61.15,
+   "line": "dan mengangkatnya menjadi seorang rasul!",
+   "scene": "Close-up Musa kagum, cahaya naik di wajahnya, partikel emas",
+   "set": "tur",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.6,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "s27",
+   "start": 61.15,
+   "end": 62.75,
+   "line": "\"Lemparkan tongkatmu!\"",
+   "scene": "Musa melemparkan tongkatnya, tongkat berputar di udara",
+   "set": "tur",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "swish",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s28",
+   "start": 62.75,
+   "end": 64.75,
+   "line": "Seketika, tongkat itu berubah menjadi",
+   "scene": "KILAT: tongkat menyentuh tanah dan berubah, asap dan cahaya",
+   "set": "tur",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "impact",
+     "gain": -5
+    },
+    {
+     "at": 0.3,
+     "name": "powerup",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "s29",
+   "start": 64.75,
+   "end": 66.95,
+   "line": "ular besar yang bergerak cepat!",
+   "scene": "Ular besar melata cepat, Musa mundur terkejut",
+   "set": "tur",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -10
+    },
+    {
+     "at": 1.2,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s30",
+   "start": 66.95,
+   "end": 69.35,
+   "line": "\"Masukkan tanganmu ke dalam bajumu!\"",
+   "scene": "Musa memasukkan tangannya ke dalam bajunya",
+   "set": "tur",
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s31",
+   "start": 69.35,
+   "end": 72.05,
+   "line": "Dan tangan itu keluar bersinar putih,",
+   "scene": "Insert: tangan keluar bersinar putih, sinar memancar",
+   "set": "tur",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "s32",
+   "start": 72.05,
+   "end": 74.05,
+   "line": "bukan karena penyakit.",
+   "scene": "Musa memandang tangannya yang bercahaya dengan tenang",
+   "set": "tur",
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s33",
+   "start": 74.05,
+   "end": 76.65,
+   "line": "Lalu datanglah perintah yang paling berat:",
+   "scene": "Wide: Musa sendirian kecil di lembah di bawah langit berbintang, kamera mundur",
+   "set": "tur",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s34",
+   "start": 76.65,
+   "end": 78.25,
+   "line": "\"Pergilah kepada Firaun.",
+   "scene": "Istana Firaun di kejauhan malam hari, piramida, mengancam",
+   "set": "city",
+   "in": {
+    "type": "whip",
+    "dur": 0.3,
+    "dir": 1
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "whoosh",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s35",
+   "start": 78.25,
+   "end": 81.45,
+   "line": "Sesungguhnya dia telah melampaui batas.\"",
+   "scene": "Close-up Firaun marah dengan nemes emas, cahaya merah",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s36",
+   "start": 81.45,
+   "end": 84.35,
+   "line": "Musa berdoa agar saudaranya, Harun, menemaninya,",
+   "scene": "Musa mengangkat tangan berdoa; Harun (ikat kepala merah) muncul di sampingnya",
+   "set": "desertDawn",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s37",
+   "start": 84.35,
+   "end": 87.55,
+   "line": "karena lisannya lebih fasih.",
+   "scene": "Harun berbicara dengan fasih, cincin suara, Musa mengangguk",
+   "set": "desertDawn",
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s38",
+   "start": 87.55,
+   "end": 89.35,
+   "line": "Doa itu dikabulkan.",
+   "scene": "Fajar: Musa dan Harun berdiri bersama, tangan Harun di bahu Musa, cahaya berkilau",
+   "set": "desertDawn",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s39",
+   "start": 89.35,
+   "end": 92.65,
+   "line": "Kini, Musa berdiri di hadapan Firaun.",
+   "scene": "Ruang singgasana: Musa & Harun di kiri, Firaun di singgasana di kanan, penjaga",
+   "set": "palace",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s40",
+   "start": 92.65,
+   "end": 94.85,
+   "line": "Penguasa yang menyebut dirinya tuhan.",
+   "scene": "Low angle: Firaun berdiri merentangkan tangan, sombong, cahaya emas",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s41",
+   "start": 94.85,
+   "end": 97.15,
+   "line": "Tapi Firaun menolak kebenaran.",
+   "scene": "Firaun menyilangkan tangan dan berpaling, menolak",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s42",
+   "start": 97.15,
+   "end": 100.0,
+   "line": "Dengan angkuh, ia mengumpulkan para penyihir terbaik",
+   "scene": "Firaun menunjuk; barisan penyihir bertopi tinggi masuk dengan aura ungu",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "glitch",
+     "gain": -14
+    },
+    {
+     "at": 1.4,
+     "name": "footstep",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s43",
+   "start": 100.0,
+   "end": 103.65,
+   "line": "di seluruh Mesir untuk mempermalukan Musa di depan rakyatnya!",
+   "scene": "Arena di depan rakyat: kerumunan, penyihir berjajar, Musa & Harun kecil di tengah",
+   "set": "arena",
+   "in": {
+    "type": "whip",
+    "dur": 0.3,
+    "dir": -1
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "murmur",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "s44",
+   "start": 103.65,
+   "end": 105.95,
+   "line": "Tongkat melawan sihir.",
+   "scene": "Layar terbagi: tongkat bercahaya emas vs tali sihir ungu",
+   "set": "split",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 1.0,
+     "name": "glitch",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "s45",
+   "start": 105.95,
+   "end": 108.45,
+   "line": "Kebenaran melawan kesombongan.",
+   "scene": "Adu tatap: Musa (cahaya putih) vs Firaun (cahaya merah), kamera mendorong",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s46",
+   "start": 108.45,
+   "end": 110.15,
+   "line": "Siapa yang akan menang?",
+   "scene": "FREEZE: para penyihir melempar tali, partikel menggantung, tanda tanya",
+   "set": "arena",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "freeze",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "s47",
+   "start": 110.15,
+   "end": 113.2,
+   "line": "Saksikan di part berikutnya!",
+   "scene": "Layar penutup: BERSAMBUNG / PART 3, para tokoh berjajar",
+   "set": "end",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "bars": "none",
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 10.65,
+   "mood": "epic",
+   "intensity": 0.6
+  },
+  {
+   "start": 10.65,
+   "end": 21.55,
+   "mood": "tension",
+   "intensity": 0.55
+  },
+  {
+   "start": 21.55,
+   "end": 41.45,
+   "mood": "hopeful",
+   "intensity": 0.35
+  },
+  {
+   "start": 41.45,
+   "end": 55.75,
+   "mood": "mystery",
+   "intensity": 0.4
+  },
+  {
+   "start": 55.75,
+   "end": 74.05,
+   "mood": "wonder",
+   "intensity": 0.6
+  },
+  {
+   "start": 74.05,
+   "end": 89.35,
+   "mood": "epic",
+   "intensity": 0.45
+  },
+  {
+   "start": 89.35,
+   "end": 108.45,
+   "mood": "tension",
+   "intensity": 0.75
+  },
+  {
+   "start": 108.45,
+   "end": 113.2,
+   "mood": "epic",
+   "intensity": 0.8
+  }
+ ],
+ "sfx": []
+}

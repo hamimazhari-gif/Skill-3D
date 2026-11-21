@@ -78,5 +78,21 @@ export const STYLES = {
       golden: { sky: ['#4a7a70', '#e0a050', '#f6dca8'], rim: '#f6c87a' },
     },
   },
+  kisah: {
+    name: 'Kisah (per-scene colour)', desc: 'Story-driven palette: each location has its own mood colours (gold palace, blue night, orange desert, rose dusk, red Pharaoh, purple sorcery); neutral cinematic grade.',
+    ink: '#0a0708', inkFar: '#2a2024', feature: '#fff6e8', rimWidth: 4.5,
+    ui: { ...UI, card: 'rgba(30,20,14,.94)', cardLine: 'rgba(255,210,140,.3)', text: '#f0dcc0', sub: '#a8907a', accent: '#ff6a4a', gold: '#ffc84a', blueprint: '#e8c890', bpBg: '#1a120c', good: '#ffd45a' },
+    grade: { contrast: 1.1, sat: 1.12, lift: [0.015, 0.01, 0.02], gamma: [1.0, 1.0, 1.0], gain: [1.04, 1.0, 0.96], vignette: 0.62, grain: 0.05, bloom: 0.75 },
+    moods: {
+      golden: { sky: ['#5a3a6a', '#e0784a', '#ffc070'], key: '#ffc47a', rim: '#ffd08a', wall: '#6a4630', floor: '#5a3a26', dark: '#2a160e', practical: '#ffe0a0', fog: '#f0b080' },
+      dusk: { sky: ['#2a2450', '#7a4a80', '#e07a6a', '#f8c088'], key: '#ffb070', rim: '#ffc890', wall: '#4a3448', floor: '#3a2a36', dark: '#1e1424', practical: '#ffd08a', fog: '#b07890' },
+      night: { sky: ['#050a1e', '#0e1a42', '#1e2c66'], ambient: '#1a2048', key: '#bcd0ff', rim: '#9ab8ff', wall: '#1e2444', floor: '#141830', dark: '#080a18', practical: '#ffaa50', fog: '#2a3870' },
+      interiorWarm: { sky: ['#c07a40', '#f0b060', '#ffd890'], key: '#ffcc80', rim: '#ffd27a', wall: '#5a3e2a', floor: '#3e2a1c', dark: '#1e140c', practical: '#ffc860', fog: '#a07850' },
+      dawn: { sky: ['#1e2a56', '#5a6aa0', '#e8a0a0', '#ffe0b0'], ambient: '#3a3a5a', key: '#ffe0b0', rim: '#ffe6c0', wall: '#4a4058', floor: '#3a3446', dark: '#1a1626', practical: '#ffe0a0', fog: '#c0a0b0' },
+      pharaoh: { sky: ['#1a0404', '#5a0e0a', '#b8301a'], ambient: '#3a1010', key: '#ff7a4a', rim: '#ff5a3a', wall: '#4a1610', floor: '#2e0e0a', dark: '#140404', practical: '#ff8a3a', fog: '#7a2a1a' },
+      sorcery: { sky: ['#0c0418', '#2a0e46', '#5a1e7a'], ambient: '#24103a', key: '#d08aff', rim: '#c07aff', wall: '#2e1a44', floor: '#1c0e2c', dark: '#0a0412', practical: '#e0a0ff', fog: '#4a2a6a' },
+      holy: { sky: ['#0a1030', '#2a3870', '#a0a8d8'], ambient: '#3a4070', key: '#fff4d8', rim: '#fff0c0', wall: '#283058', floor: '#1a2040', dark: '#0a0c1e', practical: '#fff0c0', fog: '#6a78b0' },
+    },
+  },
 };
 export const STYLE_IDS = Object.keys(STYLES);

@@ -1,0 +1,1075 @@
+{
+ "source": "silence-align",
+ "words": [
+  {
+   "word": "Dia",
+   "start": 0.233,
+   "end": 0.487
+  },
+  {
+   "word": "dibesarkan",
+   "start": 0.507,
+   "end": 1.187
+  },
+  {
+   "word": "di",
+   "start": 1.207,
+   "end": 1.4
+  },
+  {
+   "word": "dalam",
+   "start": 1.42,
+   "end": 1.796
+  },
+  {
+   "word": "istana",
+   "start": 1.816,
+   "end": 2.253
+  },
+  {
+   "word": "Firaun…",
+   "start": 2.273,
+   "end": 2.71
+  },
+  {
+   "word": "Dan",
+   "start": 3.393,
+   "end": 3.627
+  },
+  {
+   "word": "kini,",
+   "start": 3.647,
+   "end": 3.937
+  },
+  {
+   "word": "dia",
+   "start": 4.304,
+   "end": 4.455
+  },
+  {
+   "word": "kembali.",
+   "start": 4.475,
+   "end": 4.779
+  },
+  {
+   "word": "Bukan",
+   "start": 5.294,
+   "end": 5.566
+  },
+  {
+   "word": "sebagai",
+   "start": 5.586,
+   "end": 5.949
+  },
+  {
+   "word": "pangeran,",
+   "start": 5.969,
+   "end": 6.376
+  },
+  {
+   "word": "tapi",
+   "start": 6.731,
+   "end": 6.966
+  },
+  {
+   "word": "untuk",
+   "start": 6.986,
+   "end": 7.267
+  },
+  {
+   "word": "menantang",
+   "start": 7.287,
+   "end": 7.753
+  },
+  {
+   "word": "raja",
+   "start": 7.773,
+   "end": 8.008
+  },
+  {
+   "word": "paling",
+   "start": 8.028,
+   "end": 8.355
+  },
+  {
+   "word": "sombong",
+   "start": 8.375,
+   "end": 8.749
+  },
+  {
+   "word": "di",
+   "start": 8.769,
+   "end": 8.911
+  },
+  {
+   "word": "muka",
+   "start": 8.931,
+   "end": 9.166
+  },
+  {
+   "word": "bumi!",
+   "start": 9.186,
+   "end": 9.42
+  },
+  {
+   "word": "Setelah",
+   "start": 10.819,
+   "end": 11.196
+  },
+  {
+   "word": "sebuah",
+   "start": 11.216,
+   "end": 11.546
+  },
+  {
+   "word": "peristiwa",
+   "start": 11.566,
+   "end": 12.036
+  },
+  {
+   "word": "yang",
+   "start": 12.056,
+   "end": 12.293
+  },
+  {
+   "word": "mengguncang",
+   "start": 12.313,
+   "end": 12.877
+  },
+  {
+   "word": "Mesir,",
+   "start": 12.897,
+   "end": 13.181
+  },
+  {
+   "word": "Musa",
+   "start": 13.581,
+   "end": 13.803
+  },
+  {
+   "word": "terpaksa",
+   "start": 13.823,
+   "end": 14.22
+  },
+  {
+   "word": "melarikan",
+   "start": 14.24,
+   "end": 14.682
+  },
+  {
+   "word": "diri.",
+   "start": 14.702,
+   "end": 14.924
+  },
+  {
+   "word": "Sendirian.",
+   "start": 15.664,
+   "end": 16.299
+  },
+  {
+   "word": "Tanpa",
+   "start": 16.593,
+   "end": 17.008
+  },
+  {
+   "word": "bekal.",
+   "start": 17.028,
+   "end": 17.443
+  },
+  {
+   "word": "Menembus",
+   "start": 18.052,
+   "end": 18.5
+  },
+  {
+   "word": "padang",
+   "start": 18.52,
+   "end": 18.87
+  },
+  {
+   "word": "pasir",
+   "start": 18.89,
+   "end": 19.19
+  },
+  {
+   "word": "menuju",
+   "start": 19.21,
+   "end": 19.56
+  },
+  {
+   "word": "negeri",
+   "start": 19.58,
+   "end": 19.93
+  },
+  {
+   "word": "Madyan.",
+   "start": 19.95,
+   "end": 20.3
+  },
+  {
+   "word": "Di",
+   "start": 21.682,
+   "end": 21.822
+  },
+  {
+   "word": "sebuah",
+   "start": 21.842,
+   "end": 22.164
+  },
+  {
+   "word": "sumur,",
+   "start": 22.184,
+   "end": 22.461
+  },
+  {
+   "word": "ia",
+   "start": 22.481,
+   "end": 22.62
+  },
+  {
+   "word": "melihat",
+   "start": 22.64,
+   "end": 23.276
+  },
+  {
+   "word": "dua",
+   "start": 23.296,
+   "end": 23.481
+  },
+  {
+   "word": "perempuan",
+   "start": 23.501,
+   "end": 23.96
+  },
+  {
+   "word": "yang",
+   "start": 23.98,
+   "end": 24.211
+  },
+  {
+   "word": "tak",
+   "start": 24.231,
+   "end": 24.416
+  },
+  {
+   "word": "mampu",
+   "start": 24.436,
+   "end": 24.713
+  },
+  {
+   "word": "memberi",
+   "start": 24.733,
+   "end": 25.101
+  },
+  {
+   "word": "minum",
+   "start": 25.121,
+   "end": 25.397
+  },
+  {
+   "word": "ternaknya,",
+   "start": 25.417,
+   "end": 25.877
+  },
+  {
+   "word": "terdesak",
+   "start": 26.273,
+   "end": 26.673
+  },
+  {
+   "word": "di",
+   "start": 26.693,
+   "end": 26.828
+  },
+  {
+   "word": "antara",
+   "start": 26.848,
+   "end": 27.16
+  },
+  {
+   "word": "para",
+   "start": 27.18,
+   "end": 27.404
+  },
+  {
+   "word": "penggembala.",
+   "start": 27.424,
+   "end": 27.957
+  },
+  {
+   "word": "Tanpa",
+   "start": 28.95,
+   "end": 29.326
+  },
+  {
+   "word": "ragu,",
+   "start": 29.346,
+   "end": 29.661
+  },
+  {
+   "word": "Musa",
+   "start": 30.096,
+   "end": 30.301
+  },
+  {
+   "word": "menolong",
+   "start": 30.321,
+   "end": 30.69
+  },
+  {
+   "word": "mereka.",
+   "start": 30.71,
+   "end": 30.997
+  },
+  {
+   "word": "Kebaikan",
+   "start": 32.348,
+   "end": 32.777
+  },
+  {
+   "word": "kecil",
+   "start": 32.797,
+   "end": 33.085
+  },
+  {
+   "word": "itu",
+   "start": 33.105,
+   "end": 33.298
+  },
+  {
+   "word": "mengubah",
+   "start": 33.318,
+   "end": 33.747
+  },
+  {
+   "word": "hidupnya.",
+   "start": 33.767,
+   "end": 34.196
+  },
+  {
+   "word": "Musa",
+   "start": 35.138,
+   "end": 35.369
+  },
+  {
+   "word": "diterima",
+   "start": 35.389,
+   "end": 35.803
+  },
+  {
+   "word": "tinggal",
+   "start": 35.823,
+   "end": 36.192
+  },
+  {
+   "word": "di",
+   "start": 36.212,
+   "end": 36.352
+  },
+  {
+   "word": "Madyan,",
+   "start": 36.372,
+   "end": 36.695
+  },
+  {
+   "word": "menikah,",
+   "start": 37.406,
+   "end": 37.877
+  },
+  {
+   "word": "dan",
+   "start": 38.347,
+   "end": 38.518
+  },
+  {
+   "word": "menetap",
+   "start": 38.538,
+   "end": 38.879
+  },
+  {
+   "word": "di",
+   "start": 38.899,
+   "end": 39.027
+  },
+  {
+   "word": "sana",
+   "start": 39.047,
+   "end": 39.26
+  },
+  {
+   "word": "selama",
+   "start": 39.28,
+   "end": 39.578
+  },
+  {
+   "word": "bertahun-tahun.",
+   "start": 39.598,
+   "end": 40.193
+  },
+  {
+   "word": "Hingga",
+   "start": 41.633,
+   "end": 41.995
+  },
+  {
+   "word": "suatu",
+   "start": 42.015,
+   "end": 42.325
+  },
+  {
+   "word": "malam,",
+   "start": 42.345,
+   "end": 42.656
+  },
+  {
+   "word": "dalam",
+   "start": 43.062,
+   "end": 43.33
+  },
+  {
+   "word": "perjalanan",
+   "start": 43.35,
+   "end": 43.839
+  },
+  {
+   "word": "bersama",
+   "start": 43.859,
+   "end": 44.215
+  },
+  {
+   "word": "keluarganya,",
+   "start": 44.235,
+   "end": 44.769
+  },
+  {
+   "word": "Musa",
+   "start": 45.439,
+   "end": 45.66
+  },
+  {
+   "word": "melihat",
+   "start": 45.68,
+   "end": 46.032
+  },
+  {
+   "word": "cahaya",
+   "start": 46.052,
+   "end": 46.361
+  },
+  {
+   "word": "api",
+   "start": 46.381,
+   "end": 46.558
+  },
+  {
+   "word": "di",
+   "start": 46.578,
+   "end": 46.711
+  },
+  {
+   "word": "kejauhan…",
+   "start": 46.731,
+   "end": 47.127
+  },
+  {
+   "word": "dari",
+   "start": 48.309,
+   "end": 48.552
+  },
+  {
+   "word": "arah",
+   "start": 48.572,
+   "end": 48.815
+  },
+  {
+   "word": "Gunung",
+   "start": 48.835,
+   "end": 49.174
+  },
+  {
+   "word": "Thur.",
+   "start": 49.194,
+   "end": 49.437
+  },
+  {
+   "word": "Ia",
+   "start": 50.599,
+   "end": 50.752
+  },
+  {
+   "word": "mendekat.",
+   "start": 50.772,
+   "end": 51.222
+  },
+  {
+   "word": "Dan",
+   "start": 51.995,
+   "end": 52.207
+  },
+  {
+   "word": "di",
+   "start": 52.227,
+   "end": 52.388
+  },
+  {
+   "word": "lembah",
+   "start": 52.408,
+   "end": 52.775
+  },
+  {
+   "word": "suci",
+   "start": 52.795,
+   "end": 53.059
+  },
+  {
+   "word": "itu,",
+   "start": 53.079,
+   "end": 53.291
+  },
+  {
+   "word": "sebuah",
+   "start": 53.596,
+   "end": 53.905
+  },
+  {
+   "word": "seruan",
+   "start": 53.925,
+   "end": 54.233
+  },
+  {
+   "word": "memanggilnya.",
+   "start": 54.253,
+   "end": 54.824
+  },
+  {
+   "word": "Allah",
+   "start": 55.864,
+   "end": 56.257
+  },
+  {
+   "word": "memanggil",
+   "start": 56.277,
+   "end": 56.923
+  },
+  {
+   "word": "Musa,",
+   "start": 56.943,
+   "end": 57.272
+  },
+  {
+   "word": "dan",
+   "start": 57.877,
+   "end": 58.064
+  },
+  {
+   "word": "mengangkatnya",
+   "start": 58.084,
+   "end": 58.732
+  },
+  {
+   "word": "menjadi",
+   "start": 58.752,
+   "end": 59.123
+  },
+  {
+   "word": "seorang",
+   "start": 59.143,
+   "end": 59.515
+  },
+  {
+   "word": "rasul!",
+   "start": 59.535,
+   "end": 59.814
+  },
+  {
+   "word": "\"Lemparkan",
+   "start": 61.274,
+   "end": 61.749
+  },
+  {
+   "word": "tongkatmu!\"",
+   "start": 61.769,
+   "end": 62.244
+  },
+  {
+   "word": "Seketika,",
+   "start": 62.926,
+   "end": 63.284
+  },
+  {
+   "word": "tongkat",
+   "start": 63.304,
+   "end": 64.041
+  },
+  {
+   "word": "itu",
+   "start": 64.061,
+   "end": 64.22
+  },
+  {
+   "word": "berubah",
+   "start": 64.24,
+   "end": 64.559
+  },
+  {
+   "word": "menjadi",
+   "start": 64.579,
+   "end": 64.897
+  },
+  {
+   "word": "ular",
+   "start": 64.917,
+   "end": 65.116
+  },
+  {
+   "word": "besar",
+   "start": 65.136,
+   "end": 65.374
+  },
+  {
+   "word": "yang",
+   "start": 65.394,
+   "end": 65.593
+  },
+  {
+   "word": "bergerak",
+   "start": 65.613,
+   "end": 65.971
+  },
+  {
+   "word": "cepat!",
+   "start": 65.991,
+   "end": 66.23
+  },
+  {
+   "word": "\"Masukkan",
+   "start": 67.137,
+   "end": 67.488
+  },
+  {
+   "word": "tanganmu",
+   "start": 67.508,
+   "end": 67.858
+  },
+  {
+   "word": "ke",
+   "start": 67.878,
+   "end": 67.995
+  },
+  {
+   "word": "dalam",
+   "start": 68.015,
+   "end": 68.249
+  },
+  {
+   "word": "bajumu!\"",
+   "start": 68.269,
+   "end": 68.541
+  },
+  {
+   "word": "Dan",
+   "start": 69.478,
+   "end": 69.649
+  },
+  {
+   "word": "tangan",
+   "start": 69.669,
+   "end": 69.967
+  },
+  {
+   "word": "itu",
+   "start": 69.987,
+   "end": 70.774
+  },
+  {
+   "word": "keluar",
+   "start": 70.794,
+   "end": 71.092
+  },
+  {
+   "word": "bersinar",
+   "start": 71.112,
+   "end": 71.495
+  },
+  {
+   "word": "putih,",
+   "start": 71.515,
+   "end": 71.77
+  },
+  {
+   "word": "bukan",
+   "start": 72.184,
+   "end": 72.38
+  },
+  {
+   "word": "karena",
+   "start": 72.4,
+   "end": 72.629
+  },
+  {
+   "word": "penyakit.",
+   "start": 72.649,
+   "end": 72.945
+  },
+  {
+   "word": "Lalu",
+   "start": 74.175,
+   "end": 74.383
+  },
+  {
+   "word": "datanglah",
+   "start": 74.403,
+   "end": 74.818
+  },
+  {
+   "word": "perintah",
+   "start": 74.838,
+   "end": 75.212
+  },
+  {
+   "word": "yang",
+   "start": 75.232,
+   "end": 75.439
+  },
+  {
+   "word": "paling",
+   "start": 75.459,
+   "end": 75.75
+  },
+  {
+   "word": "berat:",
+   "start": 75.77,
+   "end": 76.02
+  },
+  {
+   "word": "\"Pergilah",
+   "start": 76.839,
+   "end": 77.218
+  },
+  {
+   "word": "kepada",
+   "start": 77.238,
+   "end": 77.533
+  },
+  {
+   "word": "Firaun.",
+   "start": 77.553,
+   "end": 77.848
+  },
+  {
+   "word": "Sesungguhnya",
+   "start": 78.406,
+   "end": 78.996
+  },
+  {
+   "word": "dia",
+   "start": 79.016,
+   "end": 79.199
+  },
+  {
+   "word": "telah",
+   "start": 79.219,
+   "end": 79.493
+  },
+  {
+   "word": "melampaui",
+   "start": 79.513,
+   "end": 79.968
+  },
+  {
+   "word": "batas.\"",
+   "start": 79.988,
+   "end": 80.262
+  },
+  {
+   "word": "Musa",
+   "start": 81.558,
+   "end": 81.797
+  },
+  {
+   "word": "berdoa",
+   "start": 81.817,
+   "end": 82.151
+  },
+  {
+   "word": "agar",
+   "start": 82.171,
+   "end": 82.41
+  },
+  {
+   "word": "saudaranya,",
+   "start": 82.43,
+   "end": 82.951
+  },
+  {
+   "word": "Harun,",
+   "start": 82.971,
+   "end": 83.258
+  },
+  {
+   "word": "menemaninya,",
+   "start": 83.278,
+   "end": 84.103
+  },
+  {
+   "word": "karena",
+   "start": 84.51,
+   "end": 84.905
+  },
+  {
+   "word": "lisannya",
+   "start": 84.925,
+   "end": 85.88
+  },
+  {
+   "word": "lebih",
+   "start": 85.9,
+   "end": 86.239
+  },
+  {
+   "word": "fasih.",
+   "start": 86.259,
+   "end": 86.598
+  },
+  {
+   "word": "Doa",
+   "start": 87.669,
+   "end": 87.857
+  },
+  {
+   "word": "itu",
+   "start": 87.877,
+   "end": 88.065
+  },
+  {
+   "word": "dikabulkan.",
+   "start": 88.085,
+   "end": 88.596
+  },
+  {
+   "word": "Kini,",
+   "start": 89.536,
+   "end": 89.894
+  },
+  {
+   "word": "Musa",
+   "start": 90.254,
+   "end": 90.502
+  },
+  {
+   "word": "berdiri",
+   "start": 90.522,
+   "end": 90.916
+  },
+  {
+   "word": "di",
+   "start": 90.936,
+   "end": 91.087
+  },
+  {
+   "word": "hadapan",
+   "start": 91.107,
+   "end": 91.501
+  },
+  {
+   "word": "Firaun.",
+   "start": 91.521,
+   "end": 91.867
+  },
+  {
+   "word": "Penguasa",
+   "start": 92.812,
+   "end": 93.153
+  },
+  {
+   "word": "yang",
+   "start": 93.173,
+   "end": 93.362
+  },
+  {
+   "word": "menyebut",
+   "start": 93.382,
+   "end": 93.723
+  },
+  {
+   "word": "dirinya",
+   "start": 93.743,
+   "end": 94.046
+  },
+  {
+   "word": "tuhan.",
+   "start": 94.066,
+   "end": 94.294
+  },
+  {
+   "word": "Tapi",
+   "start": 95.044,
+   "end": 95.283
+  },
+  {
+   "word": "Firaun",
+   "start": 95.303,
+   "end": 95.637
+  },
+  {
+   "word": "menolak",
+   "start": 95.657,
+   "end": 96.038
+  },
+  {
+   "word": "kebenaran.",
+   "start": 96.058,
+   "end": 96.533
+  },
+  {
+   "word": "Dengan",
+   "start": 97.331,
+   "end": 97.677
+  },
+  {
+   "word": "angkuh,",
+   "start": 97.697,
+   "end": 98.044
+  },
+  {
+   "word": "ia",
+   "start": 98.495,
+   "end": 98.611
+  },
+  {
+   "word": "mengumpulkan",
+   "start": 98.631,
+   "end": 99.136
+  },
+  {
+   "word": "para",
+   "start": 99.156,
+   "end": 99.35
+  },
+  {
+   "word": "penyihir",
+   "start": 99.37,
+   "end": 99.719
+  },
+  {
+   "word": "terbaik",
+   "start": 99.739,
+   "end": 100.05
+  },
+  {
+   "word": "di",
+   "start": 100.07,
+   "end": 100.186
+  },
+  {
+   "word": "seluruh",
+   "start": 100.206,
+   "end": 100.517
+  },
+  {
+   "word": "Mesir",
+   "start": 100.537,
+   "end": 100.769
+  },
+  {
+   "word": "untuk",
+   "start": 100.789,
+   "end": 101.407
+  },
+  {
+   "word": "mempermalukan",
+   "start": 101.427,
+   "end": 101.971
+  },
+  {
+   "word": "Musa",
+   "start": 101.991,
+   "end": 102.185
+  },
+  {
+   "word": "di",
+   "start": 102.205,
+   "end": 102.321
+  },
+  {
+   "word": "depan",
+   "start": 102.341,
+   "end": 102.574
+  },
+  {
+   "word": "rakyatnya!",
+   "start": 102.594,
+   "end": 102.982
+  },
+  {
+   "word": "Tongkat",
+   "start": 103.81,
+   "end": 104.531
+  },
+  {
+   "word": "melawan",
+   "start": 104.551,
+   "end": 105.01
+  },
+  {
+   "word": "sihir.",
+   "start": 105.03,
+   "end": 105.377
+  },
+  {
+   "word": "Kebenaran",
+   "start": 106.113,
+   "end": 106.543
+  },
+  {
+   "word": "melawan",
+   "start": 106.563,
+   "end": 107.231
+  },
+  {
+   "word": "kesombongan.",
+   "start": 107.251,
+   "end": 107.767
+  },
+  {
+   "word": "Siapa",
+   "start": 108.638,
+   "end": 108.829
+  },
+  {
+   "word": "yang",
+   "start": 108.849,
+   "end": 109.007
+  },
+  {
+   "word": "akan",
+   "start": 109.027,
+   "end": 109.185
+  },
+  {
+   "word": "menang?",
+   "start": 109.205,
+   "end": 109.428
+  },
+  {
+   "word": "Saksikan",
+   "start": 110.321,
+   "end": 110.667
+  },
+  {
+   "word": "di",
+   "start": 110.687,
+   "end": 110.802
+  },
+  {
+   "word": "part",
+   "start": 110.822,
+   "end": 111.014
+  },
+  {
+   "word": "berikutnya!",
+   "start": 111.034,
+   "end": 111.457
+  }
+ ]
+}
