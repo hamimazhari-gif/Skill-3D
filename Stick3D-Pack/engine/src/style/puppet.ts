@@ -6,7 +6,7 @@ export type Look = {
 export type Arms = "down" | "up" | "hold" | "point" | "head" | "chest" | "box" | "shrug";
 export type Pose = {
   t: number; walk?: number /* phase radians */; speed?: number /* 0..1 stride amplitude */; mood?: "grin" | "smile" | "shock" | "deadpan" | "worry" | "angry" | "laugh" | "gulp";
-  arms?: Arms; armK?: number; armR?: [number, number]; armL?: [number, number]; armRK?: number; armLK?: number; /* IK hand targets in puppet-height units: x from body centre (screen right +), y from feet up */ nerv?: number; sweat?: number; squash?: number; tilt?: number; lookX?: number; flip?: boolean; hunch?: number; air?: number;
+  arms?: Arms; armK?: number; armR?: [number, number]; armL?: [number, number]; armRK?: number; armLK?: number; /* IK hand targets in puppet-height units: x from body centre (screen right +), y from feet up */ nerv?: number; sweat?: number; squash?: number; tilt?: number; lookX?: number; flip?: boolean; hunch?: number; air?: number; sit?: number /* 0..1 seated: hips drop, thighs forward (to screen right), shins down */;
 };
 export const INK = "#0b0d1a";
 const sh = (c: CanvasRenderingContext2D, color: string, f: () => void) => { c.save(); f(); c.restore(); };
@@ -21,7 +21,8 @@ export function drawPuppet(c: CanvasRenderingContext2D, W: number, H: number, lo
   c.lineCap = "round"; c.lineJoin = "round"; c.strokeStyle = INK;
   const w = p.walk, amp = p.speed ?? 0, moving = w !== undefined && amp > 0;
   const breath = Math.sin(p.t * 0.12) * 0.012, hunch = p.hunch ?? 0;
-  const bodyTopBase = H * 0.47, bodyH = H * 0.27 * (1 + breath), bodyW = W * 0.48;
+  const sit = p.sit ?? 0;
+  const bodyTopBase = H * 0.47 + sit * H * 0.115, bodyH = H * 0.27 * (1 + breath), bodyW = W * 0.48;
   const bob = moving ? Math.abs(Math.sin(w!)) * 9 * S * amp : 0;
   const bodyTop = bodyTopBase - bob + hunch * 8 * S;
   const shoe = look.shoe ?? INK;
@@ -30,6 +31,11 @@ export function drawPuppet(c: CanvasRenderingContext2D, W: number, H: number, lo
     const ph = moving ? Math.sin(w! + (s > 0 ? Math.PI : 0)) : 0, lift = moving ? Math.max(0, Math.cos(w! + (s > 0 ? Math.PI : 0))) : 0;
     const sw = moving ? ph * 44 * S * amp : s * 12 * S + (p.air ? s * 14 * S : 0);
     const x0 = cx + s * 24 * S, y0 = bodyTop + bodyH - 8 * S, fy = feetY - 12 * S - (moving ? lift * 14 * S * amp : 0) - (p.air ?? 0) * 18 * S;
+    if (sit > 0) {
+      const kx = x0 + sit * (78 + s * 8) * S, ky = y0 + 6 * S, fx = kx + 6 * S;
+      c.lineWidth = 10 * S; c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo((x0 + kx) / 2, y0 - 4 * S, kx, ky); c.lineTo(fx, fy); c.stroke();
+      c.fillStyle = shoe; c.lineWidth = 5 * S; c.beginPath(); c.ellipse(fx + 10 * S, fy + 6 * S, 21 * S, 10 * S, 0, 0, 7); c.fill(); c.stroke(); continue;
+    }
     c.lineWidth = 10 * S; c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(x0 + sw * 0.2, (y0 + fy) / 2, x0 + sw, fy); c.stroke();
     c.fillStyle = shoe; c.lineWidth = 5 * S; c.beginPath(); c.ellipse(x0 + sw + 10 * S, fy + 6 * S, 21 * S, 10 * S, 0, 0, 7); c.fill(); c.stroke();
   }

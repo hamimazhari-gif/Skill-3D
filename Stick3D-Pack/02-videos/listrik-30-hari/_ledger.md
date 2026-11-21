@@ -1,0 +1,19 @@
+# Anti-template ledger — listrik-30-hari (Indonesian, 120.3 s, 17 scenes)
+video | scene | composition grammar | signature mechanic | entrances/transitions | environment/background | camera path | subject treatment
+listrik | S1 0-7.4 | hero foreground, city behind | blackout wave far->near, phone drops (ballistic), calendar tears 1->30 | first | dusk rooftop, festoon lights, skyline | push-in -> over-shoulder reveal -> truck to calendar | shock jump-back, walk to calendar
+listrik | S2 7.4-14.7 | top-down dollhouse | lying flat puppet (FlatPuppet), hand-fan, toy car | dip to black | warm living room, daylight shaft | high crane descends to sofa, tilts to dead bulb | relaxed: hands behind head, yawn
+listrik | S3 14.7-24.5 | frontal box room | tear-off calendar 1->2, fan button press (no spin), AC "pajangan", room revealed INSIDE an oven | whip | orange brick bedroom -> giant oven | push in, tilt up to AC, long pull-back reveal | sweat, fanning, melt squash
+listrik | S4 24.5-31.4 | scale contrast (giant phone) | dying phone 1%, plug-in fails (red X), electricity bolt leaves through window | zoom | teal night room | push to phone, high pull-up, pan to poster, push to window | worry, power-bank shake
+listrik | S5 31.4-40.8 | fridge interior as stage | door swings on hinge, ice cream melts + drips, scared meat, mold grows & opens eyes | ghost | white/blue kitchen | wide -> crane down shelf by shelf | recoil, nose hold
+listrik | S6 40.8-46.2 | foreground router, low angle | Wi-Fi icon slashed, TV smack with damped wobble, reflection in dead screen | whip | purple dusk room, candle | low -> pan to TV | phone held high, angry smack
+listrik | S7 46.2-52.0 | audience vs. show | family heads track the broom; gecko crawls the wall; cheer | zoom | garden porch, green | from neighbour yard -> crane up wall | synchronized lookX, point, clap
+listrik | S8 52.0-65.2 | 4 stations in a row | axe chop splits log (arcs), stirring, scrubbing, bucket pour + water stream, banners unroll + flags rise | ghost | village backyard | lateral truck right -> crane back wide | work actions
+listrik | S9 65.2-72.8 | walk toward lens | dead lamps/poles, cat eyes, blank notifications | dip | night street, moon | follow-cam retreating ahead | candle, darting eyes, tremble
+listrik | S10 72.8-78.6 | grass-level stage | critter concert: cricket violins, frog throat puff, mosquito mic, spotlights per word | ghost | moonlit pond | low orbit -> pull back reveal | Budi covering ears on steps
+listrik | S11 78.6-86.2 | crowd high angle | chair-stack wobble, ladder, tree, neighbours exit house, tower blinks | flash | bright hilltop | high orbit -> low angle to tower | phones held high
+listrik | S12 86.2-91.4 | single hero close | 1 signal bar pops, joy hops; neighbour's bank book ignored | whip | golden-hour roadside | close -> wide -> pan to passbook | joy jumps
+listrik | S13 91.4-101.1 | village panorama | jump rope synced hop, kite, chat, family meal, phone basket pushed away | zoom | sunset lane | high descend -> truck right -> low to mat | eating cycle
+listrik | S14 101.1-106.2 | family circle around candle | calendar 29->30, bulb flickers then ON, colour world switches | dip | dark -> bright room | push to calendar, Budi, bulb | sit -> stand -> jump
+listrik | S15 106.2-112.6 | room orbit | party popper confetti, fan spin-up (integrated), papers fly, TV on, run + plug charger | flash | bright party room | orbit fan -> TV -> socket | cheering hops, run
+listrik | S16 112.6-117.1 | foreground hero, meter behind | meter counts down, red blink, lights die, jump-back | ghost | hallway | slow ominous push -> close-up -> pull | dance -> notice -> shock
+listrik | S17 117.1-120.3 | bookend exterior | match strike, candle lights, pull back through the window | ghost | dark house at night | inside -> through window -> exterior wide | determined fist

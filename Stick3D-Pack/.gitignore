@@ -1,3 +1,7 @@
 node_modules/
 .gl-flag
 ENV-REPORT.md
+02-videos/*/out/
+engine/public/voice.wav
+engine/public/mix.wav
+99-exports/
