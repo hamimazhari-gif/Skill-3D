@@ -1,0 +1,413 @@
+{
+ "duration": 74.04,
+ "frames30": 2221,
+ "source": "silence-align (cost 1.75)",
+ "segments": [
+  [
+   0.31475,
+   0.868792
+  ],
+  [
+   1.02617,
+   3.19683
+  ],
+  [
+   3.54346,
+   4.44738
+  ],
+  [
+   4.95958,
+   5.60433
+  ],
+  [
+   6.06312,
+   9.35625
+  ],
+  [
+   10.0506,
+   12.492
+  ],
+  [
+   13.2574,
+   16.1139
+  ],
+  [
+   16.4899,
+   17.4756
+  ],
+  [
+   17.7775,
+   18.7329
+  ],
+  [
+   19.1098,
+   20.4527
+  ],
+  [
+   20.9443,
+   21.3396
+  ],
+  [
+   21.4635,
+   21.6883
+  ],
+  [
+   21.8366,
+   24.3157
+  ],
+  [
+   24.9507,
+   25.2503
+  ],
+  [
+   25.3721,
+   26.2287
+  ],
+  [
+   26.64,
+   28.3625
+  ],
+  [
+   28.7992,
+   30.0169
+  ],
+  [
+   30.3162,
+   30.8845
+  ],
+  [
+   31.1041,
+   31.5545
+  ],
+  [
+   31.8871,
+   32.7065
+  ],
+  [
+   33.0947,
+   33.507
+  ],
+  [
+   33.6466,
+   36.6698
+  ],
+  [
+   37.1124,
+   38.0537
+  ],
+  [
+   38.5645,
+   39.9198
+  ],
+  [
+   40.2699,
+   41.4447
+  ],
+  [
+   41.5895,
+   42.7916
+  ],
+  [
+   43.3689,
+   44.2805
+  ],
+  [
+   44.5781,
+   45.0553
+  ],
+  [
+   45.3346,
+   45.8575
+  ],
+  [
+   46.3726,
+   48.3185
+  ],
+  [
+   48.9836,
+   49.6268
+  ],
+  [
+   49.8458,
+   51.2571
+  ],
+  [
+   51.429,
+   52.2682
+  ],
+  [
+   52.9944,
+   54.0252
+  ],
+  [
+   54.2823,
+   55.264
+  ],
+  [
+   55.7574,
+   57.0771
+  ],
+  [
+   57.5263,
+   57.8601
+  ],
+  [
+   58.2316,
+   59.0305
+  ],
+  [
+   59.356,
+   60.836
+  ],
+  [
+   61.529,
+   62.8575
+  ],
+  [
+   63.1382,
+   64.5187
+  ],
+  [
+   65.0147,
+   66.1608
+  ],
+  [
+   66.698,
+   67.5329
+  ],
+  [
+   67.9725,
+   69.4955
+  ],
+  [
+   70.0926,
+   71.5965
+  ],
+  [
+   72.4724,
+   73.7831
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Minggu ini,",
+   "s": 0.315,
+   "e": 0.869
+  },
+  {
+   "text": "satu game meraup hampir empat miliar dolar.",
+   "s": 1.026,
+   "e": 3.197
+  },
+  {
+   "text": "Dalam satu hari.",
+   "s": 3.543,
+   "e": 4.447
+  },
+  {
+   "text": "GTA Enam.",
+   "s": 4.96,
+   "e": 5.604
+  },
+  {
+   "text": "Lebih besar dari seluruh pendapatan bioskop film superhero terlaris sepanjang masa.",
+   "s": 6.063,
+   "e": 9.356
+  },
+  {
+   "text": "Biaya pembuatannya dikabarkan lebih dari satu miliar dolar.",
+   "s": 10.051,
+   "e": 12.492
+  },
+  {
+   "text": "Tapi salah satu game video pertama di dunia nyaris tanpa biaya.",
+   "s": 13.257,
+   "e": 16.114
+  },
+  {
+   "text": "Dibuat dalam dua minggu.",
+   "s": 16.49,
+   "e": 17.476
+  },
+  {
+   "text": "Oleh satu ilmuwan.",
+   "s": 17.777,
+   "e": 18.733
+  },
+  {
+   "text": "Untuk mengusir rasa bosan.",
+   "s": 19.11,
+   "e": 20.453
+  },
+  {
+   "text": "Dan ya,",
+   "s": 20.944,
+   "e": 21.34
+  },
+  {
+   "text": "sebagian orang masih berdebat apakah ini benar-benar yang pertama.",
+   "s": 21.463,
+   "e": 24.316
+  },
+  {
+   "text": "New York,",
+   "s": 24.951,
+   "e": 25.25
+  },
+  {
+   "text": "tahun lima puluh delapan.",
+   "s": 25.372,
+   "e": 26.229
+  },
+  {
+   "text": "Sebuah lab nuklir membuka hari kunjungan.",
+   "s": 26.64,
+   "e": 28.363
+  },
+  {
+   "text": "Pamerannya membosankan.",
+   "s": 28.799,
+   "e": 30.017
+  },
+  {
+   "text": "Foto.",
+   "s": 30.316,
+   "e": 30.884
+  },
+  {
+   "text": "Grafik.",
+   "s": 31.104,
+   "e": 31.555
+  },
+  {
+   "text": "Mesin yang berdengung.",
+   "s": 31.887,
+   "e": 32.706
+  },
+  {
+   "text": "Maka fisikawan William Higinbotham mengambil komputer cadangan dan sebuah osiloskop.",
+   "s": 33.095,
+   "e": 36.67
+  },
+  {
+   "text": "Jadilah tenis.",
+   "s": 37.112,
+   "e": 38.054
+  },
+  {
+   "text": "Di layar selebar telapak tangan.",
+   "s": 38.565,
+   "e": 39.92
+  },
+  {
+   "text": "Netnya sebuah garis.",
+   "s": 40.27,
+   "e": 41.445
+  },
+  {
+   "text": "Bolanya titik bercahaya.",
+   "s": 41.59,
+   "e": 42.792
+  },
+  {
+   "text": "Dua kotak aluminium.",
+   "s": 43.369,
+   "e": 44.281
+  },
+  {
+   "text": "Satu kenop,",
+   "s": 44.578,
+   "e": 45.055
+  },
+  {
+   "text": "satu tombol.",
+   "s": 45.335,
+   "e": 45.858
+  },
+  {
+   "text": "Ratusan pengunjung antre untuk bermain.",
+   "s": 46.373,
+   "e": 48.319
+  },
+  {
+   "text": "Tahun berikutnya,",
+   "s": 48.984,
+   "e": 49.627
+  },
+  {
+   "text": "kamu bahkan bisa main tenis di Bulan.",
+   "s": 49.846,
+   "e": 51.257
+  },
+  {
+   "text": "Atau di Jupiter.",
+   "s": 51.429,
+   "e": 52.268
+  },
+  {
+   "text": "Lalu game itu dibongkar,",
+   "s": 52.994,
+   "e": 54.025
+  },
+  {
+   "text": "komponennya dipakai ulang.",
+   "s": 54.282,
+   "e": 55.264
+  },
+  {
+   "text": "Ia sudah punya dua puluh paten.",
+   "s": 55.757,
+   "e": 57.077
+  },
+  {
+   "text": "Yang ini?",
+   "s": 57.526,
+   "e": 57.86
+  },
+  {
+   "text": "Tidak ia patenkan.",
+   "s": 58.232,
+   "e": 59.031
+  },
+  {
+   "text": "Menurutnya, terlalu sederhana.",
+   "s": 59.356,
+   "e": 60.836
+  },
+  {
+   "text": "Enam puluh delapan tahun kemudian,",
+   "s": 61.529,
+   "e": 62.858
+  },
+  {
+   "text": "titik itu menjadi sebuah kota.",
+   "s": 63.138,
+   "e": 64.519
+  },
+  {
+   "text": "Dua tombol itu menjadi stik.",
+   "s": 65.015,
+   "e": 66.161
+  },
+  {
+   "text": "Dan antrean pengunjung?",
+   "s": 66.698,
+   "e": 67.533
+  },
+  {
+   "text": "Kini tiga puluh dua juta pre-order.",
+   "s": 67.972,
+   "e": 69.496
+  },
+  {
+   "text": "Kita masih rela antre untuk bermain.",
+   "s": 70.093,
+   "e": 71.597
+  },
+  {
+   "text": "Game pertama yang kamu mainkan apa?",
+   "s": 72.472,
+   "e": 73.783
+  }
+ ]
+}

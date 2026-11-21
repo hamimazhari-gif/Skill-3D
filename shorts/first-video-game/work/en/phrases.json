@@ -1,0 +1,364 @@
+{
+ "duration": 71.96,
+ "frames30": 2159,
+ "source": "silence-align (cost 3.80)",
+ "segments": [
+  [
+   0.123708,
+   0.694167
+  ],
+  [
+   0.901583,
+   3.64662
+  ],
+  [
+   3.83396,
+   4.53725
+  ],
+  [
+   5.02625,
+   6.362
+  ],
+  [
+   6.7075,
+   10.3201
+  ],
+  [
+   10.6804,
+   13.3722
+  ],
+  [
+   13.8425,
+   15.5274
+  ],
+  [
+   15.7004,
+   16.5949
+  ],
+  [
+   16.9603,
+   17.9975
+  ],
+  [
+   18.2615,
+   19.2405
+  ],
+  [
+   19.376,
+   20.5547
+  ],
+  [
+   20.8787,
+   21.5457
+  ],
+  [
+   21.741,
+   24.1903
+  ],
+  [
+   24.973,
+   28.3667
+  ],
+  [
+   28.9655,
+   29.8368
+  ],
+  [
+   30.3444,
+   31.0667
+  ],
+  [
+   31.2106,
+   31.7128
+  ],
+  [
+   32.1554,
+   32.7724
+  ],
+  [
+   33.2028,
+   36.9223
+  ],
+  [
+   37.2492,
+   37.7424
+  ],
+  [
+   37.9317,
+   39.967
+  ],
+  [
+   40.2892,
+   40.9331
+  ],
+  [
+   41.3474,
+   42.3457
+  ],
+  [
+   42.9269,
+   43.9624
+  ],
+  [
+   44.1373,
+   45.1501
+  ],
+  [
+   45.7437,
+   47.6187
+  ],
+  [
+   47.9707,
+   49.9795
+  ],
+  [
+   50.2123,
+   51.002
+  ],
+  [
+   51.682,
+   53.1892
+  ],
+  [
+   53.65,
+   55.4549
+  ],
+  [
+   55.7864,
+   56.1192
+  ],
+  [
+   56.5514,
+   57.3281
+  ],
+  [
+   57.7062,
+   58.5581
+  ],
+  [
+   59.1686,
+   60.6441
+  ],
+  [
+   60.9121,
+   62.6022
+  ],
+  [
+   62.9925,
+   64.5948
+  ],
+  [
+   64.9994,
+   65.9877
+  ],
+  [
+   66.3221,
+   68.2393
+  ],
+  [
+   68.7013,
+   69.6973
+  ],
+  [
+   70.3254,
+   71.7154
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "This week,",
+   "s": 0.124,
+   "e": 0.694
+  },
+  {
+   "text": "one game made almost four billion dollars.",
+   "s": 0.902,
+   "e": 3.647
+  },
+  {
+   "text": "In one day.",
+   "s": 3.834,
+   "e": 4.537
+  },
+  {
+   "text": "Grand Theft Auto Six.",
+   "s": 5.026,
+   "e": 6.362
+  },
+  {
+   "text": "More than the entire box office of the biggest superhero movie ever.",
+   "s": 6.707,
+   "e": 10.32
+  },
+  {
+   "text": "It reportedly cost over a billion dollars to make.",
+   "s": 10.68,
+   "e": 13.372
+  },
+  {
+   "text": "But one of the first video games ever cost almost nothing.",
+   "s": 13.842,
+   "e": 16.595
+  },
+  {
+   "text": "It was built in two weeks.",
+   "s": 16.96,
+   "e": 17.997
+  },
+  {
+   "text": "By one scientist.",
+   "s": 18.262,
+   "e": 19.241
+  },
+  {
+   "text": "To cure boredom.",
+   "s": 19.376,
+   "e": 20.555
+  },
+  {
+   "text": "And yes,",
+   "s": 20.879,
+   "e": 21.546
+  },
+  {
+   "text": "people still argue whether it was really the first.",
+   "s": 21.741,
+   "e": 24.19
+  },
+  {
+   "text": "New York, nineteen fifty-eight. A nuclear lab held a visitors' day.",
+   "s": 24.973,
+   "e": 28.367
+  },
+  {
+   "text": "The exhibits were dull.",
+   "s": 28.965,
+   "e": 29.837
+  },
+  {
+   "text": "Photos.",
+   "s": 30.344,
+   "e": 31.067
+  },
+  {
+   "text": "Charts.",
+   "s": 31.211,
+   "e": 31.713
+  },
+  {
+   "text": "Humming machines.",
+   "s": 32.155,
+   "e": 32.772
+  },
+  {
+   "text": "So physicist William Higinbotham grabbed a spare computer and an oscilloscope.",
+   "s": 33.203,
+   "e": 36.922
+  },
+  {
+   "text": "Tennis.",
+   "s": 37.249,
+   "e": 37.742
+  },
+  {
+   "text": "On a screen five inches wide.",
+   "s": 37.932,
+   "e": 39.967
+  },
+  {
+   "text": "The net was a line.",
+   "s": 40.289,
+   "e": 40.933
+  },
+  {
+   "text": "The ball was a glowing dot.",
+   "s": 41.347,
+   "e": 42.346
+  },
+  {
+   "text": "Two aluminum boxes.",
+   "s": 42.927,
+   "e": 43.962
+  },
+  {
+   "text": "One knob, one button.",
+   "s": 44.137,
+   "e": 45.15
+  },
+  {
+   "text": "Hundreds of visitors lined up to play.",
+   "s": 45.744,
+   "e": 47.619
+  },
+  {
+   "text": "The next year, you could even play tennis on the Moon.",
+   "s": 47.971,
+   "e": 49.98
+  },
+  {
+   "text": "Or on Jupiter.",
+   "s": 50.212,
+   "e": 51.002
+  },
+  {
+   "text": "Then the lab took it apart for the parts.",
+   "s": 51.682,
+   "e": 53.189
+  },
+  {
+   "text": "He had patented twenty inventions.",
+   "s": 53.65,
+   "e": 55.455
+  },
+  {
+   "text": "This one?",
+   "s": 55.786,
+   "e": 56.119
+  },
+  {
+   "text": "He never bothered.",
+   "s": 56.551,
+   "e": 57.328
+  },
+  {
+   "text": "He thought it was too simple.",
+   "s": 57.706,
+   "e": 58.558
+  },
+  {
+   "text": "Sixty-eight years later,",
+   "s": 59.169,
+   "e": 60.644
+  },
+  {
+   "text": "that dot became a whole city.",
+   "s": 60.912,
+   "e": 62.602
+  },
+  {
+   "text": "Those two buttons became a controller.",
+   "s": 62.992,
+   "e": 64.595
+  },
+  {
+   "text": "And the line of visitors?",
+   "s": 64.999,
+   "e": 65.988
+  },
+  {
+   "text": "Now it's thirty-two million pre-orders.",
+   "s": 66.322,
+   "e": 68.239
+  },
+  {
+   "text": "We still line up to play.",
+   "s": 68.701,
+   "e": 69.697
+  },
+  {
+   "text": "So what was the first game you ever played?",
+   "s": 70.325,
+   "e": 71.715
+  }
+ ]
+}
