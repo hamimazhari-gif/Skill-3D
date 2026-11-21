@@ -1,1 +1,1 @@
-{"title": "thumb", "duration": 3, "shots": [{"id": "thumb", "start": 0, "end": 3, "line": "", "scene": "thumbnail", "bars": "none"}], "music": []}
+{"title": "thumb", "duration": 4, "shots": [{"id": "thumb", "start": 0, "end": 1, "line": "", "scene": "thumb", "bars": "none"}, {"id": "v1", "start": 1, "end": 2, "line": "", "scene": "v1", "bars": "none"}, {"id": "v2", "start": 2, "end": 3, "line": "", "scene": "v2", "bars": "none"}, {"id": "v3", "start": 3, "end": 4, "line": "", "scene": "v3", "bars": "none"}], "music": []}

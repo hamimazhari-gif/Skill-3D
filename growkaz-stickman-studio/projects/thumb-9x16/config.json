@@ -6,7 +6,7 @@
  "style": "kisah",
  "voiceover": "input/voiceover.wav",
  "script": "input/script.txt",
- "duration": 3,
+ "duration": 4,
  "captions": false,
  "bars": "none",
  "fadeIn": 0,

@@ -1,0 +1,1 @@
+../../../thumb-shared/variants.js
