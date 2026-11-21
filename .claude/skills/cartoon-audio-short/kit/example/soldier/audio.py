@@ -1,4 +1,4 @@
-"""Synthesized music bed + SFX for the soldier short, mixed under voice.mp3."""
+"""Synthesized music bed + SFX stems for the soldier short -> music.wav, sfx.wav (mix with mix.py)."""
 import numpy as np, subprocess, wave
 
 SR = 48000
@@ -168,14 +168,10 @@ place(sfx, creak(0.8, 90), F(536), 1.0)
 place(sfx, snap(), F(548), 0.9)                # brace breaks on "rotting"
 place(sfx, splash(1.0), F(580), 0.9)
 
-voice = load_voice()
-# duck the bed under the voice (envelope follower)
-ve = np.abs(voice); k = int(0.05 * SR)
-ve = np.convolve(ve, np.ones(k) / k, "same"); duck = 1 - 0.45 * np.clip(ve / (ve.max() * 0.25), 0, 1)
-mix = voice + music * duck * 1.4 + sfx * 0.5
-mix = np.tanh(mix * 0.95) / np.tanh(0.95)
-fade = int(0.04 * SR); mix[-fade:] *= np.linspace(1, 0, fade)
-pcm = (np.clip(mix, -1, 1) * 32767).astype(np.int16)
-with wave.open("mix_raw.wav", "wb") as w:
-    w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
-print("ok", len(pcm) / SR)
+# stems only: levels are set by mix.py (music and SFX at 50 % of the voice's gated RMS)
+def write(name, x):
+    x = x / max(1e-9, np.abs(x).max()) * 0.9   # absolute scale is irrelevant, mix.py re-levels
+    with wave.open(name, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((x * 32767).astype(np.int16).tobytes())
+write("music.wav", music); write("sfx.wav", sfx)
+print("stems ok", N / SR)

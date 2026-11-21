@@ -1,14 +1,25 @@
 # Skill-3D
 Make animation 3D Stick
 
-Audio in, finished vertical cartoon short out. 2D bean-head cards in an inked, painted 3D world
-(three.js in headless Chromium, no Remotion and no GPU needed), with a synthesized music bed and SFX.
+A Claude Code skill, **`cartoon-audio-short`**: idea → script → your voiceover → finished vertical
+cartoon short (1080x1920, 30 fps MP4). Flat bean-head cartoon cards in an inked, painted three.js world,
+rendered in headless Chromium (no GPU), with a synthesized music bed and SFX locked at 50 % of the voice level.
 
-- `engine/` renderer: world helpers, cards, ink pass, lens blur, grade (`main.js`), painted textures (`paint.js`),
-  cast drawing (`roman.js` on top of the Pen library from mromidev/claude-animated-shorts, fetched by setup),
-  motion helpers (`motion.js`).
-- `example/soldier/` the worked example "The Soldier Who Never Left" (story.js shot plan + audio.py cue table).
-- `tools/` setup.sh (new project), timing.py (word timings), render.mjs (frames), sheet.py (contact sheets), finish.sh (encode + QA).
+```
+.claude/skills/cartoon-audio-short/
+  SKILL.md            the workflow Claude follows (10 ideas → script → build)
+  kit/engine/         renderer (main.js), painted textures, cast drawing, motion helpers
+  kit/tools/          setup.sh, timing.py, render.mjs, sheet.py, mix.py, finish.sh
+  kit/example/soldier worked example "The Soldier Who Never Left"
+  kit/vendor/         three.js r160 + toon.ts Pen library (both MIT, licenses included)
+```
 
-Quick start: `bash tools/setup.sh ~/shorts/my-short && cd ~/shorts/my-short && python3 timing.py voice.mp3 script.txt --out work`
+## Install
+- **In this repo:** nothing to do. Claude Code loads project skills from `.claude/skills/` automatically.
+- **For all your projects:** `cp -r .claude/skills/cartoon-audio-short ~/.claude/skills/`
+
+Then ask Claude for "a cartoon short" (or run `/cartoon-audio-short`).
+
+Requirements: Node 22.6+, Python 3 with numpy + Pillow, ffmpeg, Playwright with Chromium.
+
 Built on github.com/mromidev/claude-animated-shorts (MIT): toon.ts, look values and readability rules.
