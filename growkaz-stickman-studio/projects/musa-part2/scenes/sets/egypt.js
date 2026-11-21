@@ -79,7 +79,7 @@ export function throne(g, x, GY, M, k = 1) {
 // Egyptian city at night: walls, obelisks, pyramids, torches
 export function city(g, t, cam, o = {}) {
   const M = mood(o.mood || 'night'), GY = ground(), CX = E.W / 2;
-  layer(g, cam, 0.1, (g) => { backdrop(g, M.sky); FX.stars(g, t, { count: 160, area: [-E.W * 0.2, 0, E.W * 1.4, GY * 0.7] }); FX.moon(g, CX + V(520, 280), GY - V(760, 1150), V(40, 46)); });
+  layer(g, cam, 0.1, (g) => { backdrop(g, M.sky); if (['night', 'pharaoh', 'sorcery'].includes(o.mood || 'night')) FX.stars(g, t, { count: 160, area: [-E.W * 0.2, 0, E.W * 1.4, GY * 0.7] }); if (['night', 'pharaoh', 'sorcery'].includes(o.mood || 'night')) FX.moon(g, CX + V(520, 280), GY - V(760, 1150), V(40, 46)); });
   layer(g, cam, 0.3, (g) => pyramids(g, GY - V(140, 220), M, [shade(M.wall, -0.15), shade(M.wall, -0.3)], 1));
   layer(g, cam, 0.55, (g) => {
     const wall = shade(M.wall, -0.1), top = GY - V(380, 520);

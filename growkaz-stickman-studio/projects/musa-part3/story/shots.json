@@ -1,0 +1,956 @@
+{
+ "title": "Kisah Nabi Musa - Part 3",
+ "duration": 155.1,
+ "shots": [
+  {
+   "id": "p01",
+   "start": 0.0,
+   "end": 3.05,
+   "line": "Di depan mereka… lautan luas.",
+   "scene": "Dari belakang rombongan Bani Israil: lautan luas membentang di depan, fajar",
+   "set": "shore",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -16
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "start": 3.05,
+   "end": 7.75,
+   "line": "Di belakang mereka… pasukan Firaun yang tak terhitung jumlahnya.",
+   "scene": "Debu di cakrawala: pasukan Firaun dan kereta perang mendekat",
+   "set": "desert",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "start": 7.75,
+   "end": 9.65,
+   "line": "Tidak ada jalan keluar.",
+   "scene": "Bani Israil terjepit, wajah-wajah ketakutan menoleh ke belakang",
+   "set": "shore",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p04",
+   "start": 9.65,
+   "end": 11.9,
+   "line": "Atau… benarkah begitu?",
+   "scene": "Close-up Musa tenang dan yakin, tongkat bercahaya",
+   "set": "shore",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "start": 11.9,
+   "end": 13.45,
+   "line": "",
+   "scene": "Kartu judul: KISAH NABI MUSA / PART 3: LAUTAN TERBELAH",
+   "set": "title",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "start": 13.45,
+   "end": 16.45,
+   "line": "Hari itu, seluruh rakyat Mesir berkumpul.",
+   "scene": "Arena: seluruh rakyat Mesir berkumpul, kerumunan besar",
+   "set": "arena",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "p07",
+   "start": 16.45,
+   "end": 20.25,
+   "line": "Firaun yakin, Musa akan dipermalukan.",
+   "scene": "Firaun duduk di singgasana di arena, tersenyum sinis",
+   "set": "arena",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p08",
+   "start": 20.25,
+   "end": 23.45,
+   "line": "Para penyihir melemparkan tali dan tongkat mereka…",
+   "scene": "Para penyihir melemparkan tali dan tongkat",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "swish",
+     "gain": -10
+    },
+    {
+     "at": 0.9,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p09",
+   "start": 23.45,
+   "end": 27.45,
+   "line": "Seketika, semuanya tampak seperti ular yang merayap!",
+   "scene": "Tali-tali berubah menjadi ular ungu yang merayap",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "glitch",
+     "gain": -10
+    },
+    {
+     "at": 0.5,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p10",
+   "start": 27.45,
+   "end": 29.25,
+   "line": "Rakyat terperangah.",
+   "scene": "Rakyat terperangah, wajah-wajah terkejut",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "murmur",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p11",
+   "start": 29.25,
+   "end": 31.85,
+   "line": "Lalu Allah berfirman kepada Musa:",
+   "scene": "Cahaya turun ke arah Musa di arena",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p12",
+   "start": 31.85,
+   "end": 33.15,
+   "line": "\"Jangan takut!",
+   "scene": "Close-up Musa: ketakutan berubah menjadi keyakinan",
+   "set": "arena",
+   "bars": "scope"
+  },
+  {
+   "id": "p13",
+   "start": 33.15,
+   "end": 35.15,
+   "line": "Lemparkan tongkatmu!\"",
+   "scene": "Musa melempar tongkatnya",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "swish",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "p14",
+   "start": 35.15,
+   "end": 37.65,
+   "line": "Tongkat itu berubah menjadi ular raksasa…",
+   "scene": "KILAT: ular raksasa bangkit di arena",
+   "set": "arena",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -5
+    },
+    {
+     "at": 0.3,
+     "name": "powerup",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p15",
+   "start": 37.65,
+   "end": 40.65,
+   "line": "dan menelan semua tipu daya mereka.",
+   "scene": "Ular raksasa menelan ular-ular sihir satu per satu",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -10
+    },
+    {
+     "at": 0.9,
+     "name": "hit",
+     "gain": -10
+    },
+    {
+     "at": 1.5,
+     "name": "hit",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p16",
+   "start": 40.65,
+   "end": 42.75,
+   "line": "Hingga tak tersisa.",
+   "scene": "Tanah kosong, debu mengendap, tongkat kembali di tangan Musa",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "ding",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p17",
+   "start": 42.75,
+   "end": 44.05,
+   "line": "Hening.",
+   "scene": "Hening: kerumunan membeku, kamera mendorong pelan",
+   "set": "arena",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "slowmo",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p18",
+   "start": 44.05,
+   "end": 47.45,
+   "line": "Para penyihir tahu betul… ini bukan sihir.",
+   "scene": "Close-up penyihir: sadar ini bukan sihir",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 1.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p19",
+   "start": 47.45,
+   "end": 49.35,
+   "line": "Mereka langsung bersujud.",
+   "scene": "Para penyihir bersujud serempak",
+   "set": "arena",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p20",
+   "start": 49.35,
+   "end": 52.75,
+   "line": "\"Kami beriman kepada Tuhan Musa dan Harun!\"",
+   "scene": "Penyihir berlutut mengangkat tangan: Kami beriman!",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p21",
+   "start": 52.75,
+   "end": 56.15,
+   "line": "Firaun murka dan mengancam akan menyiksa mereka.",
+   "scene": "Firaun murka, wajah merah, mengancam",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "impact",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "p22",
+   "start": 56.15,
+   "end": 61.25,
+   "line": "Tapi mereka tidak gentar. Iman telah masuk ke dalam hati mereka.",
+   "scene": "Para penyihir tetap tenang, cahaya keemasan di dada mereka",
+   "set": "arena",
+   "sfx": [
+    {
+     "at": 1.8,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p23",
+   "start": 61.25,
+   "end": 63.05,
+   "line": "Firaun tetap sombong.",
+   "scene": "Firaun menyilangkan tangan dan berpaling, sombong",
+   "set": "palace",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "p24",
+   "start": 63.05,
+   "end": 66.85,
+   "line": "Maka Allah memerintahkan Musa membawa Bani Israil keluar dari Mesir,",
+   "scene": "Malam: gerbang kota, Musa memimpin Bani Israil keluar diam-diam",
+   "set": "city",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "p25",
+   "start": 66.85,
+   "end": 69.15,
+   "line": "di tengah malam.",
+   "scene": "Barisan panjang rombongan berjalan di gurun di bawah bulan",
+   "set": "desert",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.2,
+     "name": "footstep",
+     "gain": -16
+    }
+   ]
+  },
+  {
+   "id": "p26",
+   "start": 69.15,
+   "end": 73.05,
+   "line": "Saat fajar menyingsing, Firaun mengerahkan seluruh pasukannya…",
+   "scene": "Fajar: Firaun menunjuk, pasukan bersiap dengan tombak",
+   "set": "city",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p27",
+   "start": 73.05,
+   "end": 75.35,
+   "line": "dan mengejar mereka!",
+   "scene": "Kereta perang Firaun dan pasukan berlari mengejar, debu",
+   "set": "desert",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -8
+    },
+    {
+     "at": 0.4,
+     "name": "kick",
+     "gain": -12
+    },
+    {
+     "at": 0.8,
+     "name": "kick",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p28",
+   "start": 75.35,
+   "end": 78.75,
+   "line": "Kini, Bani Israil terpojok di tepi laut.",
+   "scene": "Wide: Bani Israil terpojok di tepi laut",
+   "set": "shore",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p29",
+   "start": 78.75,
+   "end": 80.45,
+   "line": "\"Kita pasti akan tersusul!\"",
+   "scene": "Close-up seorang Bani Israil berteriak ketakutan",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p30",
+   "start": 80.45,
+   "end": 82.55,
+   "line": "teriak mereka ketakutan.",
+   "scene": "Rombongan panik menoleh ke debu pasukan",
+   "set": "shore",
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "p31",
+   "start": 82.55,
+   "end": 84.95,
+   "line": "Tapi Musa menjawab dengan tenang:",
+   "scene": "Musa berdiri tenang menghadap rombongannya",
+   "set": "shore",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "p32",
+   "start": 84.95,
+   "end": 89.15,
+   "line": "\"Sekali-kali tidak! Sesungguhnya Tuhanku bersamaku.",
+   "scene": "Close-up Musa: Sekali-kali tidak! Tuhanku bersamaku",
+   "set": "shore",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.7,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p33",
+   "start": 89.15,
+   "end": 92.15,
+   "line": "Dia akan memberi petunjuk kepadaku.\"",
+   "scene": "Musa menatap langit, cahaya turun",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p34",
+   "start": 92.15,
+   "end": 96.75,
+   "line": "Allah memerintahkan: \"Pukullah laut itu dengan tongkatmu!\"",
+   "scene": "Musa di tepi air mengangkat tongkat tinggi-tinggi",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "riser",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p35",
+   "start": 96.75,
+   "end": 99.25,
+   "line": "Musa memukulkan tongkatnya…",
+   "scene": "Insert: tongkat menghantam air, cincin cahaya, guncangan",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "impact",
+     "gain": -4
+    },
+    {
+     "at": 0.7,
+     "name": "thunder",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p36",
+   "start": 99.25,
+   "end": 102.75,
+   "line": "Dan laut pun terbelah menjadi dua!",
+   "scene": "KILAT: laut terbelah dua, dinding air naik",
+   "set": "shore",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "powerup",
+     "gain": -6
+    },
+    {
+     "at": 0.3,
+     "name": "wind",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "p37",
+   "start": 102.75,
+   "end": 106.75,
+   "line": "Setiap belahannya menjulang seperti gunung yang besar!",
+   "scene": "3D: dinding air raksasa seperti gunung, kamera terbang di jalur",
+   "set": "sea3d",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "p38",
+   "start": 106.75,
+   "end": 109.25,
+   "line": "Dasar laut menjadi jalan yang kering.",
+   "scene": "Dasar laut kering di antara dinding air, cahaya di ujung",
+   "set": "corridor",
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p39",
+   "start": 109.25,
+   "end": 112.45,
+   "line": "Musa dan Bani Israil menyeberang dengan selamat.",
+   "scene": "Musa memimpin Bani Israil menyeberang di antara dinding air",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "footstep",
+     "gain": -14
+    },
+    {
+     "at": 1.0,
+     "name": "footstep",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p40",
+   "start": 112.45,
+   "end": 114.35,
+   "line": "Firaun tak mau kalah.",
+   "scene": "Firaun di kereta perangnya di tepi laut, marah",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "p41",
+   "start": 114.35,
+   "end": 117.45,
+   "line": "Ia memacu pasukannya masuk ke tengah laut…",
+   "scene": "Pasukan Firaun menyerbu masuk ke tengah laut",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "whoosh",
+     "gain": -8
+    },
+    {
+     "at": 0.6,
+     "name": "kick",
+     "gain": -12
+    },
+    {
+     "at": 1.1,
+     "name": "kick",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "p42",
+   "start": 117.45,
+   "end": 120.45,
+   "line": "Dan saat mereka semua berada di tengah…",
+   "scene": "Pasukan di tengah; dinding air bergetar, mengancam",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -16
+   }
+  },
+  {
+   "id": "p43",
+   "start": 120.45,
+   "end": 122.65,
+   "line": "Laut kembali menyatu!",
+   "scene": "KILAT: laut kembali menyatu, ombak raksasa menghantam",
+   "set": "crash",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -3
+    },
+    {
+     "at": 0.2,
+     "name": "thunder",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "p44",
+   "start": 122.65,
+   "end": 127.65,
+   "line": "Ketika air menenggelamkannya, Firaun berteriak, \"Aku beriman!\"",
+   "scene": "Firaun di tengah ombak, berteriak: Aku beriman!",
+   "set": "waves",
+   "amb": {
+    "name": "rain",
+    "gain": -16
+   }
+  },
+  {
+   "id": "p45",
+   "start": 127.65,
+   "end": 130.25,
+   "line": "Tapi semuanya sudah terlambat.",
+   "scene": "Tangan Firaun tenggelam, gelembung terakhir",
+   "set": "waves",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p46",
+   "start": 130.25,
+   "end": 135.15,
+   "line": "Raja yang mengaku tuhan itu… binasa ditelan lautan.",
+   "scene": "Laut tenang saat matahari terbit, nemes Firaun mengapung",
+   "set": "shore",
+   "in": {
+    "type": "dip",
+    "dur": 0.5
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "p47",
+   "start": 135.15,
+   "end": 138.45,
+   "line": "Dari kisah Nabi Musa, kita belajar:",
+   "scene": "Bani Israil di seberang saat matahari terbit, Musa & Harun menoleh ke laut",
+   "set": "shore",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "p48",
+   "start": 138.45,
+   "end": 142.45,
+   "line": "pertolongan Allah selalu datang kepada hamba-Nya yang beriman.",
+   "scene": "Cahaya keemasan, rombongan bersyukur",
+   "set": "shore",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "p49",
+   "start": 142.45,
+   "end": 147.65,
+   "line": "Jangan pernah takut menghadapi kesulitan, selama kita bertawakal kepada Allah.",
+   "scene": "Musa tersenyum dengan tongkatnya di bukit fajar",
+   "set": "shore"
+  },
+  {
+   "id": "p50",
+   "start": 147.65,
+   "end": 150.75,
+   "line": "Karena ketika semua jalan tampak tertutup…",
+   "scene": "Malam gelap: siluet di tepi laut, semua jalan tertutup",
+   "set": "shore",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "p51",
+   "start": 150.75,
+   "end": 155.1,
+   "line": "Allah mampu membelah lautan untukmu.",
+   "scene": "Laut terbelah oleh cahaya: ALLAH MAMPU MEMBELAH LAUTAN UNTUKMU",
+   "set": "shore",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -6
+    },
+    {
+     "at": 0.2,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 13.45,
+   "mood": "tension",
+   "intensity": 0.7
+  },
+  {
+   "start": 13.45,
+   "end": 42.75,
+   "mood": "action",
+   "intensity": 0.7
+  },
+  {
+   "start": 42.75,
+   "end": 61.25,
+   "mood": "wonder",
+   "intensity": 0.45
+  },
+  {
+   "start": 61.25,
+   "end": 75.35,
+   "mood": "tension",
+   "intensity": 0.6
+  },
+  {
+   "start": 75.35,
+   "end": 99.25,
+   "mood": "tension",
+   "intensity": 0.8
+  },
+  {
+   "start": 99.25,
+   "end": 120.45,
+   "mood": "epic",
+   "intensity": 0.85
+  },
+  {
+   "start": 120.45,
+   "end": 135.15,
+   "mood": "dark",
+   "intensity": 0.6
+  },
+  {
+   "start": 135.15,
+   "end": 155.1,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ],
+ "sfx": []
+}
