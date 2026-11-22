@@ -61,5 +61,4 @@ registerShot('k3', { draw(g) {
   person(g, { x: bx, y: by, s: vert ? 1.6 : 1.6, facing: 1, outfit: YUSUF_KID, pose: POSES.stand, expr: 'awe', look: [0, -1], rim: { color: '#fff0c0', dir: [0, -1], w: 6 } });
   if (vert) title(g, [['11 BINTANG BERSUJUD', '#fff4c0', 0.62], ['KEPADANYA?!', '#7de8ff', 0.85]], W / 2, H * 0.6, 140, -0.03);
   else title(g, [['11 BINTANG BERSUJUD', '#fff4c0', 0.75], ['KEPADANYA?!', '#7de8ff', 0.85]], W / 2, H * 0.4, 140, -0.03);
-  badge(g, 'PART 1');
 } });
