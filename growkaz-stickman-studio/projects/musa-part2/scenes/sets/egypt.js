@@ -80,7 +80,8 @@ export function throne(g, x, GY, M, k = 1) {
 export function city(g, t, cam, o = {}) {
   const M = mood(o.mood || 'night'), GY = ground(), CX = E.W / 2;
   layer(g, cam, 0.1, (g) => { backdrop(g, M.sky); if (['night', 'pharaoh', 'sorcery'].includes(o.mood || 'night')) FX.stars(g, t, { count: 160, area: [-E.W * 0.2, 0, E.W * 1.4, GY * 0.7] }); if (['night', 'pharaoh', 'sorcery'].includes(o.mood || 'night')) FX.moon(g, CX + V(520, 280), GY - V(760, 1150), V(40, 46)); });
-  layer(g, cam, 0.3, (g) => pyramids(g, GY - V(140, 220), M, [shade(M.wall, -0.15), shade(M.wall, -0.3)], 1));
+  if (!o.noEgypt) layer(g, cam, 0.3, (g) => pyramids(g, GY - V(140, 220), M, [shade(M.wall, -0.15), shade(M.wall, -0.3)], 1));
+  else layer(g, cam, 0.3, (g) => { g.fillStyle = shade(M.wall, -0.3); g.beginPath(); g.moveTo(-E.W, GY - V(140, 220)); for (let x = -E.W; x <= E.W * 2; x += 40) g.lineTo(x, GY - V(200, 300) - Math.sin(x * 0.003 + 1) * 60); g.lineTo(E.W * 2, GY); g.lineTo(-E.W, GY); g.fill(); });
   layer(g, cam, 0.55, (g) => {
     const wall = shade(M.wall, -0.1), top = GY - V(380, 520);
     g.fillStyle = linGrad(g, 0, top, 0, GY, [shade(wall, 0.05), shade(wall, -0.45)]); g.fillRect(-E.W, top, E.W * 3, GY - top);
@@ -89,7 +90,7 @@ export function city(g, t, cam, o = {}) {
     const gw = V(300, 280), gh = V(300, 380);
     g.fillStyle = shade(M.dark, -0.4); g.fillRect(CX - gw / 2 + (o.gateX || 0), GY - gh, gw, gh);
     glow(g, CX + (o.gateX || 0), GY - gh * 0.4, gw, M.practical, 0.2);
-    for (const sx of [-1, 1]) { const ox = CX + (o.gateX || 0) + sx * (gw / 2 + 120); poly(g, [[ox - 34, GY], [ox + 34, GY], [ox + 10, GY - V(620, 760)], [ox - 10, GY - V(620, 760)]], shade(wall, -0.2)); poly(g, [[ox - 10, GY - V(620, 760)], [ox + 10, GY - V(620, 760)], [ox, GY - V(660, 800)]], S().ui.gold); }
+    if (!o.noEgypt) for (const sx of [-1, 1]) { const ox = CX + (o.gateX || 0) + sx * (gw / 2 + 120); poly(g, [[ox - 34, GY], [ox + 34, GY], [ox + 10, GY - V(620, 760)], [ox - 10, GY - V(620, 760)]], shade(wall, -0.2)); poly(g, [[ox - 10, GY - V(620, 760)], [ox + 10, GY - V(620, 760)], [ox, GY - V(660, 800)]], S().ui.gold); }
     for (const i of [-3, -1, 1, 3]) { const tx = CX + i * V(260, 210), ty = GY - V(250, 300); seg(g, [[tx, ty + 30], [tx, ty]], 8, '#1a1210'); flame(g, tx, ty, 0.35, t, i * 3); FX.pool(g, tx, GY + 20, 220, 30, M.practical, 0.2); }
   });
   layer(g, cam, 0.9, (g) => { g.fillStyle = linGrad(g, 0, GY, 0, GY + 500, [shade(M.road, -0.1), shade(M.dark, -0.4)]); g.fillRect(-E.W, GY, E.W * 3, E.H * 2); FX.floorLines(g, GY, GY + 700, 'rgba(0,0,0,.3)', 0.08); });

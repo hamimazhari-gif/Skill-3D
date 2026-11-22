@@ -1,0 +1,438 @@
+{
+ "title": "Kisah Nabi Luth - Part 1",
+ "duration": 65.9,
+ "shots": [
+  {
+   "id": "l01",
+   "start": 0.0,
+   "end": 3.85,
+   "line": "Ada satu negeri… yang Allah hapus dari muka bumi.",
+   "scene": "l01",
+   "set": "city",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "l02",
+   "start": 3.85,
+   "end": 5.45,
+   "line": "Bukan dengan banjir.",
+   "scene": "l02",
+   "set": "icon",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "l03",
+   "start": 5.45,
+   "end": 6.95,
+   "line": "Bukan dengan gempa.",
+   "scene": "l03",
+   "set": "icon",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "l04",
+   "start": 6.95,
+   "end": 9.0,
+   "line": "Tapi dengan cara… dibalikkan.",
+   "scene": "l04",
+   "set": "flip",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "thunder",
+     "gain": -8
+    },
+    {
+     "at": 1.4,
+     "name": "impact",
+     "gain": -4
+    }
+   ]
+  },
+  {
+   "id": "l05",
+   "start": 9.0,
+   "end": 11.25,
+   "line": "Namanya Sodom.",
+   "scene": "l05",
+   "set": "city",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "l06",
+   "start": 11.25,
+   "end": 12.95,
+   "line": "Tanahnya subur.",
+   "scene": "l06",
+   "set": "fields",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "l07",
+   "start": 12.95,
+   "end": 14.45,
+   "line": "Hartanya melimpah.",
+   "scene": "l07",
+   "set": "market",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "ding",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "l08",
+   "start": 14.45,
+   "end": 16.15,
+   "line": "Hidupnya nyaman.",
+   "scene": "l08",
+   "set": "feast",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "l09",
+   "start": 16.15,
+   "end": 19.65,
+   "line": "Tapi penduduknya… sudah kehilangan rasa malu.",
+   "scene": "l09",
+   "set": "city",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "l10",
+   "start": 19.65,
+   "end": 25.25,
+   "line": "Mereka melakukan perbuatan keji yang belum pernah dilakukan siapa pun sebelumnya.",
+   "scene": "l10",
+   "set": "shadows",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "l11",
+   "start": 25.25,
+   "end": 27.75,
+   "line": "Mereka merampok para musafir.",
+   "scene": "l11",
+   "set": "desert",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "hit",
+     "gain": -8
+    },
+    {
+     "at": 0.7,
+     "name": "whoosh",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "l12",
+   "start": 27.75,
+   "end": 31.95,
+   "line": "Dan mereka berbuat mungkar terang-terangan, sambil tertawa.",
+   "scene": "l12",
+   "set": "city",
+   "amb": {
+    "name": "murmur",
+    "gain": -16
+   }
+  },
+  {
+   "id": "l13",
+   "start": 31.95,
+   "end": 35.25,
+   "line": "Lalu Allah mengutus seorang nabi.",
+   "scene": "l13",
+   "set": "night",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "l14",
+   "start": 35.25,
+   "end": 39.35,
+   "line": "Nabi Luth AS, keponakan Nabi Ibrahim.",
+   "scene": "l14",
+   "set": "diagram",
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 2.0,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "l15",
+   "start": 39.35,
+   "end": 42.75,
+   "line": "\"Wahai kaumku… bertakwalah kepada Allah.",
+   "scene": "l15",
+   "set": "city",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -26
+   }
+  },
+  {
+   "id": "l16",
+   "start": 42.75,
+   "end": 45.15,
+   "line": "Tinggalkan perbuatan itu!\"",
+   "scene": "l16",
+   "set": "closeup",
+   "bars": "scope"
+  },
+  {
+   "id": "l17",
+   "start": 45.15,
+   "end": 46.75,
+   "line": "Jawaban mereka?",
+   "scene": "l17",
+   "set": "city",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "heartbeat",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "l18",
+   "start": 46.75,
+   "end": 48.55,
+   "line": "\"Usir Luth dari kampung kita!",
+   "scene": "l18",
+   "set": "closeup",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "impact",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "l19",
+   "start": 48.55,
+   "end": 51.35,
+   "line": "Mereka itu orang-orang yang sok suci!\"",
+   "scene": "l19",
+   "set": "city",
+   "amb": {
+    "name": "murmur",
+    "gain": -14
+   }
+  },
+  {
+   "id": "l20",
+   "start": 51.35,
+   "end": 56.25,
+   "line": "Bayangkan… Menyeru kebaikan, tapi justru dianggap salah.",
+   "scene": "l20",
+   "set": "rain",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "rain",
+    "gain": -18
+   }
+  },
+  {
+   "id": "l21",
+   "start": 56.25,
+   "end": 58.25,
+   "line": "Dan yang paling menyakitkan…",
+   "scene": "l21",
+   "set": "house",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "l22",
+   "start": 58.25,
+   "end": 63.35,
+   "line": "Musuh terbesar Nabi Luth ternyata ada di dalam rumahnya sendiri.",
+   "scene": "l22",
+   "set": "house",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -10
+    },
+    {
+     "at": 3.4,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "l23",
+   "start": 63.35,
+   "end": 65.9,
+   "line": "Siapa dia?",
+   "scene": "l23",
+   "set": "end",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 9.0,
+   "mood": "dark",
+   "intensity": 0.6
+  },
+  {
+   "start": 9.0,
+   "end": 16.15,
+   "mood": "calm",
+   "intensity": 0.35
+  },
+  {
+   "start": 16.15,
+   "end": 31.95,
+   "mood": "dark",
+   "intensity": 0.55
+  },
+  {
+   "start": 31.95,
+   "end": 45.15,
+   "mood": "wonder",
+   "intensity": 0.45
+  },
+  {
+   "start": 45.15,
+   "end": 56.25,
+   "mood": "tension",
+   "intensity": 0.65
+  },
+  {
+   "start": 56.25,
+   "end": 65.9,
+   "mood": "mystery",
+   "intensity": 0.6
+  }
+ ],
+ "sfx": []
+}
