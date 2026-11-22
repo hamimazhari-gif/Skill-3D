@@ -13,7 +13,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 06 | `06_kota-bertembok-nordlingen.jpg` | Ukiran kota Nördlingen | B2 |
 | 07 | `07_panorama-kastel-praha.jpg` | Panorama kota berbenteng; kartusnya bertuliskan *"Königliche Schloß zu Prag"* (Kastel Praha) | B2–B4, B10 |
 | 09 | `09_aula-kastel-praha.jpg` | Aula berkubah di Kastel Praha (foto modern) | B2, B3, B10 |
-| 11 | `11_pertempuran-pasukan-berkuda.jpg` | Kavaleri dan infanteri bertempur, bangunan beratap limas di bukit — **lihat catatan 7** | B1, B4, B6 |
+| 11 | `11_pertempuran-pasukan-berkuda.jpg` | Kavaleri dan infanteri bertempur, bangunan beratap limas di bukit — **lihat catatan 7** | B1, B4 |
 | 12 | `12_potret-raja-bermahkota.jpg` | Raja bermahkota dengan orb dan tongkat — **lihat catatan 1** | B4 |
 | 13 | `13_infanteri-kekaisaran.jpg` | Infanteri Kekaisaran (tombak, halberd); ada teks Prancis di kiri-kanan — crop bagian tengah | B3, B6 |
 | 14 | `14_pengepungan-magdeburg-1631.jpg` | Ukiran Merian: pengepungan **Magdeburg** (judul "MAGDEBURG" di atas) — **lihat catatan 6** | B5, B10 |
