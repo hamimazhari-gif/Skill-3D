@@ -1,6 +1,6 @@
 # Peta Gambar ↔ Narasi — Perang Tiga Puluh Tahun
 
-Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar tanpa keterangan: `gambar/` (34 file). Nomor file = nomor di keterangan asli.
+Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar tanpa keterangan: `gambar/` (34 file, warna asli) dan `gambar_tritone/` (warna cokelat tua–abu-abu–parchment, nama file sama). Nomor file = nomor di keterangan asli.
 
 **Waktu adalah perkiraan.** Whisper tidak tersedia di lingkungan ini, jadi awal tiap paragraf diperkirakan dari jeda hening di audio dan panjang teks. Meleset ±1–3 detik itu wajar; geser titik potong ke jeda terdekat saat editing.
 
