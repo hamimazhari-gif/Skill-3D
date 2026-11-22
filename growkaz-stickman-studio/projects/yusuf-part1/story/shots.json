@@ -1,0 +1,669 @@
+{
+ "title": "Kisah Nabi Yusuf - Part 1",
+ "duration": 101.7,
+ "shots": [
+  {
+   "id": "y01",
+   "start": 0.0,
+   "end": 4.35,
+   "line": "Bagaimana mungkin… anak yang dibuang ke sumur oleh saudaranya sendiri,",
+   "scene": "Dari atas: sumur gelap, seorang anak kecil di dasarnya menengadah",
+   "set": "wellTop",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -16
+    }
+   ]
+  },
+  {
+   "id": "y02",
+   "start": 4.35,
+   "end": 7.45,
+   "line": "kelak menjadi orang paling berpengaruh di Mesir?",
+   "scene": "Kilas depan: Yusuf dewasa berdiri gagah di istana Mesir",
+   "set": "palace",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y03",
+   "start": 7.45,
+   "end": 12.3,
+   "line": "Tonton sampai akhir. Ada satu detail kecil yang membongkar sebuah kebohongan besar.",
+   "scene": "Baju putih berlumuran darah di bawah sorotan, tanda tanya",
+   "set": "insert",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "y04",
+   "start": 12.3,
+   "end": 13.15,
+   "line": "",
+   "scene": "Kartu judul: KISAH NABI YUSUF / PART 1",
+   "set": "title",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "y05",
+   "start": 13.15,
+   "end": 16.55,
+   "line": "Yusuf kecil sangat disayangi ayahnya, Nabi Yaqub.",
+   "scene": "Kan'an senja: Nabi Yaqub memeluk Yusuf kecil di depan tenda",
+   "set": "camp",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "y06",
+   "start": 16.55,
+   "end": 18.55,
+   "line": "Suatu malam, ia bermimpi:",
+   "scene": "Malam: Yusuf tidur, cahaya mimpi mulai berpendar",
+   "set": "tentNight",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "y07",
+   "start": 18.55,
+   "end": 21.45,
+   "line": "sebelas bintang, matahari, dan bulan",
+   "scene": "Mimpi: sebelas bintang muncul satu per satu, matahari, bulan",
+   "set": "dream",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -14
+    },
+    {
+     "at": 1.5,
+     "name": "ding",
+     "gain": -14
+    },
+    {
+     "at": 2.6,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "y08",
+   "start": 21.45,
+   "end": 23.65,
+   "line": "bersujud kepadanya!",
+   "scene": "Bintang, matahari, dan bulan merunduk ke arah Yusuf yang bercahaya",
+   "set": "dream",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "y09",
+   "start": 23.65,
+   "end": 25.25,
+   "line": "Nabi Yaqub berpesan:",
+   "scene": "Pagi: Yusuf bercerita, Nabi Yaqub terdiam",
+   "set": "tentNight",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "y10",
+   "start": 25.25,
+   "end": 29.85,
+   "line": "\"Wahai anakku, jangan ceritakan mimpimu kepada saudara-saudaramu.\"",
+   "scene": "Close-up Nabi Yaqub berpesan, cemas",
+   "set": "closeup",
+   "sfx": [
+    {
+     "at": 2.5,
+     "name": "heartbeat",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "y11",
+   "start": 29.85,
+   "end": 31.95,
+   "line": "Tapi kecemburuan sudah tumbuh.",
+   "scene": "Para saudara mengintip dari balik tenda, wajah dalam bayangan",
+   "set": "camp",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "y12",
+   "start": 31.95,
+   "end": 34.65,
+   "line": "\"Ayah lebih mencintai Yusuf daripada kita!\"",
+   "scene": "Close-up saudara tertua: Ayah lebih mencintai Yusuf!",
+   "set": "closeup",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "hit",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "y13",
+   "start": 34.65,
+   "end": 36.75,
+   "line": "Mereka pun menyusun rencana.",
+   "scene": "Malam: para saudara berbisik mengelilingi api unggun",
+   "set": "fire",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "glitch",
+     "gain": -18
+    }
+   ]
+  },
+  {
+   "id": "y14",
+   "start": 36.75,
+   "end": 40.05,
+   "line": "\"Ayah, izinkan Yusuf bermain bersama kami.\"",
+   "scene": "Para saudara membujuk Nabi Yaqub dengan senyum palsu",
+   "set": "camp",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "y15",
+   "start": 40.05,
+   "end": 41.75,
+   "line": "Nabi Yaqub khawatir.",
+   "scene": "Close-up Nabi Yaqub khawatir",
+   "set": "closeup"
+  },
+  {
+   "id": "y16",
+   "start": 41.75,
+   "end": 44.45,
+   "line": "\"Aku takut dia dimakan serigala.\"",
+   "scene": "Bayangan serigala melolong di bukit di bawah bulan",
+   "set": "wolf",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "wind",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "y17",
+   "start": 44.45,
+   "end": 45.55,
+   "line": "Ingat kalimat ini…",
+   "scene": "FREEZE: siluet serigala membeku, INGAT KALIMAT INI",
+   "set": "wolf",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "freeze",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "y18",
+   "start": 45.55,
+   "end": 48.85,
+   "line": "karena sebentar lagi, mereka akan memakainya sendiri.",
+   "scene": "Para saudara menggiring Yusuf ke gurun, tersenyum licik",
+   "set": "desert",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.0,
+     "name": "footstep",
+     "gain": -16
+    }
+   ]
+  },
+  {
+   "id": "y19",
+   "start": 48.85,
+   "end": 50.15,
+   "line": "Di tengah perjalanan,",
+   "scene": "Sumur di gurun; para saudara menangkap Yusuf",
+   "set": "well",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y20",
+   "start": 50.15,
+   "end": 53.75,
+   "line": "Yusuf dilemparkan ke dalam sumur yang gelap dan dalam.",
+   "scene": "Yusuf jatuh ke dalam sumur",
+   "set": "wellTop",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "whoosh",
+     "gain": -6
+    },
+    {
+     "at": 0.9,
+     "name": "impact",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "y21",
+   "start": 53.75,
+   "end": 57.95,
+   "line": "Seorang anak kecil, sendirian… dalam kegelapan.",
+   "scene": "Di dasar sumur: Yusuf sendirian memeluk lutut dalam gelap",
+   "set": "wellIn",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "heartbeat",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "y22",
+   "start": 57.95,
+   "end": 60.55,
+   "line": "Malamnya, mereka pulang sambil menangis.",
+   "scene": "Malam: para saudara pulang pura-pura menangis",
+   "set": "camp",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y23",
+   "start": 60.55,
+   "end": 63.35,
+   "line": "\"Ayah… Yusuf dimakan serigala!\"",
+   "scene": "Close-up saudara menangis: Yusuf dimakan serigala!",
+   "set": "closeup",
+   "bars": "scope"
+  },
+  {
+   "id": "y24",
+   "start": 63.35,
+   "end": 66.25,
+   "line": "Mereka membawa bajunya yang berlumuran darah.",
+   "scene": "Baju Yusuf berlumuran darah diangkat di bawah cahaya obor",
+   "set": "insert",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "stinger",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "y25",
+   "start": 66.25,
+   "end": 70.05,
+   "line": "Tapi perhatikan… bajunya sama sekali tidak robek.",
+   "scene": "Zoom ke baju: TIDAK ROBEK, lingkaran sorotan",
+   "set": "insert",
+   "in": {
+    "type": "zoom",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 2.7,
+     "name": "ding",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "y26",
+   "start": 70.05,
+   "end": 72.35,
+   "line": "Hati Nabi Yaqub hancur.",
+   "scene": "Nabi Yaqub berlutut memeluk baju itu, hancur",
+   "set": "tentNight",
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "y27",
+   "start": 72.35,
+   "end": 76.65,
+   "line": "Namun ia hanya berkata: \"Kesabaran yang baik itulah kesabaranku.\"",
+   "scene": "Close-up Nabi Yaqub tenang: kesabaran yang baik",
+   "set": "closeup",
+   "sfx": [
+    {
+     "at": 1.8,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "y28",
+   "start": 76.65,
+   "end": 81.55,
+   "line": "Kalau kamu di posisi Nabi Yaqub, apa yang kamu rasakan? Tulis di komentar.",
+   "scene": "Ajakan komentar: Apa yang kamu rasakan?",
+   "set": "prompt",
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "y29",
+   "start": 81.55,
+   "end": 85.45,
+   "line": "Sementara itu, sebuah timba turun ke dalam sumur.",
+   "scene": "Sebuah timba turun dari cahaya di atas sumur",
+   "set": "wellIn",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y30",
+   "start": 85.45,
+   "end": 88.55,
+   "line": "\"Kabar gembira! Ada seorang anak di sini!\"",
+   "scene": "Kafilah musafir menarik timba, Yusuf muncul dari sumur",
+   "set": "well",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y31",
+   "start": 88.55,
+   "end": 89.95,
+   "line": "Yusuf diangkat…",
+   "scene": "Yusuf diangkat oleh tangan para musafir",
+   "set": "well",
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y32",
+   "start": 89.95,
+   "end": 93.05,
+   "line": "lalu dijual sebagai budak dengan harga murah.",
+   "scene": "Pasar: Yusuf dijual, beberapa koin berpindah tangan",
+   "set": "market",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 1.0,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "tick",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -20
+   }
+  },
+  {
+   "id": "y33",
+   "start": 93.05,
+   "end": 95.95,
+   "line": "Tapi rencana Allah baru saja dimulai.",
+   "scene": "Kafilah unta berjalan ke arah Mesir saat matahari terbit",
+   "set": "desert",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "y34",
+   "start": 95.95,
+   "end": 101.7,
+   "line": "Menurutmu, ujian apa yang menunggu Yusuf di Mesir? Tulis di komentar!",
+   "scene": "Penutup: istana Mesir, pertanyaan ujian apa yang menunggu Yusuf, PART 2",
+   "set": "end",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 13.15,
+   "mood": "mystery",
+   "intensity": 0.6
+  },
+  {
+   "start": 13.15,
+   "end": 29.85,
+   "mood": "wonder",
+   "intensity": 0.4
+  },
+  {
+   "start": 29.85,
+   "end": 48.85,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 48.85,
+   "end": 76.65,
+   "mood": "sad",
+   "intensity": 0.5
+  },
+  {
+   "start": 76.65,
+   "end": 85.45,
+   "mood": "mystery",
+   "intensity": 0.35
+  },
+  {
+   "start": 85.45,
+   "end": 101.7,
+   "mood": "hopeful",
+   "intensity": 0.55
+  }
+ ],
+ "sfx": []
+}

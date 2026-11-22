@@ -1,0 +1,1015 @@
+{
+ "source": "silence-align",
+ "words": [
+  {
+   "word": "Bagaimana",
+   "start": 0.275,
+   "end": 0.799
+  },
+  {
+   "word": "mungkin…",
+   "start": 0.819,
+   "end": 1.24
+  },
+  {
+   "word": "anak",
+   "start": 1.26,
+   "end": 1.525
+  },
+  {
+   "word": "yang",
+   "start": 1.545,
+   "end": 1.811
+  },
+  {
+   "word": "dibuang",
+   "start": 1.831,
+   "end": 2.252
+  },
+  {
+   "word": "ke",
+   "start": 2.272,
+   "end": 2.433
+  },
+  {
+   "word": "sumur",
+   "start": 2.453,
+   "end": 2.77
+  },
+  {
+   "word": "oleh",
+   "start": 2.79,
+   "end": 3.055
+  },
+  {
+   "word": "saudaranya",
+   "start": 3.075,
+   "end": 3.652
+  },
+  {
+   "word": "sendiri,",
+   "start": 3.672,
+   "end": 4.093
+  },
+  {
+   "word": "kelak",
+   "start": 4.528,
+   "end": 4.796
+  },
+  {
+   "word": "menjadi",
+   "start": 4.816,
+   "end": 5.172
+  },
+  {
+   "word": "orang",
+   "start": 5.192,
+   "end": 5.46
+  },
+  {
+   "word": "paling",
+   "start": 5.48,
+   "end": 5.791
+  },
+  {
+   "word": "berpengaruh",
+   "start": 5.811,
+   "end": 6.345
+  },
+  {
+   "word": "di",
+   "start": 6.365,
+   "end": 6.499
+  },
+  {
+   "word": "Mesir?",
+   "start": 6.519,
+   "end": 6.787
+  },
+  {
+   "word": "Tonton",
+   "start": 7.611,
+   "end": 7.844
+  },
+  {
+   "word": "sampai",
+   "start": 7.864,
+   "end": 8.096
+  },
+  {
+   "word": "akhir.",
+   "start": 8.116,
+   "end": 8.315
+  },
+  {
+   "word": "Ada",
+   "start": 8.81,
+   "end": 9.025
+  },
+  {
+   "word": "satu",
+   "start": 9.045,
+   "end": 9.313
+  },
+  {
+   "word": "detail",
+   "start": 9.333,
+   "end": 9.705
+  },
+  {
+   "word": "kecil",
+   "start": 9.725,
+   "end": 10.045
+  },
+  {
+   "word": "yang",
+   "start": 10.065,
+   "end": 10.332
+  },
+  {
+   "word": "membongkar",
+   "start": 10.352,
+   "end": 10.933
+  },
+  {
+   "word": "sebuah",
+   "start": 10.953,
+   "end": 11.325
+  },
+  {
+   "word": "kebohongan",
+   "start": 11.345,
+   "end": 11.926
+  },
+  {
+   "word": "besar.",
+   "start": 11.946,
+   "end": 12.266
+  },
+  {
+   "word": "Yusuf",
+   "start": 13.253,
+   "end": 13.554
+  },
+  {
+   "word": "kecil",
+   "start": 13.574,
+   "end": 13.875
+  },
+  {
+   "word": "sangat",
+   "start": 13.895,
+   "end": 14.245
+  },
+  {
+   "word": "disayangi",
+   "start": 14.265,
+   "end": 14.764
+  },
+  {
+   "word": "ayahnya,",
+   "start": 14.784,
+   "end": 15.183
+  },
+  {
+   "word": "Nabi",
+   "start": 15.457,
+   "end": 15.726
+  },
+  {
+   "word": "Yaqub.",
+   "start": 15.746,
+   "end": 16.067
+  },
+  {
+   "word": "Suatu",
+   "start": 16.681,
+   "end": 17.036
+  },
+  {
+   "word": "malam,",
+   "start": 17.056,
+   "end": 17.411
+  },
+  {
+   "word": "ia",
+   "start": 17.431,
+   "end": 17.613
+  },
+  {
+   "word": "bermimpi:",
+   "start": 17.633,
+   "end": 18.161
+  },
+  {
+   "word": "sebelas",
+   "start": 18.745,
+   "end": 19.248
+  },
+  {
+   "word": "bintang,",
+   "start": 19.268,
+   "end": 19.772
+  },
+  {
+   "word": "matahari,",
+   "start": 20.048,
+   "end": 20.758
+  },
+  {
+   "word": "dan",
+   "start": 20.984,
+   "end": 21.234
+  },
+  {
+   "word": "bulan",
+   "start": 21.254,
+   "end": 21.624
+  },
+  {
+   "word": "bersujud",
+   "start": 21.644,
+   "end": 22.193
+  },
+  {
+   "word": "kepadanya!",
+   "start": 22.213,
+   "end": 22.823
+  },
+  {
+   "word": "Nabi",
+   "start": 23.781,
+   "end": 24.003
+  },
+  {
+   "word": "Yaqub",
+   "start": 24.023,
+   "end": 24.289
+  },
+  {
+   "word": "berpesan:",
+   "start": 24.309,
+   "end": 24.706
+  },
+  {
+   "word": "\"Wahai",
+   "start": 25.36,
+   "end": 25.712
+  },
+  {
+   "word": "anakku,",
+   "start": 25.732,
+   "end": 26.141
+  },
+  {
+   "word": "jangan",
+   "start": 26.686,
+   "end": 27.014
+  },
+  {
+   "word": "ceritakan",
+   "start": 27.034,
+   "end": 27.501
+  },
+  {
+   "word": "mimpimu",
+   "start": 27.521,
+   "end": 27.895
+  },
+  {
+   "word": "kepada",
+   "start": 27.915,
+   "end": 28.243
+  },
+  {
+   "word": "saudara-saudaramu.\"",
+   "start": 28.263,
+   "end": 29.055
+  },
+  {
+   "word": "Tapi",
+   "start": 29.956,
+   "end": 30.182
+  },
+  {
+   "word": "kecemburuan",
+   "start": 30.202,
+   "end": 30.743
+  },
+  {
+   "word": "sudah",
+   "start": 30.763,
+   "end": 31.035
+  },
+  {
+   "word": "tumbuh.",
+   "start": 31.055,
+   "end": 31.372
+  },
+  {
+   "word": "\"Ayah",
+   "start": 32.142,
+   "end": 32.364
+  },
+  {
+   "word": "lebih",
+   "start": 32.384,
+   "end": 32.65
+  },
+  {
+   "word": "mencintai",
+   "start": 32.67,
+   "end": 33.113
+  },
+  {
+   "word": "Yusuf",
+   "start": 33.133,
+   "end": 33.399
+  },
+  {
+   "word": "daripada",
+   "start": 33.419,
+   "end": 33.817
+  },
+  {
+   "word": "kita!\"",
+   "start": 33.837,
+   "end": 34.06
+  },
+  {
+   "word": "Mereka",
+   "start": 34.822,
+   "end": 35.121
+  },
+  {
+   "word": "pun",
+   "start": 35.141,
+   "end": 35.312
+  },
+  {
+   "word": "menyusun",
+   "start": 35.332,
+   "end": 35.716
+  },
+  {
+   "word": "rencana.",
+   "start": 35.736,
+   "end": 36.078
+  },
+  {
+   "word": "\"Ayah,",
+   "start": 36.87,
+   "end": 37.264
+  },
+  {
+   "word": "izinkan",
+   "start": 37.636,
+   "end": 38.013
+  },
+  {
+   "word": "Yusuf",
+   "start": 38.033,
+   "end": 38.317
+  },
+  {
+   "word": "bermain",
+   "start": 38.337,
+   "end": 38.713
+  },
+  {
+   "word": "bersama",
+   "start": 38.733,
+   "end": 39.11
+  },
+  {
+   "word": "kami.\"",
+   "start": 39.13,
+   "end": 39.367
+  },
+  {
+   "word": "Nabi",
+   "start": 40.182,
+   "end": 40.416
+  },
+  {
+   "word": "Yaqub",
+   "start": 40.436,
+   "end": 40.717
+  },
+  {
+   "word": "khawatir.",
+   "start": 40.737,
+   "end": 41.156
+  },
+  {
+   "word": "\"Aku",
+   "start": 41.949,
+   "end": 42.185
+  },
+  {
+   "word": "takut",
+   "start": 42.205,
+   "end": 42.554
+  },
+  {
+   "word": "dia",
+   "start": 42.574,
+   "end": 42.811
+  },
+  {
+   "word": "dimakan",
+   "start": 42.831,
+   "end": 43.294
+  },
+  {
+   "word": "serigala.\"",
+   "start": 43.314,
+   "end": 43.835
+  },
+  {
+   "word": "Ingat",
+   "start": 44.564,
+   "end": 44.786
+  },
+  {
+   "word": "kalimat",
+   "start": 44.806,
+   "end": 45.101
+  },
+  {
+   "word": "ini…",
+   "start": 45.121,
+   "end": 45.268
+  },
+  {
+   "word": "karena",
+   "start": 45.714,
+   "end": 45.991
+  },
+  {
+   "word": "sebentar",
+   "start": 46.011,
+   "end": 46.367
+  },
+  {
+   "word": "lagi,",
+   "start": 46.387,
+   "end": 46.585
+  },
+  {
+   "word": "mereka",
+   "start": 46.82,
+   "end": 47.084
+  },
+  {
+   "word": "akan",
+   "start": 47.104,
+   "end": 47.292
+  },
+  {
+   "word": "memakainya",
+   "start": 47.312,
+   "end": 47.726
+  },
+  {
+   "word": "sendiri.",
+   "start": 47.746,
+   "end": 48.047
+  },
+  {
+   "word": "Di",
+   "start": 48.965,
+   "end": 49.089
+  },
+  {
+   "word": "tengah",
+   "start": 49.109,
+   "end": 49.397
+  },
+  {
+   "word": "perjalanan,",
+   "start": 49.417,
+   "end": 49.87
+  },
+  {
+   "word": "Yusuf",
+   "start": 50.252,
+   "end": 50.555
+  },
+  {
+   "word": "dilemparkan",
+   "start": 50.575,
+   "end": 51.177
+  },
+  {
+   "word": "ke",
+   "start": 51.197,
+   "end": 51.351
+  },
+  {
+   "word": "dalam",
+   "start": 51.371,
+   "end": 51.674
+  },
+  {
+   "word": "sumur",
+   "start": 51.694,
+   "end": 51.997
+  },
+  {
+   "word": "yang",
+   "start": 52.017,
+   "end": 52.271
+  },
+  {
+   "word": "gelap",
+   "start": 52.291,
+   "end": 52.594
+  },
+  {
+   "word": "dan",
+   "start": 52.614,
+   "end": 52.818
+  },
+  {
+   "word": "dalam.",
+   "start": 52.838,
+   "end": 53.141
+  },
+  {
+   "word": "Seorang",
+   "start": 53.886,
+   "end": 54.265
+  },
+  {
+   "word": "anak",
+   "start": 54.285,
+   "end": 54.523
+  },
+  {
+   "word": "kecil,",
+   "start": 54.543,
+   "end": 54.828
+  },
+  {
+   "word": "sendirian…",
+   "start": 55.279,
+   "end": 55.849
+  },
+  {
+   "word": "dalam",
+   "start": 56.578,
+   "end": 56.828
+  },
+  {
+   "word": "kegelapan.",
+   "start": 56.848,
+   "end": 57.265
+  },
+  {
+   "word": "Malamnya,",
+   "start": 58.056,
+   "end": 58.469
+  },
+  {
+   "word": "mereka",
+   "start": 58.489,
+   "end": 58.811
+  },
+  {
+   "word": "pulang",
+   "start": 58.831,
+   "end": 59.153
+  },
+  {
+   "word": "sambil",
+   "start": 59.173,
+   "end": 59.494
+  },
+  {
+   "word": "menangis.",
+   "start": 59.514,
+   "end": 59.927
+  },
+  {
+   "word": "\"Ayah…",
+   "start": 60.734,
+   "end": 61.049
+  },
+  {
+   "word": "Yusuf",
+   "start": 61.069,
+   "end": 61.633
+  },
+  {
+   "word": "dimakan",
+   "start": 61.653,
+   "end": 62.15
+  },
+  {
+   "word": "serigala!\"",
+   "start": 62.17,
+   "end": 62.727
+  },
+  {
+   "word": "Mereka",
+   "start": 63.451,
+   "end": 63.76
+  },
+  {
+   "word": "membawa",
+   "start": 63.78,
+   "end": 64.133
+  },
+  {
+   "word": "bajunya",
+   "start": 64.153,
+   "end": 64.505
+  },
+  {
+   "word": "yang",
+   "start": 64.525,
+   "end": 64.747
+  },
+  {
+   "word": "berlumuran",
+   "start": 64.767,
+   "end": 65.251
+  },
+  {
+   "word": "darah.",
+   "start": 65.271,
+   "end": 65.536
+  },
+  {
+   "word": "Tapi",
+   "start": 66.366,
+   "end": 66.569
+  },
+  {
+   "word": "perhatikan…",
+   "start": 66.589,
+   "end": 67.037
+  },
+  {
+   "word": "bajunya",
+   "start": 67.68,
+   "end": 68.101
+  },
+  {
+   "word": "sama",
+   "start": 68.121,
+   "end": 68.386
+  },
+  {
+   "word": "sekali",
+   "start": 68.406,
+   "end": 68.775
+  },
+  {
+   "word": "tidak",
+   "start": 68.795,
+   "end": 69.112
+  },
+  {
+   "word": "robek.",
+   "start": 69.132,
+   "end": 69.449
+  },
+  {
+   "word": "Hati",
+   "start": 70.217,
+   "end": 70.534
+  },
+  {
+   "word": "Nabi",
+   "start": 70.554,
+   "end": 70.871
+  },
+  {
+   "word": "Yaqub",
+   "start": 70.891,
+   "end": 71.27
+  },
+  {
+   "word": "hancur.",
+   "start": 71.29,
+   "end": 71.73
+  },
+  {
+   "word": "Namun",
+   "start": 72.456,
+   "end": 72.69
+  },
+  {
+   "word": "ia",
+   "start": 72.71,
+   "end": 72.827
+  },
+  {
+   "word": "hanya",
+   "start": 72.847,
+   "end": 73.08
+  },
+  {
+   "word": "berkata:",
+   "start": 73.1,
+   "end": 73.412
+  },
+  {
+   "word": "\"Kesabaran",
+   "start": 74.15,
+   "end": 74.661
+  },
+  {
+   "word": "yang",
+   "start": 74.681,
+   "end": 74.939
+  },
+  {
+   "word": "baik",
+   "start": 74.959,
+   "end": 75.217
+  },
+  {
+   "word": "itulah",
+   "start": 75.237,
+   "end": 75.597
+  },
+  {
+   "word": "kesabaranku.\"",
+   "start": 75.617,
+   "end": 76.229
+  },
+  {
+   "word": "Kalau",
+   "start": 76.831,
+   "end": 77.069
+  },
+  {
+   "word": "kamu",
+   "start": 77.089,
+   "end": 77.287
+  },
+  {
+   "word": "di",
+   "start": 77.307,
+   "end": 77.426
+  },
+  {
+   "word": "posisi",
+   "start": 77.446,
+   "end": 77.724
+  },
+  {
+   "word": "Nabi",
+   "start": 77.744,
+   "end": 77.942
+  },
+  {
+   "word": "Yaqub,",
+   "start": 77.962,
+   "end": 78.2
+  },
+  {
+   "word": "apa",
+   "start": 78.709,
+   "end": 78.853
+  },
+  {
+   "word": "yang",
+   "start": 78.873,
+   "end": 79.054
+  },
+  {
+   "word": "kamu",
+   "start": 79.074,
+   "end": 79.255
+  },
+  {
+   "word": "rasakan?",
+   "start": 79.275,
+   "end": 79.565
+  },
+  {
+   "word": "Tulis",
+   "start": 80.282,
+   "end": 80.484
+  },
+  {
+   "word": "di",
+   "start": 80.504,
+   "end": 80.604
+  },
+  {
+   "word": "komentar.",
+   "start": 80.624,
+   "end": 80.928
+  },
+  {
+   "word": "Sementara",
+   "start": 81.681,
+   "end": 82.05
+  },
+  {
+   "word": "itu,",
+   "start": 82.07,
+   "end": 82.217
+  },
+  {
+   "word": "sebuah",
+   "start": 82.638,
+   "end": 83.046
+  },
+  {
+   "word": "timba",
+   "start": 83.066,
+   "end": 83.417
+  },
+  {
+   "word": "turun",
+   "start": 83.437,
+   "end": 83.788
+  },
+  {
+   "word": "ke",
+   "start": 83.808,
+   "end": 83.988
+  },
+  {
+   "word": "dalam",
+   "start": 84.008,
+   "end": 84.359
+  },
+  {
+   "word": "sumur.",
+   "start": 84.379,
+   "end": 84.73
+  },
+  {
+   "word": "\"Kabar",
+   "start": 85.57,
+   "end": 85.824
+  },
+  {
+   "word": "gembira!",
+   "start": 85.844,
+   "end": 86.184
+  },
+  {
+   "word": "Ada",
+   "start": 86.854,
+   "end": 87.007
+  },
+  {
+   "word": "seorang",
+   "start": 87.027,
+   "end": 87.335
+  },
+  {
+   "word": "anak",
+   "start": 87.355,
+   "end": 87.547
+  },
+  {
+   "word": "di",
+   "start": 87.567,
+   "end": 87.682
+  },
+  {
+   "word": "sini!\"",
+   "start": 87.702,
+   "end": 87.894
+  },
+  {
+   "word": "Yusuf",
+   "start": 88.727,
+   "end": 88.968
+  },
+  {
+   "word": "diangkat…",
+   "start": 88.988,
+   "end": 89.349
+  },
+  {
+   "word": "lalu",
+   "start": 90.051,
+   "end": 90.303
+  },
+  {
+   "word": "dijual",
+   "start": 90.323,
+   "end": 90.672
+  },
+  {
+   "word": "sebagai",
+   "start": 90.692,
+   "end": 91.091
+  },
+  {
+   "word": "budak",
+   "start": 91.111,
+   "end": 91.412
+  },
+  {
+   "word": "dengan",
+   "start": 91.432,
+   "end": 91.782
+  },
+  {
+   "word": "harga",
+   "start": 91.802,
+   "end": 92.102
+  },
+  {
+   "word": "murah.",
+   "start": 92.122,
+   "end": 92.423
+  },
+  {
+   "word": "Tapi",
+   "start": 93.198,
+   "end": 93.476
+  },
+  {
+   "word": "rencana",
+   "start": 93.496,
+   "end": 93.937
+  },
+  {
+   "word": "Allah",
+   "start": 93.957,
+   "end": 94.289
+  },
+  {
+   "word": "baru",
+   "start": 94.309,
+   "end": 94.587
+  },
+  {
+   "word": "saja",
+   "start": 94.607,
+   "end": 94.885
+  },
+  {
+   "word": "dimulai.",
+   "start": 94.905,
+   "end": 95.346
+  },
+  {
+   "word": "Menurutmu,",
+   "start": 96.141,
+   "end": 96.587
+  },
+  {
+   "word": "ujian",
+   "start": 96.607,
+   "end": 96.875
+  },
+  {
+   "word": "apa",
+   "start": 96.895,
+   "end": 97.075
+  },
+  {
+   "word": "yang",
+   "start": 97.095,
+   "end": 97.319
+  },
+  {
+   "word": "menunggu",
+   "start": 97.339,
+   "end": 97.74
+  },
+  {
+   "word": "Yusuf",
+   "start": 97.76,
+   "end": 98.029
+  },
+  {
+   "word": "di",
+   "start": 98.049,
+   "end": 98.184
+  },
+  {
+   "word": "Mesir?",
+   "start": 98.204,
+   "end": 98.472
+  },
+  {
+   "word": "Tulis",
+   "start": 99.156,
+   "end": 99.354
+  },
+  {
+   "word": "di",
+   "start": 99.374,
+   "end": 99.471
+  },
+  {
+   "word": "komentar!",
+   "start": 99.491,
+   "end": 99.79
+  }
+ ]
+}
