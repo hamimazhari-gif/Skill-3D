@@ -24,23 +24,24 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 19 | `19_peta-kota-magdeburg.jpg` | Peta kota **Magdeburg** (Braun & Hogenberg, "MAGDEBVRGVM") — **lihat catatan 6** | B5 |
 | 20 | `20_potret-gustavus-adolphus.jpg` | Gustavus Adolphus | B5, B6, B9, B10 |
 | 21 | `21_pertempuran-medan-terbuka.jpg` | Lukisan pertempuran (tidak diidentifikasi) | B4, B6, B7, B9, B10 |
+| 22 | `22_pertempuran-kavaleri.jpg` | Bentrokan kavaleri; seorang penunggang berbaju putih jatuh dari kuda — **lihat catatan 10** | B6 |
 | 23 | `23_pertempuran-breitenfeld-1631.jpg` | Formasi pasukan — **lihat catatan 3** | B1, B6, B7, B9, B10 |
 | 24 | `24_prajurit-senapan-sumbu.jpg` | Rekonstruksi prajurit senapan sumbu | B3 |
+| 25 | `25_potret-louis-xiii.jpg` | Potret bangsawan berbaju zirah dan jubah biru — kemungkinan Louis XIII, **lihat catatan 11** | B6, B7, B9, B10 |
 | 26 | `26_peta-politik-eropa-1648.jpg` | Peta Eropa sekitar 1648 | B6–B10 |
 | 27 | `27_musketir-prancis.jpg` | Musketir Prancis — **lihat catatan 2**, tidak dipakai | — |
+| 28 | `28_tiga-musketir.jpg` | Tiga musketir abad ke-17 | B8 |
 | 29 | `29_serangan-terhadap-penduduk.jpg` | Warga diserang prajurit | B8 |
+| 30 | `30_penjarahan-desa-callot.jpg` | Penjarahan desa — **lihat catatan 12** | B8 |
 | 32 | `32_adegan-kekerasan.jpg` | Prajurit mengejar warga | B1, B5, B8, B10 |
 | 33 | `33_desa-dijarah-dan-dibakar.jpg` | *(baru)* Desa dijarah, rumah terbakar | B8, B10 |
-| 34 | `34_penjarahan-desa-callot.jpg` | *(baru)* Ukiran penjarahan desa (gaya Jacques Callot, *Les Misères de la guerre*) | B8 |
-| 35 | `35_potret-louis-xiii.jpg` | *(baru)* Raja Louis XIII | B6, B7, B9, B10 |
 | 36 | `36_pengungsi.jpg` | *(baru)* Rombongan pengungsi dengan gerobak | B1, B8, B10 |
 | 37 | `37_tentara-berkuda-di-desa.jpg` | *(baru)* Prajurit berkuda meminta perbekalan dari warga | B8 |
-| 38 | `38_tiga-musketir.jpg` | *(baru)* Tiga musketir abad ke-17 | B8 |
 
 ## Catatan keterangan yang perlu dicek
 
-1. **No. 12 kemungkinan bukan Kardinal Richelieu.** Tokohnya memakai mahkota, jubah cerpelai, orb, dan tongkat kerajaan, padahal Richelieu seorang kardinal dan tidak pernah dimahkotai. Gambarnya mirip potret Frederick V sebagai Raja Bohemia karya Gerard van Honthorst, jadi sementara saya taruh di Bagian 4 ("Raja Musim Dingin"). **Pastikan dulu identitasnya.** Kalau ragu, ganti dengan `07` pada baris-baris itu. Untuk kalimat tentang Richelieu di Bagian 7 belum ada potretnya; saya pakai Louis XIII (`35`).
-2. **No. 27 bukan "Prajurit dan Kuda Perang".** Isinya tiga musketir tanpa kuda, dan tulisan di gambarnya berbunyi *"Französische Musketiere unter Ludwig XIV"*, yaitu era setelah perang berakhir. Karena itu gambar ini tidak saya pakai. Sebagai gantinya ada `38`.
+1. **No. 12 kemungkinan bukan Kardinal Richelieu.** Tokohnya memakai mahkota, jubah cerpelai, orb, dan tongkat kerajaan, padahal Richelieu seorang kardinal dan tidak pernah dimahkotai. Gambarnya mirip potret Frederick V sebagai Raja Bohemia karya Gerard van Honthorst, jadi sementara saya taruh di Bagian 4 ("Raja Musim Dingin"). **Pastikan dulu identitasnya.** Kalau ragu, ganti dengan `07` pada baris-baris itu. Untuk kalimat tentang Richelieu di Bagian 7 belum ada potretnya; saya pakai Louis XIII (`25`).
+2. **No. 27 bukan "Prajurit dan Kuda Perang".** Isinya tiga musketir tanpa kuda, dan tulisan di gambarnya berbunyi *"Französische Musketiere unter Ludwig XIV"*, yaitu era setelah perang berakhir. Karena itu gambar ini tidak saya pakai. Sebagai gantinya ada `28`.
 3. **No. 23 adalah Pertempuran Breitenfeld.** Tulisan Latin di pojok kiri bawah menyebut pertempuran antara Raja Swedia dan Elektor Saxonia melawan Tilly, *7 September 1631*. Tanggal ini memakai kalender Julian dan sama dengan 17 September 1631, persis seperti di narasi. Gambar ini dipakai untuk kalimat Breitenfeld di Bagian 6.
 4. **No. 06 bertuliskan "Nördlingen".** Sekarang hanya dipakai di Bagian 2 (kota merdeka). Adegan Magdeburg memakai gambar Magdeburg yang asli (no. 14, 17, 19).
 5. **No. 15, 16, dan 18:** sesuai keterangan aslinya, jangan diberi label "Magdeburg" di layar. Gambar ini dipakai sebagai ilustrasi suasana saja.
@@ -50,11 +51,18 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 8. **No. 16 punya watermark "bpk / Bildarchiv Preußischer Kulturbesitz"** di kiri atas. Watermark itu tanda gambar berlisensi, jadi tidak saya hapus. Cek izin pakainya; kalau tidak ada, ganti gambar ini atau cari versi domain publik.
 9. **No. 13** memuat tulisan Prancis yang menjadi bagian dari ilustrasinya (bukan bar keterangan), jadi tidak saya hapus. Di video, crop ke bagian tengah saja.
 
+10. **No. 22 kemungkinan besar *Kematian Gustavus Adolphus di Lützen* karya Carl Wahlbom (1855).** Komposisinya cocok: kavaleri bertempur di tengah asap dan seorang penunggang berbaju putih jatuh dari kudanya. Karena itu gambar ini dipakai untuk kalimat Lützen dan gugurnya Gustavus di Bagian 6. Keterangan aslinya bilang peristiwanya belum dipastikan, jadi cek judul karyanya dulu sebelum menulis nama di layar.
+11. **No. 25 kemungkinan Louis XIII**, dari potret karya (atau bengkel) Peter Paul Rubens: jubah biru bermotif fleur-de-lis dan zirah. Keterangan aslinya minta identitasnya diverifikasi dulu, jadi jangan tulis nama di layar sebelum dicek ke katalog museum.
+12. **No. 30 bukan "Kota dalam Ukiran Lama".** Ini lembar *Penjarahan* dari seri *Les Grandes Misères de la guerre* karya Jacques Callot (1633). Puisi Prancis di bawahnya bercerita tentang prajurit yang menjarah dan membakar desa. Cocok untuk Bagian 8.
+
+Nomor file mengikuti nomor di keterangan asli. File yang sebelumnya bernomor 34, 35, dan 38 sekarang menjadi 30, 25, dan 28. File 33, 36, dan 37 belum punya nomor resmi karena gambarnya dikirim tanpa keterangan.
+
 ## Gambar yang masih kurang (disarankan)
 
 - **Kardinal Richelieu**, misalnya potret karya Philippe de Champaigne (domain publik).
 - **Perdamaian Westphalia 1648**, misalnya *Ratifikasi Perjanjian Münster* karya Gerard ter Borch (domain publik). Untuk sekarang, Bagian 9 hanya memakai peta dan potret.
 - **Frederick V** yang sudah pasti identitasnya, kalau no. 12 ternyata orang lain.
+
 
 
 ## Bagian 1 — Prolog: Eropa dalam Api
@@ -170,26 +178,26 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 07:24.85–07:29.15 | Kemenangan tersebut membuat posisi Protestan kembali menguat. | `23` | zoom out |
 | 07:29.15–07:32.53 | Gustavus Adolphus kemudian melanjutkan kampanye militernya di wilayah Jerman. | `01` | pan |
 | 07:32.53–07:36.65 | Namun, kejayaannya tidak berlangsung lama. | `20` | tahan |
-| 07:36.65–07:41.85 | Pada 16 November 1632, pasukan Swedia bertempur melawan tentara Kekaisaran dalam Pertempuran Lützen. | `21` | pan |
-| 07:41.85–07:46.25 | Pertempuran berlangsung sengit di tengah kabut tebal. | `11` | tahan, overlay kabut tipis |
-| 07:46.25–07:48.94 | Di tengah pertempuran, Gustavus Adolphus gugur. | `20` | zoom ke wajah, fade gelap |
-| 07:48.94–07:54.85 | Pasukannya memang berhasil memenangkan pertempuran, tetapi mereka kehilangan seorang raja sekaligus… | `20` | tahan |
+| 07:36.65–07:41.85 | Pada 16 November 1632, pasukan Swedia bertempur melawan tentara Kekaisaran dalam Pertempuran Lützen. | `22` | pan dari kiri ke kanan |
+| 07:41.85–07:46.25 | Pertempuran berlangsung sengit di tengah kabut tebal. | `22` | zoom ke tengah, overlay kabut tipis |
+| 07:46.25–07:48.94 | Di tengah pertempuran, Gustavus Adolphus gugur. | `22` | zoom pelan ke penunggang berbaju putih yang jatuh |
+| 07:48.94–07:54.85 | Pasukannya memang berhasil memenangkan pertempuran, tetapi mereka kehilangan seorang raja sekaligus… | `20` | zoom ke wajah, fade gelap |
 | 07:54.85–08:04.63 | Kematian Gustavus Adolphus menjadi salah satu momen paling menentukan dalam Perang Tiga Puluh Tahun. | `20` | zoom out |
 | 08:04.63–08:06.40 | Namun, perang ini tidak berhenti. | `01` | zoom pelan |
 | 08:06.40–08:08.04 | Justru setelah kematiannya, konflik semakin rumit. | `01` | tahan |
-| 08:08.04–08:14.48 | Dan kali ini, sebuah kerajaan Katolik akan mengambil keputusan yang mengejutkan seluruh Eropa. | `35` | fade in |
+| 08:08.04–08:14.48 | Dan kali ini, sebuah kerajaan Katolik akan mengambil keputusan yang mengejutkan seluruh Eropa. | `25` | fade in |
 
 ## Bagian 7 — Prancis Melawan Sesama Kekuatan Katolik
 
 | Waktu (perkiraan) | Narasi | Gambar | Arahan kamera |
 |---|---|---|---|
 | 08:14.48–08:21.39 | Selama bertahun-tahun, Perang Tiga Puluh Tahun sering dipandang sebagai konflik antara Katolik dan Protestan. | `01` | zoom out |
-| 08:21.39–08:26.38 | Namun, pada 1635, terjadi perubahan besar. | `35` | tampil penuh |
+| 08:21.39–08:26.38 | Namun, pada 1635, terjadi perubahan besar. | `25` | tampil penuh |
 | 08:26.38–08:30.42 | Prancis, sebuah kerajaan Katolik, secara resmi memasuki perang melawan Spanyol dan kekuatan Habsburg. | `26` | zoom ke panah Prancis |
-| 08:30.42–08:36.52 | Keputusan ini terlihat mengejutkan. | `35` | zoom ke wajah |
-| 08:36.52–08:39.03 | Mengapa sebuah kerajaan Katolik justru melawan kerajaan Katolik lainnya? | `35` | tahan |
+| 08:30.42–08:36.52 | Keputusan ini terlihat mengejutkan. | `25` | zoom ke wajah |
+| 08:36.52–08:39.03 | Mengapa sebuah kerajaan Katolik justru melawan kerajaan Katolik lainnya? | `25` | tahan |
 | 08:39.03–08:43.59 | Jawabannya adalah politik. | `26` | tahan |
-| 08:43.59–08:54.35 | Di bawah Raja Louis XIII dan pengaruh Kardinal Richelieu, Prancis ingin membatasi dominasi keluarga… | `35` | zoom — lihat catatan Richelieu |
+| 08:43.59–08:54.35 | Di bawah Raja Louis XIII dan pengaruh Kardinal Richelieu, Prancis ingin membatasi dominasi keluarga… | `25` | zoom — lihat catatan Richelieu |
 | 08:54.35–08:55.37 | Bagi Prancis, keseimbangan kekuasaan jauh lebih penting daripada kesamaan agama dengan pihak lawan. | `26` | pan barat→timur |
 | 08:55.37–09:06.47 | Sejak saat itu, Perang Tiga Puluh Tahun semakin berubah menjadi perang perebutan kekuasaan antarnegara. | `26` | zoom out |
 | 09:06.47–09:10.03 | Prancis mendukung pihak-pihak yang berusaha melemahkan Habsburg. | `26` | zoom ke simbol pertempuran |
@@ -201,11 +209,11 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | Waktu (perkiraan) | Narasi | Gambar | Arahan kamera |
 |---|---|---|---|
 | 09:18.00–09:26.13 | Ketika para raja dan jenderal sibuk merencanakan strategi perang, masyarakat biasa justru menjadi korban… | `36` | zoom pelan |
-| 09:26.13–09:29.48 | Selama tiga puluh tahun, pasukan bergerak dari satu wilayah ke wilayah lainnya. | `38` | pan |
+| 09:26.13–09:29.48 | Selama tiga puluh tahun, pasukan bergerak dari satu wilayah ke wilayah lainnya. | `28` | pan |
 | 09:29.48–09:34.62 | Mereka membutuhkan makanan, uang, dan perlengkapan perang. | `37` | zoom pelan |
 | 09:34.62–09:38.80 | Namun, tidak semua kebutuhan tersebut diperoleh melalui pembayaran. | `37` | tahan |
 | 09:38.80–09:42.90 | Banyak tentara mengambil persediaan makanan dari desa-desa yang mereka lewati. | `37` | zoom ke perempuan di kanan |
-| 09:42.90–09:49.42 | Sebagian melakukan penjarahan. Sebagian lainnya menghancurkan tempat tinggal penduduk yang dianggap… | `34` | pan kiri→kanan |
+| 09:42.90–09:49.42 | Sebagian melakukan penjarahan. Sebagian lainnya menghancurkan tempat tinggal penduduk yang dianggap… | `30` | pan kiri→kanan |
 | 09:49.42–09:54.01 | Akibatnya, kehidupan masyarakat semakin sulit. | `33` | zoom pelan |
 | 09:54.01–09:57.05 | Ladang pertanian terbengkalai. Perdagangan terganggu. Harga makanan meningkat. | `36` | pan |
 | 09:57.05–10:02.35 | Di sejumlah wilayah, kelaparan dan penyakit menyebar dengan cepat. | `36` | zoom ke keluarga |
@@ -216,7 +224,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 10:27.52–10:37.05 | Perang ini memperlihatkan kenyataan pahit bahwa kemenangan militer tidak selalu berarti kemenangan bagi… | `33` | zoom pelan |
 | 10:37.05–10:40.24 | Para penguasa mungkin dapat memperoleh wilayah baru. | `26` | pan |
 | 10:40.24–10:42.05 | Namun, bagi rakyat biasa, yang tersisa sering kali hanyalah kehilangan. | `32` | zoom pelan |
-| 10:42.05–10:52.00 | Dan setelah tiga dekade peperangan, semakin banyak pihak menyadari bahwa konflik ini tidak bisa terus… | `34` | pan |
+| 10:42.05–10:52.00 | Dan setelah tiga dekade peperangan, semakin banyak pihak menyadari bahwa konflik ini tidak bisa terus… | `30` | pan |
 | 10:52.00–10:55.68 | Akhirnya, para penguasa mulai mencari jalan menuju perdamaian. | `26` | zoom out |
 
 ## Bagian 9 — Perdamaian Westphalia
@@ -227,7 +235,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 11:00.18–11:03.32 | Setelah bertahun-tahun peperangan, negosiasi perdamaian mulai dilakukan. | `26` | zoom pelan |
 | 11:03.32–11:06.63 | Namun, mencapai kesepakatan bukan perkara mudah. | `26` | tahan |
 | 11:06.63–11:09.16 | Ada begitu banyak pihak yang terlibat. | `01` | zoom out |
-| 11:09.16–11:14.03 | Prancis, Swedia, Spanyol, Kekaisaran Romawi Suci, dan berbagai penguasa wilayah memiliki tuntutan… | `35` | urutan cepat 35→20→03 |
+| 11:09.16–11:14.03 | Prancis, Swedia, Spanyol, Kekaisaran Romawi Suci, dan berbagai penguasa wilayah memiliki tuntutan… | `25` | urutan cepat 25→20→03 |
 | 11:14.03–11:18.24 | Perundingan berlangsung selama bertahun-tahun. | `01` | pan |
 | 11:18.24–11:21.12 | Setiap pihak berusaha mempertahankan kepentingannya. | `26` | pan |
 | 11:21.12–11:29.01 | Hingga akhirnya, pada 24 Oktober 1648, dua perjanjian penting ditandatangani di kota Münster dan Osnabrück. | `26` | zoom pelan |
@@ -256,7 +264,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 12:59.19–13:02.85 | Kita menyaksikan bagaimana sebuah insiden di Kastel Praha memicu pemberontakan. | `09` | dolly masuk |
 | 13:02.85–13:07.59 | Bagaimana Magdeburg berubah menjadi kota yang hancur. | `14` | pan |
 | 13:07.59–13:10.90 | Bagaimana seorang raja dari Swedia mengubah arah peperangan. | `20` | zoom |
-| 13:10.90–13:20.03 | Dan bagaimana Prancis akhirnya melawan kekuatan Katolik lainnya demi kepentingan politik. | `35` | zoom |
+| 13:10.90–13:20.03 | Dan bagaimana Prancis akhirnya melawan kekuatan Katolik lainnya demi kepentingan politik. | `25` | zoom |
 | 13:20.03–13:21.34 | Namun, ada satu pelajaran besar dari seluruh tragedi ini. | `32` | tahan |
 | 13:21.34–13:25.93 | Di medan perang, para penguasa mungkin berbicara tentang kejayaan, kehormatan, dan kemenangan. | `21` | pan |
 | 13:25.93–13:32.26 | Tetapi di balik semua itu, selalu ada manusia biasa yang harus membayar harganya. | `33` | zoom pelan |
