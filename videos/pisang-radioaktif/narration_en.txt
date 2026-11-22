@@ -1,15 +1,11 @@
-1 | That banana you eat almost every day is radioactive, and it has even set off alarms!
-2 | Bananas are rich in potassium, a mineral your muscles and heart need.
-3 | A tiny part of that potassium is potassium-forty, which gives off radiation naturally.
-4 | But it's strong enough for machines to notice.
-4 | At US border crossings, banana trucks have set off radiation detectors!
-5 | Then scientists coined an unofficial unit: the banana equivalent dose.
-6 | People started to worry: are bananas dangerous?
-6 | A few hours on a plane? Hundreds of bananas.
-6 | One chest CT scan? About seventy thousand bananas!
-7 | To get sick, you'd need to eat tens of millions of bananas at once, which is impossible.
-8 | You see, radiation is everywhere; what matters is the dose.
-9 | So relax: your body flushes out extra potassium, so the radiation never builds up.
-10 | Bonus fact: you're radioactive too.
-10 | About four thousand potassium atoms decay inside you every second!
-11 | Follow for more weird facts!
+1 | This fruit you eat all the time... is actually radioactive!
+2 | Bananas are rich in potassium, a key mineral for your muscles and heart.
+3 | A tiny part of that potassium is potassium-forty, which naturally gives off radiation.
+4 | It's so famous that scientists have an unofficial term, the "banana equivalent dose", to explain radiation in a way anyone can understand.
+5 | A flight of a few hours exposes you to radiation equal to hundreds of bananas.
+6 | And a CT scan... tens of thousands of bananas!
+7 | So relax.
+7 | You'd only get a dangerous dose by eating tens of millions of bananas at once, which is clearly impossible.
+8 | Your body also gets rid of extra potassium right away.
+9 | Bonus fact: your own body is a little radioactive too, because of that same potassium!
+10 | Follow for more weird facts!

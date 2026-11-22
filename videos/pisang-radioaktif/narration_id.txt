@@ -1,15 +1,11 @@
-1 | Pisang yang sering kamu makan ini ternyata radioaktif, dan buktinya pernah membuat alarm berbunyi!
-2 | Pisang kaya kalium, mineral penting untuk otot dan jantung.
-3 | Sebagian kecil kalium itu adalah kalium-empat puluh, yang secara alami memancarkan radiasi.
-4 | Tapi radiasinya cukup untuk ditangkap mesin.
-4 | Di perbatasan Amerika, truk pisang pernah membunyikan alarm detektor radiasi!
-5 | Lalu ilmuwan membuat istilah tidak resmi: dosis setara pisang.
-6 | Orang pun cemas: apa pisang berbahaya?
-6 | Naik pesawat beberapa jam? Setara ratusan pisang.
-6 | Satu CT scan dada? Sekitar tujuh puluh ribu pisang!
-7 | Kamu baru sakit kalau makan puluhan juta pisang sekaligus, dan itu jelas mustahil.
-8 | Kamu lihat, radiasi ada di mana-mana; yang menentukan bahaya adalah dosisnya.
-9 | Jadi tenang saja: tubuhmu langsung membuang kalium berlebih, jadi radiasinya tidak menumpuk.
-10 | Fakta bonus: tubuhmu sendiri juga radioaktif.
-10 | Sekitar empat ribu atom kalium meluruh di dalam dirimu setiap detik!
-11 | Follow untuk fakta unik lainnya!
+1 | Buah yang sering kamu makan ini... ternyata radioaktif!
+2 | Pisang kaya akan kalium, mineral penting untuk otot dan jantung.
+3 | Sebagian kecil kalium itu berbentuk kalium-empat puluh, yang secara alami memancarkan radiasi.
+4 | Saking terkenalnya, ilmuwan punya istilah tidak resmi, yaitu "dosis setara pisang", untuk menjelaskan besar radiasi dengan cara yang mudah dipahami.
+5 | Naik pesawat beberapa jam membuatmu terkena radiasi setara ratusan pisang.
+6 | Sedangkan CT scan... setara puluhan ribu pisang!
+7 | Jadi tenang saja.
+7 | Kamu baru terkena radiasi berbahaya kalau makan puluhan juta pisang sekaligus, dan itu jelas mustahil.
+8 | Tubuh juga langsung membuang kalium yang berlebih.
+9 | Fakta bonus: tubuhmu sendiri juga sedikit radioaktif, karena kalium yang sama!
+10 | Follow untuk fakta unik lainnya!
