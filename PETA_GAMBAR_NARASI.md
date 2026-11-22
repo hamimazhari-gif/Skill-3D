@@ -10,16 +10,22 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 |---|---|---|---|
 | 01 | `01_peta-kekaisaran-romawi-suci-1618.jpg` | Peta Kekaisaran Romawi Suci sekitar 1618 | B1, B2, B4–B10 |
 | 03 | `03_potret-ferdinand-ii.jpg` | Ferdinand II | B1–B4, B9 |
-| 06 | `06_kota-bertembok-nordlingen.jpg` | Ukiran kota Nördlingen | B2, B5 (crop tanpa tulisan "Nördlingen") |
+| 06 | `06_kota-bertembok-nordlingen.jpg` | Ukiran kota Nördlingen | B2 |
 | 07 | `07_panorama-kastel-praha.jpg` | Panorama kota berbenteng; kartusnya bertuliskan *"Königliche Schloß zu Prag"* (Kastel Praha) | B2–B4, B10 |
 | 09 | `09_aula-kastel-praha.jpg` | Aula berkubah di Kastel Praha (foto modern) | B2, B3, B10 |
+| 11 | `11_pertempuran-pasukan-berkuda.jpg` | Kavaleri dan infanteri bertempur, bangunan beratap limas di bukit — **lihat catatan 7** | B1, B4, B6 |
 | 12 | `12_potret-raja-bermahkota.jpg` | Raja bermahkota dengan orb dan tongkat — **lihat catatan 1** | B4 |
+| 13 | `13_infanteri-kekaisaran.jpg` | Infanteri Kekaisaran (tombak, halberd); ada teks Prancis di kiri-kanan — crop bagian tengah | B3, B6 |
+| 14 | `14_pengepungan-magdeburg-1631.jpg` | Ukiran Merian: pengepungan **Magdeburg** (judul "MAGDEBURG" di atas) — **lihat catatan 6** | B5, B10 |
 | 15 | `15_kota-dilalap-api.jpg` | Kota terbakar | B1, B5, B10 |
+| 16 | `16_serangan-terhadap-kota.jpg` | Pasukan menyerbu gerbang kota yang terbakar — ada watermark bpk di kiri atas, **lihat catatan 8** | B5 |
+| 17 | `17_tilly-di-depan-magdeburg-1631.jpg` | Cetakan "Tilly vor Magdeburg", 1631 — **lihat catatan 6** | B5 |
 | 18 | `18_kekerasan-terhadap-penduduk.jpg` | Kekerasan terhadap warga kota | B5 |
+| 19 | `19_peta-kota-magdeburg.jpg` | Peta kota **Magdeburg** (Braun & Hogenberg, "MAGDEBVRGVM") — **lihat catatan 6** | B5 |
 | 20 | `20_potret-gustavus-adolphus.jpg` | Gustavus Adolphus | B5, B6, B9, B10 |
-| 21 | `21_pertempuran-medan-terbuka.jpg` | Lukisan pertempuran (tidak diidentifikasi) | B1, B4, B6, B7, B9, B10 |
+| 21 | `21_pertempuran-medan-terbuka.jpg` | Lukisan pertempuran (tidak diidentifikasi) | B4, B6, B7, B9, B10 |
 | 23 | `23_pertempuran-breitenfeld-1631.jpg` | Formasi pasukan — **lihat catatan 3** | B1, B6, B7, B9, B10 |
-| 24 | `24_prajurit-senapan-sumbu.jpg` | Rekonstruksi prajurit senapan sumbu | B3, B5, B6 |
+| 24 | `24_prajurit-senapan-sumbu.jpg` | Rekonstruksi prajurit senapan sumbu | B3 |
 | 26 | `26_peta-politik-eropa-1648.jpg` | Peta Eropa sekitar 1648 | B6–B10 |
 | 27 | `27_musketir-prancis.jpg` | Musketir Prancis — **lihat catatan 2**, tidak dipakai | — |
 | 29 | `29_serangan-terhadap-penduduk.jpg` | Warga diserang prajurit | B8 |
@@ -29,15 +35,20 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 35 | `35_potret-louis-xiii.jpg` | *(baru)* Raja Louis XIII | B6, B7, B9, B10 |
 | 36 | `36_pengungsi.jpg` | *(baru)* Rombongan pengungsi dengan gerobak | B1, B8, B10 |
 | 37 | `37_tentara-berkuda-di-desa.jpg` | *(baru)* Prajurit berkuda meminta perbekalan dari warga | B8 |
-| 38 | `38_tiga-musketir.jpg` | *(baru)* Tiga musketir abad ke-17 | B3, B5, B8 |
+| 38 | `38_tiga-musketir.jpg` | *(baru)* Tiga musketir abad ke-17 | B8 |
 
 ## Catatan keterangan yang perlu dicek
 
 1. **No. 12 kemungkinan bukan Kardinal Richelieu.** Tokohnya memakai mahkota, jubah cerpelai, orb, dan tongkat kerajaan, padahal Richelieu seorang kardinal dan tidak pernah dimahkotai. Gambarnya mirip potret Frederick V sebagai Raja Bohemia karya Gerard van Honthorst, jadi sementara saya taruh di Bagian 4 ("Raja Musim Dingin"). **Pastikan dulu identitasnya.** Kalau ragu, ganti dengan `07` pada baris-baris itu. Untuk kalimat tentang Richelieu di Bagian 7 belum ada potretnya; saya pakai Louis XIII (`35`).
 2. **No. 27 bukan "Prajurit dan Kuda Perang".** Isinya tiga musketir tanpa kuda, dan tulisan di gambarnya berbunyi *"Französische Musketiere unter Ludwig XIV"*, yaitu era setelah perang berakhir. Karena itu gambar ini tidak saya pakai. Sebagai gantinya ada `38`.
 3. **No. 23 adalah Pertempuran Breitenfeld.** Tulisan Latin di pojok kiri bawah menyebut pertempuran antara Raja Swedia dan Elektor Saxonia melawan Tilly, *7 September 1631*. Tanggal ini memakai kalender Julian dan sama dengan 17 September 1631, persis seperti di narasi. Gambar ini dipakai untuk kalimat Breitenfeld di Bagian 6.
-4. **No. 06 bertuliskan "Nördlingen"** di bagian atas. Untuk adegan Magdeburg (Bagian 5), potong (crop) atau zoom ke bagian tembok supaya tulisan itu tidak terlihat.
-5. **No. 15 dan 18:** sesuai keterangan aslinya, jangan diberi label "Magdeburg" di layar. Gambar ini dipakai sebagai ilustrasi suasana saja.
+4. **No. 06 bertuliskan "Nördlingen".** Sekarang hanya dipakai di Bagian 2 (kota merdeka). Adegan Magdeburg memakai gambar Magdeburg yang asli (no. 14, 17, 19).
+5. **No. 15, 16, dan 18:** sesuai keterangan aslinya, jangan diberi label "Magdeburg" di layar. Gambar ini dipakai sebagai ilustrasi suasana saja.
+
+6. **No. 14, 17, dan 19 memang Magdeburg**, walaupun keterangan aslinya menyebut "lokasi belum dapat dipastikan". Bukti ada di gambarnya sendiri: no. 14 bertuliskan "MAGDEBURG" dan menampilkan Sungai Elbe ("Die Elbe Flus"); no. 17 berjudul "Tilly vor Magdeburg" dengan angka 1631; no. 19 berjudul "MAGDEBVRGVM". Ketiganya sekarang jadi tulang punggung Bagian 5.
+7. **No. 11 mungkin Pertempuran White Mountain (1620).** Bangunan beratap limas di bukit mirip paviliun Hvězda di White Mountain dekat Praha. Ini dugaan; sesuai keterangan aslinya, jangan beri label nama pertempuran di layar sebelum sumbernya dipastikan.
+8. **No. 16 punya watermark "bpk / Bildarchiv Preußischer Kulturbesitz"** di kiri atas. Watermark itu tanda gambar berlisensi, jadi tidak saya hapus. Cek izin pakainya; kalau tidak ada, ganti gambar ini atau cari versi domain publik.
+9. **No. 13** memuat tulisan Prancis yang menjadi bagian dari ilustrasinya (bukan bar keterangan), jadi tidak saya hapus. Di video, crop ke bagian tengah saja.
 
 ## Gambar yang masih kurang (disarankan)
 
@@ -45,13 +56,14 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 - **Perdamaian Westphalia 1648**, misalnya *Ratifikasi Perjanjian Münster* karya Gerard ter Borch (domain publik). Untuk sekarang, Bagian 9 hanya memakai peta dan potret.
 - **Frederick V** yang sudah pasti identitasnya, kalau no. 12 ternyata orang lain.
 
+
 ## Bagian 1 — Prolog: Eropa dalam Api
 
 | Waktu (perkiraan) | Narasi | Gambar | Arahan kamera |
 |---|---|---|---|
 | 00:00.26–00:05.51 | Ada sebuah benua yang selama puluhan tahun tidak pernah benar-benar mengenal kedamaian. | `36` | zoom pelan masuk |
 | 00:05.51–00:15.96 | Desa-desa terbakar. Kota-kota berubah menjadi reruntuhan. Ladang pertanian ditinggalkan. Dan ribuan… | `15` | pan kiri→kanan ke api |
-| 00:15.96–00:28.31 | Di tengah kekacauan itu, tentara bergerak dari satu wilayah ke wilayah lainnya. Meriam menggelegar.… | `21` | pan ke meriam dan kavaleri |
+| 00:15.96–00:28.31 | Di tengah kekacauan itu, tentara bergerak dari satu wilayah ke wilayah lainnya. Meriam menggelegar.… | `11` | pan ke kavaleri yang menyerbu |
 | 00:28.31–00:32.40 | Namun, perang ini tidak dimulai karena perebutan satu wilayah semata. | `01` | zoom out lebar |
 | 00:32.40–00:38.81 | Semuanya bermula dari perselisihan agama, ketegangan politik, dan ambisi para penguasa di Eropa. | `03` | zoom pelan ke wajah |
 | 00:38.81–00:47.55 | Konflik yang awalnya terjadi di sebuah wilayah kecil bernama Bohemia kemudian berkembang menjadi… | `01` | zoom ke Böhmen (Bohemia) |
@@ -92,8 +104,8 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 02:56.96–03:02.48 | Tetapi dampaknya sangat besar. | `09` | tahan |
 | 03:02.48–03:04.75 | Peristiwa itu menjadi pemicu pemberontakan Bohemia terhadap kekuasaan Habsburg. | `07` | zoom pelan |
 | 03:04.75–03:14.38 | Para bangsawan Protestan kemudian menolak mengakui Ferdinand II sebagai penguasa mereka. | `03` | zoom ke wajah |
-| 03:14.38–03:16.59 | Sebuah pemberontakan telah dimulai. | `38` | pan |
-| 03:16.59–03:20.28 | Dan kekuatan militer Kekaisaran segera bersiap untuk menghancurkannya. | `24` | pan |
+| 03:14.38–03:16.59 | Sebuah pemberontakan telah dimulai. | `24` | pan |
+| 03:16.59–03:20.28 | Dan kekuatan militer Kekaisaran segera bersiap untuk menghancurkannya. | `13` | zoom ke barisan tombak (crop tanpa teks Prancis) |
 
 ## Bagian 4 — Raja Musim Dingin dan Kejatuhan Bohemia
 
@@ -106,8 +118,8 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 03:41.86–03:47.47 | Ferdinand II tidak mengakui kekuasaan Frederick. Ia mengumpulkan dukungan dari para sekutu Katolik dan… | `03` | zoom |
 | 03:47.47–03:52.89 | Frederick kemudian mendapat julukan Raja Musim Dingin. | `12` | tahan |
 | 03:52.89–03:59.02 | Julukan itu bukan tanpa alasan. Masa pemerintahannya di Bohemia hanya berlangsung sekitar satu musim dingin. | `12` | tahan |
-| 03:59.02–04:05.99 | Pada 8 November 1620, pasukan pemberontak menghadapi tentara Kekaisaran dalam Pertempuran White Mountain,… | `21` | pan ke kanan atas (kota di kejauhan) |
-| 04:05.99–04:11.52 | Pertempuran berlangsung singkat, tetapi hasilnya menentukan masa depan Bohemia. | `21` | zoom ke tengah |
+| 03:59.02–04:05.99 | Pada 8 November 1620, pasukan pemberontak menghadapi tentara Kekaisaran dalam Pertempuran White Mountain,… | `11` | pan ke bangunan di bukit |
+| 04:05.99–04:11.52 | Pertempuran berlangsung singkat, tetapi hasilnya menentukan masa depan Bohemia. | `11` | zoom ke tengah pertempuran |
 | 04:11.52–04:13.00 | Pasukan pemberontak mengalami kekalahan. | `21` | tahan |
 | 04:13.00–04:21.96 | Frederick melarikan diri. Pemerintahan Protestan runtuh. Dan Ferdinand II berhasil mengembalikan kekuasaan… | `07` | pan pelan |
 | 04:21.96–04:29.13 | Setelah kemenangan tersebut, para pemimpin pemberontakan dihukum mati. Kekayaan mereka disita, sementara… | `03` | zoom |
@@ -120,20 +132,20 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 
 | Waktu (perkiraan) | Narasi | Gambar | Arahan kamera |
 |---|---|---|---|
-| 04:51.44–04:52.95 | Tahun 1631. | `01` | zoom ke wilayah Magdeburg |
+| 04:51.44–04:52.95 | Tahun 1631. | `14` | tampil penuh, judul MAGDEBURG |
 | 04:52.95–04:54.11 | Perang telah meluas ke berbagai wilayah Jerman. | `01` | tahan |
-| 04:54.11–05:02.56 | Salah satu kota yang menjadi sasaran adalah Magdeburg, sebuah kota penting yang mendukung gerakan Protestan. | `06` | crop tanpa tulisan Nördlingen, pan tembok |
-| 05:02.56–05:09.05 | Kota ini memiliki posisi strategis dan menjadi simbol perlawanan terhadap kekuasaan Katolik Habsburg. | `06` | tahan |
-| 05:09.05–05:15.37 | Pasukan Kekaisaran yang dipimpin oleh Johann Tserclaes, Count of Tilly, bersama pasukan sekutu mengepung… | `38` | pan |
-| 05:15.37–05:19.56 | Penduduk kota menyadari bahwa ancaman semakin dekat. | `06` | zoom ke gerbang |
-| 05:19.56–05:25.95 | Mereka berusaha mempertahankan tembok pertahanan dan berharap bantuan dari sekutu Protestan segera datang. | `24` | zoom |
-| 05:25.95–05:32.05 | Namun, bantuan tersebut tidak tiba tepat waktu. | `06` | zoom out |
-| 05:32.05–05:35.47 | Pada 20 Mei 1631, pasukan penyerang akhirnya berhasil memasuki kota. | `18` | zoom pelan |
-| 05:35.47–05:43.37 | Apa yang terjadi setelahnya menjadi salah satu tragedi paling kelam dalam Perang Tiga Puluh Tahun. | `18` | tahan |
+| 04:54.11–05:02.56 | Salah satu kota yang menjadi sasaran adalah Magdeburg, sebuah kota penting yang mendukung gerakan Protestan. | `19` | zoom pelan ke kota |
+| 05:02.56–05:09.05 | Kota ini memiliki posisi strategis dan menjadi simbol perlawanan terhadap kekuasaan Katolik Habsburg. | `19` | pan sepanjang tembok dan sungai Elbe |
+| 05:09.05–05:15.37 | Pasukan Kekaisaran yang dipimpin oleh Johann Tserclaes, Count of Tilly, bersama pasukan sekutu mengepung… | `17` | zoom ke Tilly berkuda |
+| 05:15.37–05:19.56 | Penduduk kota menyadari bahwa ancaman semakin dekat. | `14` | pan dari pasukan ke kota |
+| 05:19.56–05:25.95 | Mereka berusaha mempertahankan tembok pertahanan dan berharap bantuan dari sekutu Protestan segera datang. | `14` | zoom ke benteng berasap |
+| 05:25.95–05:32.05 | Namun, bantuan tersebut tidak tiba tepat waktu. | `17` | zoom out ke kota di latar |
+| 05:32.05–05:35.47 | Pada 20 Mei 1631, pasukan penyerang akhirnya berhasil memasuki kota. | `16` | zoom pelan ke gerbang |
+| 05:35.47–05:43.37 | Apa yang terjadi setelahnya menjadi salah satu tragedi paling kelam dalam Perang Tiga Puluh Tahun. | `16` | tahan |
 | 05:43.37–05:47.39 | Pembunuhan dan penjarahan terjadi di berbagai tempat. | `18` | pan |
 | 05:47.39–05:50.68 | Api mulai menyebar dari satu bangunan ke bangunan lainnya. | `15` | pan ke api |
 | 05:50.68–05:57.77 | Rumah-rumah terbakar. Gereja-gereja hancur. Penduduk berusaha melarikan diri, tetapi banyak yang tidak… | `15` | zoom pelan |
-| 05:57.77–06:01.89 | Dalam waktu singkat, sebagian besar Magdeburg berubah menjadi lautan api. | `15` | zoom out |
+| 05:57.77–06:01.89 | Dalam waktu singkat, sebagian besar Magdeburg berubah menjadi lautan api. | `14` | zoom ke kebakaran di kiri |
 | 06:01.89–06:11.36 | Jumlah korban jiwa diperkirakan mencapai sekitar 20.000 hingga 25.000 orang, meskipun angka pastinya masih… | `32` | zoom pelan |
 | 06:11.36–06:14.05 | Peristiwa ini dikenal sebagai Sack of Magdeburg. | `18` | zoom out |
 | 06:14.05–06:17.14 | Kehancuran kota tersebut mengguncang Eropa. | `15` | tahan |
@@ -151,7 +163,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 06:47.23–06:52.84 | Kehadirannya bukan semata-mata didorong oleh keinginan membela kaum Protestan. | `20` | zoom |
 | 06:52.84–06:57.14 | Swedia juga memiliki kepentingan politik dan militer untuk memperluas pengaruhnya di sekitar Laut Baltik. | `26` | zoom ke Svezia / Mar Baltico |
 | 06:57.14–07:02.64 | Gustavus Adolphus dikenal sebagai pemimpin militer yang cakap. | `20` | zoom ke wajah |
-| 07:02.64–07:09.41 | Ia mengembangkan organisasi pasukan yang lebih fleksibel, menggabungkan infanteri, kavaleri, dan artileri… | `24` | pan |
+| 07:02.64–07:09.41 | Ia mengembangkan organisasi pasukan yang lebih fleksibel, menggabungkan infanteri, kavaleri, dan artileri… | `13` | pan (crop tanpa teks Prancis) |
 | 07:09.41–07:16.98 | Pada 17 September 1631, pasukannya menghadapi tentara Kekaisaran dalam Pertempuran Breitenfeld. | `23` | tampil penuh |
 | 07:16.98–07:20.87 | Hasilnya menjadi kejutan besar. | `23` | zoom ke asap |
 | 07:20.87–07:24.85 | Pasukan Swedia berhasil meraih kemenangan dan menghancurkan dominasi militer Katolik yang sebelumnya… | `23` | pan |
@@ -159,7 +171,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 07:29.15–07:32.53 | Gustavus Adolphus kemudian melanjutkan kampanye militernya di wilayah Jerman. | `01` | pan |
 | 07:32.53–07:36.65 | Namun, kejayaannya tidak berlangsung lama. | `20` | tahan |
 | 07:36.65–07:41.85 | Pada 16 November 1632, pasukan Swedia bertempur melawan tentara Kekaisaran dalam Pertempuran Lützen. | `21` | pan |
-| 07:41.85–07:46.25 | Pertempuran berlangsung sengit di tengah kabut tebal. | `21` | tahan, overlay kabut tipis |
+| 07:41.85–07:46.25 | Pertempuran berlangsung sengit di tengah kabut tebal. | `11` | tahan, overlay kabut tipis |
 | 07:46.25–07:48.94 | Di tengah pertempuran, Gustavus Adolphus gugur. | `20` | zoom ke wajah, fade gelap |
 | 07:48.94–07:54.85 | Pasukannya memang berhasil memenangkan pertempuran, tetapi mereka kehilangan seorang raja sekaligus… | `20` | tahan |
 | 07:54.85–08:04.63 | Kematian Gustavus Adolphus menjadi salah satu momen paling menentukan dalam Perang Tiga Puluh Tahun. | `20` | zoom out |
@@ -242,7 +254,7 @@ Audio: `audio/Narasi_30_tahun_full.wav` (13:55.72). Gambar (tanpa keterangan): `
 | 12:45.28–12:52.63 | Perang ini dimulai dari ketegangan agama dan politik di Bohemia. | `07` | zoom pelan |
 | 12:52.63–12:59.19 | Kemudian berkembang menjadi pertarungan besar yang melibatkan kerajaan-kerajaan terkuat di Eropa. | `23` | zoom out |
 | 12:59.19–13:02.85 | Kita menyaksikan bagaimana sebuah insiden di Kastel Praha memicu pemberontakan. | `09` | dolly masuk |
-| 13:02.85–13:07.59 | Bagaimana Magdeburg berubah menjadi kota yang hancur. | `15` | pan |
+| 13:02.85–13:07.59 | Bagaimana Magdeburg berubah menjadi kota yang hancur. | `14` | pan |
 | 13:07.59–13:10.90 | Bagaimana seorang raja dari Swedia mengubah arah peperangan. | `20` | zoom |
 | 13:10.90–13:20.03 | Dan bagaimana Prancis akhirnya melawan kekuatan Katolik lainnya demi kepentingan politik. | `35` | zoom |
 | 13:20.03–13:21.34 | Namun, ada satu pelajaran besar dari seluruh tragedi ini. | `32` | tahan |
