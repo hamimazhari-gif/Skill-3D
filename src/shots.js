@@ -40,8 +40,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-1.5, 1.0, 2.8], look: [0.1, 0.95, -3.0]},
     {at: 'end', pos: [-0.9, 1.2, 1.4], look: [0.3, 1.0, -3.0]}]},
   {shot: 4, from: 'bahaya', loc: 'road', move: 'close-up driver', keys: [
-    {at: 'start', pos: [0.8, 1.5, -1.3], look: [0.3, 1.2, -3.2]},
-    {at: 'end', pos: [0.7, 1.45, -1.6], look: [0.3, 1.2, -3.2]}]},
+    {at: 'start', pos: [1.05, 1.5, -1.3], look: [0.55, 1.2, -3.2]},
+    {at: 'end', pos: [0.95, 1.45, -1.6], look: [0.5, 1.2, -3.2]}]},
   // 5 living room, days 3-4: hallucinations
   {shot: 5, loc: 'living', move: 'crane down', keys: [
     {at: 'start', pos: [2.3, 2.6, 1.5], look: [0.0, 0.9, -3.6]},

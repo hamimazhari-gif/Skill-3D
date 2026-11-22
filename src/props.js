@@ -675,7 +675,7 @@ export function car(color = '#c75b5b') {
   for (const s of [-1, 1]) { const side = box(0.1, 0.2, 1.4, toon(color)); at(side, s * 0.8, 0.83, -0.2); g.add(side); }
   const seat = box(1.4, 0.55, 0.25, '#5a3a2a'); at(seat, 0, 0.6, -0.75); g.add(seat);
   const ws = box(1.6, 0.4, 0.04, new THREE.MeshBasicMaterial({color: '#cfe8f6', transparent: true, opacity: 0.22, depthWrite: false}), {hull: 0, edges: true}); at(ws, 0, 0.97, 0.5, 0, -0.35); g.add(ws);
-  const wheel = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 8, 20), toon('#2b2b33')); wheel.position.set(0.28, 1.08, 0.28); wheel.rotation.x = -0.5; g.add(wheel);
+  const wheel = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 8, 20), toon('#2b2b33')); wheel.position.set(0.28, 0.98, 0.42); wheel.rotation.x = -1.0; g.add(wheel);
   const wheels = [];
   for (const sx of [-1, 1]) for (const sz of [-1.15, 1.15]) {
     const w = cyl(0.34, 0.34, 0.26, '#2b2b33', {center: true, seg: 20}); at(w, sx * 0.83, 0.34, sz, 0, 0, Math.PI / 2); g.add(w); wheels.push(w);

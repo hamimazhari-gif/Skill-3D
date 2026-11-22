@@ -201,8 +201,9 @@ export const Story = ({lang, captions = true}) => {
 
 const TH = {
   id: {top: '7 HARI', mid: 'TANPA TIDUR?!'},
+  en: {top: '7 DAYS', mid: 'NO SLEEP?!'},
 };
-const THUMB_T = {id: 36.6};
+const THUMB_T = {id: 36.6, en: 35.66};
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const tx = TH[lang];

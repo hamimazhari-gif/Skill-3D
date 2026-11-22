@@ -110,12 +110,12 @@ export function buildWorld(lang, T, EVt, L) {
     const lamp = new THREE.PointLight('#ffcf8a', 3.0, 5, 1.6); lamp.position.set(0.45, 1.0, -3.9); g.add(lamp);
     const mugs = [];
     for (let i = 0; i < 4; i++) { const m = P.mug(['#f3e7d3', '#c75b5b', '#4f7fa6', '#e8c35a'][i]); at(m, 0.32 + (i % 2) * 0.2, 0.55, -3.98 + Math.floor(i / 2) * 0.14, i); g.add(m); mugs.push(m); }
-    const clk = P.wallClock(0.3); at(clk.group, -0.6, 2.55, -4.88); g.add(clk.group);
-    const cal = calendar(g, 0.75, 1.7, -4.86, [1, 2, 3, 4, 5, 6, 7].map((n) => `HARI ${n}`), (t) => {
+    const clk = P.wallClock(0.3); at(clk.group, -0.3, 2.55, -4.88); g.add(clk.group);
+    const cal = calendar(g, 0.75, 1.7, -4.86, [1, 2, 3, 4, 5, 6, 7].map((n) => (lang === 'en' ? `DAY ${n}` : `HARI ${n}`)), (t) => {
       const t0 = E('tujuh') - 0.1; return t < t0 ? 0 : Math.min(6, Math.floor((t - t0) / 0.1));
     });
     const slp = sign(L.sleep, 1.3, 0.75, {bg: '#e0b84f', sub: L.sleepSub, frame: '#8a6a2a'}); at(slp, -2.2, 1.95, -4.84); g.add(slp);
-    const cmt = sign(L.comment, 1.7, 0.55, {bg: '#c75b5b', fg: '#fff3df', frame: '#8a3f2a'}); at(cmt, -1.75, 2.68, -4.84); g.add(cmt);
+    const cmt = sign(L.comment, 1.6, 0.55, {bg: '#c75b5b', fg: '#fff3df', frame: '#8a3f2a'}); at(cmt, -1.85, 2.68, -4.84); g.add(cmt);
     // hero sitting up in bed (legs hidden under the blanket)
     const hero = ch('hero', {}, g, -0.6, -3.85, 0, -0.3);
     const cup = held(hero, P.mug('#c75b5b'), {y: -0.02});
@@ -228,7 +228,7 @@ export function buildWorld(lang, T, EVt, L) {
     for (let i = 0; i < 8; i++) { const tr = P.tree({seed: 70 + i, h: 2.6}); g.add(tr); side.push({o: tr, x: (i % 2 ? -1 : 1) * (6.5 + (i % 3)), ph: i * 6 + 3}); }
     g.add(P.hills('#2a4030'));
     const cr = P.car('#c75b5b'); at(cr, 0, 0, -3.0); g.add(cr);
-    const hero = ch('hero', {seed: 63}, cr, 0.3, -0.15, 0, -0.32);
+    const hero = ch('hero', {seed: 63}, cr, 0.3, -0.15, 0, -0.18);
     hero.act([{t: 0, expr: 'sleep', pose: 'tap', action: 'slump', dur: 1.0},
       {t: E('kendara') + 0.08, expr: 'shocked', pose: 'armsUp', action: 'jump', dur: 0.6},
       {t: E('kendara') + 0.8, expr: 'worried', pose: 'tap', action: 'tremble', dur: 1.2}]);
@@ -241,7 +241,7 @@ export function buildWorld(lang, T, EVt, L) {
       side.forEach((q) => { q.o.position.set(q.x, 0, ((q.ph + d) % 48) - 40); });
       // drift toward the shoulder while asleep, jerk back on "berbahaya"
       const ts = cut(4), tb = E('kendara');
-      const drift = smooth((t - ts) / Math.max(0.3, tb - ts)) * 1.1;
+      const drift = smooth((t - ts) / Math.max(0.3, tb - ts)) * 0.5;
       const back = smooth((t - tb - 0.05) / 0.5);
       const x = drift * (1 - back);
       cr.position.x = x; cr.rotation.y = (t < tb ? 0.12 * drift : 0.12 * (1 - back) * 1.1 - 0.18 * Math.sin(back * Math.PI));
