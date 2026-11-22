@@ -194,8 +194,8 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PISANG INI', mid: 'RADIOAKTIF?!', tag: 'FAKTA UNIK'},
-  en: {top: 'THIS BANANA IS', mid: 'RADIOACTIVE?!', tag: 'WEIRD FACTS'},
+  id: {top: 'PISANG INI', mid: 'RADIOAKTIF?!'},
+  en: {top: 'THIS BANANA IS', mid: 'RADIOACTIVE?!'},
 };
 const THUMB_T = {id: 3.9, en: 3.75};
 export const Thumb = ({lang}) => {
@@ -214,9 +214,6 @@ export const Thumb = ({lang}) => {
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}
         {word(tx.mid, 132, '#e8a83a', ink, 2)}
-      </AbsoluteFill>
-      <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 170}}>
-        {word(tx.tag, 72, '#c75b5b', '#fff3df', -2)}
       </AbsoluteFill>
     </AbsoluteFill>
   );
