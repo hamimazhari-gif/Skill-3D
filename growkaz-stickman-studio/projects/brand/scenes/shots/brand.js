@@ -76,3 +76,39 @@ registerShot('b3', { draw(g, t) {
   logoText(g, W / 2, top + 330, 170);
   text(g, 'KISAH PARA NABI DALAM ANIMASI', W / 2, top + 470, { size: 50, color: '#ffffff', font: FONTS.title, weight: 700, stroke: 9, strokeColor: '#000', spacing: 6 });
 } });
+
+// b4 — profile picture v2: a front-facing face wearing a kopiah (peci), nothing else
+import { bigFace } from '/engine/rig2d.js';
+function kopiah(g, cx, cy, r) {
+  const shape = (grow = 0) => {
+    g.beginPath();
+    g.moveTo(cx - r * 0.95 - grow, cy - r * 0.38);
+    g.lineTo(cx - r * 0.84 - grow, cy - r * 1.02 - grow);
+    g.quadraticCurveTo(cx - r * 0.82, cy - r * 1.1 - grow, cx - r * 0.7, cy - r * 1.1 - grow);
+    g.lineTo(cx + r * 0.7, cy - r * 1.1 - grow);
+    g.quadraticCurveTo(cx + r * 0.82, cy - r * 1.1 - grow, cx + r * 0.84 + grow, cy - r * 1.02 - grow);
+    g.lineTo(cx + r * 0.95 + grow, cy - r * 0.38);
+    g.quadraticCurveTo(cx, cy - r * 0.5, cx - r * 0.95 - grow, cy - r * 0.38);
+    g.closePath();
+  };
+  shape(r * 0.04); g.fillStyle = '#ffe2a0'; g.fill();                       // rim light around the cap
+  shape(); g.fillStyle = linGrad(g, cx - r, 0, cx + r, 0, ['#1c1a22', '#2e2c38', '#16141c']); g.fill();
+  g.save(); shape(); g.clip();
+  g.fillStyle = linGrad(g, 0, cy - r * 1.1, 0, cy - r * 0.6, [alpha('#ffffff', 0.16), alpha('#ffffff', 0)]); g.fillRect(cx - r, cy - r * 1.2, r * 2, r * 0.6);   // velvet sheen on top
+  for (let i = -6; i <= 6; i++) seg(g, [[cx + i * r * 0.13, cy - r * 1.08], [cx + i * r * 0.14, cy - r * 0.45]], r * 0.012, alpha('#ffffff', 0.05));
+  g.restore();
+  g.strokeStyle = GOLD(); g.lineWidth = r * 0.05; g.beginPath(); g.moveTo(cx - r * 0.93, cy - r * 0.46); g.quadraticCurveTo(cx, cy - r * 0.58, cx + r * 0.93, cy - r * 0.46); g.stroke();   // gold trim
+}
+registerShot('b4', { draw(g, t) {
+  const W = E.W, H = E.H, cx = W / 2, cy = H / 2, R = 540;
+  g.fillStyle = radGrad(g, cx, cy - 60, 0, R * 1.1, ['#1e3a7a', '#0c1a4a', '#04081e']); g.fillRect(0, 0, W, H);
+  FX.godRays(g, cx, cy - 40, { count: 18, angle: 0, spread: Math.PI * 2, len: R * 1.3, color: '#ffe6a0', a: 0.07 });
+  glow(g, cx, cy - 40, R * 0.95, '#ffd890', 0.25);
+  const fr = 300, fy = cy + 30;
+  bigFace(g, cx, fy, fr, { outfit: { top: 'dress', color: '#f4efe2' }, expr: 'smile', look: [0, 0], rimColor: '#ffe2a0', rimSide: -1 });
+  // baju koko collar
+  seg(g, [[cx - fr * 0.18, fy + fr * 0.98], [cx, fy + fr * 1.2], [cx + fr * 0.18, fy + fr * 0.98]], fr * 0.05, '#c8c0aa');
+  for (const dy of [1.3, 1.45]) circle(g, cx, fy + fr * dy, fr * 0.03, '#c8c0aa');
+  kopiah(g, cx, fy, fr);
+  ring(g, cx, cy, R - 8, 14, alpha(GOLD(), 0.9));
+} });
