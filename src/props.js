@@ -384,3 +384,18 @@ export function skyDome() {
   const m = new THREE.Mesh(geo, mat); m.renderOrder = -10; m.frustumCulled = false;
   return m;
 }
+
+// Glowing moon disc (place far away, e.g. [x, 40, -120]); a halo sprite makes it read through fog.
+export function moon(r = 6) {
+  const g = new THREE.Group();
+  const c = canvas(256, 256), x = c.getContext('2d');
+  const gr = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(255,250,225,0.9)'); gr.addColorStop(0.35, 'rgba(255,245,210,0.35)'); gr.addColorStop(1, 'rgba(255,245,210,0)');
+  x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false}));
+  halo.scale.setScalar(r * 5); g.add(halo);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false}));
+  g.add(disc);
+  g.userData.faceCamera = true;
+  return g;
+}

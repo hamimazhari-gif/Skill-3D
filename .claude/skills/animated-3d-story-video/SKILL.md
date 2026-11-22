@@ -23,14 +23,16 @@ animated-3d-story-video/
   SKILL.md                  this file
   starter/                  complete Remotion project (copy to the repo root)
     package.json            pinned: remotion/@remotion/cli/@remotion/three 4.0.545, three 0.170.0, @react-three/fiber 8.18.0, react 18.3.1
+    src/vfx.js              REUSE: sparks, smoke, dust, debris, lightning, flame, fireLight (frame-driven, seeded)
     src/kit.js              REUSE: toon materials, painted wear textures, ink hull + edge lines, signs, pop/easing helpers
     src/char.js             REUSE: base character, EXPRESSIONS, POSES, actions, act() timeline
     src/props.js            REUSE: facade, house, stall, sack, crate, barrel, tree, goat, chicken, fish, basket, coin, chalkboard,
                                    chalk doodles, signpost, banner, boat, water, anvil, hammer, phone, room, boot, hills, sky dome
     src/timing.js           REUSE (generic) + per story: EV word table and LABELS per language
     src/shots.js            REUSE warpU/buildCameras/camAt + per story: SHOT_PLAN
-    src/world.js            PER STORY: locations, characters, acting cues, on-word events, LOOK per location
-    src/Video.jsx           REUSE renderer/post (DOF, vignette, dips, audio) + per story: cues() SFX sheet, DIPS, Thumb texts/camera
+    src/world.js            PER STORY: locations, characters, acting cues, on-word events, LOOK per location (LOOK_PRESETS: day,
+                            sunset, night with moon, interiorWarm, interiorNight), storyFx() flashes + camera shakes
+    src/Video.jsx           REUSE renderer/post (DOF, vignette, dips, word captions, flashes, camera shake, moon, audio) + per story: cues() SFX sheet, DIPS, Thumb texts/camera
     src/index.jsx           compositions per language + thumbnails + CharSheet test sheets
     src/CharSheet.jsx       test sheet of every expression / pose
     src/data/               sentence_times_<lang>.json (generated)
@@ -71,11 +73,21 @@ Do everything without stopping; ask nothing unless an input is missing.
 - Simple words, one idea per sentence, concrete numbers and names. Every claim has a source.
 - Output: `script.md` (shot table, rulebook check, fact map, left out on purpose, wording to watch) and a voice-over PDF per language: "Chapter N - Title (start time)" followed by one paragraph, 2-3 chapters.
 
+## Channel feel (learned from a reference "true story cartoon short", 59 s, 1080x1920)
+General traits to follow. Never copy another channel's characters, costumes, logos or scenes; our characters stay our base design.
+- **Word-by-word captions** are always on: 1-2 words at a time, heavy white type with a thick dark (#351f22) stroke and a drop shadow, centred at about 63% of the frame height, popping in (scale 1.18 → 1 in 0.12 s) on each word (`Captions` in `Video.jsx`, prop `captions`). In-world labels are still used for names, places and numbers.
+- **Fast cutting:** a new framing every 1.5-3 s (about 20-25 framings per minute). Several shots can share one location: hard cuts or continuous moves inside a location, the cream dip only when the location changes. Split long sentences across two framings (wide → close).
+- **Close-ups carry the emotion:** face close-ups where the head fills 40-60% of the frame width for every reaction beat, low angles looking up at a character, over-the-shoulder two-shots, and macro shots of the key prop (a coin, a fuse, a sack) with the background blurred.
+- **Big readable reactions:** wide round eyes with tiny pupils for shock, one raised brow + smirk for scheming, sweat drop when nervous, huge open laugh, deadpan half-lidded stare for comedy, a whole crowd reacting together on the payoff.
+- **Props and VFX sell the moment:** sparks on fuses and strikes, smoke from fires, dust on landings, debris on impacts, lightning, a warm/white flash on the climax, camera shake on every impact (`vfx.js`, `storyFx()`).
+- **Mood lighting:** night scenes with a big glowing moon and warm firelight are welcome (`LOOK_PRESETS.night`, `fireLight`, `flame`); keep characters bright and readable against dark backgrounds.
+- **Endings land on a big visual** (an explosion of light, a crowd cheer, a reveal) right on the last line.
+
 ## Art style (fixed)
 - One ink colour for every outline: #351f22. Models built in code with real depth (extruded walls, window reveals and sills, door panels, awnings, cornices, chimneys…). Textures are painted flat colours with wear (stains, chips, scratches). Outline = inverted hull plus edge lines.
 - Toon shading with a 3-band gradient; one warm key light from the upper left with shadows, hemisphere fill, light vignette, fog colour per location (`LOOK`).
 - Depth: blurred foreground object near the lens, sharp midground with characters, softly blurred background (Bokeh pass focused at the look-at distance).
-- Labels live inside the world (painted signs, banners on two poles, names on sacks/crates, chalkboards, plaques), in the language of each version. Never floating captions.
+- Labels live inside the world (painted signs, banners on two poles, names on sacks/crates, chalkboards, plaques), in the language of each version. The only screen text is the word-by-word caption track (no floating pills, titles or info boxes).
 - No flat sky or ground strips, no side-on cardboard buildings. Cuts: 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
 
 ## Characters and acting (expressive cartoon style)
@@ -97,8 +109,15 @@ Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — exp
 ## Camera
 - `SHOT_PLAN` keys: `{at: 'start' | 'end' | <EV name>, pos, look}` in location-local coordinates; keys land 0.15 s after their word; monotone cubic time warp (`warpU`), ease in/out, no wobble.
 - Net travel in every shot (about 10% of frame width per second); mix push (about half), crane (a third), sideways track (a fifth); carry the camera from subject to subject; end every move at rest.
+- Pacing: plan 18-25 framings for a 60 s video. A `SHOT_PLAN` entry is one framing; several entries may share a location and a narration shot (cut inside a sentence on a word with `at` keys, or use continuous moves).
+- Frame reactions in close-up (camera 0.9-1.3 m from the face, look at head height 1.4 m); establish each new location with one wide or crane move first.
 - 80° vertical FOV at 9:16: frame width at the subject = 0.93 × distance, frame height = 1.68 × distance.
 - Tie on-screen events to words (labels and props pop on their noun, doodles draw on their word, ticks appear on the payoff word). A word at the very end of a sentence leaves little screen time: start the event earlier or extend the key.
+
+## VFX (`vfx.js`) and screen effects
+- `FX.sparks(pos, t0, {n, speed, repeat})`, `FX.smoke(pos, t0, {every})`, `FX.dust(pos, t0)`, `FX.debris(pos, t0)`, `FX.lightning(a, b, t0, {dur})`, `FX.flame(pos)`, `FX.fireLight(pos)`: add `obj` to the location group and push `update` to `updaters`.
+- `storyFx(T, EVt)` in `world.js` returns `{flashes: [{t, dur, color, strength}], shakes: [{t, dur, amp}]}`; time them to the impact words. Shake amp 0.02-0.05, flash 0.25-0.5 s.
+- Add dust when a character lands from a jump and sparks/dust/shake on every hit.
 
 ## Sound
 - The voice-over is the composition audio; SFX come from `public/sfx/` (see its README) in `cues()`: whooshes on dips, pops on items, buzz on refusals, ticks on numbers/time, riser into the pivot, boom on the big reveal, ding on success, chime on the closing line, one click on "comment". Volumes 0.18-0.45, no more than one accent per second.

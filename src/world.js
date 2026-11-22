@@ -3,8 +3,18 @@ import * as THREE from 'three';
 import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, clamp01, INK, decal, signTex} from './kit';
 import {makeChar} from './char';
 import * as P from './props';
+import * as FX from './vfx';
 
 export const LOC = {road: 0, market: 40, docks: 80, shop: 120, cross: 160, mint: 200, museum: 240};
+
+// Reusable lighting presets (spread into a LOOK entry: {...LOOK_PRESETS.night, keyPos: [...]})
+export const LOOK_PRESETS = {
+  day: {fog: '#efe6d2', near: 14, far: 55, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff0d8', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
+  sunset: {fog: '#f1cfa6', near: 12, far: 50, skyTop: '#e8a27a', skyBottom: '#f8dcb0', key: '#ffc48a', keyI: 2.5, hemiI: 1.15, keyPos: [-8, 7, 6]},
+  night: {fog: '#1c2436', near: 10, far: 45, skyTop: '#0e1626', skyBottom: '#34405a', key: '#a9c4ff', keyI: 1.1, hemiI: 0.55, keyPos: [-6, 12, -4], moon: true},
+  interiorWarm: {fog: '#3a2a26', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffe2b8', keyI: 2.4, hemiI: 1.25, keyPos: [-4, 8, 8]},
+  interiorNight: {fog: '#1a1418', near: 8, far: 30, skyTop: '#0e1626', skyBottom: '#34405a', key: '#ffb870', keyI: 1.4, hemiI: 0.6, keyPos: [-3, 6, 6]},
+};
 
 export const LOOK = {
   road: {fog: '#efe6d2', near: 14, far: 55, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff0d8', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
@@ -20,6 +30,14 @@ function ground(w, d, color, paint) {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), toon(paintTex(color, {seed: 3, grain: 220, stains: 20, chips: 0, scratches: 0, repeat: [w / 4, d / 4], ...paint})));
   m.rotation.x = -Math.PI / 2; m.receiveShadow = true;
   return m;
+}
+
+// Screen-level effects for this story: flashes (overlay) and camera shakes, timed to words.
+export function storyFx(T, EVt) {
+  return {
+    flashes: [{t: EVt.coins + 0.02, dur: 0.35, color: '#ffe9b0', strength: 0.7}],
+    shakes: [{t: EVt.coins, dur: 0.45, amp: 0.035}, {t: EVt.goat + 0.15, dur: 0.3, amp: 0.02}],
+  };
 }
 
 export function buildWorld(lang, T, EVt, L) {
@@ -117,6 +135,7 @@ export function buildWorld(lang, T, EVt, L) {
     const chk = P.chalkDoodle('check', 0.5, 0.5); chk.material.color.set('#3f7a3a'); chk.position.set(0, 1.75, 0.08); board.add(chk);
     const top = box(3.7, 0.12, 0.3, '#7a5236'); at(top, 0, 2.86, 0); board.add(top);
     const f7 = ch('farmer', {seed: 99}, g, 8.0, -1.4, 0.2);
+    for (const [x, d] of [[8.0, 0], [10.0, 0.1]]) { const dd = FX.dust([x, 0.05, -1.4], EVt.once + d + 0.55, {}); g.add(dd.obj); updaters.push(dd.update); }
     const n7 = ch('fisher', {seed: 98}, g, 10.0, -1.4, -0.2);
 
     // shot 10/11: coins and the chalkboard
@@ -219,6 +238,7 @@ export function buildWorld(lang, T, EVt, L) {
     const gd = P.chalkDoodle('goat', 0.85, 0.6); gd.position.set(2.0, 1.75, -4.94); g.add(gd);
     const lamp = cyl(0.18, 0.28, 0.3, '#e8c76a', {}); at(lamp, -2.2, 3.3, -2.5); g.add(lamp);
     const cord = cyl(0.01, 0.01, 0.6, INK, {hull: 0}); at(cord, -2.2, 3.6, -2.5); g.add(cord);
+    const dg = FX.dust([-0.3, 0.05, -1.0], EVt.goat + 0.5, {}); g.add(dg.obj); updaters.push(dg.update);
     const realGoat = P.goat(); realGoat.scale.setScalar(0.8); at(realGoat, 2.2, 0, -3.6, -0.5); g.add(realGoat);
     farmer.act([{t: 0, pose: 'carry', expr: 'determined'}, {t: E('shoemaker'), expr: 'happy'},
       {t: E('goat') + 0.15, expr: 'shocked', action: 'jump', dur: 0.6}, {t: E('goat') + 0.9, expr: 'furious', action: 'tremble', dur: 0.8}]);
@@ -286,7 +306,9 @@ export function buildWorld(lang, T, EVt, L) {
     const furnace = box(1.0, 1.1, 0.9, toon('#8a6a5a', {paint: {bricks: true, seed: 3}})); at(furnace, 3.3, 0, -2.6); g.add(furnace);
     const glow = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), new THREE.MeshBasicMaterial({color: '#ffb04a'})); glow.position.set(3.3, 0.45, -2.14); g.add(glow);
     const fire = new THREE.PointLight('#ff9a3a', 4, 6, 1.5); fire.position.set(3.3, 0.8, -1.8); g.add(fire);
-    const sh2 = box(0.06, 0.06, 0.06, '#000'); sh2.visible = false; g.add(sh2);
+    const fxs = [FX.sparks([1.65, 0.8, -1.2], EVt.coins, {n: 70, speed: 2.4}), FX.smoke([3.3, 1.2, -2.3], 0, {every: 0.35, n: 8, color: '#9a8a80', size: 0.4, opacity: 0.45}),
+      FX.dust([1.6, 0.05, -1.0], EVt.coins, {color: '#b89a80'}), FX.flame([3.3, 0.35, -2.1], {size: 0.45})];
+    for (const f of fxs) { g.add(f.obj); updaters.push(f.update); }
     updaters.push((t) => {
       sh.scale.setScalar(1.7 * pop(t, E('shells')));
       saltPile.scale.setScalar(1.3 * pop(t, E('salt8')));

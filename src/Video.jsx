@@ -9,10 +9,10 @@ import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {makeTiming, EV, LABELS, FPS} from './timing';
-import {buildWorld, LOOK, LOC} from './world';
+import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
-import {skyDome} from './props';
-import {CREAM} from './kit';
+import {skyDome, moon as moonDisc} from './props';
+import {CREAM, INK} from './kit';
 
 const VignetteShader = {
   uniforms: {tDiffuse: {value: null}, strength: {value: 0.32}},
@@ -37,12 +37,13 @@ function Scene({lang, thumb}) {
     const w = buildWorld(lang, T, EVt, L);
     const cams = buildCameras(T, EVt);
     const sky = skyDome();
+    const moon = moonDisc();
     const key = new THREE.DirectionalLight('#fff0d8', 2.6);
     key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
     const sc = key.shadow.camera; sc.left = -9; sc.right = 9; sc.top = 9; sc.bottom = -9; sc.near = 0.5; sc.far = 40;
     key.shadow.bias = -0.0006; key.shadow.normalBias = 0.02;
     const hemi = new THREE.HemisphereLight('#dcecff', '#b09a72', 1.3);
-    return {...w, cams, sky, key, hemi};
+    return {...w, cams, sky, key, hemi, moon};
   }, [lang, T, EVt, L]);
 
   useEffect(() => {
@@ -72,14 +73,20 @@ function Scene({lang, thumb}) {
     let {pos, look, loc} = camAt(built.cams, shot, t);
     if (thumb) { pos = new THREE.Vector3(...thumb.pos).add(new THREE.Vector3(LOC[loc], 0, 0)); look = new THREE.Vector3(...thumb.look).add(new THREE.Vector3(LOC[loc], 0, 0)); }
     camera.position.copy(pos); camera.lookAt(look);
+    // camera shake on impacts (decaying, deterministic)
+    let amp = 0;
+    for (const sh of storyFx(T, EVt).shakes) { const dt = t - sh.t; if (dt > 0 && dt < sh.dur) amp = Math.max(amp, sh.amp * (1 - dt / sh.dur)); }
+    if (amp > 0 && !thumb) { camera.position.x += Math.sin(t * 71) * amp; camera.position.y += Math.sin(t * 53 + 1) * amp; camera.rotation.z += Math.sin(t * 37) * amp * 0.5; }
     camera.fov = 80; camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
     for (const [name, g] of Object.entries(built.locGroups)) g.visible = name === loc;
     const lk = LOOK[loc];
     if (!scene.fog) scene.fog = new THREE.Fog('#efe6d2', 14, 55);
-    if (!built.world.parent) { scene.add(built.world, built.sky, built.key, built.key.target, built.hemi); gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap; }
+    if (!built.world.parent) { scene.add(built.world, built.sky, built.moon, built.key, built.key.target, built.hemi); gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap; }
     scene.fog.color.set(lk.fog); scene.fog.near = lk.near; scene.fog.far = lk.far;
     built.sky.material.uniforms.top.value.set(lk.skyTop); built.sky.material.uniforms.bottom.value.set(lk.skyBottom);
     built.sky.position.copy(camera.position);
+    built.moon.visible = !!lk.moon;
+    if (lk.moon) { built.moon.position.set(camera.position.x - 30, 45, camera.position.z - 120); built.moon.lookAt(camera.position); }
     const ox = LOC[loc];
     let kp = lk.keyPos;
     if (loc === 'cross') { // the sun sinks during "half a day"
@@ -122,7 +129,40 @@ function cues(T, EVt) {
   return list;
 }
 
-export const Story = ({lang}) => {
+// Word-by-word captions (1-2 words at a time), timed by letters inside each sentence.
+export function captionWords(T) {
+  const out = [];
+  for (const s of T.S) {
+    const words = s.text.split(/\s+/).filter(Boolean);
+    const letters = (w) => w.replace(/[^\p{L}\p{N}]/gu, '').length || 1;
+    const total = words.reduce((a, w) => a + letters(w), 0);
+    let acc = 0; const items = words.map((w) => { const t0 = s.start + (s.end - s.start) * acc / total; acc += letters(w); return {w, t0}; });
+    // merge short words with the next one so chunks read naturally
+    for (let i = 0; i < items.length; i++) {
+      let txt = items[i].w; const t0 = items[i].t0;
+      if (letters(items[i].w) <= 3 && i + 1 < items.length && !/[.,!?:;]$/.test(items[i].w)) { i++; txt += ' ' + items[i].w; }
+      out.push({text: txt.replace(/[,;:]$/, ''), t0});
+    }
+    out.push({text: '', t0: s.end + 0.05});
+  }
+  return out;
+}
+
+const Captions = ({T, t}) => {
+  const words = useMemo(() => captionWords(T), [T]);
+  let cur = null; for (const w of words) if (w.t0 <= t) cur = w;
+  if (!cur || !cur.text) return null;
+  const age = t - cur.t0, k = Math.min(1, age / 0.12);
+  const scale = 1.18 - 0.18 * k;
+  return (
+    <AbsoluteFill style={{alignItems: 'center', top: '63%', height: 'auto', bottom: 'auto'}}>
+      <div style={{fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 92, color: '#fffaf0', letterSpacing: -1,
+        WebkitTextStroke: `16px ${INK}`, paintOrder: 'stroke fill', textShadow: `0 8px 0 ${INK}`, transform: `scale(${scale})`, whiteSpace: 'nowrap'}}>{cur.text}</div>
+    </AbsoluteFill>
+  );
+};
+
+export const Story = ({lang, captions = true}) => {
   const {width, height} = useVideoConfig();
   const frame = useCurrentFrame();
   const {T, EVt} = useStory(lang);
@@ -138,6 +178,8 @@ export const Story = ({lang}) => {
         <Scene lang={lang} />
       </ThreeCanvas>
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
+      {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
+      {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
         <Sequence key={i} from={Math.max(0, Math.round(at * FPS))} durationInFrames={trim ? Math.round(trim * FPS) : undefined}>
