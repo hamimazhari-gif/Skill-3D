@@ -45,8 +45,8 @@ export function nemes(g, hx, hy, r, f, rim, o = {}) {
   });
 }
 // front view nemes for bigFace (centre cx, cy, head radius r)
-export function nemesFront(g, cx, cy, r, rimColor, side = -1) {
-  const gold = GOLD(), blue = NEMES_BLUE;
+export function nemesFront(g, cx, cy, r, rimColor, side = -1, stripe = NEMES_BLUE) {
+  const gold = GOLD(), blue = stripe;
   const shape = (grow = 0) => {
     g.beginPath();
     g.moveTo(-r * 0.95 - grow, -r * 0.35);
@@ -106,6 +106,7 @@ export function person(g, o) {
   g.save(); if (o.alpha != null) g.globalAlpha *= o.alpha;
   if (acc.includes('collar')) collar(g, o, rim);
   if (acc.includes('nemes')) nemes(g, hx, hy, r, f, rim);
+  if (acc.includes('nemesRed')) nemes(g, hx, hy, r, f, rim, { blue: '#a8321e' });
   if (acc.includes('guardcloth')) guardcloth(g, hx, hy, r, f, rim);
   if (acc.includes('hat')) hat(g, hx, hy, r, f, rim);
   if (o.staff && !o.staffBehind) heldStaff(g, o, rim);
@@ -114,12 +115,12 @@ export function person(g, o) {
 }
 export function bigPerson(g, cx, cy, r, o = {}) {
   const of = o.outfit || {}, acc = of.acc || [];
-  if (acc.includes('nemes')) {
+  if (acc.includes('nemes') || acc.includes('nemesRed')) {
     // shoulders + collar first, then the head and the nemes
     bigFace(g, cx, cy, r, { ...o, outfit: { ...of, head: 'none' } });
     g.save(); g.translate(cx, cy); g.fillStyle = GOLD(); g.beginPath(); g.ellipse(0, r * 1.25, r * 1.05, r * 0.38, 0, 0, Math.PI); g.fill();
     g.strokeStyle = NEMES_BLUE; g.lineWidth = r * 0.06; g.beginPath(); g.ellipse(0, r * 1.25, r * 0.8, r * 0.22, 0, 0.2, Math.PI - 0.2); g.stroke(); g.restore();
-    nemesFront(g, cx, cy, r, o.rimColor || '#ffc68a', o.rimSide ?? -1);
+    nemesFront(g, cx, cy, r, o.rimColor || '#ffc68a', o.rimSide ?? -1, acc.includes('nemesRed') ? '#a8321e' : NEMES_BLUE);
     return;
   }
   bigFace(g, cx, cy, r, o);

@@ -1,0 +1,597 @@
+{
+ "title": "Kisah Nabi Yusuf - Part 2",
+ "duration": 105.7,
+ "shots": [
+  {
+   "id": "z01",
+   "start": 0.0,
+   "end": 3.05,
+   "line": "Ingat baju Yusuf yang tidak robek itu?",
+   "scene": "Kilas balik: baju berdarah yang tidak robek dari Part 1",
+   "set": "insert",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "z02",
+   "start": 3.05,
+   "end": 6.35,
+   "line": "Hari ini… sebuah baju kembali menjadi saksi.",
+   "scene": "Baju putih bersih dengan robekan di punggung, bercahaya: saksi baru",
+   "set": "insert",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z03",
+   "start": 6.35,
+   "end": 7.25,
+   "line": "",
+   "scene": "Kartu judul: KISAH NABI YUSUF / PART 2",
+   "set": "title",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "z04",
+   "start": 7.25,
+   "end": 11.75,
+   "line": "Yusuf dibawa ke Mesir dan dibeli oleh seorang pejabat tinggi kerajaan.",
+   "scene": "Pasar Mesir: pejabat berjubah biru membeli Yusuf kecil dengan koin",
+   "set": "city",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   },
+   "sfx": [
+    {
+     "at": 2.6,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 2.9,
+     "name": "tick",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "z05",
+   "start": 11.75,
+   "end": 13.55,
+   "line": "Bertahun-tahun berlalu.",
+   "scene": "Selang waktu: Yusuf kecil tumbuh menjadi pemuda di istana",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "clock",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "z06",
+   "start": 13.55,
+   "end": 17.15,
+   "line": "Yusuf tumbuh menjadi pemuda yang tampan dan bijaksana.",
+   "scene": "Close-up Yusuf dewasa, tampan dan bijak, cahaya keemasan",
+   "set": "closeup",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "z07",
+   "start": 17.15,
+   "end": 20.25,
+   "line": "Tapi di sinilah ujian berikutnya datang.",
+   "scene": "Lorong istana; bayangan seseorang di ambang pintu",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "z08",
+   "start": 20.25,
+   "end": 24.75,
+   "line": "Istri pejabat itu tergoda, dan mengajak Yusuf berbuat maksiat.",
+   "scene": "Pintu-pintu tertutup satu per satu; Yusuf mundur",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -10
+    },
+    {
+     "at": 1.2,
+     "name": "hit",
+     "gain": -10
+    },
+    {
+     "at": 2.0,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "z09",
+   "start": 24.75,
+   "end": 28.65,
+   "line": "Yusuf menolak tegas: \"Aku berlindung kepada Allah!\"",
+   "scene": "Close-up Yusuf: Aku berlindung kepada Allah!",
+   "set": "closeup",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.9,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z10",
+   "start": 28.65,
+   "end": 30.45,
+   "line": "lalu berlari ke pintu.",
+   "scene": "Yusuf berlari ke pintu",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "whoosh",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "z11",
+   "start": 30.45,
+   "end": 34.65,
+   "line": "Perempuan itu menarik bajunya… hingga robek dari belakang.",
+   "scene": "Tangan menarik baju dari belakang, baju robek (gerak lambat)",
+   "set": "insert",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "slowmo",
+     "gain": -10
+    },
+    {
+     "at": 2.2,
+     "name": "swish",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "z12",
+   "start": 34.65,
+   "end": 37.35,
+   "line": "Tepat saat itu, sang suami muncul.",
+   "scene": "Pintu terbuka: siluet sang suami di ambang pintu",
+   "set": "corridor",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "z13",
+   "start": 37.35,
+   "end": 39.85,
+   "line": "Dan Yusuf langsung difitnah!",
+   "scene": "Istri pejabat menunjuk Yusuf, menuduh; cahaya merah",
+   "set": "corridor",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z14",
+   "start": 39.85,
+   "end": 45.15,
+   "line": "Seorang saksi berkata: \"Jika bajunya robek dari depan, Yusuf bersalah.",
+   "scene": "Diagram saksi: robek di DEPAN = Yusuf bersalah",
+   "set": "diagram",
+   "in": {
+    "type": "zoom",
+    "dur": 0.3
+   },
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 1.8,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z15",
+   "start": 45.15,
+   "end": 48.95,
+   "line": "Jika robek dari belakang… perempuan itulah yang berdusta.\"",
+   "scene": "Diagram saksi: robek di BELAKANG = dia berdusta",
+   "set": "diagram",
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 1.7,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z16",
+   "start": 48.95,
+   "end": 52.15,
+   "line": "Dan bajunya… robek dari belakang.",
+   "scene": "Bukti: baju robek dari belakang, Yusuf tidak bersalah",
+   "set": "corridor",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 1.4,
+     "name": "ding",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "z17",
+   "start": 52.15,
+   "end": 53.75,
+   "line": "Kabar itu menyebar.",
+   "scene": "Para perempuan Mesir berbisik-bisik",
+   "set": "city",
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "z18",
+   "start": 53.75,
+   "end": 57.95,
+   "line": "Para perempuan Mesir diundang ke jamuan, dan diberi pisau.",
+   "scene": "Jamuan: para perempuan duduk, buah dan pisau berkilau",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 3.2,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "z19",
+   "start": 57.95,
+   "end": 63.05,
+   "line": "Saat Yusuf muncul, mereka begitu terpukau hingga melukai tangan sendiri.",
+   "scene": "Yusuf muncul bercahaya, para perempuan terpukau, pisau tergelincir",
+   "set": "palace",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -8
+    },
+    {
+     "at": 2.5,
+     "name": "hit",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "z20",
+   "start": 63.05,
+   "end": 65.15,
+   "line": "Tekanan terus datang.",
+   "scene": "Tekanan: bayangan tangan menunjuk dari segala arah",
+   "set": "void",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "z21",
+   "start": 65.15,
+   "end": 70.15,
+   "line": "Yusuf pun berdoa: \"Ya Tuhanku, penjara lebih aku sukai.\"",
+   "scene": "Malam: Yusuf berdoa, cahaya dari jendela",
+   "set": "prisonPray",
+   "sfx": [
+    {
+     "at": 2.0,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "z22",
+   "start": 70.15,
+   "end": 76.15,
+   "line": "Kalau kamu di posisi Yusuf, sanggupkah kamu memilih hal yang sama? Tulis di komentar.",
+   "scene": "Ajakan komentar: Sanggupkah kamu?",
+   "set": "prompt",
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "z23",
+   "start": 76.15,
+   "end": 79.55,
+   "line": "Di penjara, Yusuf menafsirkan mimpi dua pemuda.",
+   "scene": "Penjara: Yusuf menafsirkan mimpi dua pemuda",
+   "set": "prison",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "z24",
+   "start": 79.55,
+   "end": 82.75,
+   "line": "Dan semuanya terjadi persis seperti katanya.",
+   "scene": "Pintu penjara terbuka, seorang pemuda dibebaskan ke dalam cahaya",
+   "set": "prison",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "z25",
+   "start": 82.75,
+   "end": 87.25,
+   "line": "\"Ingatlah aku di hadapan rajamu,\" pesannya kepada yang dibebaskan.",
+   "scene": "Yusuf di balik jeruji: Ingatlah aku di hadapan rajamu",
+   "set": "prison",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "z26",
+   "start": 87.25,
+   "end": 88.75,
+   "line": "Tapi orang itu lupa…",
+   "scene": "Pemuda di istana menuang minuman, lupa",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "pop",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "z27",
+   "start": 88.75,
+   "end": 92.95,
+   "line": "dan Yusuf tetap di penjara, bertahun-tahun lamanya.",
+   "scene": "Selang waktu: Yusuf di sel, coretan hari di dinding bertambah",
+   "set": "prison",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "clock",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "z28",
+   "start": 92.95,
+   "end": 96.35,
+   "line": "Sampai suatu malam, Raja Mesir bermimpi aneh:",
+   "scene": "Malam: Raja Mesir tidur gelisah, cahaya mimpi",
+   "set": "palace",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "z29",
+   "start": 96.35,
+   "end": 100.35,
+   "line": "tujuh sapi gemuk dimakan oleh tujuh sapi kurus.",
+   "scene": "Mimpi: tujuh sapi gemuk, lalu tujuh sapi kurus menyerbu",
+   "set": "dream",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -14
+    },
+    {
+     "at": 2.2,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "z30",
+   "start": 100.35,
+   "end": 105.7,
+   "line": "Menurutmu, apa artinya? Tulis tebakanmu di komentar!",
+   "scene": "Ajakan komentar: apa artinya? BERSAMBUNG KE PART 3",
+   "set": "end",
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 17.15,
+   "mood": "mystery",
+   "intensity": 0.45
+  },
+  {
+   "start": 17.15,
+   "end": 39.85,
+   "mood": "tension",
+   "intensity": 0.65
+  },
+  {
+   "start": 39.85,
+   "end": 52.15,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 52.15,
+   "end": 65.15,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 65.15,
+   "end": 92.95,
+   "mood": "sad",
+   "intensity": 0.45
+  },
+  {
+   "start": 92.95,
+   "end": 105.7,
+   "mood": "mystery",
+   "intensity": 0.6
+  }
+ ],
+ "sfx": []
+}
