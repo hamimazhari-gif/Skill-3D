@@ -423,7 +423,7 @@ def build_chain():
 def pin(code): return card_pt(code, .5, .035)
 
 def draw_strings_under(frame, t, C):
-    """Red strings between photos, drawn on the board before the cards so they tuck under them."""
+    """Red strings between photos, drawn in front of the cards (pins go on top in the overlay pass)."""
     zl = max(.4, min(1.4, C[2]*3))
     for a, b, t0 in CHAIN:
         if t < t0: continue
@@ -618,7 +618,6 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if st < t < st+.35:
             k = (1-(t-st)/.35)*14; C[0] += k*math.sin(t*90)/C[2]; C[1] += k*math.cos(t*77)/C[2]
     frame = cv2.warpAffine(bg, world_M(C, BGS), (W, H), flags=cv2.INTER_LINEAR, borderValue=(38, 38, 24)).astype(np.float32)
-    draw_strings_under(frame, t, C)
     for code in sorted(CARDS, key=lambda c: CARDS[c]['t0']):
         cd = CARDS[code]
         if t < cd['t0']: continue
@@ -635,6 +634,7 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if t > st:
             u = (t-st)/.2; sc = 1.6 - .6*backout(u, 2.2)
             blend(frame, img, card_M(dict(c=c, rot=rot), img, C, sc))
+    draw_strings_under(frame, t, C)   # strings over the photos
     frame = np.clip(frame, 0, 255).astype(np.uint8)
     frame = draw_overlays(frame, t, C)
     frame = screen_overlays(frame, t)
