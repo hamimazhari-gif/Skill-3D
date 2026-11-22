@@ -7,3 +7,4 @@ video_kaz/stills/
 video_kaz/bed.wav
 video_kaz/*.mp4
 __pycache__/
+video_kaz/narration_gap.wav
