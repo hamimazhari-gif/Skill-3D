@@ -209,7 +209,7 @@ export const Thumb = ({lang}) => {
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
       <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
-        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [0.95, 1.25, -0.55], look: [0.2, 1.55, -2.4]}} />
+        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [1.15, 1.5, 0.0], look: [0.3, 1.3, -2.4]}} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}

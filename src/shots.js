@@ -37,8 +37,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-1.45, 1.95, -2.9], look: [-1.5, 1.95, -5.8]},
     {at: 'end', pos: [-1.5, 1.95, -3.35], look: [-1.5, 1.95, -5.8]}]},
   {shot: 4, from: 'easy', loc: 'lab', move: 'two-shot', keys: [
-    {at: 'start', pos: [-1.0, 1.6, -1.3], look: [-1.55, 1.5, -4.4]},
-    {at: 'end', pos: [-0.9, 1.6, -1.6], look: [-1.5, 1.5, -4.4]}]},
+    {at: 'start', pos: [-0.75, 1.62, -0.55], look: [-1.3, 1.45, -4.4]},
+    {at: 'end', pos: [-0.7, 1.62, -0.85], look: [-1.28, 1.45, -4.4]}]},
   // 5 airport: a flight = hundreds of bananas
   {shot: 5, loc: 'airport', move: 'crane up wide', keys: [
     {at: 'start', pos: [-3.2, 1.1, 4.2], look: [0.5, 2.0, -6.0]},
@@ -61,8 +61,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [0.2, 1.2, 1.6], look: [0.2, 1.7, -1.3]},
     {at: 'end', pos: [0.0, 3.0, 4.8], look: [0.0, 4.2, -18]}]},
   {shot: 7, from: 'impossible', loc: 'mountain', move: 'close-up', keys: [
-    {at: 'start', pos: [-0.15, 1.55, 0.35], look: [-0.45, 1.5, -1.2]},
-    {at: 'end', pos: [-0.25, 1.55, 0.15], look: [-0.45, 1.5, -1.2]}]},
+    {at: 'start', pos: [-0.05, 1.5, 1.05], look: [-0.35, 1.35, -1.2]},
+    {at: 'end', pos: [-0.12, 1.5, 0.85], look: [-0.38, 1.35, -1.2]}]},
   // 8 kitchen: the body flushes extra potassium
   {shot: 8, loc: 'kitchen', move: 'push', keys: [
     {at: 'start', pos: [0.7, 1.55, -0.1], look: [0.1, 1.4, -2.4]},

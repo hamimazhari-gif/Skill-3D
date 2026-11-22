@@ -65,7 +65,7 @@ export function buildWorld(lang, T, EVt, L) {
   // ---------- kitchen (shots 1 and 8) ----------
   {
     const g = addLoc('kitchen');
-    g.add(ground(40, 40, '#8a6a4a'));
+    { const gr = ground(40, 40, '#8a6a4a'); gr.position.y = -0.05; g.add(gr); }
     g.add(P.room(7.5, 3.6, 6.5, {wall: '#f1dcb8', floor: '#c9a27a', wain: '#b0694a'}));
     // window with a morning sky
     const win = new THREE.Group(); at(win, 0.6, 0, -5.38); g.add(win);
@@ -153,7 +153,7 @@ export function buildWorld(lang, T, EVt, L) {
   // ---------- lab (shots 3, 4 and 9) ----------
   {
     const g = addLoc('lab');
-    g.add(ground(40, 40, '#4a525a'));
+    { const gr = ground(40, 40, '#4a525a'); gr.position.y = -0.05; g.add(gr); }
     g.add(P.room(9, 4, 6.8, {wall: '#dfe8e6', floor: '#b9c4c4', wain: '#5a8a96', floorPaint: {bricks: true}}));
     const ls = sign(L.lab, 1.2, 0.42, {bg: '#5a8a96', fg: '#f6ead6', frame: '#3f5f6a'}); at(ls, 2.6, 3.25, -5.7); g.add(ls);
     for (const [x, c] of [[2.0, '#e8c35a'], [3.3, '#c75b5b']]) { const fr = box(0.8, 1.0, 0.05, '#7a8a90'); at(fr, x, 1.7, -5.72); g.add(fr); const pic = box(0.66, 0.84, 0.06, c, {edges: false}); at(pic, x, 1.78, -5.71); g.add(pic); }
@@ -223,7 +223,7 @@ export function buildWorld(lang, T, EVt, L) {
   {
     const g = addLoc('airport');
     g.add(ground(90, 90, '#9a9ea2', {grain: 160}));
-    const grass = ground(90, 40, '#9dbb6a'); grass.position.set(0, 0.005, -40); g.add(grass);
+    const grass = ground(90, 40, '#9dbb6a'); grass.position.set(0, 0.02, -40); g.add(grass);
     for (let i = 0; i < 12; i++) { const m = box(1.6, 0.012, 0.18, '#f4f1ea', {edges: false, hull: 0}); at(m, -16 + i * 3, 0, -11); g.add(m); }
     for (let i = 0; i < 6; i++) { const m = box(0.14, 0.012, 1.4, '#e8c35a', {edges: false, hull: 0}); at(m, 0.2, 0, 1.5 - i * 2.2); g.add(m); }
     const term = P.facade(12, 4.2, {color: '#dfe4e8', windows: 6, door: true, seed: 7, trim: '#5a6a72', shutter: '#4f7fa6'}); at(term, -7.5, 0, -15, 0.25); g.add(term);
@@ -257,7 +257,7 @@ export function buildWorld(lang, T, EVt, L) {
   // ---------- hospital CT room (shot 6) ----------
   {
     const g = addLoc('hospital');
-    g.add(ground(40, 40, '#5a6466'));
+    { const gr = ground(40, 40, '#5a6466'); gr.position.y = -0.05; g.add(gr); }
     g.add(P.room(8, 3.8, 7, {wall: '#e4f0ee', floor: '#cfd8d6', wain: '#7fb0a8', floorPaint: {bricks: true}}));
     const cs = sign(L.ct, 1.7, 0.48, {bg: '#4f9fb0', fg: '#f6ead6', frame: '#2f6f7a'}); at(cs, 0.9, 3.0, -5.85); g.add(cs);
     const ct = P.ctScanner('CT'); at(ct, 0.9, 0, -4.0, 0.42); g.add(ct);
@@ -271,14 +271,14 @@ export function buildWorld(lang, T, EVt, L) {
     doc.act([{t: 0, pose: 'present', expr: 'neutral'}, {t: E('ct') + 0.05, pose: 'present', expr: 'smug'},
       {t: E('tens') + 0.4, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.7}]);
     // banana avalanche
-    const N = 380, r = rng(61), cx = -0.7, cz = -2.1, R = 1.7, H = 1.0;
+    const N = 560, r = rng(61), cx = -0.7, cz = -2.1, R = 1.45, H = 1.45;
     const av = P.bananaInstances(N); g.add(av.obj);
     const B = [];
     for (let i = 0; i < N; i++) {
       const a = r() * Math.PI * 2, d = Math.sqrt(r()) * R;
       const x = cx + Math.cos(a) * d, z = cz + Math.sin(a) * d * 0.8;
-      const y = H * Math.pow(1 - d / R, 1.1) + 0.05 + r() * 0.08;
-      B.push({x, y, z, y0: y + 3.5 + r() * 2.5, t0: r() * 0.55, rot: [r() * 6, r() * 6, r() * 6], spin: (r() - 0.5) * 8});
+      const y = H * Math.pow(1 - (d / R) * (d / R), 0.75) + 0.05 + r() * 0.1;
+      B.push({x, y, z, y0: y + 2.2 + r() * 1.6, t0: r() * 0.3, rot: [r() * 6, r() * 6, r() * 6], spin: (r() - 0.5) * 8});
     }
     fx(g, FX.dust([cx, 0.1, cz + 0.6], E('tens') + 0.45, {n: 10, size: 0.5, color: '#efe2a0'}), (t) => inShots(t, 6));
     fx(g, FX.dust([cx + 0.8, 0.1, cz + 0.2], E('tens') + 0.6, {n: 8, size: 0.45, color: '#efe2a0', seed: 9}), (t) => inShots(t, 6));
@@ -287,7 +287,7 @@ export function buildWorld(lang, T, EVt, L) {
       for (let i = 0; i < N; i++) {
         const b = B[i], dt = t - t0 - b.t0;
         if (dt < 0) { av.set(i, [b.x, -5, b.z], b.rot, 0.0001); continue; }
-        const y = Math.max(b.y, b.y0 - 0.5 * 14 * dt * dt);
+        const y = Math.max(b.y, b.y0 - 0.5 * 22 * dt * dt);
         const landed = y <= b.y;
         av.set(i, [b.x, y, b.z], landed ? b.rot : [b.rot[0] + dt * b.spin, b.rot[1], b.rot[2] + dt * b.spin], 1.15);
       }
