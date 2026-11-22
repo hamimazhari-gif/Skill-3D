@@ -29,3 +29,31 @@ A few hours on a plane ≈ hundreds of bananas, a CT scan ≈ tens of thousands.
 Follow for more weird facts!
 
 #weirdfacts #banana #radiation #science #education #shorts
+
+## Caption siap posting
+
+### Indonesia (TikTok / Reels / Shorts)
+**Utama:**
+Kamu makan pisang hari ini? Selamat, kamu baru saja kena radiasi 🍌☢️
+
+Pisang mengandung kalium-40 yang memancarkan radiasi secara alami. Ilmuwan bahkan pakai "dosis setara pisang" buat ngukur radiasi! Tapi tenang, butuh puluhan juta pisang sekaligus baru berbahaya 😄
+
+Kamu tim pisang tiap hari? Tulis di komentar 👇
+#faktaunik #pisang #radiasi #sains #edukasi #fyp
+
+**Pendek:**
+Pisang itu radioaktif. Serius. Tapi kamu juga 😏🍌☢️
+#faktaunik #pisang #sains #fyp
+
+### English (TikTok / Reels / Shorts)
+**Main:**
+Had a banana today? Congrats, you just got a dose of radiation 🍌☢️
+
+Bananas contain potassium-40, which naturally gives off radiation. Scientists even use the "banana equivalent dose" to explain radiation! But relax, you'd need tens of millions of bananas at once for it to be dangerous 😄
+
+Banana every day? Tell me in the comments 👇
+#weirdfacts #banana #radiation #science #learnontiktok #fyp
+
+**Short:**
+Bananas are radioactive. Seriously. But so are you 😏🍌☢️
+#weirdfacts #banana #science #fyp
