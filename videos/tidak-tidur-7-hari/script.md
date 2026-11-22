@@ -1,6 +1,8 @@
 # Tidak Tidur 7 Hari — naskah & cek
 
-Naskah: teks asli pengguna, tidak diubah. Audio: rekaman pengguna (70,2 s). Hanya versi Indonesia.
+Naskah: teks asli pengguna, tidak diubah. Audio: rekaman pengguna — Indonesia 70,2 s, Inggris 65,0 s.
+
+Versi Inggris memakai struktur shot yang sama (`narration_en.txt`); bedanya, "This is called microsleep..." jatuh di shot 4 (mobil). Batas "He hallucinated... / So..." di timing Inggris dikoreksi manual (jeda 55,4–56,1 s).
 
 ## Tabel shot
 | Shot | Waktu | Lokasi | Kalimat |
@@ -30,6 +32,6 @@ Naskah: teks asli pengguna, tidak diubah. Audio: rekaman pengguna (70,2 s). Hany
 - 7–9 jam per malam untuk dewasa — rekomendasi umum (AASM/CDC: minimal 7 jam).
 
 ## Kata yang perlu diperhatikan
-- "pemain sepak bola terkenal": Randy mengira dirinya **Paul Lowe**, pemain *American football* (San Diego Chargers), bukan sepak bola. Di video ditampilkan sebagai stadion American football agar faktanya tetap benar.
+- "pemain sepak bola terkenal" / "famous football player": Randy mengira dirinya **Paul Lowe**, pemain *American football* (San Diego Chargers), bukan sepak bola. Di video ditampilkan sebagai stadion American football agar faktanya tetap benar.
 - "seperti orang yang sedang mabuk": perbandingan dari CDC/NIOSH; bukan konversi pasti.
 - "Hari kelima sampai ketujuh": Randy tidak tidur 11 hari dan pulih normal — urutan gejala per hari adalah gambaran umum, bukan jadwal pasti.
