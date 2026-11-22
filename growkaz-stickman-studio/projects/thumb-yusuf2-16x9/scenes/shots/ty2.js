@@ -1,0 +1,1 @@
+../../../thumb-yusuf-shared/ty2.js
