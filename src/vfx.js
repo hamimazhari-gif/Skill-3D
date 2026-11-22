@@ -144,3 +144,71 @@ export function flame(p, o = {}) {
   }
   return {obj: g, update(t) { for (const q of fl) { const k = 1 + 0.15 * Math.sin(t * 13 + q.ph); q.m.scale.set(size * q.s * k, size * q.s * 1.5 * k, 1); } }};
 }
+
+// Falling particles over an area (rain streaks, snow, ash, petals). area: [cx, cz, w, d], top height h.
+export function fall(area, o = {}) {
+  const {n = 400, h = 8, speed = 9, color = '#cfe3ff', size = 0.05, drift = 0.2, seed = 11, from = -1e9, to = 1e9, sway = 0} = o;
+  const r = rng(seed); const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(n * 3); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const P = []; for (let i = 0; i < n; i++) P.push([area[0] + (r() - 0.5) * area[2], r() * h, area[1] + (r() - 0.5) * area[3], r() * 6]);
+  const mat = new THREE.PointsMaterial({color, size, map: softTex(), transparent: true, depthWrite: false, opacity: 0.85});
+  const pts = new THREE.Points(geo, mat); pts.frustumCulled = false;
+  return {obj: pts, update(t) {
+    pts.visible = t >= from && t <= to;
+    for (let i = 0; i < n; i++) {
+      const [x, y0, z, ph] = P[i];
+      const y = ((y0 - t * speed) % h + h) % h;
+      pos[i * 3] = x + Math.sin(t * 1.3 + ph) * sway + drift * t % 1; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+    }
+    geo.attributes.position.needsUpdate = true;
+  }};
+}
+// Rain: falling streaks (instanced thin boxes, slightly slanted), so it reads as rain, not dots.
+export function rain(area, o = {}) {
+  const {n = 900, h = 8, speed = 12, color = '#9dbfe0', len = 0.35, width = 0.012, slant = 0.12, seed = 11, from = -1e9, to = 1e9, opacity = 0.6} = o;
+  const r = rng(seed);
+  const mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(width, len, width), new THREE.MeshBasicMaterial({color, transparent: true, opacity, depthWrite: false}), n);
+  mesh.frustumCulled = false;
+  const P = []; for (let i = 0; i < n; i++) P.push([area[0] + (r() - 0.5) * area[2], r() * h, area[1] + (r() - 0.5) * area[3]]);
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, slant)), sc = new THREE.Vector3(1, 1, 1), v = new THREE.Vector3();
+  return {obj: mesh, update(t) {
+    mesh.visible = t >= from && t <= to;
+    for (let i = 0; i < n; i++) {
+      const y = ((P[i][1] - t * speed) % h + h) % h;
+      v.set(P[i][0] - y * slant, y, P[i][2]); m4.compose(v, q, sc); mesh.setMatrixAt(i, m4);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+  }};
+}
+export const snow = (area, o = {}) => fall(area, {n: 350, speed: 0.9, color: '#ffffff', size: 0.09, sway: 0.25, ...o});
+
+// Confetti burst (celebrations, wins): coloured paper flakes that flutter down.
+export function confetti(p, t0, o = {}) {
+  const {n = 90, seed = 13, life = 2.6, colors = ['#e8a83a', '#c75b5b', '#5a9a8a', '#4f7fa6', '#9a6fb0', '#f3e7d3']} = o;
+  const r = rng(seed); const g = new THREE.Group(); const parts = [];
+  for (let i = 0; i < n; i++) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.06, 0.035), new THREE.MeshBasicMaterial({color: colors[i % colors.length], side: THREE.DoubleSide}));
+    g.add(m); const a = r() * 6.28;
+    parts.push({m, v: [Math.cos(a) * (0.5 + r() * 1.8), 3 + r() * 2.5, Math.sin(a) * (0.5 + r() * 1.8)], w: [r() * 12, r() * 12, r() * 12], ph: r() * 6});
+  }
+  return {obj: g, update(t) {
+    const dt = t - t0; g.visible = dt > 0 && dt < life;
+    for (const q of parts) {
+      const k = Math.max(0, dt), vy = q.v[1] - 9.8 * k;
+      const fallK = vy < -1.2 ? (k - (q.v[1] + 1.2) / 9.8) : 0; // terminal flutter speed
+      const y = fallK > 0 ? p[1] + (q.v[1] ** 2 - 1.44) / 19.6 - 1.2 * fallK : p[1] + q.v[1] * k - 4.9 * k * k;
+      q.m.position.set(p[0] + q.v[0] * Math.min(k, 0.6) + Math.sin(k * 4 + q.ph) * 0.1, Math.max(0.02, y), p[2] + q.v[2] * Math.min(k, 0.6));
+      q.m.rotation.set(q.w[0] * k, q.w[1] * k, q.w[2] * k);
+    }
+  }};
+}
+
+// Water splash (something drops in water, a boat lands, a wave hits).
+export function splash(p, t0, o = {}) {
+  return sparks(p, t0, {n: 70, speed: 2.0, life: 1.0, color: '#d6f0ff', size: 0.08, spread: 0.7, up: 1.6, seed: 17, ...o});
+}
+
+// Magic / idea glints (a discovery, a "lightbulb" moment): small twinkles around a point.
+export function glints(p, t0, o = {}) {
+  return sparks(p, t0, {n: 24, speed: 0.6, life: 1.2, color: '#fff3b0', size: 0.12, spread: 1, up: 0.4, seed: 19, ...o});
+}

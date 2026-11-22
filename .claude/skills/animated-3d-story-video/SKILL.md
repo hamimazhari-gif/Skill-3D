@@ -54,7 +54,7 @@ Do everything without stopping; ask nothing unless an input is missing.
 2. **Shots.** Split the narration into 9-12 shots by sentence (one location per shot), following the beats in the rulebook where the text allows (But / Then / complaint / "You see" pivot / "So" consequence / closing). Never rewrite the user's narration; only note rule misses in `script.md`. Write `videos/<slug>/narration_<lang>.txt` as `shot | sentence` lines; write numbers as spoken words.
 3. **Facts.** Search the web to check each factual claim; list doubtful ones in `script.md` ("wording to watch") and tell the user at the end. Do not change the audio.
 4. **Timing.** `python3 -I tools/align.py public/vo/voiceover_<lang>.wav videos/<slug>/narration_<lang>.txt src/data/sentence_times_<lang>.json` for every language. Check that each sentence length is close to its prediction; if the tool says there are too few pauses, lower the threshold in `gaps.py` (-44 dB / 0.12 s by default) or merge sentences.
-5. **Design** (write `camera_plan.md`): locations (x offsets 0, 40, 80, …), cast (palettes in `char.js`; add palettes, never new body shapes), in-world labels per language (`LABELS`), the word events (`EV`: `[sentenceIndex, word]` per language), acting cues per character, on-word props (pop-ins, doodles, coins…), SFX cue sheet.
+5. **Design** (write `camera_plan.md`, including the VFX plan): locations (x offsets 0, 40, 80, …), cast (palettes in `char.js`; add palettes, never new body shapes), in-world labels per language (`LABELS`), the word events (`EV`: `[sentenceIndex, word]` per language), acting cues per character, on-word props (pop-ins, doodles, coins…), SFX cue sheet.
 6. **Build** the story files (`world.js`, `SHOT_PLAN` in `shots.js`, `EV`/`LABELS` in `timing.js`, `cues()`/`DIPS`/thumbnail in `Video.jsx`, compositions in `index.jsx`). Reuse kit/props; build new props in `props.js` with the same helpers.
 7. **Check stills** (stage F) for every language, fix, repeat until clean.
 8. **Render** every language (`tools/render.sh CompA CompB`, run in the background; about 1 s per frame on 4 cores, so a 60 s video takes about 30 min), check with ffprobe and a contact sheet of one frame per shot.
@@ -115,7 +115,25 @@ Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — exp
 - Tie on-screen events to words (labels and props pop on their noun, doodles draw on their word, ticks appear on the payoff word). A word at the very end of a sentence leaves little screen time: start the event earlier or extend the key.
 
 ## VFX (`vfx.js`) and screen effects
-- `FX.sparks(pos, t0, {n, speed, repeat})`, `FX.smoke(pos, t0, {every})`, `FX.dust(pos, t0)`, `FX.debris(pos, t0)`, `FX.lightning(a, b, t0, {dur})`, `FX.flame(pos)`, `FX.fireLight(pos)`: add `obj` to the location group and push `update` to `updaters`.
+**Effects come from the story, never from a fixed list.** Before building, write a "VFX plan" table in `camera_plan.md`: beat (word) → what physically happens in the story → effect. Every effect must be motivated by something in the narration or on screen; a story with no fire gets no sparks, a calm story gets few effects. Match weather, era and place (rain for a storm, snow for winter, dust for deserts and roads, embers for battles, splashes for rivers and ports, confetti only for celebrations).
+
+| Story event | Effect |
+|---|---|
+| explosion, cannon, bomb, gunpowder | flame + sparks + debris + smoke, white/orange flash 0.4 s, shake 0.04-0.05 |
+| hammer, strike, minting, forging | sparks + dust, short warm flash, shake 0.03 |
+| fire, torch, campfire, furnace | `flame` + `fireLight` + slow `smoke` (every 0.35 s) |
+| storm, thunder, magic power | `lightning` + white flash + shake, `rain` |
+| rain / winter / ash / petals | `rain` / `snow` / `fall` with a fitting colour |
+| fall, landing, stomp, run on dirt | `dust` at the feet |
+| collapse, crash, breaking | `debris` + dust + shake |
+| water: drop, boat, wave | `splash` |
+| idea, discovery, treasure, sparkle | `glints` |
+| celebration, win, crowd cheer | `confetti` (+ chime SFX) |
+| money, gold appearing | `glints` + small warm flash |
+Pair each visual effect with a matching SFX from `public/sfx/` and keep it to the beat (no effect running through dialogue unless it is ambient: fire, rain, snow, smoke).
+
+Available primitives (all frame-driven and seeded; add `obj` to the location group and push `update` to `updaters`; write new ones in the same style when the story needs something else, such as bubbles, feathers, coins raining or steam):
+- `FX.sparks(pos, t0, {n, speed, repeat})`, `FX.smoke(pos, t0, {every})`, `FX.dust(pos, t0)`, `FX.debris(pos, t0)`, `FX.lightning(a, b, t0, {dur})`, `FX.flame(pos)`, `FX.fireLight(pos)`, `FX.rain(area)`, `FX.snow(area)`, `FX.fall(area, {color})`, `FX.confetti(pos, t0)`, `FX.splash(pos, t0)`, `FX.glints(pos, t0)`.
 - `storyFx(T, EVt)` in `world.js` returns `{flashes: [{t, dur, color, strength}], shakes: [{t, dur, amp}]}`; time them to the impact words. Shake amp 0.02-0.05, flash 0.25-0.5 s.
 - Add dust when a character lands from a jump and sparks/dust/shake on every hit.
 

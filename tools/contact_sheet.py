@@ -1,6 +1,9 @@
 import sys,subprocess,os
 out=sys.argv[1]; fs=[f for f in sys.argv[2:] if os.path.exists(f)]
-cols=min(4,len(fs)); 
+cols=min(4,len(fs))
+if len(fs)==1:
+  import shutil; shutil.copy(fs[0],out); print(out); sys.exit(0)
+
 # use ffmpeg tile with labels
 inputs=[];filt=[]
 for i,f in enumerate(fs):
