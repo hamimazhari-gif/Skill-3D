@@ -1,0 +1,600 @@
+{
+ "source": "silence-align",
+ "words": [
+  {
+   "word": "Part",
+   "start": 0.298,
+   "end": 0.567
+  },
+  {
+   "word": "tiga.",
+   "start": 0.587,
+   "end": 0.856
+  },
+  {
+   "word": "Subuh",
+   "start": 1.473,
+   "end": 1.87
+  },
+  {
+   "word": "Terakhir",
+   "start": 1.89,
+   "end": 2.48
+  },
+  {
+   "word": "Negeri",
+   "start": 2.5,
+   "end": 2.961
+  },
+  {
+   "word": "Sodom.",
+   "start": 2.981,
+   "end": 3.378
+  },
+  {
+   "word": "Malaikat",
+   "start": 4.236,
+   "end": 5.266
+  },
+  {
+   "word": "memberi",
+   "start": 5.286,
+   "end": 5.746
+  },
+  {
+   "word": "perintah",
+   "start": 5.766,
+   "end": 6.283
+  },
+  {
+   "word": "yang",
+   "start": 6.303,
+   "end": 6.594
+  },
+  {
+   "word": "tegas:",
+   "start": 6.614,
+   "end": 6.962
+  },
+  {
+   "word": "\"Pergilah",
+   "start": 7.573,
+   "end": 8.107
+  },
+  {
+   "word": "di",
+   "start": 8.127,
+   "end": 8.31
+  },
+  {
+   "word": "akhir",
+   "start": 8.33,
+   "end": 8.689
+  },
+  {
+   "word": "malam",
+   "start": 8.709,
+   "end": 9.068
+  },
+  {
+   "word": "bersama",
+   "start": 9.088,
+   "end": 9.563
+  },
+  {
+   "word": "keluargamu.",
+   "start": 9.583,
+   "end": 10.232
+  },
+  {
+   "word": "Jangan",
+   "start": 10.501,
+   "end": 10.881
+  },
+  {
+   "word": "ada",
+   "start": 10.901,
+   "end": 11.12
+  },
+  {
+   "word": "yang",
+   "start": 11.14,
+   "end": 11.413
+  },
+  {
+   "word": "menoleh",
+   "start": 11.433,
+   "end": 11.865
+  },
+  {
+   "word": "ke",
+   "start": 11.885,
+   "end": 12.052
+  },
+  {
+   "word": "belakang…",
+   "start": 12.072,
+   "end": 12.558
+  },
+  {
+   "word": "kecuali",
+   "start": 13.22,
+   "end": 13.704
+  },
+  {
+   "word": "istrimu.\"",
+   "start": 13.724,
+   "end": 14.208
+  },
+  {
+   "word": "\"Azab",
+   "start": 15.346,
+   "end": 15.644
+  },
+  {
+   "word": "mereka",
+   "start": 15.664,
+   "end": 16.079
+  },
+  {
+   "word": "datang",
+   "start": 16.099,
+   "end": 16.513
+  },
+  {
+   "word": "saat",
+   "start": 16.533,
+   "end": 16.831
+  },
+  {
+   "word": "subuh.",
+   "start": 16.851,
+   "end": 17.208
+  },
+  {
+   "word": "Bukankah",
+   "start": 17.798,
+   "end": 18.193
+  },
+  {
+   "word": "subuh",
+   "start": 18.213,
+   "end": 18.476
+  },
+  {
+   "word": "itu",
+   "start": 18.496,
+   "end": 18.673
+  },
+  {
+   "word": "sudah",
+   "start": 18.693,
+   "end": 18.956
+  },
+  {
+   "word": "dekat?\"",
+   "start": 18.976,
+   "end": 19.24
+  },
+  {
+   "word": "Malam",
+   "start": 20.846,
+   "end": 21.154
+  },
+  {
+   "word": "itu",
+   "start": 21.174,
+   "end": 21.381
+  },
+  {
+   "word": "sunyi.",
+   "start": 21.401,
+   "end": 21.71
+  },
+  {
+   "word": "Nabi",
+   "start": 22.396,
+   "end": 22.662
+  },
+  {
+   "word": "Luth",
+   "start": 22.682,
+   "end": 22.948
+  },
+  {
+   "word": "dan",
+   "start": 22.968,
+   "end": 23.182
+  },
+  {
+   "word": "orang-orang",
+   "start": 23.202,
+   "end": 23.78
+  },
+  {
+   "word": "beriman",
+   "start": 23.8,
+   "end": 24.222
+  },
+  {
+   "word": "melangkah",
+   "start": 24.242,
+   "end": 24.768
+  },
+  {
+   "word": "pergi.",
+   "start": 24.788,
+   "end": 25.107
+  },
+  {
+   "word": "Tanpa",
+   "start": 25.797,
+   "end": 26.188
+  },
+  {
+   "word": "menoleh.",
+   "start": 26.208,
+   "end": 26.724
+  },
+  {
+   "word": "Tanpa",
+   "start": 27.129,
+   "end": 27.519
+  },
+  {
+   "word": "ragu.",
+   "start": 27.539,
+   "end": 27.867
+  },
+  {
+   "word": "Lalu",
+   "start": 28.898,
+   "end": 29.242
+  },
+  {
+   "word": "fajar",
+   "start": 29.262,
+   "end": 30.215
+  },
+  {
+   "word": "menyingsing…",
+   "start": 30.235,
+   "end": 31.043
+  },
+  {
+   "word": "Terdengar",
+   "start": 32.137,
+   "end": 32.627
+  },
+  {
+   "word": "suara",
+   "start": 32.647,
+   "end": 32.942
+  },
+  {
+   "word": "yang",
+   "start": 32.962,
+   "end": 33.209
+  },
+  {
+   "word": "menggelegar!",
+   "start": 33.229,
+   "end": 33.816
+  },
+  {
+   "word": "Bumi",
+   "start": 34.395,
+   "end": 34.688
+  },
+  {
+   "word": "Sodom",
+   "start": 34.708,
+   "end": 35.058
+  },
+  {
+   "word": "terangkat",
+   "start": 35.078,
+   "end": 35.656
+  },
+  {
+   "word": "ke",
+   "start": 35.676,
+   "end": 35.855
+  },
+  {
+   "word": "langit…",
+   "start": 35.875,
+   "end": 36.282
+  },
+  {
+   "word": "lalu",
+   "start": 36.828,
+   "end": 37.122
+  },
+  {
+   "word": "dijungkirbalikkan.",
+   "start": 37.142,
+   "end": 38.178
+  },
+  {
+   "word": "Yang",
+   "start": 39.032,
+   "end": 39.296
+  },
+  {
+   "word": "di",
+   "start": 39.316,
+   "end": 39.477
+  },
+  {
+   "word": "atas…",
+   "start": 39.497,
+   "end": 39.76
+  },
+  {
+   "word": "menjadi",
+   "start": 40.293,
+   "end": 40.61
+  },
+  {
+   "word": "di",
+   "start": 40.63,
+   "end": 40.748
+  },
+  {
+   "word": "bawah.",
+   "start": 40.768,
+   "end": 41.006
+  },
+  {
+   "word": "Belum",
+   "start": 42.227,
+   "end": 42.488
+  },
+  {
+   "word": "berhenti.",
+   "start": 42.508,
+   "end": 42.898
+  },
+  {
+   "word": "Hujan",
+   "start": 43.386,
+   "end": 43.77
+  },
+  {
+   "word": "batu",
+   "start": 43.79,
+   "end": 44.111
+  },
+  {
+   "word": "dari",
+   "start": 44.131,
+   "end": 44.453
+  },
+  {
+   "word": "tanah",
+   "start": 44.473,
+   "end": 44.857
+  },
+  {
+   "word": "yang",
+   "start": 44.877,
+   "end": 45.198
+  },
+  {
+   "word": "terbakar",
+   "start": 45.218,
+   "end": 45.788
+  },
+  {
+   "word": "turun",
+   "start": 45.808,
+   "end": 46.192
+  },
+  {
+   "word": "bertubi-tubi.",
+   "start": 46.212,
+   "end": 46.968
+  },
+  {
+   "word": "Tak",
+   "start": 47.799,
+   "end": 47.954
+  },
+  {
+   "word": "ada",
+   "start": 47.974,
+   "end": 48.13
+  },
+  {
+   "word": "yang",
+   "start": 48.15,
+   "end": 48.345
+  },
+  {
+   "word": "tersisa.",
+   "start": 48.365,
+   "end": 48.676
+  },
+  {
+   "word": "Termasuk…",
+   "start": 49.539,
+   "end": 49.935
+  },
+  {
+   "word": "istri",
+   "start": 50.496,
+   "end": 50.84
+  },
+  {
+   "word": "Nabi",
+   "start": 50.86,
+   "end": 51.148
+  },
+  {
+   "word": "Luth.",
+   "start": 51.168,
+   "end": 51.456
+  },
+  {
+   "word": "Negeri",
+   "start": 52.23,
+   "end": 53.169
+  },
+  {
+   "word": "yang",
+   "start": 53.189,
+   "end": 53.479
+  },
+  {
+   "word": "dulu",
+   "start": 53.499,
+   "end": 53.788
+  },
+  {
+   "word": "sombong",
+   "start": 53.808,
+   "end": 54.266
+  },
+  {
+   "word": "itu…",
+   "start": 54.286,
+   "end": 54.519
+  },
+  {
+   "word": "kini",
+   "start": 54.922,
+   "end": 55.189
+  },
+  {
+   "word": "hanya",
+   "start": 55.209,
+   "end": 55.528
+  },
+  {
+   "word": "tinggal",
+   "start": 55.548,
+   "end": 55.971
+  },
+  {
+   "word": "pelajaran.",
+   "start": 55.991,
+   "end": 56.519
+  },
+  {
+   "word": "Hikmahnya:",
+   "start": 57.329,
+   "end": 57.891
+  },
+  {
+   "word": "Menjadi",
+   "start": 58.678,
+   "end": 59.087
+  },
+  {
+   "word": "istri",
+   "start": 59.107,
+   "end": 59.416
+  },
+  {
+   "word": "seorang",
+   "start": 59.436,
+   "end": 59.845
+  },
+  {
+   "word": "nabi",
+   "start": 59.865,
+   "end": 60.123
+  },
+  {
+   "word": "pun",
+   "start": 60.143,
+   "end": 60.351
+  },
+  {
+   "word": "tidak",
+   "start": 60.371,
+   "end": 60.679
+  },
+  {
+   "word": "menyelamatkan…",
+   "start": 60.699,
+   "end": 61.412
+  },
+  {
+   "word": "tanpa",
+   "start": 61.963,
+   "end": 62.238
+  },
+  {
+   "word": "iman.",
+   "start": 62.258,
+   "end": 62.487
+  },
+  {
+   "word": "Dan",
+   "start": 63.434,
+   "end": 63.646
+  },
+  {
+   "word": "dosa",
+   "start": 63.666,
+   "end": 63.93
+  },
+  {
+   "word": "yang",
+   "start": 63.95,
+   "end": 64.213
+  },
+  {
+   "word": "dibanggakan…",
+   "start": 64.233,
+   "end": 64.857
+  },
+  {
+   "word": "hanya",
+   "start": 65.539,
+   "end": 65.916
+  },
+  {
+   "word": "menunggu",
+   "start": 65.936,
+   "end": 66.497
+  },
+  {
+   "word": "waktu.",
+   "start": 66.517,
+   "end": 66.894
+  },
+  {
+   "word": "Ikuti",
+   "start": 67.921,
+   "end": 68.222
+  },
+  {
+   "word": "terus",
+   "start": 68.242,
+   "end": 68.543
+  },
+  {
+   "word": "kisah",
+   "start": 68.563,
+   "end": 68.865
+  },
+  {
+   "word": "para",
+   "start": 68.885,
+   "end": 69.137
+  },
+  {
+   "word": "nabi",
+   "start": 69.157,
+   "end": 69.409
+  },
+  {
+   "word": "selanjutnya!",
+   "start": 69.429,
+   "end": 70.027
+  }
+ ]
+}

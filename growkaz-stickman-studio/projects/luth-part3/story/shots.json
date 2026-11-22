@@ -1,0 +1,441 @@
+{
+ "title": "Kisah Nabi Luth - Part 3",
+ "duration": 71.9,
+ "shots": [
+  {
+   "id": "n01",
+   "start": 0.0,
+   "end": 4.05,
+   "line": "Part tiga. Subuh Terakhir Negeri Sodom.",
+   "scene": "n01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "n02",
+   "start": 4.05,
+   "end": 10.35,
+   "line": "Malaikat memberi perintah yang tegas: \"Pergilah di akhir malam bersama keluargamu.",
+   "scene": "n02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "n03",
+   "start": 10.35,
+   "end": 13.05,
+   "line": "Jangan ada yang menoleh ke belakang…",
+   "scene": "n03",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 0.7,
+     "name": "hit",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "n04",
+   "start": 13.05,
+   "end": 15.2,
+   "line": "kecuali istrimu.\"",
+   "scene": "n04",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "n05",
+   "start": 15.2,
+   "end": 20.7,
+   "line": "\"Azab mereka datang saat subuh. Bukankah subuh itu sudah dekat?\"",
+   "scene": "n05",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "n06",
+   "start": 20.7,
+   "end": 22.25,
+   "line": "Malam itu sunyi.",
+   "scene": "n06",
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "n07",
+   "start": 22.25,
+   "end": 25.65,
+   "line": "Nabi Luth dan orang-orang beriman melangkah pergi.",
+   "scene": "n07",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.0,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.6,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "n08",
+   "start": 25.65,
+   "end": 28.75,
+   "line": "Tanpa menoleh. Tanpa ragu.",
+   "scene": "n08",
+   "bars": "scope"
+  },
+  {
+   "id": "n09",
+   "start": 28.75,
+   "end": 31.95,
+   "line": "Lalu fajar menyingsing…",
+   "scene": "n09",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "n10",
+   "start": 31.95,
+   "end": 34.25,
+   "line": "Terdengar suara yang menggelegar!",
+   "scene": "n10",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "thunder",
+     "gain": -3
+    },
+    {
+     "at": 1.2,
+     "name": "impact",
+     "gain": -3
+    }
+   ]
+  },
+  {
+   "id": "n11",
+   "start": 34.25,
+   "end": 36.65,
+   "line": "Bumi Sodom terangkat ke langit…",
+   "scene": "n11",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "riser",
+     "gain": -6
+    },
+    {
+     "at": 0.3,
+     "name": "wind",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "n12",
+   "start": 36.65,
+   "end": 38.85,
+   "line": "lalu dijungkirbalikkan.",
+   "scene": "n12",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -6
+    },
+    {
+     "at": 2.0,
+     "name": "impact",
+     "gain": -2
+    }
+   ]
+  },
+  {
+   "id": "n13",
+   "start": 38.85,
+   "end": 42.05,
+   "line": "Yang di atas… menjadi di bawah.",
+   "scene": "n13",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "n14",
+   "start": 42.05,
+   "end": 47.65,
+   "line": "Belum berhenti. Hujan batu dari tanah yang terbakar turun bertubi-tubi.",
+   "scene": "n14",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 1.2,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 2.1,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 3.0,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 3.9,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 1.5,
+     "name": "thunder",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "n15",
+   "start": 47.65,
+   "end": 49.35,
+   "line": "Tak ada yang tersisa.",
+   "scene": "n15",
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "n16",
+   "start": 49.35,
+   "end": 52.05,
+   "line": "Termasuk… istri Nabi Luth.",
+   "scene": "n16",
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "slowmo",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "n17",
+   "start": 52.05,
+   "end": 57.15,
+   "line": "Negeri yang dulu sombong itu… kini hanya tinggal pelajaran.",
+   "scene": "n17",
+   "in": {
+    "type": "dip",
+    "dur": 0.6
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "n18",
+   "start": 57.15,
+   "end": 63.25,
+   "line": "Hikmahnya: Menjadi istri seorang nabi pun tidak menyelamatkan… tanpa iman.",
+   "scene": "n18",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -10
+    },
+    {
+     "at": 4.9,
+     "name": "stinger",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "n19",
+   "start": 63.25,
+   "end": 67.75,
+   "line": "Dan dosa yang dibanggakan… hanya menunggu waktu.",
+   "scene": "n19",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "n20",
+   "start": 67.75,
+   "end": 71.9,
+   "line": "Ikuti terus kisah para nabi selanjutnya!",
+   "scene": "n20",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 20.7,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 20.7,
+   "end": 31.95,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 31.95,
+   "end": 49.35,
+   "mood": "epic",
+   "intensity": 0.9
+  },
+  {
+   "start": 49.35,
+   "end": 57.15,
+   "mood": "sad",
+   "intensity": 0.45
+  },
+  {
+   "start": 57.15,
+   "end": 67.75,
+   "mood": "calm",
+   "intensity": 0.4
+  },
+  {
+   "start": 67.75,
+   "end": 71.9,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ],
+ "sfx": []
+}
