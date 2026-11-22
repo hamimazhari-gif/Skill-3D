@@ -20,7 +20,7 @@ Naskah alternatif yang lebih panjang ada di `alternatif_*` (tidak dipakai).
 ## Cek rulebook (dicatat saja, narasi tidak diubah)
 - Hook di detik 0, premis di kalimat pertama ✔ (8 kata, aturan 5-23)
 - 10 shot ✔
-- Panjang: ID ~95 kata ≈ 35 dtk, EN ~110 kata ≈ 33 dtk — di bawah minimum 39 dtk; durasi final tergantung tempo rekaman ⚠
+- Panjang: ID 108 kata ≈ 40 dtk, EN 133 kata ≈ 40 dtk ✔ (batas bawah 39 dtk; durasi final tergantung tempo rekaman)
 - Tidak ada beat "Tapi" / "Lalu" / keluhan / "Kamu lihat" ⚠ (gaya fakta-cepat; dibantu akting & kamera)
 - "Jadi" ≈ 60% durasi (aturan 80-93%) ⚠
 - Penutup ajakan follow ✔
