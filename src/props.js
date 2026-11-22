@@ -610,3 +610,150 @@ export function flask(color = '#7ad66a', h = 0.3) {
   const liq = cyl(0.105, 0.115, 0.1, toon(color, {wear: false, emissive: color, emissiveIntensity: 0.25}), {hull: 0}); at(liq, 0, 0.005, 0); g.add(liq);
   return g;
 }
+
+// ---------- "7 hari tanpa tidur" props ----------
+// Bed (foot toward +z). The sleeper stands inside it at local (0, -0.35, -0.55) so the blanket hides the legs.
+export function bed(o = {}) {
+  const g = new THREE.Group(); const c = o.color || '#8a5a3a', sheet = o.sheet || '#7fa6c9';
+  const frame = box(1.3, 0.38, 2.1, toon(c, {paint: {planks: 3, seed: 81}})); at(frame, 0, 0, 0); g.add(frame);
+  const mat = box(1.2, 0.16, 2.0, '#f3ece0'); at(mat, 0, 0.38, 0); g.add(mat);
+  const head = box(1.4, 1.15, 0.1, toon(c, {paint: {planks: 4, seed: 82}})); at(head, 0, 0, -1.05); g.add(head);
+  const foot = box(1.4, 0.6, 0.08, toon(c, {paint: {planks: 3, seed: 83}})); at(foot, 0, 0, 1.05); g.add(foot);
+  const pil = ball(0.28, '#f6f1e6', {sx: 1.6, sy: 0.45, sz: 0.8}); at(pil, 0, 0.62, -0.82); g.add(pil);
+  const blanket = box(1.26, 0.3, 1.45, toon(sheet, {paint: {seed: 84, stains: 4}})); at(blanket, 0, 0.5, 0.25); g.add(blanket);
+  const fold = box(1.28, 0.08, 0.3, '#f3ece0'); at(fold, 0, 0.78, -0.4); g.add(fold);
+  return g;
+}
+
+// Wall clock with moving hands: returns {group, set(hours, minutes)}.
+export function wallClock(r = 0.32, o = {}) {
+  const g = new THREE.Group();
+  const rim = cyl(r, r, 0.08, o.rim || '#c75b5b', {center: true, hull: 0.012}); rim.rotation.x = Math.PI / 2; g.add(rim);
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.fillStyle = '#fbf6ea'; x.beginPath(); x.arc(128, 128, 124, 0, 7); x.fill();
+  x.fillStyle = INK; for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; x.save(); x.translate(128 + Math.sin(a) * 100, 128 - Math.cos(a) * 100); x.rotate(a); x.fillRect(-5, -14, 10, i % 3 ? 16 : 28); x.restore(); }
+  const face = new THREE.Mesh(new THREE.CircleGeometry(r * 0.9, 32), new THREE.MeshBasicMaterial({map: texFrom(c)})); face.position.z = 0.045; g.add(face);
+  const mk = (len, w) => { const p = new THREE.Group(); const m = new THREE.Mesh(new THREE.PlaneGeometry(w, len), new THREE.MeshBasicMaterial({color: INK})); m.position.y = len / 2 - 0.02; p.add(m); p.position.z = 0.05; g.add(p); return p; };
+  const hh = mk(r * 0.5, 0.035), mh = mk(r * 0.78, 0.022);
+  const dot = new THREE.Mesh(new THREE.CircleGeometry(0.03, 12), new THREE.MeshBasicMaterial({color: INK})); dot.position.z = 0.055; g.add(dot);
+  return {group: g, set(h, m) { mh.rotation.z = -m / 60 * Math.PI * 2; hh.rotation.z = -((h % 12) + m / 60) / 12 * Math.PI * 2; }};
+}
+
+export function desk(o = {}) {
+  const g = new THREE.Group();
+  const top = box(1.8, 0.06, 0.85, toon(o.color || '#c9a27a', {paint: {planks: 4, seed: 85}})); at(top, 0, 0.74, 0); g.add(top);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const l = box(0.06, 0.74, 0.06, '#5a4a42'); at(l, sx * 0.84, 0, sz * 0.36); g.add(l); }
+  const dr = box(0.5, 0.45, 0.75, toon('#b08454', {paint: {seed: 86}})); at(dr, 0.6, 0.29, 0); g.add(dr);
+  return g;
+}
+
+export function monitor(screen = '#8fd0e0') {
+  const g = new THREE.Group();
+  const st = box(0.06, 0.25, 0.06, '#3a3a40'); g.add(st);
+  const ft = box(0.28, 0.02, 0.18, '#3a3a40'); g.add(ft);
+  const sc = box(0.62, 0.4, 0.04, '#2b2b33'); at(sc, 0, 0.22, 0); g.add(sc);
+  const c = canvas(256, 160), x = c.getContext('2d');
+  x.fillStyle = screen; x.fillRect(0, 0, 256, 160); x.fillStyle = 'rgba(53,31,34,0.35)';
+  for (let i = 0; i < 6; i++) x.fillRect(20, 20 + i * 22, 80 + ((i * 53) % 130), 9);
+  const s = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.34), new THREE.MeshBasicMaterial({map: texFrom(c)})); s.position.set(0, 0.42, 0.022); g.add(s);
+  return g;
+}
+
+export function mug(color = '#f3e7d3') {
+  const g = new THREE.Group();
+  g.add(cyl(0.055, 0.05, 0.12, color, {hull: 0.008}));
+  const h = new THREE.Mesh(new THREE.TorusGeometry(0.035, 0.01, 6, 12), toon(color)); h.position.set(0.06, 0.06, 0); g.add(h);
+  return g;
+}
+
+// Small open-top car facing +z. The driver stands at local (0.28, -0.25, -0.15).
+export function car(color = '#c75b5b') {
+  const g = new THREE.Group();
+  const body = box(1.7, 0.55, 3.6, toon(color, {paint: {seed: 87, stains: 6, chips: 6}})); at(body, 0, 0.28, 0); g.add(body);
+  const hood = box(1.66, 0.14, 1.2, toon(color, {paint: {seed: 88}})); at(hood, 0, 0.83, 1.15); g.add(hood);
+  const trunk = box(1.66, 0.14, 0.9, toon(color, {paint: {seed: 89}})); at(trunk, 0, 0.83, -1.35); g.add(trunk);
+  for (const s of [-1, 1]) { const side = box(0.1, 0.2, 1.4, toon(color)); at(side, s * 0.8, 0.83, -0.2); g.add(side); }
+  const seat = box(1.4, 0.55, 0.25, '#5a3a2a'); at(seat, 0, 0.6, -0.75); g.add(seat);
+  const ws = box(1.6, 0.4, 0.04, new THREE.MeshBasicMaterial({color: '#cfe8f6', transparent: true, opacity: 0.22, depthWrite: false}), {hull: 0, edges: true}); at(ws, 0, 0.97, 0.5, 0, -0.35); g.add(ws);
+  const wheel = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 8, 20), toon('#2b2b33')); wheel.position.set(0.28, 1.08, 0.28); wheel.rotation.x = -0.5; g.add(wheel);
+  const wheels = [];
+  for (const sx of [-1, 1]) for (const sz of [-1.15, 1.15]) {
+    const w = cyl(0.34, 0.34, 0.26, '#2b2b33', {center: true, seg: 20}); at(w, sx * 0.83, 0.34, sz, 0, 0, Math.PI / 2); g.add(w); wheels.push(w);
+    const hub = cyl(0.14, 0.14, 0.28, '#c9ccd0', {center: true}); at(hub, sx * 0.83, 0.34, sz, 0, 0, Math.PI / 2); g.add(hub);
+  }
+  for (const s of [-1, 1]) {
+    const hl = ball(0.12, new THREE.MeshBasicMaterial({color: '#fff3b0'}), {hull: 0.015}); at(hl, s * 0.6, 0.66, 1.8); g.add(hl);
+    const tl = box(0.25, 0.1, 0.04, new THREE.MeshBasicMaterial({color: '#ff5a4a'})); at(tl, s * 0.6, 0.6, -1.8); g.add(tl);
+  }
+  // soft headlight beams
+  const beamMat = new THREE.MeshBasicMaterial({color: '#fff1b0', transparent: true, opacity: 0.16, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide});
+  for (const s of [-1, 1]) { const b = new THREE.Mesh(new THREE.ConeGeometry(0.9, 6, 20, 1, true), beamMat); b.rotation.x = -Math.PI / 2; b.position.set(s * 0.6, 0.55, 4.8); g.add(b); }
+  g.userData.wheels = wheels;
+  return g;
+}
+
+export function streetLamp() {
+  const g = new THREE.Group();
+  g.add(cyl(0.06, 0.08, 3.6, '#4a5058'));
+  const arm = box(0.9, 0.06, 0.06, '#4a5058'); at(arm, -0.42, 3.55, 0); g.add(arm);
+  const hd = box(0.4, 0.1, 0.22, '#4a5058'); at(hd, -0.82, 3.45, 0); g.add(hd);
+  const bulb = ball(0.12, new THREE.MeshBasicMaterial({color: '#ffd98a'}), {sy: 0.5, hull: 0}); at(bulb, -0.82, 3.42, 0); g.add(bulb);
+  const pool = new THREE.Mesh(new THREE.CircleGeometry(1.6, 24), new THREE.MeshBasicMaterial({color: '#ffcf7a', transparent: true, opacity: 0.16, depthWrite: false}));
+  pool.rotation.x = -Math.PI / 2; pool.position.set(-0.82, 0.03, 0); g.add(pool);
+  return g;
+}
+
+export function sofa(color = '#6a7fb0') {
+  const g = new THREE.Group();
+  const base = box(2.2, 0.42, 0.9, toon(color, {paint: {seed: 90, stains: 8}})); g.add(base);
+  const back = box(2.2, 0.55, 0.22, toon(color, {paint: {seed: 91}})); at(back, 0, 0.42, -0.34); g.add(back);
+  for (const s of [-1, 1]) { const arm = box(0.22, 0.32, 0.9, toon(shade(color, -0.08))); at(arm, s * 1.0, 0.42, 0); g.add(arm); }
+  for (const s of [-0.5, 0.5]) { const cu = box(0.9, 0.12, 0.66, shade(color, 0.08)); at(cu, s, 0.42, 0.08); g.add(cu); }
+  return g;
+}
+
+// TV with a flickering screen: returns {group, update(t, on)}.
+export function tv() {
+  const g = new THREE.Group();
+  const stand = box(1.4, 0.5, 0.45, toon('#7a5236', {paint: {planks: 3, seed: 92}})); g.add(stand);
+  const set = box(1.1, 0.68, 0.12, '#2b2b33'); at(set, 0, 0.58, 0); g.add(set);
+  const c = canvas(128, 96), x = c.getContext('2d'); const tex = texFrom(c);
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.58), new THREE.MeshBasicMaterial({map: tex})); scr.position.set(0, 0.92, 0.065); g.add(scr);
+  let last = -1;
+  return {group: g, update(t) {
+    const f = Math.floor(t * 12); if (f === last) return; last = f; const r = rng(f + 1);
+    for (let i = 0; i < 96; i += 4) for (let j = 0; j < 128; j += 4) { const v = 120 + Math.floor(r() * 120); x.fillStyle = `rgb(${v - 20},${v},${v + 30})`; x.fillRect(j, i, 4, 4); }
+    tex.needsUpdate = true;
+  }};
+}
+
+export function goalPost() {
+  const g = new THREE.Group(); const y = '#f2d24a';
+  g.add(cyl(0.12, 0.14, 3.0, y));
+  const cross = cyl(0.08, 0.08, 5.6, y, {center: true}); at(cross, 0, 3.0, 0, 0, 0, Math.PI / 2); g.add(cross);
+  for (const s of [-1, 1]) { const up = cyl(0.07, 0.07, 4.2, y); at(up, s * 2.8, 3.0, 0); g.add(up); }
+  return g;
+}
+
+export function footballBall() {
+  const g = new THREE.Group();
+  g.add(ball(0.11, '#8a4a2a', {sx: 1, sy: 1, sz: 1.65, hull: 0.012}));
+  const lace = box(0.012, 0.012, 0.12, '#f6f1e6', {center: true, hull: 0}); at(lace, 0, 0.11, 0); g.add(lace);
+  return g;
+}
+
+export function bleachers(w = 10, rows = 4) {
+  const g = new THREE.Group();
+  for (let i = 0; i < rows; i++) { const s = box(w, 0.45, 0.8, toon(i % 2 ? '#8a9aa8' : '#9aaab8', {paint: {seed: 93 + i}})); at(s, 0, 0, -i * 0.8); s.scale.y = 1 + i; g.add(s); }
+  return g;
+}
+
+// Floating "Z" letters / big glyphs as camera-facing sprites.
+export function glyph(text, size = 0.3, color = '#fff3df') {
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.font = '900 200px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.lineWidth = 28; x.strokeStyle = INK; x.lineJoin = 'round'; x.strokeText(text, 128, 138); x.fillStyle = color; x.fillText(text, 128, 138);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false}));
+  s.scale.set(size, size, 1);
+  return s;
+}

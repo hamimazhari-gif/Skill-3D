@@ -1,0 +1,82 @@
+{
+ "duration": 51.68,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "This fruit you eat all the time... is actually radioactive!",
+   "start": 0.22,
+   "end": 4.42,
+   "pred": 3.63
+  },
+  {
+   "shot": 2,
+   "text": "Bananas are rich in potassium, a key mineral for your muscles and heart.",
+   "start": 5.08,
+   "end": 9.06,
+   "pred": 5.05
+  },
+  {
+   "shot": 3,
+   "text": "A tiny part of that potassium is potassium-forty, which naturally gives off radiation.",
+   "start": 9.72,
+   "end": 14.78,
+   "pred": 6.08
+  },
+  {
+   "shot": 4,
+   "text": "It's so famous that scientists have an unofficial term, the \"banana equivalent dose\", to explain radiation in a way anyone can understand.",
+   "start": 15.22,
+   "end": 23.38,
+   "pred": 9.71
+  },
+  {
+   "shot": 5,
+   "text": "A flight of a few hours exposes you to radiation equal to hundreds of bananas.",
+   "start": 23.88,
+   "end": 29.96,
+   "pred": 4.98
+  },
+  {
+   "shot": 6,
+   "text": "And a CT scan... tens of thousands of bananas!",
+   "start": 30.28,
+   "end": 32.96,
+   "pred": 2.69
+  },
+  {
+   "shot": 7,
+   "text": "So relax.",
+   "start": 33.2,
+   "end": 33.66,
+   "pred": 0.55
+  },
+  {
+   "shot": 7,
+   "text": "You'd only get a dangerous dose by eating tens of millions of bananas at once, which is clearly impossible.",
+   "start": 33.84,
+   "end": 40.08,
+   "pred": 7.27
+  },
+  {
+   "shot": 8,
+   "text": "Your body also gets rid of extra potassium right away.",
+   "start": 40.5,
+   "end": 43.16,
+   "pred": 3.48
+  },
+  {
+   "shot": 9,
+   "text": "Bonus fact: your own body is a little radioactive too, because of that same potassium!",
+   "start": 44.26,
+   "end": 49.36,
+   "pred": 5.92
+  },
+  {
+   "shot": 10,
+   "text": "Follow for more weird facts!",
+   "start": 50.0,
+   "end": 51.4,
+   "pred": 1.82
+  }
+ ]
+}

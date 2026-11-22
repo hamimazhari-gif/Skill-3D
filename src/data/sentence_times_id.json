@@ -1,82 +1,124 @@
 {
- "duration": 50.0,
+ "duration": 70.16,
  "sentences": [
   {
    "shot": 1,
-   "text": "Buah yang sering kamu makan ini... ternyata radioaktif!",
-   "start": 0.0,
-   "end": 4.58,
-   "pred": 3.22
+   "text": "Apa yang terjadi... kalau kamu tidak tidur selama tujuh hari?",
+   "start": 0.3,
+   "end": 4.7,
+   "pred": 3.78
   },
   {
    "shot": 2,
-   "text": "Pisang kaya akan kalium, mineral penting untuk otot dan jantung.",
-   "start": 5.46,
-   "end": 8.76,
-   "pred": 4.32
+   "text": "Hari pertama, setelah dua puluh empat jam terjaga, otakmu bekerja seperti orang yang sedang mabuk.",
+   "start": 5.54,
+   "end": 11.16,
+   "pred": 7.33
+  },
+  {
+   "shot": 2,
+   "text": "Sulit fokus, gampang marah, dan reaksimu melambat.",
+   "start": 11.6,
+   "end": 14.84,
+   "pred": 4.18
   },
   {
    "shot": 3,
-   "text": "Sebagian kecil kalium itu berbentuk kalium-empat puluh, yang secara alami memancarkan radiasi.",
-   "start": 9.18,
-   "end": 14.58,
-   "pred": 6.3
+   "text": "Hari kedua, tubuh mulai memaksa tidur.",
+   "start": 15.76,
+   "end": 18.08,
+   "pred": 2.92
+  },
+  {
+   "shot": 3,
+   "text": "Kamu bisa tertidur beberapa detik tanpa sadar, ini disebut microsleep.",
+   "start": 18.52,
+   "end": 22.74,
+   "pred": 5.12
   },
   {
    "shot": 4,
-   "text": "Saking terkenalnya, ilmuwan punya istilah tidak resmi, yaitu \"dosis setara pisang\", untuk menjelaskan besar radiasi dengan cara yang mudah dipahami.",
-   "start": 15.18,
-   "end": 23.32,
-   "pred": 10.32
+   "text": "Sangat berbahaya kalau terjadi saat berkendara.",
+   "start": 23.32,
+   "end": 25.72,
+   "pred": 3.23
   },
   {
    "shot": 5,
-   "text": "Naik pesawat beberapa jam membuatmu terkena radiasi setara ratusan pisang.",
-   "start": 24.04,
-   "end": 29.38,
-   "pred": 4.69
-  },
-  {
-   "shot": 6,
-   "text": "Sedangkan CT scan... setara puluhan ribu pisang!",
-   "start": 29.68,
-   "end": 32.0,
-   "pred": 2.78
-  },
-  {
-   "shot": 7,
-   "text": "Jadi tenang saja.",
-   "start": 32.52,
-   "end": 34.1,
-   "pred": 1.03
-  },
-  {
-   "shot": 7,
-   "text": "Kamu baru terkena radiasi berbahaya kalau makan puluhan juta pisang sekaligus, dan itu jelas mustahil.",
-   "start": 34.42,
-   "end": 38.98,
-   "pred": 6.74
-  },
-  {
-   "shot": 8,
-   "text": "Tubuh juga langsung membuang kalium yang berlebih.",
-   "start": 39.4,
-   "end": 43.04,
+   "text": "Hari ketiga dan keempat, otak mulai kacau.",
+   "start": 26.84,
+   "end": 29.06,
    "pred": 3.15
   },
   {
+   "shot": 5,
+   "text": "Kamu bisa melihat atau mendengar sesuatu yang sebenarnya tidak ada.",
+   "start": 29.58,
+   "end": 34.58,
+   "pred": 4.49
+  },
+  {
+   "shot": 5,
+   "text": "Halusinasi!",
+   "start": 35.94,
+   "end": 37.3,
+   "pred": 0.79
+  },
+  {
+   "shot": 6,
+   "text": "Hari kelima sampai ketujuh, kamu makin sulit membedakan mana yang nyata dan mana yang tidak.",
+   "start": 37.7,
+   "end": 41.24,
+   "pred": 6.47
+  },
+  {
+   "shot": 6,
+   "text": "Pikiran kacau, mudah curiga, dan ingatan melemah.",
+   "start": 41.76,
+   "end": 45.12,
+   "pred": 4.1
+  },
+  {
+   "shot": 7,
+   "text": "Tahun seribu sembilan ratus enam puluh empat, seorang remaja bernama Randy Gardner bertahan tanpa tidur selama sebelas hari!",
+   "start": 46.38,
+   "end": 53.1,
+   "pred": 8.75
+  },
+  {
+   "shot": 8,
+   "text": "Ia mengalami halusinasi, sampai mengira dirinya seorang pemain sepak bola terkenal.",
+   "start": 53.52,
+   "end": 60.5,
+   "pred": 6.07
+  },
+  {
    "shot": 9,
-   "text": "Fakta bonus: tubuhmu sendiri juga sedikit radioaktif, karena kalium yang sama!",
-   "start": 43.64,
-   "end": 47.96,
-   "pred": 5.2
+   "text": "Jadi... jangan pernah dicoba!",
+   "start": 60.92,
+   "end": 63.26,
+   "pred": 1.73
+  },
+  {
+   "shot": 9,
+   "text": "Tidurlah tujuh sampai sembilan jam setiap malam.",
+   "start": 63.74,
+   "end": 66.18,
+   "pred": 3.23
   },
   {
    "shot": 10,
-   "text": "Follow untuk fakta unik lainnya!",
-   "start": 48.62,
-   "end": 49.72,
-   "pred": 1.98
+   "text": "Kamu pernah begadang paling lama berapa jam?",
+   "start": 66.96,
+   "end": 68.76,
+   "pred": 2.92
+  },
+  {
+   "shot": 10,
+   "text": "Tulis di komentar!",
+   "start": 69.14,
+   "end": 69.76,
+   "pred": 1.18
   }
  ]
 }

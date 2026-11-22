@@ -102,33 +102,39 @@ function cues(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
   return [
     ['05-airy-whoosh.mp3', 0.0, 0.22],
-    ['06-digital-glitch-tech-blip.mp3', EVt.radio + 0.05, 0.4],
-    ['04-counter-tick-number-roll.wav', EVt.radio + 0.35, 0.3],
+    ['04-counter-tick-number-roll.wav', EVt.tujuh - 0.1, 0.32],
     ['08-heavy-whoosh.wav', c(2) - 0.35, 0.28],
-    ['04-soft-ui-pop.mp3', EVt.kalium, 0.32],
-    ['pop-bubble-sound-effect.mp3', EVt.jantung, 0.32],
-    ['07-smooth-transition-whoosh.mp3', c(3) - 0.4, 0.28],
-    ['03-subtle-digital-impact.mp3', EVt.k40, 0.35],
-    ['06-digital-glitch-tech-blip.mp3', EVt.radiasi, 0.25],
-    ['03-typing-keyboard-burst.wav', EVt.dose, 0.18],
-    ['04-soft-ui-pop.mp3', EVt.dose + 0.05, 0.3],
-    ['08-soft-success-chime.mp3', EVt.easy + 0.1, 0.22],
-    ['08-heavy-whoosh.wav', c(5) - 0.35, 0.28],
-    ['05-airy-whoosh.mp3', EVt.plane, 0.25],
-    ['04-counter-tick-number-roll-2.wav', EVt.hundreds - 0.05, 0.35],
-    ['07-smooth-transition-whoosh.mp3', c(6) - 0.4, 0.28],
-    ['06-deep-cinematic-boom.wav', EVt.tens + 0.3, 0.45],
+    ['06-digital-glitch-tech-blip.mp3', EVt.mabuk, 0.3],
+    ['02-error-denied-buzz.wav', EVt.marah + 0.1, 0.3],
+    ['03-subtle-digital-impact.mp3', EVt.lambat + 0.25, 0.4],
+    ['05-airy-whoosh.mp3', c(3) - 0.2, 0.2],
+    ['04-counter-tick-number-roll-2.wav', EVt.detik, 0.25],
+    ['04-soft-ui-pop.mp3', EVt.micro + 0.05, 0.35],
+    ['08-heavy-whoosh.wav', c(4) - 0.35, 0.28],
+    ['06-deep-cinematic-boom.wav', EVt.kendara + 0.05, 0.4],
+    ['07-smooth-transition-whoosh.mp3', c(5) - 0.4, 0.28],
+    ['pop-bubble-sound-effect.mp3', EVt.melihat + 0.05, 0.35],
+    ['04-soft-ui-pop.mp3', EVt.mendengar, 0.3],
+    ['07-riser-build-up.wav', EVt.halu - 1.4, 0.28],
+    ['06-digital-glitch-tech-blip.mp3', EVt.halu + 0.05, 0.42],
+    ['05-airy-whoosh.mp3', c(6) - 0.2, 0.2],
+    ['pop-bubble-sound-effect.mp3', EVt.tidak2 + 0.1, 0.3],
+    ['02-error-denied-buzz.wav', EVt.curiga + 0.1, 0.22],
+    ['04-counter-tick-number-roll.wav', EVt.ingatan, 0.22],
     ['08-heavy-whoosh.wav', c(7) - 0.35, 0.28],
-    ['07-riser-build-up.wav', EVt.millions - 1.7, 0.3],
-    ['03-subtle-digital-impact.mp3', EVt.millions + 0.2, 0.4],
-    ['09-notification-ding.wav', EVt.impossible + 0.1, 0.35],
+    ['04-counter-tick-number-roll-2.wav', EVt.tahun, 0.28],
+    ['08-soft-success-chime.mp3', EVt.sebelas, 0.32],
     ['07-smooth-transition-whoosh.mp3', c(8) - 0.4, 0.28],
-    ['pop-bubble-sound-effect.mp3', EVt.remove + 0.15, 0.3],
+    ['04-soft-ui-pop.mp3', EVt.mengira + 0.1, 0.32],
+    ['03-subtle-digital-impact.mp3', EVt.terkenal + 0.05, 0.4],
+    ['09-notification-ding.wav', EVt.terkenal + 0.3, 0.3],
     ['08-heavy-whoosh.wav', c(9) - 0.35, 0.28],
-    ['04-counter-tick-number-roll.wav', EVt.yourself, 0.32],
+    ['02-error-denied-buzz.wav', EVt.jangan + 0.1, 0.28],
+    ['08-soft-success-chime.mp3', EVt.tidurlah + 0.1, 0.22],
     ['05-airy-whoosh.mp3', c(10) - 0.35, 0.25],
-    ['08-soft-success-chime.mp3', EVt.follow, 0.35],
-    ['mouse-click-sound-effect.mp3', EVt.follow + 0.5, 0.4, 0.45],
+    ['04-counter-tick-number-roll.wav', EVt.jam, 0.25],
+    ['08-soft-success-chime.mp3', EVt.komentar, 0.35],
+    ['mouse-click-sound-effect.mp3', EVt.komentar + 0.45, 0.4, 0.45],
   ];
 }
 
@@ -172,7 +178,7 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [2, 3, 5, 6, 7, 8, 9, 10];
+  const DIPS = [2, 4, 5, 7, 8, 9, 10];
   for (const k of DIPS) { const ct = T.CUTS[k - 1]; dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2); }
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
   return (
@@ -194,10 +200,9 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PISANG INI', mid: 'RADIOAKTIF?!'},
-  en: {top: 'THIS BANANA IS', mid: 'RADIOACTIVE?!'},
+  id: {top: '7 HARI', mid: 'TANPA TIDUR?!'},
 };
-const THUMB_T = {id: 3.9, en: 3.75};
+const THUMB_T = {id: 36.6};
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const tx = TH[lang];
@@ -209,7 +214,7 @@ export const Thumb = ({lang}) => {
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
       <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
-        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [1.15, 1.5, 0.0], look: [0.3, 1.3, -2.4]}} />
+        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [0.3, 1.25, -1.0], look: [0.1, 1.05, -3.7]}} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}

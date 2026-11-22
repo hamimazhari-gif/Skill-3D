@@ -1,0 +1,82 @@
+{
+ "duration": 50.0,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Buah yang sering kamu makan ini... ternyata radioaktif!",
+   "start": 0.0,
+   "end": 4.58,
+   "pred": 3.22
+  },
+  {
+   "shot": 2,
+   "text": "Pisang kaya akan kalium, mineral penting untuk otot dan jantung.",
+   "start": 5.46,
+   "end": 8.76,
+   "pred": 4.32
+  },
+  {
+   "shot": 3,
+   "text": "Sebagian kecil kalium itu berbentuk kalium-empat puluh, yang secara alami memancarkan radiasi.",
+   "start": 9.18,
+   "end": 14.58,
+   "pred": 6.3
+  },
+  {
+   "shot": 4,
+   "text": "Saking terkenalnya, ilmuwan punya istilah tidak resmi, yaitu \"dosis setara pisang\", untuk menjelaskan besar radiasi dengan cara yang mudah dipahami.",
+   "start": 15.18,
+   "end": 23.32,
+   "pred": 10.32
+  },
+  {
+   "shot": 5,
+   "text": "Naik pesawat beberapa jam membuatmu terkena radiasi setara ratusan pisang.",
+   "start": 24.04,
+   "end": 29.38,
+   "pred": 4.69
+  },
+  {
+   "shot": 6,
+   "text": "Sedangkan CT scan... setara puluhan ribu pisang!",
+   "start": 29.68,
+   "end": 32.0,
+   "pred": 2.78
+  },
+  {
+   "shot": 7,
+   "text": "Jadi tenang saja.",
+   "start": 32.52,
+   "end": 34.1,
+   "pred": 1.03
+  },
+  {
+   "shot": 7,
+   "text": "Kamu baru terkena radiasi berbahaya kalau makan puluhan juta pisang sekaligus, dan itu jelas mustahil.",
+   "start": 34.42,
+   "end": 38.98,
+   "pred": 6.74
+  },
+  {
+   "shot": 8,
+   "text": "Tubuh juga langsung membuang kalium yang berlebih.",
+   "start": 39.4,
+   "end": 43.04,
+   "pred": 3.15
+  },
+  {
+   "shot": 9,
+   "text": "Fakta bonus: tubuhmu sendiri juga sedikit radioaktif, karena kalium yang sama!",
+   "start": 43.64,
+   "end": 47.96,
+   "pred": 5.2
+  },
+  {
+   "shot": 10,
+   "text": "Follow untuk fakta unik lainnya!",
+   "start": 48.62,
+   "end": 49.72,
+   "pred": 1.98
+  }
+ ]
+}

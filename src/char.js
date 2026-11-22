@@ -83,6 +83,9 @@ export const EXPRESSIONS = {
   proud: {eyes: 'closed', brows: 'up', mouth: 'smile', extras: ['blush', 'sparkle']},
   determined: {eyes: 'open', brows: 'angry', mouth: 'grin'},
   disgusted: {eyes: 'squint', brows: 'angry', mouth: 'wavy'},
+  sleep: {eyes: 'blink', brows: 'none', mouth: 'flat'},
+  drowsy: {eyes: 'tired', brows: 'sad', mouth: 'wavy', extras: ['gloom']},
+  paranoid: {eyes: 'squint', brows: 'angry', mouth: 'wavy', extras: ['sweat']},
 };
 
 function drawFace(o, f, r) {
@@ -224,6 +227,14 @@ export const PALETTES = {
   scientist: {jacket: '#eef0ee', lower: '#55606e', tie: '#4f7fa6', hair: '#6a5a52', hat: 'none', glasses: true},
   doctor: {jacket: '#8fc7c0', lower: '#4f7f7a', tie: '#eef0ee', hair: '#3a2a26', hat: 'none'},
   pilot: {jacket: '#2a3a56', lower: '#1f2a40', tie: '#d9a441', hair: '#5a3a2a', hat: 'cap', hatColor: '#2a3a56', hatColor2: '#1f2a40'},
+  coworker: {jacket: '#c99a4a', lower: '#55606e', tie: '#4f7fa6', hair: '#3a2a26', hat: 'none', glasses: true},
+  friend: {jacket: '#9a6fb0', lower: '#4a3a56', tie: '#e8c35a', hair: '#5a3a2a', hat: 'none'},
+  randy: {jacket: '#b8443a', lower: '#3a4a6a', tie: '#f3e7d3', hair: '#8a5a3a', hat: 'none'},
+  pal1: {jacket: '#4f7fa6', lower: '#55606e', tie: '#c75b5b', hair: '#2b2326', hat: 'none'},
+  pal2: {jacket: '#7fa35a', lower: '#6b4a3a', tie: '#e8c35a', hair: '#4a3026', hat: 'none', glasses: true},
+  player: {jacket: '#2f5fa8', lower: '#f3e7d3', tie: '#f2d24a', hair: '#8a5a3a', hat: 'cap', hatColor: '#2f5fa8', hatColor2: '#f2d24a'},
+  fanA: {jacket: '#e0b84f', lower: '#55606e', tie: '#2f5fa8', hair: '#2b2326', hat: 'none'},
+  fanB: {jacket: '#2f5fa8', lower: '#3a3a40', tie: '#f2d24a', hair: '#6a4a2a', hat: 'cap', hatColor: '#f2d24a', hatColor2: '#2f5fa8'},
 };
 
 // Poses: [upper, fore] per arm, radians. 0 = hanging down; positive upper = swings outward (away from body),

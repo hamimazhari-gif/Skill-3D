@@ -5,82 +5,103 @@ import * as THREE from 'three';
 import {LOC} from './world';
 
 export const SHOT_PLAN = [
-  // 1 kitchen: "This fruit you eat all the time... is actually radioactive!"
-  {shot: 1, loc: 'kitchen', move: 'push in on banana', keys: [
-    {at: 'start', pos: [0.75, 1.62, -0.35], look: [0.2, 1.38, -2.4]},
-    {at: 'end', pos: [0.32, 1.52, -1.05], look: [0.12, 1.42, -2.4]}]},
-  {shot: 1, from: 'radio', loc: 'kitchen', move: 'pull back reveal', keys: [
-    {at: 'start', pos: [1.25, 1.55, -0.2], look: [0.35, 1.15, -2.1]},
-    {at: 'end', pos: [1.9, 1.85, 0.9], look: [0.3, 1.3, -2.3]}]},
-  // 2 farm: potassium, muscles, heart
-  {shot: 2, loc: 'farm', move: 'crane down', keys: [
-    {at: 'start', pos: [1.4, 3.9, 3.2], look: [0.2, 1.6, -3.0]},
-    {at: 'end', pos: [0.55, 1.6, 1.0], look: [0.1, 1.2, -1.8]}]},
-  {shot: 2, from: 'otot', loc: 'farm', move: 'low push', keys: [
-    {at: 'start', pos: [-0.9, 1.15, 0.2], look: [-0.25, 1.45, -1.8]},
-    {at: 'end', pos: [-0.55, 1.2, -0.25], look: [-0.05, 1.6, -1.8]}]},
-  // 3 lab: K-40 gives off radiation
-  {shot: 3, loc: 'lab', move: 'establish + push', keys: [
-    {at: 'start', pos: [3.0, 2.3, 1.8], look: [1.0, 1.2, -2.6]},
-    {at: 'end', pos: [1.6, 1.65, -0.5], look: [0.9, 1.25, -2.6]}]},
-  {shot: 3, from: 'k40', loc: 'lab', move: 'macro track', keys: [
-    {at: 'start', pos: [0.62, 1.52, -1.75], look: [0.9, 1.45, -2.6]},
-    {at: 'end', pos: [1.12, 1.56, -1.72], look: [0.92, 1.45, -2.6]}]},
-  {shot: 3, from: 'alami', loc: 'lab', move: 'pull to scientist', keys: [
-    {at: 'start', pos: [1.55, 1.5, -0.9], look: [1.6, 1.42, -3.3]},
-    {at: 'end', pos: [1.75, 1.6, -0.3], look: [1.6, 1.4, -3.3]}]},
-  // 4 lab chalkboard: banana equivalent dose
-  {shot: 4, loc: 'lab', move: 'track to board', keys: [
-    {at: 'start', pos: [0.4, 1.6, -0.6], look: [-0.6, 1.45, -4.6]},
-    {at: 'end', pos: [-0.4, 1.7, -1.0], look: [-1.4, 1.6, -4.8]}]},
-  {shot: 4, from: 'dose', loc: 'lab', move: 'push on board', keys: [
-    {at: 'start', pos: [-1.45, 1.95, -2.9], look: [-1.5, 1.95, -5.8]},
-    {at: 'end', pos: [-1.5, 1.95, -3.35], look: [-1.5, 1.95, -5.8]}]},
-  {shot: 4, from: 'easy', loc: 'lab', move: 'two-shot', keys: [
-    {at: 'start', pos: [-0.75, 1.62, -0.55], look: [-1.3, 1.45, -4.4]},
-    {at: 'end', pos: [-0.7, 1.62, -0.85], look: [-1.28, 1.45, -4.4]}]},
-  // 5 airport: a flight = hundreds of bananas
-  {shot: 5, loc: 'airport', move: 'crane up wide', keys: [
-    {at: 'start', pos: [-3.2, 1.1, 4.2], look: [0.5, 2.0, -6.0]},
-    {at: 'end', pos: [-1.8, 2.2, 3.0], look: [0.8, 1.5, -4.0]}]},
-  {shot: 5, from: 'hundreds', loc: 'airport', move: 'push on pile', keys: [
-    {at: 'start', pos: [0.1, 1.55, 2.1], look: [0.15, 1.05, -1.8]},
-    {at: 'end', pos: [-0.05, 1.5, 1.6], look: [0.05, 1.15, -1.8]}]},
-  // 6 hospital: CT scan = tens of thousands
-  {shot: 6, loc: 'hospital', move: 'push', keys: [
-    {at: 'start', pos: [2.4, 1.7, 1.4], look: [0.3, 1.3, -2.6]},
-    {at: 'end', pos: [1.6, 1.6, 0.6], look: [0.0, 1.3, -2.4]}]},
-  {shot: 6, from: 'tens', loc: 'hospital', move: 'pull back', keys: [
-    {at: 'start', pos: [-0.2, 1.65, 0.4], look: [-0.6, 1.2, -2.2]},
-    {at: 'end', pos: [0.2, 2.3, 2.4], look: [-0.4, 1.0, -2.2]}]},
-  // 7 banana mountain: relax... tens of millions... impossible
-  {shot: 7, loc: 'mountain', move: 'slow push two-shot', keys: [
-    {at: 'start', pos: [0.4, 1.5, 1.4], look: [0.2, 1.45, -1.3]},
-    {at: 'end', pos: [0.3, 1.5, 0.7], look: [0.2, 1.45, -1.3]}]},
-  {shot: 7, from: 'millions', loc: 'mountain', move: 'crane up reveal', keys: [
-    {at: 'start', pos: [0.2, 1.2, 1.6], look: [0.2, 1.7, -1.3]},
-    {at: 'end', pos: [0.0, 3.0, 4.8], look: [0.0, 4.2, -18]}]},
-  {shot: 7, from: 'impossible', loc: 'mountain', move: 'close-up', keys: [
-    {at: 'start', pos: [-0.05, 1.5, 1.05], look: [-0.35, 1.35, -1.2]},
-    {at: 'end', pos: [-0.12, 1.5, 0.85], look: [-0.38, 1.35, -1.2]}]},
-  // 8 kitchen: the body flushes extra potassium
-  {shot: 8, loc: 'kitchen', move: 'push', keys: [
-    {at: 'start', pos: [0.7, 1.55, -0.1], look: [0.1, 1.4, -2.4]},
-    {at: 'end', pos: [0.45, 1.55, -0.7], look: [0.1, 1.45, -2.4]}]},
-  {shot: 8, from: 'remove', loc: 'kitchen', move: 'crane up after tokens', keys: [
-    {at: 'start', pos: [0.9, 1.6, 0.2], look: [0.2, 1.6, -2.4]},
-    {at: 'end', pos: [1.0, 2.1, 0.6], look: [0.4, 2.0, -3.0]}]},
-  // 9 lab corner: you are radioactive too
-  {shot: 9, loc: 'lab', move: 'push two-shot', keys: [
-    {at: 'start', pos: [3.9, 1.55, 0.6], look: [3.7, 1.3, -2.4]},
-    {at: 'end', pos: [3.7, 1.5, -0.3], look: [3.6, 1.3, -2.4]}]},
-  {shot: 9, from: 'because', loc: 'lab', move: 'close-up', keys: [
-    {at: 'start', pos: [3.3, 1.55, -1.25], look: [3.2, 1.5, -2.4]},
-    {at: 'end', pos: [3.25, 1.55, -1.4], look: [3.2, 1.5, -2.4]}]},
-  // 10 farm finale
-  {shot: 10, loc: 'farm', move: 'pull back', keys: [
-    {at: 'start', pos: [0.0, 1.6, 2.2], look: [0.0, 1.4, -1.6]},
-    {at: 'end', pos: [0.0, 2.0, 3.6], look: [0.0, 1.5, -1.6]}]},
+  // 1 bedroom 3 a.m.: "What happens... if you don't sleep for seven days?"
+  {shot: 1, loc: 'bedroom', move: 'push in on hero in bed', keys: [
+    {at: 'start', pos: [0.9, 1.6, 0.1], look: [-0.6, 1.1, -3.8]},
+    {at: 'end', pos: [0.35, 1.4, -1.5], look: [-0.45, 1.15, -3.9]}]},
+  {shot: 1, from: 'tujuh', loc: 'bedroom', move: 'two-shot with calendar', keys: [
+    {at: 'start', pos: [0.75, 1.5, -1.1], look: [0.05, 1.35, -4.6]},
+    {at: 'end', pos: [0.7, 1.5, -1.35], look: [0.05, 1.35, -4.6]}]},
+  // 2 office, day 1: drunk-like brain, angry, slow reactions
+  {shot: 2, loc: 'office', move: 'crane down', keys: [
+    {at: 'start', pos: [2.2, 2.9, 1.6], look: [0.0, 1.0, -3.0]},
+    {at: 'end', pos: [0.9, 1.6, -0.1], look: [0.0, 1.1, -3.0]}]},
+  {shot: 2, from: 'mabuk', loc: 'office', move: 'close-up', keys: [
+    {at: 'start', pos: [0.15, 1.3, -1.55], look: [-0.1, 1.15, -3.0]},
+    {at: 'end', pos: [0.05, 1.27, -1.8], look: [-0.1, 1.15, -3.0]}]},
+  {shot: 2, from: 'fokus', loc: 'office', move: 'two-shot', keys: [
+    {at: 'start', pos: [0.95, 1.5, 0.3], look: [0.65, 1.2, -2.7]},
+    {at: 'end', pos: [0.75, 1.45, -0.1], look: [0.6, 1.2, -2.7]}]},
+  {shot: 2, from: 'lambat', loc: 'office', move: 'low angle on the mug', keys: [
+    {at: 'start', pos: [-0.15, 0.55, -0.35], look: [-0.45, 0.75, -2.3]},
+    {at: 'end', pos: [-0.2, 0.5, -0.55], look: [-0.45, 0.75, -2.3]}]},
+  // 3 office, day 2 at dusk: microsleep
+  {shot: 3, loc: 'office', move: 'push', keys: [
+    {at: 'start', pos: [1.6, 1.7, 0.7], look: [-0.1, 1.1, -3.0]},
+    {at: 'end', pos: [0.8, 1.5, -0.5], look: [-0.1, 1.1, -3.0]}]},
+  {shot: 3, from: 'tertidur', loc: 'office', move: 'close-up', keys: [
+    {at: 'start', pos: [0.3, 1.25, -1.55], look: [-0.1, 1.1, -3.0]},
+    {at: 'end', pos: [0.2, 1.22, -1.8], look: [-0.1, 1.1, -3.0]}]},
+  {shot: 3, from: 'micro', loc: 'office', move: 'side track', keys: [
+    {at: 'start', pos: [-1.8, 1.45, -1.3], look: [0.1, 1.3, -3.2]},
+    {at: 'end', pos: [-1.4, 1.4, -1.7], look: [0.2, 1.3, -3.2]}]},
+  // 4 night road: dangerous while driving
+  {shot: 4, loc: 'road', move: 'low push on car', keys: [
+    {at: 'start', pos: [-1.5, 1.0, 2.8], look: [0.1, 0.95, -3.0]},
+    {at: 'end', pos: [-0.9, 1.2, 1.4], look: [0.3, 1.0, -3.0]}]},
+  {shot: 4, from: 'bahaya', loc: 'road', move: 'close-up driver', keys: [
+    {at: 'start', pos: [0.8, 1.5, -1.3], look: [0.3, 1.2, -3.2]},
+    {at: 'end', pos: [0.7, 1.45, -1.6], look: [0.3, 1.2, -3.2]}]},
+  // 5 living room, days 3-4: hallucinations
+  {shot: 5, loc: 'living', move: 'crane down', keys: [
+    {at: 'start', pos: [2.3, 2.6, 1.5], look: [0.0, 0.9, -3.6]},
+    {at: 'end', pos: [1.1, 1.6, 0.1], look: [0.0, 1.0, -3.6]}]},
+  {shot: 5, from: 'melihat', loc: 'living', move: 'two-shot hero + goat', keys: [
+    {at: 'start', pos: [0.25, 1.3, -1.25], look: [0.05, 1.0, -3.7]},
+    {at: 'end', pos: [0.15, 1.25, -1.6], look: [0.05, 1.0, -3.7]}]},
+  {shot: 5, from: 'mendengar', loc: 'living', move: 'tilt up to flying fish', keys: [
+    {at: 'start', pos: [-1.3, 1.2, -0.6], look: [0.3, 1.5, -3.2]},
+    {at: 'end', pos: [-1.0, 1.4, -1.1], look: [0.2, 1.6, -3.3]}]},
+  {shot: 5, from: 'halu', loc: 'living', move: 'close-up', keys: [
+    {at: 'start', pos: [-0.25, 1.25, -2.35], look: [-0.45, 1.15, -3.8]},
+    {at: 'end', pos: [-0.3, 1.22, -2.55], look: [-0.45, 1.15, -3.8]}]},
+  // 6 living room, days 5-7: real or not, suspicious, memory
+  {shot: 6, loc: 'living', move: 'push three-shot', keys: [
+    {at: 'start', pos: [1.9, 1.6, 0.6], look: [0.7, 1.2, -3.2]},
+    {at: 'end', pos: [1.3, 1.5, -0.3], look: [0.7, 1.2, -3.2]}]},
+  {shot: 6, from: 'nyata', loc: 'living', move: 'over the shoulder at the two friends', keys: [
+    {at: 'start', pos: [-0.7, 1.4, -1.1], look: [1.8, 1.3, -3.1]},
+    {at: 'end', pos: [-0.55, 1.4, -1.35], look: [1.8, 1.3, -3.1]}]},
+  {shot: 6, from: 'pikiran', loc: 'living', move: 'close-up', keys: [
+    {at: 'start', pos: [0.0, 1.25, -2.25], look: [-0.45, 1.15, -3.8]},
+    {at: 'end', pos: [-0.1, 1.22, -2.5], look: [-0.45, 1.15, -3.8]}]},
+  {shot: 6, from: 'ingatan', loc: 'living', move: 'pull back', keys: [
+    {at: 'start', pos: [0.3, 1.4, -1.2], look: [0.3, 1.15, -3.4]},
+    {at: 'end', pos: [0.8, 1.75, 0.4], look: [0.4, 1.2, -3.4]}]},
+  // 7 1964: Randy Gardner, eleven days
+  {shot: 7, loc: 'retro', move: 'crane from the board', keys: [
+    {at: 'start', pos: [-1.1, 2.3, -2.7], look: [-1.35, 2.1, -5.4]},
+    {at: 'end', pos: [-0.4, 1.8, -0.7], look: [-0.3, 1.6, -4.0]}]},
+  {shot: 7, from: 'randy', loc: 'retro', move: 'push on Randy', keys: [
+    {at: 'start', pos: [0.3, 1.5, -1.0], look: [0.0, 1.4, -2.65]},
+    {at: 'end', pos: [0.2, 1.48, -1.25], look: [0.0, 1.4, -2.65]}]},
+  {shot: 7, from: 'sebelas', loc: 'retro', move: 'wide with record sign', keys: [
+    {at: 'start', pos: [0.6, 1.75, 0.6], look: [0.45, 1.8, -4.0]},
+    {at: 'end', pos: [0.5, 1.85, 0.2], look: [0.45, 1.85, -4.0]}]},
+  // 8 dream stadium: he thought he was a famous football player
+  {shot: 8, loc: 'field', move: 'low push with goal posts', keys: [
+    {at: 'start', pos: [0.0, 0.9, 3.0], look: [0.0, 1.7, -8.0]},
+    {at: 'end', pos: [0.3, 1.3, 1.4], look: [0.0, 1.55, -8.0]}]},
+  {shot: 8, from: 'mengira', loc: 'field', move: 'low-angle close-up', keys: [
+    {at: 'start', pos: [0.35, 1.1, -0.35], look: [0.0, 1.5, -1.7]},
+    {at: 'end', pos: [0.25, 1.15, -0.55], look: [0.0, 1.5, -1.7]}]},
+  {shot: 8, from: 'terkenal', loc: 'field', move: 'crane up over the crowd', keys: [
+    {at: 'start', pos: [0.2, 1.4, 0.6], look: [0.0, 1.6, -3.0]},
+    {at: 'end', pos: [0.0, 3.0, 2.6], look: [0.0, 2.6, -14.0]}]},
+  // 9 bedroom at night: don't try it, sleep 7-9 hours
+  {shot: 9, loc: 'bedroom', move: 'close-up', keys: [
+    {at: 'start', pos: [1.0, 1.5, -0.95], look: [0.75, 1.45, -2.45]},
+    {at: 'end', pos: [0.95, 1.48, -1.2], look: [0.75, 1.45, -2.45]}]},
+  {shot: 9, from: 'tidurlah', loc: 'bedroom', move: 'push on sleeper + sign', keys: [
+    {at: 'start', pos: [0.4, 1.8, -0.8], look: [-1.1, 1.35, -4.3]},
+    {at: 'end', pos: [0.0, 1.6, -1.55], look: [-1.15, 1.35, -4.3]}]},
+  // 10 bedroom morning: closing question
+  {shot: 10, loc: 'bedroom', move: 'close-up', keys: [
+    {at: 'start', pos: [-0.05, 1.35, -1.95], look: [-0.6, 1.1, -3.85]},
+    {at: 'end', pos: [-0.15, 1.3, -2.15], look: [-0.6, 1.1, -3.85]}]},
+  {shot: 10, from: 'komentar', loc: 'bedroom', move: 'pull back to wide', keys: [
+    {at: 'start', pos: [-0.1, 1.5, -1.3], look: [-0.8, 1.75, -4.6]},
+    {at: 'end', pos: [0.4, 1.8, 0.2], look: [-0.7, 1.7, -4.6]}]},
 ];
 
 export function warpU(T, t) {
