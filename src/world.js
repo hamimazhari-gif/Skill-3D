@@ -4,24 +4,19 @@ import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, clamp01, INK, dec
 import {makeChar} from './char';
 import * as P from './props';
 import * as FX from './vfx';
+import {LOOK_PRESETS, MOODS} from './lighting';
 
 export const LOC = {road: 0, market: 40, docks: 80, shop: 120, cross: 160, mint: 200, museum: 240};
 
-// Reusable lighting presets (spread into a LOOK entry: {...LOOK_PRESETS.night, keyPos: [...]})
-export const LOOK_PRESETS = {
-  day: {fog: '#efe6d2', near: 14, far: 55, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff0d8', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
-  sunset: {fog: '#f1cfa6', near: 12, far: 50, skyTop: '#e8a27a', skyBottom: '#f8dcb0', key: '#ffc48a', keyI: 2.5, hemiI: 1.15, keyPos: [-8, 7, 6]},
-  night: {fog: '#1c2436', near: 10, far: 45, skyTop: '#0e1626', skyBottom: '#34405a', key: '#a9c4ff', keyI: 1.1, hemiI: 0.55, keyPos: [-6, 12, -4], moon: true},
-  interiorWarm: {fog: '#3a2a26', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffe2b8', keyI: 2.4, hemiI: 1.25, keyPos: [-4, 8, 8]},
-  interiorNight: {fog: '#1a1418', near: 8, far: 30, skyTop: '#0e1626', skyBottom: '#34405a', key: '#ffb870', keyI: 1.4, hemiI: 0.6, keyPos: [-3, 6, 6]},
-};
+export {LOOK_PRESETS, MOODS} from './lighting';
 
 export const LOOK = {
   road: {fog: '#efe6d2', near: 14, far: 55, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff0d8', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
   market: {fog: '#f1e5cf', near: 12, far: 45, skyTop: '#a6cbe6', skyBottom: '#f6ead6', key: '#ffeccc', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
   docks: {fog: '#e4ecec', near: 14, far: 60, skyTop: '#8fc1e3', skyBottom: '#eef1e8', key: '#fff3e0', keyI: 2.5, hemiI: 1.4, keyPos: [-7, 10, 6]},
   shop: {fog: '#3a2a26', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffe2b8', keyI: 2.4, hemiI: 1.25, keyPos: [-4, 8, 8]},
-  cross: {fog: '#f1cfa6', near: 12, far: 50, skyTop: '#e8a27a', skyBottom: '#f8dcb0', key: '#ffc48a', keyI: 2.5, hemiI: 1.15, keyPos: [-8, 7, 6]},
+  // "Half a day gone": the sun sinks through the shot and the mood turns sad on "still no fish".
+  cross: {keys: [{at: 'cut6', ...LOOK_PRESETS.goldenHour, keyPos: [-8, 9, 6]}, {at: 'nofish', ...LOOK_PRESETS.dusk, ...MOODS.sad, keyPos: [-6, 4, 5]}]},
   mint: {fog: '#3a2620', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffd6a0', keyI: 2.5, hemiI: 1.2, keyPos: [-4, 8, 8]},
   museum: {fog: '#2e3440', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff4e6', keyI: 2.4, hemiI: 1.35, keyPos: [-4, 8, 8]},
 };

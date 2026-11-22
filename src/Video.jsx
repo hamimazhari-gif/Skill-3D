@@ -13,12 +13,8 @@ import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
 import {CREAM, INK} from './kit';
+import {GradeShader, resolveLook, applyGrade} from './lighting';
 
-const VignetteShader = {
-  uniforms: {tDiffuse: {value: null}, strength: {value: 0.32}},
-  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-  fragmentShader: 'uniform sampler2D tDiffuse; uniform float strength; varying vec2 vUv; void main(){ vec4 c = texture2D(tDiffuse, vUv); vec2 d = vUv-0.5; d.x *= 0.75; float v = smoothstep(0.75, 0.2, length(d)); c.rgb *= mix(1.0-strength, 1.0, v); gl_FragColor = c; }',
-};
 
 export function useStory(lang) {
   return useMemo(() => {
@@ -59,7 +55,7 @@ function Scene({lang, thumb}) {
     c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 3, aperture: 0.0016, maxblur: 0.0055});
     c.addPass(bokeh);
-    c.addPass(new ShaderPass(VignetteShader));
+    const grade = new ShaderPass(GradeShader); c.addPass(grade); c.grade = grade;
     c.addPass(new OutputPass());
     c.bokeh = bokeh;
     return c;
@@ -79,7 +75,7 @@ function Scene({lang, thumb}) {
     if (amp > 0 && !thumb) { camera.position.x += Math.sin(t * 71) * amp; camera.position.y += Math.sin(t * 53 + 1) * amp; camera.rotation.z += Math.sin(t * 37) * amp * 0.5; }
     camera.fov = 80; camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
     for (const [name, g] of Object.entries(built.locGroups)) g.visible = name === loc;
-    const lk = LOOK[loc];
+    const lk = resolveLook(LOOK[loc], t, {EVt, CUTS: T.CUTS});
     if (!scene.fog) scene.fog = new THREE.Fog('#efe6d2', 14, 55);
     if (!built.world.parent) { scene.add(built.world, built.sky, built.moon, built.key, built.key.target, built.hemi); gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap; }
     scene.fog.color.set(lk.fog); scene.fog.near = lk.near; scene.fog.far = lk.far;
@@ -88,12 +84,10 @@ function Scene({lang, thumb}) {
     built.moon.visible = !!lk.moon;
     if (lk.moon) { built.moon.position.set(camera.position.x - 30, 45, camera.position.z - 120); built.moon.lookAt(camera.position); }
     const ox = LOC[loc];
-    let kp = lk.keyPos;
-    if (loc === 'cross') { // the sun sinks during "half a day"
-      const u = THREE.MathUtils.clamp((t - built.cams[5].t0) / (built.cams[5].t1 - built.cams[5].t0), 0, 1);
-      kp = [-8 + 2 * u, 9 - 4.5 * u, 6 - 1 * u];
-      built.key.color.set('#ffd9a8').lerp(new THREE.Color('#ff9a5a'), u);
-    } else built.key.color.set(lk.key);
+    const kp = lk.keyPos;
+    built.key.color.set(lk.key);
+    built.hemi.color.set(lk.hemiSky || '#dcecff'); built.hemi.groundColor.set(lk.hemiGround || '#b09a72');
+    applyGrade(composer.grade, lk.grade);
     built.key.position.set(ox + kp[0], kp[1], kp[2]);
     built.key.target.position.set(ox, 0, -1); built.key.target.updateMatrixWorld();
     built.key.intensity = lk.keyI; built.hemi.intensity = lk.hemiI;

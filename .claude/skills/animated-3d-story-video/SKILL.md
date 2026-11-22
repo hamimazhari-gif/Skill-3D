@@ -23,6 +23,8 @@ animated-3d-story-video/
   SKILL.md                  this file
   starter/                  complete Remotion project (copy to the repo root)
     package.json            pinned: remotion/@remotion/cli/@remotion/three 4.0.545, three 0.170.0, @react-three/fiber 8.18.0, react 18.3.1
+    src/lighting.js         REUSE: LOOK_PRESETS (dawn, day, noon, goldenHour, sunset, dusk, night, overcast, storm, winter, desert,
+                                   interiorWarm, interiorCool, candle, underground, underwater), MOODS, keyed looks, grade shader
     src/vfx.js              REUSE: sparks, smoke, dust, debris, lightning, flame, fireLight (frame-driven, seeded)
     src/kit.js              REUSE: toon materials, painted wear textures, ink hull + edge lines, signs, pop/easing helpers
     src/char.js             REUSE: base character, EXPRESSIONS, POSES, actions, act() timeline
@@ -54,7 +56,7 @@ Do everything without stopping; ask nothing unless an input is missing.
 2. **Shots.** Split the narration into 9-12 shots by sentence (one location per shot), following the beats in the rulebook where the text allows (But / Then / complaint / "You see" pivot / "So" consequence / closing). Never rewrite the user's narration; only note rule misses in `script.md`. Write `videos/<slug>/narration_<lang>.txt` as `shot | sentence` lines; write numbers as spoken words.
 3. **Facts.** Search the web to check each factual claim; list doubtful ones in `script.md` ("wording to watch") and tell the user at the end. Do not change the audio.
 4. **Timing.** `python3 -I tools/align.py public/vo/voiceover_<lang>.wav videos/<slug>/narration_<lang>.txt src/data/sentence_times_<lang>.json` for every language. Check that each sentence length is close to its prediction; if the tool says there are too few pauses, lower the threshold in `gaps.py` (-44 dB / 0.12 s by default) or merge sentences.
-5. **Design** (write `camera_plan.md`, including the VFX plan): locations (x offsets 0, 40, 80, …), cast (palettes in `char.js`; add palettes, never new body shapes), in-world labels per language (`LABELS`), the word events (`EV`: `[sentenceIndex, word]` per language), acting cues per character, on-word props (pop-ins, doodles, coins…), SFX cue sheet.
+5. **Design** (write `camera_plan.md`, including the lighting plan and the VFX plan): locations (x offsets 0, 40, 80, …), cast (palettes in `char.js`; add palettes, never new body shapes), in-world labels per language (`LABELS`), the word events (`EV`: `[sentenceIndex, word]` per language), acting cues per character, on-word props (pop-ins, doodles, coins…), SFX cue sheet.
 6. **Build** the story files (`world.js`, `SHOT_PLAN` in `shots.js`, `EV`/`LABELS` in `timing.js`, `cues()`/`DIPS`/thumbnail in `Video.jsx`, compositions in `index.jsx`). Reuse kit/props; build new props in `props.js` with the same helpers.
 7. **Check stills** (stage F) for every language, fix, repeat until clean.
 8. **Render** every language (`tools/render.sh CompA CompB`, run in the background; about 1 s per frame on 4 cores, so a 60 s video takes about 30 min), check with ffprobe and a contact sheet of one frame per shot.
@@ -85,7 +87,7 @@ General traits to follow. Never copy another channel's characters, costumes, log
 
 ## Art style (fixed)
 - One ink colour for every outline: #351f22. Models built in code with real depth (extruded walls, window reveals and sills, door panels, awnings, cornices, chimneys…). Textures are painted flat colours with wear (stains, chips, scratches). Outline = inverted hull plus edge lines.
-- Toon shading with a 3-band gradient; one warm key light from the upper left with shadows, hemisphere fill, light vignette, fog colour per location (`LOOK`).
+- Toon shading with a 3-band gradient; one key light (upper left by default) with shadows, hemisphere fill, vignette and a colour grade; fog, sky and light colours per location and per beat from the lighting plan (`LOOK`, `lighting.js`).
 - Depth: blurred foreground object near the lens, sharp midground with characters, softly blurred background (Bokeh pass focused at the look-at distance).
 - Labels live inside the world (painted signs, banners on two poles, names on sacks/crates, chalkboards, plaques), in the language of each version. The only screen text is the word-by-word caption track (no floating pills, titles or info boxes).
 - No flat sky or ground strips, no side-on cardboard buildings. Cuts: 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
@@ -113,6 +115,15 @@ Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — exp
 - Frame reactions in close-up (camera 0.9-1.3 m from the face, look at head height 1.4 m); establish each new location with one wide or crane move first.
 - 80° vertical FOV at 9:16: frame width at the subject = 0.93 × distance, frame height = 1.68 × distance.
 - Tie on-screen events to words (labels and props pop on their noun, doodles draw on their word, ticks appear on the payoff word). A word at the very end of a sentence leaves little screen time: start the event earlier or extend the key.
+
+## Lighting (`lighting.js`) — comes from the story
+**Light every location from what the narration says, not from a default.** Write a "lighting plan" table in `camera_plan.md`: location → time of day, weather, light sources, mood per beat → preset + keys. Read the narration for clues: explicit times ("at sunrise", "that night", "by noon"), weather ("storm", "winter", "fog"), places (desert, cave, ship, palace, prison), light sources (torches, candles, lanterns, fire, moon, lightning, screens) and the emotional arc (hope, danger, loss, triumph). When the text gives no clue, choose what the real event most likely looked like (historical season, place and hour) and stay consistent between shots that happen at the same moment.
+- Start from a preset: `{...LOOK_PRESETS.night, keyPos: [...]}`. Presets: dawn, day, noon, goldenHour, sunset, dusk, night (moon on), overcast, storm, winter, desert, interiorWarm, interiorCool, candle, underground, underwater. Each sets fog, sky gradient, key light colour/intensity/direction, hemisphere fill and a colour grade (saturation, contrast, tint, vignette).
+- Let the light change with the story: a LOOK entry can be `{keys: [{at, ...look}, ...]}` where `at` is seconds, an EV word or `'cutN'`; everything is interpolated (sun setting during "half a day", lights going out on "the lamps died", dawn breaking on "by morning", lightning-lit storm).
+- Spread a mood on a beat: `MOODS.tense | sad | joyful | danger | mystery | nostalgic` (grade only), for example `{...LOOK_PRESETS.day, ...MOODS.sad}` on the failure beat, `joyful` on the payoff.
+- Practical lights must exist in the world: torches/candles/fires get `FX.flame` + `FX.fireLight`; night scenes need at least one warm source near the characters so faces read; storms pair with `FX.lightning` + flashes.
+- Characters are unlit flat drawings and stay bright: never make a scene so dark that faces or labels stop reading; use the grade (tint, vignette), not black.
+- Check lighting in the stills: same moment → same light across cuts; key light from the upper left of the frame unless a story light source says otherwise.
 
 ## VFX (`vfx.js`) and screen effects
 **Effects come from the story, never from a fixed list.** Before building, write a "VFX plan" table in `camera_plan.md`: beat (word) → what physically happens in the story → effect. Every effect must be motivated by something in the narration or on screen; a story with no fire gets no sparks, a calm story gets few effects. Match weather, era and place (rain for a storm, snow for winter, dust for deserts and roads, embers for battles, splashes for rivers and ports, confetti only for celebrations).
