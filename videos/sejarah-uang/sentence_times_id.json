@@ -1,0 +1,139 @@
+{
+ "lang": "id",
+ "duration": 61.96,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Dulu, untuk membeli seekor ayam, kamu harus memanggul sekarung beras ke pasar.",
+   "start": 0.12,
+   "end": 4.96,
+   "pred": 5.29
+  },
+  {
+   "shot": 2,
+   "text": "Belum ada uang.",
+   "start": 5.3,
+   "end": 6.2,
+   "pred": 0.84
+  },
+  {
+   "shot": 2,
+   "text": "Orang saling menukar barang: beras dengan ikan, garam dengan kain, kambing dengan gandum.",
+   "start": 6.48,
+   "end": 12.6,
+   "pred": 5.92
+  },
+  {
+   "shot": 3,
+   "text": "Petani kita lapar ikan.",
+   "start": 13.06,
+   "end": 14.12,
+   "pred": 1.32
+  },
+  {
+   "shot": 3,
+   "text": "Ia berjalan jauh ke dermaga, menemui seorang nelayan.",
+   "start": 14.4,
+   "end": 17.34,
+   "pred": 3.48
+  },
+  {
+   "shot": 4,
+   "text": "Tapi nelayan itu menggeleng.",
+   "start": 17.76,
+   "end": 18.98,
+   "pred": 1.67
+  },
+  {
+   "shot": 4,
+   "text": "Ia tidak butuh beras.",
+   "start": 19.18,
+   "end": 20.18,
+   "pred": 1.18
+  },
+  {
+   "shot": 4,
+   "text": "Ia butuh sepasang sepatu.",
+   "start": 20.34,
+   "end": 22.48,
+   "pred": 1.46
+  },
+  {
+   "shot": 5,
+   "text": "Lalu petani mencari tukang sepatu.",
+   "start": 23.04,
+   "end": 24.62,
+   "pred": 2.02
+  },
+  {
+   "shot": 5,
+   "text": "Tukang sepatu malah minta seekor kambing.",
+   "start": 24.92,
+   "end": 26.86,
+   "pred": 2.44
+  },
+  {
+   "shot": 6,
+   "text": "Setengah hari habis, kakinya pegal, berasnya masih utuh, dan ikan yang ia mau belum juga didapat.",
+   "start": 27.18,
+   "end": 33.9,
+   "pred": 6.69
+  },
+  {
+   "shot": 7,
+   "text": "Kamu lihat, barter hanya berhasil kalau dua orang saling butuh di saat yang sama.",
+   "start": 34.64,
+   "end": 38.64,
+   "pred": 5.02
+  },
+  {
+   "shot": 8,
+   "text": "Maka orang memakai kerang, garam, dan logam.",
+   "start": 38.84,
+   "end": 41.4,
+   "pred": 3.27
+  },
+  {
+   "shot": 8,
+   "text": "Sekitar dua ribu enam ratus tahun lalu, Lydia di Turki mencetak koin paling awal.",
+   "start": 41.68,
+   "end": 45.84,
+   "pred": 5.02
+  },
+  {
+   "shot": 9,
+   "text": "Seribu tahun lalu, China membuat uang kertas.",
+   "start": 46.0,
+   "end": 48.48,
+   "pred": 3.0
+  },
+  {
+   "shot": 9,
+   "text": "Sekarang, cukup tempelkan ponsel.",
+   "start": 48.74,
+   "end": 51.0,
+   "pred": 2.37
+  },
+  {
+   "shot": 10,
+   "text": "Jadi, dari sekarung beras sampai satu sentuhan, uang terus berubah mengikuti kita.",
+   "start": 51.56,
+   "end": 57.16,
+   "pred": 5.57
+  },
+  {
+   "shot": 11,
+   "text": "Kalau uang hilang besok, apa yang kamu tukar untuk makan siang?",
+   "start": 57.56,
+   "end": 60.6,
+   "pred": 3.97
+  },
+  {
+   "shot": 11,
+   "text": "Tulis di komentar!",
+   "start": 60.98,
+   "end": 61.7,
+   "pred": 1.04
+  }
+ ]
+}

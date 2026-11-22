@@ -1,0 +1,125 @@
+{
+ "lang": "en",
+ "duration": 48.8,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Long ago, to buy one chicken, you had to haul a sack of rice to market.",
+   "start": 0.28,
+   "end": 4.14,
+   "pred": 4.14
+  },
+  {
+   "shot": 2,
+   "text": "No money yet.",
+   "start": 4.52,
+   "end": 5.02,
+   "pred": 0.64
+  },
+  {
+   "shot": 2,
+   "text": "People swapped goods: rice for fish, salt for cloth, goats for wheat.",
+   "start": 5.38,
+   "end": 9.34,
+   "pred": 4.2
+  },
+  {
+   "shot": 3,
+   "text": "Our farmer wants fish.",
+   "start": 9.64,
+   "end": 10.8,
+   "pred": 1.15
+  },
+  {
+   "shot": 3,
+   "text": "He walks all the way to the docks to find a fisherman.",
+   "start": 10.98,
+   "end": 13.62,
+   "pred": 2.67
+  },
+  {
+   "shot": 4,
+   "text": "But the fisherman shakes his head.",
+   "start": 13.96,
+   "end": 15.16,
+   "pred": 1.78
+  },
+  {
+   "shot": 4,
+   "text": "He needs shoes, not rice.",
+   "start": 15.36,
+   "end": 16.84,
+   "pred": 1.59
+  },
+  {
+   "shot": 5,
+   "text": "Then the farmer finds a shoemaker, who wants a goat.",
+   "start": 17.38,
+   "end": 19.4,
+   "pred": 2.99
+  },
+  {
+   "shot": 6,
+   "text": "Half a day gone, sore feet, a full sack of rice, and still no fish.",
+   "start": 19.84,
+   "end": 24.04,
+   "pred": 4.26
+  },
+  {
+   "shot": 7,
+   "text": "You see, barter only works when two people want each other's things at once.",
+   "start": 24.4,
+   "end": 27.84,
+   "pred": 4.2
+  },
+  {
+   "shot": 8,
+   "text": "Instead, people used shells, salt and metal.",
+   "start": 28.18,
+   "end": 30.64,
+   "pred": 2.99
+  },
+  {
+   "shot": 8,
+   "text": "Around two thousand six hundred years ago, Lydia, now Turkey, struck some of the earliest coins.",
+   "start": 31.02,
+   "end": 35.98,
+   "pred": 6.05
+  },
+  {
+   "shot": 9,
+   "text": "A thousand years ago, China printed paper money.",
+   "start": 36.42,
+   "end": 38.6,
+   "pred": 2.86
+  },
+  {
+   "shot": 9,
+   "text": "Now we just tap a phone.",
+   "start": 39.16,
+   "end": 40.14,
+   "pred": 1.15
+  },
+  {
+   "shot": 10,
+   "text": "So from rice to a single tap, money keeps changing with us.",
+   "start": 40.54,
+   "end": 43.98,
+   "pred": 3.31
+  },
+  {
+   "shot": 11,
+   "text": "If money vanished tomorrow, what would you trade for lunch?",
+   "start": 44.3,
+   "end": 47.44,
+   "pred": 3.44
+  },
+  {
+   "shot": 11,
+   "text": "Comment below.",
+   "start": 47.8,
+   "end": 48.46,
+   "pred": 0.76
+  }
+ ]
+}
