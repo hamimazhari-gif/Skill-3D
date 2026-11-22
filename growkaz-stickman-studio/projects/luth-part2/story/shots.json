@@ -1,0 +1,519 @@
+{
+ "title": "Kisah Nabi Luth - Part 2",
+ "duration": 84.7,
+ "shots": [
+  {
+   "id": "m01",
+   "start": 0.0,
+   "end": 4.05,
+   "line": "Part dua. Tamu yang Bukan Manusia.",
+   "scene": "m01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "m02",
+   "start": 4.05,
+   "end": 5.85,
+   "line": "Musuh itu…",
+   "scene": "m02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "m03",
+   "start": 5.85,
+   "end": 8.45,
+   "line": "adalah istrinya sendiri.",
+   "scene": "m03",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "m04",
+   "start": 8.45,
+   "end": 12.3,
+   "line": "Diam-diam, ia memihak kaum yang durhaka.",
+   "scene": "m04",
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "m05",
+   "start": 12.3,
+   "end": 16.15,
+   "line": "Suatu sore, datang beberapa pemuda ke rumah Nabi Luth.",
+   "scene": "m05",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.4,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "m06",
+   "start": 16.15,
+   "end": 18.55,
+   "line": "Wajah mereka sangat tampan.",
+   "scene": "m06",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "m07",
+   "start": 18.55,
+   "end": 22.6,
+   "line": "Tapi Nabi Luth justru gelisah. Dadanya sesak.",
+   "scene": "m07",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 2.3,
+     "name": "heartbeat",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "m08",
+   "start": 22.6,
+   "end": 25.3,
+   "line": "\"Ini hari yang sangat sulit,\" katanya.",
+   "scene": "m08",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "m09",
+   "start": 25.3,
+   "end": 29.9,
+   "line": "Karena beliau tahu… apa yang akan dilakukan kaumnya.",
+   "scene": "m09",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "m10",
+   "start": 29.9,
+   "end": 33.95,
+   "line": "Dan benar saja. Istrinya membocorkan kabar itu.",
+   "scene": "m10",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "m11",
+   "start": 33.95,
+   "end": 36.95,
+   "line": "Tak lama… terdengar langkah kaki.",
+   "scene": "m11",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 0.7,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 1.2,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 1.7,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 2.2,
+     "name": "footstep",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "m12",
+   "start": 36.95,
+   "end": 40.05,
+   "line": "Semakin banyak. Semakin dekat.",
+   "scene": "m12",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 0.5,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 0.8,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 1.1,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 1.4,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 1.7,
+     "name": "footstep",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "m13",
+   "start": 40.05,
+   "end": 42.75,
+   "line": "Rumah Nabi Luth dikepung!",
+   "scene": "m13",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "impact",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -14
+   }
+  },
+  {
+   "id": "m14",
+   "start": 42.75,
+   "end": 46.05,
+   "line": "\"Wahai kaumku, takutlah kepada Allah!",
+   "scene": "m14",
+   "amb": {
+    "name": "murmur",
+    "gain": -20
+   }
+  },
+  {
+   "id": "m15",
+   "start": 46.05,
+   "end": 49.25,
+   "line": "Jangan permalukan aku di depan tamuku!",
+   "scene": "m15",
+   "bars": "scope"
+  },
+  {
+   "id": "m16",
+   "start": 49.25,
+   "end": 52.65,
+   "line": "Tidak adakah satu pun orang berakal di antara kalian?\"",
+   "scene": "m16",
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "m17",
+   "start": 52.65,
+   "end": 57.15,
+   "line": "Mereka tidak peduli. Pintu terus didesak.",
+   "scene": "m17",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "hit",
+     "gain": -6
+    },
+    {
+     "at": 1.0,
+     "name": "hit",
+     "gain": -6
+    },
+    {
+     "at": 1.7,
+     "name": "hit",
+     "gain": -6
+    },
+    {
+     "at": 2.4,
+     "name": "hit",
+     "gain": -6
+    },
+    {
+     "at": 3.1,
+     "name": "hit",
+     "gain": -6
+    },
+    {
+     "at": 3.8,
+     "name": "hit",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -16
+   }
+  },
+  {
+   "id": "m18",
+   "start": 57.15,
+   "end": 59.55,
+   "line": "Nabi Luth berbisik pilu…",
+   "scene": "m18",
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "hit",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "m19",
+   "start": 59.55,
+   "end": 65.15,
+   "line": "\"Andai aku punya kekuatan… atau tempat berlindung yang kuat…\"",
+   "scene": "m19",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 2.5,
+     "name": "hit",
+     "gain": -16
+    }
+   ]
+  },
+  {
+   "id": "m20",
+   "start": 65.15,
+   "end": 67.95,
+   "line": "Saat itulah para tamu berkata,",
+   "scene": "m20",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "m21",
+   "start": 67.95,
+   "end": 71.85,
+   "line": "\"Wahai Luth… kami adalah utusan Tuhanmu.\"",
+   "scene": "m21",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "m22",
+   "start": 71.85,
+   "end": 74.65,
+   "line": "Ternyata mereka… malaikat.",
+   "scene": "m22",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "powerup",
+     "gain": -6
+    },
+    {
+     "at": 1.4,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "m23",
+   "start": 74.65,
+   "end": 78.25,
+   "line": "Seketika, mata para pengepung itu dibutakan.",
+   "scene": "m23",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "impact",
+     "gain": -4
+    },
+    {
+     "at": 2.3,
+     "name": "glitch",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "m24",
+   "start": 78.25,
+   "end": 80.85,
+   "line": "Mereka meraba-raba dalam gelap.",
+   "scene": "m24",
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "m25",
+   "start": 80.85,
+   "end": 84.7,
+   "line": "Tapi itu… baru permulaan.",
+   "scene": "m25",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "thunder",
+     "gain": -8
+    }
+   ],
+   "captions": false
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 12.3,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 12.3,
+   "end": 29.9,
+   "mood": "tension",
+   "intensity": 0.45
+  },
+  {
+   "start": 29.9,
+   "end": 57.15,
+   "mood": "action",
+   "intensity": 0.7
+  },
+  {
+   "start": 57.15,
+   "end": 65.15,
+   "mood": "sad",
+   "intensity": 0.4
+  },
+  {
+   "start": 65.15,
+   "end": 78.25,
+   "mood": "wonder",
+   "intensity": 0.7
+  },
+  {
+   "start": 78.25,
+   "end": 84.7,
+   "mood": "dark",
+   "intensity": 0.6
+  }
+ ],
+ "sfx": []
+}
