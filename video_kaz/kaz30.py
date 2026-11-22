@@ -12,7 +12,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 IMGDIR = os.path.join(ROOT, 'gambar_tritone')
 W, H, FPS = 1920, 1080, 30
-DUR = 835.72
 MONO = '/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf'
 SERIF = '/usr/share/fonts/truetype/crosextra/Caladea-Bold.ttf'
 RED = (208, 49, 45)                       # RGB
@@ -28,11 +27,15 @@ def backout(x, s=1.7): x = clamp(x) - 1; return 1 + (s+1)*x**3 + s*x**2
 rng = np.random.default_rng(1)
 
 # ---------------------------------------------------------------- timing
-TM = json.load(open(os.path.join(HERE, 'timing.json'), encoding='utf-8'))
+_TG = json.load(open(os.path.join(HERE, 'timing_gap.json'), encoding='utf-8'))
+TM, BAG, DUR = _TG['paras'], _TG['bagian'], _TG['duration']
 PSTART = {f"{d['bagian']}.{d['para']}": d['start'] for d in TM}
 PTEXT = {f"{d['bagian']}.{d['para']}": d['text'] for d in TM}
 KEYS = list(PSTART)
-PEND = {k: (PSTART[KEYS[i+1]] if i+1 < len(KEYS) else DUR) for i, k in enumerate(KEYS)}
+PEND = {}
+for i, k in enumerate(KEYS):
+    nxt = KEYS[i+1] if i+1 < len(KEYS) else None
+    PEND[k] = PSTART[nxt] if nxt and nxt.split('.')[0] == k.split('.')[0] else BAG[int(k.split('.')[0]) - 1]['end']
 def P(k): return PSTART[k]
 def WD(k, word, n=1):
     """Estimated time a word is spoken: char position inside the paragraph, spread over its speech span."""
@@ -204,7 +207,7 @@ def build_camera():
             beats.append((PSTART[k], t_cut, parse_beat('38'), k)); beats.append((t_cut, PEND[k], parse_beat('37'), k))
         else:
             beats.append((PSTART[k], PEND[k], parse_beat(BEAT[k]), k))
-    keys = [(0.0,) + target(beats[0][2])[:2] + (target(beats[0][2])[2]*0.9, target(beats[0][2])[3])]
+    keys = []
     prev = None
     for a, b, spec, k in beats:
         cx, cy, z, r = target(spec)
@@ -218,6 +221,13 @@ def build_camera():
         drift = 1.07 if spec[0] == 'card' else 1.05
         keys.append((b - .02, cx + 14*math.sin(a), cy + 10*math.cos(a), z * drift, r + (.6 if (len(keys) % 4) else -.6)))
         prev = spec
+    for bg_ in BAG:                                  # chapter gap: pull out over the board, hold, then move on
+        c0, c1 = bg_['card'], bg_['start']
+        if bg_['n'] == 1:
+            keys.append((0.0, WIDE_C[0], WIDE_C[1], .13, 0)); keys.append((c1 - .1, WIDE_C[0], WIDE_C[1], .14, 0))
+        else:
+            keys.append((c0 + 1.3, WIDE_C[0], WIDE_C[1], .14, 0)); keys.append((c1 - .1, WIDE_C[0], WIDE_C[1], .15, 0))
+    keys = [k for k in keys if not any(b_['card'] < k[0] < b_['start'] - .15 and not (abs(k[0] - b_['card'] - 1.3) < 1e-6) for b_ in BAG)]
     keys.sort(key=lambda x: x[0])
     return keys, beats
 
@@ -405,10 +415,57 @@ def text_center(d, y, s, f, fill):
     w = f.getbbox(s)[2]; d.text(((W-w)/2, y), s, font=f, fill=fill)
 
 FM = None
+CHAIN = []
+def build_chain():
+    order = sorted((c for c in CARDS if CARDS[c]['t0'] < 1e8), key=lambda c: CARDS[c]['t0'])
+    for a, b in zip(order, order[1:]): CHAIN.append((a, b, CARDS[b]['t0'] + .25))
+
+def pin(code): return card_pt(code, .5, .035)
+
+def draw_strings_under(frame, t, C):
+    """Red strings between photos, drawn on the board before the cards so they tuck under them."""
+    zl = max(.4, min(1.4, C[2]*3))
+    for a, b, t0 in CHAIN:
+        if t < t0: continue
+        u = ease((t - t0) / .8)
+        pa, pb = to_screen(pin(a), C), to_screen(pin(b), C)
+        L = math.dist(pa, pb)
+        if L < 2: continue
+        sag = min(90, L*.08); n = int(24*u) + 1
+        pts = np.array([(pa[0] + (pb[0]-pa[0])*(i/24), pa[1] + (pb[1]-pa[1])*(i/24) + sag*4*(i/24)*(1-i/24)) for i in range(n)])
+        if len(pts) < 2: continue
+        cv2.polylines(frame, [(pts + (3, 5)).astype(np.int32)], False, (14, 14, 40), max(3, int(5*zl)), cv2.LINE_AA)
+        cv2.polylines(frame, [pts.astype(np.int32)], False, (45, 49, 208), max(2, int(3*zl)), cv2.LINE_AA)
+
+def draw_chain(d, t, C):
+    zl = max(.4, min(1.4, C[2]*3))
+    for a, b, t0 in []:
+        if t < t0: continue
+        u = ease((t - t0) / .8)
+        pa, pb = to_screen(pin(a), C), to_screen(pin(b), C)
+        L = math.dist(pa, pb)
+        if L < 2: continue
+        sag = min(90, L*.08)
+        pts = []
+        for i in range(int(24*u) + 1):
+            v = i / 24
+            pts.append((pa[0] + (pb[0]-pa[0])*v, pa[1] + (pb[1]-pa[1])*v + sag*4*v*(1-v)))
+        if len(pts) > 1:
+            d.line(pts, fill=(120, 20, 18, 120), width=max(3, int(5*zl)))         # shadow
+            d.line([(x-2, y-3) for x, y in pts], fill=RED+(215,), width=max(2, int(3*zl)))
+    for code, cd in CARDS.items():                                                # pins
+        if t < cd['t0'] + .35: continue
+        p = to_screen(pin(code), C); r = max(4, 9*zl)
+        if -20 < p[0] < W+20 and -20 < p[1] < H+20:
+            d.ellipse([p[0]-r+2, p[1]-r+4, p[0]+r+2, p[1]+r+4], fill=(0, 0, 0, 110))
+            d.ellipse([p[0]-r, p[1]-r, p[0]+r, p[1]+r], fill=RED+(255,))
+            d.ellipse([p[0]-r*.4, p[1]-r*.55, p[0]+r*.05, p[1]-r*.1], fill=(255, 190, 180, 200))
+
 def draw_overlays(img, t, C):
     global FM
     FM = FM or font(MONO, 30)
     pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)); d = ImageDraw.Draw(pil, 'RGBA')
+    draw_chain(d, t, C)
     z = C[2]; zl = max(.35, min(1.6, z*3))
     fin = t > FINALE
     for c, rx, ry, t0, du in ELLS:
@@ -454,6 +511,24 @@ def screen_overlays(img, t):
     out = img.astype(np.float32)
     def pil_of(o): return Image.fromarray(cv2.cvtColor(np.clip(o, 0, 255).astype(np.uint8), cv2.COLOR_BGR2RGB))
     def back(p): return cv2.cvtColor(np.array(p), cv2.COLOR_RGB2BGR)
+    for bg_ in BAG:
+        c0, c1 = bg_['card'], bg_['start']
+        if c0 - .01 <= t < c1 + .3:
+            a = (ss((t-c0)/.4) if bg_['n'] > 1 else 1) * (1-ss((t-c1+.2)/.5))
+            out *= 1 - .62*a
+            pil = pil_of(out); d = ImageDraw.Draw(pil, 'RGBA'); al = int(255*a)
+            lab = f"BAGIAN {bg_['n']}"; n = min(len(lab), int(max(0, t-c0-.2)*16))
+            text_center(d, 330, lab[:n] + ('_' if n < len(lab) else ''), font(MONO, 50), (225, 225, 215, al))
+            title = bg_['title']; main, sub = (title.split(':', 1) + [''])[:2]
+            if t > c0 + .9:
+                a2 = int(al*ss((t-c0-.9)/.5))
+                fs = 120 if len(main) < 18 else 96 if len(main) < 26 else 78
+                text_center(d, 410, main.strip(), font(SERIF, fs), (242, 238, 228, a2))
+                u = ease((t-c0-1.3)/.6); x0 = W/2 - 300
+                d.line([(x0, 580), (x0 + 600*u, 580)], fill=RED+(a2,), width=6)
+                if sub.strip():
+                    text_center(d, 610, sub.strip(), font(MONO, 38), (215, 210, 196, int(a2*ss((t-c0-1.6)/.5))))
+            return back(pil)
     for t0, small, big, hold in YEARS:
         if t0 < t < t0 + hold + .5:
             a = ss((t-t0)/.3) * (1-ss((t-t0-hold)/.4))
@@ -531,6 +606,7 @@ def setup():
     for a, b, spec, k in BEATS:                  # a card appears when the camera first goes to it
         if spec[0] == 'card': CARDS[spec[1]]['t0'] = min(CARDS[spec[1]]['t0'], a + .25)
     for c in CARDS.values(): c['t0'] = min(c['t0'], FINALE + .5)   # everything is on the board for the finale
+    build_chain()
     stamps = [(make_stamp(s), A(an), rot, t) for s, an, rot, t in STAMPS]
     return build_bg(), stamps
 
@@ -542,6 +618,7 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if st < t < st+.35:
             k = (1-(t-st)/.35)*14; C[0] += k*math.sin(t*90)/C[2]; C[1] += k*math.cos(t*77)/C[2]
     frame = cv2.warpAffine(bg, world_M(C, BGS), (W, H), flags=cv2.INTER_LINEAR, borderValue=(38, 38, 24)).astype(np.float32)
+    draw_strings_under(frame, t, C)
     for code in sorted(CARDS, key=lambda c: CARDS[c]['t0']):
         cd = CARDS[code]
         if t < cd['t0']: continue
@@ -566,7 +643,7 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if st < t < st + .2:
             f[..., 2] = np.roll(f[..., 2], 10, axis=1); f[..., 0] = np.roll(f[..., 0], -10, axis=1)
     f = f * vig + grains[fi % 6]
-    if t < .6: f *= t/.6
+    if t < .8: f *= t/.8
     return np.clip(f, 0, 255).astype(np.uint8)
 
 def render(frames, out):

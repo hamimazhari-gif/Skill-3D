@@ -10,7 +10,7 @@ W, H = 1920, 1080
 MONO = '/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf'
 SERIF = '/usr/share/fonts/truetype/crosextra/Caladea-Bold.ttf'
 INK = (52, 38, 26); PAPER = (226, 208, 172); MID = (150, 124, 92); DARK = (88, 66, 46); RED = (178, 40, 32)
-_TM = {f"{d['bagian']}.{d['para']}": d['start'] for d in json.load(open(os.path.join(HERE, 'timing.json'), encoding='utf-8'))}
+_TM = {f"{d['bagian']}.{d['para']}": d['start'] for d in json.load(open(os.path.join(HERE, 'timing_gap.json'), encoding='utf-8'))['paras']}
 T_WIN, T_THROW, T_16, T_SAFE, T_TITLE = _TM['3.5'], _TM['3.6'], _TM['3.7'], _TM['3.8'], _TM['3.9']
 
 def F(p, s): return ImageFont.truetype(p, int(s))
