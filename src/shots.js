@@ -24,7 +24,7 @@ export const SHOT_PLAN = [
   {shot: 5, loc: 'shop', move: 'push + track', keys: [
     {at: 'start', pos: [-1.5, 1.55, 2.5], look: [-1.55, 1.1, -1.2]},
     {at: 'shoemaker', pos: [-0.2, 1.6, 1.2], look: [0.3, 1.25, -2.8]},
-    {at: 'end', pos: [0.9, 1.65, 0.6], look: [1.4, 1.45, -4.9]}]},
+    {at: 'end', pos: [0.55, 1.6, 1.7], look: [0.8, 1.3, -3.6]}]},
   {shot: 6, loc: 'cross', move: 'crane up', keys: [
     {at: 'start', pos: [-1.3, 1.05, 1.9], look: [-1.55, 0.8, 0.55]},
     {at: 'feet', pos: [-0.5, 1.45, 2.5], look: [-0.35, 0.95, -0.2]},

@@ -51,12 +51,16 @@ export function buildWorld(lang, T, EVt, L) {
     const seller = ch('sellerA', {}, g, 2.9, 1.0, 0.3);
     const farmer = ch('farmer', {}, g, -2.4, 0.4, 0.6);
     const fs = P.sack(L.rice, {scale: 0.8}); at(fs, 0.3, 0.92, -0.08, 0, 0, -0.15); fs.traverse((m) => { m.castShadow = false; }); farmer.group.children[0].add(fs);
-    farmer.arms[1].userData.raise = 2.2;
+    farmer.act([
+      {t: 0, pose: 'carry', expr: 'happy', action: 'walk', dur: cut(2) - 0.2},
+      {t: E('chicken'), expr: 'excited'},
+      {t: E('rice'), expr: 'worried', action: 'tremble', dur: 0.5},
+      {t: E('market') - 0.1, expr: 'determined'},
+    ]);
+    seller.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('chicken'), pose: 'present', expr: 'happy', action: 'hop', dur: 0.5}]);
     updaters.push((t) => {
       const u = clamp01((t - 0) / (cut(2)));
       farmer.group.position.x = -2.6 + u * 3.0;
-      farmer.state.walk = t < cut(2) - 0.2 ? 1 : 0;
-      farmer.state.armR = 2.7; // hand up to hold sack
       cg.userData.chicken.rotation.y = -0.3 + Math.sin(t * 3) * 0.3;
       cg.userData.chicken.position.y = 0.45 + Math.abs(Math.sin(t * 5)) * 0.03;
     });
@@ -87,8 +91,10 @@ export function buildWorld(lang, T, EVt, L) {
     const pops = [];
     for (const p of pairs) {
       const cr = P.crate(0.8, 0.5, 0.6, null); at(cr, p.x, 0, -1.2); pairGroup.add(cr);
-      ch(p.a, {}, pairGroup, p.x - 0.75, -1.15, 0.35);
-      ch(p.b, {}, pairGroup, p.x + 0.75, -1.15, -0.35);
+      const ca = ch(p.a, {}, pairGroup, p.x - 0.75, -1.15, 0.35);
+      const cb2 = ch(p.b, {}, pairGroup, p.x + 0.75, -1.15, -0.35);
+      ca.act([{t: 0, pose: 'hold', expr: 'neutral'}, {t: E(p.ea) - 0.05, pose: 'give', expr: 'happy', action: 'hop', dur: 0.5}, {t: E(p.eb) + 0.1, expr: 'laugh', pose: 'cheer'}]);
+      cb2.act([{t: 0, pose: 'hips', expr: 'thinking'}, {t: E(p.ea) + 0.1, expr: 'surprised'}, {t: E(p.eb) - 0.05, pose: 'give', expr: 'happy', action: 'hop', dur: 0.5}]);
       const A = p.ga(); at(A, p.x - 0.2, p.a === 'sellerD' ? 0 : 0.5, p.a === 'sellerD' ? -0.55 : -1.2); pairGroup.add(A); pops.push([A, p.ea]);
       if (p.a === 'sellerD') { A.position.x = p.x - 0.1; A.position.z = -2.0; A.rotation.y = 0.5; }
       const B = p.gb(); at(B, p.x + 0.2, 0.5, -1.2); pairGroup.add(B); pops.push([B, p.eb]);
@@ -117,7 +123,7 @@ export function buildWorld(lang, T, EVt, L) {
     const coinGroup = new THREE.Group(); g.add(coinGroup);
     for (const [x, z] of [[-3.0, -1.2], [0.2, -1.2], [3.4, -1.2]]) { const cp = P.coinPile(9, x * 10 + 50); at(cp, x, 0.5, z); coinGroup.add(cp); }
     const buyer = ch('buyer', {}, coinGroup, -1.9, -0.6, 0.3);
-    ch('sellerC', {seed: 61}, coinGroup, -4.2, -3.25, 0); ch('sellerB', {seed: 62}, coinGroup, 0, -3.6, 0); ch('sellerD', {seed: 63}, coinGroup, 4.2, -3.25, 0); ch('fisher', {seed: 64}, coinGroup, -0.9, -1.0, -0.3);
+    ch('sellerC', {seed: 61}, coinGroup, -4.2, -3.25, 0).act([{t: 0, pose: 'wave', expr: 'happy'}]); ch('sellerB', {seed: 62}, coinGroup, 0, -3.6, 0).act([{t: 0, pose: 'presentBoth', expr: 'laugh'}]); ch('sellerD', {seed: 63}, coinGroup, 4.2, -3.25, 0).act([{t: 0, pose: 'hips', expr: 'proud'}]); ch('fisher', {seed: 64}, coinGroup, -0.9, -1.0, -0.3).act([{t: 0, pose: 'give', expr: 'happy'}]);
     const ph = P.phone(); at(ph, 0, 0.02, 0.05); buyer.hand(1).add(ph);
     const cb = P.chalkboard(1.3, 0.95, {text: L.trade, textY: 0.5});
     const easel = new THREE.Group(); at(easel, 5.6, 0, 0.6, -0.35); g.add(easel);
@@ -127,6 +133,10 @@ export function buildWorld(lang, T, EVt, L) {
     const f11 = ch('farmer', {seed: 97}, g, 4.55, 0.85, 0.2);
     const sk11 = P.sack(L.rice, {scale: 0.55}); at(sk11, 4.0, 0, 1.15, 0.3); g.add(sk11);
     const ph11 = P.phone(); at(ph11, 0, 0.03, 0.05); f11.hand(1).add(ph11);
+    f7.act([{t: 0, pose: 'chin', expr: 'thinking'}, {t: E('two'), pose: 'present', expr: 'surprised'}, {t: E('once'), pose: 'cheer', expr: 'excited', action: 'jump', dur: 0.7}]);
+    n7.act([{t: 0, pose: 'cross', expr: 'confused'}, {t: E('two') + 0.2, pose: 'present', expr: 'surprised'}, {t: E('once') + 0.1, pose: 'cheer', expr: 'laugh', action: 'jump', dur: 0.7}]);
+    buyer.act([{t: 0, pose: 'give', expr: 'happy'}, {t: E('single'), action: 'hop', dur: 0.6, expr: 'laugh'}]);
+    f11.act([{t: 0, pose: 'hold', expr: 'thinking'}, {t: E('trade'), pose: 'shrug', expr: 'confused', action: 'hop', dur: 0.4}, {t: E('comment'), pose: 'point', expr: 'excited', action: 'jump', dur: 0.6}]);
 
     updaters.push((t) => {
       const s2 = t >= cut(2) && t < cut(3);
@@ -139,9 +149,6 @@ export function buildWorld(lang, T, EVt, L) {
       rL.position.x = -1.05 + 0.55 * u; rR.position.x = 1.05 - 0.55 * u;
       chk.scale.setScalar(s10 ? 1 : pop(t, E('once')));
       coinGroup.visible = s10; easel.visible = s10; f11.group.visible = s10; sk11.visible = s10;
-      buyer.state.armR = 1.0 + 0.2 * Math.sin(t * 2);
-      f11.state.armR = 0.9;
-      f7.state.armR = 0.5 * smooth((t - E('two')) * 2); n7.state.armL = 0.5 * smooth((t - E('two')) * 2);
     });
   }
 
@@ -172,6 +179,10 @@ export function buildWorld(lang, T, EVt, L) {
     const shed = P.house(3.6, 2.6, 3, {color: '#c9b08a', roof: '#5f7f8a', seed: 13, windows: 1}); at(shed, -6, 0, 3.2, 0.6); g.add(shed);
     const fisher = ch('fisher', {}, g, 0.35, -2.25, 0);
     const farmer = ch('farmer', {seed: 44}, g, -0.6, -1.6, 0.4);
+    farmer.act([{t: 0, pose: 'carry', expr: 'excited'}, {t: E('fisherman'), expr: 'happy', action: 'hop', dur: 0.5},
+      {t: E('shakes') + 0.15, expr: 'shocked', action: 'tremble', dur: 0.6}, {t: E('shoes') + 0.3, expr: 'confused'}]);
+    fisher.act([{t: 0, pose: 'hips', expr: 'neutral'}, {t: E('fisherman') + 0.1, expr: 'surprised'},
+      {t: E('shakes'), pose: 'cross', expr: 'annoyed', action: 'shake', dur: 1.3}, {t: E('shoes'), pose: 'point', expr: 'smug', action: 'hop', dur: 0.4}]);
     const fsk = P.sack(L.rice, {scale: 0.7}); at(fsk, 0.3, 0.92, -0.08, 0, 0, -0.15); fsk.traverse((m) => { m.castShadow = false; }); farmer.group.children[0].add(fsk);
     updaters.push((t) => {
       water.material.map.offset.set(t * 0.01, t * 0.006);
@@ -179,10 +190,7 @@ export function buildWorld(lang, T, EVt, L) {
       const walkU = clamp01((t - cut(3)) / Math.max(0.5, E('fisherman') - cut(3)));
       farmer.group.position.z = 0.6 + (-1.5 - 0.6) * smooth(walkU);
       farmer.state.walk = walkU > 0 && walkU < 1 ? 1 : 0;
-      farmer.state.armR = 2.7;
-      fisher.state.shake = t > E('shakes') && t < E('shakes') + 1.3 ? Math.sin(clamp01((t - E('shakes')) / 1.3) * Math.PI) : 0;
       const sh = pop(t, E('shoes'), 0.3); shoe.scale.setScalar(sh);
-      fisher.state.armR = t > E('shoes') ? 0.8 * smooth((t - E('shoes')) * 3) : 0;
     });
   }
 
@@ -212,13 +220,15 @@ export function buildWorld(lang, T, EVt, L) {
     const lamp = cyl(0.18, 0.28, 0.3, '#e8c76a', {}); at(lamp, -2.2, 3.3, -2.5); g.add(lamp);
     const cord = cyl(0.01, 0.01, 0.6, INK, {hull: 0}); at(cord, -2.2, 3.6, -2.5); g.add(cord);
     const realGoat = P.goat(); realGoat.scale.setScalar(0.8); at(realGoat, 2.2, 0, -3.6, -0.5); g.add(realGoat);
+    farmer.act([{t: 0, pose: 'carry', expr: 'determined'}, {t: E('shoemaker'), expr: 'happy'},
+      {t: E('goat') + 0.15, expr: 'shocked', action: 'jump', dur: 0.6}, {t: E('goat') + 0.9, expr: 'furious', action: 'tremble', dur: 0.8}]);
+    shoemaker.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('shoemaker') + 0.2, pose: 'hips', expr: 'smug'},
+      {t: E('goat'), pose: 'point', expr: 'happy', action: 'hop', dur: 0.4}]);
     updaters.push((t) => {
       gd.scale.setScalar(pop(t, E('goat')));
       realGoat.visible = false;
-      shoemaker.state.armL = t > E('goat') ? 1.3 * smooth((t - E('goat')) * 3) : 0;
-      farmer.state.armR = 2.7;
       const wu = clamp01((t - cut(5)) / 1.4);
-      farmer.group.position.x = -1.9 + 0.6 * smooth(wu); farmer.state.walk = wu < 1 ? 1 : 0;
+      farmer.group.position.x = -1.9 + 1.6 * smooth(wu); farmer.state.walk = wu < 1 ? 1 : 0;
     });
   }
 
@@ -239,13 +249,13 @@ export function buildWorld(lang, T, EVt, L) {
     const gnm = (await_ink(gng)); at(gnm, 0, 0.9, 0); dial.add(gnm);
     const farmer = ch('farmer', {seed: 46}, g, -0.35, -0.2, 0.2);
     const sk = P.sack(L.rice, {scale: 0.7}); at(sk, 0.35, 0, 0.2, -0.3); g.add(sk);
+    farmer.act([{t: 0, pose: 'limp', expr: 'tired', action: 'slump', dur: 99}, {t: E('feet'), action: 'tremble', dur: 0.5},
+      {t: E('nofish'), expr: 'cry', pose: 'facepalm'}]);
     g.add(P.hills('#9cb46a'));
     for (const [x, z, s] of [[-5, -6, 21], [5, -9, 22], [-9, -12, 23], [9, -4, 24], [-4, -15, 25]]) { const tr = P.tree({seed: s, leaf: '#8fa04f'}); at(tr, x, 0, z); g.add(tr); }
     for (let i = 0; i < 8; i++) { const p = cyl(0.05, 0.06, 0.9, '#7a5236'); at(p, -3.5 - i * 1.1, 0, -1.6); g.add(p); }
     const fr = box(8, 0.06, 0.05, '#7a5236'); at(fr, -7.4, 0.65, -1.6); g.add(fr);
     updaters.push((t) => {
-      farmer.state.nod = 2.2; farmer.state.armR = 0; farmer.state.armL = 0;
-      farmer.headPiv.rotation.x = 0;
     });
   }
 
@@ -256,7 +266,8 @@ export function buildWorld(lang, T, EVt, L) {
     const rm = P.room(8.4, 4.4, 6.4, {wall: '#d8b48a', floor: '#9a7a5a', bricks: true, wain: '#7a4a32'}); g.add(rm);
     const tbl = box(2.4, 0.85, 0.8, toon('#8a5a3a', {paint: {planks: 4, seed: 81}})); at(tbl, -1.9, 0, -1.3); g.add(tbl);
     const sh = P.shells(9, 5); at(sh, -2.65, 0.86, -1.2); g.add(sh);
-    ch('sellerB', {seed: 81}, g, -1.9, -2.05, 0);
+    ch('sellerB', {seed: 81}, g, -1.9, -2.05, 0).act([{t: 0, pose: 'hips', expr: 'neutral'}, {t: E('shells'), pose: 'presentBoth', expr: 'happy', action: 'hop', dur: 0.4},
+      {t: E('salt8'), expr: 'excited'}, {t: E('metal'), expr: 'proud', action: 'hop', dur: 0.4}]);
     const saltPile = new THREE.Group(); at(saltPile, -1.9, 0.86, -1.2); g.add(saltPile);
     const sp1 = P.basket('#c9a462', 0); saltPile.add(sp1); sp1.scale.setScalar(0.7);
     const mound = ball(0.2, '#fbfaf5', {sx: 1, sy: 0.6, sz: 1}); at(mound, 0, 0.22, 0); saltPile.add(mound);
@@ -270,6 +281,8 @@ export function buildWorld(lang, T, EVt, L) {
     const stand = cyl(0.04, 0.14, 1.05, '#5a3a2a'); at(stand, 0.95, 0, -0.6); g.add(stand);
     const minter = ch('minter', {}, g, 2.35, -1.55, -0.2);
     const hm = P.hammer(); at(hm, 0, 0, 0.03, 0, 0, Math.PI); minter.hand(0).add(hm);
+    minter.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('lydia'), pose: 'hammerUp', expr: 'determined'},
+      {t: E('coins') - 0.05, pose: 'hammerDown', expr: 'shocked', action: 'hop', dur: 0.3}, {t: E('coins') + 0.35, expr: 'proud', pose: 'hips'}]);
     const furnace = box(1.0, 1.1, 0.9, toon('#8a6a5a', {paint: {bricks: true, seed: 3}})); at(furnace, 3.3, 0, -2.6); g.add(furnace);
     const glow = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), new THREE.MeshBasicMaterial({color: '#ffb04a'})); glow.position.set(3.3, 0.45, -2.14); g.add(glow);
     const fire = new THREE.PointLight('#ff9a3a', 4, 6, 1.5); fire.position.set(3.3, 0.8, -1.8); g.add(fire);
@@ -279,9 +292,6 @@ export function buildWorld(lang, T, EVt, L) {
       saltPile.scale.setScalar(1.3 * pop(t, E('salt8')));
       metal.scale.setScalar(1.3 * pop(t, E('metal')));
       const tc = E('coins');
-      // hammer strike: arm raises before "coins", lands on the word
-      const lift = t < tc ? smooth((t - (tc - 1.0)) / 0.7) : 1 - smooth((t - tc + 0.12) / 0.12) * 1;
-      minter.state.armL = 1.9 * Math.max(0, lift);
       big.scale.setScalar(pop(t, tc, 0.4));
       big.rotation.set(Math.PI / 2, 0, Math.sin(t * 1.4) * 0.2);
       fire.intensity = 4 + Math.sin(t * 9) * 0.6;
@@ -313,12 +323,14 @@ export function buildWorld(lang, T, EVt, L) {
     const cashier = ch('guide', {}, g, 1.85, -2.45, 0);
     const buyer = ch('buyer', {seed: 71}, g, 0.55, -0.85, 0.35);
     const ph = P.phone(); at(ph, 0, 0.02, 0.06); buyer.hand(1).add(ph);
+    buyer.act([{t: 0, pose: 'hold', expr: 'neutral'}, {t: E('paper'), expr: 'surprised'}, {t: E('tap') - 0.5, pose: 'tap', expr: 'smug'},
+      {t: E('tap') + 0.2, expr: 'laugh', action: 'jump', dur: 0.6}]);
+    cashier.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('tap') + 0.25, pose: 'wave', expr: 'happy'}]);
     const rope = cyl(0.02, 0.02, 1.2, '#8a2a2a', {hull: 0.008}); at(rope, -1.5, 0.5, -0.5, 0, 0, Math.PI / 2); g.add(rope);
     for (const s of [-1, 1]) { const st = cyl(0.03, 0.08, 0.55, '#c9a462'); at(st, -1.5 + s * 0.62, 0, -0.5); g.add(st); }
     updaters.push((t) => {
       const tt = E('tap');
       const reach = smooth((t - (tt - 0.6)) / 0.6);
-      buyer.state.armR = 0.4 + 1.0 * reach;
       buyer.group.position.x = 0.55 + 0.15 * reach;
       const paid = t > tt + 0.1;
       scr.material.color.set(paid ? '#5fbf6a' : '#7fb8d0');
