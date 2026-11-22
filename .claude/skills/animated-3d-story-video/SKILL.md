@@ -1,98 +1,119 @@
 ---
 name: "animated-3d-story-video"
-description: "Make a short vertical 3D-world story animation from scratch: generate ideas, write the script, then build the video in the fixed house style and render it directly."
+description: "Make short vertical 3D-world story animations with expressive 2D cartoon characters (Remotion + three.js). Use when the user uploads this skill package with a voice-over and narration (build the whole video, every language version, thumbnail and titles without stopping), or asks for a new story video from a topic or idea."
 ---
 
-# Animated 3D story video (house style)
+# Animated 3D story video (house style + acting kit)
 
-This skill makes a 40-60 s vertical (9:16) story video in one fixed house style: every location is a real 3D world (painted flat-colour models with ink outlines), 2D cartoon characters stand inside it, and the camera always moves. It is all code (Remotion + three.js), so no image or model files are needed.
+This skill makes a 40-65 s vertical (9:16, 1080x1920) story video in one fixed house style: every location is a real 3D world (painted flat-colour models with ink outlines), expressive 2D cartoon characters act inside it, and the camera always moves. It is all code (Remotion + three.js), so no image or model files are needed.
 
-The style is already defined below. It is based on the finished video "Chicago lifted itself" (a hotel lifted six feet while guests slept, then a whole city raised out of the mud). New videos must look and feel the same.
+The package ships a working starter project (`starter/`) built for "Dari Sekarung Beras ke Satu Sentuhan / From a Sack of Rice to a Single Tap" (history of money, Indonesian + English). New videos reuse its kit and replace only the story files.
 
 ## Hard rules
-- Never ask the user for reference videos, examples or a style. The style and rulebook are in this file.
-- Do the technical work yourself. Ask the user only the questions in the flow below.
-- Keep approved things fixed: script, timing, facts, characters, ink colour #351f22.
+- Never ask the user for reference videos, examples or a style. The style, acting rules and rulebook are in this file.
+- Do the technical work yourself. Ask the user only the questions in the flows below, or when an input is missing and cannot be derived (for example no narration text and no audio).
+- Keep approved things fixed: script / the user's narration, timing, facts, characters, ink colour #351f22.
 - Be honest about what was checked (stills versus the full video) and list known problems at the end.
 - Render the full video yourself, directly. Never hand over a render.bat or ask the user to render.
+- Commit and push the project, story files and final videos to the session branch as you go (the container is temporary).
 
-## The flow (three steps for the user, everything else automatic)
-
-### Step 1. Ideas (start here, do not ask questions first)
-Immediately generate 5 story ideas. If the user gave a topic, use it; otherwise pick true, surprising stories where something physically big changes (a city rises, a river is moved, a ship is carried over land). For each: one-line title, the visual hook (what moves or changes on screen), the escalation (but / then / so), and 2-3 hard numbers or names. Search the web to confirm facts and drop anything single-source or unclear. Ask: "Which one should I write?" (or let them give their own).
-
-### Step 2. Script
-Write the script for the chosen idea using the script rules below. Show a short shot table (shot, start time, words, line, on screen) and the voice-over text. Then ask: "Do you want me to make the video from this script?" Make small edits if asked, then ask again.
-
-### Step 3. Make the video and render it
-Only after a yes. Get the voice-over: the user's file if they have one; otherwise generate it with a connected text-to-speech tool if available; otherwise build on estimated timing (3.35 words per second) and say cuts must be re-timed once audio exists. Then build everything without stopping (stages A-F), then render it yourself straight away (see Render).
-
-## Script rules (built-in rulebook)
-- First word at t=0, no intro, premise in the first sentence. Hook 5-23 words (aim 16), ends at about 4-5 s.
-- 9-12 shots, one location per shot, about 140-150 words for about 43-48 s (3.35 words per second, range 3.05-3.65). Total 39-65 s.
-- Beats: But (shot 4), Then (shot 5), the complaint or conflict (shot 6), a pivot "You see" at 53-87% of the runtime (shot 7), "So..." consequence at 80-93% (shot 9), closing line 5-19 words (about 9). No outro, no call to action.
-- Simple words, one idea per sentence, concrete numbers and names. Every claim has a source; leave out single-source or unverifiable details.
-- Output: `script.md` (shot table, rulebook check, fact map, left out on purpose, wording to watch) and a voice-over script PDF: "Chapter N - Title (start time)" followed by one paragraph, 2-3 chapters for a short video.
-
-## Build stages (automatic)
-
-### A. Timing
-Transcribe the voice-over with timestamps into `sentence_times.json` (starts and ends per sentence). Shot cuts come from real sentence ends, collected in one `CUTS` array; if a shot holds two sentences keep both times.
-
-### B. Art style (fixed)
-- One ink colour for every outline: #351f22.
-- Models built in code with real depth: extruded walls with window reveals and sills, door panels, awnings, cornices, chimneys, threaded jackscrews, timber crib stacks, brick vaults. Textures are painted flat colours with wear (stains, chips, scratches) drawn on a canvas. Outline = inverted hull plus edge lines.
-- Toon shading with a 3-band gradient. One warm key light from the upper left with shadows, a hemisphere fill, a light vignette, fog colour per location.
-- Depth: blurred foreground object near the lens, sharp midground with characters, softly blurred background (depth-of-field pass focused at the look-at distance).
-- Labels live inside the world (painted signs, a banner on two poles, names on crates, a map title, a desk nameplate). Never floating pills or captions.
-- No flat sky or ground strips, no side-on cardboard buildings.
-- Cuts: a 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
-
-### C. Characters (2D flat people in the 3D world)
-- Built in code from flat shapes: large round pale head, calm half-lidded eyes, tiny smile, hair fringe, white collar, tie, small pear-shaped two-tone torso with a pocket patch, thin tapered stick limbs, dark disc hands. Hand-drawn ink band with varying, slightly wobbly thickness around every shape.
-- Variants by palette, hat (top hat, bowler, cap, none) and glasses only. Never redesign the base character.
-- Flat shading. Idle bob and nod, arm sway. Turn toward the camera with limited yaw (clamp about 0.7 rad) so they are never edge-on. Soft contact-shadow blob on the ground.
-- Size: body 40-60% of frame height in medium shots, 70%+ in close shots. Three people side by side need the camera about 4 m away.
-
-### D. 3D worlds
-- Put every location in one scene at different x offsets (for example 0, 40, 80, 120, 200, 300, 400) so the camera can travel and light can switch per location.
-- Build shared helpers once: facade (extruded wall with window and door openings and an interior backdrop), liftable building (facade + needle beams + jackscrews + timber stacks + a brick foundation under it), lamp post, barrel, plank sidewalk, mud ground, brick tunnel, room.
-- Procedural models only (the cloud workspace cannot download assets).
-- A door opening must be a notch in the outline, not a hole touching the bottom edge, or triangulation breaks.
-- If a starter project is attached or present in the folder (files such as kit.js, char3.js, world1.js, areas.js, Full.jsx), copy and adapt it. Otherwise build the kit from this spec.
-
-### E. Camera plan and animation
-- Write `camera_plan.md`: per shot, the time, location, camera path (start -> end), speed, foreground / midground / background objects and in-world labels.
-- Rules: net travel in every shot; about 10% of frame width per second on average (25-40% travel or push per shot); mix of push (about half), crane (a third), sideways track (a fifth); carry the camera from one subject to the next inside a location; dissolve between locations.
-- Geometry for an 80 degree vertical field of view at 9:16: frame width at the subject = 0.93 x distance, frame height = 1.68 x distance.
-- Sync to the words: for each camera key set a beat time from the sentence timing (word positions by proportion) so the camera reaches each subject as it is named. Smooth with a monotone cubic time warp, zero speed at first and last key (ease in, ease out), no straight-line blending, almost no wobble:
-```js
-function warpU(T, t) { // T = beat times per path key; returns path position 0..1
-  const n = T.length; if (t <= T[0]) return 0; if (t >= T[n-1]) return 1;
-  const sec = []; for (let i = 0; i < n-1; i++) sec.push((1/(n-1)) / (T[i+1]-T[i]));
-  const m = [0]; for (let i = 1; i < n-1; i++) m.push(2*sec[i-1]*sec[i]/(sec[i-1]+sec[i])); m.push(0);
-  let i = 0; while (t > T[i+1]) i++;
-  const h = T[i+1]-T[i], x = (t-T[i])/h, x2 = x*x, x3 = x2*x;
-  return (2*x3-3*x2+1)*(i/(n-1)) + (x3-2*x2+x)*h*m[i] + (-2*x3+3*x2)*((i+1)/(n-1)) + (x3-x2)*h*m[i+1];
-}
+## Package layout (what the user uploads)
 ```
-- Tie on-screen events to words: a label appears on its number word, a street rises on "raised", water pools on "couldn't drain", an arrow is drawn on "go up".
-- Keep the camera clear of characters and props; end every move at rest.
-- Drive all animation from the frame number (`useCurrentFrame`), never wall-clock time. Render the 3D scene in a `ThreeCanvas`, with the post-processing composer in a `useFrame` at priority 1.
+animated-3d-story-video/
+  SKILL.md                  this file
+  starter/                  complete Remotion project (copy to the repo root)
+    package.json            pinned: remotion/@remotion/cli/@remotion/three 4.0.545, three 0.170.0, @react-three/fiber 8.18.0, react 18.3.1
+    src/kit.js              REUSE: toon materials, painted wear textures, ink hull + edge lines, signs, pop/easing helpers
+    src/char.js             REUSE: base character, EXPRESSIONS, POSES, actions, act() timeline
+    src/props.js            REUSE: facade, house, stall, sack, crate, barrel, tree, goat, chicken, fish, basket, coin, chalkboard,
+                                   chalk doodles, signpost, banner, boat, water, anvil, hammer, phone, room, boot, hills, sky dome
+    src/timing.js           REUSE (generic) + per story: EV word table and LABELS per language
+    src/shots.js            REUSE warpU/buildCameras/camAt + per story: SHOT_PLAN
+    src/world.js            PER STORY: locations, characters, acting cues, on-word events, LOOK per location
+    src/Video.jsx           REUSE renderer/post (DOF, vignette, dips, audio) + per story: cues() SFX sheet, DIPS, Thumb texts/camera
+    src/index.jsx           compositions per language + thumbnails + CharSheet test sheets
+    src/CharSheet.jsx       test sheet of every expression / pose
+    src/data/               sentence_times_<lang>.json (generated)
+    public/sfx/             sound-effect library + README (what each sound is for)
+    public/vo/              voiceover_<lang>.wav (user audio)
+    tools/                  align.py, gaps.py, stills.sh, render.sh, contact_sheet.py, vo_pdf.py
+  example/sejarah-uang/     script.md, camera_plan.md, narration_<lang>.txt, judul.md (worked example)
+```
 
-### F. Check it (stills)
-Render single frames at the beat times at half scale (`npx remotion still ... --scale=0.5 --gl=swangle --browser-executable=<preinstalled chromium>`; about 90 s each in the cloud, one at a time, never edit source while one renders). Tile into a contact sheet and look for: objects hiding a name, face or label; characters cropped at the frame edge; props behind heads; poles or lamps crossing the subject; anything passing through the lens; black polygons or empty openings; camera inside a wall; wrong fact on screen. Fix by moving objects out of the camera's line of sight; repeat until clean.
+## Install (first thing, every new session)
+1. Unzip the upload into its own scratch folder, read SKILL.md, then copy `animated-3d-story-video/` (without `starter/` and `example/` if size matters) to `.claude/skills/animated-3d-story-video/` in the repo.
+2. If the repo has no Remotion project yet, copy `starter/*` to the repo root. Otherwise reuse the project that is there.
+3. `npm install` (registry.npmjs.org must be reachable). Chromium is preinstalled; pass `--browser-executable=/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell` (tools default to it; override with `BROWSER=`).
+4. Each new story goes in `videos/<slug>/` (script, narration, timing, camera plan, PDFs, final mp4s, thumbnails, titles).
 
-## Render (do it yourself, directly)
-As soon as the stills are clean, start the full render yourself. Do not make a render.bat and do not ask the user to render.
-1. Run `npm install` once if `node_modules` is missing.
-   Output resolution is **1080x1920 (1080p vertical)**: set `width={1080} height={1920}` on the composition in `src/index.jsx` before rendering.
-2. Render the silent video in the background: `npx remotion render src/index.jsx <Id> out/full_silent.mp4 --gl=angle --concurrency=4 --image-format=jpeg --jpeg-quality=92 --crf=17`.
-3. Add the voice-over: `npx remotion ffmpeg -y -i out/full_silent.mp4 -i voiceover.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest final.mp4`.
-4. If the render fails or is very slow, say so plainly and fix the cause; do not fall back to handing over a .bat file.
+## Flow A — fast path: the user uploads the package + audio + narration (default)
+Do everything without stopping; ask nothing unless an input is missing.
+1. **Inputs.** One voice-over per language (wav/mp3/m4a) and the narration text for each (pasted, .txt, .md, .pdf or .docx). Convert audio: `ffmpeg -i in.mp3 -ac 1 -ar 24000 voiceover_<lang>.wav` into `public/vo/` and `videos/<slug>/`. If only audio is given with no text and nothing in the upload contains it, ask once for the text (there is no speech recognition here).
+2. **Shots.** Split the narration into 9-12 shots by sentence (one location per shot), following the beats in the rulebook where the text allows (But / Then / complaint / "You see" pivot / "So" consequence / closing). Never rewrite the user's narration; only note rule misses in `script.md`. Write `videos/<slug>/narration_<lang>.txt` as `shot | sentence` lines; write numbers as spoken words.
+3. **Facts.** Search the web to check each factual claim; list doubtful ones in `script.md` ("wording to watch") and tell the user at the end. Do not change the audio.
+4. **Timing.** `python3 -I tools/align.py public/vo/voiceover_<lang>.wav videos/<slug>/narration_<lang>.txt src/data/sentence_times_<lang>.json` for every language. Check that each sentence length is close to its prediction; if the tool says there are too few pauses, lower the threshold in `gaps.py` (-44 dB / 0.12 s by default) or merge sentences.
+5. **Design** (write `camera_plan.md`): locations (x offsets 0, 40, 80, …), cast (palettes in `char.js`; add palettes, never new body shapes), in-world labels per language (`LABELS`), the word events (`EV`: `[sentenceIndex, word]` per language), acting cues per character, on-word props (pop-ins, doodles, coins…), SFX cue sheet.
+6. **Build** the story files (`world.js`, `SHOT_PLAN` in `shots.js`, `EV`/`LABELS` in `timing.js`, `cues()`/`DIPS`/thumbnail in `Video.jsx`, compositions in `index.jsx`). Reuse kit/props; build new props in `props.js` with the same helpers.
+7. **Check stills** (stage F) for every language, fix, repeat until clean.
+8. **Render** every language (`tools/render.sh CompA CompB`, run in the background; about 1 s per frame on 4 cores, so a 60 s video takes about 30 min), check with ffprobe and a contact sheet of one frame per shot.
+9. **Thumbnail + titles**: a `Thumb<LANG>` composition (frozen scene moment + 2-3 bold ink-bordered text blocks + small tag), title + 2 alternatives + description + hashtags per language in `videos/<slug>/judul.md`.
+10. **Deliver**: send the mp4s, thumbnails and voice-over PDFs (`tools/vo_pdf.py`) to the user, commit and push, and report what was checked and what is still wrong.
+
+## Flow B — from an idea (when there is no narration yet)
+1. **Ideas** (start here, do not ask questions first): 5 true, surprising stories where something physically big changes. For each: title, visual hook, escalation (but / then / so), 2-3 hard numbers or names, confirmed by web search (drop single-source details). Ask: "Which one should I write?"
+2. **Script** by the rulebook; show the shot table and the voice-over text; ask "Do you want me to make the video from this script?" Offer other language versions if the user writes in a non-English language.
+3. On yes: the voice-over is the user's file (ask for it), a connected text-to-speech tool, or estimated timing (3.35 words/s English, about 2.7 words/s Indonesian) with a warning that cuts need re-timing. Then Flow A steps 4-10.
+
+## Script rules (rulebook)
+- First word at t=0, no intro, premise in the first sentence. Hook 5-23 words (aim 16), ends at about 4-5 s.
+- 9-12 shots, one location per shot, about 140-150 words for about 43-48 s in English. Total 39-65 s.
+- Beats: But (shot 4), Then (shot 5), the complaint or conflict (shot 6), a pivot "You see" at 53-87% of the runtime (shot 7), "So..." consequence at 80-93% (shot 9), closing line 5-19 words. A closing question to the viewer ("…? Tell me in the comments") is allowed when the user asks for engagement.
+- Simple words, one idea per sentence, concrete numbers and names. Every claim has a source.
+- Output: `script.md` (shot table, rulebook check, fact map, left out on purpose, wording to watch) and a voice-over PDF per language: "Chapter N - Title (start time)" followed by one paragraph, 2-3 chapters.
+
+## Art style (fixed)
+- One ink colour for every outline: #351f22. Models built in code with real depth (extruded walls, window reveals and sills, door panels, awnings, cornices, chimneys…). Textures are painted flat colours with wear (stains, chips, scratches). Outline = inverted hull plus edge lines.
+- Toon shading with a 3-band gradient; one warm key light from the upper left with shadows, hemisphere fill, light vignette, fog colour per location (`LOOK`).
+- Depth: blurred foreground object near the lens, sharp midground with characters, softly blurred background (Bokeh pass focused at the look-at distance).
+- Labels live inside the world (painted signs, banners on two poles, names on sacks/crates, chalkboards, plaques), in the language of each version. Never floating captions.
+- No flat sky or ground strips, no side-on cardboard buildings. Cuts: 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
+
+## Characters and acting (expressive cartoon style)
+Base design (never redesign): large round pale head, calm half-lidded eyes, tiny smile, hair fringe, white collar, tie, small pear-shaped two-tone torso with pocket patch, thin tapered stick limbs (two-segment arms), dark disc hands, wobbly hand-drawn ink band. Variants by palette, hat (top hat, bowler, cap, none) and glasses only. Flat shading, contact-shadow blob, limited yaw toward camera (±0.7 rad).
+
+Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — expr/pose persist until the next cue; actions run for `dur` seconds.
+- **Expressions** (`EXPRESSIONS`): neutral, happy, laugh, excited, surprised, shocked, annoyed, angry, furious, sad, cry, worried, confused, tired, smug, thinking, proud, determined, disgusted. Built from eyes (calm/open/wide/closed/blink/angry/sad/tired/squint), brows, mouth (smile/grin/laugh/open/shout/frown/flat/wavy/smirk/talk) and extras (blush, sweat, tear, anger mark, shock lines, question mark, sparkle, gloom). Automatic blinking; a head "take" pop on every expression change.
+- **Poses** (`POSES`): idle, limp, wave, point, pointUp, present, presentBoth, shrug, hips, armsUp, cheer, facepalm, think, chin, cross, headHold, carry, carryBoth, hold, give, stop, hammerUp, hammerDown, tap, beg. Pose changes ease with overshoot (0.32 s).
+- **Actions**: jump (anticipation squash → stretch → landing squash), hop, shake (head no), nod, tremble, slump, lean, talk (mouth flaps), walk, run, spinIn, popIn.
+- Acting rules:
+  - Every character on screen reacts at least once per shot, timed to the words (use `EV` times; react 0.1-0.2 s after the word).
+  - "But…" / refusal → annoyed or angry + cross/hips + head shake (and the denied-buzz SFX); the listener answers with shocked + tremble.
+  - Surprise or bad news → shocked + jump (a double take) or headHold; worry → worried + sweat + tremble; tiredness → tired + slump + limp; failure → cry + facepalm.
+  - Success / "So…" → happy/laugh/excited + cheer or armsUp + jump; showing something → present/point + smug or proud; asking the viewer → shrug + confused, then point + excited.
+  - At most one big action per character per second; keep faces in frame and unblocked during reactions.
+  - Check new poses or expressions with the `SheetExpr` / `SheetPose` compositions before using them.
+- Size: body 40-60% of frame height in medium shots, 70%+ in close shots; three people side by side need the camera about 4 m away.
+
+## Camera
+- `SHOT_PLAN` keys: `{at: 'start' | 'end' | <EV name>, pos, look}` in location-local coordinates; keys land 0.15 s after their word; monotone cubic time warp (`warpU`), ease in/out, no wobble.
+- Net travel in every shot (about 10% of frame width per second); mix push (about half), crane (a third), sideways track (a fifth); carry the camera from subject to subject; end every move at rest.
+- 80° vertical FOV at 9:16: frame width at the subject = 0.93 × distance, frame height = 1.68 × distance.
+- Tie on-screen events to words (labels and props pop on their noun, doodles draw on their word, ticks appear on the payoff word). A word at the very end of a sentence leaves little screen time: start the event earlier or extend the key.
+
+## Sound
+- The voice-over is the composition audio; SFX come from `public/sfx/` (see its README) in `cues()`: whooshes on dips, pops on items, buzz on refusals, ticks on numbers/time, riser into the pivot, boom on the big reveal, ding on success, chime on the closing line, one click on "comment". Volumes 0.18-0.45, no more than one accent per second.
+- Final mix is loudness-normalised to -14 LUFS (`tools/render.sh`).
+
+## Check it (stills)
+`tools/stills.sh <Comp> <prefix> t1 t2 …` (bundles once, about 5-10 s per still, writes `out/<prefix>_sheet.png`). Look for: objects hiding a name, face or label; characters cropped at the frame edge; props behind heads; poles crossing the subject; anything passing through the lens; black polygons or empty openings; camera inside a wall; wrong fact on screen; reactions that happen off-screen. Fix by moving objects or keys; repeat until clean. Never edit `src/` while a render is bundling.
+
+## Known gotchas (this environment)
+- No speech recognition: YouTube, Hugging Face and model hosts are blocked; `align.py` uses pauses + the known text. Word times inside a sentence are proportional estimates (±0.3 s).
+- In `useFrame`, add the world to the scene and create the fog there too (a still renders a single frame before `useEffect` runs).
+- GLSL `#include` lines must start on their own line.
+- `pop()` with an undefined event time gives NaN scale (invisible object): check `EV` names.
+- Characters do not cast real shadows (flat planes); the blob is their shadow. Props attached to characters should not cast shadows either.
+- Render: `--gl=angle --concurrency=4 --image-format=jpeg --jpeg-quality=92 --crf=17`; stills: `--gl=swangle --scale=0.5`.
 
 ## After rendering
-Check the real video: `ffprobe` for size (must be 1080x1920), fps, duration and audio, and one frame per shot in a contact sheet. Deliver the mp4 and the voice-over script PDF. Say what was checked, what is still wrong, and offer one next step.
-
-## Known limits
-Models are procedural, not imported. Resolution 1080x1920 (1080p). Ground-floor openings of lifted facades once rendered as black patches (cause not found); report it if it appears.
+`ffprobe` (1080x1920, 30 fps, duration, audio present), one frame per shot in a contact sheet, then deliver mp4s, thumbnails, titles and PDFs; say what was checked, what is still wrong, and offer one next step.
