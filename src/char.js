@@ -220,6 +220,10 @@ export const PALETTES = {
   minter: {jacket: '#c99a4a', lower: '#7a5a3a', tie: '#8a3a3a', hair: '#3a2a26', hat: 'none'},
   guide: {jacket: '#3f5f8a', lower: '#2a3a56', tie: '#d9a441', hair: '#5a3a2a', hat: 'none', glasses: true},
   buyer: {jacket: '#e0b84f', lower: '#55606e', tie: '#4f7fa6', hair: '#2b2326', hat: 'top', hatColor: '#3a2f33'},
+  hero: {jacket: '#4f9a8a', lower: '#2f4f5a', tie: '#e8c35a', hair: '#2b2326', hat: 'cap', hatColor: '#e8c35a', hatColor2: '#c9a43a'},
+  scientist: {jacket: '#eef0ee', lower: '#55606e', tie: '#4f7fa6', hair: '#6a5a52', hat: 'none', glasses: true},
+  doctor: {jacket: '#8fc7c0', lower: '#4f7f7a', tie: '#eef0ee', hair: '#3a2a26', hat: 'none'},
+  pilot: {jacket: '#2a3a56', lower: '#1f2a40', tie: '#d9a441', hair: '#5a3a2a', hat: 'cap', hatColor: '#2a3a56', hatColor2: '#1f2a40'},
 };
 
 // Poses: [upper, fore] per arm, radians. 0 = hanging down; positive upper = swings outward (away from body),
@@ -250,6 +254,8 @@ export const POSES = {
   hammerDown: {L: [1.0, 0.2], R: [0.12, 0]},
   tap: {L: [0.12, 0], R: [1.25, 0.15]},
   beg: {L: [0.9, -0.9], R: [0.9, -0.9]},
+  flex: {L: [1.45, 1.75], R: [1.45, 1.75]},
+  eat: {L: [0.12, 0], R: [0.35, -2.2]},
 };
 
 const easeOutBack = (x) => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };

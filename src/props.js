@@ -1,6 +1,6 @@
 // Shared procedural props: facade/house, stall, sack, crate, barrel, tree, goat, chicken, fish, coin, etc.
 import * as THREE from 'three';
-import {INK, toon, ink, box, cyl, ball, cone, at, sign, signTex, paintTex, canvas, texFrom, rng, shade, decal} from './kit';
+import {INK, toon, ink, box, cyl, ball, cone, at, sign, signTex, paintTex, canvas, texFrom, rng, shade, decal, gradientMap} from './kit';
 
 // Extruded wall with window reveals + sills, door as a notch (not a hole touching the edge), cornice, interior backdrop.
 export function facade(w, h, o = {}) {
@@ -397,5 +397,216 @@ export function moon(r = 6) {
   const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false}));
   g.add(disc);
   g.userData.faceCamera = true;
+  return g;
+}
+
+// ================= Banana story props =================
+// Curved, five-sided, tapered banana (centred on its bounding box). len = tip-to-tip chord length.
+const _bgeo = new Map();
+export function bananaGeo(len = 0.22) {
+  if (_bgeo.has(len)) return _bgeo.get(len);
+  const R = len * 0.95, A = 0.6;
+  const curve = new THREE.CatmullRomCurve3(Array.from({length: 9}, (_, i) => { const a = -A + 2 * A * i / 8; return new THREE.Vector3(R * Math.sin(a), R * (1 - Math.cos(a)), 0); }));
+  const TS = 24, RS = 5;
+  const geo = new THREE.TubeGeometry(curve, TS, len * 0.13, RS, false);
+  const p = geo.attributes.position, c = new THREE.Vector3(), v = new THREE.Vector3();
+  for (let i = 0; i <= TS; i++) {
+    const u = i / TS; curve.getPointAt(u, c);
+    const k = 0.22 + 0.78 * Math.pow(Math.sin(Math.PI * u), 0.55);
+    for (let j = 0; j <= RS; j++) { const ix = i * (RS + 1) + j; v.fromBufferAttribute(p, ix).sub(c).multiplyScalar(k).add(c); p.setXYZ(ix, v.x, v.y, v.z); }
+  }
+  geo.computeVertexNormals(); geo.center();
+  _bgeo.set(len, geo);
+  return geo;
+}
+
+export function banana(o = {}) {
+  const len = o.len || 0.22;
+  const g = new THREE.Group();
+  g.add(ink(bananaGeo(len), toon(o.color || '#f2cf3e', {paint: {seed: 7, stains: 4, chips: 2, scratches: 0}}), {hull: 0.008, edges: false, cast: o.cast !== false}));
+  const R = len * 0.95, A = 0.6, yOff = R * (1 - Math.cos(A)) / 2;
+  const stem = cyl(len * 0.03, len * 0.04, len * 0.14, '#8a7a3a', {hull: 0.005, center: true}); at(stem, -R * Math.sin(A) - len * 0.03, yOff + len * 0.05, 0, 0, 0, 0.9); g.add(stem);
+  const tip = ball(len * 0.03, '#4a3a2a', {hull: 0.004}); at(tip, R * Math.sin(A) + len * 0.005, yOff + len * 0.01, 0); g.add(tip);
+  return g;
+}
+
+export function bunch(n = 5, o = {}) {
+  const g = new THREE.Group(); const len = o.len || 0.22;
+  const crown = cyl(0.03 * len / 0.22, 0.035 * len / 0.22, 0.08 * len / 0.22, '#7d8a4a', {hull: 0.005}); g.add(crown);
+  for (let i = 0; i < n; i++) {
+    const piv = new THREE.Group(); piv.rotation.y = (i - (n - 1) / 2) * 0.32; g.add(piv);
+    const b = banana({len, cast: o.cast}); at(b, len * 0.5, 0.02 + (i % 2) * 0.012, 0, 0, 0, -0.15); piv.add(b);
+  }
+  return g;
+}
+
+// Instanced bananas (piles, avalanches, mountains): set(i, [x,y,z], [rx,ry,rz], scale) then done().
+export function bananaInstances(n, o = {}) {
+  const geo = bananaGeo(o.len || 0.22);
+  const m = new THREE.InstancedMesh(geo, toon(o.color || '#f2cf3e', {paint: {seed: 7, stains: 4, chips: 2, scratches: 0}}), n);
+  const hull = new THREE.InstancedMesh(geo, new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide}), n);
+  m.castShadow = !!o.cast; m.receiveShadow = true; m.frustumCulled = false; hull.frustumCulled = false;
+  const g = new THREE.Group(); g.add(m, hull);
+  const M4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3(), s = new THREE.Vector3();
+  const hk = 1 + (o.hull ?? 0.09);
+  return {obj: g,
+    set(i, p, r, sc) { e.set(r[0], r[1], r[2]); q.setFromEuler(e); v.set(p[0], p[1], p[2]); s.setScalar(Math.max(1e-4, sc)); M4.compose(v, q, s); m.setMatrixAt(i, M4); s.setScalar(Math.max(1e-4, sc * hk)); M4.compose(v, q, s); hull.setMatrixAt(i, M4); },
+    done() { m.instanceMatrix.needsUpdate = true; hull.instanceMatrix.needsUpdate = true; }};
+}
+
+export function bananaTree(o = {}) {
+  const r = rng(o.seed || 3); const g = new THREE.Group(); const h = o.h || 2.6;
+  g.add(cyl(0.1, 0.17, h, toon('#8a9a52', {paint: {stripes: {n: 9, color: '#76864a'}, seed: 13}})));
+  const n = o.leaves || 8;
+  for (let i = 0; i < n; i++) {
+    const piv = new THREE.Group(); piv.position.y = h - 0.05; piv.rotation.y = i / n * Math.PI * 2 + r() * 0.4; g.add(piv);
+    const tilt = new THREE.Group(); tilt.rotation.z = 0.15 + r() * 0.55 - (i % 3 === 0 ? 0.6 : 0); piv.add(tilt);
+    const leaf = ball(0.5, i % 2 ? '#6fae4a' : '#5f9e42', {sx: 2.5, sy: 0.07, sz: 0.62, seg: 12, hull: 0.014}); at(leaf, 1.1, 0, 0, 0, 0, -0.18); tilt.add(leaf);
+    const rib = box(2.4, 0.03, 0.03, '#a8c46a', {center: true, edges: false, hull: 0}); at(rib, 1.1, 0.04, 0, 0, 0, -0.18); tilt.add(rib);
+  }
+  if (o.bunch !== false) {
+    const stalk = cyl(0.025, 0.025, 0.5, '#7d8a4a', {hull: 0.006}); at(stalk, 0.22, h - 0.55, 0.12); g.add(stalk);
+    for (let k = 0; k < 3; k++) { const b = bunch(6, {len: 0.2}); at(b, 0.22, h - 0.25 - k * 0.14, 0.12, k * 1.1); g.add(b); }
+    const fl = cone(0.07, 0.2, '#7a2a4a', {hull: 0.008}); at(fl, 0.22, h - 0.78, 0.12, 0, Math.PI); g.add(fl);
+  }
+  return g;
+}
+
+// Yellow radiation warning sign (trefoil + label), standing on a post or hung on a wall.
+export function radSign(text, w = 0.9, h = 1.15) {
+  const c = canvas(512, Math.round(512 * h / w)), x = c.getContext('2d'); const W = c.width, H = c.height;
+  x.fillStyle = '#f2c73a'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = INK; x.lineWidth = 22; x.strokeRect(16, 16, W - 32, H - 32);
+  const cx = W / 2, cy = H * 0.4, R = W * 0.33;
+  x.fillStyle = INK;
+  for (const a0 of [-Math.PI / 2 - Math.PI / 6 - Math.PI / 3, -Math.PI / 2 + Math.PI / 6, Math.PI / 2 - Math.PI / 6]) {
+    x.beginPath(); x.moveTo(cx + Math.cos(a0) * R * 0.28, cy + Math.sin(a0) * R * 0.28); x.arc(cx, cy, R, a0, a0 + Math.PI / 3); x.arc(cx, cy, R * 0.28, a0 + Math.PI / 3, a0, true); x.fill();
+  }
+  x.beginPath(); x.arc(cx, cy, R * 0.18, 0, 7); x.fill();
+  let fs = H * 0.13; x.font = `900 ${fs}px "Inter Display"`; while (x.measureText(text).width > W * 0.84) { fs -= 3; x.font = `900 ${fs}px "Inter Display"`; }
+  x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(text, cx, H * 0.83);
+  const geo = new THREE.BoxGeometry(w, h, 0.05);
+  const side = toon('#c99a2a');
+  const m = new THREE.Mesh(geo, [side, side, side, side, toon(texFrom(c)), side]); m.castShadow = true;
+  const g = new THREE.Group(); g.add(m);
+  const hull = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide})); hull.scale.set(1 + 0.04 / w, 1 + 0.04 / h, 1.4); g.add(hull);
+  return g;
+}
+
+// Geiger counter on a table: body + dial + needle (returns {group, needle}); needle.rotation.z = -1.1 .. 1.1.
+export function geiger() {
+  const g = new THREE.Group();
+  g.add(box(0.38, 0.22, 0.24, toon('#e0b84f', {paint: {seed: 44, stains: 8, chips: 10}})));
+  for (const s of [-1, 1]) { const p = box(0.03, 0.08, 0.03, '#3a3a40'); at(p, s * 0.11, 0.22, 0); g.add(p); }
+  const hd = box(0.28, 0.04, 0.05, '#3a3a40'); at(hd, 0, 0.29, 0); g.add(hd);
+  const c = canvas(512, 300), x = c.getContext('2d');
+  x.fillStyle = '#f4ecd6'; x.fillRect(0, 0, 512, 300);
+  const cx = 256, cy = 270, R = 210;
+  const segs = [['#6abf5a', 0, 0.45], ['#e8c33a', 0.45, 0.75], ['#d8513a', 0.75, 1]];
+  for (const [col, a, b] of segs) { x.strokeStyle = col; x.lineWidth = 34; x.beginPath(); x.arc(cx, cy, R - 20, Math.PI + 0.45 + a * (Math.PI - 0.9), Math.PI + 0.45 + b * (Math.PI - 0.9)); x.stroke(); }
+  x.strokeStyle = INK; x.lineWidth = 6;
+  for (let i = 0; i <= 10; i++) { const a = Math.PI + 0.45 + i / 10 * (Math.PI - 0.9); x.beginPath(); x.moveTo(cx + Math.cos(a) * (R - 45), cy + Math.sin(a) * (R - 45)); x.lineTo(cx + Math.cos(a) * (R + 2), cy + Math.sin(a) * (R + 2)); x.stroke(); }
+  x.fillStyle = INK; x.font = '800 44px "Inter Display"'; x.textAlign = 'center'; x.fillText('µSv/h', cx, 200);
+  x.lineWidth = 12; x.strokeRect(6, 6, 500, 288);
+  const dial = decal(texFrom(c), 0.3, 0.176); dial.position.set(0, 0.112, 0.122); g.add(dial);
+  const needle = new THREE.Group(); needle.position.set(0, 0.04, 0.126); g.add(needle);
+  const nd = new THREE.Mesh(new THREE.PlaneGeometry(0.008, 0.115), new THREE.MeshBasicMaterial({color: INK})); nd.position.y = 0.0575; needle.add(nd);
+  const hub = new THREE.Mesh(new THREE.CircleGeometry(0.012, 16), new THREE.MeshBasicMaterial({color: INK})); hub.position.z = 0.001; needle.add(hub);
+  const probe = cyl(0.03, 0.03, 0.24, '#4a4a52', {center: true, hull: 0.006}); at(probe, 0.3, 0.05, 0.06, 0.3, 0, Math.PI / 2); g.add(probe);
+  const cable = cyl(0.008, 0.008, 0.16, INK, {center: true, hull: 0}); at(cable, 0.2, 0.06, 0.04, 0, 0, Math.PI / 2); g.add(cable);
+  return {group: g, needle};
+}
+
+// Atom: glowing nucleus + three ink orbits with electrons. update(t) spins electrons.
+export function atom(o = {}) {
+  const g = new THREE.Group(); const r = rng(o.seed || 8); const R = o.r || 0.3;
+  const nuc = new THREE.Group(); g.add(nuc);
+  for (let i = 0; i < 11; i++) {
+    const col = i % 2 ? '#7ad66a' : '#c9cbd6';
+    const b = ball(R * 0.15, toon(col, {wear: false, emissive: i % 2 ? '#5fd04a' : undefined, emissiveIntensity: 0.5}), {hull: 0.006});
+    const a = r() * 6.28, e = r() * 3.14; at(b, Math.cos(a) * Math.sin(e) * R * 0.17, Math.cos(e) * R * 0.17, Math.sin(a) * Math.sin(e) * R * 0.17); nuc.add(b);
+  }
+  const els = [];
+  for (let k = 0; k < 3; k++) {
+    const piv = new THREE.Group(); piv.rotation.set(k === 0 ? Math.PI / 2 : 1.2, k * 1.05, k === 2 ? 0.9 : 0.2); g.add(piv);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(R, R * 0.025, 6, 72), new THREE.MeshBasicMaterial({color: INK})); piv.add(ring);
+    const el = ball(R * 0.09, toon('#4f9fe0', {wear: false}), {hull: 0.005}); piv.add(el); els.push({el, ph: k * 2.1, w: 2.6 + k * 0.7});
+  }
+  return {group: g, update(t) { for (const q of els) q.el.position.set(Math.cos(t * q.w + q.ph) * R, Math.sin(t * q.w + q.ph) * R, 0); nuc.rotation.y = t * 0.6; }};
+}
+
+export function magnifier() {
+  const g = new THREE.Group();
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.022, 10, 40), toon('#3a3a40', {wear: false})); g.add(ring);
+  const ringH = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.032, 10, 40), new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide})); g.add(ringH);
+  const glass = new THREE.Mesh(new THREE.CircleGeometry(0.16, 40), new THREE.MeshBasicMaterial({color: '#cfeef6', transparent: true, opacity: 0.22, depthWrite: false, side: THREE.DoubleSide})); g.add(glass);
+  const hd = cyl(0.025, 0.025, 0.26, '#8a5a3a', {center: true, hull: 0.008}); at(hd, 0.2, -0.2, 0, 0, 0, 0.78); g.add(hd);
+  return g;
+}
+
+// Floating "K" potassium token (sprite) for showing potassium leaving the body.
+export function kToken(label = 'K') {
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.fillStyle = '#9a6fb0'; x.beginPath(); x.arc(128, 128, 112, 0, 7); x.fill();
+  x.strokeStyle = INK; x.lineWidth = 16; x.stroke();
+  x.fillStyle = '#fff3df'; x.font = '900 120px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(label, 128, 136);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false}));
+  return s;
+}
+
+export function heart(color = '#d8413a') {
+  const s = new THREE.Shape();
+  s.moveTo(0, -0.25); s.bezierCurveTo(-0.05, -0.18, -0.3, -0.05, -0.3, 0.1); s.bezierCurveTo(-0.3, 0.25, -0.12, 0.32, 0, 0.18);
+  s.bezierCurveTo(0.12, 0.32, 0.3, 0.25, 0.3, 0.1); s.bezierCurveTo(0.3, -0.05, 0.05, -0.18, 0, -0.25);
+  const geo = new THREE.ExtrudeGeometry(s, {depth: 0.1, bevelEnabled: true, bevelSize: 0.03, bevelThickness: 0.03, bevelSegments: 3}); geo.translate(0, 0, -0.05);
+  return ink(geo, toon(color, {wear: false}), {hull: 0.015, edges: false});
+}
+
+export function plane() {
+  const g = new THREE.Group();
+  const fus = new THREE.CapsuleGeometry(0.85, 7.5, 8, 24); fus.rotateZ(Math.PI / 2); fus.translate(0, 1.6, 0);
+  g.add(ink(fus, toon('#f4f1ea', {paint: {seed: 5, stains: 6, chips: 4}}), {hull: 0.03, edges: false}));
+  const band = new THREE.CylinderGeometry(0.862, 0.862, 7.4, 28, 1, true, Math.PI * 0.1, Math.PI * 0.8); band.rotateZ(Math.PI / 2); band.translate(0, 1.6, 0);
+  const bm = new THREE.Mesh(band, toon('#4f7fa6', {wear: false})); bm.scale.set(1, 1, 1); bm.position.y = -0.05; g.add(bm);
+  for (let i = 0; i < 13; i++) { const w = ball(0.075, '#2f4f6a', {sy: 1.35, sz: 0.4, hull: 0.008}); at(w, -3.0 + i * 0.5, 1.82, 0.8); g.add(w); }
+  for (const s of [-1, 1]) { const cw = box(0.3, 0.16, 0.25, '#2f4f6a', {center: true, hull: 0.01}); at(cw, 4.15, 1.95, s * 0.38, 0, 0, 0.35); g.add(cw); }
+  const door = box(0.55, 1.1, 0.05, '#dfe4e8', {center: true}); at(door, 3.0, 1.55, 0.82); g.add(door);
+  const wing = box(2.2, 0.12, 9.2, toon('#d8dde2', {paint: {seed: 6}})); at(wing, 0.2, 1.05, 0, 0, 0, 0); g.add(wing);
+  for (const s of [-1, 1]) {
+    const eng = cyl(0.32, 0.28, 1.2, '#b8c0c8', {center: true}); at(eng, 0.8, 0.72, s * 2.3, 0, 0, Math.PI / 2); g.add(eng);
+    const intake = new THREE.Mesh(new THREE.CircleGeometry(0.26, 24), new THREE.MeshBasicMaterial({color: '#2b2b33'})); intake.position.set(1.41, 0.72, s * 2.3); intake.rotation.y = Math.PI / 2; g.add(intake);
+  }
+  const fin = box(1.4, 1.7, 0.12, '#4f7fa6'); at(fin, -4.0, 2.2, 0, 0, 0, 0.35); g.add(fin);
+  const stab = box(1.1, 0.08, 3.4, '#d8dde2'); at(stab, -4.1, 1.95, 0); g.add(stab);
+  for (const [x, z] of [[3.2, 0], [0.4, 0.6], [0.4, -0.6]]) { const st = cyl(0.05, 0.05, 0.6, '#5a5a62'); at(st, x, 0.2, z); g.add(st); const wh = cyl(0.2, 0.2, 0.14, '#2b2b33', {center: true}); at(wh, x, 0.2, z, 0, Math.PI / 2); g.add(wh); }
+  return g;
+}
+
+export function suitcase(color = '#c75b5b') {
+  const g = new THREE.Group();
+  g.add(box(0.42, 0.55, 0.2, toon(color, {paint: {seed: 9}})));
+  const hd = box(0.16, 0.06, 0.04, '#3a3a40'); at(hd, 0, 0.55, 0); g.add(hd);
+  for (const s of [-1, 1]) { const w = cyl(0.04, 0.04, 0.04, '#2b2b33', {center: true}); at(w, s * 0.15, 0.02, 0.1, 0, Math.PI / 2); g.add(w); }
+  return g;
+}
+
+export function ctScanner(label = 'CT') {
+  const g = new THREE.Group();
+  const base = box(2.2, 0.4, 1.0, toon('#cdd6da', {paint: {seed: 3}})); at(base, 0, 0, 0); g.add(base);
+  const tg = new THREE.TorusGeometry(0.85, 0.4, 18, 48); tg.scale(1, 1, 1.25); tg.translate(0, 1.35, 0);
+  g.add(ink(tg, toon('#eef3f5', {paint: {seed: 4, stains: 4}}), {hull: 0.03, edges: false}));
+  const acc = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.045, 8, 48), toon('#4f9fb0', {wear: false})); acc.position.set(0, 1.35, 0.5); g.add(acc);
+  const lb = sign(label, 0.5, 0.18, {bg: '#eef3f5', border: false}); at(lb, 0, 2.38, 0.42, 0, -0.25); g.add(lb);
+  const ped = box(0.5, 0.7, 0.7, '#cdd6da'); at(ped, 0, 0, 1.7); g.add(ped);
+  const bed = box(0.56, 0.1, 2.8, toon('#f6f8f8', {paint: {seed: 5}})); at(bed, 0, 0.8, 0.95); g.add(bed);
+  const pil = ball(0.16, '#dfeaf0', {sx: 1.4, sy: 0.4, sz: 0.8}); at(pil, 0, 0.93, 2.1); g.add(pil);
+  return g;
+}
+
+export function flask(color = '#7ad66a', h = 0.3) {
+  const g = new THREE.Group();
+  const geo = new THREE.LatheGeometry([[0.001, 0], [0.11, 0.0], [0.12, 0.05], [0.12, 0.12], [0.05, 0.2], [0.04, h], [0.05, h + 0.02]].map(([a, b]) => new THREE.Vector2(a, b)), 20);
+  g.add(ink(geo, new THREE.MeshToonMaterial({color: '#dff2f6', transparent: true, opacity: 0.45, gradientMap: gradientMap()}), {hull: 0.008, edges: false}));
+  const liq = cyl(0.105, 0.115, 0.1, toon(color, {wear: false, emissive: color, emissiveIntensity: 0.25}), {hull: 0}); at(liq, 0, 0.005, 0); g.add(liq);
   return g;
 }

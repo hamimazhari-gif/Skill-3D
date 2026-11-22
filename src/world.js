@@ -1,24 +1,33 @@
-// All locations in one scene at different x offsets. Each returns {group, update(t)}.
+// All locations in one scene at different x offsets. Story: "Pisang radioaktif / The radioactive banana".
 import * as THREE from 'three';
-import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, clamp01, INK, decal, signTex} from './kit';
+import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, clamp01, INK, decal, canvas, texFrom, rng} from './kit';
 import {makeChar} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {road: 0, market: 40, docks: 80, shop: 120, cross: 160, mint: 200, museum: 240};
+export const LOC = {kitchen: 0, farm: 40, lab: 80, airport: 120, hospital: 160, mountain: 200};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
+const GREEN = {grade: {sat: 1.05, contrast: 1.06, tint: '#a8ffa0', tintAmt: 0.12, vignette: 0.5}};
+const kitchenLook = {...LOOK_PRESETS.interiorWarm, keyPos: [-4, 7, 8]};
+const labLook = {...LOOK_PRESETS.interiorCool, keyPos: [-4, 8, 8]};
+const hospLook = {...LOOK_PRESETS.interiorCool, keyPos: [-3, 8, 8], key: '#f6fbff'};
+
+// Lighting plan (camera_plan.md): morning kitchen; noon banana farm turning golden for the finale; cool lab;
+// bright airport day; clinical hospital going tense on "tens of thousands"; golden-hour banana mountain turning joyful.
 export const LOOK = {
-  road: {fog: '#efe6d2', near: 14, far: 55, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff0d8', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
-  market: {fog: '#f1e5cf', near: 12, far: 45, skyTop: '#a6cbe6', skyBottom: '#f6ead6', key: '#ffeccc', keyI: 2.6, hemiI: 1.35, keyPos: [-6, 10, 7]},
-  docks: {fog: '#e4ecec', near: 14, far: 60, skyTop: '#8fc1e3', skyBottom: '#eef1e8', key: '#fff3e0', keyI: 2.5, hemiI: 1.4, keyPos: [-7, 10, 6]},
-  shop: {fog: '#3a2a26', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffe2b8', keyI: 2.4, hemiI: 1.25, keyPos: [-4, 8, 8]},
-  // "Half a day gone": the sun sinks through the shot and the mood turns sad on "still no fish".
-  cross: {keys: [{at: 'cut6', ...LOOK_PRESETS.goldenHour, keyPos: [-8, 9, 6]}, {at: 'nofish', ...LOOK_PRESETS.dusk, ...MOODS.sad, keyPos: [-6, 4, 5]}]},
-  mint: {fog: '#3a2620', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#ffd6a0', keyI: 2.5, hemiI: 1.2, keyPos: [-4, 8, 8]},
-  museum: {fog: '#2e3440', near: 8, far: 30, skyTop: '#9cc6e6', skyBottom: '#f6ead6', key: '#fff4e6', keyI: 2.4, hemiI: 1.35, keyPos: [-4, 8, 8]},
+  kitchen: {keys: [{at: 0, ...kitchenLook}, {at: 'radio', ...kitchenLook, ...GREEN}, {at: 'cut2', ...kitchenLook},
+    {at: 'cut8', ...kitchenLook}, {at: 'remove', ...kitchenLook, ...MOODS.joyful}]},
+  farm: {keys: [{at: 0, ...LOOK_PRESETS.noon, keyPos: [-5, 12, 6]}, {at: 'cut3', ...LOOK_PRESETS.noon, keyPos: [-5, 12, 6]},
+    {at: 'cut10', ...LOOK_PRESETS.goldenHour, ...MOODS.joyful, keyPos: [-8, 6, 7]}]},
+  lab: {keys: [{at: 0, ...labLook}, {at: 'radiasi', ...labLook, ...GREEN}, {at: 'cut4', ...labLook}, {at: 'cut5', ...labLook},
+    {at: 'cut9', ...labLook, ...MOODS.mystery}, {at: 'yourself', ...labLook, ...GREEN}, {at: 'samek', ...labLook, ...MOODS.joyful}]},
+  airport: {...LOOK_PRESETS.day, keyPos: [-7, 11, 7]},
+  hospital: {keys: [{at: 0, ...hospLook}, {at: 'cut6', ...hospLook}, {at: 'tens', ...hospLook, ...MOODS.tense}]},
+  mountain: {keys: [{at: 0, ...LOOK_PRESETS.goldenHour, keyPos: [-9, 6, 7]}, {at: 'millions', ...LOOK_PRESETS.goldenHour, keyPos: [-9, 6, 7]},
+    {at: 'impossible', ...LOOK_PRESETS.goldenHour, ...MOODS.joyful, keyPos: [-9, 6, 7]}]},
 };
 
 function ground(w, d, color, paint) {
@@ -27,11 +36,16 @@ function ground(w, d, color, paint) {
   return m;
 }
 
-// Screen-level effects for this story: flashes (overlay) and camera shakes, timed to words.
+// Screen-level effects: flashes (overlay) and camera shakes, timed to words.
 export function storyFx(T, EVt) {
   return {
-    flashes: [{t: EVt.coins + 0.02, dur: 0.35, color: '#ffe9b0', strength: 0.7}],
-    shakes: [{t: EVt.coins, dur: 0.45, amp: 0.035}, {t: EVt.goat + 0.15, dur: 0.3, amp: 0.02}],
+    flashes: [
+      {t: EVt.radio + 0.05, dur: 0.3, color: '#c8ffb8', strength: 0.45},
+      {t: EVt.tens + 0.3, dur: 0.35, color: '#ffffff', strength: 0.55},
+      {t: EVt.yourself + 0.05, dur: 0.3, color: '#c8ffb8', strength: 0.35},
+      {t: EVt.follow, dur: 0.35, color: '#ffe9b0', strength: 0.45},
+    ],
+    shakes: [{t: EVt.radio + 0.05, dur: 0.35, amp: 0.02}, {t: EVt.tens + 0.3, dur: 0.6, amp: 0.045}],
   };
 }
 
@@ -44,318 +58,276 @@ export function buildWorld(lang, T, EVt, L) {
   const ch = (name, o, parent, x, z, yaw = 0) => { const c = makeChar(name, {yaw, ...o}); at(c.group, x, 0, z); parent.add(c.group); chars.push(c); return c; };
   const E = (k) => EVt[k];
   const cut = (k) => T.CUTS[k - 1];
+  const inShots = (t, a, b = a) => t >= cut(a) && t < cut(b + 1);
+  const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
+  const holdBanana = (c, o = {}) => { const b = P.banana({len: 0.24, cast: false}); at(b, 0.02, -0.02, 0.05, 0, 0, o.rz ?? 1.9); c.hand(1).add(b); return b; };
 
-  // ---------- L0: village road to the market ----------
+  // ---------- kitchen (shots 1 and 8) ----------
   {
-    const g = addLoc('road');
-    g.add(ground(60, 60, '#9dbb6a'));
-    const road = box(26, 0.03, 2.4, toon('#c9a77a', {paint: {grain: 200, seed: 8}}), {edges: false, hull: 0}); at(road, 0, 0, 0.3); g.add(road);
-    for (let i = 0; i < 6; i++) for (let j = 0; j < 3; j++) {
-      const p = box(3.2, 0.18, 2.0, toon('#7fae4f', {paint: {stripes: {n: 12, color: '#6f9e45'}, seed: 70 + i}}));
-      at(p, -9 + i * 3.6, 0, -3.2 - j * 2.4); g.add(p);
-    }
-    const gate = P.banner(L.market, 2.4, 0.66, {poleH: 3.1}); at(gate, 3.6, 0, -1.3); g.add(gate);
-    const cg = P.cage(); at(cg, 2.1, 0, 1.6, -0.3); g.add(cg);
-    const sk = P.sack(null, {scale: 0.9, color: '#cdb48a'}); at(sk, 4.6, 0, 1.3); g.add(sk);
-    const bk = P.basket(); at(bk, 3.9, 0, 2.6); g.add(bk);
-    const h1 = P.house(4, 2.8, 3, {seed: 4}); at(h1, -6.5, 0, -10.5, 0.15); g.add(h1);
-    const h2 = P.house(3.4, 2.6, 3, {color: '#dcb98a', roof: '#8a5a3a', seed: 6, shutter: '#4f7fa6'}); at(h2, 7.5, 0, -11, -0.2); g.add(h2);
-    for (const [x, z, s] of [[-3, -12, 1], [1.5, -13, 2], [11, -9, 3], [-10, -8, 4], [6, -6.5, 5]]) { const tr = P.tree({seed: s}); at(tr, x, 0, z); g.add(tr); }
-    const seller = ch('sellerA', {}, g, 2.9, 1.0, 0.3);
-    const farmer = ch('farmer', {}, g, -2.4, 0.4, 0.6);
-    const fs = P.sack(L.rice, {scale: 0.8}); at(fs, 0.3, 0.92, -0.08, 0, 0, -0.15); fs.traverse((m) => { m.castShadow = false; }); farmer.group.children[0].add(fs);
-    farmer.act([
-      {t: 0, pose: 'carry', expr: 'happy', action: 'walk', dur: cut(2) - 0.2},
-      {t: E('chicken'), expr: 'excited'},
-      {t: E('rice'), expr: 'worried', action: 'tremble', dur: 0.5},
-      {t: E('market') - 0.1, expr: 'determined'},
-    ]);
-    seller.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('chicken'), pose: 'present', expr: 'happy', action: 'hop', dur: 0.5}]);
-    updaters.push((t) => {
-      const u = clamp01((t - 0) / (cut(2)));
-      farmer.group.position.x = -2.6 + u * 3.0;
-      cg.userData.chicken.rotation.y = -0.3 + Math.sin(t * 3) * 0.3;
-      cg.userData.chicken.position.y = 0.45 + Math.abs(Math.sin(t * 5)) * 0.03;
-    });
-  }
-
-  // ---------- L1: barter market (also shots 7, 10, 11) ----------
-  {
-    const g = addLoc('market');
-    g.add(ground(60, 60, '#c8ad86', {cobbles: true}));
-    const stalls = [[-4.2, -4.2, L.fish, '#4f7fa6'], [0, -4.6, L.salt, '#d9774a'], [4.2, -4.2, L.cloth, '#9a6fb0']];
-    for (const [x, z, l, c] of stalls) { const s = P.stall(l, {awning: c}); at(s, x, 0, z); g.add(s); }
-    const b1 = P.basket(); at(b1, -4.6, 0.85, -4.2); g.add(b1);
-    const b2 = P.basket(); at(b2, -3.8, 0.85, -4.2); g.add(b2);
-    const salt = P.sack(null, {color: '#f4f1ea', scale: 0.6}); at(salt, -0.4, 0.85, -4.6); g.add(salt);
-    const salt2 = P.sack(null, {color: '#f4f1ea', scale: 0.55}); at(salt2, 0.4, 0.85, -4.5); g.add(salt2);
-    for (let i = 0; i < 3; i++) { const cl = cyl(0.12, 0.12, 0.7, ['#c75b5b', '#e0b84f', '#5a9a8a'][i]); at(cl, 3.7 + i * 0.4, 0.97, -4.2, 0, 0, Math.PI / 2); g.add(cl); }
-    for (const [x, z] of [[-8, -9], [8, -10], [-11, -3], [13.5, -7]]) { const h = P.house(4, 3, 3, {seed: x + 20, color: x < 0 ? '#e6c99a' : '#d8b48a'}); at(h, x, 0, z, x < 0 ? 0.5 : -0.5); g.add(h); }
-    for (const [x, z, s] of [[-6, -14, 3], [5, -15, 8], [13, -11, 2]]) { const tr = P.tree({seed: s}); at(tr, x, 0, z); g.add(tr); }
-    for (const [x, z] of [[-6.5, 1.2], [6.6, 0.6]]) { const b = P.barrel(); at(b, x, 0, z); g.add(b); }
-
-    // shot 2: three trading pairs, each with a crate where goods pop in on the words
-    const pairs = [
-      {x: -3.0, a: 'farmer', b: 'fisher', ga: () => P.sack(L.rice, {scale: 0.55}), gb: () => P.basket(undefined, 2), ea: 'rice2', eb: 'fish'},
-      {x: 0.2, a: 'sellerB', b: 'sellerC', ga: () => P.sack(null, {color: '#f4f1ea', scale: 0.5}), gb: () => { const gg = new THREE.Group(); for (let i = 0; i < 3; i++) { const c = cyl(0.09, 0.09, 0.5, ['#c75b5b', '#e0b84f', '#5a9a8a'][i]); at(c, 0, 0.09 + i * 0.17, 0, 0, 0, Math.PI / 2); gg.add(c); } return gg; }, ea: 'salt', eb: 'cloth'},
-      {x: 3.4, a: 'sellerD', b: 'sellerA', ga: () => { const gt = P.goat(); gt.scale.setScalar(0.75); return gt; }, gb: () => { const gg = new THREE.Group(); for (let i = 0; i < 5; i++) { const w = cyl(0.015, 0.015, 0.6, '#d9b44a', {hull: 0.006}); at(w, (i - 2) * 0.03, 0, 0, 0, 0, (i - 2) * 0.08); gg.add(w); const e = ball(0.035, '#e0bf5a', {sx: 0.7, sy: 1.6, sz: 0.7}); at(e, (i - 2) * 0.03 + Math.sin((i - 2) * 0.08) * -0.6, 0.62, 0); gg.add(e); } return gg; }, ea: 'goats', eb: 'wheat'},
-    ];
-    const pairGroup = new THREE.Group(); g.add(pairGroup);
-    const pops = [];
-    for (const p of pairs) {
-      const cr = P.crate(0.8, 0.5, 0.6, null); at(cr, p.x, 0, -1.2); pairGroup.add(cr);
-      const ca = ch(p.a, {}, pairGroup, p.x - 0.75, -1.15, 0.35);
-      const cb2 = ch(p.b, {}, pairGroup, p.x + 0.75, -1.15, -0.35);
-      ca.act([{t: 0, pose: 'hold', expr: 'neutral'}, {t: E(p.ea) - 0.05, pose: 'give', expr: 'happy', action: 'hop', dur: 0.5}, {t: E(p.eb) + 0.1, expr: 'laugh', pose: 'cheer'}]);
-      cb2.act([{t: 0, pose: 'hips', expr: 'thinking'}, {t: E(p.ea) + 0.1, expr: 'surprised'}, {t: E(p.eb) - 0.05, pose: 'give', expr: 'happy', action: 'hop', dur: 0.5}]);
-      const A = p.ga(); at(A, p.x - 0.2, p.a === 'sellerD' ? 0 : 0.5, p.a === 'sellerD' ? -0.55 : -1.2); pairGroup.add(A); pops.push([A, p.ea]);
-      if (p.a === 'sellerD') { A.position.x = p.x - 0.1; A.position.z = -2.0; A.rotation.y = 0.5; }
-      const B = p.gb(); at(B, p.x + 0.2, 0.5, -1.2); pairGroup.add(B); pops.push([B, p.eb]);
-    }
-    // shot 7: notice board with two painted "want" circles that slide together
-    const board = new THREE.Group(); at(board, 9, 0, -3.6); g.add(board);
-    for (const s of [-1, 1]) { const p = cyl(0.09, 0.1, 4.0, '#7a5236'); at(p, s * 1.85, 0, 0); board.add(p); }
-    const panel = box(3.4, 2.1, 0.12, toon('#efdcb2', {paint: {seed: 90, stains: 20}})); at(panel, 0, 1.75, 0); board.add(panel);
-    const ring = (label, col) => {
-      const c = document.createElement('canvas'); c.width = c.height = 512; const x = c.getContext('2d');
-      x.fillStyle = col; x.globalAlpha = 0.35; x.beginPath(); x.arc(256, 256, 230, 0, 7); x.fill(); x.globalAlpha = 1;
-      x.strokeStyle = INK; x.lineWidth = 18; x.beginPath(); x.arc(256, 256, 230, 0, 7); x.stroke();
-      x.fillStyle = INK; x.font = '900 92px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(label, 256, 256);
-      const tx = new THREE.CanvasTexture(c); tx.colorSpace = THREE.SRGBColorSpace;
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({map: tx, transparent: true, depthWrite: false}));
-      return m;
-    };
-    const rL = ring(L.rice, '#e0b84f'); const rR = ring(L.fish, '#5f9fb8');
-    rL.position.set(-0.8, 1.75, 0.07); rR.position.set(0.8, 1.75, 0.075); board.add(rL, rR);
-    const chk = P.chalkDoodle('check', 0.5, 0.5); chk.material.color.set('#3f7a3a'); chk.position.set(0, 1.75, 0.08); board.add(chk);
-    const top = box(3.7, 0.12, 0.3, '#7a5236'); at(top, 0, 2.86, 0); board.add(top);
-    const f7 = ch('farmer', {seed: 99}, g, 8.0, -1.4, 0.2);
-    for (const [x, d] of [[8.0, 0], [10.0, 0.1]]) { const dd = FX.dust([x, 0.05, -1.4], EVt.once + d + 0.55, {}); g.add(dd.obj); updaters.push(dd.update); }
-    const n7 = ch('fisher', {seed: 98}, g, 10.0, -1.4, -0.2);
-
-    // shot 10/11: coins and the chalkboard
-    const coinGroup = new THREE.Group(); g.add(coinGroup);
-    for (const [x, z] of [[-3.0, -1.2], [0.2, -1.2], [3.4, -1.2]]) { const cp = P.coinPile(9, x * 10 + 50); at(cp, x, 0.5, z); coinGroup.add(cp); }
-    const buyer = ch('buyer', {}, coinGroup, -1.9, -0.6, 0.3);
-    ch('sellerC', {seed: 61}, coinGroup, -4.2, -3.25, 0).act([{t: 0, pose: 'wave', expr: 'happy'}]); ch('sellerB', {seed: 62}, coinGroup, 0, -3.6, 0).act([{t: 0, pose: 'presentBoth', expr: 'laugh'}]); ch('sellerD', {seed: 63}, coinGroup, 4.2, -3.25, 0).act([{t: 0, pose: 'hips', expr: 'proud'}]); ch('fisher', {seed: 64}, coinGroup, -0.9, -1.0, -0.3).act([{t: 0, pose: 'give', expr: 'happy'}]);
-    const ph = P.phone(); at(ph, 0, 0.02, 0.05); buyer.hand(1).add(ph);
-    const cb = P.chalkboard(1.3, 0.95, {text: L.trade, textY: 0.5});
-    const easel = new THREE.Group(); at(easel, 5.6, 0, 0.6, -0.35); g.add(easel);
-    for (const s of [-1, 1]) { const leg = cyl(0.03, 0.03, 1.9, '#7a5236', {hull: 0.01}); at(leg, s * 0.55, 0, 0.1, 0, -0.12); easel.add(leg); }
-    const back = cyl(0.03, 0.03, 1.9, '#7a5236', {hull: 0.01}); at(back, 0, 0, -0.35, 0, 0.25); easel.add(back);
-    at(cb, 0, 1.25, 0.12, 0, -0.12); easel.add(cb);
-    const f11 = ch('farmer', {seed: 97}, g, 4.55, 0.85, 0.2);
-    const sk11 = P.sack(L.rice, {scale: 0.55}); at(sk11, 4.0, 0, 1.15, 0.3); g.add(sk11);
-    const ph11 = P.phone(); at(ph11, 0, 0.03, 0.05); f11.hand(1).add(ph11);
-    f7.act([{t: 0, pose: 'chin', expr: 'thinking'}, {t: E('two'), pose: 'present', expr: 'surprised'}, {t: E('once'), pose: 'cheer', expr: 'excited', action: 'jump', dur: 0.7}]);
-    n7.act([{t: 0, pose: 'cross', expr: 'confused'}, {t: E('two') + 0.2, pose: 'present', expr: 'surprised'}, {t: E('once') + 0.1, pose: 'cheer', expr: 'laugh', action: 'jump', dur: 0.7}]);
-    buyer.act([{t: 0, pose: 'give', expr: 'happy'}, {t: E('single'), action: 'hop', dur: 0.6, expr: 'laugh'}]);
-    f11.act([{t: 0, pose: 'hold', expr: 'thinking'}, {t: E('trade'), pose: 'shrug', expr: 'confused', action: 'hop', dur: 0.4}, {t: E('comment'), pose: 'point', expr: 'excited', action: 'jump', dur: 0.6}]);
-
-    updaters.push((t) => {
-      const s2 = t >= cut(2) && t < cut(3);
-      const s7 = t >= cut(7) && t < cut(8);
-      const s10 = t >= cut(10);
-      pairGroup.visible = s2;
-      for (const [o, k] of pops) o.scale.setScalar(pop(t, E(k) - 0.05));
-      board.visible = s7; f7.group.visible = s7; n7.group.visible = s7;
-      const u = smooth((t - E('see')) / Math.max(0.5, E('once') - E('see')));
-      rL.position.x = -1.05 + 0.55 * u; rR.position.x = 1.05 - 0.55 * u;
-      chk.scale.setScalar(s10 ? 1 : pop(t, E('once')));
-      coinGroup.visible = s10; easel.visible = s10; f11.group.visible = s10; sk11.visible = s10;
-    });
-  }
-
-  // ---------- L2: docks ----------
-  {
-    const g = addLoc('docks');
-    const sand = ground(60, 26, '#e3cf9e'); sand.position.z = 13 + 1.5; g.add(sand);
-    const water = new THREE.Mesh(new THREE.PlaneGeometry(80, 70), new THREE.MeshToonMaterial({map: P.waterTex(), gradientMap: undefined}));
-    water.rotation.x = -Math.PI / 2; water.position.set(0, -0.55, -33.5); water.receiveShadow = true; g.add(water);
-    const deck = box(3.0, 0.16, 10, toon('#b08454', {paint: {planks: 14, seed: 33}})); at(deck, 0, -0.16, -3.4); g.add(deck);
-    deck.children[0].material.map.rotation = Math.PI / 2;
-    for (let i = 0; i < 6; i++) for (const s of [-1, 1]) { const p = cyl(0.11, 0.11, 1.2, '#7a5236'); at(p, s * 1.45, -0.9, 1.0 - i * 1.9); g.add(p); }
-    for (const s of [-1, 1]) { const rail = box(0.08, 0.08, 9.5, '#7a5236'); at(rail, s * 1.48, 0.6, -3.6); if (s > 0) g.add(rail); }
-    for (let i = 0; i < 5; i++) { const p = cyl(0.05, 0.05, 0.62, '#7a5236'); at(p, 1.48, 0, 0.6 - i * 2.2); g.add(p); }
-    const bt = P.boat(); at(bt, 3.4, -0.6, -3.2, Math.PI / 2 + 0.1); g.add(bt);
-    const bt2 = P.boat(); at(bt2, -5.5, -0.6, -8, 0.4); g.add(bt2);
-    const sg = new THREE.Group(); at(sg, -1.75, 0, 0.6); g.add(sg);
-    const pole = cyl(0.07, 0.08, 2.6, '#7a5236'); sg.add(pole);
-    const sb = sign(L.signDocks, 1.5, 0.45, {bg: '#e9d6a8'}); at(sb, 0.0, 2.25, 0.08); sg.add(sb);
-    const bkt = P.basket(); at(bkt, -0.95, 0, -2.6); g.add(bkt);
-    const bkt2 = P.basket(); at(bkt2, -0.75, 0, -3.3); g.add(bkt2);
-    const brl = P.barrel(); at(brl, 1.0, 0, -2.6); g.add(brl);
-    const slate = P.chalkboard(0.5, 0.4, {}); at(slate, 1.0, 1.02, -2.38, 0, -0.25); g.add(slate);
-    const shoe = P.chalkDoodle('shoe', 0.38, 0.32); shoe.position.set(1.0, 1.04, -2.33); shoe.rotation.x = -0.25; g.add(shoe);
-    const rope = cyl(0.25, 0.25, 0.12, '#c9a462'); at(rope, -1.0, 0, -0.6); g.add(rope);
-    const cr = P.crate(0.7, 0.5, 0.6, null); at(cr, 0.95, 0, -4.4); g.add(cr);
-    for (const [x, z, s] of [[-7, 6, 11], [8, 7, 12]]) { const tr = P.tree({seed: s, leaf: '#7aa35a', h: 3}); at(tr, x, 0, z); g.add(tr); }
-    const shed = P.house(3.6, 2.6, 3, {color: '#c9b08a', roof: '#5f7f8a', seed: 13, windows: 1}); at(shed, -6, 0, 3.2, 0.6); g.add(shed);
-    const fisher = ch('fisher', {}, g, 0.35, -2.25, 0);
-    const farmer = ch('farmer', {seed: 44}, g, -0.6, -1.6, 0.4);
-    farmer.act([{t: 0, pose: 'carry', expr: 'excited'}, {t: E('fisherman'), expr: 'happy', action: 'hop', dur: 0.5},
-      {t: E('shakes') + 0.15, expr: 'shocked', action: 'tremble', dur: 0.6}, {t: E('shoes') + 0.3, expr: 'confused'}]);
-    fisher.act([{t: 0, pose: 'hips', expr: 'neutral'}, {t: E('fisherman') + 0.1, expr: 'surprised'},
-      {t: E('shakes'), pose: 'cross', expr: 'annoyed', action: 'shake', dur: 1.3}, {t: E('shoes'), pose: 'point', expr: 'smug', action: 'hop', dur: 0.4}]);
-    const fsk = P.sack(L.rice, {scale: 0.7}); at(fsk, 0.3, 0.92, -0.08, 0, 0, -0.15); fsk.traverse((m) => { m.castShadow = false; }); farmer.group.children[0].add(fsk);
-    updaters.push((t) => {
-      water.material.map.offset.set(t * 0.01, t * 0.006);
-      bt.position.y = -0.6 + Math.sin(t * 1.3) * 0.04; bt.rotation.z = Math.sin(t * 1.1) * 0.03;
-      const walkU = clamp01((t - cut(3)) / Math.max(0.5, E('fisherman') - cut(3)));
-      farmer.group.position.z = 0.6 + (-1.5 - 0.6) * smooth(walkU);
-      farmer.state.walk = walkU > 0 && walkU < 1 ? 1 : 0;
-      const sh = pop(t, E('shoes'), 0.3); shoe.scale.setScalar(sh);
-    });
-  }
-
-  // ---------- L3: shoemaker's workshop ----------
-  {
-    const g = addLoc('shop');
+    const g = addLoc('kitchen');
     g.add(ground(40, 40, '#8a6a4a'));
-    const rm = P.room(6.4, 4.2, 6.2, {wall: '#e2c9a0', floor: '#a87a4e', wain: '#8a5a3a'}); g.add(rm);
-    const win = new THREE.Group(); at(win, -3.08, 0, -1.8, Math.PI / 2); g.add(win);
-    const wb = box(1.1, 1.0, 0.1, '#f4e9cf', {}); at(wb, 0, 1.4, 0); win.add(wb);
-    for (const s of [-1, 1]) { const sh = box(0.06, 1.0, 0.12, '#6b4a3a'); at(sh, s * 0.55, 1.4, 0.02); win.add(sh); }
-    const sill = box(1.3, 0.08, 0.2, '#6b4a3a'); at(sill, 0, 1.36, 0.05); win.add(sill);
-    for (let r = 0; r < 3; r++) {
-      const shelf = box(3.2, 0.06, 0.4, '#7a5236'); at(shelf, -0.6, 0.9 + r * 0.6, -4.95); g.add(shelf);
-      for (let i = 0; i < 6; i++) { const b = P.boot(['#6b3f2a', '#3b2a2c', '#9a5a3a', '#4a3a5a'][(i + r) % 4]); at(b, -2.0 + i * 0.55, 0.98 + r * 0.6, -4.9); g.add(b); }
+    g.add(P.room(7.5, 3.6, 6.5, {wall: '#f1dcb8', floor: '#c9a27a', wain: '#b0694a'}));
+    // window with a morning sky
+    const win = new THREE.Group(); at(win, 0.6, 0, -5.38); g.add(win);
+    const pane = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.0), new THREE.MeshBasicMaterial({color: '#bfe0f2'})); pane.position.set(0, 2.05, 0.02); win.add(pane);
+    for (const s of [-1, 1]) { const f = box(0.08, 1.1, 0.12, '#f6ead6', {center: true}); at(f, s * 0.68, 2.05, 0.05); win.add(f); }
+    for (const y of [1.52, 2.58]) { const f = box(1.44, 0.08, 0.14, '#f6ead6', {center: true}); at(f, 0, y, 0.06); win.add(f); }
+    const mull = box(0.05, 1.0, 0.06, '#f6ead6', {center: true}); at(mull, 0, 2.05, 0.05); win.add(mull);
+    const counter = box(4.6, 0.9, 0.7, toon('#9a6a4a', {paint: {planks: 6, seed: 21}})); at(counter, 0.3, 0, -5.0); g.add(counter);
+    const top = box(4.7, 0.06, 0.76, '#eae3d6'); at(top, 0.3, 0.9, -5.0); g.add(top);
+    for (const x of [-1.5, 2.6]) { const cb = box(1.4, 0.8, 0.4, toon('#b0694a', {paint: {planks: 3, seed: 22}})); at(cb, x, 2.4, -5.18); g.add(cb); }
+    const fridge = box(0.85, 2.05, 0.72, toon('#e8eef0', {paint: {seed: 23, stains: 6}})); at(fridge, -3.0, 0, -4.9); g.add(fridge);
+    const fh = box(0.04, 0.5, 0.05, '#9aa4a8'); at(fh, -2.7, 1.1, -4.52); g.add(fh);
+    const kettle = cyl(0.12, 0.15, 0.22, '#c75b5b'); at(kettle, 1.9, 0.96, -5.0); g.add(kettle);
+    for (const [x, c] of [[-0.6, '#5a9a8a'], [-0.35, '#e0b84f']]) { const j = cyl(0.08, 0.08, 0.22, c); at(j, x, 0.96, -5.1); g.add(j); }
+    const table = box(1.8, 0.78, 0.9, toon('#b08454', {paint: {planks: 4, seed: 24}})); at(table, 0.3, 0, -1.6); g.add(table);
+    const bowl = cyl(0.24, 0.14, 0.12, '#4f7fa6'); at(bowl, -0.3, 0.78, -1.55); g.add(bowl);
+    const bn = P.bunch(6); at(bn, -0.3, 0.88, -1.55, 0.4); g.add(bn);
+    const mug = cyl(0.06, 0.055, 0.12, '#f3e7d3'); at(mug, 0.15, 0.78, -1.3); g.add(mug);
+    const gc = P.geiger(); at(gc.group, 0.8, 0.78, -1.45, -0.45); g.add(gc.group);
+    const rs = P.radSign(L.radio, 0.62, 0.8); at(rs, -1.5, 1.52, -5.32); g.add(rs);
+    const hero = ch('hero', {}, g, 0.05, -2.45, 0.1);
+    holdBanana(hero);
+    hero.act([
+      {t: 0, pose: 'present', expr: 'happy'},
+      {t: E('eat') + 0.1, expr: 'excited', action: 'hop', dur: 0.5},
+      {t: E('radio') + 0.12, expr: 'shocked', action: 'jump', dur: 0.7},
+      {t: E('radio') + 0.85, expr: 'worried', pose: 'hold', action: 'tremble', dur: 1.0},
+      {t: cut(8), pose: 'eat', expr: 'happy', action: 'talk', dur: 1.0},
+      {t: E('body') + 0.1, expr: 'laugh', pose: 'present'},
+      {t: E('remove') + 0.15, expr: 'proud', pose: 'hips', action: 'hop', dur: 0.5},
+    ]);
+    const tokens = [];
+    for (let i = 0; i < 6; i++) { const s = P.kToken('K'); s.scale.setScalar(0.0001); g.add(s); tokens.push(s); }
+    fx(g, FX.glints([0.35, 1.6, -2.2], E('radio') + 0.05, {color: '#9dff7a', n: 36, speed: 0.9, size: 0.1}), (t) => inShots(t, 1));
+    fx(g, FX.sparks([0.35, 1.6, -2.2], E('radio') + 0.05, {color: '#b8ff8a', n: 30, speed: 1.1, size: 0.05, up: 0.6, repeat: 0.7}), (t) => inShots(t, 1));
+    updaters.push((t) => {
+      const lvl = t < E('radio') ? -0.95 + 0.04 * Math.sin(t * 11) : t < cut(2) ? 0.85 + 0.15 * Math.sin(t * 23) + 0.08 * Math.sin(t * 41) : -0.9 + 0.05 * Math.sin(t * 9);
+      const rise = smooth((t - E('radio')) / 0.25);
+      gc.needle.rotation.z = -(t < cut(2) ? -0.95 + (lvl + 0.95) * rise : lvl);
+      rs.visible = inShots(t, 1); rs.scale.setScalar(pop(t, E('radio') + 0.05));
+      const tr = E('remove');
+      tokens.forEach((s, i) => {
+        const t0 = tr + i * 0.12, u = clamp01((t - t0) / 1.6);
+        s.visible = inShots(t, 8) && t > t0;
+        s.position.set(0.05 + (i % 3 - 1) * 0.15 + u * (0.6 - i * 0.12), 1.15 + u * 1.5 + Math.sin(u * 6 + i) * 0.05, -2.3 + u * (-2.0 + i * 0.1));
+        s.scale.setScalar(0.3 * pop(t, t0, 0.3) * (1 - 0.4 * u));
+      });
+    });
+  }
+
+  // ---------- banana farm (shots 2 and 10) ----------
+  {
+    const g = addLoc('farm');
+    g.add(ground(80, 80, '#8fb36a'));
+    const path = box(2.4, 0.02, 30, toon('#c9a77a', {paint: {grain: 200, seed: 8}}), {edges: false, hull: 0}); at(path, 0, 0, -4); g.add(path);
+    for (const [x, z, s, h] of [[-2.6, -3.2, 1, 2.7], [2.9, -3.6, 2, 2.9], [-4.6, -6.5, 3, 3.0], [4.8, -7.2, 4, 2.8], [-1.8, -9.5, 5, 3.1], [1.9, -11, 6, 2.9], [-6.5, -11, 7, 3.0], [6.8, -12, 8, 3.1], [-3.5, -14, 9, 2.8], [4, -16, 10, 3]]) {
+      const tr = P.bananaTree({seed: s, h}); at(tr, x, 0, z, s * 0.7); g.add(tr);
     }
-    const ss = sign(L.signShoes, 1.8, 0.5, {bg: '#e8c76a'}); at(ss, -0.6, 3.05, -5.05); g.add(ss);
-    const bench = box(2.0, 0.85, 0.8, toon('#9a6a3e', {paint: {planks: 4, seed: 71}})); at(bench, 0.1, 0, -2.2); g.add(bench);
-    const lst = P.boot('#9a5a3a'); at(lst, -0.3, 0.88, -2.0, 0.4); g.add(lst);
-    const hm = P.hammer(); at(hm, 0.5, 0.92, -2.0, 0, 0, Math.PI / 2); g.add(hm);
-    const leather = box(0.6, 0.02, 0.4, '#b0694a'); at(leather, 0.6, 0.85, -2.3, 0.3); g.add(leather);
-    const shoemaker = ch('shoemaker', {}, g, 0.35, -2.95, 0);
-    const farmer = ch('farmer', {seed: 45}, g, -1.6, -1.05, 0.5);
-    const fsk = P.sack(L.rice, {scale: 0.7}); at(fsk, 0.3, 0.92, -0.08, 0, 0, -0.15); fsk.traverse((m) => { m.castShadow = false; }); farmer.group.children[0].add(fsk);
-    const ob = P.chalkboard(1.1, 0.8, {}); at(ob, 2.0, 1.75, -5.0); g.add(ob);
-    const gd = P.chalkDoodle('goat', 0.85, 0.6); gd.position.set(2.0, 1.75, -4.94); g.add(gd);
-    const lamp = cyl(0.18, 0.28, 0.3, '#e8c76a', {}); at(lamp, -2.2, 3.3, -2.5); g.add(lamp);
-    const cord = cyl(0.01, 0.01, 0.6, INK, {hull: 0}); at(cord, -2.2, 3.6, -2.5); g.add(cord);
-    const dg = FX.dust([-0.3, 0.05, -1.0], EVt.goat + 0.5, {}); g.add(dg.obj); updaters.push(dg.update);
-    const realGoat = P.goat(); realGoat.scale.setScalar(0.8); at(realGoat, 2.2, 0, -3.6, -0.5); g.add(realGoat);
-    farmer.act([{t: 0, pose: 'carry', expr: 'determined'}, {t: E('shoemaker'), expr: 'happy'},
-      {t: E('goat') + 0.15, expr: 'shocked', action: 'jump', dur: 0.6}, {t: E('goat') + 0.9, expr: 'furious', action: 'tremble', dur: 0.8}]);
-    shoemaker.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('shoemaker') + 0.2, pose: 'hips', expr: 'smug'},
-      {t: E('goat'), pose: 'point', expr: 'happy', action: 'hop', dur: 0.4}]);
+    g.add(P.hills('#9cbf6a'));
+    const crate = P.crate(0.9, 0.55, 0.65, L.potassium, '#b08454'); at(crate, 1.15, 0, -1.7, -0.25); g.add(crate);
+    for (const [x, r] of [[0.95, 0.3], [1.35, -0.5]]) { const b = P.bunch(6); at(b, x, 0.6, -1.7, r); g.add(b); }
+    const hero = ch('hero', {seed: 41}, g, -0.25, -1.8, 0.15);
+    holdBanana(hero);
+    hero.act([{t: 0, pose: 'present', expr: 'happy'}, {t: E('kalium'), pose: 'point', expr: 'excited', action: 'hop', dur: 0.4},
+      {t: E('otot') - 0.05, pose: 'flex', expr: 'proud', action: 'hop', dur: 0.5}, {t: E('jantung') + 0.1, expr: 'laugh'}]);
+    const ht = P.heart(); at(ht, 0.45, 2.15, -1.75); g.add(ht);
+    // finale crowd
+    const crowd = new THREE.Group(); g.add(crowd);
+    const fh = ch('hero', {seed: 42}, crowd, 0, -1.6, 0); holdBanana(fh);
+    const cs = [['scientist', -1.0, -1.9], ['doctor', 1.0, -1.9], ['pilot', -1.85, -2.6], ['farmer', 1.85, -2.6]].map(([n, x, z], i) => ch(n, {seed: 50 + i}, crowd, x, z, -x * 0.1));
+    fh.act([{t: 0, pose: 'cheer', expr: 'excited'}, {t: E('follow') - 0.05, pose: 'point', expr: 'laugh', action: 'jump', dur: 0.7}]);
+    cs.forEach((c, i) => c.act([{t: 0, pose: i % 2 ? 'cheer' : 'armsUp', expr: i % 2 ? 'laugh' : 'happy'}, {t: E('follow') + 0.1 + i * 0.07, action: 'jump', dur: 0.7, expr: 'excited'}]));
+    const bnr = P.banner(L.follow, 2.6, 0.75, {poleH: 3.3, bg: '#e0b84f', fg: '#351f22', frame: '#8a6a2a'}); at(bnr, 0, 0, -4.6); g.add(bnr);
+    fx(g, FX.confetti([0, 2.4, -1.4], E('follow')), (t) => inShots(t, 10));
+    fx(g, FX.confetti([0.8, 2.2, -1.8], E('follow') + 0.2, {seed: 21}), (t) => inShots(t, 10));
     updaters.push((t) => {
-      gd.scale.setScalar(pop(t, E('goat')));
-      realGoat.visible = false;
-      const wu = clamp01((t - cut(5)) / 1.4);
-      farmer.group.position.x = -1.9 + 1.6 * smooth(wu); farmer.state.walk = wu < 1 ? 1 : 0;
+      const s2 = inShots(t, 2);
+      hero.group.visible = s2; crowd.visible = !s2;
+      ht.visible = s2; ht.scale.setScalar(pop(t, E('jantung'), 0.4) * (1 + 0.08 * Math.max(0, Math.sin(t * 9))));
+      ht.rotation.y = Math.sin(t * 2) * 0.3;
+      bnr.visible = !s2;
     });
   }
 
-  // ---------- L4: crossroads at sunset ----------
+  // ---------- lab (shots 3, 4 and 9) ----------
   {
-    const g = addLoc('cross');
-    g.add(ground(70, 70, '#a8b86a'));
-    const r1 = box(30, 0.03, 2.2, toon('#d0ac7c', {paint: {grain: 200, seed: 18}}), {edges: false, hull: 0}); at(r1, 0, 0, 0); g.add(r1);
-    const r2 = box(2.2, 0.03, 30, toon('#d0ac7c', {paint: {grain: 200, seed: 19}}), {edges: false, hull: 0}); at(r2, 1.6, 0, -8); g.add(r2);
-    const sp = P.signpost([{text: L.signMarket, angle: 0.3, dir: 1}, {text: L.signDocks, angle: -0.35, dir: -1}, {text: L.signShoes, angle: 0.15, dir: 1}]);
-    at(sp, 0.9, 0, -1.25); g.add(sp);
-    const dial = new THREE.Group(); at(dial, -1.55, 0, 0.55); g.add(dial);
-    dial.add(cyl(0.16, 0.22, 0.85, '#bdb2a0'));
-    const plate = cyl(0.36, 0.36, 0.05, toon('#e6dcc6', {paint: {seed: 5}})); at(plate, 0, 0.85, 0); dial.add(plate);
-    for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; const tk = box(0.02, 0.012, 0.08, INK, {edges: false, hull: 0}); at(tk, Math.cos(a) * 0.28, 0.9, Math.sin(a) * 0.28, -a); dial.add(tk); }
-    const gn = new THREE.Shape(); gn.moveTo(0, 0); gn.lineTo(0.28, 0); gn.lineTo(0, 0.22); gn.lineTo(0, 0);
-    const gng = new THREE.ExtrudeGeometry(gn, {depth: 0.02, bevelEnabled: false}); gng.translate(-0.12, 0, -0.01);
-    const gnm = (await_ink(gng)); at(gnm, 0, 0.9, 0); dial.add(gnm);
-    const farmer = ch('farmer', {seed: 46}, g, -0.35, -0.2, 0.2);
-    const sk = P.sack(L.rice, {scale: 0.7}); at(sk, 0.35, 0, 0.2, -0.3); g.add(sk);
-    farmer.act([{t: 0, pose: 'limp', expr: 'tired', action: 'slump', dur: 99}, {t: E('feet'), action: 'tremble', dur: 0.5},
-      {t: E('nofish'), expr: 'cry', pose: 'facepalm'}]);
-    g.add(P.hills('#9cb46a'));
-    for (const [x, z, s] of [[-5, -6, 21], [5, -9, 22], [-9, -12, 23], [9, -4, 24], [-4, -15, 25]]) { const tr = P.tree({seed: s, leaf: '#8fa04f'}); at(tr, x, 0, z); g.add(tr); }
-    for (let i = 0; i < 8; i++) { const p = cyl(0.05, 0.06, 0.9, '#7a5236'); at(p, -3.5 - i * 1.1, 0, -1.6); g.add(p); }
-    const fr = box(8, 0.06, 0.05, '#7a5236'); at(fr, -7.4, 0.65, -1.6); g.add(fr);
+    const g = addLoc('lab');
+    g.add(ground(40, 40, '#4a525a'));
+    g.add(P.room(9, 4, 6.8, {wall: '#dfe8e6', floor: '#b9c4c4', wain: '#5a8a96', floorPaint: {bricks: true}}));
+    const ls = sign(L.lab, 1.2, 0.42, {bg: '#5a8a96', fg: '#f6ead6', frame: '#3f5f6a'}); at(ls, 2.6, 3.25, -5.7); g.add(ls);
+    for (const [x, c] of [[2.0, '#e8c35a'], [3.3, '#c75b5b']]) { const fr = box(0.8, 1.0, 0.05, '#7a8a90'); at(fr, x, 1.7, -5.72); g.add(fr); const pic = box(0.66, 0.84, 0.06, c, {edges: false}); at(pic, x, 1.78, -5.71); g.add(pic); }
+    const shelf = box(1.6, 0.06, 0.35, '#7a8a90'); at(shelf, -3.4, 1.6, -5.55); g.add(shelf);
+    for (let i = 0; i < 4; i++) { const f = P.flask(['#7ad66a', '#4f9fe0', '#e8c35a', '#c75b5b'][i], 0.22); at(f, -4.0 + i * 0.38, 1.66, -5.55); g.add(f); }
+    // shot 3: bench with banana, magnifier, atom, K-40 tag
+    const bench = box(2.6, 0.9, 0.9, toon('#5a6a72', {paint: {seed: 31}})); at(bench, 1.1, 0, -2.6); g.add(bench);
+    const btop = box(2.7, 0.06, 1.0, '#e9eef0'); at(btop, 1.1, 0.9, -2.6); g.add(btop);
+    const bb = P.banana({len: 0.3}); at(bb, 0.9, 1.0, -2.55, 0.2); g.add(bb);
+    const mg = P.magnifier(); at(mg, 0.55, 1.15, -2.35, 0.7, -0.2); g.add(mg);
+    for (const [x, c] of [[1.85, '#7ad66a'], [2.15, '#4f9fe0']]) { const f = P.flask(c); at(f, x, 0.96, -2.75); g.add(f); }
+    const at3 = P.atom({r: 0.2}); at(at3.group, 0.9, 1.45, -2.6); g.add(at3.group); updaters.push(at3.update);
+    const kt = new THREE.Group(); at(kt, 1.22, 0.96, -2.3, -0.35); g.add(kt);
+    const ktp = cyl(0.015, 0.015, 0.12, '#7a8a90', {hull: 0.005}); kt.add(ktp);
+    const kts = sign(L.k40, 0.34, 0.17, {bg: '#7ad66a'}); at(kts, 0, 0.2, 0); kt.add(kts);
+    const sci = ch('scientist', {}, g, 1.6, -3.45, 0);
+    sci.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('k40') + 0.1, pose: 'present', expr: 'smug'},
+      {t: E('radiasi') + 0.1, pose: 'pointUp', expr: 'excited', action: 'hop', dur: 0.5}]);
+    fx(g, FX.sparks([0.9, 1.45, -2.6], E('radiasi'), {color: '#9dff7a', n: 40, speed: 1.0, size: 0.05, up: 0.4, repeat: 0.6, seed: 31}), (t) => inShots(t, 3));
+    fx(g, FX.glints([0.9, 1.45, -2.6], E('k40') + 0.1, {color: '#c8ffb0', n: 20}), (t) => inShots(t, 3));
+    // shot 4: chalkboard
+    const board = P.chalkboard(2.2, 1.2, {seed: 4}); at(board, -1.35, 2.35, -5.65); g.add(board);
+    const bc = canvas(1024, 560), bx = bc.getContext('2d');
+    bx.fillStyle = '#f4efe2'; bx.textAlign = 'center'; bx.textBaseline = 'middle';
+    let fs = 96; bx.font = `900 ${fs}px "Inter Display"`; while (bx.measureText(L.bed).width > 900) { fs -= 4; bx.font = `900 ${fs}px "Inter Display"`; }
+    bx.fillText(L.bed, 512, 110);
+    bx.strokeStyle = '#f4efe2'; bx.lineWidth = 12; bx.lineCap = 'round';
+    bx.beginPath(); bx.moveTo(110, 220); bx.lineTo(920, 220); bx.stroke();
+    // chalk banana doodle
+    bx.strokeStyle = '#f2d84a'; bx.lineWidth = 14;
+    bx.beginPath(); bx.arc(260, 160, 210, 0.35 * Math.PI, 0.72 * Math.PI); bx.stroke();
+    bx.beginPath(); bx.arc(260, 205, 160, 0.33 * Math.PI, 0.7 * Math.PI); bx.stroke();
+    bx.fillStyle = '#f4efe2'; bx.font = '800 110px "Inter Display"'; bx.fillText(lang === 'en' ? '≈ 0.1 µSv' : '≈ 0,1 µSv', 660, 400);
+    const bov = new THREE.Mesh(new THREE.PlaneGeometry(2.1, 1.15), new THREE.MeshBasicMaterial({map: texFrom(bc), transparent: true, depthWrite: false}));
+    bov.position.set(-1.35, 2.35, -5.6); g.add(bov);
+    const sci2 = ch('scientist', {seed: 12}, g, -2.95, -4.9, 0.2);
+    sci2.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('scientists') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: E('dose') + 0.1, pose: 'point', expr: 'proud', action: 'hop', dur: 0.4}, {t: E('easy') + 0.1, pose: 'presentBoth', expr: 'happy'}]);
+    const hero2 = ch('hero', {seed: 43}, g, -0.6, -3.8, -0.35);
+    hero2.act([{t: 0, pose: 'chin', expr: 'confused'}, {t: E('dose') + 0.3, expr: 'surprised'},
+      {t: E('easy') + 0.15, pose: 'cheer', expr: 'laugh', action: 'nod', dur: 0.9}]);
+    // shot 9 corner: geiger on a stool
+    const stool = box(0.55, 0.8, 0.45, toon('#7a8a90', {paint: {seed: 33}})); at(stool, 3.8, 0, -1.9); g.add(stool);
+    const gc = P.geiger(); at(gc.group, 3.75, 0.8, -1.85, -0.2); g.add(gc.group);
+    const hero3 = ch('hero', {seed: 44}, g, 3.15, -2.55, 0.15);
+    const sci3 = ch('scientist', {seed: 13}, g, 4.15, -2.95, -0.25);
+    hero3.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('bonus'), pose: 'chin', expr: 'thinking'},
+      {t: E('yourself') + 0.12, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.7}, {t: E('samek') + 0.1, pose: 'cheer', expr: 'laugh', action: 'hop', dur: 0.6}]);
+    sci3.act([{t: 0, pose: 'idle', expr: 'smug'}, {t: E('bonus'), pose: 'pointUp', expr: 'excited'},
+      {t: E('yourself'), pose: 'point', expr: 'smug', action: 'hop', dur: 0.4}, {t: E('samek') + 0.2, pose: 'hips', expr: 'laugh'}]);
+    fx(g, FX.glints([3.15, 1.2, -2.3], E('yourself') + 0.05, {color: '#9dff7a', n: 40, speed: 0.9, size: 0.1, seed: 41}), (t) => inShots(t, 9));
+    fx(g, FX.sparks([3.15, 1.1, -2.3], E('yourself') + 0.05, {color: '#b8ff8a', n: 30, speed: 0.8, size: 0.04, up: 0.6, repeat: 0.8, spread: 0.8}), (t) => inShots(t, 9));
     updaters.push((t) => {
+      const s3 = inShots(t, 3), s4 = inShots(t, 4), s9 = inShots(t, 9);
+      at3.group.visible = s3; at3.group.scale.setScalar(pop(t, E('k40'), 0.4) * (1 + 0.05 * Math.sin(t * 7)));
+      kt.visible = s3; kt.scale.setScalar(pop(t, E('k40') + 0.15));
+      sci.group.visible = s3;
+      bov.scale.setScalar(t < cut(4) ? 0.0001 : pop(t, E('dose') - 0.05, 0.4));
+      sci2.group.visible = s4; hero2.group.visible = s4;
+      hero3.group.visible = s9; sci3.group.visible = s9;
+      const y = E('yourself');
+      gc.needle.rotation.z = -(t < y ? -0.9 + 0.05 * Math.sin(t * 9) : -0.9 + (0.35 + 0.12 * Math.sin(t * 19)) * smooth((t - y) / 0.3));
     });
   }
 
-  // ---------- L5: early money table + Lydian coin workshop ----------
+  // ---------- airport (shot 5) ----------
   {
-    const g = addLoc('mint');
-    g.add(ground(40, 40, '#6a4a3a'));
-    const rm = P.room(8.4, 4.4, 6.4, {wall: '#d8b48a', floor: '#9a7a5a', bricks: true, wain: '#7a4a32'}); g.add(rm);
-    const tbl = box(2.4, 0.85, 0.8, toon('#8a5a3a', {paint: {planks: 4, seed: 81}})); at(tbl, -1.9, 0, -1.3); g.add(tbl);
-    const sh = P.shells(9, 5); at(sh, -2.65, 0.86, -1.2); g.add(sh);
-    ch('sellerB', {seed: 81}, g, -1.9, -2.05, 0).act([{t: 0, pose: 'hips', expr: 'neutral'}, {t: E('shells'), pose: 'presentBoth', expr: 'happy', action: 'hop', dur: 0.4},
-      {t: E('salt8'), expr: 'excited'}, {t: E('metal'), expr: 'proud', action: 'hop', dur: 0.4}]);
-    const saltPile = new THREE.Group(); at(saltPile, -1.9, 0.86, -1.2); g.add(saltPile);
-    const sp1 = P.basket('#c9a462', 0); saltPile.add(sp1); sp1.scale.setScalar(0.7);
-    const mound = ball(0.2, '#fbfaf5', {sx: 1, sy: 0.6, sz: 1}); at(mound, 0, 0.22, 0); saltPile.add(mound);
-    const metal = new THREE.Group(); at(metal, -1.15, 0.86, -1.2); g.add(metal);
-    for (let i = 0; i < 4; i++) { const b = box(0.32, 0.07, 0.11, i % 2 ? '#c9853a' : '#b8b8c0'); at(b, 0, i * 0.075, 0, i % 2 ? 0.3 : -0.1); metal.add(b); }
-    const bn = P.banner(L.lydia, 2.4, 0.75, {poleH: 3.3, bg: '#8a3a3a', frame: '#5a2a24'}); at(bn, 1.7, 0, -2.9); g.add(bn);
-    const sub = sign(L.lydiaSub, 1.2, 0.3, {bg: '#efd9a8'}); at(sub, 1.7, 2.12, -2.85); g.add(sub);
-    const av = P.anvil(); at(av, 1.6, 0, -1.25); g.add(av);
-    const cp = P.coinPile(7, 9); at(cp, 1.3, 0.77, -1.2); g.add(cp);
-    const big = P.coin(0.24); at(big, 0.95, 1.3, -0.6, 0, Math.PI / 2); g.add(big);
-    const stand = cyl(0.04, 0.14, 1.05, '#5a3a2a'); at(stand, 0.95, 0, -0.6); g.add(stand);
-    const minter = ch('minter', {}, g, 2.35, -1.55, -0.2);
-    const hm = P.hammer(); at(hm, 0, 0, 0.03, 0, 0, Math.PI); minter.hand(0).add(hm);
-    minter.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('lydia'), pose: 'hammerUp', expr: 'determined'},
-      {t: E('coins') - 0.05, pose: 'hammerDown', expr: 'shocked', action: 'hop', dur: 0.3}, {t: E('coins') + 0.35, expr: 'proud', pose: 'hips'}]);
-    const furnace = box(1.0, 1.1, 0.9, toon('#8a6a5a', {paint: {bricks: true, seed: 3}})); at(furnace, 3.3, 0, -2.6); g.add(furnace);
-    const glow = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), new THREE.MeshBasicMaterial({color: '#ffb04a'})); glow.position.set(3.3, 0.45, -2.14); g.add(glow);
-    const fire = new THREE.PointLight('#ff9a3a', 4, 6, 1.5); fire.position.set(3.3, 0.8, -1.8); g.add(fire);
-    const fxs = [FX.sparks([1.65, 0.8, -1.2], EVt.coins, {n: 70, speed: 2.4}), FX.smoke([3.3, 1.2, -2.3], 0, {every: 0.35, n: 8, color: '#9a8a80', size: 0.4, opacity: 0.45}),
-      FX.dust([1.6, 0.05, -1.0], EVt.coins, {color: '#b89a80'}), FX.flame([3.3, 0.35, -2.1], {size: 0.45})];
-    for (const f of fxs) { g.add(f.obj); updaters.push(f.update); }
+    const g = addLoc('airport');
+    g.add(ground(90, 90, '#9a9ea2', {grain: 160}));
+    const grass = ground(90, 40, '#9dbb6a'); grass.position.set(0, 0.005, -40); g.add(grass);
+    for (let i = 0; i < 12; i++) { const m = box(1.6, 0.012, 0.18, '#f4f1ea', {edges: false, hull: 0}); at(m, -16 + i * 3, 0, -11); g.add(m); }
+    for (let i = 0; i < 6; i++) { const m = box(0.14, 0.012, 1.4, '#e8c35a', {edges: false, hull: 0}); at(m, 0.2, 0, 1.5 - i * 2.2); g.add(m); }
+    const term = P.facade(12, 4.2, {color: '#dfe4e8', windows: 6, door: true, seed: 7, trim: '#5a6a72', shutter: '#4f7fa6'}); at(term, -7.5, 0, -15, 0.25); g.add(term);
+    const tb = box(12, 4.2, 4, '#dfe4e8'); at(tb, -7.5 + Math.sin(0.25) * -2, 0, -17, 0.25); g.add(tb);
+    const as = sign(L.airport, 3.6, 0.8, {bg: '#4f7fa6', fg: '#f6ead6', frame: '#2a3a56'}); at(as, -7.5 + 0.3, 4.75, -14.9, 0.25); g.add(as);
+    const tower = cyl(0.5, 0.7, 7, '#dfe4e8'); at(tower, 6, 0, -20); g.add(tower);
+    const cab = cyl(1.2, 0.9, 1.0, '#4f7fa6'); at(cab, 6, 7, -20); g.add(cab);
+    const pl = P.plane(); at(pl, 2.6, 0, -8.2, 0.32); g.add(pl);
+    const pilot = ch('pilot', {}, g, 2.1, -2.7, -0.2);
+    const hero = ch('hero', {seed: 45}, g, -0.7, -1.5, 0.3);
+    const sc = P.suitcase(); at(sc, -1.12, 0, -1.25, 0.3); g.add(sc);
+    hero.act([{t: 0, pose: 'idle', expr: 'happy', action: 'walk', dur: 1.2}, {t: E('plane') + 0.1, pose: 'point', expr: 'excited'},
+      {t: E('hundreds') + 0.12, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.7}]);
+    pilot.act([{t: 0, pose: 'wave', expr: 'happy'}, {t: E('hundreds'), pose: 'presentBoth', expr: 'smug', action: 'hop', dur: 0.4}]);
+    // pile of banana crates popping in on "hundreds"
+    const crates = [];
+    const pile = new THREE.Group(); at(pile, 0.75, 0, -2.0, -0.2); g.add(pile);
+    const slots = [[-0.45, 0, 0], [0.45, 0, 0], [-0.45, 0, -0.7], [0.45, 0, -0.7], [0, 0.55, -0.35], [-0.45, 0.55, 0.0], [0.45, 0.55, -0.7], [0, 1.1, -0.35]];
+    slots.forEach(([x, y, z], i) => {
+      const c = new THREE.Group(); at(c, x, y, z, (i % 3 - 1) * 0.1); pile.add(c);
+      c.add(P.crate(0.85, 0.55, 0.65, L.bananas, '#c99a5a'));
+      const b = P.bunch(5); at(b, 0, 0.55, 0, i); c.add(b);
+      crates.push(c);
+    });
     updaters.push((t) => {
-      sh.scale.setScalar(1.7 * pop(t, E('shells')));
-      saltPile.scale.setScalar(1.3 * pop(t, E('salt8')));
-      metal.scale.setScalar(1.3 * pop(t, E('metal')));
-      const tc = E('coins');
-      big.scale.setScalar(pop(t, tc, 0.4));
-      big.rotation.set(Math.PI / 2, 0, Math.sin(t * 1.4) * 0.2);
-      fire.intensity = 4 + Math.sin(t * 9) * 0.6;
+      const wu = clamp01((t - cut(5)) / 1.2); hero.group.position.x = -1.2 + 0.5 * smooth(wu); sc.position.x = hero.group.position.x - 0.42;
+      crates.forEach((c, i) => c.scale.setScalar(pop(t, E('hundreds') - 0.1 + i * 0.07, 0.3)));
     });
   }
 
-  // ---------- L6: museum of money ----------
+  // ---------- hospital CT room (shot 6) ----------
   {
-    const g = addLoc('museum');
-    g.add(ground(40, 40, '#4a4a52'));
-    const rm = P.room(7.2, 4.4, 6.2, {wall: '#e9dcc0', floor: '#c9b48a', floorPaint: {cobbles: false, bricks: true}, wain: '#3f5f8a'}); g.add(rm);
-    const title = sign(L.museum, 3.0, 0.5, {bg: '#3f5f8a', fg: '#f6ead6', frame: '#2a3a56'}); at(title, 0, 3.4, -5.05); g.add(title);
-    for (const [x, c] of [[-2.2, '#c75b5b'], [2.2, '#5a9a8a']]) { const fr = box(1.1, 0.8, 0.06, '#8a6a3a'); at(fr, x, 2.1, -5.05); g.add(fr); const pic = box(0.95, 0.65, 0.07, c, {edges: false}); at(pic, x, 2.17, -5.04); g.add(pic); }
-    const plinth = box(1.0, 1.0, 0.8, toon('#3f5f8a', {paint: {seed: 91}})); at(plinth, -1.5, 0, -1.4); g.add(plinth);
-    const note = decal(P.jiaoziTex(), 0.32, 0.58); note.position.set(-1.5, 1.38, -1.4); note.rotation.x = -0.15; g.add(note);
-    const glass = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.75, 0.7), new THREE.MeshToonMaterial({color: '#dff2f6', transparent: true, opacity: 0.18, depthWrite: false, gradientMap: undefined}));
-    glass.position.set(-1.5, 1.38, -1.4); g.add(glass);
-    const ge = new THREE.LineSegments(new THREE.EdgesGeometry(glass.geometry), new THREE.LineBasicMaterial({color: INK})); ge.position.copy(glass.position); g.add(ge);
-    const capb = box(0.95, 0.05, 0.75, '#2a3a56'); at(capb, -1.5, 1.75, -1.4); g.add(capb);
-    const plaque = sign(L.jiaozi, 0.9, 0.32, {bg: '#efe2bf', sub: L.jiaoziSub}); at(plaque, -1.5, 0.8, -0.98); g.add(plaque);
-    const counter = box(1.8, 1.0, 0.6, toon('#8a5a3a', {paint: {planks: 3, seed: 92}})); at(counter, 1.5, 0, -1.7); g.add(counter);
-    const term = new THREE.Group(); at(term, 1.15, 1.0, -1.6, 0.2); g.add(term);
-    term.add(box(0.22, 0.08, 0.3, '#2b2b33'));
-    const head = box(0.2, 0.26, 0.05, '#2b2b33'); at(head, 0, 0.05, -0.1, 0, -0.5); term.add(head);
-    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.15, 0.18), new THREE.MeshBasicMaterial({color: '#7fb8d0'}));
-    scr.position.set(0, 0.19, -0.08); scr.rotation.x = -0.5; term.add(scr);
-    const ok = P.chalkDoodle('check', 0.12, 0.12); ok.position.set(0, 0.19, -0.075); ok.rotation.x = -0.5; term.add(ok);
-    const paySign = sign(L.pay, 0.6, 0.22, {bg: '#e8c76a'}); at(paySign, 1.9, 1.0, -1.38); g.add(paySign);
-    const cashier = ch('guide', {}, g, 1.85, -2.45, 0);
-    const buyer = ch('buyer', {seed: 71}, g, 0.55, -0.85, 0.35);
-    const ph = P.phone(); at(ph, 0, 0.02, 0.06); buyer.hand(1).add(ph);
-    buyer.act([{t: 0, pose: 'hold', expr: 'neutral'}, {t: E('paper'), expr: 'surprised'}, {t: E('tap') - 0.5, pose: 'tap', expr: 'smug'},
-      {t: E('tap') + 0.2, expr: 'laugh', action: 'jump', dur: 0.6}]);
-    cashier.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('tap') + 0.25, pose: 'wave', expr: 'happy'}]);
-    const rope = cyl(0.02, 0.02, 1.2, '#8a2a2a', {hull: 0.008}); at(rope, -1.5, 0.5, -0.5, 0, 0, Math.PI / 2); g.add(rope);
-    for (const s of [-1, 1]) { const st = cyl(0.03, 0.08, 0.55, '#c9a462'); at(st, -1.5 + s * 0.62, 0, -0.5); g.add(st); }
+    const g = addLoc('hospital');
+    g.add(ground(40, 40, '#5a6466'));
+    g.add(P.room(8, 3.8, 7, {wall: '#e4f0ee', floor: '#cfd8d6', wain: '#7fb0a8', floorPaint: {bricks: true}}));
+    const cs = sign(L.ct, 1.7, 0.48, {bg: '#4f9fb0', fg: '#f6ead6', frame: '#2f6f7a'}); at(cs, 0.9, 3.0, -5.85); g.add(cs);
+    const ct = P.ctScanner('CT'); at(ct, 0.9, 0, -4.0, 0.42); g.add(ct);
+    const cab = box(0.9, 1.6, 0.5, toon('#dfe8e6', {paint: {seed: 61}})); at(cab, -3.0, 0, -5.4); g.add(cab);
+    const scr = box(0.9, 0.55, 0.06, '#2b2b33'); at(scr, 3.0, 1.6, -5.85); g.add(scr);
+    const scrIn = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.45), new THREE.MeshBasicMaterial({color: '#7fb8d0'})); scrIn.position.set(3.0, 1.875, -5.81); g.add(scrIn);
+    const doc = ch('doctor', {}, g, 2.35, -2.6, -0.3);
+    const hero = ch('hero', {seed: 46}, g, -0.75, -2.0, 0.25);
+    hero.act([{t: 0, pose: 'hold', expr: 'worried', action: 'tremble', dur: 0.8}, {t: E('ct') + 0.1, pose: 'point', expr: 'confused'},
+      {t: E('tens') + 0.35, pose: 'armsUp', expr: 'shocked', action: 'tremble', dur: 1.5}]);
+    doc.act([{t: 0, pose: 'present', expr: 'neutral'}, {t: E('ct') + 0.05, pose: 'present', expr: 'smug'},
+      {t: E('tens') + 0.4, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.7}]);
+    // banana avalanche
+    const N = 380, r = rng(61), cx = -0.7, cz = -2.1, R = 1.7, H = 1.0;
+    const av = P.bananaInstances(N); g.add(av.obj);
+    const B = [];
+    for (let i = 0; i < N; i++) {
+      const a = r() * Math.PI * 2, d = Math.sqrt(r()) * R;
+      const x = cx + Math.cos(a) * d, z = cz + Math.sin(a) * d * 0.8;
+      const y = H * Math.pow(1 - d / R, 1.1) + 0.05 + r() * 0.08;
+      B.push({x, y, z, y0: y + 3.5 + r() * 2.5, t0: r() * 0.55, rot: [r() * 6, r() * 6, r() * 6], spin: (r() - 0.5) * 8});
+    }
+    fx(g, FX.dust([cx, 0.1, cz + 0.6], E('tens') + 0.45, {n: 10, size: 0.5, color: '#efe2a0'}), (t) => inShots(t, 6));
+    fx(g, FX.dust([cx + 0.8, 0.1, cz + 0.2], E('tens') + 0.6, {n: 8, size: 0.45, color: '#efe2a0', seed: 9}), (t) => inShots(t, 6));
     updaters.push((t) => {
-      const tt = E('tap');
-      const reach = smooth((t - (tt - 0.6)) / 0.6);
-      buyer.group.position.x = 0.55 + 0.15 * reach;
-      const paid = t > tt + 0.1;
-      scr.material.color.set(paid ? '#5fbf6a' : '#7fb8d0');
-      ok.visible = paid; ok.scale.setScalar(pop(t, tt + 0.1, 0.3));
+      const t0 = E('tens') + 0.05;
+      for (let i = 0; i < N; i++) {
+        const b = B[i], dt = t - t0 - b.t0;
+        if (dt < 0) { av.set(i, [b.x, -5, b.z], b.rot, 0.0001); continue; }
+        const y = Math.max(b.y, b.y0 - 0.5 * 14 * dt * dt);
+        const landed = y <= b.y;
+        av.set(i, [b.x, y, b.z], landed ? b.rot : [b.rot[0] + dt * b.spin, b.rot[1], b.rot[2] + dt * b.spin], 1.15);
+      }
+      av.done();
     });
   }
 
-  function await_ink(geo) { return new THREE.Mesh(geo, toon('#8a7a6a')); }
+  // ---------- banana mountain (shot 7) ----------
+  {
+    const g = addLoc('mountain');
+    g.add(ground(140, 140, '#b9b86a'));
+    g.add(P.hills('#a8b060'));
+    const MX = 0, MZ = -19, MR = 10.5, MH = 9.5;
+    const core = new THREE.Mesh(new THREE.ConeGeometry(MR * 0.97, MH * 0.97, 48), toon('#d9b23a', {wear: false})); core.position.set(MX, MH * 0.97 / 2, MZ); g.add(core);
+    const N = 3200, r = rng(71);
+    const mt = P.bananaInstances(N, {hull: 0.08}); g.add(mt.obj);
+    for (let i = 0; i < N; i++) {
+      const y = MH * (1 - Math.sqrt(r())) * 0.98, a = r() * Math.PI * 2, rr = MR * (1 - y / MH) + 0.15;
+      mt.set(i, [MX + Math.cos(a) * rr, y + 0.2, MZ + Math.sin(a) * rr], [r() * 6, r() * 6, r() * 6], 2.4 + r() * 1.2);
+    }
+    // smaller bananas spilling toward the camera
+    const N2 = 260;
+    mt.done();
+    const sp = P.bananaInstances(N2); g.add(sp.obj);
+    for (let i = 0; i < N2; i++) { const a = -Math.PI / 2 + (r() - 0.5) * 2.6, d = MR + r() * 5.5; sp.set(i, [MX + Math.cos(a) * d * 1.1, 0.06 + r() * 0.15 * (1 - (d - MR) / 5.5), MZ - Math.sin(a) * d], [r() * 6, r() * 6, 0], 1.2 + r() * 0.8); }
+    sp.done();
+    for (const [x, z, s] of [[-6.5, -5, 11], [7, -6, 12], [-10, -10, 13], [11, -11, 14]]) { const tr = P.bananaTree({seed: s, h: 3}); at(tr, x, 0, z); g.add(tr); }
+    const bs = new THREE.Group(); at(bs, 2.7, 0, -5.2, -0.2); g.add(bs);
+    for (const s of [-1, 1]) { const p = cyl(0.08, 0.1, 2.6, '#7a5236'); at(p, s * 1.45, 0, 0); bs.add(p); }
+    const msg = sign(L.millions, 2.7, 0.95, {bg: '#e0b84f', sub: L.millionsSub, frame: '#8a6a2a'}); at(msg, 0, 2.05, 0.05); bs.add(msg);
+    const hero = ch('hero', {seed: 47}, g, -0.5, -1.25, 0.15);
+    const sci = ch('scientist', {seed: 14}, g, 0.9, -1.45, -0.2);
+    hero.act([{t: 0, pose: 'beg', expr: 'worried', action: 'tremble', dur: 1.2}, {t: E('relax') + 0.4, pose: 'idle', expr: 'neutral'},
+      {t: E('dangerous') + 0.1, expr: 'worried', pose: 'hold'}, {t: E('millions') + 0.15, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.7},
+      {t: E('impossible') + 0.12, pose: 'shrug', expr: 'laugh', action: 'shake', dur: 1.0}]);
+    sci.act([{t: 0, pose: 'stop', expr: 'happy'}, {t: E('relax'), pose: 'stop', expr: 'happy', action: 'nod', dur: 0.8},
+      {t: E('dangerous'), pose: 'pointUp', expr: 'smug'}, {t: E('millions') + 0.2, pose: 'presentBoth', expr: 'excited'},
+      {t: E('impossible') + 0.1, pose: 'cross', expr: 'laugh', action: 'shake', dur: 0.8}]);
+    updaters.push((t) => { bs.scale.setScalar(t < E('millions') ? 0.0001 : pop(t, E('millions') + 0.3, 0.4)); });
+  }
 
   return {world, chars, locGroups, update(t, camPos) { for (const u of updaters) u(t); for (const c of chars) c.update(t, camPos); }};
 }

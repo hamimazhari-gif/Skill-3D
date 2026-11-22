@@ -65,8 +65,7 @@ function Scene({lang, thumb}) {
   const fref = useRef(frame); fref.current = frame;
   useFrame(() => {
     const t = thumb ? thumb.t : fref.current / FPS;
-    const shot = T.shotOf(t);
-    let {pos, look, loc} = camAt(built.cams, shot, t);
+    let {pos, look, loc} = camAt(built.cams, t);
     if (thumb) { pos = new THREE.Vector3(...thumb.pos).add(new THREE.Vector3(LOC[loc], 0, 0)); look = new THREE.Vector3(...thumb.look).add(new THREE.Vector3(LOC[loc], 0, 0)); }
     camera.position.copy(pos); camera.lookAt(look);
     // camera shake on impacts (decaying, deterministic)
@@ -101,26 +100,36 @@ function Scene({lang, thumb}) {
 // SFX cue sheet: [file, time, volume, trimSeconds?]
 function cues(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
-  const list = [
-    ['05-airy-whoosh.mp3', 0.0, 0.25],
-    ['04-soft-ui-pop.mp3', EVt.chicken, 0.35],
-    ['04-soft-ui-pop.mp3', EVt.fish, 0.35], ['04-soft-ui-pop.mp3', EVt.cloth, 0.35], ['pop-bubble-sound-effect.mp3', EVt.wheat, 0.3],
-    ['08-heavy-whoosh.wav', c(3) - 0.35, 0.3],
-    ['02-error-denied-buzz.wav', EVt.shakes, 0.32],
-    ['pop-bubble-sound-effect.mp3', EVt.shoes, 0.3],
-    ['08-heavy-whoosh.wav', c(5) - 0.35, 0.3],
-    ['02-error-denied-buzz.wav', EVt.goat, 0.32],
-    ['04-counter-tick-number-roll.wav', EVt.half, 0.35], ['04-counter-tick-number-roll-2.wav', EVt.feet, 0.35],
-    ['07-riser-build-up.wav', EVt.once - 1.7, 0.3],
-    ['03-subtle-digital-impact.mp3', EVt.shells, 0.35], ['03-subtle-digital-impact.mp3', EVt.salt8, 0.35], ['03-subtle-digital-impact.mp3', EVt.metal, 0.35],
-    ['06-deep-cinematic-boom.wav', EVt.coins, 0.45],
-    ['03-typing-keyboard-burst.wav', EVt.paper, 0.18],
-    ['09-notification-ding.wav', EVt.tap + 0.1, 0.4],
-    ['07-smooth-transition-whoosh.mp3', c(10) - 0.4, 0.3],
-    ['08-soft-success-chime.mp3', EVt.trade, 0.3],
-    ['mouse-click-sound-effect.mp3', EVt.comment, 0.4, 0.45],
+  return [
+    ['05-airy-whoosh.mp3', 0.0, 0.22],
+    ['06-digital-glitch-tech-blip.mp3', EVt.radio + 0.05, 0.4],
+    ['04-counter-tick-number-roll.wav', EVt.radio + 0.35, 0.3],
+    ['08-heavy-whoosh.wav', c(2) - 0.35, 0.28],
+    ['04-soft-ui-pop.mp3', EVt.kalium, 0.32],
+    ['pop-bubble-sound-effect.mp3', EVt.jantung, 0.32],
+    ['07-smooth-transition-whoosh.mp3', c(3) - 0.4, 0.28],
+    ['03-subtle-digital-impact.mp3', EVt.k40, 0.35],
+    ['06-digital-glitch-tech-blip.mp3', EVt.radiasi, 0.25],
+    ['03-typing-keyboard-burst.wav', EVt.dose, 0.18],
+    ['04-soft-ui-pop.mp3', EVt.dose + 0.05, 0.3],
+    ['08-soft-success-chime.mp3', EVt.easy + 0.1, 0.22],
+    ['08-heavy-whoosh.wav', c(5) - 0.35, 0.28],
+    ['05-airy-whoosh.mp3', EVt.plane, 0.25],
+    ['04-counter-tick-number-roll-2.wav', EVt.hundreds - 0.05, 0.35],
+    ['07-smooth-transition-whoosh.mp3', c(6) - 0.4, 0.28],
+    ['06-deep-cinematic-boom.wav', EVt.tens + 0.3, 0.45],
+    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.28],
+    ['07-riser-build-up.wav', EVt.millions - 1.7, 0.3],
+    ['03-subtle-digital-impact.mp3', EVt.millions + 0.2, 0.4],
+    ['09-notification-ding.wav', EVt.impossible + 0.1, 0.35],
+    ['07-smooth-transition-whoosh.mp3', c(8) - 0.4, 0.28],
+    ['pop-bubble-sound-effect.mp3', EVt.remove + 0.15, 0.3],
+    ['08-heavy-whoosh.wav', c(9) - 0.35, 0.28],
+    ['04-counter-tick-number-roll.wav', EVt.yourself, 0.32],
+    ['05-airy-whoosh.mp3', c(10) - 0.35, 0.25],
+    ['08-soft-success-chime.mp3', EVt.follow, 0.35],
+    ['mouse-click-sound-effect.mp3', EVt.follow + 0.5, 0.4, 0.45],
   ];
-  return list;
 }
 
 // Word-by-word captions (1-2 words at a time), timed by letters inside each sentence.
@@ -185,9 +194,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'BELI AYAM', mid: 'PAKAI BERAS?', tag: 'SEJARAH UANG'},
-  en: {top: 'BUY A CHICKEN', mid: 'WITH RICE?', tag: 'HISTORY OF MONEY'},
+  id: {top: 'PISANG INI', mid: 'RADIOAKTIF?!', tag: 'FAKTA UNIK'},
+  en: {top: 'THIS BANANA IS', mid: 'RADIOACTIVE?!', tag: 'WEIRD FACTS'},
 };
+const THUMB_T = {id: 3.9, en: 3.75};
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const tx = TH[lang];
@@ -199,7 +209,7 @@ export const Thumb = ({lang}) => {
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
       <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
-        <Scene lang={lang} thumb={{t: lang === 'id' ? 4.95 : 4.15, pos: [1.4, 1.0, 3.75], look: [1.4, 1.15, 0.9]}} />
+        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [0.95, 1.25, -0.55], look: [0.2, 1.55, -2.4]}} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}

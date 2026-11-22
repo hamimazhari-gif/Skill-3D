@@ -3,7 +3,7 @@ import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 11;
+export const SHOTS = 10;
 export const TAIL = 0.7; // hold after the last word
 
 const DATA = {en: EN, id: ID};
@@ -38,45 +38,37 @@ export function makeTiming(lang) {
 
 // Word events per language: [sentenceIndex, word, occurrence]
 export const EV = {
-  chicken: {en: [0, 'chicken'], id: [0, 'ayam']},
-  rice: {en: [0, 'rice'], id: [0, 'beras']},
-  market: {en: [0, 'market'], id: [0, 'pasar']},
-  rice2: {en: [2, 'rice'], id: [2, 'beras']},
-  fish: {en: [2, 'fish'], id: [2, 'ikan']},
-  salt: {en: [2, 'salt'], id: [2, 'garam']},
-  cloth: {en: [2, 'cloth'], id: [2, 'kain']},
-  goats: {en: [2, 'goats'], id: [2, 'kambing']},
-  wheat: {en: [2, 'wheat'], id: [2, 'gandum']},
-  wantsFish: {en: [3, 'fish'], id: [3, 'ikan']},
-  docks: {en: [4, 'docks'], id: [4, 'dermaga']},
-  fisherman: {en: [4, 'fisherman'], id: [4, 'nelayan']},
-  shakes: {en: [5, 'shakes'], id: [5, 'menggeleng']},
-  shoes: {en: [6, 'shoes'], id: [7, 'sepatu']},
-  shoemaker: {en: [7, 'shoemaker'], id: [8, 'tukang']},
-  goat: {en: [7, 'goat'], id: [9, 'kambing']},
-  half: {en: [8, 'half'], id: [10, 'setengah']},
-  feet: {en: [8, 'feet'], id: [10, 'pegal']},
-  nofish: {en: [8, 'fish'], id: [10, 'ikan']},
-  see: {en: [9, 'see'], id: [11, 'lihat']},
-  two: {en: [9, 'two'], id: [11, 'dua']},
-  once: {en: [9, 'once'], id: [11, 'sama']},
-  shells: {en: [10, 'shells'], id: [12, 'kerang']},
-  salt8: {en: [10, 'salt'], id: [12, 'garam']},
-  metal: {en: [10, 'metal'], id: [12, 'logam']},
-  lydia: {en: [11, 'lydia'], id: [13, 'lydia']},
-  coins: {en: [11, 'coins'], id: [13, 'koin']},
-  paper: {en: [12, 'paper'], id: [14, 'kertas']},
-  tap: {en: [13, 'tap'], id: [15, 'tempelkan']},
-  rice10: {en: [14, 'rice'], id: [16, 'beras']},
-  single: {en: [14, 'single'], id: [16, 'sentuhan']},
-  us: {en: [14, 'us'], id: [16, 'kita']},
-  trade: {en: [15, 'trade'], id: [17, 'tukar']},
-  comment: {en: [16, 'comment'], id: [18, 'komentar']},
+  eat: {en: [0, 'eat'], id: [0, 'makan']},
+  radio: {en: [0, 'radioactive'], id: [0, 'radioaktif']},
+  kalium: {en: [1, 'potassium'], id: [1, 'kalium']},
+  otot: {en: [1, 'muscles'], id: [1, 'otot']},
+  jantung: {en: [1, 'heart'], id: [1, 'jantung']},
+  k40: {en: [2, 'potassium', 1], id: [2, 'kalium', 1]},
+  alami: {en: [2, 'naturally'], id: [2, 'secara']},
+  radiasi: {en: [2, 'radiation'], id: [2, 'radiasi']},
+  scientists: {en: [3, 'scientists'], id: [3, 'ilmuwan']},
+  dose: {en: [3, 'banana'], id: [3, 'dosis']},
+  easy: {en: [3, 'anyone'], id: [3, 'mudah']},
+  plane: {en: [4, 'flight'], id: [4, 'pesawat']},
+  hundreds: {en: [4, 'hundreds'], id: [4, 'ratusan']},
+  ct: {en: [5, 'ct'], id: [5, 'ct']},
+  tens: {en: [5, 'tens'], id: [5, 'puluhan']},
+  relax: {en: [6, 'relax'], id: [6, 'tenang']},
+  dangerous: {en: [7, 'dangerous'], id: [7, 'berbahaya']},
+  millions: {en: [7, 'tens'], id: [7, 'puluhan']},
+  impossible: {en: [7, 'impossible'], id: [7, 'mustahil']},
+  body: {en: [8, 'body'], id: [8, 'tubuh']},
+  remove: {en: [8, 'rid'], id: [8, 'membuang']},
+  bonus: {en: [9, 'bonus'], id: [9, 'bonus']},
+  yourself: {en: [9, 'radioactive'], id: [9, 'radioaktif']},
+  because: {en: [9, 'because'], id: [9, 'karena']},
+  samek: {en: [9, 'potassium'], id: [9, 'kalium']},
+  follow: {en: [10, 'follow'], id: [10, 'follow']},
 };
 
 export const LABELS = {
-  en: {rice: 'RICE', market: 'MARKET', docks: 'DOCKS', shoes: 'SHOES', fish: 'FISH', salt: 'SALT', cloth: 'CLOTH', wheat: 'WHEAT',
-    signMarket: 'MARKET', signDocks: 'DOCKS', signShoes: 'SHOES', trade: 'TRADE WHAT?', lydia: 'LYDIA', lydiaSub: 'c. 600 BC', jiaozi: 'JIAOZI · 1024', jiaoziSub: 'SONG DYNASTY, CHINA', pay: 'PAY', museum: 'MUSEUM OF MONEY'},
-  id: {rice: 'BERAS', market: 'PASAR', docks: 'DERMAGA', shoes: 'SEPATU', fish: 'IKAN', salt: 'GARAM', cloth: 'KAIN', wheat: 'GANDUM',
-    signMarket: 'PASAR', signDocks: 'DERMAGA', signShoes: 'SEPATU', trade: 'TUKAR APA?', lydia: 'LYDIA', lydiaSub: '± 600 SM', jiaozi: 'JIAOZI · 1024', jiaoziSub: 'DINASTI SONG, CHINA', pay: 'BAYAR', museum: 'MUSEUM UANG'},
+  en: {radio: 'RADIOACTIVE!', potassium: 'POTASSIUM', k40: 'K-40', bed: 'BANANA EQUIVALENT DOSE', bedSub: '1 banana ≈ 0.1 µSv', lab: 'LAB',
+    airport: 'AIRPORT', bananas: 'BANANAS', ct: 'CT SCAN', millions: 'TENS OF MILLIONS', millionsSub: 'BANANAS AT ONCE', follow: 'FOLLOW!'},
+  id: {radio: 'RADIOAKTIF!', potassium: 'KALIUM', k40: 'K-40', bed: 'DOSIS SETARA PISANG', bedSub: '1 pisang ≈ 0,1 µSv', lab: 'LAB',
+    airport: 'BANDARA', bananas: 'PISANG', ct: 'CT SCAN', millions: 'PULUHAN JUTA', millionsSub: 'PISANG SEKALIGUS', follow: 'FOLLOW!'},
 };

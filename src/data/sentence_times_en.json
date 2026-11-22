@@ -1,125 +1,82 @@
 {
- "lang": "en",
- "duration": 48.8,
+ "duration": 51.68,
  "sentences": [
   {
    "shot": 1,
-   "text": "Long ago, to buy one chicken, you had to haul a sack of rice to market.",
-   "start": 0.28,
-   "end": 4.14,
-   "pred": 4.14
+   "text": "This fruit you eat all the time... is actually radioactive!",
+   "start": 0.22,
+   "end": 4.42,
+   "pred": 3.63
   },
   {
    "shot": 2,
-   "text": "No money yet.",
-   "start": 4.52,
-   "end": 5.02,
-   "pred": 0.64
-  },
-  {
-   "shot": 2,
-   "text": "People swapped goods: rice for fish, salt for cloth, goats for wheat.",
-   "start": 5.38,
-   "end": 9.34,
-   "pred": 4.2
+   "text": "Bananas are rich in potassium, a key mineral for your muscles and heart.",
+   "start": 5.08,
+   "end": 9.06,
+   "pred": 5.05
   },
   {
    "shot": 3,
-   "text": "Our farmer wants fish.",
-   "start": 9.64,
-   "end": 10.8,
-   "pred": 1.15
-  },
-  {
-   "shot": 3,
-   "text": "He walks all the way to the docks to find a fisherman.",
-   "start": 10.98,
-   "end": 13.62,
-   "pred": 2.67
+   "text": "A tiny part of that potassium is potassium-forty, which naturally gives off radiation.",
+   "start": 9.72,
+   "end": 14.78,
+   "pred": 6.08
   },
   {
    "shot": 4,
-   "text": "But the fisherman shakes his head.",
-   "start": 13.96,
-   "end": 15.16,
-   "pred": 1.78
-  },
-  {
-   "shot": 4,
-   "text": "He needs shoes, not rice.",
-   "start": 15.36,
-   "end": 16.84,
-   "pred": 1.59
+   "text": "It's so famous that scientists have an unofficial term, the \"banana equivalent dose\", to explain radiation in a way anyone can understand.",
+   "start": 15.22,
+   "end": 23.38,
+   "pred": 9.71
   },
   {
    "shot": 5,
-   "text": "Then the farmer finds a shoemaker, who wants a goat.",
-   "start": 17.38,
-   "end": 19.4,
-   "pred": 2.99
+   "text": "A flight of a few hours exposes you to radiation equal to hundreds of bananas.",
+   "start": 23.88,
+   "end": 29.96,
+   "pred": 4.98
   },
   {
    "shot": 6,
-   "text": "Half a day gone, sore feet, a full sack of rice, and still no fish.",
-   "start": 19.84,
-   "end": 24.04,
-   "pred": 4.26
+   "text": "And a CT scan... tens of thousands of bananas!",
+   "start": 30.28,
+   "end": 32.96,
+   "pred": 2.69
   },
   {
    "shot": 7,
-   "text": "You see, barter only works when two people want each other's things at once.",
-   "start": 24.4,
-   "end": 27.84,
-   "pred": 4.2
+   "text": "So relax.",
+   "start": 33.2,
+   "end": 33.66,
+   "pred": 0.55
+  },
+  {
+   "shot": 7,
+   "text": "You'd only get a dangerous dose by eating tens of millions of bananas at once, which is clearly impossible.",
+   "start": 33.84,
+   "end": 40.08,
+   "pred": 7.27
   },
   {
    "shot": 8,
-   "text": "Instead, people used shells, salt and metal.",
-   "start": 28.18,
-   "end": 30.64,
-   "pred": 2.99
-  },
-  {
-   "shot": 8,
-   "text": "Around two thousand six hundred years ago, Lydia, now Turkey, struck some of the earliest coins.",
-   "start": 31.02,
-   "end": 35.98,
-   "pred": 6.05
+   "text": "Your body also gets rid of extra potassium right away.",
+   "start": 40.5,
+   "end": 43.16,
+   "pred": 3.48
   },
   {
    "shot": 9,
-   "text": "A thousand years ago, China printed paper money.",
-   "start": 36.42,
-   "end": 38.6,
-   "pred": 2.86
-  },
-  {
-   "shot": 9,
-   "text": "Now we just tap a phone.",
-   "start": 39.16,
-   "end": 40.14,
-   "pred": 1.15
+   "text": "Bonus fact: your own body is a little radioactive too, because of that same potassium!",
+   "start": 44.26,
+   "end": 49.36,
+   "pred": 5.92
   },
   {
    "shot": 10,
-   "text": "So from rice to a single tap, money keeps changing with us.",
-   "start": 40.54,
-   "end": 43.98,
-   "pred": 3.31
-  },
-  {
-   "shot": 11,
-   "text": "If money vanished tomorrow, what would you trade for lunch?",
-   "start": 44.3,
-   "end": 47.44,
-   "pred": 3.44
-  },
-  {
-   "shot": 11,
-   "text": "Comment below.",
-   "start": 47.8,
-   "end": 48.46,
-   "pred": 0.76
+   "text": "Follow for more weird facts!",
+   "start": 50.0,
+   "end": 51.4,
+   "pred": 1.82
   }
  ]
 }
