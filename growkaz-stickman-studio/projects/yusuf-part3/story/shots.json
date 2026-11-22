@@ -1,0 +1,634 @@
+{
+ "title": "Kisah Nabi Yusuf - Part 3",
+ "duration": 119.9,
+ "shots": [
+  {
+   "id": "w01",
+   "start": 0.0,
+   "end": 2.55,
+   "line": "Dua kali baju Yusuf menjadi saksi.",
+   "scene": "Dua baju: yang tidak robek (1) dan yang robek dari belakang (2)",
+   "set": "insert",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "pop",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "w02",
+   "start": 2.55,
+   "end": 5.2,
+   "line": "Tapi yang ketiga… akan membuatmu terharu.",
+   "scene": "Siluet baju ketiga bercahaya dengan tanda tanya",
+   "set": "insert",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w03",
+   "start": 5.2,
+   "end": 6.45,
+   "line": "",
+   "scene": "Kartu judul: KISAH NABI YUSUF / PART 3",
+   "set": "title",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "w04",
+   "start": 6.45,
+   "end": 8.85,
+   "line": "Di penjara, Yusuf masih menunggu.",
+   "scene": "Penjara: Yusuf menunggu, coretan hari memenuhi dinding",
+   "set": "prison",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w05",
+   "start": 8.85,
+   "end": 14.65,
+   "line": "Sampai Raja Mesir bermimpi aneh: tujuh sapi gemuk dimakan tujuh sapi kurus.",
+   "scene": "Mimpi raja: tujuh sapi gemuk dimakan tujuh sapi kurus",
+   "set": "dream",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 4.0,
+     "name": "stinger",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w06",
+   "start": 14.65,
+   "end": 18.15,
+   "line": "Tujuh bulir gandum hijau, dan tujuh yang kering.",
+   "scene": "Tujuh bulir gandum hijau, lalu tujuh bulir kering",
+   "set": "dream",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "ding",
+     "gain": -14
+    },
+    {
+     "at": 2.2,
+     "name": "glitch",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "w07",
+   "start": 18.15,
+   "end": 20.65,
+   "line": "Tak seorang pun mampu menjelaskannya…",
+   "scene": "Raja di singgasana, para pembesar angkat bahu",
+   "set": "palace",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w08",
+   "start": 20.65,
+   "end": 24.75,
+   "line": "sampai seorang mantan tahanan teringat: Yusuf!",
+   "scene": "Close-up mantan tahanan teringat: Yusuf!",
+   "set": "closeup",
+   "sfx": [
+    {
+     "at": 2.4,
+     "name": "ding",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w09",
+   "start": 24.75,
+   "end": 30.65,
+   "line": "Yusuf menjelaskan: akan datang tujuh tahun panen melimpah, lalu tujuh tahun kelaparan.",
+   "scene": "Yusuf menjelaskan: 7 tahun panen lalu 7 tahun kelaparan",
+   "set": "prison",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 4.0,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w10",
+   "start": 30.65,
+   "end": 33.6,
+   "line": "\"Simpanlah sebagian besar hasil panen kalian.\"",
+   "scene": "Lumbung: karung-karung gandum disimpan",
+   "set": "granary",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -14
+    },
+    {
+     "at": 0.9,
+     "name": "hit",
+     "gain": -14
+    },
+    {
+     "at": 1.4,
+     "name": "hit",
+     "gain": -14
+    }
+   ]
+  },
+  {
+   "id": "w11",
+   "start": 33.6,
+   "end": 37.95,
+   "line": "Raja kagum dan memerintahkan Yusuf dibebaskan.",
+   "scene": "Raja kagum, memerintahkan Yusuf dibebaskan",
+   "set": "closeup",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "impact",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w12",
+   "start": 37.95,
+   "end": 41.85,
+   "line": "Tapi Yusuf menolak keluar… sebelum namanya dibersihkan.",
+   "scene": "Pintu penjara terbuka, tapi Yusuf menolak keluar",
+   "set": "prison",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w13",
+   "start": 41.85,
+   "end": 43.6,
+   "line": "Kebenaran pun terungkap.",
+   "scene": "Baju robek dari belakang bercahaya: TIDAK BERSALAH",
+   "set": "insert",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "ding",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w14",
+   "start": 43.6,
+   "end": 48.5,
+   "line": "Dan Raja mengangkatnya menjadi pengurus perbendaharaan Mesir.",
+   "scene": "Raja mengalungkan emas pada Yusuf, pengurus perbendaharaan Mesir",
+   "set": "palace",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w15",
+   "start": 48.5,
+   "end": 51.45,
+   "line": "Bertahun-tahun kemudian, kelaparan melanda.",
+   "scene": "Kelaparan: tanah retak, matahari terik, pohon mati",
+   "set": "drought",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "w16",
+   "start": 51.45,
+   "end": 55.15,
+   "line": "Saudara-saudara Yusuf datang dari jauh meminta makanan.",
+   "scene": "Saudara-saudara Yusuf datang dengan unta, lelah",
+   "set": "desert",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "w17",
+   "start": 55.15,
+   "end": 57.35,
+   "line": "Yusuf langsung mengenali mereka.",
+   "scene": "Close-up Yusuf mengenali mereka",
+   "set": "closeup",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w18",
+   "start": 57.35,
+   "end": 61.15,
+   "line": "Tapi mereka sama sekali tidak mengenalinya.",
+   "scene": "Para saudara menunduk di hadapan Yusuf, bingung, tidak mengenalinya",
+   "set": "palace",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w19",
+   "start": 61.15,
+   "end": 68.75,
+   "line": "Kalau kamu jadi Yusuf, apa yang akan kamu lakukan? Membalas… atau memaafkan? Tulis di komentar.",
+   "scene": "Ajakan komentar: MEMBALAS atau MEMAAFKAN?",
+   "set": "prompt",
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.7,
+     "name": "pop",
+     "gain": -8
+    },
+    {
+     "at": 0.95,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w20",
+   "start": 68.75,
+   "end": 72.65,
+   "line": "Hingga akhirnya Yusuf berkata: \"Akulah Yusuf.\"",
+   "scene": "Close-up Yusuf: Akulah Yusuf",
+   "set": "closeup",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 2.5,
+     "name": "impact",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "w21",
+   "start": 72.65,
+   "end": 74.55,
+   "line": "Mereka gemetar ketakutan.",
+   "scene": "Para saudara gemetar ketakutan",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w22",
+   "start": 74.55,
+   "end": 79.35,
+   "line": "Tapi Yusuf menjawab: \"Pada hari ini tidak ada cercaan atas kalian.",
+   "scene": "Yusuf membuka tangan: tidak ada cercaan atas kalian",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 2.0,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w23",
+   "start": 79.35,
+   "end": 82.35,
+   "line": "Semoga Allah mengampuni kalian.\"",
+   "scene": "Cahaya ampunan, para saudara menangis lega",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "w24",
+   "start": 82.35,
+   "end": 86.65,
+   "line": "Lalu ia memberikan bajunya. \"Usapkan ke wajah ayahku.\"",
+   "scene": "Yusuf memberikan bajunya yang putih bercahaya",
+   "set": "insert",
+   "in": {
+    "type": "fade",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w25",
+   "start": 86.65,
+   "end": 91.15,
+   "line": "Nabi Yaqub, yang matanya memutih karena bertahun-tahun bersedih…",
+   "scene": "Close-up Nabi Yaqub, matanya memutih karena kesedihan",
+   "set": "closeup",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w26",
+   "start": 91.15,
+   "end": 93.75,
+   "line": "kembali bisa melihat.",
+   "scene": "Baju diusapkan, mata Nabi Yaqub kembali melihat",
+   "set": "closeup",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "powerup",
+     "gain": -8
+    },
+    {
+     "at": 0.5,
+     "name": "ding",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w27",
+   "start": 93.75,
+   "end": 96.15,
+   "line": "Keluarga itu akhirnya bersatu di Mesir.",
+   "scene": "Yusuf berlari memeluk ayahnya di Mesir",
+   "set": "palace",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "w28",
+   "start": 96.15,
+   "end": 101.05,
+   "line": "Ayah, ibu, dan sebelas saudaranya tunduk memberi hormat.",
+   "scene": "Ayah, ibu, dan sebelas saudara tunduk memberi hormat",
+   "set": "palace",
+   "sfx": [
+    {
+     "at": 2.6,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "w29",
+   "start": 101.05,
+   "end": 104.75,
+   "line": "\"Wahai ayahku… inilah takwil mimpiku dahulu.\"",
+   "scene": "Takwil mimpi: sebelas bintang, matahari, dan bulan di atas keluarga",
+   "set": "dream",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -6
+    },
+    {
+     "at": 1.6,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w30",
+   "start": 104.75,
+   "end": 110.15,
+   "line": "Dari sumur yang gelap, Allah mengangkat Yusuf ke kedudukan yang mulia.",
+   "scene": "Dari dasar sumur, kamera naik menuju cahaya, lalu istana",
+   "set": "wellIn",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -10
+    },
+    {
+     "at": 3.4,
+     "name": "impact",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "w31",
+   "start": 110.15,
+   "end": 114.95,
+   "line": "Apa pun ujianmu hari ini… jangan pernah putus asa dari rahmat Allah.",
+   "scene": "Matahari terbit di atas Mesir: jangan putus asa dari rahmat Allah",
+   "set": "palace",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w32",
+   "start": 114.95,
+   "end": 119.9,
+   "line": "Pelajaran mana yang paling menyentuh hatimu? Tulis di komentar.",
+   "scene": "Ajakan komentar penutup + TAMAT",
+   "set": "end",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 24.75,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 24.75,
+   "end": 48.5,
+   "mood": "hopeful",
+   "intensity": 0.55
+  },
+  {
+   "start": 48.5,
+   "end": 68.75,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 68.75,
+   "end": 93.75,
+   "mood": "sad",
+   "intensity": 0.5
+  },
+  {
+   "start": 93.75,
+   "end": 110.15,
+   "mood": "triumph",
+   "intensity": 0.6
+  },
+  {
+   "start": 110.15,
+   "end": 119.9,
+   "mood": "hopeful",
+   "intensity": 0.45
+  }
+ ],
+ "sfx": []
+}
