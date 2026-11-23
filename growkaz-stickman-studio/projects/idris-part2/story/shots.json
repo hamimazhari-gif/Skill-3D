@@ -1,0 +1,335 @@
+{
+ "title": "Kisah Nabi Idris - Part 2",
+ "duration": 68.6,
+ "shots": [
+  {
+   "id": "e01",
+   "start": 0.0,
+   "end": 4.45,
+   "line": "Part dua. Dakwah di Tengah Kaum yang Tersesat.",
+   "scene": "e01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "e02",
+   "start": 4.45,
+   "end": 7.55,
+   "line": "Zaman itu, manusia mulai terpecah.",
+   "scene": "e02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "e03",
+   "start": 7.55,
+   "end": 12.7,
+   "line": "Dikisahkan, sebagian keturunan Qabil hidup dalam kemaksiatan.",
+   "scene": "e03",
+   "amb": {
+    "name": "murmur",
+    "gain": -20
+   }
+  },
+  {
+   "id": "e04",
+   "start": 12.7,
+   "end": 17.45,
+   "line": "Mereka lalai… bersenang-senang… dan melupakan Allah.",
+   "scene": "e04",
+   "amb": {
+    "name": "murmur",
+    "gain": -16
+   }
+  },
+  {
+   "id": "e05",
+   "start": 17.45,
+   "end": 25.55,
+   "line": "Nabi Idris bangkit menyeru mereka: \"Sembahlah Allah… tinggalkan kemungkaran… dan berbuat adillah!\"",
+   "scene": "e05",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 2.7,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 4.3,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 5.9,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "e06",
+   "start": 25.55,
+   "end": 27.1,
+   "line": "Sebagian mendengar.",
+   "scene": "e06",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "e07",
+   "start": 27.1,
+   "end": 29.35,
+   "line": "Tapi banyak yang menolak.",
+   "scene": "e07",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "e08",
+   "start": 29.35,
+   "end": 32.35,
+   "line": "Namun Nabi Idris tidak menyerah.",
+   "scene": "e08",
+   "bars": "scope"
+  },
+  {
+   "id": "e09",
+   "start": 32.35,
+   "end": 33.95,
+   "line": "Siang ia berdakwah.",
+   "scene": "e09",
+   "in": {
+    "type": "whip",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "e10",
+   "start": 33.95,
+   "end": 35.95,
+   "line": "Malam ia beribadah.",
+   "scene": "e10",
+   "in": {
+    "type": "whip",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    },
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "e11",
+   "start": 35.95,
+   "end": 40.65,
+   "line": "Dan di sela-selanya… ia terus bekerja dengan tangannya sendiri.",
+   "scene": "e11",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "e12",
+   "start": 40.65,
+   "end": 43.15,
+   "line": "Allah memujinya dalam Al-Qur'an.",
+   "scene": "e12",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "e13",
+   "start": 43.15,
+   "end": 50.15,
+   "line": "Ia termasuk golongan… orang-orang yang sabar. Q S Al-Anbiya ayat delapan puluh lima.",
+   "scene": "e13",
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "ding",
+     "gain": -10
+    },
+    {
+     "at": 3.4,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "e14",
+   "start": 50.15,
+   "end": 59.05,
+   "line": "Ia juga disebut… seorang yang sangat membenarkan dan seorang nabi. Q S Maryam ayat lima puluh enam.",
+   "scene": "e14",
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 4.3,
+     "name": "ding",
+     "gain": -10
+    },
+    {
+     "at": 5.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "e15",
+   "start": 59.05,
+   "end": 65.95,
+   "line": "Lalu Allah memberinya kemuliaan yang luar biasa… yang tidak diberikan kepada banyak manusia.",
+   "scene": "e15",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -8
+    },
+    {
+     "at": 3.0,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "e16",
+   "start": 65.95,
+   "end": 68.6,
+   "line": "Apa itu?",
+   "scene": "e16",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "stinger",
+     "gain": -8
+    },
+    {
+     "at": 0.8,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 17.45,
+   "mood": "dark",
+   "intensity": 0.5
+  },
+  {
+   "start": 17.45,
+   "end": 29.35,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 29.35,
+   "end": 40.65,
+   "mood": "hopeful",
+   "intensity": 0.45
+  },
+  {
+   "start": 40.65,
+   "end": 59.05,
+   "mood": "wonder",
+   "intensity": 0.45
+  },
+  {
+   "start": 59.05,
+   "end": 68.6,
+   "mood": "mystery",
+   "intensity": 0.6
+  }
+ ],
+ "sfx": []
+}
