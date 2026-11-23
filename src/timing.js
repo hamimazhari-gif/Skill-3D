@@ -3,7 +3,7 @@ import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 11;
+export const SHOTS = 10;
 export const TAIL = 0.7; // hold after the last word
 
 const DATA = {en: EN, id: ID};
@@ -36,31 +36,36 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "Raja yang mencetak uang / The king who printed money".
+// Word events per language: [sentenceIndex, word, occurrence]. Story: "Hidup 500 tahun / Living to 500".
 export const EV = {
-  miskin: {en: [0, 'poor'], id: [0, 'miskin']},
-  raja: {en: [1, 'king'], id: [1, 'raja']}, ide: {en: [1, 'idea'], id: [1, 'ide']}, jenius: {en: [1, 'brilliant'], id: [1, 'jenius']},
-  gampang: {en: [2, 'easy'], id: [2, 'gampang']},
-  cetak: {en: [3, 'print'], id: [3, 'cetak']}, bagikan: {en: [3, 'give'], id: [3, 'bagikan']}, haha: {en: [3, 'hahaha'], id: [3, 'hahaha']},
-  kaya: {en: [4, 'rich'], id: [4, 'kaya']}, mobil: {en: [4, 'car'], id: [4, 'mobil']},
-  tapi: {en: [5, 'but'], id: [5, 'tapi']}, uang5: {en: [5, 'money'], id: [5, 'uang']}, roti5: {en: [5, 'bread'], id: [5, 'roti']}, sama: {en: [5, 'same'], id: [5, 'sama']},
-  maaf: {en: [6, 'sorry'], id: [6, 'maaf']}, naik1: {en: [6, 'up', 0], id: [6, 'naik', 0]}, naik2: {en: [6, 'up', 1], id: [6, 'naik', 1]}, naik3: {en: [6, 'up', 2], id: [6, 'naik', 2]},
-  pagi: {en: [7, 'morning'], id: [7, 'pagi']}, kambing: {en: [7, 'goat'], id: [7, 'kambing']}, sekarang7: {en: [7, 'now'], id: [7, 'sekarang']}, huhu: {en: [7, 'huhuhu'], id: [7, 'huhuhu']},
-  ehem: {en: [8, 'ahem'], id: [8, 'ehem']}, matikan: {en: [8, 'switch'], id: [8, 'matikan']},
-  dongeng: {en: [9, 'fairy'], id: [9, 'dongeng']}, negara: {en: [10, 'country'], id: [10, 'negara']},
-  barang: {en: [11, 'goods'], id: [11, 'barang']}, meroket: {en: [11, 'skyrocketed'], id: [11, 'meroket']},
-  dua: {en: [12, 'double'], id: [12, 'dua']}, hari: {en: [12, 'day'], id: [12, 'hari']},
-  triliun: {en: [13, 'trillion'], id: [13, 'triliun']},
-  dipakai: {en: [14, 'used'], id: [14, 'dipakai']}, asing: {en: [14, 'foreign'], id: [14, 'asing']},
-  lucunya: {en: [15, 'funny'], id: [15, 'lucunya']}, kolektor: {en: [15, 'collectors'], id: [15, 'kolektor']}, mahal: {en: [15, 'more'], id: [15, 'mahal']},
-  tebak: {en: [16, 'guess'], id: [16, 'tebak']}, beli: {en: [17, 'buy'], id: [17, 'beli']}, komentar: {en: [18, 'comments'], id: [18, 'komentar']},
+  bayang: {en: [0, 'imagine'], id: [0, 'bayangkan']}, lima: {en: [0, 'five'], id: [0, 'lima']},
+  enak: {en: [1, 'amazing'], id: [1, 'enak']}, tunggu: {en: [2, 'wait'], id: [2, 'tunggu']},
+  dua: {en: [3, 'two'], id: [3, 'dua']}, muda: {en: [3, 'young'], id: [3, 'muda']},
+  santai: {en: [4, 'relax'], id: [4, 'santai']}, setengah: {en: [4, 'halfway'], id: [4, 'setengah']},
+  kuliah: {en: [5, 'college'], id: [5, 'kuliah']}, ilmu: {en: [5, 'learn'], id: [5, 'ilmunya']},
+  skripsi: {en: [6, 'thesis'], id: [6, 'skripsinya']}, lemari: {en: [6, 'wardrobe'], id: [6, 'lemari']},
+  rumah: {en: [7, 'house'], id: [7, 'rumah']}, brosur: {en: [7, 'brochure'], id: [7, 'brosurnya']},
+  sales: {en: [8, 'only'], id: [8, 'cicilan']}, cicilan: {en: [8, 'three'], id: [8, 'tiga']}, dp: {en: [8, 'low'], id: [8, 'dp']},
+  reuni: {en: [9, 'reunion'], id: [9, 'reuni']}, terbesar: {en: [9, 'biggest'], id: [9, 'terbesar']},
+  teman: {en: [10, 'classmates'], id: [10, 'teman']}, anak: {en: [10, 'kids'], id: [10, 'anak']}, cucu: {en: [10, 'grandkids'], id: [10, 'cucu']},
+  cicit: {en: [10, 'great'], id: [10, 'cicit']}, generasi: {en: [10, 'twelve'], id: [10, 'dua belas']},
+  pensiun: {en: [11, 'retirement'], id: [11, 'pensiun']}, empat: {en: [11, 'four'], id: [11, 'empat']},
+  kakek: {en: [12, 'grandpa'], id: [12, 'kakek']}, telat: {en: [12, 'late'], id: [12, 'telat']},
+  maaf: {en: [13, 'sorry'], id: [13, 'maaf']}, lutut: {en: [13, 'knees'], id: [13, 'lututku']},
+  tapi: {en: [14, 'but'], id: [14, 'tapi']}, serius: {en: [14, 'serious'], id: [14, 'serius']},
+  semua: {en: [15, 'everyone'], id: [15, 'semua']}, penuh: {en: [15, 'overcrowded'], id: [15, 'kepenuhan']},
+  makanan: {en: [16, 'food'], id: [16, 'makanan']}, air: {en: [16, 'water'], id: [16, 'air']}, tinggal: {en: [16, 'housing'], id: [16, 'tinggal']}, rebutan: {en: [16, 'fight'], id: [16, 'rebutan']},
+  sebal: {en: [17, 'annoying'], id: [17, 'menyebalkan']}, kakek2: {en: [17, 'grandpa'], id: [17, 'kakek']}, gorengan: {en: [17, 'snack'], id: [17, 'gorengan']}, lalu: {en: [17, 'ago'], id: [17, 'lalu']},
+  jadi: {en: [18, 'so'], id: [18, 'jadi']}, pas: {en: [18, 'right'], id: [18, 'pas']},
+  penting: {en: [19, 'matters'], id: [19, 'penting']}, manfaat: {en: [19, 'meaningful'], id: [19, 'bermanfaat']},
+  ngapain: {en: [20, 'what'], id: [20, 'ngapain']}, komentar: {en: [20, 'comments'], id: [20, 'komentar']},
 };
 
 export const LABELS = {
-  en: {kingdom: 'KINGDOM', money: 'MONEY', bakery: 'BAKERY', bread: 'BREAD', rice: 'RICE', price: 'PRICE', prices: ['10', '20', '40', '80'],
-    noteVal: '100', note: '100 TRILLION', foreignVal: '$5', country: 'REAL COUNTRY', chart: 'PRICES', tagA: '100', tagB: '200', x2: 'x2', day: '1 DAY',
-    collectorShop: 'COLLECTOR', forSale: 'SOLD $$$', comment: 'COMMENT!'},
-  id: {kingdom: 'KERAJAAN', money: 'UANG', bakery: 'TOKO ROTI', bread: 'ROTI', rice: 'BERAS', price: 'HARGA', prices: ['10', '20', '40', '80'],
-    noteVal: '100', note: '100 TRILIUN', foreignVal: '$5', country: 'NEGARA NYATA', chart: 'HARGA', tagA: '100', tagB: '200', x2: 'x2', day: '1 HARI',
-    collectorShop: 'KOLEKTOR', forSale: 'LAKU $$$', comment: 'KOMENTAR!'},
+  en: {big500: '500 YEARS', party: 'HAPPY 250th!', cake: '250', life: 'LIFE', campus: 'SEMESTER 80', thesis: 'THESIS', forSale: 'FOR SALE',
+    loan: '300-YEAR LOAN', loanSub: 'LOW DOWN PAYMENT!', reunion: 'SCHOOL REUNION', gens: '12 GENERATIONS', retire: 'RETIRE AT 400', clockIn: 'CLOCK IN',
+    late: 'LATE!', food: 'FOOD', water: 'WATER', full: 'FULL', snacks: 'SNACKS', price: '$2', oldPrice: '1¢', oldSub: '400 YEARS AGO', comment: 'COMMENT!'},
+  id: {big500: '500 TAHUN', party: 'ULTAH KE-250!', cake: '250', life: 'HIDUP', campus: 'SEMESTER 80', thesis: 'SKRIPSI', forSale: 'DIJUAL',
+    loan: 'CICILAN 300 TAHUN', loanSub: 'DP RINGAN!', reunion: 'REUNI SD', gens: '12 GENERASI', retire: 'PENSIUN: 400', clockIn: 'ABSEN',
+    late: 'TELAT!', food: 'MAKANAN', water: 'AIR', full: 'PENUH', snacks: 'GORENGAN', price: 'Rp2.000', oldPrice: 'Rp1', oldSub: '400 TAHUN LALU', comment: 'KOMENTAR!'},
 };

@@ -1087,3 +1087,93 @@ export function noteFrame(value, o = {}) {
   const n = banknote(value, {...o, w}); n.position.z = 0.035; g.add(n);
   return g;
 }
+
+// ---------- living-to-500 story props ----------
+// Birthday cake with a number plaque and candles; returns {group, flames}.
+export function cake(label = '250', o = {}) {
+  const g = new THREE.Group(); const flames = [];
+  const t1 = cyl(0.42, 0.42, 0.28, toon(o.color || '#f3c8d8', {wear: false}), {hull: 0.012, seg: 32}); g.add(t1);
+  const ic1 = cyl(0.44, 0.44, 0.05, toon('#fff3df', {wear: false}), {hull: 0.01, seg: 32}); at(ic1, 0, 0.26, 0); g.add(ic1);
+  const t2 = cyl(0.3, 0.3, 0.24, toon(o.color2 || '#c97aa8', {wear: false}), {hull: 0.012, seg: 32}); at(t2, 0, 0.3, 0); g.add(t2);
+  const ic2 = cyl(0.32, 0.32, 0.05, toon('#fff3df', {wear: false}), {hull: 0.01, seg: 32}); at(ic2, 0, 0.52, 0); g.add(ic2);
+  for (let i = 0; i < 7; i++) {
+    const a = i / 7 * Math.PI * 2, x = Math.cos(a) * 0.2, z = Math.sin(a) * 0.2;
+    const c = cyl(0.018, 0.018, 0.14, ['#4f8fc8', '#f2d24a', '#7fa35a'][i % 3], {hull: 0.006}); at(c, x, 0.56, z); g.add(c);
+    const f = ball(0.03, new THREE.MeshBasicMaterial({color: '#ffcf5a'}), {sy: 1.6, hull: 0}); at(f, x, 0.74, z); g.add(f); flames.push(f);
+  }
+  const pl = sign(label, 0.42, 0.2, {bg: '#fff3df', frame: '#c97aa8'}); at(pl, 0, 0.06, 0.43); g.add(pl);
+  return {group: g, flames};
+}
+
+// Wall progress bar board: label, bar filled to `frac`, percentage. set(frac) redraws.
+export function lifeBar(label, w = 1.6, h = 0.55) {
+  const c = canvas(1024, Math.round(1024 * h / w)), x = c.getContext('2d'); const tex = texFrom(c); const H = c.height;
+  let last = -1;
+  const set = (f) => {
+    const q = Math.round(f * 100); if (q === last) return; last = q;
+    x.fillStyle = '#fff3df'; x.fillRect(0, 0, 1024, H); x.strokeStyle = INK; x.lineWidth = 18; x.strokeRect(12, 12, 1000, H - 24);
+    x.font = '900 110px "Inter Display"'; x.fillStyle = INK; x.textBaseline = 'middle'; x.fillText(label, 50, H * 0.3);
+    x.textAlign = 'right'; x.fillText(q + '%', 975, H * 0.3); x.textAlign = 'left';
+    x.fillStyle = '#e7dcc8'; x.fillRect(50, H * 0.55, 925, H * 0.3);
+    x.fillStyle = q < 30 ? '#d8413a' : '#7fc06a'; x.fillRect(50, H * 0.55, 925 * q / 100, H * 0.3);
+    x.lineWidth = 12; x.strokeRect(50, H * 0.55, 925, H * 0.3); tex.needsUpdate = true;
+  };
+  set(0.5);
+  const g = new THREE.Group(); const back = box(w + 0.06, h + 0.06, 0.05, '#7a5236', {center: true}); g.add(back);
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({map: tex})); face.position.z = 0.03; g.add(face);
+  return {group: g, set};
+}
+
+// A book standing upright, very thick (the thesis). Spine faces +z with the title.
+export function bigBook(label, w = 0.9, h = 1.9, d = 1.5, color = '#3f5f8a') {
+  const g = new THREE.Group();
+  const pages = box(w * 0.94, h * 0.97, d * 0.96, toon('#f6efdf', {paint: {stripes: {n: 40, color: '#e2d6bd'}, seed: 91}})); at(pages, 0.02, h * 0.015, 0); g.add(pages);
+  for (const s of [-1, 1]) { const cv = box(0.05, h, d, color); at(cv, s * w / 2, 0, 0); g.add(cv); }
+  const sp = box(w, h, 0.08, color); at(sp, 0, 0, d / 2); g.add(sp);
+  const t = sign(label, w * 0.8, 0.32, {bg: '#e8c35a', frame: '#8a6a2a'}); at(t, 0, h * 0.72, d / 2 + 0.06); g.add(t);
+  for (const y of [0.2, 0.9]) { const b = box(w + 0.01, 0.05, 0.02, '#e8c35a', {hull: 0}); at(b, 0, h * y, d / 2 + 0.045); g.add(b); }
+  return g;
+}
+
+// Wardrobe with two doors and knobs.
+export function wardrobe(color = '#9a6a4a', w = 1.0, h = 1.9, d = 0.6) {
+  const g = new THREE.Group();
+  g.add(box(w, h, d, toon(color, {paint: {planks: 3, seed: 92}})));
+  for (const s of [-1, 1]) {
+    const door = box(w / 2 - 0.06, h - 0.2, 0.03, toon(color, {paint: {seed: 93 + s}})); at(door, s * w / 4, 0.12, d / 2 + 0.01); g.add(door);
+    const k = ball(0.035, '#e8c35a'); at(k, s * 0.06, h * 0.52, d / 2 + 0.05); g.add(k);
+  }
+  const top = box(w + 0.08, 0.08, d + 0.06, color); at(top, 0, h, 0); g.add(top);
+  return g;
+}
+
+// Time clock on a post (clock-in machine): returns {group, card}.
+export function timeClock(label) {
+  const g = new THREE.Group();
+  const post = cyl(0.04, 0.06, 1.1, '#5a5a62'); g.add(post);
+  const bx = box(0.5, 0.55, 0.3, '#c9ccd2'); at(bx, 0, 1.1, 0); g.add(bx);
+  const clk = wallClock(0.15, {rim: '#5a5a62'}); at(clk.group, 0, 1.47, 0.16); clk.set(9, 20); g.add(clk.group);
+  const s = sign(label, 0.42, 0.13, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(s, 0, 1.22, 0.16); g.add(s);
+  const card = box(0.12, 0.18, 0.01, '#fff3df', {hull: 0.004}); at(card, 0.1, 1.68, 0.05); g.add(card);
+  return {group: g, card, clock: clk};
+}
+
+// Tray of fried snacks.
+export function snackTray(n = 7, seed = 5) {
+  const g = new THREE.Group(); const r = rng(seed);
+  const tray = cyl(0.36, 0.32, 0.04, '#c9ccd2', {hull: 0.008, seg: 24}); g.add(tray);
+  for (let i = 0; i < n; i++) {
+    const a = r() * 6.28, rr = r() * 0.22;
+    const p = ball(0.07 + r() * 0.02, toon(['#d9a04a', '#c98a3a', '#e3b25a'][i % 3], {paint: {grain: 120, seed: 50 + i}}), {sx: 1.5, sy: 0.6, hull: 0.008});
+    at(p, Math.cos(a) * rr, 0.06 + (i % 3) * 0.03, Math.sin(a) * rr, r() * 3); g.add(p);
+  }
+  return g;
+}
+
+// Tiny simple person (for crowds on the globe): body + head, coloured.
+export function tinyPerson(color = '#4f8fc8', s = 0.12) {
+  const g = new THREE.Group();
+  const b = cyl(s * 0.35, s * 0.45, s * 1.1, color, {hull: 0.006, seg: 10}); g.add(b);
+  const h = ball(s * 0.32, '#f5dcc6', {hull: 0.006, seg: 10}); at(h, 0, s * 1.4, 0); g.add(h);
+  return g;
+}

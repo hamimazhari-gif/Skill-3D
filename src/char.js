@@ -16,9 +16,10 @@ export const DESIGNS = {
   egg: {head: 'round', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   bean: {head: 'round', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -89,6 +90,11 @@ function drawHeadBase(o, r) {
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.62, cy - RY * 0.66]);
     fr.push([cx + RX * 0.2, cy - RY * 0.62]); fr.push([cx - RX * 0.3, cy - RY * 0.5]); fr.push([cx - RX * 0.7, cy - RY * 0.3]); fr.push([cx - RX * 0.95, cy - RY * 0.12]);
+  } else if (hairStyle === 'bald') { // old man: bald crown, white hair only around the sides, forehead wrinkles
+    for (const sd of [-1, 1]) inkShape(x, wobble(ellipse(cx + sd * RX * 0.9, cy - RY * 0.12, RX * 0.2, RY * 0.36, 30), r, 2), o.hair, r, 8, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.25));
+    x.save(); x.strokeStyle = 'rgba(53,31,34,0.55)'; x.lineCap = 'round'; x.lineWidth = R * 0.035;
+    for (const k of [0, 1]) { x.beginPath(); x.arc(cx, cy - RY * (0.5 - k * 0.12) + R * 0.9, R * 0.95, Math.PI * 1.4, Math.PI * 1.6); x.stroke(); }
+    x.restore();
   } else if (hairStyle === 'tuft') { // short cap of hair with a tuft on top
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.12 + 0.76 * i / 40); fr.push([hx(a), hy(a)]); }
     for (let i = 0; i <= 12; i++) { const t = 1 - i / 12; fr.push([cx + (t - 0.5) * 2 * RX * 0.8, cy - RY * 0.6 + Math.sin(t * Math.PI) * RY * 0.06]); }
@@ -99,8 +105,8 @@ function drawHeadBase(o, r) {
       fr.push([xx, cy - RY * 0.42 + Math.abs(Math.sin(t * Math.PI * 4)) * R * 0.2]);
     }
   }
-  inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
-  if (D.shading && (!o.hat || o.hat === 'none')) { // glossy hair streak
+  if (fr.length) inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
+  if (D.shading && (!o.hat || o.hat === 'none') && hairStyle !== 'bald') { // glossy hair streak
     x.save(); x.strokeStyle = 'rgba(255,255,255,0.32)'; x.lineCap = 'round'; x.lineWidth = R * 0.07;
     x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.22, Math.PI * 1.45); x.stroke();
     x.lineWidth = R * 0.035; x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.5, Math.PI * 1.56); x.stroke(); x.restore();
