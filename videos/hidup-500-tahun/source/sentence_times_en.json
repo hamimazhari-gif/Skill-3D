@@ -1,0 +1,430 @@
+{
+ "duration": 77.6,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Imagine... if humans could live for five hundred years.",
+   "start": 0.22,
+   "end": 3.56,
+   "pred": 3.25,
+   "voiced": [
+    [
+     0.22,
+     0.62
+    ],
+    [
+     1.26,
+     2.02
+    ],
+    [
+     2.12,
+     3.56
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Sounds amazing, right?",
+   "start": 4.22,
+   "end": 5.14,
+   "pred": 1.81,
+   "voiced": [
+    [
+     4.22,
+     5.12
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Wait a minute.",
+   "start": 5.92,
+   "end": 6.32,
+   "pred": 0.83,
+   "voiced": [
+    [
+     5.92,
+     6.32
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Age two hundred fifty? You're still considered young.",
+   "start": 7.06,
+   "end": 9.66,
+   "pred": 3.25,
+   "voiced": [
+    [
+     7.06,
+     8.22
+    ],
+    [
+     8.56,
+     9.64
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Relax, I'm still young. Only halfway there!\"",
+   "start": 10.3,
+   "end": 13.16,
+   "pred": 2.95,
+   "voiced": [
+    [
+     10.3,
+     11.08
+    ],
+    [
+     11.18,
+     12.08
+    ],
+    [
+     12.24,
+     13.16
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "College could take decades, because there's always more to learn.",
+   "start": 14.12,
+   "end": 17.26,
+   "pred": 4.46,
+   "voiced": [
+    [
+     14.12,
+     15.36
+    ],
+    [
+     15.44,
+     17.26
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Your thesis? As thick as a wardrobe.",
+   "start": 17.94,
+   "end": 20.34,
+   "pred": 2.12,
+   "voiced": [
+    [
+     17.94,
+     18.64
+    ],
+    [
+     18.96,
+     19.2
+    ],
+    [
+     19.34,
+     20.3
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Then you buy a house. The brochure says...",
+   "start": 21.1,
+   "end": 23.82,
+   "pred": 2.34,
+   "voiced": [
+    [
+     21.1,
+     21.44
+    ],
+    [
+     21.64,
+     22.08
+    ],
+    [
+     22.16,
+     22.28
+    ],
+    [
+     22.82,
+     23.56
+    ],
+    [
+     23.66,
+     23.72
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Only three hundred years of payments! Low down payment!\"",
+   "start": 24.08,
+   "end": 27.12,
+   "pred": 3.4,
+   "voiced": [
+    [
+     24.08,
+     24.38
+    ],
+    [
+     24.48,
+     25.8
+    ],
+    [
+     26.16,
+     27.12
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Your elementary school reunion becomes the biggest event in town.",
+   "start": 28.08,
+   "end": 31.62,
+   "pred": 4.16,
+   "voiced": [
+    [
+     28.08,
+     30.06
+    ],
+    [
+     30.2,
+     31.38
+    ],
+    [
+     31.48,
+     31.62
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Not just your classmates show up, but their kids, grandkids, great-grandkids, up to twelve generations of their families.",
+   "start": 31.78,
+   "end": 38.44,
+   "pred": 9.22,
+   "voiced": [
+    [
+     31.78,
+     33.1
+    ],
+    [
+     33.36,
+     34.0
+    ],
+    [
+     34.42,
+     35.06
+    ],
+    [
+     35.44,
+     36.22
+    ],
+    [
+     36.52,
+     38.44
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "And retirement? Maybe not until age four hundred.",
+   "start": 39.2,
+   "end": 42.12,
+   "pred": 3.02,
+   "voiced": [
+    [
+     39.2,
+     39.8
+    ],
+    [
+     40.2,
+     40.32
+    ],
+    [
+     40.46,
+     41.92
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Grandpa, you're late for work again?\"",
+   "start": 42.78,
+   "end": 44.5,
+   "pred": 2.57,
+   "voiced": [
+    [
+     42.78,
+     44.32
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Sorry, boss... my knees haven't been replaced in three hundred years!\"",
+   "start": 44.92,
+   "end": 47.9,
+   "pred": 4.46,
+   "voiced": [
+    [
+     44.94,
+     47.88
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "But there's a serious problem.",
+   "start": 48.94,
+   "end": 50.38,
+   "pred": 1.81,
+   "voiced": [
+    [
+     48.96,
+     49.08
+    ],
+    [
+     49.4,
+     50.34
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "If everyone lived five hundred years, Earth could get overcrowded.",
+   "start": 50.88,
+   "end": 54.7,
+   "pred": 4.61,
+   "voiced": [
+    [
+     50.88,
+     51.02
+    ],
+    [
+     51.16,
+     51.9
+    ],
+    [
+     52.02,
+     52.86
+    ],
+    [
+     53.3,
+     54.7
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Food, water, and housing would become a fight.",
+   "start": 55.36,
+   "end": 57.8,
+   "pred": 3.63,
+   "voiced": [
+    [
+     55.4,
+     55.72
+    ],
+    [
+     55.94,
+     56.28
+    ],
+    [
+     56.44,
+     57.78
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "And the most annoying part... there's always that one grandpa complaining about snack prices from four hundred years ago.",
+   "start": 58.66,
+   "end": 64.5,
+   "pred": 7.4,
+   "voiced": [
+    [
+     58.66,
+     59.7
+    ],
+    [
+     59.82,
+     59.96
+    ],
+    [
+     60.08,
+     64.5
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "So maybe... our lifespan is just right.",
+   "start": 65.36,
+   "end": 68.18,
+   "pred": 2.19,
+   "voiced": [
+    [
+     65.36,
+     65.6
+    ],
+    [
+     66.02,
+     66.38
+    ],
+    [
+     66.82,
+     67.64
+    ],
+    [
+     67.74,
+     68.18
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "What matters isn't how long we live, but how meaningful our life is.",
+   "start": 68.96,
+   "end": 72.72,
+   "pred": 4.46,
+   "voiced": [
+    [
+     68.96,
+     70.64
+    ],
+    [
+     71.08,
+     71.2
+    ],
+    [
+     71.32,
+     72.72
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "If you could live five hundred years, what would you do? Tell me in the comments!",
+   "start": 73.56,
+   "end": 77.36,
+   "pred": 5.21,
+   "voiced": [
+    [
+     73.56,
+     74.16
+    ],
+    [
+     74.3,
+     75.04
+    ],
+    [
+     75.36,
+     75.84
+    ],
+    [
+     76.44,
+     77.34
+    ]
+   ]
+  }
+ ]
+}
