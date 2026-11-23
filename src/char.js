@@ -12,7 +12,7 @@ const PX = 420; // canvas pixels per metre
 //   shadows: characters cast real shadows on the ground and walls.
 export const DESIGNS = {
   classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0, shading: false, shadows: false},
-  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, shading: true, shadows: true},
+  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: -0.04, shading: true, shadows: true},
 };
 let D = DESIGNS.classic;
@@ -73,9 +73,11 @@ function drawHeadBase(o, r) {
     ? wobble(smoothPoly(64, (t) => { const a = t * Math.PI * 2; return [cx + Math.cos(a) * RX * (1 - 0.09 * Math.sin(a)), cy + Math.sin(a) * RY]; }), r, 2)
     : wobble(ellipse(cx, cy, RX, RY, 64), r, 2);
   inkShape(x, headPts, SKIN, r, 11, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.42));
-  x.fillStyle = 'rgba(232,140,120,0.35)';
-  x.beginPath(); x.ellipse(cx - R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
-  x.beginPath(); x.ellipse(cx + R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
+  if (D.cheeks !== false) {
+    x.fillStyle = 'rgba(232,140,120,0.35)';
+    x.beginPath(); x.ellipse(cx - R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
+    x.beginPath(); x.ellipse(cx + R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
+  }
   const fr = [];
   const hx = (a, k = 1.02) => cx + Math.cos(a) * RX * k * (D.head === 'egg' ? 1 - 0.09 * Math.sin(a) : 1), hy = (a, k = 1.02) => cy + Math.sin(a) * RY * k;
   const hairStyle = o.hairStyle || D.hair;
@@ -238,7 +240,7 @@ function drawFace(o, f, r) {
     x.beginPath(); x.moveTo(cx - R * 0.16, cy); x.lineTo(cx + R * 0.16, cy); x.stroke();
   }
   // extras
-  for (const e of f.extras || []) {
+  for (const e of (f.extras || []).filter((e) => D.cheeks !== false || (e !== 'blush' && e !== 'anger'))) {
     if (e === 'blush') { x.fillStyle = 'rgba(232,110,110,0.55)'; for (const s of [-1, 1]) { x.beginPath(); x.ellipse(cx + s * R * 0.55, cy + R * 0.3, R * 0.17, R * 0.09, 0, 0, 7); x.fill(); } }
     if (e === 'sweat') { const sx = cx + R * 0.95, sy = cy - R * 0.55; x.fillStyle = '#8fd0ef'; x.lineWidth = 6; x.beginPath(); x.moveTo(sx, sy - R * 0.2); x.quadraticCurveTo(sx + R * 0.14, sy + R * 0.02, sx, sy + R * 0.08); x.quadraticCurveTo(sx - R * 0.14, sy + R * 0.02, sx, sy - R * 0.2); x.fill(); x.stroke(); }
     if (e === 'tear') { x.fillStyle = '#8fd0ef'; for (const s of [-1, 1]) { x.beginPath(); x.ellipse(cx + s * R * 0.4, cy + R * 0.35, R * 0.06, R * 0.16, 0, 0, 7); x.fill(); } }
