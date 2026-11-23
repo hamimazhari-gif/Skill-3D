@@ -97,7 +97,7 @@ function drawHeadBase(o, r) {
   }
   inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
   if (D.shading && (!o.hat || o.hat === 'none')) { // glossy hair streak
-    x.save(); x.strokeStyle = 'rgba(255,255,255,0.13)'; x.lineCap = 'round'; x.lineWidth = R * 0.1; x.filter = 'blur(3px)';
+    x.save(); x.strokeStyle = 'rgba(255,255,255,0.22)'; x.lineCap = 'round'; x.lineWidth = R * 0.1; x.filter = 'blur(3px)';
     x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.22, Math.PI * 1.45); x.stroke();
     x.restore();
   }
@@ -291,11 +291,11 @@ function drawTorso(o, r) {
     g.addColorStop(0, SHADE + '0.12)'); g.addColorStop(0.18, SHADE + '0)'); g.addColorStop(0.55, SHADE + '0)'); g.addColorStop(0.82, SHADE + '0.26)'); g.addColorStop(1, SHADE + '0.4)');
     x.fillStyle = g; x.fillRect(0, 0, W * PX, H * PX);
     const sh = x.createLinearGradient(cx - bw, 0, cx + bw, 0);
-    sh.addColorStop(0.02, 'rgba(255,255,255,0)'); sh.addColorStop(0.24, 'rgba(255,255,255,0.12)'); sh.addColorStop(0.34, 'rgba(255,255,255,0.16)'); sh.addColorStop(0.44, 'rgba(255,255,255,0.12)'); sh.addColorStop(0.62, 'rgba(255,255,255,0)');
+    sh.addColorStop(0.04, 'rgba(255,255,255,0)'); sh.addColorStop(0.22, 'rgba(255,255,255,0.2)'); sh.addColorStop(0.32, 'rgba(255,255,255,0.28)'); sh.addColorStop(0.42, 'rgba(255,255,255,0.2)'); sh.addColorStop(0.58, 'rgba(255,255,255,0)');
     x.fillStyle = sh; x.fillRect(0, 0, W * PX, H * PX);
     // small bright specular glint high on the chest
     const sp = x.createRadialGradient(cx - bw * 0.4, top + (bot - top) * 0.3, 1, cx - bw * 0.4, top + (bot - top) * 0.3, bw * 0.5);
-    sp.addColorStop(0, 'rgba(255,255,255,0.14)'); sp.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = sp; x.fillRect(0, 0, W * PX, H * PX);
+    sp.addColorStop(0, 'rgba(255,255,255,0.24)'); sp.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = sp; x.fillRect(0, 0, W * PX, H * PX);
     const n = x.createRadialGradient(cx, top - 10, 4, cx, top - 10, 0.16 * PX); // shadow of the head on the chest
     n.addColorStop(0, SHADE + '0.3)'); n.addColorStop(1, SHADE + '0)'); x.fillStyle = n; x.fillRect(0, 0, W * PX, H * PX);
     x.restore();
@@ -310,7 +310,7 @@ function drawLimb(len, color, end, r, wTop = 9, wBot = 5) {
   const cx = W / 2 * PX, top = 0.03 * PX, bot = (len + 0.02) * PX;
   inkShape(x, wobble([[cx - wTop, top], [cx + wTop, top], [cx + wBot, bot], [cx - wBot, bot]], r, 1), color, r, 7, (pts) => {
     if (!D.shading) return; x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
-    const g = x.createLinearGradient(cx - wTop, 0, cx + wTop, 0); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.3, 'rgba(255,255,255,0.12)'); g.addColorStop(0.5, SHADE + '0)'); g.addColorStop(0.62, SHADE + '0)'); g.addColorStop(1, SHADE + '0.38)');
+    const g = x.createLinearGradient(cx - wTop, 0, cx + wTop, 0); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.3, 'rgba(255,255,255,0.22)'); g.addColorStop(0.5, SHADE + '0)'); g.addColorStop(0.62, SHADE + '0)'); g.addColorStop(1, SHADE + '0.38)');
     x.fillStyle = g; x.fillRect(0, 0, W * PX, H * PX); x.restore();
   });
   if (end === 'hand') { x.fillStyle = INK; x.beginPath(); x.arc(cx, bot + 4, 0.05 * PX, 0, 7); x.fill(); }
