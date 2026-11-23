@@ -42,12 +42,15 @@ for i, k in enumerate(KEYS):
     nxt = KEYS[i+1] if i+1 < len(KEYS) else None
     PEND[k] = PSTART[nxt] if nxt and PBAB[nxt] == PBAB[k] else BAB[PBAB[k]]['end']
 def P(k): return PSTART[str(k)]
+PW = {str(d['i']): d.get('w', []) for d in TM}
 def WD(k, word, n=1):
-    """Estimated time a word is spoken: char position inside the paragraph, spread over its speech span."""
+    """Time a word is spoken: Whisper word anchors (interpolated by character position), else char position over the span."""
     k = str(k); txt = PTEXT[k]; i = -1
     for _ in range(n): i = txt.index(word, i + 1)
-    span = (PEND[k] - PSTART[k]) - 0.35
-    return PSTART[k] + span * i / len(txt)
+    pts = [[0, PSTART[k]]] * (not PW[k] or PW[k][0][0] > 0) + PW[k] + [[len(txt), PEND[k] - .35]]
+    for (c0, t0), (c1, t1) in zip(pts, pts[1:]):
+        if c0 <= i <= c1: return t0 + (t1 - t0) * ((i - c0) / (c1 - c0) if c1 > c0 else 0)
+    return PSTART[k] + ((PEND[k] - PSTART[k]) - 0.35) * i / len(txt)
 
 # ---------------------------------------------------------------- board map (generated Pacific map)
 LON0, LON1, LAT0, LAT1, KD, MX, MY = 95.0, 290.0, 58.0, -12.0, 50.0, 1100, 2600
@@ -531,7 +534,7 @@ def edge_pt(code, toward):
     return (cx + dx*k, cy + dy*k), k
 
 def draw_links(frame, t, C):
-    """Straight red photo-to-photo lines, drawn in front of the board and cards; they grow while the camera travels."""
+    """Straight red photo-to-photo lines from paper edge to paper edge; they grow while the camera travels."""
     zl = max(.4, min(1.4, C[2]*3))
     for a, b, t0, du in LINKS:
         if t < t0: continue
@@ -708,6 +711,7 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if st < t < st+.35:
             k = (1-(t-st)/.35)*14; C[0] += k*math.sin(t*90)/C[2]; C[1] += k*math.cos(t*77)/C[2]
     frame = cv2.warpAffine(bg, world_M(C, BGS), (W, H), flags=cv2.INTER_LINEAR, borderValue=(38, 38, 24)).astype(np.float32)
+    draw_links(frame, t, C)                      # photo-to-photo lines run edge to edge, under other photos
     for code in sorted(CARDS, key=lambda c: CARDS[c]['t0']):
         cd = CARDS[code]
         if t < cd['t0']: continue
@@ -724,7 +728,6 @@ def board_frame(t, fi, bg, stamps, vig, grains):
         if t > st:
             u = (t-st)/.2; sc = 1.6 - .6*backout(u, 2.2)
             blend(frame, img, card_M(dict(c=c, rot=rot), img, C, sc))
-    draw_links(frame, t, C)
     frame = np.clip(frame, 0, 255).astype(np.uint8)
     frame = draw_overlays(frame, t, C)
     frame = screen_overlays(frame, t)

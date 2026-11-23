@@ -16,7 +16,8 @@ for i, (p, title) in enumerate(CH):
 out = []
 for q in paras:
     b = max(i for i, (p, _) in enumerate(CH) if q['i'] >= p)
-    out.append(dict(i=q['i'], bab=b, start=round(shift(q['start']), 3), end=round(shift(q['end']), 3), text=q['text']))
+    out.append(dict(i=q['i'], bab=b, start=round(shift(q['start']), 3), end=round(shift(q['end']), 3), text=q['text'],
+                    w=[[ci, round(shift(t), 3)] for ci, t in q.get('w', [])]))
 total = dur + GAP * (len(CH) - 1)
 json.dump(dict(gap=GAP, duration=round(total, 3), bab=bab, paras=out), open('timing_gap.json', 'w'), ensure_ascii=False, indent=1)
 fc, n = '', 0
