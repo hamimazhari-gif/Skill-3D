@@ -377,9 +377,19 @@ export function skyDome() {
   const geo = new THREE.SphereGeometry(400, 32, 16);
   const mat = new THREE.ShaderMaterial({
     side: THREE.BackSide, depthWrite: false, fog: false,
-    uniforms: {top: {value: new THREE.Color('#9fc8e8')}, bottom: {value: new THREE.Color('#f3e7d3')}},
+    uniforms: {top: {value: new THREE.Color('#9fc8e8')}, bottom: {value: new THREE.Color('#f3e7d3')}, clouds: {value: 0.0}},
     vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-    fragmentShader: 'uniform vec3 top; uniform vec3 bottom; varying vec3 vP; void main(){ float h = smoothstep(-0.05, 0.6, vP.y); gl_FragColor = vec4(mix(bottom, top, h), 1.0);\n#include <colorspace_fragment>\n}',
+    fragmentShader: [
+      'uniform vec3 top; uniform vec3 bottom; uniform float clouds; varying vec3 vP;',
+      'float hsh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+      'float nz(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(hsh(i), hsh(i+vec2(1,0)), f.x), mix(hsh(i+vec2(0,1)), hsh(i+vec2(1,1)), f.x), f.y); }',
+      'float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * nz(p); p *= 2.03; a *= 0.5; } return v; }',
+      'void main(){ float h = smoothstep(-0.05, 0.6, vP.y); vec3 col = mix(bottom, top, h);',
+      ' if (clouds > 0.0 && vP.y > 0.02) { vec2 uv = vP.xz / (vP.y + 0.25) * 1.6; float c = smoothstep(0.48, 0.78, fbm(uv)); c *= smoothstep(0.02, 0.25, vP.y);',
+      '  vec3 cc = mix(vec3(1.0), bottom, 0.25) * (0.85 + 0.15 * fbm(uv * 2.0 + 3.0)); col = mix(col, cc, c * clouds); }',
+      ' gl_FragColor = vec4(col, 1.0);',
+      '#include <colorspace_fragment>',
+      '}'].join('\n'),
   });
   const m = new THREE.Mesh(geo, mat); m.renderOrder = -10; m.frustumCulled = false;
   return m;

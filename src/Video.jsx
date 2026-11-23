@@ -12,12 +12,23 @@ import {makeTiming, EV, LABELS, FPS} from './timing';
 import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
-import {CREAM, INK} from './kit';
+import {CREAM, INK, STYLE} from './kit';
+import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import {GradeShader, resolveLook, applyGrade} from './lighting';
 import {CHAR_TINT} from './char';
 
 
 const TMPC = new THREE.Color();
+// Realistic look: soft image-based light from a studio environment + neutral tone mapping (keeps character colours).
+function ensureRealism(gl, scene) {
+  if (!STYLE.realistic) return;
+  if (!scene.userData.envReady) {
+    const pm = new THREE.PMREMGenerator(gl);
+    scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; scene.userData.envReady = true;
+  }
+  scene.environmentIntensity = 0.45;
+  gl.toneMapping = THREE.NeutralToneMapping; gl.toneMappingExposure = 1.0;
+}
 export function useStory(lang) {
   return useMemo(() => {
     const T = makeTiming(lang);
@@ -79,8 +90,10 @@ function Scene({lang, thumb}) {
     const lk = resolveLook(LOOK[loc], t, {EVt, CUTS: T.CUTS});
     if (!scene.fog) scene.fog = new THREE.Fog('#efe6d2', 14, 55);
     if (!built.world.parent) { scene.add(built.world, built.sky, built.moon, built.key, built.key.target, built.hemi); gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap; }
+    ensureRealism(gl, scene);
     scene.fog.color.set(lk.fog); scene.fog.near = lk.near; scene.fog.far = lk.far;
     built.sky.material.uniforms.top.value.set(lk.skyTop); built.sky.material.uniforms.bottom.value.set(lk.skyBottom);
+    built.sky.material.uniforms.clouds.value = STYLE.realistic ? (lk.clouds ?? 0) : 0;
     built.sky.position.copy(camera.position);
     built.moon.visible = !!lk.moon;
     if (lk.moon) { built.moon.position.set(camera.position.x - 30, 45, camera.position.z - 120); built.moon.lookAt(camera.position); }

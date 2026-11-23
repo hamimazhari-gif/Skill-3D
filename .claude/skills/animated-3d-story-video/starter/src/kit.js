@@ -2,6 +2,10 @@
 import * as THREE from 'three';
 
 export const INK = '#351f22';
+// Render style for worlds and props. 'realistic' (default): physically based materials with roughness, bump detail and
+// environment light, no ink outlines on props (characters keep their hand-drawn ink). 'toon': the original flat look.
+export const STYLE = {realistic: true};
+export function setRenderStyle(name) { STYLE.realistic = name !== 'toon'; matCache.clear(); }
 export const CREAM = '#f3e7d3';
 const V3 = THREE.Vector3;
 
@@ -84,6 +88,10 @@ export function paintTex(base, o = {}) {
     x.fillRect(r() * size, r() * size, 2 + r() * 6, 1 + r() * 2);
   }
   x.globalAlpha = 1;
+  if (STYLE.realistic) { // micro texture: fine mottling so surfaces never look plastic
+    for (let i = 0; i < size * 6; i++) { x.fillStyle = r() < 0.5 ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'; x.fillRect(r() * size, r() * size, 1 + r() * 3, 1 + r() * 3); }
+    for (let i = 0; i < 6; i++) { const px = r() * size, py = r() * size, rad = 40 + r() * 90; const g = x.createRadialGradient(px, py, 0, px, py, rad); g.addColorStop(0, `rgba(${r() < 0.5 ? '0,0,0' : '255,255,255'},0.06)`); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(px - rad, py - rad, rad * 2, rad * 2); }
+  }
   for (let i = 0; i < stains; i++) {
     const px = r() * size, py = r() * size, rad = 10 + r() * 40;
     const g = x.createRadialGradient(px, py, 0, px, py, rad);
@@ -108,13 +116,16 @@ export function toon(colorOrTex, o = {}) {
   const key = typeof colorOrTex === 'string' && !o.noCache ? colorOrTex + JSON.stringify(o) : null;
   if (key && matCache.has(key)) return matCache.get(key);
   let m;
+  const real = STYLE.realistic && !o.toon;
+  const Mat = (opts) => (real ? new THREE.MeshStandardMaterial({roughness: o.rough ?? 0.82, metalness: o.metal ?? 0, ...opts}) : new THREE.MeshToonMaterial({gradientMap: gradientMap(), ...opts}));
   if (typeof colorOrTex === 'string') {
     const wear = o.wear === false ? null : paintTex(colorOrTex, {seed: hash(colorOrTex), ...(o.paint || {})});
-    m = new THREE.MeshToonMaterial({color: '#ffffff', map: wear, gradientMap: gradientMap()});
+    m = Mat({color: '#ffffff', map: wear});
     if (!wear) m.color.set(colorOrTex);
   } else {
-    m = new THREE.MeshToonMaterial({map: colorOrTex, gradientMap: gradientMap()});
+    m = Mat({map: colorOrTex});
   }
+  if (real && m.map && o.bump !== false) { m.bumpMap = m.map; m.bumpScale = o.bump ?? 1.2; }
   if (o.transparent) { m.transparent = true; m.opacity = o.opacity ?? 0.4; m.depthWrite = false; }
   if (o.emissive) { m.emissive = new THREE.Color(o.emissive); m.emissiveIntensity = o.emissiveIntensity ?? 0.6; }
   if (o.side) m.side = o.side;
@@ -129,7 +140,8 @@ const lineMat = new THREE.LineBasicMaterial({color: INK});
 
 // Wrap a geometry in a group: toon mesh + inverted hull + edge lines.
 export function ink(geom, mat, o = {}) {
-  const {hull = 0.022, edges = true, edgeAngle = 35, cast = true, receive = true} = o;
+  let {hull = 0.022, edges = true, edgeAngle = 35, cast = true, receive = true} = o;
+  if (STYLE.realistic && !o.keepInk) { hull = 0; edges = false; }
   const g = new THREE.Group();
   const m = new THREE.Mesh(geom, mat);
   m.castShadow = cast; m.receiveShadow = receive;
@@ -222,7 +234,7 @@ export function sign(text, w, h, o = {}) {
   const g = new THREE.Group();
   const m = new THREE.Mesh(geo, mats); m.castShadow = true; m.receiveShadow = true;
   g.add(m);
-  const hull = new THREE.Mesh(geo, hullMat); hull.scale.set(1 + 0.05 / w, 1 + 0.05 / h, 1.4); g.add(hull);
+  if (!STYLE.realistic) { const hull = new THREE.Mesh(geo, hullMat); hull.scale.set(1 + 0.05 / w, 1 + 0.05 / h, 1.4); g.add(hull); }
   return g;
 }
 

@@ -69,7 +69,7 @@ function partMesh(tex, wM, hM, castsShadow = true) {
 }
 
 // ---------- head base: skin, cheeks, hair, hat ----------
-function drawHeadBase(o, r) {
+function drawHeadBase(o, r, view = 'front') {
   const c = canvas(HEAD_W * PX, HEAD_H * PX), x = c.getContext('2d');
   const cx = HEAD_W / 2 * PX, cy = HEAD_CY * PX, R = HEAD_R * PX;
   const RX = R * headRX(), RY = R * headRY();
@@ -85,7 +85,14 @@ function drawHeadBase(o, r) {
   const fr = [];
   const hx = (a, k = 1.02) => cx + Math.cos(a) * RX * k * (D.head === 'egg' ? 1 - 0.09 * Math.sin(a) : 1), hy = (a, k = 1.02) => cy + Math.sin(a) * RY * k;
   const hairStyle = o.hairStyle || D.hair;
-  if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
+  if (view === 'side') { // profile facing right: hair over the crown and the back of the head
+    for (let i = 0; i <= 40; i++) { const a = Math.PI * (0.9 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
+    fr.push([cx + RX * 0.42, cy - RY * 0.58]); fr.push([cx + RX * 0.05, cy - RY * 0.5]); fr.push([cx - RX * 0.3, cy - RY * 0.2]);
+    fr.push([cx - RX * 0.55, cy + RY * 0.12]); fr.push([cx - RX * 0.8, cy + RY * 0.3]);
+  } else if (view === 'back') { // seen from behind: hair covers most of the head
+    for (let i = 0; i <= 48; i++) { const a = Math.PI * (0.88 + 1.24 * i / 48); fr.push([hx(a), hy(a)]); }
+    for (let i = 0; i <= 12; i++) { const t = i / 12; fr.push([cx + RX * (0.85 - 1.7 * t), cy + RY * (0.32 + Math.sin(t * Math.PI * 3) * 0.05)]); }
+  } else if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.62, cy - RY * 0.66]);
     fr.push([cx + RX * 0.2, cy - RY * 0.62]); fr.push([cx - RX * 0.3, cy - RY * 0.5]); fr.push([cx - RX * 0.7, cy - RY * 0.3]); fr.push([cx - RX * 0.95, cy - RY * 0.12]);
@@ -99,6 +106,9 @@ function drawHeadBase(o, r) {
       fr.push([xx, cy - RY * 0.42 + Math.abs(Math.sin(t * Math.PI * 4)) * R * 0.2]);
     }
   }
+  if (view === 'threeq') for (const q of fr) q[0] -= R * 0.12; // hair parting shifts away from the face
+  if (view === 'side') inkShape(x, ellipse(cx - RX * 0.08, cy + RY * 0.1, R * 0.12, R * 0.17, 24), SKIN, r, 7); // ear
+  if (view === 'back') for (const sx of [-1, 1]) inkShape(x, ellipse(cx + sx * RX * 0.97, cy + RY * 0.08, R * 0.09, R * 0.15, 24), SKIN, r, 7);
   inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
   if (D.shading && (!o.hat || o.hat === 'none')) { // glossy hair streak
     x.save(); x.strokeStyle = 'rgba(255,255,255,0.32)'; x.lineCap = 'round'; x.lineWidth = R * 0.07;
@@ -156,9 +166,13 @@ export const EXPRESSIONS = {
   scheming: {eyes: 'calm', brows: 'skeptic', mouth: 'teethSmirk'},
 };
 
-function drawFace(o, f, r) {
+function drawFace(o, f, r, view = 'front') {
   const c = canvas(HEAD_W * PX, HEAD_H * PX), x = c.getContext('2d');
   const cx = HEAD_W / 2 * PX, cy = HEAD_CY * PX, R = HEAD_R * PX;
+  if (view === 'back') return texFrom(c);
+  // eye centres and mouth placement per view (three-quarter and profile face to the right)
+  const EYES = view === 'side' ? [[1, cx + R * 0.52]] : view === 'threeq' ? [[-1, cx - R * 0.06], [1, cx + R * 0.5]] : [[-1, cx - R * 0.36], [1, cx + R * 0.36]];
+  const MX = view === 'side' ? cx + R * 0.62 : view === 'threeq' ? cx + R * 0.24 : cx, MS = view === 'side' ? 0.6 : view === 'threeq' ? 0.85 : 1;
   x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = INK;
   const lid = (ex, ey, s, kind) => { // skin cover over the top of an eye, inner = towards the nose
     const w = R * 0.15, top = ey - R * 0.2;
@@ -171,8 +185,8 @@ function drawFace(o, f, r) {
     x.fillStyle = SKIN; x.beginPath(); x.moveTo(xi, top); x.lineTo(xo, top); x.lineTo(xo, yo); x.lineTo(xi, yi); x.closePath(); x.fill();
     x.lineWidth = 8; x.beginPath(); x.moveTo(xi, yi); x.lineTo(xo, yo); x.stroke();
   };
-  for (const s of [-1, 1]) {
-    const ex = cx + s * R * 0.36, ey = cy + R * 0.05;
+  for (const [s, ex0] of EYES) {
+    const ex = ex0, ey = cy + R * 0.05;
     const dot = (rx, ry) => { x.fillStyle = INK; x.beginPath(); x.ellipse(ex, ey, rx, ry, 0, 0, 7); x.fill(); x.fillStyle = '#fff'; x.beginPath(); x.arc(ex + R * 0.03, ey - R * 0.02, R * 0.028, 0, 7); x.fill(); };
     switch (f.eyes) {
       case 'open': dot(R * 0.1, R * 0.13); break;
@@ -194,7 +208,8 @@ function drawFace(o, f, r) {
     if (f.brows === 'skeptic') brow(s < 0 ? -R * 0.08 : R * 0.03, s < 0 ? -R * 0.1 : R * 0.03);
   }
   // mouth
-  const my = cy + R * 0.34, mx = cx; x.lineWidth = 7;
+  const my = cy + R * 0.34, mx = MX; x.lineWidth = 7;
+  x.save(); x.translate(mx, my); x.scale(MS, 1); x.translate(-mx, -my);
   const openShape = (w, h, tongue) => {
     x.fillStyle = '#5a2328'; x.beginPath(); x.ellipse(mx, my, w, h, 0, 0, 7); x.fill(); x.lineWidth = 7; x.stroke();
     if (tongue) { x.save(); x.beginPath(); x.ellipse(mx, my, w, h, 0, 0, 7); x.clip(); x.fillStyle = '#e8737a'; x.beginPath(); x.ellipse(mx, my + h * 0.8, w * 0.7, h * 0.55, 0, 0, 7); x.fill(); x.restore(); }
@@ -245,10 +260,11 @@ function drawFace(o, f, r) {
     case 'smirk': x.beginPath(); x.moveTo(mx - R * 0.1, my + R * 0.01); x.quadraticCurveTo(mx + R * 0.04, my + R * 0.06, mx + R * 0.14, my - R * 0.05); x.stroke(); break;
     default: x.beginPath(); x.arc(mx, my - R * 0.02, R * 0.12, 0.25 * Math.PI, 0.75 * Math.PI); x.stroke();
   }
+  x.restore();
   if (o.glasses) {
     x.lineWidth = 7;
-    for (const s of [-1, 1]) { x.beginPath(); x.arc(cx + s * R * 0.36, cy + R * 0.04, R * 0.2, 0, 7); x.stroke(); }
-    x.beginPath(); x.moveTo(cx - R * 0.16, cy); x.lineTo(cx + R * 0.16, cy); x.stroke();
+    for (const [, ex] of EYES) { x.beginPath(); x.arc(ex, cy + R * 0.04, R * 0.2, 0, 7); x.stroke(); }
+    if (EYES.length > 1) { x.beginPath(); x.moveTo(EYES[0][1] + R * 0.2, cy); x.lineTo(EYES[1][1] - R * 0.2, cy); x.stroke(); }
   }
   // extras
   for (const e of (f.extras || []).filter((e) => D.cheeks !== false || (e !== 'blush' && e !== 'anger'))) {
@@ -274,10 +290,11 @@ function drawFace(o, f, r) {
   return texFrom(c);
 }
 
-function drawTorso(o, r) {
+function drawTorso(o, r, view = 'front') {
   const TX = D.torsoExtra || 0;
   const W = 0.66, H = 0.74 + TX, c = canvas(W * PX, H * PX), x = c.getContext('2d');
-  const cx = W / 2 * PX, top = 0.06 * PX, bot = (0.68 + TX) * PX, tw = 0.15 * PX, bw = 0.25 * PX;
+  const wf = view === 'side' ? 0.7 : view === 'threeq' ? 0.9 : 1, dx = view === 'threeq' ? 0.25 * PX * 0.3 : 0;
+  const cx = W / 2 * PX, top = 0.06 * PX, bot = (0.68 + TX) * PX, tw = 0.15 * PX * wf, bw = 0.25 * PX * wf;
   const hw = (t) => {
     let w = tw + (bw - tw) * Math.pow(Math.sin(Math.min(1, t / 0.82) * Math.PI / 2), 1.3);
     if (t > 0.82) w = bw * Math.sqrt(Math.max(0, 1 - Math.pow((t - 0.82) / 0.18, 2)));
@@ -292,11 +309,19 @@ function drawTorso(o, r) {
   x.fillStyle = o.lower; x.fillRect(0, top + (bot - top) * 0.64, W * PX, H * PX);
   x.strokeStyle = INK; x.lineWidth = 6; x.beginPath(); x.moveTo(0, top + (bot - top) * 0.64); x.lineTo(W * PX, top + (bot - top) * 0.64); x.stroke();
   x.restore();
-  const py = top + (bot - top) * 0.42, px = cx - bw * 0.58;
-  inkShape(x, wobble([[px - 18, py], [px + 18, py], [px + 16, py + 30], [px - 16, py + 30]], r, 2), o.pocket || o.lower, r, 5);
-  inkShape(x, [[cx, top + 52], [cx - 36, top + 6], [cx - 6, top + 2]], '#fffdf6', r, 5);
-  inkShape(x, [[cx, top + 52], [cx + 36, top + 6], [cx + 6, top + 2]], '#fffdf6', r, 5);
-  inkShape(x, [[cx, top + 40], [cx + 11, top + 58], [cx + 7, top + 140], [cx, top + 156], [cx - 7, top + 140], [cx - 11, top + 58]], o.tie, r, 5);
+  const py = top + (bot - top) * 0.42, px = cx - bw * 0.58 + dx;
+  if (view === 'front' || view === 'threeq') {
+    const k = cx + dx;
+    inkShape(x, wobble([[px - 18, py], [px + 18, py], [px + 16, py + 30], [px - 16, py + 30]], r, 2), o.pocket || o.lower, r, 5);
+    inkShape(x, [[k, top + 52], [k - 36 * wf, top + 6], [k - 6, top + 2]], '#fffdf6', r, 5);
+    inkShape(x, [[k, top + 52], [k + 36 * wf, top + 6], [k + 6, top + 2]], '#fffdf6', r, 5);
+    inkShape(x, [[k, top + 40], [k + 11, top + 58], [k + 7, top + 140], [k, top + 156], [k - 7, top + 140], [k - 11, top + 58]], o.tie, r, 5);
+  } else if (view === 'side') { // collar point and a sliver of tie at the front edge
+    inkShape(x, [[cx + tw * 0.9, top + 44], [cx + tw * 0.2, top + 6], [cx + tw * 0.95, top + 4]], '#fffdf6', r, 5);
+    inkShape(x, [[cx + tw * 1.0, top + 44], [cx + tw * 1.2, top + 60], [cx + bw * 0.95, top + 140], [cx + bw * 0.82, top + 140]], o.tie, r, 4);
+  } else { // back: seam
+    x.strokeStyle = 'rgba(53,31,34,0.35)'; x.lineWidth = 4; x.beginPath(); x.moveTo(cx, top + 20); x.lineTo(cx, top + (bot - top) * 0.62); x.stroke();
+  }
   if (D.shading) {
     x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
     // fabric: fine vertical weave lines
@@ -411,7 +436,9 @@ export function makeChar(name, o = {}) {
   const p = {...PALETTES[name], ...o};
   const r = rng(o.seed || name.length * 17 + 3);
   const g = new THREE.Group();
-  const body = new THREE.Group(); g.add(body);
+  // bill: turns the flat character toward the camera (yaw) and leans it back for high cameras (tilt)
+  const bill = new THREE.Group(); bill.rotation.order = 'YXZ'; g.add(bill);
+  const body = new THREE.Group(); bill.add(body);
   const s = o.scale || 1;
   g.scale.setScalar(s);
 
@@ -423,7 +450,10 @@ export function makeChar(name, o = {}) {
     const l = drawLimb(0.62 + LX, p.lower, 'shoe', r);
     l.mesh.position.set(0, -l.H / 2 + 0.03, 0); piv.add(l.mesh); body.add(piv); legs.push(piv);
   }
+  const seed0 = o.seed || name.length * 17 + 3;
   const torso = drawTorso(p, r);
+  const torsoTex = {front: torso.mesh.material.map};
+  const torsoFor = (v) => { if (!torsoTex[v]) torsoTex[v] = drawTorso(p, rng(seed0 + 5), v).mesh.material.map; return torsoTex[v]; };
   torso.mesh.position.set(0, 0.53 + LX + torso.H / 2, 0); body.add(torso.mesh);
   const arms = [];
   for (const sx of [-1, 1]) {
@@ -440,11 +470,14 @@ export function makeChar(name, o = {}) {
   const headPiv = new THREE.Group(); headPiv.position.set(0, neckY, 0.03); body.add(headPiv);
   const headY = (1.42 - 1.12) + (HEAD_H / 2 - (1 - HEAD_CY)); // head sits on the neck, so a taller body lifts it
   const head = partMesh(drawHeadBase(p, r), HEAD_W, HEAD_H); head.position.set(0, headY, 0); headPiv.add(head);
+  const headTex = {front: head.material.map};
+  const headFor = (v) => { if (!headTex[v]) headTex[v] = drawHeadBase(p, rng(seed0 + 9), v); return headTex[v]; };
+  const setMap = (m, tex) => { if (m.material.map === tex) return; m.material.map = tex; if (m.customDepthMaterial) { m.customDepthMaterial.map = tex; m.customDepthMaterial.needsUpdate = true; } };
   const face = partMesh(null, HEAD_W, HEAD_H, false); face.position.set(0, headY, 0.004); headPiv.add(face);
   const faceCache = new Map();
-  const faceTex = (f) => {
-    const key = `${f.eyes}|${f.brows}|${f.mouth}|${(f.extras || []).join(',')}`;
-    if (!faceCache.has(key)) faceCache.set(key, drawFace(p, f, rng(7)));
+  const faceTex = (f, v = 'front') => {
+    const key = `${v}|${f.eyes}|${f.brows}|${f.mouth}|${(f.extras || []).join(',')}`;
+    if (!faceCache.has(key)) faceCache.set(key, drawFace(p, f, rng(7), v));
     return faceCache.get(key);
   };
   face.material.map = faceTex(EXPRESSIONS.neutral);
@@ -472,10 +505,34 @@ export function makeChar(name, o = {}) {
     for (const c of cues) if (c.expr && c.t <= t) { e = c.expr; te = c.t; }
     return {e, te};
   }
+  // Locomotion: cues {t, move: [x, z], dur, gait: 'walk' | 'run'} walk the character to a point (it turns to face
+  // where it goes); cues {t, face: angleRad | 'camera'} turn it in place. Heading 0 = facing +z.
+  let p0 = null;
+  function locomotion(t) {
+    const moves = cues.filter((c) => c.move);
+    let heading = null, moving = null;
+    for (const c of cues) if (c.face !== undefined && c.t <= t) heading = c.face;
+    if (!moves.length) return {heading, moving};
+    if (!p0) p0 = g.position.clone();
+    let px = p0.x, pz = p0.z, lastT = -1e9;
+    for (const c of moves) {
+      if (t < c.t) break;
+      const dxm = c.move[0] - px, dzm = c.move[1] - pz, dist = Math.hypot(dxm, dzm), dur = c.dur || Math.max(0.4, dist / (c.gait === 'run' ? 3.2 : 1.3));
+      const u = cl((t - c.t) / dur);
+      const k = u < 0.08 ? u * u / 0.16 : u > 0.92 ? 1 - (1 - u) * (1 - u) / 0.16 : (u - 0.04) / 0.92; // ease in/out of the gait
+      if (c.t >= lastT) { const hd = Math.atan2(dxm, dzm); if (dist > 0.01) heading = hd; }
+      if (u < 1) { moving = {gait: c.gait || 'walk', speed: dist / dur}; px += dxm * k; pz += dzm * k; break; }
+      px = c.move[0]; pz = c.move[1]; lastT = c.t + dur;
+      for (const f of cues) if (f.face !== undefined && f.t <= t && f.t >= lastT - 0.01) heading = f.face;
+    }
+    g.position.x = px; g.position.z = pz;
+    return {heading, moving};
+  }
   function activeActions(t) { return cues.filter((c) => c.action && t >= c.t && t <= c.t + (c.dur || 0.6)); }
 
   function update(t, camPos) {
     const P = poseAt(t);
+    const loco = locomotion(t);
     const {e, te} = exprAt(t);
     const acts = activeActions(t);
     let walk = state.walk, shake = state.shake, nodAmt = 0.04 * state.nod, sy = 1, sx = 1, lift = 0, tremble = 0, slump = 0, lean = 0, talk = false, spin = 0;
@@ -504,17 +561,34 @@ export function makeChar(name, o = {}) {
     const blinkPhase = (t + phase) % 3.7;
     if (blinkPhase < 0.12 && f.eyes !== 'closed' && f.eyes !== 'wide' && sinceE > 0.3) f.eyes = 'blink';
     if (talk) { const k = Math.floor((t + phase) * 9) % 4; f.mouth = k === 0 ? 'talkB' : k === 2 ? 'talkA' : k === 1 ? 'talkB' : f.mouth === 'smile' ? 'talkA' : f.mouth; }
-    face.material.map = faceTex(f);
     // expression change "take": quick squash pop on the head
     const take = sinceE >= 0 && sinceE < 0.25 ? Math.sin(sinceE / 0.25 * Math.PI) : 0;
     headPiv.scale.set(1 + 0.08 * take, 1 + 0.12 * take, 1);
 
-    const walkF = walk > 1 ? 11 : 7;
+    if (loco.moving) walk = loco.moving.gait === 'run' ? 1.8 : 1;
+    const walkF = loco.moving ? Math.max(6, Math.min(16, loco.moving.speed * (loco.moving.gait === 'run' ? 3.6 : 5.5))) : walk > 1 ? 11 : 7;
+    // which drawing to show: front / three-quarter / side / back, from the camera angle relative to the heading
+    let view = 'front', mirror = 1, yawB = 0, tilt = 0;
+    if (camPos) {
+      g.getWorldPosition(tmp);
+      const th = Math.atan2(camPos.x - tmp.x, camPos.z - tmp.z);
+      const hd = loco.heading === 'camera' ? th : loco.heading ?? state.yaw0;
+      let a = th - hd; a = Math.atan2(Math.sin(a), Math.cos(a));
+      const aa = Math.abs(a);
+      view = aa < 0.42 ? 'front' : aa < 1.15 ? 'threeq' : aa < 2.3 ? 'side' : 'back';
+      mirror = (view === 'threeq' || view === 'side') && a > 0 ? -1 : 1;
+      yawB = th - g.rotation.y;
+      const hor = Math.hypot(camPos.x - tmp.x, camPos.z - tmp.z), elev = Math.atan2(camPos.y - tmp.y - 1.2 * s, hor);
+      tilt = Math.max(0, Math.min(1.1, (elev - 0.5) * 1.2));
+    }
+    const side = view === 'side', tq = view === 'threeq';
+    face.material.map = faceTex(f, view);
+    setMap(head, headFor(view)); setMap(torso.mesh, torsoFor(view));
     const bob = Math.sin(t * 2.2 + phase) * 0.012;
     body.position.y = bob + Math.abs(Math.sin(t * walkF)) * 0.04 * Math.min(1, walk) + lift;
     body.position.x = tremble ? Math.sin(t * 60) * 0.012 : 0;
-    body.scale.set(sx, sy * (1 - 0.06 * slump), 1);
-    body.rotation.z = lean + (walk > 1 ? 0 : 0);
+    body.scale.set(sx * mirror, sy * (1 - 0.06 * slump), 1);
+    body.rotation.z = (lean + (side && walk > 1 ? -0.16 : side && walk ? -0.05 : 0)) * mirror;
     const nod = acts.some((a) => a.action === 'nod');
     headPiv.rotation.x = 0;
     headPiv.rotation.z = Math.sin(t * 1.3 + phase) * nodAmt;
@@ -522,27 +596,31 @@ export function makeChar(name, o = {}) {
     headPiv.position.x = Math.sin(t * 16) * 0.035 * shake;
     headPiv.rotation.z += Math.sin(t * 16) * 0.14 * shake + slump * 0.12;
     const sw = Math.sin(t * walkF) * 0.45 * Math.min(1.3, walk);
-    legs[0].rotation.x = sw; legs[1].rotation.x = -sw;
-    legs[0].rotation.z = sw * 0.33; legs[1].rotation.z = -sw * 0.33;
+    legs[0].rotation.x = side ? 0 : sw; legs[1].rotation.x = side ? 0 : -sw;
+    const stride = side ? 1.25 : tq ? 0.75 : 0.33;
+    legs[0].rotation.z = sw * stride; legs[1].rotation.z = -sw * stride;
+    legs[0].position.set(side ? -0.01 : tq ? -0.05 : -0.075, hipY, side ? -0.03 : -0.02); legs[1].position.set(side ? 0.01 : tq ? 0.05 : 0.075, hipY, side ? 0.0 : -0.02);
     if (lift > 0.05) { legs[0].rotation.z = -0.25; legs[1].rotation.z = 0.25; }
     const swayL = Math.sin(t * 1.7 + phase) * 0.05, swayR = Math.sin(t * 1.7 + phase + 1) * 0.05;
     const wig = Math.sin(t * 12) * 0.35;
     const walkArm = walk ? Math.sin(t * walkF) * 0.35 * Math.min(1.3, walk) : 0;
     const [L, R] = arms;
+    L.up.position.set(side ? -0.01 : tq ? -0.12 : -0.165, shY, side ? -0.06 : tq ? -0.04 : 0.02);
+    R.up.position.set(side ? 0.02 : tq ? 0.15 : 0.165, shY, side ? 0.05 : 0.02);
     const isDefault = (P.L[0] === 0.12 && P.L[1] === 0);
     L.up.rotation.z = -(P.L[0] + swayL + state.armL + (P.wiggle === 'both' ? wig * 0.5 : 0) + (isDefault ? walkArm : 0));
     L.fore.rotation.z = -(P.L[1]);
     R.up.rotation.z = (P.R[0] + swayR + state.armR + (P.wiggle ? wig * 0.5 : 0) - (P.R[0] === 0.12 ? walkArm : 0));
     R.fore.rotation.z = P.R[1] + (P.wiggle ? wig : 0);
+    if (side) { // profile: both arms swing in the picture plane, forward = +x (opposite phases while walking)
+      L.up.rotation.z = P.L[0] * 0.6 + swayL - (P.L[0] < 0.3 ? walkArm * 1.6 : 0); L.fore.rotation.z = Math.abs(P.L[1]) * 0.6 + (walk ? 0.35 : 0);
+      R.up.rotation.z = P.R[0] * 0.6 + swayR + (P.R[0] < 0.3 ? walkArm * 1.6 : 0); R.fore.rotation.z = Math.abs(P.R[1]) * 0.6 + (walk ? 0.35 : 0);
+    }
     if (slump) { L.up.rotation.z *= 1 - slump * 0.8; R.up.rotation.z *= 1 - slump * 0.8; }
 
-    if (camPos) {
-      g.getWorldPosition(tmp);
-      let a = Math.atan2(camPos.x - tmp.x, camPos.z - tmp.z) - state.yaw0;
-      a = Math.atan2(Math.sin(a), Math.cos(a));
-      body.rotation.y = state.yaw0 - g.rotation.y + Math.max(-0.7, Math.min(0.7, a)) + spin;
-    }
+    bill.rotation.set(-tilt, yawB + spin, 0);
+    body.rotation.y = 0;
   }
-  const api = {group: g, state, act, update, arms, hand: (i) => arms[i].hand, headPiv};
+  const api = {group: g, state, act, update, arms, hand: (i) => arms[i].hand, headPiv, bill};
   return api;
 }

@@ -7,7 +7,7 @@ description: "Make short vertical 3D-world story animations with expressive 2D c
 
 This skill makes a 40-65 s vertical (9:16, 1080x1920) story video in one fixed house style: every location is a real 3D world (painted flat-colour models with ink outlines), expressive 2D cartoon characters act inside it, and the camera always moves. It is all code (Remotion + three.js), so no image or model files are needed.
 
-The package ships a working starter project (`starter/`) built for "Apa yang terjadi kalau Bumi tiba-tiba berhenti berputar? / What if Earth suddenly stopped spinning?" (Indonesian + English) in the current house style. New videos reuse its kit and replace only the story files. `example/bumi-berhenti-berputar/style_reference.png` shows the approved character look; `example/sejarah-uang/` is the older first video (its story source is in `source/`).
+The package ships a working starter project (`starter/`) built for "Otak, si pencuri energi / Your brain, the energy thief" (Indonesian + English) in the current house style, plus `DemoGerak` (src/Demo.jsx, a 12 s demo of walking, running, turning, every view angle and the realistic world). New videos reuse its kit and replace only the story files. `example/bumi-berhenti-berputar/style_reference.png` shows the approved character look; `example/sejarah-uang/` is the older first video (its story source is in `source/`).
 
 ## Hard rules
 - Never ask the user for reference videos, examples or a style. The style, acting rules and rulebook are in this file.
@@ -41,7 +41,8 @@ animated-3d-story-video/
     public/sfx/             sound-effect library + README (what each sound is for)
     public/vo/              voiceover_<lang>.wav (user audio)
     tools/                  align.py, gaps.py, stills.sh, render.sh, contact_sheet.py, vo_pdf.py
-  example/bumi-berhenti-berputar/  current worked example (story of the starter) + style_reference.png (approved look)
+  example/otak-pencuri-energi/     latest worked example (story of the starter)
+  example/bumi-berhenti-berputar/  worked example + style_reference.png (approved character look)
   example/sejarah-uang/     first video: script.md, camera_plan.md, narration_<lang>.txt, judul.md, source/ (old story files)
 ```
 
@@ -93,6 +94,16 @@ General traits to follow. Never copy another channel's characters, costumes, log
 - Labels live inside the world (painted signs, banners on two poles, names on sacks/crates, chalkboards, plaques), in the language of each version. The only screen text is the word-by-word caption track (no floating pills, titles or info boxes).
 - No flat sky or ground strips, no side-on cardboard buildings. Cuts: 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
 
+## World look: realistic (user rule)
+Backgrounds and props are realistic 3D, not flat toon: `STYLE.realistic = true` in `kit.js` (default) makes `toon()` return physically based materials (roughness, optional metalness via `{rough, metal}`, bump from the painted texture, fine micro-texture), removes ink outlines from props and signs (`keepInk: true` to keep one), and the renderer adds image-based light (RoomEnvironment, `environmentIntensity` 0.45), neutral tone mapping and cloudy skies on daytime presets (`clouds` in `LOOK_PRESETS`, 0 indoors and at night). Build props with real depth and detail (bevels, frames, legs, trims, cobbles, planks, grass grain), give metal parts `metal: 0.6, rough: 0.4`, glass transparency, wood `planks`. Characters stay hand-drawn 2D (the contrast is the style, like the reference video). `setRenderStyle('toon')` brings back the old flat look only if the user asks.
+
+## Character movement and view angles (user rule)
+Characters must move naturally and be seen from many angles.
+- **Locomotion cues** in `act()`: `{t, move: [x, z], dur?, gait: 'walk' | 'run'}` walks or runs the character to a point in location coordinates (eases in/out, legs stride, arms swing, body leans when running, speed sets the cadence; `dur` defaults from the distance). `{t, face: angleRad | 'camera'}` turns in place (heading 0 = facing +z, the default camera side). Chain several moves for paths; combine with expressions/poses/actions in the same cue. Do not move a character with `g.position` by hand when it walks — use `move`.
+- **Automatic view angles:** each character always turns its drawing toward the camera and picks the drawing from the camera angle relative to its heading: `front` (|a| < 24°), `threeq` (three-quarter, < 66°), `side` (profile, one eye, ear, hair over the back, arms and legs swing in the picture plane, < 132°), `back` (hair from behind, no face). Left/right are mirrored. High cameras tilt the drawing back so a top view still reads.
+- **Use the angles in the camera plan:** in every video include walking/running beats seen from the side, a character walking toward or away from the camera (front/back), over-the-shoulder shots (back of one character, face of the other), at least one orbit around a character and at least one high/top shot. Turn characters with `face` to talk to each other (profiles) instead of always facing the lens.
+- Check new moves with stills at several times of the move, and `DemoGerak` as the reference.
+
 ## Character look (approved by the user — keep it in every video)
 Learned from the user's reference ("cartoon true story" short with lit 2D characters) and approved step by step. See `example/bumi-berhenti-berputar/style_reference.png`.
 - **Lit, rounded characters, not flat stickers.** Every part (head, hair, hat, torso, limbs) is painted with light from the upper left and a soft core shadow on the lower right (`paintShade`). The head leaves a soft shadow on the chest.
@@ -113,7 +124,7 @@ Base design (never redesign): large round pale head, calm half-lidded eyes, tiny
 Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — expr/pose persist until the next cue; actions run for `dur` seconds.
 - **Expressions** (`EXPRESSIONS`): neutral, happy, laugh, excited, surprised, shocked, annoyed, angry, furious, sad, cry, worried, confused, tired, smug, thinking, proud, determined, disgusted, plus teeth-showing faces: grimace (scared, clenched teeth), nervous (small nervous teeth grin), toothy (big laugh with upper teeth), cheesy (wide-eyed toothy smile), scream (open mouth, both rows of teeth), gritted (angry or freezing, teeth clenched), scheming (sly teeth smirk). Use the teeth faces often for strong reactions. Anger and annoyance (annoyed, angry, furious, gritted, irritated) carry the manga anger vein: four bulging red arcs with an ink outline on the forehead, plus thick V brows; chatter = teeth clenched from cold, no vein. Built from eyes (calm/open/wide/closed/blink/angry/sad/tired/squint), brows, mouth (smile/grin/laugh/open/shout/frown/flat/wavy/smirk/talk/teeth/teethSmall/teethSmirk/toothy/scream) and extras (sweat, tear, vein, shock lines, question mark, sparkle, gloom; blush and the old ring anger mark are switched off by `cheeks: false`). Automatic blinking; a head "take" pop on every expression change.
 - **Poses** (`POSES`): idle, limp, wave, point, pointUp, present, presentBoth, shrug, hips, armsUp, cheer, facepalm, think, chin, cross, headHold, carry, carryBoth, hold, give, stop, hammerUp, hammerDown, tap, beg. Pose changes ease with overshoot (0.32 s).
-- **Actions**: jump (anticipation squash → stretch → landing squash), hop, shake (head no), nod, tremble, slump, lean, talk (mouth flaps), walk, run, spinIn, popIn.
+- **Actions**: jump (anticipation squash → stretch → landing squash), hop, shake (head no), nod, tremble, slump, lean, talk (mouth flaps), walk, run (in place), spinIn, popIn. For walking or running somewhere use `move` cues (see Character movement).
 - Acting rules:
   - Every character on screen reacts at least once per shot, timed to the words (use `EV` times; react 0.1-0.2 s after the word).
   - "But…" / refusal → annoyed or angry + cross/hips + head shake (and the denied-buzz SFX); the listener answers with shocked + tremble.

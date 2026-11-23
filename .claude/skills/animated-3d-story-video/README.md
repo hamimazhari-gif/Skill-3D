@@ -13,7 +13,7 @@ lalu mengirim hasilnya.
 
 Isi:
 - `SKILL.md` — aturan gaya, akting, alur kerja (dibaca Claude).
-- `starter/` — proyek Remotion + three.js lengkap (kit 3D, karakter ekspresif, efek visual, props, alat bantu, sound effect), sudah memakai gaya terbaru (video "Bumi berhenti berputar").
+- `starter/` — proyek Remotion + three.js lengkap (kit 3D, karakter ekspresif, efek visual, props, alat bantu, sound effect), sudah memakai gaya terbaru (video "Otak, si pencuri energi" + demo gerakan).
 - `example/bumi-berhenti-berputar/` — contoh terbaru + `style_reference.png` (gaya tokoh yang disetujui).
 - `example/sejarah-uang/` — video pertama: naskah, rencana kamera, narasi, judul, thumbnail, PDF.
 
@@ -26,3 +26,7 @@ Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Banyak ekspresi bergigi (meringis, menjerit, tertawa lebar, menggertakkan gigi).
 - Badan panjang dengan kaki kurus panjang.
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
+- Tokoh bergerak natural: berjalan, berlari, berbalik (`move`, `face`), dengan langkah kaki dan ayunan tangan.
+- Tokoh punya banyak sudut pandang otomatis: depan, serong, samping (kiri/kanan), belakang, dan dari atas.
+- Latar dan benda realistik: material bertekstur yang bereaksi pada cahaya, pantulan lingkungan, langit berawan, tanpa garis tinta di benda.
+- Contoh gerakan & sudut pandang: komposisi `DemoGerak` (12 detik).
