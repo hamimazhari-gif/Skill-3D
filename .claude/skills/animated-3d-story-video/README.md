@@ -26,3 +26,5 @@ Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Banyak ekspresi bergigi (meringis, menjerit, tertawa lebar, menggertakkan gigi).
 - Badan panjang dengan kaki kurus panjang.
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
+
+- Desain karakter tiap video tetap berbeda (rambut, alis, kulit, badan, kaki), tetapi bentuk kepala/muka selalu bulat seperti video 7 hari tanpa tidur.

@@ -13,9 +13,9 @@ const PX = 420; // canvas pixels per metre
 export const DESIGNS = {
   // House style for every design: painted shading + cloth sheen + dark rims, cast shadows, no red cheeks, long body.
   classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0.02, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
-  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
-  bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
-  pill: {head: 'pill', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  egg: {head: 'round', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
+  bean: {head: 'round', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
 export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
