@@ -10,87 +10,89 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // 1 home: energy drains, a brain steals it from behind the sofa
-  {shot: 1, loc: 'home', move: 'push in on the tired hero and the battery', keys: [
-    {at: 'start', pos: [1.5, 2.0, 2.0], look: [-0.3, 1.5, -4.5]},
-    {at: 'end', pos: [0.7, 1.7, 0.4], look: [-0.4, 1.4, -4.5]}]},
-  {shot: 1, from: 'mencuri', loc: 'home', move: 'over the hero to the thief', keys: [
-    {at: 'start', pos: [-1.0, 1.5, -1.0], look: [-2.3, 1.1, -5.4]},
-    {at: 'end', pos: [-1.2, 1.45, -1.8], look: [-2.35, 1.1, -5.4]}]},
-  // 2 lab: 2% vs 20%, then the reveal
-  {shot: 2, loc: 'lab', move: 'push', keys: [
-    {at: 'start', pos: [0.3, 1.95, 2.2], look: [0, 1.6, -4.6]},
-    {at: 'end', pos: [0.1, 1.8, 0.9], look: [0, 1.6, -4.6]}]},
-  {shot: 2, from: 'puluh', loc: 'lab', move: 'close on the pie', keys: [
-    {at: 'start', pos: [0.9, 1.75, -1.6], look: [1.45, 1.6, -4.4]},
-    {at: 'end', pos: [1.0, 1.7, -1.95], look: [1.45, 1.6, -4.4]}]},
-  {shot: 2, from: 'otakmu', loc: 'lab', move: 'low push on the revealed brain', keys: [
-    {at: 'start', pos: [0.4, 1.25, -1.9], look: [0.1, 1.45, -3.9]},
-    {at: 'end', pos: [0.3, 1.3, -2.35], look: [0.1, 1.45, -3.9]}]},
-  // 3 power room: brain lights the bulb, all day long
-  {shot: 3, loc: 'power', move: 'push', keys: [
-    {at: 'start', pos: [0.2, 1.8, 1.6], look: [0, 1.3, -4.0]},
-    {at: 'end', pos: [0.1, 1.65, 0.5], look: [0, 1.3, -4.0]}]},
-  {shot: 3, from: 'lampu', loc: 'power', move: 'close on the bulb', keys: [
-    {at: 'start', pos: [0.9, 1.6, -1.5], look: [1.35, 1.6, -3.7]},
-    {at: 'end', pos: [0.95, 1.6, -1.85], look: [1.35, 1.6, -3.7]}]},
-  {shot: 3, from: 'sepanjang', loc: 'power', move: 'wide with the window', keys: [
-    {at: 'start', pos: [0.6, 1.75, 0.6], look: [-0.3, 1.8, -4.6]},
-    {at: 'end', pos: [0.2, 1.7, 0.1], look: [-0.3, 1.8, -4.6]}]},
-  // 4 neurons
-  {shot: 4, loc: 'neuro', move: 'close-up question', keys: [
-    {at: 'start', pos: [-0.6, 1.5, -0.4], look: [-1.1, 1.45, -2.3]},
-    {at: 'end', pos: [-0.7, 1.5, -0.65], look: [-1.1, 1.45, -2.3]}]},
-  {shot: 4, from: 'miliar', loc: 'neuro', lift: false, move: 'crane up into the network', keys: [
-    {at: 'start', pos: [0.2, 1.9, 2.4], look: [0, 2.7, -5.0]},
-    {at: 'end', pos: [0, 2.5, 1.4], look: [0, 3.0, -5.5]}]},
-  {shot: 4, from: 'tidur', loc: 'neuro', move: 'sleeping under firing neurons', keys: [
-    {at: 'start', pos: [1.6, 1.8, -0.6], look: [1.0, 1.5, -3.8]},
-    {at: 'end', pos: [1.5, 1.7, -1.0], look: [1.0, 1.5, -3.8]}]},
-  // 5 study
-  {shot: 5, loc: 'study', move: 'push to the plot twist', keys: [
-    {at: 'start', pos: [0.6, 1.8, 1.2], look: [-0.3, 1.5, -3.6]},
-    {at: 'end', pos: [0.4, 1.7, 0.4], look: [-0.3, 1.5, -3.6]}]},
-  {shot: 5, from: 'belajar', loc: 'study', move: 'close-up studying hard', keys: [
-    {at: 'start', pos: [0.1, 1.5, -1.1], look: [-0.4, 1.4, -3.2]},
-    {at: 'end', pos: [0.0, 1.5, -1.35], look: [-0.4, 1.4, -3.2]}]},
-  {shot: 5, from: 'kurus', loc: 'study', move: 'on the scale', keys: [
-    {at: 'start', pos: [2.2, 1.4, 0.4], look: [1.45, 1.0, -2.3]},
-    {at: 'end', pos: [2.1, 1.45, 0.1], look: [1.45, 1.05, -2.3]}]},
-  // 6 lab: where the energy goes
-  {shot: 6, loc: 'lab', move: 'close on the pie', keys: [
-    {at: 'start', pos: [1.0, 1.85, -1.0], look: [1.55, 1.4, -4.4]},
-    {at: 'end', pos: [1.05, 1.8, -1.4], look: [1.55, 1.4, -4.4]}]},
-  {shot: 6, from: 'sebagian', loc: 'lab', move: 'wide: hero, brain and pie', keys: [
-    {at: 'start', pos: [0.2, 1.85, 1.0], look: [0.4, 1.5, -4.3]},
-    {at: 'end', pos: [0.1, 1.75, 0.3], look: [0.4, 1.5, -4.3]}]},
-  // 7 playroom
-  {shot: 7, loc: 'kids', lift: false, move: 'push on the kid', keys: [
-    {at: 'start', pos: [0.4, 1.6, 1.2], look: [0, 1.0, -3.2]},
-    {at: 'end', pos: [0.3, 1.45, 0.2], look: [0, 1.0, -3.2]}]},
-  {shot: 7, from: 'lima', loc: 'kids', lift: false, move: 'low close on the kid', keys: [
-    {at: 'start', pos: [0.35, 1.35, -0.9], look: [0.1, 1.3, -2.6]},
-    {at: 'end', pos: [0.3, 1.35, -1.15], look: [0.1, 1.3, -2.6]}]},
-  {shot: 7, from: 'separuh', loc: 'kids', lift: false, move: 'pie on the wall with the kid', keys: [
-    {at: 'start', pos: [0.3, 1.55, -0.3], look: [1.0, 1.45, -4.6]},
-    {at: 'end', pos: [0.25, 1.5, -0.6], look: [1.0, 1.45, -4.6]}]},
-  {shot: 7, from: 'tumbuh', loc: 'kids', lift: false, move: 'pull back', keys: [
-    {at: 'start', pos: [0.3, 1.3, -0.9], look: [0.1, 1.3, -2.6]},
-    {at: 'end', pos: [0.4, 1.7, 0.8], look: [-0.2, 1.3, -3.4]}]},
-  // 8 home: eat, drink, sleep
-  {shot: 8, loc: 'home', move: 'push at the table', keys: [
-    {at: 'start', pos: [0.6, 1.65, -0.2], look: [-0.5, 1.35, -3.2]},
-    {at: 'end', pos: [0.4, 1.6, -0.7], look: [-0.5, 1.35, -3.2]}]},
-  {shot: 8, from: 'tidur2', loc: 'home', move: 'to the bed', keys: [
-    {at: 'start', pos: [1.5, 1.7, -2.1], look: [2.5, 1.2, -5.0]},
-    {at: 'end', pos: [1.6, 1.65, -2.4], look: [2.5, 1.2, -5.0]}]},
-  // 9 home: closing question
-  {shot: 9, loc: 'home', move: 'push on the hero among organs', keys: [
-    {at: 'start', pos: [0.1, 1.8, 1.0], look: [-0.25, 1.65, -3.0]},
-    {at: 'end', pos: [0.05, 1.75, 0.4], look: [-0.25, 1.65, -3.0]}]},
-  {shot: 9, from: 'komentar', loc: 'home', move: 'pull back to the sign', keys: [
-    {at: 'start', pos: [0.05, 1.8, 0.4], look: [-0.4, 2.1, -5.5]},
-    {at: 'end', pos: [0.3, 1.9, 1.4], look: [-0.5, 2.1, -5.5]}]},
+  // 1 village: the poor people, then the king's idea in the palace
+  {shot: 1, loc: 'square', move: 'crane down onto the poor villagers', keys: [
+    {at: 'start', pos: [0.4, 3.4, 3.4], look: [0, 1.6, -5.0]},
+    {at: 'end', pos: [0.2, 1.8, 1.0], look: [-0.1, 1.35, -3.0]}]},
+  {shot: 1, from: 'raja', loc: 'throne', move: 'push on the king and his idea', keys: [
+    {at: 'start', pos: [0.4, 1.9, 0.4], look: [-0.15, 1.7, -3.6]},
+    {at: 'end', pos: [0.2, 1.8, -1.6], look: [-0.15, 1.75, -3.6]}]},
+  // 2 palace: "Easy!" then the printing press
+  {shot: 2, loc: 'throne', move: 'low close-up on the king', keys: [
+    {at: 'start', pos: [-0.5, 1.35, -1.9], look: [-0.2, 1.5, -3.6]},
+    {at: 'end', pos: [-0.45, 1.4, -2.2], look: [-0.2, 1.5, -3.6]}]},
+  {shot: 2, from: 'cetak', loc: 'throne', move: 'track to the roaring press', keys: [
+    {at: 'start', pos: [0.4, 1.9, 0.6], look: [2.2, 1.1, -3.4]},
+    {at: 'end', pos: [1.0, 1.85, -0.4], look: [2.2, 1.1, -3.4]}]},
+  {shot: 2, from: 'haha', loc: 'throne', move: 'king laughing in the money', keys: [
+    {at: 'start', pos: [0.3, 1.55, -1.5], look: [-0.1, 1.45, -3.6]},
+    {at: 'end', pos: [0.25, 1.5, -1.85], look: [-0.1, 1.45, -3.6]}]},
+  // 3 village: money rain
+  {shot: 3, loc: 'square', move: 'low angle in the money rain', keys: [
+    {at: 'start', pos: [0.3, 1.0, -0.6], look: [-0.2, 1.8, -2.3]},
+    {at: 'end', pos: [0.2, 1.1, -0.9], look: [-0.2, 1.75, -2.3]}]},
+  {shot: 3, from: 'mobil', loc: 'square', move: 'wide with the car', keys: [
+    {at: 'start', pos: [-0.6, 1.9, 1.6], look: [1.0, 1.2, -3.6]},
+    {at: 'end', pos: [-0.4, 1.8, 0.9], look: [1.0, 1.2, -3.6]}]},
+  // 4 market: everyone rich, same bread and rice
+  {shot: 4, loc: 'market', move: 'crowd at the bakery', keys: [
+    {at: 'start', pos: [0.3, 2.2, 2.6], look: [0.4, 1.3, -3.6]},
+    {at: 'end', pos: [0.4, 2.0, 1.4], look: [0.4, 1.3, -3.6]}]},
+  {shot: 4, from: 'roti5', loc: 'market', lift: false, move: 'close on the bread and rice', keys: [
+    {at: 'start', pos: [0.2, 1.55, -0.6], look: [0.5, 0.95, -3.5]},
+    {at: 'end', pos: [0.5, 1.5, -1.0], look: [0.7, 0.95, -3.4]}]},
+  // 5 market: the baker and the climbing price
+  {shot: 5, loc: 'market', move: 'push on the baker and the price', keys: [
+    {at: 'start', pos: [0.4, 1.75, -0.2], look: [0.35, 1.45, -4.2]},
+    {at: 'end', pos: [0.4, 1.7, -1.0], look: [0.4, 1.45, -4.2]}]},
+  {shot: 5, from: 'naik3', loc: 'market', move: 'snap closer on the last price', keys: [
+    {at: 'start', pos: [0.5, 1.65, -1.3], look: [0.45, 1.5, -4.0]},
+    {at: 'end', pos: [0.5, 1.65, -1.55], look: [0.45, 1.5, -4.0]}]},
+  // 6 market: the goat that became bread; then the king turns the press off
+  {shot: 6, loc: 'market', move: 'close on the crying customer', keys: [
+    {at: 'start', pos: [-1.1, 1.65, 0.1], look: [-1.75, 1.6, -2.4]},
+    {at: 'end', pos: [-1.15, 1.65, -0.3], look: [-1.75, 1.6, -2.4]}]},
+  {shot: 6, from: 'sekarang7', loc: 'market', move: 'push on the tears', keys: [
+    {at: 'start', pos: [-1.2, 1.55, -1.1], look: [-1.5, 1.45, -2.2]},
+    {at: 'end', pos: [-1.25, 1.5, -1.3], look: [-1.5, 1.45, -2.2]}]},
+  {shot: 6, from: 'ehem', loc: 'throne', move: 'king sneaks to the lever', keys: [
+    {at: 'start', pos: [1.0, 1.65, -0.3], look: [1.9, 1.35, -3.1]},
+    {at: 'end', pos: [1.1, 1.6, -0.7], look: [1.9, 1.35, -3.1]}]},
+  // 7 the real country: street and the rocketing chart
+  {shot: 7, loc: 'country', move: 'establishing push down the street', keys: [
+    {at: 'start', pos: [0.6, 2.6, 4.0], look: [0, 1.4, -4.5]},
+    {at: 'end', pos: [0.3, 1.9, 1.0], look: [0, 1.4, -3.0]}]},
+  {shot: 7, from: 'barang', loc: 'country', lift: false, move: 'close on the price chart', keys: [
+    {at: 'start', pos: [1.6, 1.6, -1.2], look: [2.2, 1.5, -3.4]},
+    {at: 'end', pos: [1.7, 1.6, -1.6], look: [2.2, 1.55, -3.4]}]},
+  // 8 prices double each day; the 100 trillion note
+  {shot: 8, loc: 'country', move: 'price tag and clock', keys: [
+    {at: 'start', pos: [-1.4, 1.8, -0.1], look: [-0.25, 1.8, -4.2]},
+    {at: 'end', pos: [-1.4, 1.75, -0.7], look: [-0.25, 1.8, -4.2]}]},
+  {shot: 8, from: 'triliun', loc: 'country', move: 'low angle on the giant note', keys: [
+    {at: 'start', pos: [0.3, 1.0, -0.4], look: [0.4, 1.7, -2.6]},
+    {at: 'end', pos: [0.25, 1.05, -0.7], look: [0.4, 1.7, -2.6]}]},
+  // 9 money abandoned, foreign currency
+  {shot: 9, loc: 'country', move: 'wheelbarrow and the bin', keys: [
+    {at: 'start', pos: [0.0, 2.2, 1.8], look: [0, 0.9, -2.4]},
+    {at: 'end', pos: [0.0, 2.0, 1.1], look: [0, 0.9, -2.4]}]},
+  {shot: 9, from: 'asing', loc: 'country', move: 'close on the new money', keys: [
+    {at: 'start', pos: [0.3, 1.5, -1.3], look: [0.0, 1.35, -2.6]},
+    {at: 'end', pos: [0.3, 1.5, -1.55], look: [0.0, 1.35, -2.6]}]},
+  // 10 collector's shop
+  {shot: 10, loc: 'collector', move: 'push past the collector to the framed note', keys: [
+    {at: 'start', pos: [0.2, 1.9, 0.8], look: [0.0, 1.7, -5.0]},
+    {at: 'end', pos: [-0.2, 1.85, -1.0], look: [0.2, 1.75, -5.0]}]},
+  {shot: 10, from: 'mahal', loc: 'collector', move: 'collector cheering by the price', keys: [
+    {at: 'start', pos: [0.1, 1.7, -0.7], look: [0.0, 1.6, -4.6]},
+    {at: 'end', pos: [0.1, 1.7, -1.0], look: [0.0, 1.6, -4.6]}]},
+  // 11 closing question in the golden village
+  {shot: 11, loc: 'square', move: 'push on the villager with the note', keys: [
+    {at: 'start', pos: [0.2, 1.8, 0.8], look: [-0.1, 1.6, -2.4]},
+    {at: 'end', pos: [0.1, 1.75, -0.2], look: [-0.1, 1.65, -2.4]}]},
+  {shot: 11, from: 'beli', loc: 'square', move: 'pull back to the wishes', keys: [
+    {at: 'start', pos: [0.1, 1.85, 0.3], look: [-0.1, 1.9, -2.6]},
+    {at: 'end', pos: [0.2, 1.95, 1.2], look: [-0.1, 2.0, -2.8]}]},
 ];
 
 export function warpU(T, t) {

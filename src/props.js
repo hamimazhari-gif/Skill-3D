@@ -1000,3 +1000,90 @@ export function bookStack(n = 4, seed = 3) {
   for (let i = 0; i < n; i++) { const h = 0.05 + r() * 0.03; const b = box(0.32 + r() * 0.06, h, 0.24, ['#c75b5b', '#4f7fa6', '#e8c35a', '#5a9a8a', '#9a6fb0'][i % 5], {hull: 0.008}); at(b, (r() - 0.5) * 0.04, y, 0, (r() - 0.5) * 0.3); g.add(b); y += h; }
   return g;
 }
+
+// ---------- money printing story props ----------
+// Banknote texture: our own design (not a real note) with a big value and a small caption.
+export function noteTex(value = '100', o = {}) {
+  const {color = '#7fb36a', dark = '#3f6a3a', sub = '', seed = 3} = o;
+  const c = canvas(512, 256), x = c.getContext('2d'); const r = rng(seed);
+  x.fillStyle = color; x.fillRect(0, 0, 512, 256);
+  x.strokeStyle = INK; x.lineWidth = 12; x.strokeRect(0, 0, 512, 256);
+  x.strokeStyle = dark; x.lineWidth = 10; x.strokeRect(20, 20, 472, 216);
+  x.lineWidth = 2; for (let i = 0; i < 26; i++) { x.globalAlpha = 0.25; x.beginPath(); x.arc(256, 128, 30 + i * 9, 0, 7); x.stroke(); } x.globalAlpha = 1;
+  x.fillStyle = shade(color, 0.25); x.beginPath(); x.ellipse(110, 128, 62, 78, 0, 0, 7); x.fill();
+  x.strokeStyle = dark; x.lineWidth = 5; x.stroke();
+  // crown emblem in the oval
+  x.fillStyle = '#e8c04a'; x.beginPath(); x.moveTo(72, 150); x.lineTo(72, 100); x.lineTo(92, 122); x.lineTo(110, 92); x.lineTo(128, 122); x.lineTo(148, 100); x.lineTo(148, 150); x.closePath(); x.fill(); x.strokeStyle = INK; x.lineWidth = 4; x.stroke();
+  x.fillStyle = INK; x.textAlign = 'center'; x.textBaseline = 'middle';
+  const big = value.length > 6 ? 46 : value.length > 4 ? 62 : 92;
+  x.font = `900 ${big}px "Inter Display"`; x.fillText(value, 345, sub ? 110 : 128);
+  if (sub) { x.font = '900 34px "Inter Display"'; x.fillText(sub, 345, 178); }
+  x.font = '900 30px "Inter Display"'; x.fillText(value.length > 4 ? '' : value, 455, 50);
+  for (let i = 0; i < 40; i++) { x.fillStyle = `rgba(40,30,20,${0.03 + r() * 0.05})`; x.beginPath(); x.arc(r() * 512, r() * 256, 4 + r() * 14, 0, 7); x.fill(); }
+  return texFrom(c);
+}
+export function banknote(value = '100', o = {}) {
+  const w = o.w || 0.32, h = w / 2;
+  const tex = o.tex || noteTex(value, o);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({map: tex, side: THREE.DoubleSide}));
+  const g = new THREE.Group(); g.add(m);
+  return g;
+}
+// A stack (brick) of notes.
+export function noteStack(n = 6, o = {}) {
+  const g = new THREE.Group(); const tex = noteTex(o.value || '100', o);
+  const side = toon(o.color || '#7fb36a', {wear: false}); const top = toon(tex);
+  const w = o.w || 0.34, d = w / 2;
+  const geo = new THREE.BoxGeometry(w, 0.022, d); geo.translate(0, 0.011, 0);
+  for (let i = 0; i < n; i++) { const b = ink(geo, [side, side, top, side, side, side], {hull: 0.008}); at(b, (i % 2) * 0.012, i * 0.024, 0, (i % 3 - 1) * 0.06); g.add(b); }
+  return g;
+}
+// Money printing press: a chunky machine with rollers, a lever, a chute and a glowing lamp.
+export function printingPress(label = 'MONEY', o = {}) {
+  const g = new THREE.Group(); const col = o.color || '#5a6a7a';
+  const body = box(1.7, 1.25, 1.1, toon(col, {paint: {seed: 61, stains: 14, chips: 10}})); g.add(body);
+  const top = box(1.9, 0.18, 1.25, toon(shade(col, -0.2))); at(top, 0, 1.25, 0); g.add(top);
+  for (const z of [-0.22, 0.22]) { const rl = cyl(0.16, 0.16, 1.5, '#b8b0a0'); rl.rotation.z = Math.PI / 2; at(rl, 0.75, 1.62, z); g.add(rl); }
+  const chute = box(0.9, 0.06, 0.7, toon('#3a3a42')); at(chute, 0, 0.55, 0.75, 0, 0.35); g.add(chute);
+  const s = sign(label, 1.2, 0.36, {bg: '#e8c04a', frame: '#8a6a2a'}); at(s, 0, 0.92, 0.56); g.add(s);
+  const gear = cyl(0.3, 0.3, 0.1, '#c9a462'); gear.rotation.x = Math.PI / 2; at(gear, -0.6, 0.95, 0.58); g.add(gear);
+  const leverBase = box(0.16, 0.2, 0.16, '#3a3a42'); at(leverBase, 0.98, 0.9, 0.2); g.add(leverBase);
+  const lever = new THREE.Group(); at(lever, 0.98, 1.05, 0.2); g.add(lever);
+  const stick = cyl(0.035, 0.035, 0.55, '#3a3a42'); lever.add(stick);
+  const knob = ball(0.08, '#d8413a'); at(knob, 0, 0.58, 0); lever.add(knob);
+  const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 12), new THREE.MeshBasicMaterial({color: '#6fd06a'})); at(lamp, 0.55, 1.42, 0.62); g.add(lamp);
+  return {group: g, lever, gear, lamp};
+}
+// Throne: high-backed gold chair with a red cushion.
+export function throne() {
+  const g = new THREE.Group();
+  const seat = box(1.0, 0.55, 0.8, toon('#d8a83a', {paint: {seed: 71}})); g.add(seat);
+  const cush = box(0.86, 0.12, 0.7, toon('#b8323a')); at(cush, 0, 0.55, 0.02); g.add(cush);
+  const back = box(1.0, 1.7, 0.18, toon('#d8a83a', {paint: {seed: 72}})); at(back, 0, 0.55, -0.35); g.add(back);
+  const pad = box(0.7, 1.2, 0.06, toon('#b8323a')); at(pad, 0, 0.85, -0.24); g.add(pad);
+  for (const s of [-1, 1]) { const k = ball(0.12, '#e8c04a'); at(k, s * 0.44, 2.35, -0.35); g.add(k); const arm = box(0.14, 0.28, 0.8, toon('#c9982f')); at(arm, s * 0.46, 0.55, 0); g.add(arm); }
+  const crest = cone(0.2, 0.32, '#e8c04a'); at(crest, 0, 2.25, -0.35); g.add(crest);
+  return g;
+}
+// Bread loaf.
+export function loaf(s = 1) {
+  const g = new THREE.Group();
+  const b = ball(0.16 * s, toon('#d89a4a', {paint: {seed: 81, stains: 6}}), {sx: 1.6, sy: 0.75, sz: 1, hull: 0.012}); at(b, 0, 0.1 * s, 0); g.add(b);
+  for (let i = -1; i <= 1; i++) { const c = box(0.03 * s, 0.012, 0.2 * s, '#f3d9a0', {hull: 0}); at(c, i * 0.09 * s, 0.2 * s, 0, 0.5); g.add(c); }
+  return g;
+}
+// Wheelbarrow.
+export function wheelbarrow(color = '#6a8aa8') {
+  const g = new THREE.Group();
+  const tub = box(0.9, 0.35, 0.6, toon(color, {paint: {seed: 91, chips: 8}})); at(tub, 0, 0.32, 0); g.add(tub);
+  const wh = cyl(0.2, 0.2, 0.08, '#3a3a42'); wh.rotation.z = Math.PI / 2; at(wh, 0, 0.2, 0.45); wh.rotation.set(0, 0, Math.PI / 2); at(wh, 0.55, 0.2, 0); g.add(wh);
+  for (const z of [-0.22, 0.22]) { const h = cyl(0.025, 0.025, 0.9, '#7a5236'); h.rotation.z = Math.PI / 2 - 0.25; at(h, -0.75, 0.55, z); g.add(h); const lg = cyl(0.025, 0.025, 0.3, '#7a5236'); at(lg, -0.3, 0, z); g.add(lg); }
+  return g;
+}
+// Picture frame for a collector's note.
+export function noteFrame(value, o = {}) {
+  const g = new THREE.Group(); const w = o.w || 1.3, h = w / 2;
+  const fr = box(w + 0.2, h + 0.2, 0.06, toon('#c9982f', {paint: {seed: 93}}), {center: true}); g.add(fr);
+  const n = banknote(value, {...o, w}); n.position.z = 0.035; g.add(n);
+  return g;
+}

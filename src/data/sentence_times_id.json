@@ -1,124 +1,138 @@
 {
- "duration": 67.64,
+ "duration": 74.36,
  "sentences": [
   {
    "shot": 1,
-   "text": "Di dalam tubuhmu... ada satu organ yang diam-diam mencuri energimu setiap detik.",
-   "start": 0.18,
-   "end": 5.02,
-   "pred": 4.57
+   "text": "Di sebuah kerajaan, rakyatnya hidup miskin.",
+   "start": 0.2,
+   "end": 2.74,
+   "pred": 3.49
+  },
+  {
+   "shot": 1,
+   "text": "Lalu sang raja punya ide... yang menurutnya sangat jenius.",
+   "start": 3.24,
+   "end": 7.28,
+   "pred": 3.83
   },
   {
    "shot": 2,
-   "text": "Beratnya cuma sekitar dua persen dari berat badanmu, tapi ia menghabiskan sekitar dua puluh persen energi tubuh.",
-   "start": 5.76,
-   "end": 11.86,
-   "pred": 7.14
+   "text": "\"Rakyatku miskin? Gampang!",
+   "start": 7.92,
+   "end": 9.68,
+   "pred": 1.75
   },
   {
    "shot": 2,
-   "text": "Dialah... otakmu!",
-   "start": 12.38,
-   "end": 13.64,
-   "pred": 0.86
+   "text": "Cetak uang yang banyak, bagikan ke semua orang! Hahaha!\"",
+   "start": 9.82,
+   "end": 14.04,
+   "pred": 4.16
   },
   {
    "shot": 3,
-   "text": "Kalau diubah jadi listrik, otakmu bekerja dengan daya sekitar dua puluh watt.",
-   "start": 14.74,
-   "end": 18.5,
-   "pred": 5.0
-  },
-  {
-   "shot": 3,
-   "text": "Cukup untuk menyalakan sebuah lampu kecil.",
-   "start": 18.8,
-   "end": 20.66,
-   "pred": 2.57
-  },
-  {
-   "shot": 3,
-   "text": "Sepanjang hari, tanpa pernah mati!",
-   "start": 21.02,
-   "end": 23.18,
-   "pred": 2.43
+   "text": "\"Aku kaya! Aku kaya! Besok aku beli mobil!\"",
+   "start": 14.6,
+   "end": 17.8,
+   "pred": 2.58
   },
   {
    "shot": 4,
-   "text": "Kenapa serakus itu?",
-   "start": 24.16,
-   "end": 24.96,
-   "pred": 1.14
-  },
-  {
-   "shot": 4,
-   "text": "Karena di dalamnya ada sekitar delapan puluh enam miliar sel saraf yang terus mengirim sinyal, bahkan saat kamu sedang tidur.",
-   "start": 25.42,
-   "end": 32.06,
-   "pred": 7.85
+   "text": "Tapi waktu semua orang pegang uang banyak, jumlah roti dan beras... tetap sama.",
+   "start": 18.44,
+   "end": 23.42,
+   "pred": 5.66
   },
   {
    "shot": 5,
-   "text": "Tapi ada plot twist-nya.",
-   "start": 33.1,
-   "end": 34.24,
-   "pred": 1.36
-  },
-  {
-   "shot": 5,
-   "text": "Belajar keras atau berpikir berat... ternyata tidak membuatmu kurus.",
-   "start": 34.9,
-   "end": 38.2,
-   "pred": 4.0
+   "text": "\"Maaf, Mas. Rotinya naik... eh, naik lagi... eh, naik lagi!\"",
+   "start": 24.34,
+   "end": 29.32,
+   "pred": 4.66
   },
   {
    "shot": 6,
-   "text": "Otak hanya memakai sedikit sekali energi tambahan saat kamu berpikir keras.",
-   "start": 38.64,
-   "end": 42.12,
-   "pred": 4.57
+   "text": "\"Tadi pagi uang ini cukup buat beli kambing... sekarang cuma dapat roti! Huhuhu...\"",
+   "start": 30.08,
+   "end": 36.26,
+   "pred": 5.16
   },
   {
    "shot": 6,
-   "text": "Sebagian besar energinya dipakai untuk menjaga dirinya tetap hidup.",
-   "start": 42.46,
-   "end": 45.66,
-   "pred": 4.14
+   "text": "\"Ehem... mesin cetaknya saya matikan dulu ya...\"",
+   "start": 36.7,
+   "end": 39.44,
+   "pred": 2.83
   },
   {
    "shot": 7,
-   "text": "Dan yang lebih gila lagi, pada anak usia sekitar lima tahun, otak bisa memakai lebih dari separuh energi tubuh saat istirahat, karena sedang tumbuh dengan sangat cepat!",
-   "start": 46.72,
-   "end": 55.14,
-   "pred": 11.14
+   "text": "Ini bukan cuma dongeng.",
+   "start": 40.44,
+   "end": 41.68,
+   "pred": 1.58
+  },
+  {
+   "shot": 7,
+   "text": "Ada satu negara yang benar-benar melakukannya.",
+   "start": 42.06,
+   "end": 44.38,
+   "pred": 3.24
+  },
+  {
+   "shot": 7,
+   "text": "Uang makin banyak, barang tetap sama, harga pun meroket.",
+   "start": 44.58,
+   "end": 48.42,
+   "pred": 4.74
   },
   {
    "shot": 8,
-   "text": "Jadi, rawat otakmu.",
-   "start": 56.88,
-   "end": 58.36,
-   "pred": 1.5
+   "text": "Harga barang bisa naik dua kali lipat hanya dalam satu hari!",
+   "start": 49.06,
+   "end": 52.32,
+   "pred": 4.08
   },
   {
    "shot": 8,
-   "text": "Makan yang cukup, minum air, dan jangan lupa tidur.",
-   "start": 59.02,
-   "end": 62.18,
-   "pred": 3.71
+   "text": "Mereka bahkan mencetak uang kertas senilai seratus triliun!",
+   "start": 52.94,
+   "end": 56.56,
+   "pred": 4.24
   },
   {
    "shot": 9,
-   "text": "Menurut kamu, organ apa lagi yang paling hebat di tubuh manusia?",
-   "start": 63.14,
-   "end": 66.1,
-   "pred": 4.14
+   "text": "Akhirnya, uang itu tidak lagi dipakai, dan negara itu beralih ke mata uang asing.",
+   "start": 57.26,
+   "end": 61.2,
+   "pred": 6.4
   },
   {
-   "shot": 9,
+   "shot": 10,
+   "text": "Lucunya, sekarang uang seratus triliun itu laku dijual ke kolektor... lebih mahal daripada nilainya dulu!",
+   "start": 61.88,
+   "end": 67.52,
+   "pred": 7.65
+  },
+  {
+   "shot": 11,
+   "text": "Coba tebak, negara mana itu?",
+   "start": 68.1,
+   "end": 69.52,
+   "pred": 2.33
+  },
+  {
+   "shot": 11,
+   "text": "Dan kalau kamu punya uang seratus triliun, mau beli apa?",
+   "start": 69.84,
+   "end": 72.86,
+   "pred": 4.24
+  },
+  {
+   "shot": 11,
    "text": "Tulis di komentar!",
-   "start": 66.66,
-   "end": 67.36,
-   "pred": 1.07
+   "start": 73.44,
+   "end": 74.06,
+   "pred": 1.25
   }
  ]
 }

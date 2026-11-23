@@ -18,7 +18,7 @@ export const DESIGNS = {
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -116,6 +116,13 @@ function drawHeadBase(o, r) {
   } else if (o.hat === 'top') {
     inkShape(x, [[cx - R * 0.62, top - R * 0.85], [cx + R * 0.62, top - R * 0.85], [cx + R * 0.68, top + R * 0.25], [cx - R * 0.68, top + R * 0.25]], o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.15, R * 0.13, 40), o.hatColor, r, 9);
+  } else if (o.hat === 'crown') { // gold crown with five points and red jewels
+    const b = top + R * 0.32, h = R * 0.62, w = R * 0.78;
+    const pts = [[cx - w, b]]; for (let i = 0; i <= 8; i++) { const xx = cx - w + (2 * w) * i / 8; pts.push([xx, i % 2 ? b - h * 0.45 : b - h]); } pts.push([cx + w, b]);
+    inkShape(x, pts, o.hatColor || '#e8c04a', r, 10, (q) => paintShade(x, q, cx, top, R * 1.3, 0.3));
+    inkShape(x, [[cx - w * 1.04, b - R * 0.02], [cx + w * 1.04, b - R * 0.02], [cx + w * 1.04, b + R * 0.14], [cx - w * 1.04, b + R * 0.14]], o.hatColor2 || '#c9982f', r, 8);
+    for (const k of [-0.55, 0, 0.55]) inkShape(x, ellipse(cx + k * w, b + R * 0.06, R * 0.07, R * 0.06, 16), '#d8413a', r, 5);
+    for (let i = 0; i <= 8; i += 2) { const xx = cx - w + (2 * w) * i / 8; inkShape(x, ellipse(xx, b - h, R * 0.06, R * 0.06, 14), '#fff3c8', r, 5); }
   }
   return texFrom(c);
 }

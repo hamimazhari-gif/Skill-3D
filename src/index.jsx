@@ -6,8 +6,8 @@ import {CharSheet} from './CharSheet';
 
 const Root = () => (
   <>
-    <Composition id="OtakID" component={Story} defaultProps={{lang: 'id'}} width={1080} height={1920} fps={FPS} durationInFrames={makeTiming('id').frames} />
-    <Composition id="BrainEN" component={Story} defaultProps={{lang: 'en'}} width={1080} height={1920} fps={FPS} durationInFrames={makeTiming('en').frames} />
+    <Composition id="RajaID" component={Story} defaultProps={{lang: 'id'}} width={1080} height={1920} fps={FPS} durationInFrames={makeTiming('id').frames} />
+    <Composition id="KingEN" component={Story} defaultProps={{lang: 'en'}} width={1080} height={1920} fps={FPS} durationInFrames={makeTiming('en').frames} />
     <Composition id="ThumbEN" component={Thumb} defaultProps={{lang: 'en'}} width={1080} height={1920} fps={FPS} durationInFrames={1} />
     <Composition id="ThumbID" component={Thumb} defaultProps={{lang: 'id'}} width={1080} height={1920} fps={FPS} durationInFrames={1} />
     <Composition id="SheetExpr" component={CharSheet} defaultProps={{mode: 'expr', design: 'egg'}} width={1080} height={1920} fps={FPS} durationInFrames={1} />

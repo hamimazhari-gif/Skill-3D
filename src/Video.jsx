@@ -103,40 +103,31 @@ function Scene({lang, thumb}) {
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
 function cues(T, EVt) {
-  const c = (k) => T.CUTS[k - 1];
+  const C = T.CUTS;
   return [
-    ['05-airy-whoosh.mp3', 0.0, 0.22],
-    ['07-riser-build-up.wav', EVt.organ, 0.18],
-    ['06-digital-glitch-tech-blip.mp3', EVt.mencuri + 0.1, 0.28],
-    ['08-heavy-whoosh.wav', c(2) - 0.35, 0.26],
-    ['04-soft-ui-pop.mp3', EVt.dua, 0.3],
-    ['04-counter-tick-number-roll.wav', EVt.puluh, 0.3],
-    ['03-subtle-digital-impact.mp3', EVt.otakmu + 0.05, 0.4],
-    ['09-notification-ding.wav', EVt.otakmu + 0.25, 0.28],
-    ['07-smooth-transition-whoosh.mp3', c(3) - 0.4, 0.26],
-    ['06-digital-glitch-tech-blip.mp3', EVt.listrik, 0.26],
-    ['04-soft-ui-pop.mp3', EVt.watt, 0.3],
-    ['03-subtle-digital-impact.mp3', EVt.lampu + 0.05, 0.36],
-    ['04-counter-tick-number-roll-2.wav', EVt.sepanjang, 0.24],
-    ['08-soft-success-chime.mp3', EVt.mati + 0.1, 0.26],
-    ['08-heavy-whoosh.wav', c(4) - 0.35, 0.26],
-    ['04-counter-tick-number-roll.wav', EVt.miliar, 0.3],
-    ['06-digital-glitch-tech-blip.mp3', EVt.sinyal, 0.24],
-    ['05-airy-whoosh.mp3', c(5) - 0.3, 0.22],
-    ['06-deep-cinematic-boom.wav', EVt.twist + 0.05, 0.34],
-    ['02-error-denied-buzz.wav', EVt.kurus + 0.25, 0.28],
-    ['08-heavy-whoosh.wav', c(6) - 0.35, 0.26],
-    ['pop-bubble-sound-effect.mp3', EVt.sedikit + 0.05, 0.3],
-    ['09-notification-ding.wav', EVt.hidup, 0.26],
-    ['07-smooth-transition-whoosh.mp3', c(7) - 0.4, 0.26],
-    ['04-soft-ui-pop.mp3', EVt.lima, 0.3],
-    ['08-soft-success-chime.mp3', EVt.separuh, 0.3],
-    ['05-airy-whoosh.mp3', c(8) - 0.3, 0.22],
-    ['pop-bubble-sound-effect.mp3', EVt.makan, 0.26],
-    ['pop-bubble-sound-effect.mp3', EVt.minum, 0.26],
-    ['04-soft-ui-pop.mp3', EVt.tidur2, 0.24],
-    ['08-heavy-whoosh.wav', c(9) - 0.35, 0.24],
-    ['pop-bubble-sound-effect.mp3', EVt.organ2 + 0.1, 0.28],
+    ...[3, 4, 7, 10, 11].map((k) => ['07-smooth-transition-whoosh.mp3', C[k - 1] - 0.25, 0.22]),
+    ['09-notification-ding.wav', EVt.ide, 0.3],
+    ['04-soft-ui-pop.mp3', EVt.gampang, 0.26],
+    ['06-deep-cinematic-boom.wav', EVt.cetak + 0.05, 0.3],
+    ['03-typing-keyboard-burst.wav', EVt.cetak + 0.3, 0.2, 1.4],
+    ['08-soft-success-chime.mp3', EVt.kaya, 0.28],
+    ['pop-bubble-sound-effect.mp3', EVt.mobil, 0.3],
+    ['02-error-denied-buzz.wav', EVt.sama, 0.24],
+    ['04-counter-tick-number-roll.wav', EVt.naik1, 0.28],
+    ['04-counter-tick-number-roll-2.wav', EVt.naik2, 0.3],
+    ['03-subtle-digital-impact.mp3', EVt.naik3, 0.36],
+    ['pop-bubble-sound-effect.mp3', EVt.kambing - 0.2, 0.24],
+    ['04-soft-ui-pop.mp3', EVt.sekarang7, 0.26],
+    ['mouse-click-sound-effect.mp3', EVt.matikan + 0.1, 0.4, 0.45],
+    ['07-riser-build-up.wav', EVt.negara, 0.2],
+    ['08-heavy-whoosh.wav', EVt.meroket - 0.1, 0.3],
+    ['04-counter-tick-number-roll.wav', EVt.dua, 0.3],
+    ['06-deep-cinematic-boom.wav', EVt.triliun + 0.05, 0.36],
+    ['02-error-denied-buzz.wav', EVt.dipakai + 0.1, 0.24],
+    ['09-notification-ding.wav', EVt.asing + 0.05, 0.26],
+    ['08-soft-success-chime.mp3', EVt.mahal, 0.3],
+    ['pop-bubble-sound-effect.mp3', EVt.tebak, 0.26],
+    ['pop-bubble-sound-effect.mp3', EVt.beli, 0.26],
     ['08-soft-success-chime.mp3', EVt.komentar, 0.35],
     ['mouse-click-sound-effect.mp3', EVt.komentar + 0.4, 0.4, 0.45],
   ];
@@ -182,7 +173,7 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [2, 3, 4, 5, 6, 7, 8];
+  const DIPS = [3, 4, 7, 10, 11];
   const dipT = DIPS.map((k) => T.CUTS[k - 1]);
   for (const ct of dipT) dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2);
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
@@ -205,10 +196,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PENCURI', mid: 'ENERGIMU?!'},
-  en: {top: 'YOUR ENERGY', mid: 'THIEF?!'},
+  id: {top: 'CETAK UANG', mid: 'TERUS?!'},
+  en: {top: 'PRINT MORE', mid: 'MONEY?!'},
 };
-const THUMB = (EVt) => ({t: EVt.otakmu + 0.6, pos: [0.35, 1.45, -2.2], look: [0.05, 1.5, -3.9]});
+const THUMB = (EVt) => ({t: EVt.haha + 0.4, pos: [0.9, 1.7, 0.4], look: [1.1, 2.0, -3.6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
