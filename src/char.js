@@ -360,6 +360,23 @@ function drawLimb(len, color, end, r, wTop = 9, wBot = 5) {
   return {mesh: partMesh(texFrom(c), W, H), W, H};
 }
 
+// Reference-style limb: a thin black ink stick (no fill, no sleeve), slightly tapered, with a black ball hand or a
+// small rounded black foot at the end. Joints are hidden by the round caps, so two sticks make a bendy limb.
+function drawStick(len, end, r, w = 10) {
+  const W = 0.16, H = len + 0.1, c = canvas(W * PX, H * PX), x = c.getContext('2d');
+  const cx = W / 2 * PX, top = 0.03 * PX, bot = (len + 0.03) * PX;
+  x.strokeStyle = INK; x.fillStyle = INK; x.lineCap = 'round';
+  const n = 6, bend = (r() - 0.5) * 3;
+  for (let i = 0; i < n; i++) { // hand-drawn: slight wobble and a gentle taper
+    const a = i / n, b = (i + 1) / n;
+    x.lineWidth = w * (1.08 - 0.16 * a) * (0.94 + 0.12 * r());
+    x.beginPath(); x.moveTo(cx + Math.sin(a * Math.PI) * bend, top + (bot - top) * a); x.lineTo(cx + Math.sin(b * Math.PI) * bend, top + (bot - top) * b); x.stroke();
+  }
+  if (end === 'hand') { x.beginPath(); x.arc(cx, bot + 2, 0.034 * PX, 0, 7); x.fill(); }
+  if (end === 'foot') { x.beginPath(); x.ellipse(cx + 0.02 * PX, bot + 1, 0.05 * PX, 0.024 * PX, 0, 0, 7); x.fill(); }
+  return {mesh: partMesh(texFrom(c), W, H), W, H};
+}
+
 let _blob;
 function blobTex() {
   if (_blob) return _blob;
@@ -445,10 +462,16 @@ export function makeChar(name, o = {}) {
   const LX = D.legExtra || 0, TX = D.torsoExtra || 0;
   const hipY = 0.64 + LX, shY = 1.1 + LX + TX, neckY = 1.12 + LX + TX;
   const legs = [];
-  for (const sx of [-1, 1]) {
+  const knees = [], LL = 0.62 + LX + 0.04, thigh = LL * 0.5;
+  for (const sx of [-1, 1]) { // thin black stick legs: thigh + shin with a knee, small black feet
     const piv = new THREE.Group(); piv.position.set(sx * 0.075, hipY, -0.02);
-    const l = drawLimb(0.62 + LX, p.lower, 'shoe', r);
-    l.mesh.position.set(0, -l.H / 2 + 0.03, 0); piv.add(l.mesh); body.add(piv); legs.push(piv);
+    const l1 = drawStick(thigh, null, r);
+    l1.mesh.position.set(0, -l1.H / 2 + 0.03, 0); piv.add(l1.mesh);
+    const knee = new THREE.Group(); knee.position.set(0, -thigh, 0.002); piv.add(knee);
+    const l2 = drawStick(LL - thigh, 'foot', r);
+    l2.mesh.position.set(0, -l2.H / 2 + 0.03, 0); knee.add(l2.mesh);
+    if (sx < 0) l2.mesh.scale.x = -1; // feet point outward
+    body.add(piv); legs.push(piv); knees.push(knee);
   }
   const seed0 = o.seed || name.length * 17 + 3;
   const torso = drawTorso(p, r);
@@ -458,10 +481,10 @@ export function makeChar(name, o = {}) {
   const arms = [];
   for (const sx of [-1, 1]) {
     const up = new THREE.Group(); up.position.set(sx * 0.165, shY, 0.02);
-    const a1 = drawLimb(0.26, p.jacket, 'elbow', r, 9, 7);
+    const a1 = drawStick(0.26, null, r);
     a1.mesh.position.set(0, -a1.H / 2 + 0.03, 0); up.add(a1.mesh);
     const fore = new THREE.Group(); fore.position.set(0, -0.26, 0.004); up.add(fore);
-    const a2 = drawLimb(0.25, p.jacket, 'hand', r, 7, 5);
+    const a2 = drawStick(0.25, 'hand', r);
     a2.mesh.position.set(0, -a2.H / 2 + 0.03, 0); fore.add(a2.mesh);
     const hand = new THREE.Group(); hand.position.set(0, -0.27, 0.02); fore.add(hand);
     body.add(up);
@@ -575,8 +598,10 @@ export function makeChar(name, o = {}) {
       const hd = loco.heading === 'camera' ? th : loco.heading ?? state.yaw0;
       let a = th - hd; a = Math.atan2(Math.sin(a), Math.cos(a));
       const aa = Math.abs(a);
-      view = aa < 0.42 ? 'front' : aa < 1.15 ? 'threeq' : aa < 2.3 ? 'side' : 'back';
-      mirror = (view === 'threeq' || view === 'side') && a > 0 ? -1 : 1;
+      if (D.views) { // optional turn drawings (off by default: the character always faces the camera, like the reference)
+        view = aa < 0.42 ? 'front' : aa < 1.15 ? 'threeq' : aa < 2.3 ? 'side' : 'back';
+        mirror = (view === 'threeq' || view === 'side') && a > 0 ? -1 : 1;
+      }
       yawB = th - g.rotation.y;
       const hor = Math.hypot(camPos.x - tmp.x, camPos.z - tmp.z), elev = Math.atan2(camPos.y - tmp.y - 1.2 * s, hor);
       tilt = Math.max(0, Math.min(1.1, (elev - 0.5) * 1.2));
@@ -597,10 +622,15 @@ export function makeChar(name, o = {}) {
     headPiv.rotation.z += Math.sin(t * 16) * 0.14 * shake + slump * 0.12;
     const sw = Math.sin(t * walkF) * 0.45 * Math.min(1.3, walk);
     legs[0].rotation.x = side ? 0 : sw; legs[1].rotation.x = side ? 0 : -sw;
-    const stride = side ? 1.25 : tq ? 0.75 : 0.33;
+    const stride = side ? 1.25 : tq ? 0.75 : 0.55;
     legs[0].rotation.z = sw * stride; legs[1].rotation.z = -sw * stride;
     legs[0].position.set(side ? -0.01 : tq ? -0.05 : -0.075, hipY, side ? -0.03 : -0.02); legs[1].position.set(side ? 0.01 : tq ? 0.05 : 0.075, hipY, side ? 0.0 : -0.02);
-    if (lift > 0.05) { legs[0].rotation.z = -0.25; legs[1].rotation.z = 0.25; }
+    // knees: the leg swinging back bends at the knee (shin folds back), like a stick-figure walk cycle
+    const kk = walk > 1 ? 1.5 : 1.15; // leg 0 bends while it swings to -z rotation, leg 1 on the opposite half-step
+    const r0 = legs[0].rotation.z, r1 = legs[1].rotation.z;
+    knees[0].rotation.z = r0 < 0 ? -r0 * kk : 0; knees[1].rotation.z = r1 > 0 ? -r1 * kk : 0;
+    knees[0].rotation.x = 0; knees[1].rotation.x = 0;
+    if (lift > 0.05) { legs[0].rotation.z = -0.25; legs[1].rotation.z = 0.25; knees[0].rotation.z = 0.5; knees[1].rotation.z = -0.5; }
     const swayL = Math.sin(t * 1.7 + phase) * 0.05, swayR = Math.sin(t * 1.7 + phase + 1) * 0.05;
     const wig = Math.sin(t * 12) * 0.35;
     const walkArm = walk ? Math.sin(t * walkF) * 0.35 * Math.min(1.3, walk) : 0;

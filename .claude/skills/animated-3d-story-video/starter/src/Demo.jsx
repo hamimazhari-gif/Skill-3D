@@ -142,8 +142,7 @@ function DemoScene() {
   return null;
 }
 
-const NOTES = [[0, 3.6, 'Berjalan · tampak samping'], [3.6, 5.7, 'Berbalik · tampak depan'], [5.7, 7.8, 'Menjauh · tampak belakang'],
-  [7.8, 9.9, 'Berlari · tampak serong'], [9.9, 10.6, 'Tampak depan'], [10.6, 11.15, 'Tampak samping'], [11.15, 11.6, 'Tampak belakang'], [11.6, 12.1, 'Dari atas']];
+const NOTES = [[0, 3.6, 'Berjalan'], [3.6, 5.7, 'Berhenti & menyapa'], [5.7, 7.8, 'Berjalan menjauh'], [7.8, 9.9, 'Berlari'], [9.9, 12.1, 'Kamera berputar']];
 export const DemoGerak = () => {
   const {width, height} = useVideoConfig();
   const t = useCurrentFrame() / FPS;

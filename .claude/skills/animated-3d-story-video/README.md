@@ -19,7 +19,7 @@ Isi:
 
 Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Tokoh diberi bayangan: terang dari kiri atas, bayangan lembut di kanan bawah, bayangan kepala di dada.
-- Baju tampak 3D: kilauan putih vertikal di kiri, kilau di dada, bayangan gelap di kedua tepi badan, lengan dan kaki.
+- Baju tampak 3D: kilauan putih vertikal di kiri, kilau di dada, bayangan gelap di kedua tepi badan.
 - Tokoh menjatuhkan bayangan ke lantai/dinding dan ikut warna cahaya adegan.
 - Tanpa lingkaran merah di wajah (tanpa pipi merah / rona).
 - Marah atau kesal: tanda urat merah khas komik di dahi + alis tebal miring.
@@ -27,6 +27,7 @@ Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Badan panjang dengan kaki kurus panjang.
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
 - Tokoh bergerak natural: berjalan, berlari, berbalik (`move`, `face`), dengan langkah kaki dan ayunan tangan.
-- Tokoh punya banyak sudut pandang otomatis: depan, serong, samping (kiri/kanan), belakang, dan dari atas.
+- Tangan dan kaki seperti video contoh: garis hitam tipis, lutut menekuk, tangan bulatan hitam kecil, kaki kecil hitam.
+- Tokoh selalu menghadap kamera (tanpa gambar samping/belakang) — permintaan pengguna.
 - Latar dan benda realistik dan kaya: tekstur bermotif (karpet berornamen, wallpaper, lantai kayu berserat, batu, rumput), ruangan penuh benda (rak, guci, lukisan, tirai, tanaman, lentera), padang rumput bergoyang, gunung berkabut, lampu yang berpendar, kontras cahaya hangat-dingin.
-- Contoh gerakan & sudut pandang: komposisi `DemoGerak` (12 detik).
+- Contoh gerakan: komposisi `DemoGerak` (12 detik).
