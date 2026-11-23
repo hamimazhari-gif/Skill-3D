@@ -11,10 +11,14 @@ const PX = 420; // canvas pixels per metre
 //   limb: stick widths [top, bottom]; legExtra: extra leg length (m); shading: painted light/shadow on every part;
 //   shadows: characters cast real shadows on the ground and walls.
 export const DESIGNS = {
-  classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0, shading: false, shadows: false},
+  // House style for every design: painted shading + cloth sheen + dark rims, cast shadows, no red cheeks, long body.
+  classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0.02, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
   egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
-  bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: -0.04, shading: true, shadows: true},
+  bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  pill: {head: 'pill', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
+// Designs already used, newest last (pick one that is NOT the last entry for the next video).
+export const DESIGN_HISTORY = ['classic', 'egg'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -33,8 +37,8 @@ function paintShade(x, pts, cx, cy, R, amt = 0.3) {
   x.restore();
 }
 const HEAD_W = 0.86, HEAD_H = 1.0, HEAD_CY = 0.62, HEAD_R = 0.29; // head canvas (metres); centre from top
-const headRY = () => (D.head === 'egg' ? 1.17 : D.head === 'bean' ? 0.86 : 0.97);
-const headRX = () => (D.head === 'egg' ? 0.93 : D.head === 'bean' ? 1.12 : 1.0);
+const headRY = () => (D.head === 'egg' ? 1.17 : D.head === 'bean' ? 0.86 : D.head === 'pill' ? 1.2 : 0.97);
+const headRX = () => (D.head === 'egg' ? 0.93 : D.head === 'bean' ? 1.12 : D.head === 'pill' ? 0.82 : 1.0);
 
 function smoothPoly(n, fn) { const p = []; for (let i = 0; i < n; i++) p.push(fn(i / n)); return p; }
 
