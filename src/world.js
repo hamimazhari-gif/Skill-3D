@@ -304,8 +304,8 @@ export function buildWorld(lang, T, EVt, L) {
     const hero = ch('hero', {seed: 68}, g, 0.1, -2.5, 0);
     hero.act([
       {t: 0, pose: 'chin', expr: 'thinking'},
-      {t: E('hari') + 0.1, pose: 'shrug', expr: 'confused'},
-      {t: E('jam24') + 0.2, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.6},
+      {t: E('hari') + 0.1, pose: 'hips', expr: 'annoyed'},
+      {t: E('jam24') + 0.2, pose: 'point', expr: 'furious', action: 'shake', dur: 0.7},
     ]);
     updaters.push((t) => {
       // hands race, then slow and stop dead on "hari"
@@ -328,7 +328,7 @@ export function buildWorld(lang, T, EVt, L) {
     const sub = sign(L.day6Sub, 1.5, 0.32, {bg: '#fff3df', frame: '#8a5a2a'}); at(sub, 1.65 - 0.05, 1.32, -3.17, -0.25); g.add(sub);
     const hero = ch('hero', {seed: 69}, g, -0.1, -1.6, 0);
     hero.act([
-      {t: 0, pose: 'wave', expr: 'tired'},
+      {t: 0, pose: 'wave', expr: 'irritated'},
       {t: E('siang') + 0.1, pose: 'wave', expr: 'grimace', action: 'slump', dur: 1.0},
     ]);
     fx(g, FX.glints([-0.1, 1.6, -1.5], E('siang'), {n: 20, color: '#ffd890'}), (t) => inShots(t, 9));
@@ -354,7 +354,7 @@ export function buildWorld(lang, T, EVt, L) {
     const sub = sign(L.night6Sub, 1.5, 0.32, {bg: '#dfe8ff', frame: '#1f2a40'}); at(sub, 1.6, 1.32, -3.17, -0.25); g.add(sub);
     const hero = ch('hero', {seed: 70}, g, 0.0, -1.6, 0);
     hero.act([
-      {t: 0, pose: 'cross', expr: 'gritted', action: 'tremble', dur: 3},
+      {t: 0, pose: 'cross', expr: 'chatter', action: 'tremble', dur: 3},
       {t: E('membeku') + 0.1, pose: 'cross', expr: 'shocked'},
     ]);
     const ice = P.iceBlock(0.75, 1.75, 0.5); at(ice, 0.0, 0, -1.6); g.add(ice);

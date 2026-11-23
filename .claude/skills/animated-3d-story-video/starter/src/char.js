@@ -124,9 +124,9 @@ export const EXPRESSIONS = {
   excited: {eyes: 'open', brows: 'up', mouth: 'laugh', extras: ['sparkle']},
   surprised: {eyes: 'open', brows: 'up', mouth: 'open'},
   shocked: {eyes: 'wide', brows: 'up', mouth: 'shout', extras: ['shock', 'sweat']},
-  annoyed: {eyes: 'angry', brows: 'angry', mouth: 'frown'},
-  angry: {eyes: 'angry', brows: 'angry', mouth: 'frown', extras: ['anger']},
-  furious: {eyes: 'angry', brows: 'angry', mouth: 'shout', extras: ['anger', 'shock']},
+  annoyed: {eyes: 'angry', brows: 'angry', mouth: 'frown', extras: ['vein']},
+  angry: {eyes: 'angry', brows: 'angry', mouth: 'frown', extras: ['vein']},
+  furious: {eyes: 'angry', brows: 'angry', mouth: 'shout', extras: ['vein', 'shock']},
   sad: {eyes: 'sad', brows: 'sad', mouth: 'frown'},
   cry: {eyes: 'sad', brows: 'sad', mouth: 'wavy', extras: ['tear']},
   worried: {eyes: 'open', brows: 'sad', mouth: 'wavy', extras: ['sweat']},
@@ -146,7 +146,9 @@ export const EXPRESSIONS = {
   toothy: {eyes: 'closed', brows: 'up', mouth: 'toothy', extras: ['blush']},
   cheesy: {eyes: 'open', brows: 'up', mouth: 'toothy', extras: ['sparkle']},
   scream: {eyes: 'wide', brows: 'up', mouth: 'scream', extras: ['shock', 'sweat']},
-  gritted: {eyes: 'angry', brows: 'angry', mouth: 'teeth', extras: ['anger']},
+  gritted: {eyes: 'angry', brows: 'angry', mouth: 'teeth', extras: ['vein']},
+  chatter: {eyes: 'squint', brows: 'sad', mouth: 'teeth', extras: ['sweat']},
+  irritated: {eyes: 'angry', brows: 'angry', mouth: 'teethSmall', extras: ['vein']},
   scheming: {eyes: 'calm', brows: 'skeptic', mouth: 'teethSmirk'},
 };
 
@@ -249,6 +251,16 @@ function drawFace(o, f, r) {
     if (e === 'blush') { x.fillStyle = 'rgba(232,110,110,0.55)'; for (const s of [-1, 1]) { x.beginPath(); x.ellipse(cx + s * R * 0.55, cy + R * 0.3, R * 0.17, R * 0.09, 0, 0, 7); x.fill(); } }
     if (e === 'sweat') { const sx = cx + R * 0.95, sy = cy - R * 0.55; x.fillStyle = '#8fd0ef'; x.lineWidth = 6; x.beginPath(); x.moveTo(sx, sy - R * 0.2); x.quadraticCurveTo(sx + R * 0.14, sy + R * 0.02, sx, sy + R * 0.08); x.quadraticCurveTo(sx - R * 0.14, sy + R * 0.02, sx, sy - R * 0.2); x.fill(); x.stroke(); }
     if (e === 'tear') { x.fillStyle = '#8fd0ef'; for (const s of [-1, 1]) { x.beginPath(); x.ellipse(cx + s * R * 0.4, cy + R * 0.35, R * 0.06, R * 0.16, 0, 0, 7); x.fill(); } }
+    if (e === 'vein') { // manga anger vein on the temple: four bulging red arcs, ink outlined
+      const vx = cx + R * 0.52, vy = cy - R * 0.42, d = R * 0.19, rr = R * 0.17;
+      for (let k = 0; k < 4; k++) {
+        const a = Math.PI / 4 + k * Math.PI / 2, ox = vx + Math.cos(a) * d * 1.25, oy = vy + Math.sin(a) * d * 1.25;
+        const a0 = a + Math.PI - 0.95, a1 = a + Math.PI + 0.95;
+        x.lineCap = 'round'; x.strokeStyle = INK; x.lineWidth = R * 0.14; x.beginPath(); x.arc(ox, oy, rr, a0, a1); x.stroke();
+        x.strokeStyle = '#d8312a'; x.lineWidth = R * 0.08; x.beginPath(); x.arc(ox, oy, rr, a0, a1); x.stroke();
+      }
+      x.strokeStyle = INK;
+    }
     if (e === 'anger') { const ax = cx + R * 0.98, ay = cy - R * 0.2; x.strokeStyle = '#d8413a'; x.lineWidth = 9; for (const [a, b] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) { x.beginPath(); x.arc(ax + a * R * 0.13, ay + b * R * 0.13, R * 0.1, 0, 7); x.stroke(); } x.strokeStyle = INK; }
     if (e === 'shock') { x.lineWidth = 8; for (const a of [-0.5, 0, 0.5]) { const bx = cx + Math.sin(a) * R * 1.25, by2 = cy - Math.cos(a) * R * 1.25; x.beginPath(); x.moveTo(bx, by2); x.lineTo(cx + Math.sin(a) * R * 1.55, cy - Math.cos(a) * R * 1.55); x.stroke(); } }
     if (e === 'question') { x.fillStyle = INK; x.font = `900 ${R * 0.9}px "Inter Display"`; x.textAlign = 'center'; x.fillText('?', cx + R * 1.05, cy - R * 0.6); }
