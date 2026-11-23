@@ -14,8 +14,10 @@ import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
 import {CREAM, INK} from './kit';
 import {GradeShader, resolveLook, applyGrade} from './lighting';
+import {CHAR_TINT} from './char';
 
 
+const TMPC = new THREE.Color();
 export function useStory(lang) {
   return useMemo(() => {
     const T = makeTiming(lang);
@@ -87,6 +89,8 @@ function Scene({lang, thumb}) {
     built.key.color.set(lk.key);
     built.hemi.color.set(lk.hemiSky || '#dcecff'); built.hemi.groundColor.set(lk.hemiGround || '#b09a72');
     applyGrade(composer.grade, lk.grade);
+    // characters pick up the scene light a little (cool at night, warm at sunset)
+    CHAR_TINT.set('#ffffff').lerp(TMPC.set(lk.hemiSky || '#dcecff'), 0.22).lerp(TMPC.set(lk.key), 0.12);
     built.key.position.set(ox + kp[0], kp[1], kp[2]);
     built.key.target.position.set(ox, 0, -1); built.key.target.updateMatrixWorld();
     built.key.intensity = lk.keyI; built.hemi.intensity = lk.hemiI;

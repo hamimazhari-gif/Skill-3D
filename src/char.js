@@ -5,15 +5,42 @@ import * as THREE from 'three';
 import {INK, rng, canvas, texFrom} from './kit';
 
 const PX = 420; // canvas pixels per metre
-const SKIN = '#f6dfc8';
+
+// Character DESIGNS: each video picks one (setCharDesign) so every story has its own look.
+//   head: 'round' | 'egg' | 'bean'; hair: 'fringe' | 'side' | 'tuft'; skin; brows: 'thin' | 'thick';
+//   limb: stick widths [top, bottom]; legExtra: extra leg length (m); shading: painted light/shadow on every part;
+//   shadows: characters cast real shadows on the ground and walls.
+export const DESIGNS = {
+  classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0, shading: false, shadows: false},
+  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.07, shading: true, shadows: true},
+  bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: -0.04, shading: true, shadows: true},
+};
+let D = DESIGNS.classic;
+let SKIN = D.skin;
+export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
+// Shared tint for every character part (set per frame from the scene light, so characters sit in the light).
+export const CHAR_TINT = new THREE.Color('#ffffff');
+const SHADE = 'rgba(64,38,58,';
+// Painted shading inside a closed shape: light from the upper left, soft core shadow on the lower right.
+function paintShade(x, pts, cx, cy, R, amt = 0.3) {
+  if (!D.shading) return;
+  x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(p[0], p[1]) : x.moveTo(p[0], p[1]))); x.closePath(); x.clip();
+  const g = x.createRadialGradient(cx - R * 0.4, cy - R * 0.5, R * 0.15, cx - R * 0.4, cy - R * 0.5, R * 1.95);
+  g.addColorStop(0, SHADE + '0)'); g.addColorStop(0.5, SHADE + '0)'); g.addColorStop(0.72, SHADE + (amt * 0.6) + ')'); g.addColorStop(1, SHADE + amt + ')');
+  x.fillStyle = g; x.fillRect(cx - R * 3, cy - R * 3, R * 6, R * 6);
+  x.restore();
+}
 const HEAD_W = 0.86, HEAD_H = 1.0, HEAD_CY = 0.62, HEAD_R = 0.29; // head canvas (metres); centre from top
+const headRY = () => (D.head === 'egg' ? 1.17 : D.head === 'bean' ? 0.86 : 0.97);
+const headRX = () => (D.head === 'egg' ? 0.93 : D.head === 'bean' ? 1.12 : 1.0);
 
 function smoothPoly(n, fn) { const p = []; for (let i = 0; i < n; i++) p.push(fn(i / n)); return p; }
 
 // Fill a closed polygon, then ink it with a hand-drawn band of varying thickness.
-function inkShape(x, pts, fill, r, base = 10) {
+function inkShape(x, pts, fill, r, base = 10, shade) {
   x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(p[0], p[1]) : x.moveTo(p[0], p[1]))); x.closePath();
   if (fill) { x.fillStyle = fill; x.fill(); }
+  if (shade) shade(pts);
   x.strokeStyle = INK; x.lineCap = 'round'; x.lineJoin = 'round';
   const ph = r() * 6.28, n = pts.length;
   for (let i = 0; i < n; i++) {
@@ -26,10 +53,12 @@ function wobble(pts, r, amt) { return pts.map(([a, b]) => [a + (r() - 0.5) * amt
 function ellipse(cx, cy, rx, ry, n = 48, a0 = 0, a1 = Math.PI * 2) {
   return smoothPoly(n, (t) => { const a = a0 + (a1 - a0) * t; return [cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]; });
 }
-function partMesh(tex, wM, hM) {
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(wM, hM),
-    new THREE.MeshBasicMaterial({map: tex, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide}));
-  m.castShadow = false;
+function partMesh(tex, wM, hM, castsShadow = true) {
+  const mat = new THREE.MeshBasicMaterial({map: tex, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide});
+  mat.color = CHAR_TINT;
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(wM, hM), mat);
+  m.castShadow = D.shadows && castsShadow;
+  if (m.castShadow) m.customDepthMaterial = new THREE.MeshDepthMaterial({depthPacking: THREE.RGBADepthPacking, map: tex, alphaTest: 0.5, side: THREE.DoubleSide});
   return m;
 }
 
@@ -37,26 +66,42 @@ function partMesh(tex, wM, hM) {
 function drawHeadBase(o, r) {
   const c = canvas(HEAD_W * PX, HEAD_H * PX), x = c.getContext('2d');
   const cx = HEAD_W / 2 * PX, cy = HEAD_CY * PX, R = HEAD_R * PX;
-  inkShape(x, wobble(ellipse(cx, cy, R, R * 0.97, 64), r, 2), SKIN, r, 11);
+  const RX = R * headRX(), RY = R * headRY();
+  const headPts = D.head === 'egg'
+    ? wobble(smoothPoly(64, (t) => { const a = t * Math.PI * 2; return [cx + Math.cos(a) * RX * (1 - 0.09 * Math.sin(a)), cy + Math.sin(a) * RY]; }), r, 2)
+    : wobble(ellipse(cx, cy, RX, RY, 64), r, 2);
+  inkShape(x, headPts, SKIN, r, 11, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.42));
   x.fillStyle = 'rgba(232,140,120,0.35)';
   x.beginPath(); x.ellipse(cx - R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
   x.beginPath(); x.ellipse(cx + R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
   const fr = [];
-  for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.08 + 0.84 * i / 40); fr.push([cx + Math.cos(a) * R * 1.02, cy + Math.sin(a) * R * 1.02]); }
-  for (let i = 0; i <= 24; i++) {
-    const t = 1 - i / 24, xx = cx + (t - 0.5) * 2 * R * 0.9;
-    fr.push([xx, cy - R * 0.42 + Math.abs(Math.sin(t * Math.PI * 4)) * R * 0.2]);
+  const hx = (a, k = 1.02) => cx + Math.cos(a) * RX * k * (D.head === 'egg' ? 1 - 0.09 * Math.sin(a) : 1), hy = (a, k = 1.02) => cy + Math.sin(a) * RY * k;
+  const hairStyle = o.hairStyle || D.hair;
+  if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
+    for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
+    fr.push([cx + RX * 0.62, cy - RY * 0.66]);
+    fr.push([cx + RX * 0.2, cy - RY * 0.62]); fr.push([cx - RX * 0.3, cy - RY * 0.5]); fr.push([cx - RX * 0.7, cy - RY * 0.3]); fr.push([cx - RX * 0.95, cy - RY * 0.12]);
+  } else if (hairStyle === 'tuft') { // short cap of hair with a tuft on top
+    for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.12 + 0.76 * i / 40); fr.push([hx(a), hy(a)]); }
+    for (let i = 0; i <= 12; i++) { const t = 1 - i / 12; fr.push([cx + (t - 0.5) * 2 * RX * 0.8, cy - RY * 0.6 + Math.sin(t * Math.PI) * RY * 0.06]); }
+  } else {
+    for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.08 + 0.84 * i / 40); fr.push([hx(a), hy(a)]); }
+    for (let i = 0; i <= 24; i++) {
+      const t = 1 - i / 24, xx = cx + (t - 0.5) * 2 * RX * 0.9;
+      fr.push([xx, cy - RY * 0.42 + Math.abs(Math.sin(t * Math.PI * 4)) * R * 0.2]);
+    }
   }
-  inkShape(x, fr, o.hair, r, 9);
-  const top = cy - R;
+  inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
+  if (hairStyle === 'tuft' && o.hat === 'none') inkShape(x, ellipse(cx + RX * 0.1, cy - RY * 1.02, RX * 0.22, RY * 0.16, 30), o.hair, r, 8);
+  const top = cy - RY;
   if (o.hat === 'cap') {
-    inkShape(x, ellipse(cx, top + R * 0.42, R * 0.98, R * 0.62, 40, Math.PI, Math.PI * 2).concat([[cx + R * 0.98, top + R * 0.42]]), o.hatColor, r, 10);
+    inkShape(x, ellipse(cx, top + R * 0.42, R * 0.98, R * 0.62, 40, Math.PI, Math.PI * 2).concat([[cx + R * 0.98, top + R * 0.42]]), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, [[cx - R * 0.95, top + R * 0.36], [cx + R * 1.45, top + R * 0.36], [cx + R * 1.4, top + R * 0.5], [cx - R * 0.95, top + R * 0.5]], o.hatColor2 || o.hatColor, r, 9);
   } else if (o.hat === 'bowler') {
-    inkShape(x, ellipse(cx, top + R * 0.25, R * 0.82, R * 0.75, 40, Math.PI, Math.PI * 2), o.hatColor, r, 10);
+    inkShape(x, ellipse(cx, top + R * 0.25, R * 0.82, R * 0.75, 40, Math.PI, Math.PI * 2), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.25, R * 0.13, 40), o.hatColor, r, 9);
   } else if (o.hat === 'top') {
-    inkShape(x, [[cx - R * 0.62, top - R * 0.85], [cx + R * 0.62, top - R * 0.85], [cx + R * 0.68, top + R * 0.25], [cx - R * 0.68, top + R * 0.25]], o.hatColor, r, 10);
+    inkShape(x, [[cx - R * 0.62, top - R * 0.85], [cx + R * 0.62, top - R * 0.85], [cx + R * 0.68, top + R * 0.25], [cx - R * 0.68, top + R * 0.25]], o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.15, R * 0.13, 40), o.hatColor, r, 9);
   }
   return texFrom(c);
@@ -117,11 +162,12 @@ function drawFace(o, f, r) {
       default: dot(R * 0.1, R * 0.12); lid(ex, ey, s, f.eyes === 'calm' ? 'calm' : f.eyes);
     }
     // brows
-    const by = ey - R * 0.27; x.lineWidth = 9;
+    const by = ey - R * 0.27; x.lineWidth = D.brows === 'thick' ? 14 : 9;
     const brow = (yi, yo) => { x.beginPath(); x.moveTo(ex - s * R * 0.13, by + yi); x.lineTo(ex + s * R * 0.13, by + yo); x.stroke(); };
     if (f.brows === 'up') { x.beginPath(); x.arc(ex, by + R * 0.02, R * 0.14, Math.PI * 1.2, Math.PI * 1.8); x.stroke(); }
     if (f.brows === 'angry') brow(R * 0.1, -R * 0.05);
     if (f.brows === 'sad') brow(-R * 0.07, R * 0.06);
+    if (f.brows === 'none' && D.brows === 'thick') brow(-R * 0.02, -R * 0.04);
     if (f.brows === 'skeptic') brow(s < 0 ? -R * 0.08 : R * 0.03, s < 0 ? -R * 0.1 : R * 0.03);
   }
   // mouth
@@ -188,14 +234,27 @@ function drawTorso(o, r) {
   inkShape(x, [[cx, top + 52], [cx - 36, top + 6], [cx - 6, top + 2]], '#fffdf6', r, 5);
   inkShape(x, [[cx, top + 52], [cx + 36, top + 6], [cx + 6, top + 2]], '#fffdf6', r, 5);
   inkShape(x, [[cx, top + 40], [cx + 11, top + 58], [cx + 7, top + 140], [cx, top + 156], [cx - 7, top + 140], [cx - 11, top + 58]], o.tie, r, 5);
+  if (D.shading) {
+    x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
+    const g = x.createLinearGradient(cx - bw, 0, cx + bw, 0);
+    g.addColorStop(0, SHADE + '0)'); g.addColorStop(0.55, SHADE + '0)'); g.addColorStop(1, SHADE + '0.34)'); x.fillStyle = g; x.fillRect(0, 0, W * PX, H * PX);
+    const n = x.createRadialGradient(cx, top - 10, 4, cx, top - 10, 0.16 * PX); // shadow of the head on the chest
+    n.addColorStop(0, SHADE + '0.3)'); n.addColorStop(1, SHADE + '0)'); x.fillStyle = n; x.fillRect(0, 0, W * PX, H * PX);
+    x.restore();
+  }
   inkShape(x, pts, null, r, 11);
   return {mesh: partMesh(texFrom(c), W, H), W, H};
 }
 
 function drawLimb(len, color, end, r, wTop = 9, wBot = 5) {
+  if (D.limb) { wTop = Math.max(3, wTop + D.limb[0] - 9); wBot = Math.max(3, wBot + D.limb[1] - 5); }
   const W = 0.18, H = len + 0.1, c = canvas(W * PX, H * PX), x = c.getContext('2d');
   const cx = W / 2 * PX, top = 0.03 * PX, bot = (len + 0.02) * PX;
-  inkShape(x, wobble([[cx - wTop, top], [cx + wTop, top], [cx + wBot, bot], [cx - wBot, bot]], r, 1), color, r, 7);
+  inkShape(x, wobble([[cx - wTop, top], [cx + wTop, top], [cx + wBot, bot], [cx - wBot, bot]], r, 1), color, r, 7, (pts) => {
+    if (!D.shading) return; x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
+    const g = x.createLinearGradient(cx - wTop, 0, cx + wTop, 0); g.addColorStop(0, SHADE + '0)'); g.addColorStop(0.5, SHADE + '0)'); g.addColorStop(1, SHADE + '0.35)');
+    x.fillStyle = g; x.fillRect(0, 0, W * PX, H * PX); x.restore();
+  });
   if (end === 'hand') { x.fillStyle = INK; x.beginPath(); x.arc(cx, bot + 4, 0.05 * PX, 0, 7); x.fill(); }
   if (end === 'shoe') inkShape(x, ellipse(cx + 8, bot + 6, 0.07 * PX, 0.035 * PX, 30), '#3b2a2c', r, 6);
   if (end === 'elbow') { x.fillStyle = color; x.beginPath(); x.arc(cx, bot, wBot + 2, 0, 7); x.fill(); }
@@ -281,15 +340,16 @@ export function makeChar(name, o = {}) {
   const s = o.scale || 1;
   g.scale.setScalar(s);
 
-  const hipY = 0.64, shY = 1.1, neckY = 1.12;
+  const LX = D.legExtra || 0;
+  const hipY = 0.64 + LX, shY = 1.1 + LX, neckY = 1.12 + LX;
   const legs = [];
   for (const sx of [-1, 1]) {
     const piv = new THREE.Group(); piv.position.set(sx * 0.075, hipY, -0.02);
-    const l = drawLimb(0.62, p.lower, 'shoe', r);
+    const l = drawLimb(0.62 + LX, p.lower, 'shoe', r);
     l.mesh.position.set(0, -l.H / 2 + 0.03, 0); piv.add(l.mesh); body.add(piv); legs.push(piv);
   }
   const torso = drawTorso(p, r);
-  torso.mesh.position.set(0, 0.53 + torso.H / 2, 0); body.add(torso.mesh);
+  torso.mesh.position.set(0, 0.53 + LX + torso.H / 2, 0); body.add(torso.mesh);
   const arms = [];
   for (const sx of [-1, 1]) {
     const up = new THREE.Group(); up.position.set(sx * 0.165, shY, 0.02);
@@ -305,7 +365,7 @@ export function makeChar(name, o = {}) {
   const headPiv = new THREE.Group(); headPiv.position.set(0, neckY, 0.03); body.add(headPiv);
   const headY = (1.42 - neckY) + (HEAD_H / 2 - (1 - HEAD_CY));
   const head = partMesh(drawHeadBase(p, r), HEAD_W, HEAD_H); head.position.set(0, headY, 0); headPiv.add(head);
-  const face = partMesh(null, HEAD_W, HEAD_H); face.position.set(0, headY, 0.004); headPiv.add(face);
+  const face = partMesh(null, HEAD_W, HEAD_H, false); face.position.set(0, headY, 0.004); headPiv.add(face);
   const faceCache = new Map();
   const faceTex = (f) => {
     const key = `${f.eyes}|${f.brows}|${f.mouth}|${(f.extras || []).join(',')}`;
@@ -383,7 +443,7 @@ export function makeChar(name, o = {}) {
     const nod = acts.some((a) => a.action === 'nod');
     headPiv.rotation.x = 0;
     headPiv.rotation.z = Math.sin(t * 1.3 + phase) * nodAmt;
-    headPiv.position.y = 1.12 - 0.05 * slump + (nod ? -Math.abs(Math.sin(t * 10)) * 0.04 : 0);
+    headPiv.position.y = neckY - 0.05 * slump + (nod ? -Math.abs(Math.sin(t * 10)) * 0.04 : 0);
     headPiv.position.x = Math.sin(t * 16) * 0.035 * shake;
     headPiv.rotation.z += Math.sin(t * 16) * 0.14 * shake + slump * 0.12;
     const sw = Math.sin(t * walkF) * 0.45 * Math.min(1.3, walk);

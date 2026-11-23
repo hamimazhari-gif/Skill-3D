@@ -93,6 +93,8 @@ General traits to follow. Never copy another channel's characters, costumes, log
 - No flat sky or ground strips, no side-on cardboard buildings. Cuts: 0.4 s dip to cream at location changes; continuous camera moves where one shot flows into the next.
 
 ## Characters and acting (expressive cartoon style)
+**A new character design for every video (user rule).** `char.js` has `DESIGNS` (`classic`, `egg`, `bean`, add more) built from: head shape (round / egg / bean), hair style (fringe / side / tuft), skin, brow weight, limb thickness, leg length, painted shading and cast shadows. Each story sets `CHAR_DESIGN` and a `CAST` palette table in `world.js` (`setCharDesign` is called at the top of `buildWorld`). Never reuse the previous video's design: pick a different preset or make a new one, and record it in `camera_plan.md`. Keep the shading look: every part has painted light from the upper left with a soft core shadow on the lower right, the head leaves a shadow on the chest, characters cast real shadows on floors and walls (`customDepthMaterial` with the texture alpha), and `CHAR_TINT` tints them with the scene light each frame. (The base design described below is the `classic` preset.)
+
 Base design (never redesign): large round pale head, calm half-lidded eyes, tiny smile, hair fringe, white collar, tie, small pear-shaped two-tone torso with pocket patch, thin tapered stick limbs (two-segment arms), dark disc hands, wobbly hand-drawn ink band. Variants by palette, hat (top hat, bowler, cap, none) and glasses only. Flat shading, contact-shadow blob, limited yaw toward camera (±0.7 rad).
 
 Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — expr/pose persist until the next cue; actions run for `dur` seconds.

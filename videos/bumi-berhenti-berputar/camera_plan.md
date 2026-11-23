@@ -42,3 +42,9 @@ Lokasi (offset x): planet 0, town 40, beach 80, room 120, desert 160, frozen 200
 
 ## SFX
 Whoosh di setiap pindah lokasi; boom di "berhenti", "mendadak", "badai"; counter tick di "seribu" dan jam dinding; buzz di "24 jam"; pop di label; chime di "tidak" dan "komentar"; klik mouse di akhir.
+
+## Desain tokoh (khusus video ini)
+Preset `egg`: kepala lonjong seperti telur, kulit pucat, alis tebal, kaki lebih panjang (+7 cm) dan lengan/kaki tipis.
+Bayangan dilukis di setiap bagian (terang dari kiri atas, bayangan lembut di kanan bawah, bayangan kepala di dada), tokoh menjatuhkan bayangan nyata ke lantai/dinding, dan warna tokoh ikut cahaya adegan.
+Tokoh utama: jaket oranye, rambut disisir ke samping, tanpa topi. Tetangga: rambut jambul / topi bowler. Ilmuwan: rambut jambul abu-abu.
+Video sebelumnya memakai `classic` (kepala bulat, topi kuning); video berikutnya harus memakai desain lain.

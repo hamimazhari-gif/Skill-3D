@@ -1,7 +1,7 @@
 // All locations in one scene at different x offsets. Story: "Apa yang terjadi kalau Bumi tiba-tiba berhenti berputar?".
 import * as THREE from 'three';
 import {toon, box, cyl, ball, cone, at, sign, paintTex, pop, smooth, clamp01, INK, rng} from './kit';
-import {makeChar} from './char';
+import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
@@ -9,6 +9,15 @@ import {LOOK_PRESETS, MOODS} from './lighting';
 export const LOC = {planet: 0, town: 40, beach: 80, room: 120, desert: 160, frozen: 200, lab: 240};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
+
+// Cast look for this story (palette overrides on top of char.js PALETTES).
+export const CHAR_DESIGN = 'egg';
+const CAST = {
+  hero: {jacket: '#e07a3a', lower: '#34445e', tie: '#f3e7d3', hair: '#2b2326', hat: 'none', hairStyle: 'side', pocket: '#c9622a'},
+  pal1: {hairStyle: 'tuft'},
+  pal2: {hat: 'bowler', hatColor: '#4a3a56'},
+  scientist: {hairStyle: 'tuft', hair: '#8a8a8a'},
+};
 
 // Lighting plan (camera_plan.md): space around the globe (dark navy, sun key from the left); a sunny town that turns to
 // danger when the Earth stops and to a storm for the winds; a bright noon beach going tense as the sea drains; a warm
@@ -59,12 +68,14 @@ export function storyFx(T, EVt) {
 }
 
 export function buildWorld(lang, T, EVt, L) {
+  // Character design for this story (each video has its own): egg heads, side-swept hair, painted shading, cast shadows.
+  setCharDesign(CHAR_DESIGN);
   const world = new THREE.Group();
   const chars = [];
   const updaters = [];
   const locGroups = {};
   const addLoc = (name) => { const g = new THREE.Group(); g.position.x = LOC[name]; world.add(g); locGroups[name] = g; return g; };
-  const ch = (name, o, parent, x, z, yaw = 0, y = 0) => { const c = makeChar(name, {yaw, ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); return c; };
+  const ch = (name, o, parent, x, z, yaw = 0, y = 0) => { const c = makeChar(name, {yaw, ...(CAST[name] || {}), ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); return c; };
   const E = (k) => EVt[k];
   const cut = (k) => T.CUTS[k - 1];
   const inShots = (t, a, b = a) => t >= cut(a) && t < cut(b + 1);
