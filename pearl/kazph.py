@@ -31,7 +31,7 @@ rng = np.random.default_rng(1)
 
 # ---------------------------------------------------------------- timing
 _TG = json.load(open(os.path.join(HERE, 'timing_gap.json'), encoding='utf-8'))
-TM, BAB, DUR = _TG['paras'], _TG['bab'], _TG['duration']
+TM, BAB, DUR = _TG['paras'], _TG['bab'], _TG['duration'] + 5.0   # 5 s tail so the end title can breathe
 CHAP = [b for b in BAB if b['n'] >= 1]                    # chapters with a title card
 PSTART = {str(d['i']): d['start'] for d in TM}
 PTEXT = {str(d['i']): d['text'] for d in TM}
