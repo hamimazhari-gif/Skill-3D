@@ -131,6 +131,27 @@ Acting API (`char.js`): `c.act([{t, expr?, pose?, action?, dur?}, ...])` — exp
 - Pacing: plan 18-25 framings for a 60 s video. A `SHOT_PLAN` entry is one framing; several entries may share a location and a narration shot (cut inside a sentence on a word with `at` keys, or use continuous moves).
 - Frame reactions in close-up (camera 0.9-1.3 m from the face, look at head height 1.4 m); establish each new location with one wide or crane move first.
 - 80° vertical FOV at 9:16: frame width at the subject = 0.93 × distance, frame height = 1.68 × distance.
+- **Vary angles and moves (user rule: no monotone camera).** Inside one location use 2-3 framings of different kinds: low tracking shot beside a walking character, high crane down, overhead on a prop, orbit/arc around the subject, low angle looking up at an authority figure, high angle down on a small or defeated character, handheld-style truck. Keys also take `roll` (dutch angle, radians, ±0.06-0.14 for tension or comedy) and `fov` (70-74 tele for close drama or a planet, 84 wide for crane-ups and reveals; default 80). `camAt` eases roll and fov between keys; the thumbnail ignores both.
+- **Characters walk when the story moves them** (entering a room, arriving at a stall, running to a reunion). Use `walkPath(c, [[t, x, z], …], {run})` in `world.js`: it adds walk/run leg actions for each moving segment and an updater that moves the body and turns it into the walking direction (yaw clamps ±1.1, 0.2 s ramp), then back to its rest yaw. Track the walker with a low side camera, and end the walk before the first reaction cue. Helper (put it next to the other helpers in `buildWorld`; it needs `updaters`):
+```js
+  const walkPath = (c, keys, o = {}) => {
+    const rest = c.state.yaw0;
+    for (let i = 0; i < keys.length - 1; i++) {
+      const [a, x0, z0] = keys[i], [b, x1, z1] = keys[i + 1];
+      if (b - a > 0.05 && Math.hypot(x1 - x0, z1 - z0) > 0.2) c.act([{t: a, action: o.run ? 'run' : 'walk', dur: b - a}]);
+    }
+    updaters.push((t) => {
+      let i = 0; while (i < keys.length - 1 && t >= keys[i + 1][0]) i++;
+      const [a, x0, z0] = keys[i], [b, x1, z1] = keys[Math.min(i + 1, keys.length - 1)];
+      const u = b > a ? Math.max(0, Math.min(1, (t - a) / (b - a))) : 1;
+      c.group.position.x = x0 + (x1 - x0) * u; c.group.position.z = z0 + (z1 - z0) * u;
+      const moving = b - a > 0.05 && t > a && t < b && Math.hypot(x1 - x0, z1 - z0) > 0.2;
+      const dir = Math.max(-1.1, Math.min(1.1, Math.atan2(x1 - x0, Math.abs(z1 - z0) + 0.001)));
+      const ramp = moving ? Math.min(1, (t - a) / 0.2, (b - t) / 0.2) : 0;
+      c.state.yaw0 = rest + (dir - rest) * ramp;
+    });
+  };
+```
 - Tie on-screen events to words (labels and props pop on their noun, doodles draw on their word, ticks appear on the payoff word). A word at the very end of a sentence leaves little screen time: start the event earlier or extend the key.
 
 ## Lighting (`lighting.js`) — comes from the story
@@ -167,6 +188,7 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 
 ## Sound
 - The voice-over is the composition audio; SFX come from `public/sfx/` (see its README) in `cues()`: whooshes on dips, pops on items, buzz on refusals, ticks on numbers/time, riser into the pivot, boom on the big reveal, ding on success, chime on the closing line, one click on "comment". Volumes 0.18-0.45, no more than one accent per second.
+- **Vary the sound (user rule).** Besides the library files, `public/sfx/synth/` has procedural sounds made by `tools/synth_sfx.py` (numpy only; re-run to regenerate): footsteps_walk / footsteps_run / cane_shuffle (trim each to the walk with the 4th cue field), boing, slide_whistle_up/down, thud, swish, heart_pop, sparkle, ka_ching, party_horn, punch_clock, clock_tick, page_flips, creak, crowd_murmur / crowd_angry / crowd_cheer, applause, birds, frying, rumble, tada, uh_oh. Rotate the four whooshes across location changes, lay a quiet ambience per location (birds outside, clock_tick in an office, frying at a food stall, rumble in space, 0.08-0.15), and pick a different accent for each comic beat instead of repeating pop. Cue format: `[file, t, vol, trimSeconds?]`. These are synthesized: check levels with `ffmpeg -af volumedetect` and keep the voice clearly on top.
 - Final mix is loudness-normalised to -14 LUFS (`tools/render.sh`).
 
 ## Check it (stills)

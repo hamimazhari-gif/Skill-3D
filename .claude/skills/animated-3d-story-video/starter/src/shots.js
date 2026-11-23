@@ -121,7 +121,8 @@ export function buildCameras(T, EVt) {
     for (let j = 1; j < times.length; j++) times[j] = Math.max(times[j], times[j - 1] + 0.35);
     const pos = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.pos[0] + ox, k.pos[1] + ly(p, k), k.pos[2])), false, 'centripetal');
     const look = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.look[0] + ox, k.look[1] + ly(p, k), k.look[2])), false, 'centripetal');
-    return {...p, t0, t1, times, pos, look};
+    const rolls = p.keys.map((k) => k.roll || 0), fovs = p.keys.map((k) => k.fov || 80);
+    return {...p, t0, t1, times, pos, look, rolls, fovs};
   });
 }
 
@@ -130,5 +131,8 @@ export function camAt(cams, t) {
   let c = cams[0];
   for (const k of cams) if (t >= k.t0) c = k;
   const u = warpU(c.times, t);
-  return {pos: c.pos.getPoint(u), look: c.look.getPoint(u), loc: c.loc};
+  // roll (dutch angle, rad) and fov (lens) per key, eased between keys
+  const s = u * (c.rolls.length - 1), i = Math.min(c.rolls.length - 2, Math.floor(s)), f = s - i;
+  const e = f * f * (3 - 2 * f), mix = (a) => (a.length < 2 ? a[0] : a[i] + (a[i + 1] - a[i]) * e);
+  return {pos: c.pos.getPoint(u), look: c.look.getPoint(u), loc: c.loc, roll: mix(c.rolls), fov: mix(c.fovs)};
 }

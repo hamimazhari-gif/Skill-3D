@@ -67,14 +67,14 @@ function Scene({lang, thumb}) {
   const fref = useRef(frame); fref.current = frame;
   useFrame(() => {
     const t = thumb ? thumb.t : fref.current / FPS;
-    let {pos, look, loc} = camAt(built.cams, t);
+    let {pos, look, loc, roll, fov} = camAt(built.cams, t);
     if (thumb) { pos = new THREE.Vector3(...thumb.pos).add(new THREE.Vector3(LOC[loc], 0, 0)); look = new THREE.Vector3(...thumb.look).add(new THREE.Vector3(LOC[loc], 0, 0)); }
-    camera.position.copy(pos); camera.lookAt(look);
+    camera.position.copy(pos); camera.lookAt(look); if (!thumb && roll) camera.rotateZ(roll);
     // camera shake on impacts (decaying, deterministic)
     let amp = 0;
     for (const sh of storyFx(T, EVt).shakes) { const dt = t - sh.t; if (dt > 0 && dt < sh.dur) amp = Math.max(amp, sh.amp * (1 - dt / sh.dur)); }
     if (amp > 0 && !thumb) { camera.position.x += Math.sin(t * 71) * amp; camera.position.y += Math.sin(t * 53 + 1) * amp; camera.rotation.z += Math.sin(t * 37) * amp * 0.5; }
-    camera.fov = 80; camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
+    camera.fov = thumb ? 80 : (fov || 80); camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
     for (const [name, g] of Object.entries(built.locGroups)) g.visible = name === loc;
     const lk = resolveLook(LOOK[loc], t, {EVt, CUTS: T.CUTS});
     if (!scene.fog) scene.fog = new THREE.Fog('#efe6d2', 14, 55);
