@@ -22,3 +22,29 @@ Sound effects for the videos. Use them in Remotion with `staticFile('sfx/<file>'
 | mouse-click-sound-effect.mp3 | 3.07 s | arrow drawn or pointed (trim to the first click) |
 
 Mix: SFX under the voice-over (about -18 to -12 dB relative to the VO); no more than one accent per second.
+
+## Synthesized cartoon sounds (`synth/`)
+
+Made in code by `tools/synth_sfx.py` (numpy only, no third-party recordings; re-run it to rebuild). Use them as `staticFile('sfx/synth/<file>')`.
+
+| File | Use |
+|---|---|
+| footsteps_walk.wav / footsteps_run.wav | under a character walking / running (trim to the walk) |
+| cane_shuffle.wav | old person shuffling with a cane |
+| boing.wav | jumps, hops, comic bounce |
+| slide_whistle_up.wav / slide_whistle_down.wav | rising hope / a fall, shock, something drops |
+| thud.wav | heavy object lands, impact |
+| swish.wav | whip pan, quick hand move, something whipped out |
+| heart_pop.wav | hearts, small happy pops |
+| sparkle.wav | magic, wishes, shiny reveal |
+| ka_ching.wav | money, price, sale |
+| party_horn.wav / tada.wav | party, celebration |
+| punch_clock.wav | clocking in, stamp, mechanical clunk |
+| clock_tick.wav | room tone in offices and classrooms |
+| page_flips.wav | books, papers |
+| creak.wav | creaky knees, old furniture |
+| crowd_murmur.wav / crowd_angry.wav / crowd_cheer.wav / applause.wav | crowds |
+| birds.wav | outdoor day ambience |
+| frying.wav | street food, kitchen |
+| rumble.wav | big danger, Earth, tension bed |
+| uh_oh.wav | comic "uh-oh" on a bad surprise |
