@@ -14,5 +14,11 @@ PL=/tmp/claude-0/-home-user-Skill-3D/c280758a-1754-5c85-83f9-bb7bca6b2e9c/scratc
 VF="scale=1280:720:flags=lanczos,hqdn3d=1.5:1.5:4:4"
 ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$VF" -c:v libx264 -preset slow -b:v 780k -pass 1 -passlogfile $PL -an -f null /dev/null
 ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$VF" -c:v libx264 -preset slow -b:v 780k -pass 2 -passlogfile $PL -c:a aac -b:a 128k -movflags +faststart Perang_Tiga_Puluh_Tahun_Kaz_720p.mp4
+V5="scale=960:540,hqdn3d=3:3:6:6"
+ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$V5" -c:v libx264 -preset medium -b:v 330k -pass 1 -passlogfile $PL -an -f mp4 /dev/null
+ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$V5" -c:v libx264 -preset medium -b:v 330k -pass 2 -passlogfile $PL -c:a aac -b:a 96k -movflags +faststart Perang_Tiga_Puluh_Tahun_Kaz_540p.mp4
+VH="hqdn3d=1.5:1.5:4:4"
+ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$VH" -c:v libx264 -preset slow -b:v 2800k -pass 1 -passlogfile $PL -an -f mp4 /dev/null
+ffmpeg -v error -y -i Perang_Tiga_Puluh_Tahun_Kaz_1080p.mp4 -vf "$VH" -c:v libx264 -preset slow -b:v 2800k -pass 2 -passlogfile $PL -c:a aac -b:a 192k -movflags +faststart Perang_Tiga_Puluh_Tahun_Kaz_1080p_HQ.mp4
 rm -f board.mp4 parts/p*.mp4
 ls -la *.mp4
