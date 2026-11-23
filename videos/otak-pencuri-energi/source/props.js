@@ -1,6 +1,6 @@
 // Shared procedural props: facade/house, stall, sack, crate, barrel, tree, goat, chicken, fish, coin, etc.
 import * as THREE from 'three';
-import {INK, toon, ink, box, cyl, ball, cone, at, sign, signTex, paintTex, canvas, texFrom, rng, shade, decal, gradientMap, patternTex, patternMat} from './kit';
+import {INK, toon, ink, box, cyl, ball, cone, at, sign, signTex, paintTex, canvas, texFrom, rng, shade, decal, gradientMap} from './kit';
 
 // Extruded wall with window reveals + sills, door as a notch (not a hole touching the edge), cornice, interior backdrop.
 export function facade(w, h, o = {}) {
@@ -101,11 +101,10 @@ export function barrel(o = {}) {
 export function tree(o = {}) {
   const g = new THREE.Group(); const r = rng(o.seed || 5);
   const h = o.h || 2.4;
-  g.add(cyl(0.12, 0.18, h, toon(patternTex('bark', {base: '#6a4a30', seed: 3, repeat: [1, 2]}), {rough: 0.95, bump: 3})));
-  const leaf = o.leaf || '#6f9a4f';
-  for (let i = 0; i < 9; i++) {
-    const b = ball(0.45 + r() * 0.4, toon(shade(leaf, (r() - 0.5) * 0.25), {paint: {grain: 300, seed: 70 + i}, rough: 0.8, bump: 2.5}), {seg: 12});
-    at(b, (r() - 0.5) * 1.2, h + (r() - 0.2) * 1.0, (r() - 0.5) * 1.2); g.add(b);
+  g.add(cyl(0.12, 0.18, h, '#7a5236'));
+  for (let i = 0; i < 4; i++) {
+    const b = ball(0.7 + r() * 0.4, o.leaf || '#6f9a4f', {seg: 10});
+    at(b, (r() - 0.5) * 0.9, h + (r() - 0.2) * 0.8, (r() - 0.5) * 0.9); g.add(b);
   }
   return g;
 }
@@ -333,17 +332,14 @@ export function phone() {
 
 export function room(w, h, d, o = {}) {
   const g = new THREE.Group();
-  const rich = o.rich !== false;
-  const floorMat = rich ? patternMat(o.floorPattern || (o.floorPaint && o.floorPaint.bricks ? 'tiles' : 'woodfloor'), {base: o.floor || '#b08454', repeat: [w / 2.5, d / 2.5], seed: 61, n: 5}) : toon(o.floor || '#b08454', {paint: {planks: o.tiles ? 0 : 12, seed: 61, ...(o.floorPaint || {})}});
-  const floor = box(w, 0.1, d, floorMat, {edges: false});
+  const floor = box(w, 0.1, d, toon(o.floor || '#b08454', {paint: {planks: o.tiles ? 0 : 12, seed: 61, ...(o.floorPaint || {})}}), {edges: false});
   at(floor, 0, -0.1, -d / 2 + 1); g.add(floor);
-  const wallMat = rich ? patternMat(o.wallPattern || 'wallpaper', {base: o.wall || '#e7d2b0', accent: shade(o.wall || '#e7d2b0', -0.12), repeat: [w / 2, h / 2], seed: 62, bump: 0.6}) : toon(o.wall || '#e7d2b0', {paint: {bricks: !!o.bricks, seed: 62, stains: 16}});
+  const wallMat = toon(o.wall || '#e7d2b0', {paint: {bricks: !!o.bricks, seed: 62, stains: 16}});
   const back = box(w, h, 0.2, wallMat); at(back, 0, 0, -d + 1); back.traverse((m) => { m.castShadow = false; }); g.add(back);
   for (const s of [-1, 1]) {
     const side = box(0.2, h, d, wallMat); at(side, s * w / 2, 0, -d / 2 + 1); side.traverse((m) => { m.castShadow = false; }); g.add(side);
   }
-  const wain = box(w - 0.2, 0.9, 0.06, rich ? patternMat('woodfloor', {base: o.wain || '#9a6a4a', planks: 2, seed: 63, repeat: [w / 2, 1]}) : o.wain || '#9a6a4a'); at(wain, 0, 0, -d + 1.12); g.add(wain);
-  if (rich) { const rail = box(w - 0.2, 0.06, 0.1, toon(shade(o.wain || '#9a6a4a', -0.15), {rough: 0.5})); at(rail, 0, 0.9, -d + 1.14); g.add(rail); for (const s of [-1, 1]) { const bb = box(0.06, 0.14, d, toon(shade(o.wain || '#9a6a4a', -0.1), {rough: 0.6})); at(bb, s * (w / 2 - 0.13), 0, -d / 2 + 1); g.add(bb); } }
+  const wain = box(w - 0.2, 0.9, 0.06, o.wain || '#9a6a4a'); at(wain, 0, 0, -d + 1.12); g.add(wain);
   const ceil = box(w, 0.15, d, '#6a4a3a'); at(ceil, 0, h, -d / 2 + 1); ceil.traverse((m) => { m.castShadow = false; }); g.add(ceil);
   for (let i = 0; i < 4; i++) { const b = box(w, 0.18, 0.2, '#5a3a2a'); at(b, 0, h - 0.18, -d + 1.5 + i * d / 4); b.traverse((m) => { m.castShadow = false; }); g.add(b); }
   return g;
@@ -381,19 +377,9 @@ export function skyDome() {
   const geo = new THREE.SphereGeometry(400, 32, 16);
   const mat = new THREE.ShaderMaterial({
     side: THREE.BackSide, depthWrite: false, fog: false,
-    uniforms: {top: {value: new THREE.Color('#9fc8e8')}, bottom: {value: new THREE.Color('#f3e7d3')}, clouds: {value: 0.0}},
+    uniforms: {top: {value: new THREE.Color('#9fc8e8')}, bottom: {value: new THREE.Color('#f3e7d3')}},
     vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-    fragmentShader: [
-      'uniform vec3 top; uniform vec3 bottom; uniform float clouds; varying vec3 vP;',
-      'float hsh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
-      'float nz(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(hsh(i), hsh(i+vec2(1,0)), f.x), mix(hsh(i+vec2(0,1)), hsh(i+vec2(1,1)), f.x), f.y); }',
-      'float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * nz(p); p *= 2.03; a *= 0.5; } return v; }',
-      'void main(){ float h = smoothstep(-0.05, 0.6, vP.y); vec3 col = mix(bottom, top, h);',
-      ' if (clouds > 0.0 && vP.y > 0.02) { vec2 uv = vP.xz / (vP.y + 0.25) * 1.6; float c = smoothstep(0.48, 0.78, fbm(uv)); c *= smoothstep(0.02, 0.25, vP.y);',
-      '  vec3 cc = mix(vec3(1.0), bottom, 0.25) * (0.85 + 0.15 * fbm(uv * 2.0 + 3.0)); col = mix(col, cc, c * clouds); }',
-      ' gl_FragColor = vec4(col, 1.0);',
-      '#include <colorspace_fragment>',
-      '}'].join('\n'),
+    fragmentShader: 'uniform vec3 top; uniform vec3 bottom; varying vec3 vP; void main(){ float h = smoothstep(-0.05, 0.6, vP.y); gl_FragColor = vec4(mix(bottom, top, h), 1.0);\n#include <colorspace_fragment>\n}',
   });
   const m = new THREE.Mesh(geo, mat); m.renderOrder = -10; m.frustumCulled = false;
   return m;
@@ -408,7 +394,7 @@ export function moon(r = 6) {
   x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false}));
   halo.scale.setScalar(r * 5); g.add(halo);
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false})); disc.material.color.multiplyScalar(3.0);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false}));
   g.add(disc);
   g.userData.faceCamera = true;
   return g;
@@ -844,7 +830,7 @@ export function sunBall(r = 3, color = '#ffd760') {
   gr.addColorStop(0, 'rgba(255,240,180,0.9)'); gr.addColorStop(0.35, 'rgba(255,210,110,0.4)'); gr.addColorStop(1, 'rgba(255,200,100,0)');
   x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false})); halo.scale.setScalar(r * 5); g.add(halo);
-  const sm = new THREE.MeshBasicMaterial({color, fog: false}); sm.color.multiplyScalar(3.5); g.add(new THREE.Mesh(new THREE.SphereGeometry(r, 32, 20), sm));
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(r, 32, 20), new THREE.MeshBasicMaterial({color, fog: false})));
   return g;
 }
 
@@ -953,7 +939,7 @@ export function bulb(s = 1) {
   const fil = new THREE.Mesh(new THREE.TorusGeometry(0.07 * s, 0.012 * s, 6, 16, Math.PI), new THREE.MeshBasicMaterial({color: '#6a4a2a'})); fil.position.y = 0.42 * s; g.add(fil);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex(), transparent: true, depthWrite: false, opacity: 0, color: '#ffe08a'})); halo.scale.setScalar(1.6 * s); halo.position.y = 0.42 * s; g.add(halo);
   const light = new THREE.PointLight('#ffd98a', 0, 7, 1.6); light.position.y = 0.45 * s; g.add(light);
-  return {group: g, set(on) { glassMat.color.set(on > 0.5 ? '#fff3a0' : '#e8eef2'); if (on > 0.5) glassMat.color.multiplyScalar(1 + on * 2.5); glassMat.opacity = 0.5 + on * 0.45; fil.material.color.set(on > 0.5 ? '#fffbe0' : '#6a4a2a'); halo.material.opacity = on * 0.9; light.intensity = on * 4; }};
+  return {group: g, set(on) { glassMat.color.set(on > 0.5 ? '#fff3a0' : '#e8eef2'); glassMat.opacity = 0.5 + on * 0.45; fil.material.color.set(on > 0.5 ? '#fffbe0' : '#6a4a2a'); halo.material.opacity = on * 0.9; light.intensity = on * 4; }};
 }
 let _glow;
 function glowTex() {
@@ -1012,150 +998,5 @@ export function waterGlass() {
 export function bookStack(n = 4, seed = 3) {
   const g = new THREE.Group(); const r = rng(seed); let y = 0;
   for (let i = 0; i < n; i++) { const h = 0.05 + r() * 0.03; const b = box(0.32 + r() * 0.06, h, 0.24, ['#c75b5b', '#4f7fa6', '#e8c35a', '#5a9a8a', '#9a6fb0'][i % 5], {hull: 0.008}); at(b, (r() - 0.5) * 0.04, y, 0, (r() - 0.5) * 0.3); g.add(b); y += h; }
-  return g;
-}
-
-// ================= Set dressing & nature (rich, layered worlds like the reference) =================
-// Emissive (HDR, blooms) basic material for light sources: lamp glass, flames, lit windows, moon.
-export function hdr(color, k = 3.5) { const m = new THREE.MeshBasicMaterial({color}); m.color.multiplyScalar(k); return m; }
-
-export function rug(w = 2.4, d = 1.6, o = {}) {
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), patternMat('carpet', {base: o.base || '#b8433a', accent: o.accent || '#e8b44a', accent2: o.accent2 || '#2f3f6a', dark: o.dark || '#22263a', seed: o.seed || 3}));
-  m.rotation.x = -Math.PI / 2; m.position.y = 0.015; m.receiveShadow = true;
-  const g = new THREE.Group(); g.add(m); return g; // wrapped so at()/position never resets the flat rotation
-}
-export function curtain(w = 1.2, h = 2.0, color = '#8a3f4a') {
-  const g = new THREE.Group(); const geo = new THREE.PlaneGeometry(w, h, 24, 1); const p = geo.attributes.position;
-  for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) / w * Math.PI * 7) * 0.05);
-  geo.computeVertexNormals();
-  const m = new THREE.Mesh(geo, toon(patternTex('fabric', {base: color, accent: shade(color, 0.12), accent2: shade(color, -0.2), stripes: 10, seed: 5}), {rough: 0.95, bump: 2}));
-  m.material.side = THREE.DoubleSide; m.position.y = h / 2; m.castShadow = true; g.add(m);
-  const rod = cyl(0.025, 0.025, w + 0.3, toon('#8a6a3a', {rough: 0.35, metal: 0.7}), {center: true}); rod.rotation.z = Math.PI / 2; rod.position.y = h + 0.03; g.add(rod);
-  return g;
-}
-export function shelf(w = 1.4, h = 1.8, o = {}) {
-  const g = new THREE.Group(); const wood = patternMat('woodfloor', {base: o.wood || '#7a4f2e', planks: 3, seed: 21});
-  for (const s of [-1, 1]) { const side = box(0.05, h, 0.35, wood); at(side, s * w / 2, 0, 0); g.add(side); }
-  const r = rng(o.seed || 8);
-  for (let k = 0; k <= 3; k++) {
-    const y = k * h / 3.4; const b = box(w, 0.04, 0.35, wood); at(b, 0, y, 0); g.add(b);
-    if (k === 3) continue;
-    let x0 = -w / 2 + 0.06;
-    while (x0 < w / 2 - 0.15) {
-      if (r() < 0.65) { const bw = 0.04 + r() * 0.04, bh = 0.22 + r() * 0.14; const bk = box(bw, bh, 0.24, toon(['#8a2f2a', '#2f4f7a', '#3f6a3a', '#c99a3a', '#5a3a6a'][Math.floor(r() * 5)], {rough: 0.7}), {}); at(bk, x0 + bw / 2, y + 0.02, 0, 0, 0, r() < 0.15 ? 0.25 : 0); g.add(bk); x0 += bw + 0.01; }
-      else { const pot = jar(0.07 + r() * 0.05, 0.14 + r() * 0.1, ['#c75b5b', '#4f7fa6', '#d8c8a8', '#5a9a8a'][Math.floor(r() * 4)]); at(pot, x0 + 0.08, y + 0.02, 0); g.add(pot); x0 += 0.2; }
-    }
-  }
-  return g;
-}
-export function jar(rad = 0.12, h = 0.3, color = '#b8643a') {
-  const pts = []; for (let i = 0; i <= 12; i++) { const t = i / 12; pts.push(new THREE.Vector2(rad * (0.55 + 0.6 * Math.sin(t * Math.PI * 0.95) - (t > 0.85 ? 0.25 : 0)), t * h)); }
-  const m = new THREE.Mesh(new THREE.LatheGeometry(pts, 24), toon(patternTex('plaster', {base: color, seed: 9}), {rough: 0.45, bump: 0.8})); m.castShadow = true; m.receiveShadow = true;
-  const g = new THREE.Group(); g.add(m); const band = new THREE.Mesh(new THREE.TorusGeometry(rad * 1.08, rad * 0.06, 6, 24), toon(shade(color, -0.3), {rough: 0.5})); band.rotation.x = Math.PI / 2; band.position.y = h * 0.55; g.add(band);
-  return g;
-}
-export function chest(w = 0.8, h = 0.5, d = 0.5) {
-  const g = new THREE.Group(); const wood = patternMat('woodfloor', {base: '#7a4a2a', planks: 4, seed: 31});
-  const b = box(w, h, d, wood); g.add(b); const lid = box(w + 0.02, 0.08, d + 0.02, wood); at(lid, 0, h, 0); g.add(lid);
-  const metal = toon('#c9a44a', {rough: 0.3, metal: 0.85});
-  for (const s of [-0.3, 0.3]) { const strap = box(0.06, h + 0.1, d + 0.03, metal); at(strap, s * w, 0, 0); g.add(strap); }
-  const lock = box(0.1, 0.12, 0.03, metal); at(lock, 0, h - 0.12, d / 2 + 0.01); g.add(lock);
-  return g;
-}
-export function pictureFrame(w = 0.9, h = 0.65, kind = 'landscape') {
-  const g = new THREE.Group(); const c = canvas(256, Math.round(256 * h / w)), x = c.getContext('2d'); const W = c.width, H = c.height;
-  const sky = x.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#f2c27a'); sky.addColorStop(1, '#e8866a'); x.fillStyle = sky; x.fillRect(0, 0, W, H);
-  x.fillStyle = '#fff3c8'; x.beginPath(); x.arc(W * 0.7, H * 0.38, H * 0.12, 0, 7); x.fill();
-  for (const [col, y0, a] of [['#7a5a8a', 0.55, 0.18], ['#4f3f6a', 0.68, 0.14], ['#2f3a4a', 0.82, 0.1]]) { x.fillStyle = col; x.beginPath(); x.moveTo(0, H); for (let i = 0; i <= 20; i++) x.lineTo(i / 20 * W, H * (y0 - Math.sin(i * 0.9 + y0 * 10) * a * 0.5 - Math.abs(Math.sin(i * 0.35)) * a)); x.lineTo(W, H); x.fill(); }
-  const art = new THREE.Mesh(new THREE.PlaneGeometry(w, h), toon(texFrom(c), {rough: 0.6, bump: 0.3})); art.position.z = 0.03; g.add(art);
-  const fm = toon('#b8863a', {rough: 0.35, metal: 0.6});
-  for (const [px, py, fw, fh] of [[0, h / 2 + 0.04, w + 0.16, 0.08], [0, -h / 2 - 0.04, w + 0.16, 0.08], [-w / 2 - 0.04, 0, 0.08, h], [w / 2 + 0.04, 0, 0.08, h]]) { const f = box(fw, fh, 0.06, fm, {center: true}); at(f, px, py, 0.02); g.add(f); }
-  return g;
-}
-export function pottedPlant(h = 1.0, seed = 4) {
-  const g = new THREE.Group(); const pot = jar(0.18, 0.32, '#c0603a'); g.add(pot); const r = rng(seed);
-  const leafMat = toon('#4f8a3f', {rough: 0.6}); leafMat.side = THREE.DoubleSide;
-  for (let i = 0; i < 14; i++) { const l = new THREE.Mesh(new THREE.PlaneGeometry(0.12, 0.42 + r() * 0.3), leafMat); const a = r() * 6.28, tilt = 0.3 + r() * 0.6; l.position.set(Math.cos(a) * 0.05, 0.3 + (h - 0.3) * 0.45, Math.sin(a) * 0.05); l.rotation.set(Math.cos(a) * tilt, a, Math.sin(a) * tilt); l.castShadow = true; l.material.color.set(r() < 0.5 ? '#ffffff' : '#d8f0c8'); g.add(l); }
-  return g;
-}
-// Hanging/standing lantern with a warm glow and a real point light. Returns {group, light, update(t)} (gentle flicker).
-export function lantern(o = {}) {
-  const g = new THREE.Group(); const metal = toon('#3a3430', {rough: 0.4, metal: 0.7});
-  const top = cone(0.14, 0.12, metal); at(top, 0, 0.32, 0); g.add(top);
-  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.26, 12), hdr(o.color || '#ffcf7a', 3.5)); glass.position.y = 0.17; g.add(glass);
-  for (let i = 0; i < 4; i++) { const bar = box(0.015, 0.28, 0.015, metal, {center: true}); const a = i / 4 * 6.28; at(bar, Math.cos(a) * 0.1, 0.17, Math.sin(a) * 0.1); g.add(bar); }
-  const base = cyl(0.12, 0.12, 0.04, metal); g.add(base);
-  const light = new THREE.PointLight(o.color || '#ffb85a', o.intensity ?? 3.5, o.distance ?? 6, 1.8); light.position.y = 0.2; g.add(light);
-  return {group: g, light, update(t) { const k = 0.92 + 0.08 * Math.sin(t * 9 + (o.seed || 0)) * Math.sin(t * 13.7); light.intensity = (o.intensity ?? 3.5) * k; }};
-}
-// Realistic grass: tens of thousands of curved, tapered blades in natural clumps, darker at the root, lighter (and
-// sometimes dry/yellow) at the tip, normals pointing up (soft even shading like real lawns), wind sway in the vertex
-// shader. area [cx, cz, w, d]. Returns {obj, update(t)}.
-export function grassField(area, o = {}) {
-  const {n = 12000, h = 0.45, color = '#4a7a2e', tip = '#a8c06a', dry = 0.12, flowers = 0.02, seed = 12, clumps = 0.7} = o;
-  const r = rng(seed);
-  const geo = new THREE.PlaneGeometry(1, 1, 1, 5); geo.translate(0, 0.5, 0);
-  const pos = geo.attributes.position, nor = geo.attributes.normal, col = [];
-  const cRoot = new THREE.Color(color).multiplyScalar(0.45), cMid = new THREE.Color(color), cTip = new THREE.Color(tip);
-  for (let i = 0; i < pos.count; i++) {
-    const y = pos.getY(i);
-    pos.setX(i, pos.getX(i) * 0.045 * Math.pow(1 - y, 0.7)); pos.setZ(i, y * y * 0.28); // taper + forward bend
-    nor.setXYZ(i, 0, 1, 0);
-    const cc = y < 0.5 ? cRoot.clone().lerp(cMid, y / 0.5) : cMid.clone().lerp(cTip, (y - 0.5) / 0.5); col.push(cc.r, cc.g, cc.b);
-  }
-  geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
-  const mat = new THREE.MeshStandardMaterial({vertexColors: true, roughness: 0.78, side: THREE.DoubleSide});
-  const uTime = {value: 0};
-  mat.onBeforeCompile = (sh) => {
-    sh.uniforms.uTime = uTime;
-    sh.vertexShader = 'uniform float uTime;\n' + sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
-      #ifdef USE_INSTANCING
-        vec3 ip = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
-      #else
-        vec3 ip = vec3(0.0);
-      #endif
-      float hh = position.y * position.y;
-      float gust = sin(uTime * 0.9 + ip.x * 0.15) * 0.5 + 0.5;
-      transformed.x += (sin(uTime * 2.1 + ip.x * 0.8 + ip.z * 0.6) * 0.09 + gust * 0.08) * hh;
-      transformed.z += cos(uTime * 1.7 + ip.z * 0.7) * 0.05 * hh;`);
-  };
-  const mesh = new THREE.InstancedMesh(geo, mat, n); mesh.receiveShadow = true; mesh.frustumCulled = false;
-  const nc = Math.max(1, Math.round(n / 120)), centers = [];
-  for (let i = 0; i < nc; i++) centers.push([area[0] + (r() - 0.5) * area[2], area[1] + (r() - 0.5) * area[3], 0.15 + r() * 0.45]);
-  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3(), sc = new THREE.Vector3(), tint = new THREE.Color();
-  const tips = [];
-  for (let i = 0; i < n; i++) {
-    let px, pz;
-    if (r() < clumps) { const c = centers[Math.floor(r() * nc)], a = r() * 6.28, d = Math.sqrt(r()) * c[2]; px = c[0] + Math.cos(a) * d; pz = c[1] + Math.sin(a) * d; }
-    else { px = area[0] + (r() - 0.5) * area[2]; pz = area[1] + (r() - 0.5) * area[3]; }
-    const hh = h * (0.45 + r() * 0.9), w = 0.7 + r() * 0.9;
-    e.set((r() - 0.5) * 0.35, r() * 6.28, (r() - 0.5) * 0.35); q.setFromEuler(e); v.set(px, 0, pz); sc.set(w, hh, w); m4.compose(v, q, sc); mesh.setMatrixAt(i, m4);
-    if (r() < dry) tint.setRGB(1.25, 1.15, 0.55); else tint.setHSL(0.22 + (r() - 0.5) * 0.06, 0.25, 0.85 + r() * 0.3);
-    mesh.setColorAt(i, tint);
-    if (r() < flowers) tips.push([px, hh, pz]);
-  }
-  const g = new THREE.Group(); g.add(mesh);
-  if (tips.length) {
-    const fm = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(0.022, 0), new THREE.MeshStandardMaterial({roughness: 0.6}), tips.length);
-    tips.forEach(([px, hh, pz], i) => { m4.makeTranslation(px, hh * 0.95, pz + hh * 0.25); fm.setMatrixAt(i, m4); fm.setColorAt(i, tint.set(['#ffffff', '#f6e27a', '#f0b8d0', '#ffffff'][i % 4])); });
-    g.add(fm);
-  }
-  return {obj: g, update(t) { uTime.value = t; }};
-}
-export function pebbles(area, n = 60, seed = 5, color = '#8a8478') {
-  const g = new THREE.Group(); const r = rng(seed); const mat = toon(color, {rough: 0.8});
-  for (let i = 0; i < n; i++) { const s = 0.02 + r() * 0.05; const p = new THREE.Mesh(new THREE.DodecahedronGeometry(s, 0), mat); p.scale.set(1, 0.55, 0.8 + r() * 0.4); p.position.set(area[0] + (r() - 0.5) * area[2], s * 0.25, area[1] + (r() - 0.5) * area[3]); p.rotation.set(r(), r() * 6, r()); p.castShadow = true; p.receiveShadow = true; g.add(p); }
-  return g;
-}
-// Layered distant mountains (fog sells the depth) with an optional row of lit village windows.
-export function mountains(o = {}) {
-  const g = new THREE.Group(); const r = rng(o.seed || 7);
-  [[o.far || '#7a8ab0', -120, 34], [o.mid || '#5f7090', -90, 24], [o.near || '#4a5a6a', -60, 14]].forEach(([col, z, hmax], k) => {
-    const shp = new THREE.Shape(); shp.moveTo(-200, -2);
-    for (let i = 0; i <= 40; i++) shp.lineTo(-200 + i * 10, Math.max(1, hmax * (0.35 + 0.65 * Math.abs(Math.sin(i * 0.37 + k)) * (0.6 + r() * 0.4))));
-    shp.lineTo(200, -2);
-    const m = new THREE.Mesh(new THREE.ShapeGeometry(shp), new THREE.MeshStandardMaterial({color: col, roughness: 1})); m.position.z = z; g.add(m);
-  });
-  if (o.village) { for (let i = 0; i < 40; i++) { const w = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), hdr('#ffc870', 3.5)); w.position.set(-60 + r() * 120, 0.6 + r() * 2.2, -56 + r() * 4); g.add(w); } }
   return g;
 }
