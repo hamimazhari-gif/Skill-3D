@@ -1,1019 +1,1029 @@
 {
- "gap": 4.0,
- "duration": 875.72,
+ "gap": 2.0,
+ "duration": 855.72,
  "bagian": [
   {
    "n": 1,
    "title": "PROLOG: EROPA DALAM API",
    "card": 0.0,
-   "start": 4.0,
-   "end": 68.12
+   "start": 2.0,
+   "hold": 4.2,
+   "end": 66.12
   },
   {
    "n": 2,
    "title": "BENIH KEBENCIAN DI EROPA",
-   "card": 68.12,
-   "start": 72.12,
-   "end": 136.76
+   "card": 67.32000000000001,
+   "start": 68.12,
+   "hold": 70.32000000000001,
+   "end": 132.76
   },
   {
    "n": 3,
    "title": "DEFENESTRASI PRAHA: AWAL PEPERANGAN",
-   "card": 136.76,
-   "start": 140.76,
-   "end": 212.0
+   "card": 133.95999999999998,
+   "start": 134.76,
+   "hold": 136.95999999999998,
+   "end": 206.0
   },
   {
    "n": 4,
    "title": "RAJA MUSIM DINGIN DAN KEJATUHAN BOHEMIA",
-   "card": 212.0,
-   "start": 216.0,
-   "end": 307.44
+   "card": 207.2,
+   "start": 208.0,
+   "hold": 210.2,
+   "end": 299.44
   },
   {
    "n": 5,
    "title": "MAGDEBURG: KOTA YANG BERUBAH MENJADI NERAKA",
-   "card": 307.44,
-   "start": 311.44,
-   "end": 421.84000000000003
+   "card": 300.64,
+   "start": 301.44,
+   "hold": 303.64,
+   "end": 411.84000000000003
   },
   {
    "n": 6,
    "title": "GUSTAVUS ADOLPHUS: RAJA YANG MENGUBAH ARAH PERANG",
-   "card": 421.84000000000003,
-   "start": 425.84000000000003,
-   "end": 518.48
+   "card": 413.04,
+   "start": 413.84000000000003,
+   "hold": 416.04,
+   "end": 506.48
   },
   {
    "n": 7,
    "title": "PRANCIS MELAWAN SESAMA KEKUATAN KATOLIK",
-   "card": 518.48,
-   "start": 522.48,
-   "end": 586.0
+   "card": 507.68,
+   "start": 508.48,
+   "hold": 510.68,
+   "end": 572.0
   },
   {
    "n": 8,
    "title": "TIGA PULUH TAHUN KEHANCURAN",
-   "card": 586.0,
-   "start": 590.0,
-   "end": 687.4
+   "card": 573.2,
+   "start": 574.0,
+   "hold": 576.2,
+   "end": 671.4
   },
   {
    "n": 9,
    "title": "PERDAMAIAN WESTPHALIA: AKHIR DARI PERANG PANJANG",
-   "card": 687.4,
-   "start": 691.4,
-   "end": 778.76
+   "card": 672.6,
+   "start": 673.4,
+   "hold": 675.6,
+   "end": 760.76
   },
   {
    "n": 10,
    "title": "EPILOG: HARGA SEBUAH KEKUASAAN",
-   "card": 778.76,
-   "start": 782.76,
-   "end": 875.72
+   "card": 761.96,
+   "start": 762.76,
+   "hold": 764.96,
+   "end": 855.72
   }
  ],
  "paras": [
   {
    "bagian": 1,
    "para": 1,
-   "start": 4.26,
+   "start": 2.26,
    "text": "Ada sebuah benua yang selama puluhan tahun tidak pernah benar-benar mengenal kedamaian."
   },
   {
    "bagian": 1,
    "para": 2,
-   "start": 9.51,
+   "start": 7.51,
    "text": "Desa-desa terbakar. Kota-kota berubah menjadi reruntuhan. Ladang pertanian ditinggalkan. Dan ribuan keluarga terpaksa meninggalkan rumah mereka demi menyelamatkan nyawa."
   },
   {
    "bagian": 1,
    "para": 3,
-   "start": 19.96,
+   "start": 17.96,
    "text": "Di tengah kekacauan itu, tentara bergerak dari satu wilayah ke wilayah lainnya. Meriam menggelegar. Kavaleri menyerbu. Sementara penduduk sipil hanya bisa berharap agar perang tidak sampai ke tempat tinggal mereka."
   },
   {
    "bagian": 1,
    "para": 4,
-   "start": 32.31,
+   "start": 30.31,
    "text": "Namun, perang ini tidak dimulai karena perebutan satu wilayah semata."
   },
   {
    "bagian": 1,
    "para": 5,
-   "start": 36.4,
+   "start": 34.4,
    "text": "Semuanya bermula dari perselisihan agama, ketegangan politik, dan ambisi para penguasa di Eropa."
   },
   {
    "bagian": 1,
    "para": 6,
-   "start": 42.81,
+   "start": 40.81,
    "text": "Konflik yang awalnya terjadi di sebuah wilayah kecil bernama Bohemia kemudian berkembang menjadi peperangan besar yang melibatkan kekuatan-kekuatan utama Eropa."
   },
   {
    "bagian": 1,
    "para": 7,
-   "start": 51.55,
+   "start": 49.55,
    "text": "Selama tiga puluh tahun, perang ini merenggut begitu banyak kehidupan dan mengubah wajah benua tersebut."
   },
   {
    "bagian": 1,
    "para": 8,
-   "start": 57.69,
+   "start": 55.69,
    "text": "Inilah Perang Tiga Puluh Tahun."
   },
   {
    "bagian": 1,
    "para": 9,
-   "start": 59.78,
+   "start": 57.78,
    "text": "Sebuah tragedi yang membuktikan bahwa ketika agama, kekuasaan, dan ambisi bertemu di medan perang, seluruh masyarakat dapat menjadi korbannya."
   },
   {
    "bagian": 2,
    "para": 1,
-   "start": 72.32,
+   "start": 68.32,
    "text": "Untuk memahami bagaimana perang ini dimulai, kita harus kembali ke awal abad ke-17."
   },
   {
    "bagian": 2,
    "para": 2,
-   "start": 78.15,
+   "start": 74.15,
    "text": "Pada masa itu, Eropa Tengah berada di bawah pengaruh Kekaisaran Romawi Suci."
   },
   {
    "bagian": 2,
    "para": 3,
-   "start": 85.4,
+   "start": 81.4,
    "text": "Namun, kekaisaran ini bukanlah sebuah negara yang sepenuhnya bersatu. Di dalamnya terdapat ratusan kerajaan kecil, kepangeranan, kota merdeka, dan wilayah bangsawan yang memiliki kepentingan masing-masing."
   },
   {
    "bagian": 2,
    "para": 4,
-   "start": 96.8,
+   "start": 92.8,
    "text": "Salah satu persoalan terbesar adalah perbedaan agama."
   },
   {
    "bagian": 2,
    "para": 5,
-   "start": 100.14,
+   "start": 96.14,
    "text": "Sejak Reformasi Protestan pada abad ke-16, pengaruh Gereja Katolik mulai mendapat tantangan dari kelompok-kelompok Protestan."
   },
   {
    "bagian": 2,
    "para": 6,
-   "start": 107.58,
+   "start": 103.58,
    "text": "Ketegangan tersebut berkembang menjadi persaingan politik."
   },
   {
    "bagian": 2,
    "para": 7,
-   "start": 110.86,
+   "start": 106.86,
    "text": "Para penguasa Katolik ingin mempertahankan pengaruh mereka. Sementara para bangsawan Protestan berusaha melindungi kebebasan beragama dan kekuasaan wilayahnya."
   },
   {
    "bagian": 2,
    "para": 8,
-   "start": 119.6,
+   "start": 115.6,
    "text": "Salah satu wilayah yang paling tegang adalah Bohemia."
   },
   {
    "bagian": 2,
    "para": 9,
-   "start": 123.33,
+   "start": 119.33,
    "text": "Di wilayah ini, kaum bangsawan Protestan mulai khawatir bahwa penguasa Habsburg akan membatasi hak-hak keagamaan mereka."
   },
   {
    "bagian": 2,
    "para": 10,
-   "start": 130.34,
+   "start": 126.34,
    "text": "Perselisihan semakin memburuk."
   },
   {
    "bagian": 2,
    "para": 11,
-   "start": 132.58,
+   "start": 128.58,
    "text": "Dan pada tahun 1618, ketegangan tersebut akhirnya meledak."
   },
   {
    "bagian": 3,
    "para": 1,
-   "start": 140.99,
+   "start": 134.99,
    "text": "Pada 23 Mei 1618, sekelompok bangsawan Protestan berkumpul di Kastel Praha."
   },
   {
    "bagian": 3,
    "para": 2,
-   "start": 145.83,
+   "start": 139.83,
    "text": "Mereka marah terhadap kebijakan pemerintahan Habsburg yang dianggap mengancam kebebasan beragama mereka."
   },
   {
    "bagian": 3,
    "para": 3,
-   "start": 152.72,
+   "start": 146.72,
    "text": "Pertemuan yang awalnya merupakan bentuk protes berubah menjadi kekerasan."
   },
   {
    "bagian": 3,
    "para": 4,
-   "start": 158.72,
+   "start": 152.72,
    "text": "Dua pejabat Katolik, Jaroslav Martinic dan Vilém Slavata, bersama sekretaris mereka, Philip Fabricius, ditangkap."
   },
   {
    "bagian": 3,
    "para": 5,
-   "start": 171.59,
+   "start": 165.59,
    "text": "Kemudian, ketiganya dibawa menuju sebuah jendela."
   },
   {
    "bagian": 3,
    "para": 6,
-   "start": 175.22,
+   "start": 169.22,
    "text": "Dan tanpa diduga, mereka dilemparkan keluar dari bangunan kastel."
   },
   {
    "bagian": 3,
    "para": 7,
-   "start": 179.26,
+   "start": 173.26,
    "text": "Mereka jatuh dari ketinggian sekitar 16 meter."
   },
   {
    "bagian": 3,
    "para": 8,
-   "start": 182.74,
+   "start": 176.74,
    "text": "Namun, ketiganya ternyata selamat."
   },
   {
    "bagian": 3,
    "para": 9,
-   "start": 185.4,
+   "start": 179.4,
    "text": "Peristiwa ini kemudian dikenal sebagai Defenestrasi Praha."
   },
   {
    "bagian": 3,
    "para": 10,
-   "start": 188.96,
+   "start": 182.96,
    "text": "Bagi sebagian orang, kejadian tersebut mungkin terdengar seperti insiden aneh di dalam sebuah istana."
   },
   {
    "bagian": 3,
    "para": 11,
-   "start": 194.48,
+   "start": 188.48,
    "text": "Tetapi dampaknya sangat besar."
   },
   {
    "bagian": 3,
    "para": 12,
-   "start": 196.75,
+   "start": 190.75,
    "text": "Peristiwa itu menjadi pemicu pemberontakan Bohemia terhadap kekuasaan Habsburg."
   },
   {
    "bagian": 3,
    "para": 13,
-   "start": 201.35,
+   "start": 195.35,
    "text": "Para bangsawan Protestan kemudian menolak mengakui Ferdinand II sebagai penguasa mereka."
   },
   {
    "bagian": 3,
    "para": 14,
-   "start": 206.38,
+   "start": 200.38,
    "text": "Sebuah pemberontakan telah dimulai."
   },
   {
    "bagian": 3,
    "para": 15,
-   "start": 208.59,
+   "start": 202.59,
    "text": "Dan kekuatan militer Kekaisaran segera bersiap untuk menghancurkannya."
   },
   {
    "bagian": 4,
    "para": 1,
-   "start": 216.28,
+   "start": 208.28,
    "text": "Setelah pemberontakan dimulai, kaum bangsawan Bohemia mengambil keputusan yang sangat berani."
   },
   {
    "bagian": 4,
    "para": 2,
-   "start": 222.83,
+   "start": 214.83,
    "text": "Mereka menolak Ferdinand II dan memilih seorang penguasa Protestan bernama Frederick V dari Palatinate sebagai raja mereka."
   },
   {
    "bagian": 4,
    "para": 3,
-   "start": 234.02,
+   "start": 226.02,
    "text": "Frederick menerima mahkota tersebut pada tahun 1619."
   },
   {
    "bagian": 4,
    "para": 4,
-   "start": 237.86,
+   "start": 229.86,
    "text": "Namun, keputusannya membawa konsekuensi besar."
   },
   {
    "bagian": 4,
    "para": 5,
-   "start": 240.85,
+   "start": 232.85,
    "text": "Ferdinand II tidak mengakui kekuasaan Frederick. Ia mengumpulkan dukungan dari para sekutu Katolik dan mempersiapkan serangan untuk merebut kembali Bohemia."
   },
   {
    "bagian": 4,
    "para": 6,
-   "start": 249.69,
+   "start": 241.69,
    "text": "Frederick kemudian mendapat julukan Raja Musim Dingin."
   },
   {
    "bagian": 4,
    "para": 7,
-   "start": 253.14,
+   "start": 245.14,
    "text": "Julukan itu bukan tanpa alasan. Masa pemerintahannya di Bohemia hanya berlangsung sekitar satu musim dingin."
   },
   {
    "bagian": 4,
    "para": 8,
-   "start": 259.4,
+   "start": 251.4,
    "text": "Pada 8 November 1620, pasukan pemberontak menghadapi tentara Kekaisaran dalam Pertempuran White Mountain, di dekat Praha."
   },
   {
    "bagian": 4,
    "para": 9,
-   "start": 267.52,
+   "start": 259.52,
    "text": "Pertempuran berlangsung singkat, tetapi hasilnya menentukan masa depan Bohemia."
   },
   {
    "bagian": 4,
    "para": 10,
-   "start": 272.08,
+   "start": 264.08,
    "text": "Pasukan pemberontak mengalami kekalahan."
   },
   {
    "bagian": 4,
    "para": 11,
-   "start": 274.57,
+   "start": 266.57,
    "text": "Frederick melarikan diri. Pemerintahan Protestan runtuh. Dan Ferdinand II berhasil mengembalikan kekuasaan Habsburg."
   },
   {
    "bagian": 4,
    "para": 12,
-   "start": 281.13,
+   "start": 273.13,
    "text": "Setelah kemenangan tersebut, para pemimpin pemberontakan dihukum mati. Kekayaan mereka disita, sementara pengaruh kaum bangsawan Protestan semakin dihancurkan."
   },
   {
    "bagian": 4,
    "para": 13,
-   "start": 289.42,
+   "start": 281.42,
    "text": "Bohemia pun mengalami perubahan besar."
   },
   {
    "bagian": 4,
    "para": 14,
-   "start": 292.49,
+   "start": 284.49,
    "text": "Namun, kemenangan Ferdinand justru menimbulkan ketakutan di antara kerajaan-kerajaan Protestan lainnya."
   },
   {
    "bagian": 4,
    "para": 15,
-   "start": 297.78,
+   "start": 289.78,
    "text": "Mereka mulai menyadari bahwa jika kekuasaan Habsburg terus berkembang, keseimbangan politik Eropa bisa berubah selamanya."
   },
   {
    "bagian": 4,
    "para": 16,
-   "start": 304.17,
+   "start": 296.17,
    "text": "Perang yang semula dimulai di Bohemia kini mulai meluas."
   },
   {
    "bagian": 5,
    "para": 1,
-   "start": 311.44,
+   "start": 301.44,
    "text": "Tahun 1631."
   },
   {
    "bagian": 5,
    "para": 2,
-   "start": 312.95,
+   "start": 302.95,
    "text": "Perang telah meluas ke berbagai wilayah Jerman."
   },
   {
    "bagian": 5,
    "para": 3,
-   "start": 316.78,
+   "start": 306.78,
    "text": "Salah satu kota yang menjadi sasaran adalah Magdeburg, sebuah kota penting yang mendukung gerakan Protestan."
   },
   {
    "bagian": 5,
    "para": 4,
-   "start": 325.83,
+   "start": 315.83,
    "text": "Kota ini memiliki posisi strategis dan menjadi simbol perlawanan terhadap kekuasaan Katolik Habsburg."
   },
   {
    "bagian": 5,
    "para": 5,
-   "start": 335.37,
+   "start": 325.37,
    "text": "Pasukan Kekaisaran yang dipimpin oleh Johann Tserclaes, Count of Tilly, bersama pasukan sekutu mengepung Magdeburg."
   },
   {
    "bagian": 5,
    "para": 6,
-   "start": 342.62,
+   "start": 332.62,
    "text": "Penduduk kota menyadari bahwa ancaman semakin dekat."
   },
   {
    "bagian": 5,
    "para": 7,
-   "start": 345.95,
+   "start": 335.95,
    "text": "Mereka berusaha mempertahankan tembok pertahanan dan berharap bantuan dari sekutu Protestan segera datang."
   },
   {
    "bagian": 5,
    "para": 8,
-   "start": 352.05,
+   "start": 342.05,
    "text": "Namun, bantuan tersebut tidak tiba tepat waktu."
   },
   {
    "bagian": 5,
    "para": 9,
-   "start": 355.47,
+   "start": 345.47,
    "text": "Pada 20 Mei 1631, pasukan penyerang akhirnya berhasil memasuki kota."
   },
   {
    "bagian": 5,
    "para": 10,
-   "start": 361.83,
+   "start": 351.83,
    "text": "Apa yang terjadi setelahnya menjadi salah satu tragedi paling kelam dalam Perang Tiga Puluh Tahun."
   },
   {
    "bagian": 5,
    "para": 11,
-   "start": 367.39,
+   "start": 357.39,
    "text": "Pembunuhan dan penjarahan terjadi di berbagai tempat."
   },
   {
    "bagian": 5,
    "para": 12,
-   "start": 370.68,
+   "start": 360.68,
    "text": "Api mulai menyebar dari satu bangunan ke bangunan lainnya."
   },
   {
    "bagian": 5,
    "para": 13,
-   "start": 374.23,
+   "start": 364.23,
    "text": "Rumah-rumah terbakar. Gereja-gereja hancur. Penduduk berusaha melarikan diri, tetapi banyak yang tidak berhasil."
   },
   {
    "bagian": 5,
    "para": 14,
-   "start": 381.89,
+   "start": 371.89,
    "text": "Dalam waktu singkat, sebagian besar Magdeburg berubah menjadi lautan api."
   },
   {
    "bagian": 5,
    "para": 15,
-   "start": 386.41,
+   "start": 376.41,
    "text": "Jumlah korban jiwa diperkirakan mencapai sekitar 20.000 hingga 25.000 orang, meskipun angka pastinya masih diperdebatkan."
   },
   {
    "bagian": 5,
    "para": 16,
-   "start": 394.05,
+   "start": 384.05,
    "text": "Peristiwa ini dikenal sebagai Sack of Magdeburg."
   },
   {
    "bagian": 5,
    "para": 17,
-   "start": 397.14,
+   "start": 387.14,
    "text": "Kehancuran kota tersebut mengguncang Eropa."
   },
   {
    "bagian": 5,
    "para": 18,
-   "start": 399.83,
+   "start": 389.83,
    "text": "Berita mengenai pembantaian itu menyebar dan memperkuat tekad sejumlah penguasa Protestan untuk melawan Habsburg."
   },
   {
    "bagian": 5,
    "para": 19,
-   "start": 406.18,
+   "start": 396.18,
    "text": "Magdeburg menjadi simbol kehancuran yang dapat ditimbulkan oleh perang."
   },
   {
    "bagian": 5,
    "para": 20,
-   "start": 410.18,
+   "start": 400.18,
    "text": "Namun, di tengah ketakutan tersebut, muncul seorang raja dari utara."
   },
   {
    "bagian": 5,
    "para": 21,
-   "start": 414.87,
+   "start": 404.87,
    "text": "Ia datang dengan pasukan yang siap mengubah arah peperangan."
   },
   {
    "bagian": 5,
    "para": 22,
-   "start": 418.36,
+   "start": 408.36,
    "text": "Namanya adalah Gustavus Adolphus, Raja Swedia."
   },
   {
    "bagian": 6,
    "para": 1,
-   "start": 426.07,
+   "start": 414.07,
    "text": "Pada tahun 1630, Raja Gustavus Adolphus dari Swedia memasuki wilayah Jerman."
   },
   {
    "bagian": 6,
    "para": 2,
-   "start": 431.23,
+   "start": 419.23,
    "text": "Kehadirannya bukan semata-mata didorong oleh keinginan membela kaum Protestan."
   },
   {
    "bagian": 6,
    "para": 3,
-   "start": 436.84,
+   "start": 424.84,
    "text": "Swedia juga memiliki kepentingan politik dan militer untuk memperluas pengaruhnya di sekitar Laut Baltik."
   },
   {
    "bagian": 6,
    "para": 4,
-   "start": 446.64,
+   "start": 434.64,
    "text": "Gustavus Adolphus dikenal sebagai pemimpin militer yang cakap."
   },
   {
    "bagian": 6,
    "para": 5,
-   "start": 450.36,
+   "start": 438.36,
    "text": "Ia mengembangkan organisasi pasukan yang lebih fleksibel, menggabungkan infanteri, kavaleri, dan artileri dengan koordinasi yang efektif."
   },
   {
    "bagian": 6,
    "para": 6,
-   "start": 458.31,
+   "start": 446.31,
    "text": "Pada 17 September 1631, pasukannya menghadapi tentara Kekaisaran dalam Pertempuran Breitenfeld."
   },
   {
    "bagian": 6,
    "para": 7,
-   "start": 464.87,
+   "start": 452.87,
    "text": "Hasilnya menjadi kejutan besar."
   },
   {
    "bagian": 6,
    "para": 8,
-   "start": 466.8,
+   "start": 454.8,
    "text": "Pasukan Swedia berhasil meraih kemenangan dan menghancurkan dominasi militer Katolik yang sebelumnya terlihat sangat kuat."
   },
   {
    "bagian": 6,
    "para": 9,
-   "start": 473.15,
+   "start": 461.15,
    "text": "Kemenangan tersebut membuat posisi Protestan kembali menguat."
   },
   {
    "bagian": 6,
    "para": 10,
-   "start": 476.53,
+   "start": 464.53,
    "text": "Gustavus Adolphus kemudian melanjutkan kampanye militernya di wilayah Jerman."
   },
   {
    "bagian": 6,
    "para": 11,
-   "start": 480.65,
+   "start": 468.65,
    "text": "Namun, kejayaannya tidak berlangsung lama."
   },
   {
    "bagian": 6,
    "para": 12,
-   "start": 483.07,
+   "start": 471.07,
    "text": "Pada 16 November 1632, pasukan Swedia bertempur melawan tentara Kekaisaran dalam Pertempuran Lützen."
   },
   {
    "bagian": 6,
    "para": 13,
-   "start": 490.25,
+   "start": 478.25,
    "text": "Pertempuran berlangsung sengit di tengah kabut tebal."
   },
   {
    "bagian": 6,
    "para": 14,
-   "start": 492.94,
+   "start": 480.94,
    "text": "Di tengah pertempuran, Gustavus Adolphus gugur."
   },
   {
    "bagian": 6,
    "para": 15,
-   "start": 496.35,
+   "start": 484.35,
    "text": "Pasukannya memang berhasil memenangkan pertempuran, tetapi mereka kehilangan seorang raja sekaligus pemimpin militer yang sangat berpengaruh."
   },
   {
    "bagian": 6,
    "para": 16,
-   "start": 503.68,
+   "start": 491.68,
    "text": "Kematian Gustavus Adolphus menjadi salah satu momen paling menentukan dalam Perang Tiga Puluh Tahun."
   },
   {
    "bagian": 6,
    "para": 17,
-   "start": 508.63,
+   "start": 496.63,
    "text": "Namun, perang ini tidak berhenti."
   },
   {
    "bagian": 6,
    "para": 18,
-   "start": 510.4,
+   "start": 498.4,
    "text": "Justru setelah kematiannya, konflik semakin rumit."
   },
   {
    "bagian": 6,
    "para": 19,
-   "start": 513.67,
+   "start": 501.67,
    "text": "Dan kali ini, sebuah kerajaan Katolik akan mengambil keputusan yang mengejutkan seluruh Eropa."
   },
   {
    "bagian": 7,
    "para": 1,
-   "start": 522.71,
+   "start": 508.71,
    "text": "Selama bertahun-tahun, Perang Tiga Puluh Tahun sering dipandang sebagai konflik antara Katolik dan Protestan."
   },
   {
    "bagian": 7,
    "para": 2,
-   "start": 534.38,
+   "start": 520.38,
    "text": "Namun, pada 1635, terjadi perubahan besar."
   },
   {
    "bagian": 7,
    "para": 3,
-   "start": 538.42,
+   "start": 524.42,
    "text": "Prancis, sebuah kerajaan Katolik, secara resmi memasuki perang melawan Spanyol dan kekuatan Habsburg."
   },
   {
    "bagian": 7,
    "para": 4,
-   "start": 544.52,
+   "start": 530.52,
    "text": "Keputusan ini terlihat mengejutkan."
   },
   {
    "bagian": 7,
    "para": 5,
-   "start": 547.03,
+   "start": 533.03,
    "text": "Mengapa sebuah kerajaan Katolik justru melawan kerajaan Katolik lainnya?"
   },
   {
    "bagian": 7,
    "para": 6,
-   "start": 551.59,
+   "start": 537.59,
    "text": "Jawabannya adalah politik."
   },
   {
    "bagian": 7,
    "para": 7,
-   "start": 553.66,
+   "start": 539.66,
    "text": "Di bawah Raja Louis XIII dan pengaruh Kardinal Richelieu, Prancis ingin membatasi dominasi keluarga Habsburg yang menguasai wilayah luas di Eropa."
   },
   {
    "bagian": 7,
    "para": 8,
-   "start": 562.35,
+   "start": 548.35,
    "text": "Bagi Prancis, keseimbangan kekuasaan jauh lebih penting daripada kesamaan agama dengan pihak lawan."
   },
   {
    "bagian": 7,
    "para": 9,
-   "start": 568.41,
+   "start": 554.41,
    "text": "Sejak saat itu, Perang Tiga Puluh Tahun semakin berubah menjadi perang perebutan kekuasaan antarnegara."
   },
   {
    "bagian": 7,
    "para": 10,
-   "start": 574.47,
+   "start": 560.47,
    "text": "Prancis mendukung pihak-pihak yang berusaha melemahkan Habsburg."
   },
   {
    "bagian": 7,
    "para": 11,
-   "start": 578.03,
+   "start": 564.03,
    "text": "Konflik semakin meluas."
   },
   {
    "bagian": 7,
    "para": 12,
-   "start": 580.16,
+   "start": 566.16,
    "text": "Perang yang dimulai dari perselisihan agama kini telah berubah menjadi pertarungan politik dan militer berskala Eropa."
   },
   {
    "bagian": 8,
    "para": 1,
-   "start": 590.23,
+   "start": 574.23,
    "text": "Ketika para raja dan jenderal sibuk merencanakan strategi perang, masyarakat biasa justru menjadi korban terbesar."
   },
   {
    "bagian": 8,
    "para": 2,
-   "start": 601.48,
+   "start": 585.48,
    "text": "Selama tiga puluh tahun, pasukan bergerak dari satu wilayah ke wilayah lainnya."
   },
   {
    "bagian": 8,
    "para": 3,
-   "start": 606.62,
+   "start": 590.62,
    "text": "Mereka membutuhkan makanan, uang, dan perlengkapan perang."
   },
   {
    "bagian": 8,
    "para": 4,
-   "start": 610.8,
+   "start": 594.8,
    "text": "Namun, tidak semua kebutuhan tersebut diperoleh melalui pembayaran."
   },
   {
    "bagian": 8,
    "para": 5,
-   "start": 614.9,
+   "start": 598.9,
    "text": "Banyak tentara mengambil persediaan makanan dari desa-desa yang mereka lewati."
   },
   {
    "bagian": 8,
    "para": 6,
-   "start": 619.45,
+   "start": 603.45,
    "text": "Sebagian melakukan penjarahan. Sebagian lainnya menghancurkan tempat tinggal penduduk yang dianggap mendukung musuh."
   },
   {
    "bagian": 8,
    "para": 7,
-   "start": 626.01,
+   "start": 610.01,
    "text": "Akibatnya, kehidupan masyarakat semakin sulit."
   },
   {
    "bagian": 8,
    "para": 8,
-   "start": 629.05,
+   "start": 613.05,
    "text": "Ladang pertanian terbengkalai. Perdagangan terganggu. Harga makanan meningkat."
   },
   {
    "bagian": 8,
    "para": 9,
-   "start": 634.35,
+   "start": 618.35,
    "text": "Di sejumlah wilayah, kelaparan dan penyakit menyebar dengan cepat."
   },
   {
    "bagian": 8,
    "para": 10,
-   "start": 638.58,
+   "start": 622.58,
    "text": "Banyak keluarga kehilangan anggota keluarganya. Banyak pula penduduk yang meninggalkan desa untuk mencari tempat yang lebih aman."
   },
   {
    "bagian": 8,
    "para": 11,
-   "start": 645.79,
+   "start": 629.79,
    "text": "Namun, tidak ada jaminan bahwa tempat tujuan mereka akan lebih baik."
   },
   {
    "bagian": 8,
    "para": 12,
-   "start": 649.78,
+   "start": 633.78,
    "text": "Sebab, perang bisa datang kapan saja."
   },
   {
    "bagian": 8,
    "para": 13,
-   "start": 652.71,
+   "start": 636.71,
    "text": "Dampak demografisnya sangat besar. Beberapa wilayah di Jerman kehilangan bagian yang sangat besar dari jumlah penduduknya, meskipun tingkat kehancuran berbeda-beda di setiap daerah."
   },
   {
    "bagian": 8,
    "para": 14,
-   "start": 662.66,
+   "start": 646.66,
    "text": "Perang ini memperlihatkan kenyataan pahit bahwa kemenangan militer tidak selalu berarti kemenangan bagi masyarakat."
   },
   {
    "bagian": 8,
    "para": 15,
-   "start": 669.05,
+   "start": 653.05,
    "text": "Para penguasa mungkin dapat memperoleh wilayah baru."
   },
   {
    "bagian": 8,
    "para": 16,
-   "start": 672.24,
+   "start": 656.24,
    "text": "Namun, bagi rakyat biasa, yang tersisa sering kali hanyalah kehilangan."
   },
   {
    "bagian": 8,
    "para": 17,
-   "start": 676.84,
+   "start": 660.84,
    "text": "Dan setelah tiga dekade peperangan, semakin banyak pihak menyadari bahwa konflik ini tidak bisa terus berlangsung tanpa akhir."
   },
   {
    "bagian": 8,
    "para": 18,
-   "start": 684.0,
+   "start": 668.0,
    "text": "Akhirnya, para penguasa mulai mencari jalan menuju perdamaian."
   },
   {
    "bagian": 9,
    "para": 1,
-   "start": 691.68,
+   "start": 673.68,
    "text": "Tahun 1643."
   },
   {
    "bagian": 9,
    "para": 2,
-   "start": 694.03,
+   "start": 676.03,
    "text": "Setelah bertahun-tahun peperangan, negosiasi perdamaian mulai dilakukan."
   },
   {
    "bagian": 9,
    "para": 3,
-   "start": 699.32,
+   "start": 681.32,
    "text": "Namun, mencapai kesepakatan bukan perkara mudah."
   },
   {
    "bagian": 9,
    "para": 4,
-   "start": 702.63,
+   "start": 684.63,
    "text": "Ada begitu banyak pihak yang terlibat."
   },
   {
    "bagian": 9,
    "para": 5,
-   "start": 705.16,
+   "start": 687.16,
    "text": "Prancis, Swedia, Spanyol, Kekaisaran Romawi Suci, dan berbagai penguasa wilayah memiliki tuntutan masing-masing."
   },
   {
    "bagian": 9,
    "para": 6,
-   "start": 714.24,
+   "start": 696.24,
    "text": "Perundingan berlangsung selama bertahun-tahun."
   },
   {
    "bagian": 9,
    "para": 7,
-   "start": 717.12,
+   "start": 699.12,
    "text": "Setiap pihak berusaha mempertahankan kepentingannya."
   },
   {
    "bagian": 9,
    "para": 8,
-   "start": 720.75,
+   "start": 702.75,
    "text": "Hingga akhirnya, pada 24 Oktober 1648, dua perjanjian penting ditandatangani di kota Münster dan Osnabrück."
   },
   {
    "bagian": 9,
    "para": 9,
-   "start": 729.53,
+   "start": 711.53,
    "text": "Kesepakatan ini dikenal sebagai Perdamaian Westphalia."
   },
   {
    "bagian": 9,
    "para": 10,
-   "start": 733.2,
+   "start": 715.2,
    "text": "Perjanjian tersebut mengakhiri Perang Tiga Puluh Tahun di Kekaisaran Romawi Suci."
   },
   {
    "bagian": 9,
    "para": 11,
-   "start": 737.88,
+   "start": 719.88,
    "text": "Kedudukan beberapa kelompok agama diakui secara lebih luas, termasuk Katolik, Lutheran, dan Calvinis."
   },
   {
    "bagian": 9,
    "para": 12,
-   "start": 744.95,
+   "start": 726.95,
    "text": "Prancis dan Swedia memperoleh keuntungan politik serta wilayah."
   },
   {
    "bagian": 9,
    "para": 13,
-   "start": 748.69,
+   "start": 730.69,
    "text": "Sementara itu, para penguasa wilayah di dalam kekaisaran mendapatkan ruang kedaulatan yang lebih besar."
   },
   {
    "bagian": 9,
    "para": 14,
-   "start": 754.97,
+   "start": 736.97,
    "text": "Namun, perdamaian ini tidak langsung mengakhiri seluruh peperangan di Eropa."
   },
   {
    "bagian": 9,
    "para": 15,
-   "start": 759.16,
+   "start": 741.16,
    "text": "Konflik antara Prancis dan Spanyol masih berlanjut hingga 1659."
   },
   {
    "bagian": 9,
    "para": 16,
-   "start": 764.66,
+   "start": 746.66,
    "text": "Meskipun demikian, Perjanjian Westphalia menjadi salah satu tonggak penting dalam perkembangan tatanan politik Eropa."
   },
   {
    "bagian": 9,
    "para": 17,
-   "start": 771.59,
+   "start": 753.59,
    "text": "Setelah tiga puluh tahun penuh kehancuran, perang panjang itu akhirnya mencapai titik akhir."
   },
   {
    "bagian": 9,
    "para": 18,
-   "start": 776.82,
+   "start": 758.82,
    "text": "Eropa memasuki babak baru."
   },
   {
    "bagian": 10,
    "para": 1,
-   "start": 782.76,
+   "start": 762.76,
    "text": "Perang Tiga Puluh Tahun akhirnya berakhir pada 1648."
   },
   {
    "bagian": 10,
    "para": 2,
-   "start": 787.15,
+   "start": 767.15,
    "text": "Namun, berakhirnya peperangan tidak berarti penderitaan masyarakat langsung menghilang."
   },
   {
    "bagian": 10,
    "para": 3,
-   "start": 792.39,
+   "start": 772.39,
    "text": "Banyak kota membutuhkan waktu lama untuk dibangun kembali."
   },
   {
    "bagian": 10,
    "para": 4,
-   "start": 797.87,
+   "start": 777.87,
    "text": "Banyak keluarga tidak pernah menemukan anggota keluarganya yang hilang."
   },
   {
    "bagian": 10,
    "para": 5,
-   "start": 805.28,
+   "start": 785.28,
    "text": "Dan sejumlah wilayah di Eropa Tengah membutuhkan generasi demi generasi untuk memulihkan kehidupan mereka."
   },
   {
    "bagian": 10,
    "para": 6,
-   "start": 812.63,
+   "start": 792.63,
    "text": "Perang ini dimulai dari ketegangan agama dan politik di Bohemia."
   },
   {
    "bagian": 10,
    "para": 7,
-   "start": 816.63,
+   "start": 796.63,
    "text": "Kemudian berkembang menjadi pertarungan besar yang melibatkan kerajaan-kerajaan terkuat di Eropa."
   },
   {
    "bagian": 10,
    "para": 8,
-   "start": 822.85,
+   "start": 802.85,
    "text": "Kita menyaksikan bagaimana sebuah insiden di Kastel Praha memicu pemberontakan."
   },
   {
    "bagian": 10,
    "para": 9,
-   "start": 827.59,
+   "start": 807.59,
    "text": "Bagaimana Magdeburg berubah menjadi kota yang hancur."
   },
   {
    "bagian": 10,
    "para": 10,
-   "start": 830.9,
+   "start": 810.9,
    "text": "Bagaimana seorang raja dari Swedia mengubah arah peperangan."
   },
   {
    "bagian": 10,
    "para": 11,
-   "start": 834.64,
+   "start": 814.64,
    "text": "Dan bagaimana Prancis akhirnya melawan kekuatan Katolik lainnya demi kepentingan politik."
   },
   {
    "bagian": 10,
    "para": 12,
-   "start": 840.03,
+   "start": 820.03,
    "text": "Namun, ada satu pelajaran besar dari seluruh tragedi ini."
   },
   {
    "bagian": 10,
    "para": 13,
-   "start": 844.87,
+   "start": 824.87,
    "text": "Di medan perang, para penguasa mungkin berbicara tentang kejayaan, kehormatan, dan kemenangan."
   },
   {
    "bagian": 10,
    "para": 14,
-   "start": 850.67,
+   "start": 830.67,
    "text": "Tetapi di balik semua itu, selalu ada manusia biasa yang harus membayar harganya."
   },
   {
    "bagian": 10,
    "para": 15,
-   "start": 856.07,
+   "start": 836.07,
    "text": "Tiga puluh tahun peperangan telah mengubah Eropa."
   },
   {
    "bagian": 10,
    "para": 16,
-   "start": 859.2,
+   "start": 839.2,
    "text": "Dan sejarah mengingatkan kita bahwa kekuasaan yang diperebutkan tanpa batas dapat menghancurkan kehidupan banyak orang."
   },
   {
    "bagian": 10,
    "para": 17,
-   "start": 865.84,
+   "start": 845.84,
    "text": "Inilah Perang Tiga Puluh Tahun. Perang yang tidak hanya mengubah peta Eropa, tetapi juga mengubah cara dunia memahami kekuasaan, agama, dan perdamaian."
   }
  ]
