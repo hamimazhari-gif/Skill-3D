@@ -1,6 +1,6 @@
 // All locations in one scene at different x offsets. Story: "Otak, si pencuri energi / Your brain, the energy thief".
 import * as THREE from 'three';
-import {toon, box, cyl, ball, cone, at, sign, paintTex, pop, smooth, clamp01, INK, rng} from './kit';
+import {toon, box, cyl, ball, cone, at, sign, paintTex, patternMat, pop, smooth, clamp01, INK, rng} from './kit';
 import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
@@ -20,15 +20,15 @@ const CAST = {
 // Lighting plan (camera_plan.md): a warm home that turns mysterious while the energy is stolen, joyful for the advice;
 // a cool lab turning joyful when the brain is revealed; a dark room lit only when the bulb switches on; a purple
 // neuron space; an evening study desk going tense on the plot twist; a bright joyful playroom.
-const homeWarm = {...LOOK_PRESETS.interiorWarm, keyPos: [-4, 8, 8]};
-const labCool = {...LOOK_PRESETS.interiorCool, keyPos: [-4, 8, 8]};
+const homeWarm = {...LOOK_PRESETS.interiorWarm, keyI: 2.1, hemiI: 0.95, keyPos: [-4, 8, 8], grade: {sat: 1.05, contrast: 1.08, tint: '#ffc890', tintAmt: 0.08, vignette: 0.45}};
+const labCool = {...LOOK_PRESETS.interiorCool, keyI: 1.9, hemiI: 0.95, keyPos: [-4, 8, 8], grade: {sat: 1.0, contrast: 1.08, tint: '#d8e6ff', tintAmt: 0.05, vignette: 0.42}};
 const darkRoom = {...LOOK_PRESETS.night, fog: '#141824', near: 8, far: 30, keyI: 0.9, hemiI: 0.95, keyPos: [-4, 8, 6], moon: false, hemiSky: '#7a88b8', hemiGround: '#3a3550',
   grade: {sat: 0.9, contrast: 1.06, tint: '#8a9ad8', tintAmt: 0.1, vignette: 0.5}};
 const litRoom = {...LOOK_PRESETS.interiorWarm, keyI: 2.0, hemiI: 1.2, keyPos: [4, 7, 6], grade: {sat: 1.05, contrast: 1.04, tint: '#ffd890', tintAmt: 0.12, vignette: 0.4}};
 const neuroSpace = {fog: '#1a1030', near: 14, far: 60, skyTop: '#0c0620', skyBottom: '#2e1a58', key: '#d8c0ff', keyI: 1.6, hemiI: 1.15, keyPos: [-5, 9, 6],
   hemiSky: '#b89aff', hemiGround: '#3a2a5a', grade: {sat: 1.05, contrast: 1.06, tint: '#b090ff', tintAmt: 0.1, vignette: 0.5}};
-const studyEve = {...LOOK_PRESETS.interiorWarm, keyI: 1.9, keyPos: [4, 6, 6], grade: {sat: 1.0, contrast: 1.04, tint: '#ffc080', tintAmt: 0.1, vignette: 0.42}};
-const kidsDay = {...LOOK_PRESETS.interiorWarm, keyI: 2.6, keyPos: [-4, 8, 8], ...MOODS.joyful};
+const studyEve = {...LOOK_PRESETS.interiorWarm, keyI: 1.7, hemiI: 0.9, keyPos: [4, 6, 6], grade: {sat: 1.0, contrast: 1.04, tint: '#ffc080', tintAmt: 0.1, vignette: 0.42}};
+const kidsDay = {...LOOK_PRESETS.interiorWarm, keyI: 1.9, hemiI: 0.95, keyPos: [-4, 8, 8], grade: {sat: 1.12, contrast: 1.07, tint: '#ffe0a0', tintAmt: 0.06, vignette: 0.4}};
 
 export const LOOK = {
   home: {keys: [{at: 0, ...homeWarm}, {at: 'mencuri', ...homeWarm, ...MOODS.mystery}, {at: 'cut8', ...homeWarm, ...MOODS.joyful}, {at: 'cut9', ...homeWarm}]},
@@ -44,6 +44,7 @@ function ground(w, d, color, paint) {
   m.rotation.x = -Math.PI / 2; m.receiveShadow = true;
   return m;
 }
+const patMat = (kind, base) => patternMat(kind, {base, planks: 3, seed: 5});
 const under = (g, color) => { const gr = ground(40, 40, color); gr.position.y = -0.05; g.add(gr); };
 
 // Screen-level effects: flashes (overlay) and camera shakes, timed to words.
@@ -100,6 +101,16 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(8, 3.6, 7, {wall: '#efdcbc', floor: '#b08a5e', wain: '#7a9a6a'}));
     const sofa = P.sofa('#c75b5b'); at(sofa, -2.4, 0, -5.0); g.add(sofa);
     const bd = P.bed({color: '#8a5a3a', sheet: '#7fa6c9'}); at(bd, 2.55, 0, -4.7); g.add(bd);
+    // set dressing: rug, shelf, framed picture, plants, curtains, floor lamp, jars
+    const rg = P.rug(3.2, 2.2, {seed: 4}); rg.position.set(-0.4, 0, -3.0); g.add(rg);
+    const sh = P.shelf(1.3, 1.9, {seed: 11}); at(sh, -3.55, 0, -3.2, Math.PI / 2); g.add(sh);
+    const pic = P.pictureFrame(1.0, 0.7); at(pic, 2.6, 2.3, -5.85); g.add(pic);
+    const pl1 = P.pottedPlant(1.1, 3); at(pl1, -3.4, 0, -5.5); g.add(pl1);
+    const pl2 = P.pottedPlant(0.9, 8); at(pl2, 1.45, 0, -5.55); g.add(pl2);
+    for (const cx2 of [-1.75, 0.25]) { const ct = P.curtain(0.55, 2.1, '#8a3f4a'); at(ct, cx2 + (cx2 < 0 ? 0 : 0.9), 0.9, -5.8); g.add(ct); }
+    const fl = P.lantern({intensity: 3}); at(fl.group, 3.55, 0.9, -5.3); g.add(fl.group); updaters.push(fl.update);
+    const lampPole = cyl(0.03, 0.05, 0.9, toon('#3a3430', {rough: 0.4, metal: 0.7})); at(lampPole, 3.55, 0, -5.3); g.add(lampPole);
+    const j1 = P.jar(0.12, 0.34, '#4f7fa6'); at(j1, -1.4, 0.75, -4.05); g.add(j1);
     const tbl = box(1.1, 0.75, 0.7, toon('#9a6a42', {paint: {planks: 3, seed: 97}})); at(tbl, -1.0, 0, -3.9); g.add(tbl);
     const pl = P.plate(); at(pl, -1.2, 0.75, -3.85); g.add(pl);
     const gls = P.waterGlass(); at(gls, -0.65, 0.75, -3.8); g.add(gls);
@@ -126,10 +137,14 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('mencuri') + 0.15, expr: 'drowsy', pose: 'limp'},
       {t: E('detik') + 0.05, expr: 'worried', pose: 'headHold', action: 'tremble', dur: 0.8},
       {t: cut(8), pose: 'hips', expr: 'happy'},
+      {t: cut(8) + 0.05, move: [-0.55, -3.05], dur: 0.9},
+      {t: cut(8) + 1.0, face: 'camera'},
       {t: E('rawat') + 0.1, pose: 'point', expr: 'cheesy'},
       {t: E('makan') + 0.05, pose: 'eat', expr: 'toothy'},
       {t: E('minum') + 0.05, pose: 'drink', expr: 'happy'},
       {t: cut(9), pose: 'chin', expr: 'thinking'},
+      {t: cut(9) + 0.05, move: [-0.3, -2.4], dur: 0.8},
+      {t: cut(9) + 0.9, face: 'camera'},
       {t: E('organ2') + 0.1, pose: 'shrug', expr: 'confused'},
       {t: E('hebat') + 0.1, pose: 'presentBoth', expr: 'excited'},
       {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},
@@ -175,9 +190,17 @@ export function buildWorld(lang, T, EVt, L) {
     const brain = P.brainMascot(); at(brain.group, 0.1, 1.33, -3.9); brain.group.scale.setScalar(0.55); g.add(brain.group);
     const spot = new THREE.Mesh(new THREE.ConeGeometry(0.75, 2.6, 24, 1, true), new THREE.MeshBasicMaterial({color: '#fff1c0', transparent: true, opacity: 0.07, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending}));
     spot.position.set(0.1, 2.2, -3.9); g.add(spot);
-    const hero = ch('hero', {seed: 51}, g, -0.95, -2.9, 0.25);
+    const lsh = P.shelf(1.4, 1.9, {seed: 14}); at(lsh, -3.55, 0, -3.6, Math.PI / 2); g.add(lsh);
+    const lpl = P.pottedPlant(1.1, 6); at(lpl, 3.35, 0, -5.4); g.add(lpl);
+    const lch = P.chest(0.8, 0.45, 0.5); at(lch, -2.8, 0, -5.2); g.add(lch);
+    for (const [jx, c] of [[-0.35, '#4f7fa6'], [0.55, '#c75b5b']]) { const j = P.jar(0.08, 0.22, c); at(j, jx, 0.9, -4.05); g.add(j); }
+    const lpic = P.pictureFrame(0.9, 0.62); at(lpic, -0.3, 2.65, -5.85); g.add(lpic);
+    const lrug = P.rug(2.6, 1.8, {base: '#2f5f7a', accent: '#e8c35a', accent2: '#c75b5b', dark: '#1f2a3a', seed: 9}); lrug.position.set(-0.6, 0, -2.8); g.add(lrug);
+    const hero = ch('hero', {seed: 51}, g, -2.6, -2.9, 0.25);
     hero.act([
       {t: 0, pose: 'present', expr: 'smug', action: 'talk', dur: 1.2},
+      {t: cut(2) + 0.05, move: [-0.95, -2.9], dur: 1.3},
+      {t: cut(2) + 1.4, face: 0.25},
       {t: E('dua') + 0.1, pose: 'pointUp', expr: 'thinking'},
       {t: E('puluh') + 0.1, pose: 'point', expr: 'shocked', action: 'jump', dur: 0.6},
       {t: E('otakmu') + 0.1, pose: 'presentBoth', expr: 'cheesy', action: 'hop', dur: 0.5},
@@ -221,9 +244,16 @@ export function buildWorld(lang, T, EVt, L) {
     for (const yy of [1.72, 2.78]) { const f = box(1.44, 0.08, 0.14, '#d6cab6', {center: true}); at(f, -1.0, yy, -4.82); g.add(f); }
     const sunDot = new THREE.Mesh(new THREE.CircleGeometry(0.13, 20), new THREE.MeshBasicMaterial({color: '#fff3c8'})); g.add(sunDot);
     const clk = P.wallClock(0.3); at(clk.group, 0.2, 2.6, -4.86); g.add(clk.group);
-    const hero = ch('hero', {seed: 52}, g, 0.05, -2.35, 0);
+    const psh = P.shelf(1.2, 1.8, {seed: 22}); at(psh, 3.3, 0, -3.2, -Math.PI / 2); g.add(psh);
+    const pch = P.chest(0.8, 0.45, 0.5); at(pch, -2.6, 0, -4.4); g.add(pch);
+    const prug = P.rug(2.6, 1.8, {base: '#5a2a3a', accent: '#d8a84a', accent2: '#2a4a6a', dark: '#1a1a2a', seed: 12}); prug.position.set(0, 0, -2.8); g.add(prug);
+    const ppl = P.pottedPlant(0.9, 9); at(ppl, -2.9, 0, -2.2); g.add(ppl);
+    for (const cx2 of [-1.95, -0.05]) { const ct = P.curtain(0.45, 1.6, '#3f4a7a'); at(ct, cx2, 1.4, -4.8); g.add(ct); }
+    const hero = ch('hero', {seed: 52}, g, 1.9, -2.35, 0);
     hero.act([
       {t: 0, pose: 'chin', expr: 'thinking'},
+      {t: cut(3) + 0.05, move: [0.05, -2.35], dur: 1.4},
+      {t: cut(3) + 1.5, face: 'camera'},
       {t: E('watt') + 0.1, pose: 'pointUp', expr: 'scheming'},
       {t: E('lampu') + 0.1, pose: 'armsUp', expr: 'cheesy', action: 'jump', dur: 0.6},
       {t: E('sepanjang') + 0.1, pose: 'present', expr: 'surprised'},
@@ -306,6 +336,12 @@ export function buildWorld(lang, T, EVt, L) {
     const lampS = cone(0.15, 0.2, '#e8a83a'); at(lampS, 0.35, 1.25, -2.85); lampS.rotation.z = Math.PI; g.add(lampS);
     const tw = sign(L.twist, 1.9, 0.6, {bg: '#d8413a', fg: '#fff3df', frame: '#7a2a2a'}); at(tw, -0.3, 2.6, -4.84); g.add(tw);
     const scale = P.bathScale(L.kg); at(scale.group, 1.45, 0, -2.3); g.add(scale.group);
+    const ssh = P.shelf(1.3, 1.9, {seed: 31}); at(ssh, 2.3, 0, -4.55); g.add(ssh);
+    const spic = P.pictureFrame(0.8, 0.56); at(spic, -2.2, 2.2, -4.85); g.add(spic);
+    const srug = P.rug(2.4, 1.6, {base: '#6a3a2a', accent: '#e0b060', accent2: '#3a5a4a', dark: '#2a1a1a', seed: 17}); srug.position.set(0.2, 0, -2.4); g.add(srug);
+    const spl = P.pottedPlant(1.0, 12); at(spl, -2.9, 0, -4.3); g.add(spl);
+    const sln = P.lantern({intensity: 2.5}); at(sln.group, -2.3, 0.77, -3.6); g.add(sln.group); updaters.push(sln.update);
+    const sst = box(0.5, 0.77, 0.5, patMat('woodfloor', '#7a4a2a')); at(sst, -2.3, 0, -3.6); g.add(sst);
     const hero = ch('hero', {seed: 55}, g, -0.4, -3.2, 0);
     hero.act([
       {t: 0, pose: 'think', expr: 'thinking'},
@@ -332,7 +368,11 @@ export function buildWorld(lang, T, EVt, L) {
     const g = addLoc('kids');
     under(g, '#3a3036');
     g.add(P.room(7, 3.4, 6, {wall: '#f6e2b8', floor: '#c9a86a', wain: '#8fc7c0'}));
-    const rug = new THREE.Mesh(new THREE.CircleGeometry(1.6, 40), toon('#8fb3e0')); rug.rotation.x = -Math.PI / 2; rug.position.set(0, 0.02, -2.8); rug.receiveShadow = true; g.add(rug);
+    const rug = P.rug(3.2, 2.4, {base: '#4f8fc8', accent: '#f2d24a', accent2: '#e07a3a', dark: '#2a3a6a', seed: 21}); rug.position.set(0, 0, -2.8); g.add(rug);
+    const ksh = P.shelf(1.3, 1.6, {seed: 41}); at(ksh, 3.25, 0, -3.3, -Math.PI / 2); g.add(ksh);
+    const kpl = P.pottedPlant(1.0, 15); at(kpl, -3.0, 0, -4.5); g.add(kpl);
+    for (const cx2 of [-0.75, 0.55]) { const ct = P.curtain(0.5, 1.8, '#e07a8a'); at(ct, cx2, 1.0, -4.82); g.add(ct); }
+    const kpic = P.pictureFrame(0.7, 0.5); at(kpic, -0.1, 2.55, -4.85); g.add(kpic);
     'ABC123'.split('').forEach((ch2, i) => { const b = P.toyBlock(ch2, ['#c75b5b', '#4f7fa6', '#e8a83a', '#5a9a8a', '#9a6fb0', '#e07a3a'][i]); at(b, -0.9 + (i % 3) * 0.36, Math.floor(i / 3) * 0.32, -2.2 - (i % 2) * 0.2, i * 0.3); g.add(b); });
     const pie = P.pieChart(0.75); at(pie.group, 1.6, 1.95, -4.85); g.add(pie.group);
     const hs = sign(L.halfSub, 1.5, 0.34, {bg: '#f2d24a', frame: '#8a6a2a'}); at(hs, 1.6, 0.98, -4.84); g.add(hs);
@@ -340,15 +380,18 @@ export function buildWorld(lang, T, EVt, L) {
     // growth ruler
     const ruler = box(0.18, 1.8, 0.04, '#fbf6ea'); at(ruler, -2.9, 0.2, -4.86); g.add(ruler);
     for (let i = 0; i < 9; i++) { const tk = box(0.08, 0.015, 0.02, INK, {hull: 0, edges: false}); at(tk, -2.86, 0.3 + i * 0.2, -4.83); g.add(tk); }
-    const kid = ch('kid', {seed: 57}, g, 0.1, -2.6, 0);
+    const kid = ch('kid', {seed: 57}, g, 0.9, -2.3, 0);
     kid.act([
-      {t: 0, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.8},
+      {t: 0, pose: 'cheer', expr: 'toothy'},
+      {t: cut(7) + 0.05, move: [-0.5, -2.2], dur: 0.8, gait: 'run'},
+      {t: cut(7) + 0.9, move: [0.1, -2.6], dur: 0.6, gait: 'run'},
+      {t: cut(7) + 1.6, face: 'camera'},
       {t: E('lima') + 0.1, pose: 'armsUp', expr: 'cheesy', action: 'jump', dur: 0.6},
       {t: E('separuh') + 0.1, pose: 'present', expr: 'excited'},
       {t: E('tumbuh') + 0.1, pose: 'cheer', expr: 'laugh', action: 'jump', dur: 0.7},
     ]);
-    const adult = ch('hero', {seed: 58}, g, -1.0, -3.3, 0.2);
-    adult.act([{t: 0, pose: 'hips', expr: 'happy'}, {t: E('separuh') + 0.15, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.6}, {t: E('tumbuh') + 0.2, pose: 'present', expr: 'cheesy'}]);
+    const adult = ch('hero', {seed: 58}, g, -2.4, -3.3, 0.2);
+    adult.act([{t: 0, pose: 'hips', expr: 'happy'}, {t: cut(7) + 0.1, move: [-1.0, -3.3], dur: 1.4}, {t: cut(7) + 1.6, face: 0.3}, {t: E('separuh') + 0.15, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.6}, {t: E('tumbuh') + 0.2, pose: 'present', expr: 'cheesy'}]);
     const kb = P.brainMascot(); kb.group.scale.setScalar(0.3); at(kb.group, 0.1, 1.85, -2.55); g.add(kb.group);
     const glow = P.glowSprite('#ffe08a', 1.1); glow.position.set(0.1, 1.85, -2.6); g.add(glow);
     orbFlow(g, [-0.2, 0.7, -2.5], [0.1, 1.8, -2.55], {n: 10, size: 0.14, speed: 1.1, lift: 0.3, vis: (t) => inShots(t, 7)});

@@ -8,16 +8,28 @@ import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {makeTiming, EV, LABELS, FPS} from './timing';
 import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
-import {CREAM, INK} from './kit';
+import {CREAM, INK, STYLE} from './kit';
+import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import {GradeShader, resolveLook, applyGrade} from './lighting';
 import {CHAR_TINT} from './char';
 
 
 const TMPC = new THREE.Color();
+// Realistic look: soft image-based light from a studio environment + neutral tone mapping (keeps character colours).
+function ensureRealism(gl, scene) {
+  if (!STYLE.realistic) return;
+  if (!scene.userData.envReady) {
+    const pm = new THREE.PMREMGenerator(gl);
+    scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; scene.userData.envReady = true;
+  }
+  scene.environmentIntensity = 0.45;
+  gl.toneMapping = THREE.NeutralToneMapping; gl.toneMappingExposure = 1.0;
+}
 export function useStory(lang) {
   return useMemo(() => {
     const T = makeTiming(lang);
@@ -57,6 +69,8 @@ function Scene({lang, thumb}) {
     c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 3, aperture: 0.0016, maxblur: 0.0055});
     c.addPass(bokeh);
+    // glow around light sources only (lamps, fire, moon, lit windows are HDR > 1; characters stay below the threshold)
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.6, 0.5, 1.6));
     const grade = new ShaderPass(GradeShader); c.addPass(grade); c.grade = grade;
     c.addPass(new OutputPass());
     c.bokeh = bokeh;
@@ -79,8 +93,10 @@ function Scene({lang, thumb}) {
     const lk = resolveLook(LOOK[loc], t, {EVt, CUTS: T.CUTS});
     if (!scene.fog) scene.fog = new THREE.Fog('#efe6d2', 14, 55);
     if (!built.world.parent) { scene.add(built.world, built.sky, built.moon, built.key, built.key.target, built.hemi); gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap; }
+    ensureRealism(gl, scene);
     scene.fog.color.set(lk.fog); scene.fog.near = lk.near; scene.fog.far = lk.far;
     built.sky.material.uniforms.top.value.set(lk.skyTop); built.sky.material.uniforms.bottom.value.set(lk.skyBottom);
+    built.sky.material.uniforms.clouds.value = STYLE.realistic ? (lk.clouds ?? 0) : 0;
     built.sky.position.copy(camera.position);
     built.moon.visible = !!lk.moon;
     if (lk.moon) { built.moon.position.set(camera.position.x - 30, 45, camera.position.z - 120); built.moon.lookAt(camera.position); }
