@@ -35,8 +35,8 @@ def paste(img, ph, cx, cy, annot=None):
     img.paste(im, (x, y), im)
 
 G = lambda n: os.path.join(ROOT, 'gambar_tritone', n)
-# big middle photo: burning city
-paste(img, photo(G('15_kota-dilalap-api.jpg'), 420, -2.5), 1030, 330)
+# big middle photo: Gustavus Adolphus
+paste(img, photo(G('20_potret-gustavus-adolphus.jpg'), 430, -2.5, crop=(.12, .02, .98, .62)), 1030, 335)
 # top-right: Prague castle
 paste(img, photo(G('07_panorama-kastel-praha.jpg'), 290, 3, border=10), 1125, 95)
 # bottom: map 1618 with a red circle around Bohemia + stamp
