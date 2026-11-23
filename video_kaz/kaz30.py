@@ -221,7 +221,7 @@ def build_camera():
         drift = 1.07 if spec[0] == 'card' else 1.05
         keys.append((b - .02, cx + 14*math.sin(a), cy + 10*math.cos(a), z * drift, r + (.6 if (len(keys) % 4) else -.6)))
         prev = spec
-    for bg_ in BAG:                                  # chapter card: pull out over the board while the card shows, then go to the first beat
+    for bg_ in BAG[1:]:                              # chapter card (none for Bagian 1): pull out over the board while the card shows, then go to the first beat
         c0, c1 = bg_['card'], bg_['hold']
         if bg_['n'] == 1:
             keys.append((0.0, WIDE_C[0], WIDE_C[1], .13, 0))
@@ -231,7 +231,7 @@ def build_camera():
         first = min((x for x in beats if x[0] >= bg_['start'] - .01), key=lambda x: x[0])
         cx, cy, z, r = target(first[2]); keys.append((c1 + 1.0, cx, cy, z, r))
     keys = [k for k in keys if not any(b_['card'] - .4 < k[0] < b_['hold'] + 1.0 - 1e-6 and not k in (
-        (b_['card'] + .5, WIDE_C[0], WIDE_C[1], .14, 0), (b_['hold'] - .1, WIDE_C[0], WIDE_C[1], .15, 0), (0.0, WIDE_C[0], WIDE_C[1], .13, 0)) for b_ in BAG)]
+        (b_['card'] + .5, WIDE_C[0], WIDE_C[1], .14, 0), (b_['hold'] - .1, WIDE_C[0], WIDE_C[1], .15, 0), (0.0, WIDE_C[0], WIDE_C[1], .13, 0)) for b_ in BAG[1:])]
     keys.sort(key=lambda x: x[0])
     return keys, beats
 
@@ -515,7 +515,7 @@ def screen_overlays(img, t):
     out = img.astype(np.float32)
     def pil_of(o): return Image.fromarray(cv2.cvtColor(np.clip(o, 0, 255).astype(np.uint8), cv2.COLOR_BGR2RGB))
     def back(p): return cv2.cvtColor(np.array(p), cv2.COLOR_RGB2BGR)
-    for bg_ in BAG:
+    for bg_ in BAG[1:]:
         c0, c1 = bg_['card'], bg_['hold']
         if c0 - .01 <= t < c1 + .3:
             a = (ss((t-c0)/.4) if bg_['n'] > 1 else 1) * (1-ss((t-c1+.2)/.5))
@@ -607,7 +607,7 @@ def setup():
     KEYS_CAM, BEATS = build_camera()
     for a, b, spec, k in BEATS:                  # a card appears when the camera first goes to it
         if spec[0] == 'card':
-            hb = next((b_['hold'] for b_ in BAG if b_['start'] - .01 <= a < b_['hold']), None)
+            hb = next((b_['hold'] for b_ in BAG[1:] if b_['start'] - .01 <= a < b_['hold']), None)
             CARDS[spec[1]]['t0'] = min(CARDS[spec[1]]['t0'], (hb + .6) if hb else a + .25)
     for c in CARDS.values(): c['t0'] = min(c['t0'], FINALE + .5)   # everything is on the board for the finale
     build_chain()

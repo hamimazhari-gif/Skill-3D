@@ -18,7 +18,8 @@ durs = [float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format
 orig0 = [sum(durs[:i]) for i in range(10)]
 tr = [TRIM.get(i+1, 0.0) for i in range(10)]
 dur2 = [durs[i] - tr[i] for i in range(10)]
-new0 = [sum(dur2[:i]) + (i+1)*GAP for i in range(10)]          # where each Bagian's (trimmed) audio starts
+G0 = .05                                       # no pause/card before Bagian 1: the video opens straight into the story
+new0 = [sum(dur2[:i]) + i*GAP + G0 for i in range(10)]          # where each Bagian's (trimmed) audio starts
 bag = []
 for i in range(10):
     st = new0[i]; n = i + 1
@@ -35,7 +36,7 @@ for b in range(10):
 json.dump(dict(gap=GAP, duration=round(bag[-1]['end'], 3), bagian=bag, paras=paras), open(os.path.join(HERE, 'timing_gap.json'), 'w'), ensure_ascii=False, indent=1)
 inp, fc, pre = [], '', ''
 for i, f in enumerate(files):
-    inp += ['-f', 'lavfi', '-t', str(GAP), '-i', 'anullsrc=r=24000:cl=mono', '-i', f]
+    inp += ['-f', 'lavfi', '-t', str(GAP if i else G0), '-i', 'anullsrc=r=24000:cl=mono', '-i', f]
     pre += f'[{2*i+1}:a]atrim=start={tr[i]:.3f},asetpts=PTS-STARTPTS[t{i}];'
     fc += f'[{2*i}:a][t{i}]'
 subprocess.run(['ffmpeg', '-v', 'error', '-y'] + inp + ['-filter_complex', pre + fc + 'concat=n=20:v=0:a=1[a]', '-map', '[a]', '-c:a', 'pcm_s16le',
