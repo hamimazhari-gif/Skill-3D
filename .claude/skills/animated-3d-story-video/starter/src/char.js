@@ -18,7 +18,7 @@ export const DESIGNS = {
   pill: {head: 'pill', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -399,6 +399,7 @@ export const POSES = {
   tap: {L: [0.12, 0], R: [1.25, 0.15]},
   beg: {L: [0.9, -0.9], R: [0.9, -0.9]},
   flex: {L: [1.45, 1.75], R: [1.45, 1.75]},
+  drink: {L: [0.12, 0], R: [0.2, -2.45]},
   eat: {L: [0.12, 0], R: [0.35, -2.2]},
 };
 
