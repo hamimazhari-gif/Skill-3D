@@ -1,0 +1,508 @@
+{
+ "title": "Kisah Nabi Yunus - Part 3",
+ "duration": 81.4,
+ "shots": [
+  {
+   "id": "w01",
+   "start": 0.0,
+   "end": 3.55,
+   "line": "Part tiga. Doa dari Tiga Kegelapan.",
+   "scene": "w01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "w02",
+   "start": 3.55,
+   "end": 9.25,
+   "line": "Nabi Yunus tidak mati. Atas kehendak Allah, ia hidup… di dalam perut ikan.",
+   "scene": "w02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -10
+    },
+    {
+     "at": 3.0,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  },
+  {
+   "id": "w03",
+   "start": 9.25,
+   "end": 10.95,
+   "line": "Gelapnya malam.",
+   "scene": "w03",
+   "in": {
+    "type": "dip",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "tick",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w04",
+   "start": 10.95,
+   "end": 12.55,
+   "line": "Gelapnya lautan.",
+   "scene": "w04",
+   "in": {
+    "type": "dip",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "tick",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -16
+   }
+  },
+  {
+   "id": "w05",
+   "start": 12.55,
+   "end": 14.35,
+   "line": "Gelapnya perut ikan.",
+   "scene": "w05",
+   "in": {
+    "type": "dip",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "tick",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -16
+   }
+  },
+  {
+   "id": "w06",
+   "start": 14.35,
+   "end": 17.45,
+   "line": "Tiga kegelapan… dan ia sendirian.",
+   "scene": "w06",
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "riser",
+     "gain": -12
+    },
+    {
+     "at": 1.5,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -16
+   }
+  },
+  {
+   "id": "w07",
+   "start": 17.45,
+   "end": 23.15,
+   "line": "Di sanalah, ia menyadari kesalahannya. Dengan hati yang hancur, ia berdoa:",
+   "scene": "w07",
+   "bars": "scope",
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  },
+  {
+   "id": "w08",
+   "start": 23.15,
+   "end": 28.45,
+   "line": "Laa ilaaha illaa anta, subhaanaka, innii kuntu minazh-zhaalimiin.",
+   "scene": "w08",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "w09",
+   "start": 28.45,
+   "end": 35.35,
+   "line": "Tidak ada Tuhan selain Engkau. Mahasuci Engkau. Sungguh, aku termasuk orang-orang yang zalim.",
+   "scene": "w09",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "w10",
+   "start": 35.35,
+   "end": 37.35,
+   "line": "Allah mendengar doanya.",
+   "scene": "w10",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -6
+    },
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -20
+   }
+  },
+  {
+   "id": "w11",
+   "start": 37.35,
+   "end": 40.05,
+   "line": "Ikan itu memuntahkannya ke daratan yang tandus.",
+   "scene": "w11",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "whoosh",
+     "gain": -8
+    },
+    {
+     "at": 1.6,
+     "name": "impact",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w12",
+   "start": 40.05,
+   "end": 43.75,
+   "line": "Tubuhnya lemah… sakit… tak berdaya.",
+   "scene": "w12",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "w13",
+   "start": 43.75,
+   "end": 47.85,
+   "line": "Lalu Allah menumbuhkan pohon labu untuk menaunginya, hingga ia pulih.",
+   "scene": "w13",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "shimmer",
+     "gain": -12
+    },
+    {
+     "at": 3.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w14",
+   "start": 47.85,
+   "end": 49.75,
+   "line": "Dan inilah kejutannya…",
+   "scene": "w14",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "w15",
+   "start": 49.75,
+   "end": 53.75,
+   "line": "Setelah Nabi Yunus pergi dulu, kaumnya melihat tanda-tanda azab mendekat.",
+   "scene": "w15",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "thunder",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -14
+   }
+  },
+  {
+   "id": "w16",
+   "start": 53.75,
+   "end": 57.25,
+   "line": "Mereka ketakutan… lalu bertobat beramai-ramai.",
+   "scene": "w16",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "thunder",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "w17",
+   "start": 57.25,
+   "end": 60.65,
+   "line": "Dan Allah… mengangkat azab itu dari mereka.",
+   "scene": "w17",
+   "sfx": [
+    {
+     "at": 0.7,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w18",
+   "start": 60.65,
+   "end": 66.85,
+   "line": "Saat Nabi Yunus kembali… seratus ribu orang lebih menyambutnya… dalam keadaan beriman.",
+   "scene": "w18",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.0,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.2,
+     "name": "riser",
+     "gain": -12
+    },
+    {
+     "at": 3.0,
+     "name": "pop",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -18
+   }
+  },
+  {
+   "id": "w19",
+   "start": 66.85,
+   "end": 73.05,
+   "line": "Hikmahnya: Sedalam apa pun kegelapan yang kamu alami… pintu tobat selalu terbuka.",
+   "scene": "w19",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 4.0,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "w20",
+   "start": 73.05,
+   "end": 77.95,
+   "line": "Dan jangan pernah putus asa berdakwah… karena hidayah adalah milik Allah.",
+   "scene": "w20",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 2.5,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "w21",
+   "start": 77.95,
+   "end": 81.4,
+   "line": "Ikuti terus kisah para nabi selanjutnya!",
+   "scene": "w21",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "stinger",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 23.15,
+   "mood": "sad",
+   "intensity": 0.5
+  },
+  {
+   "start": 23.15,
+   "end": 47.85,
+   "mood": "wonder",
+   "intensity": 0.45
+  },
+  {
+   "start": 47.85,
+   "end": 60.65,
+   "mood": "tension",
+   "intensity": 0.6
+  },
+  {
+   "start": 60.65,
+   "end": 81.4,
+   "mood": "hopeful",
+   "intensity": 0.6
+  }
+ ],
+ "sfx": []
+}
