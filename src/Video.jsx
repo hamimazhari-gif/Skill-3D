@@ -8,6 +8,7 @@ import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {makeTiming, EV, LABELS, FPS} from './timing';
 import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
@@ -68,6 +69,8 @@ function Scene({lang, thumb}) {
     c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 3, aperture: 0.0016, maxblur: 0.0055});
     c.addPass(bokeh);
+    // glow around light sources only (lamps, fire, moon, lit windows are HDR > 1; characters stay below the threshold)
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.75, 0.55, 1.0));
     const grade = new ShaderPass(GradeShader); c.addPass(grade); c.grade = grade;
     c.addPass(new OutputPass());
     c.bokeh = bokeh;

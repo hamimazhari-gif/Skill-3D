@@ -28,5 +28,5 @@ Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
 - Tokoh bergerak natural: berjalan, berlari, berbalik (`move`, `face`), dengan langkah kaki dan ayunan tangan.
 - Tokoh punya banyak sudut pandang otomatis: depan, serong, samping (kiri/kanan), belakang, dan dari atas.
-- Latar dan benda realistik: material bertekstur yang bereaksi pada cahaya, pantulan lingkungan, langit berawan, tanpa garis tinta di benda.
+- Latar dan benda realistik dan kaya: tekstur bermotif (karpet berornamen, wallpaper, lantai kayu berserat, batu, rumput), ruangan penuh benda (rak, guci, lukisan, tirai, tanaman, lentera), padang rumput bergoyang, gunung berkabut, lampu yang berpendar, kontras cahaya hangat-dingin.
 - Contoh gerakan & sudut pandang: komposisi `DemoGerak` (12 detik).
