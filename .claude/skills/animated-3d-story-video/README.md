@@ -13,22 +13,16 @@ lalu mengirim hasilnya.
 
 Isi:
 - `SKILL.md` — aturan gaya, akting, alur kerja (dibaca Claude).
-- `starter/` — proyek Remotion + three.js lengkap (kit 3D, karakter ekspresif, efek visual, props, alat bantu, sound effect), sudah memakai gaya terbaru (video "Otak, si pencuri energi" + demo gerakan).
+- `starter/` — proyek Remotion + three.js lengkap (kit 3D, karakter ekspresif, efek visual, props, alat bantu, sound effect), sudah memakai gaya terbaru (video "Bumi berhenti berputar").
 - `example/bumi-berhenti-berputar/` — contoh terbaru + `style_reference.png` (gaya tokoh yang disetujui).
 - `example/sejarah-uang/` — video pertama: naskah, rencana kamera, narasi, judul, thumbnail, PDF.
 
 Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Tokoh diberi bayangan: terang dari kiri atas, bayangan lembut di kanan bawah, bayangan kepala di dada.
-- Baju tampak 3D: kilauan putih vertikal di kiri, kilau di dada, bayangan gelap di kedua tepi badan.
+- Baju tampak 3D: kilauan putih vertikal di kiri, kilau di dada, bayangan gelap di kedua tepi badan, lengan dan kaki.
 - Tokoh menjatuhkan bayangan ke lantai/dinding dan ikut warna cahaya adegan.
 - Tanpa lingkaran merah di wajah (tanpa pipi merah / rona).
 - Marah atau kesal: tanda urat merah khas komik di dahi + alis tebal miring.
 - Banyak ekspresi bergigi (meringis, menjerit, tertawa lebar, menggertakkan gigi).
 - Badan panjang dengan kaki kurus panjang.
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
-- Tokoh bergerak natural: berjalan, berlari, berbalik (`move`, `face`), dengan langkah kaki dan ayunan tangan.
-- Kepala besar, warna kulit tetap seperti semula, garis luar hitam tebal dan rata, mata kelopak tebal + pupil setengah lingkaran, alis tebal pendek, mulut kecil (seperti video contoh).
-- Tangan dan kaki seperti video contoh: garis hitam tipis, lutut menekuk, tangan bulatan hitam kecil, kaki kecil hitam.
-- Tokoh selalu menghadap kamera (tanpa gambar samping/belakang) — permintaan pengguna.
-- Latar dan benda realistik dan kaya: tekstur bermotif (karpet berornamen, wallpaper, lantai kayu berserat, batu, rumput), ruangan penuh benda (rak, guci, lukisan, tirai, tanaman, lentera), padang rumput bergoyang, gunung berkabut, lampu yang berpendar, kontras cahaya hangat-dingin.
-- Contoh gerakan: komposisi `DemoGerak` (12 detik).

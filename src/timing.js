@@ -3,7 +3,7 @@ import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 9;
+export const SHOTS = 11;
 export const TAIL = 0.7; // hold after the last word
 
 const DATA = {en: EN, id: ID};
@@ -36,30 +36,25 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "Otak, pencuri energi" (Indonesian + English).
+// Word events per language: [sentenceIndex, word, occurrence]. Story: "Bumi berhenti berputar" (Indonesian + English).
 export const EV = {
-  organ: {en: [0, 'organ'], id: [0, 'organ']}, mencuri: {en: [0, 'stealing'], id: [0, 'mencuri']}, detik: {en: [0, 'second'], id: [0, 'detik']},
-  dua: {en: [1, 'two'], id: [1, 'dua']}, puluh: {en: [1, 'twenty'], id: [1, 'puluh']}, energi: {en: [1, 'energy'], id: [1, 'energi']},
-  otakmu: {en: [2, 'brain'], id: [2, 'otakmu']},
-  listrik: {en: [3, 'electricity'], id: [3, 'listrik']}, watt: {en: [3, 'watts'], id: [3, 'watt']},
-  lampu: {en: [4, 'bulb'], id: [4, 'lampu']},
-  sepanjang: {en: [5, 'day'], id: [5, 'sepanjang']}, mati: {en: [5, 'switching'], id: [5, 'mati']},
-  serakus: {en: [6, 'hungry'], id: [6, 'serakus']},
-  miliar: {en: [7, 'billion'], id: [7, 'miliar']}, sinyal: {en: [7, 'signals'], id: [7, 'sinyal']}, tidur: {en: [7, 'sleep'], id: [7, 'tidur']},
-  twist: {en: [8, 'twist'], id: [8, 'twist']},
-  belajar: {en: [9, 'studying'], id: [9, 'belajar']}, kurus: {en: [9, 'weight'], id: [9, 'kurus']},
-  sedikit: {en: [10, 'tiny'], id: [10, 'sedikit']}, keras: {en: [10, 'concentrate'], id: [10, 'keras']},
-  sebagian: {en: [11, 'most'], id: [11, 'sebagian']}, hidup: {en: [11, 'alive'], id: [11, 'hidup']},
-  anak: {en: [12, 'children'], id: [12, 'anak']}, lima: {en: [12, 'five'], id: [12, 'lima']}, separuh: {en: [12, 'half'], id: [12, 'separuh']}, tumbuh: {en: [12, 'growing'], id: [12, 'tumbuh']},
-  rawat: {en: [13, 'care'], id: [13, 'rawat']},
-  makan: {en: [14, 'eat'], id: [14, 'makan']}, minum: {en: [14, 'drink'], id: [14, 'minum']}, tidur2: {en: [14, 'sleep'], id: [14, 'tidur']},
-  organ2: {en: [15, 'organ'], id: [15, 'organ']}, hebat: {en: [15, 'amazing'], id: [15, 'hebat']},
-  tulis: {en: [16, 'tell'], id: [16, 'tulis']}, komentar: {en: [16, 'comments'], id: [16, 'komentar']},
+  bumi: {en: [0, 'earth'], id: [0, 'bumi']}, berhenti: {en: [0, 'stops'], id: [0, 'berhenti']},
+  sadari: {en: [1, 'noticing'], id: [1, 'sadari']}, cepat: {en: [1, 'fast'], id: [1, 'cepat']},
+  khatulistiwa: {en: [2, 'equator'], id: [2, 'khatulistiwa']}, seribu: {en: [2, 'thousand'], id: [2, 'seribu']}, kmjam: {en: [2, 'hour'], id: [2, 'jam']},
+  mendadak: {en: [3, 'suddenly'], id: [3, 'mendadak']}, manusia: {en: [3, 'people'], id: [3, 'manusia']}, mobil: {en: [3, 'cars'], id: [3, 'mobil']},
+  rumah: {en: [3, 'houses'], id: [3, 'rumah']}, terlempar: {en: [3, 'thrown'], id: [3, 'terlempar']},
+  udara: {en: [4, 'air'], id: [4, 'udara']}, angin: {en: [4, 'winds'], id: [4, 'angin']}, badai: {en: [4, 'hurricane'], id: [4, 'badai']},
+  laut: {en: [5, 'oceans'], id: [5, 'laut']}, mengalir: {en: [5, 'flow'], id: [5, 'mengalir']}, kutub: {en: [5, 'poles'], id: [5, 'kutub']},
+  utara: {en: [6, 'north'], id: [6, 'utara']}, selatan: {en: [6, 'south'], id: [6, 'selatan']}, daratan: {en: [6, 'continent'], id: [6, 'daratan']},
+  hari: {en: [7, 'day'], id: [7, 'hari']}, jam24: {en: [7, 'twenty'], id: [7, 'dua']},
+  matahari: {en: [8, 'sun'], id: [8, 'matahari']}, siang: {en: [8, 'daylight'], id: [8, 'siang']}, lainnya: {en: [8, 'other'], id: [8, 'lainnya']}, membeku: {en: [8, 'freeze'], id: [8, 'membeku']},
+  tenang: {en: [9, 'worry'], id: [9, 'tenang']}, ilmuwan: {en: [9, 'scientists'], id: [9, 'ilmuwan']}, tidak: {en: [9, 'won'], id: [9, 'tidak']},
+  seram: {en: [10, 'scares'], id: [10, 'menyeramkan']}, tulis: {en: [11, 'tell'], id: [11, 'tulis']}, komentar: {en: [11, 'comments'], id: [11, 'komentar']},
 };
 
 export const LABELS = {
-  en: {energy: 'ENERGY', weight: '2%', weightSub: 'BODY WEIGHT', energy20: '20%', energySub: 'BODY ENERGY', watt: '20 WATTS', neurons: '86 BILLION', neuronsSub: 'NERVE CELLS',
-    kg: 'KG', twist: 'PLOT TWIST!', alive: 'STAY ALIVE', think: '+THINK', half: 'OVER 50%', halfSub: 'RESTING ENERGY', age: 'AGE 5', comment: 'COMMENT!', rest: 'BODY'},
-  id: {energy: 'ENERGI', weight: '2%', weightSub: 'BERAT BADAN', energy20: '20%', energySub: 'ENERGI TUBUH', watt: '20 WATT', neurons: '86 MILIAR', neuronsSub: 'SEL SARAF',
-    kg: 'KG', twist: 'PLOT TWIST!', alive: 'TETAP HIDUP', think: '+MIKIR', half: 'LEBIH 50%', halfSub: 'ENERGI ISTIRAHAT', age: 'USIA 5', comment: 'KOMENTAR!', rest: 'TUBUH'},
+  en: {speed: '1,670 KM/H', equator: 'EQUATOR', north: 'NORTH', south: 'SOUTH', poles: 'TO THE POLES', beach: 'BEACH', hours: '24 HOURS',
+    day6: '6 MONTHS', day6Sub: 'OF DAYLIGHT', night6: '6 MONTHS', night6Sub: 'OF DARKNESS', safe: 'EARTH: SAFE', comment: 'COMMENT!', shop: 'BAKERY'},
+  id: {speed: '1.670 KM/JAM', equator: 'KHATULISTIWA', north: 'UTARA', south: 'SELATAN', poles: 'KE KUTUB', beach: 'PANTAI', hours: '24 JAM',
+    day6: '6 BULAN', day6Sub: 'SIANG TERUS', night6: '6 BULAN', night6Sub: 'MALAM GELAP', safe: 'BUMI: AMAN', comment: 'KOMENTAR!', shop: 'TOKO ROTI'},
 };

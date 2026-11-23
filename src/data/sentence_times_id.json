@@ -1,124 +1,89 @@
 {
- "duration": 67.64,
+ "duration": 57.56,
  "sentences": [
   {
    "shot": 1,
-   "text": "Di dalam tubuhmu... ada satu organ yang diam-diam mencuri energimu setiap detik.",
-   "start": 0.18,
-   "end": 5.02,
-   "pred": 4.57
+   "text": "Apa yang terjadi... kalau Bumi tiba-tiba berhenti berputar?",
+   "start": 0.12,
+   "end": 3.74,
+   "pred": 3.3
   },
   {
    "shot": 2,
-   "text": "Beratnya cuma sekitar dua persen dari berat badanmu, tapi ia menghabiskan sekitar dua puluh persen energi tubuh.",
-   "start": 5.76,
-   "end": 11.86,
-   "pred": 7.14
-  },
-  {
-   "shot": 2,
-   "text": "Dialah... otakmu!",
-   "start": 12.38,
-   "end": 13.64,
-   "pred": 0.86
+   "text": "Tanpa kamu sadari, kamu sedang bergerak sangat cepat.",
+   "start": 4.48,
+   "end": 7.2,
+   "pred": 3.51
   },
   {
    "shot": 3,
-   "text": "Kalau diubah jadi listrik, otakmu bekerja dengan daya sekitar dua puluh watt.",
-   "start": 14.74,
-   "end": 18.5,
-   "pred": 5.0
-  },
-  {
-   "shot": 3,
-   "text": "Cukup untuk menyalakan sebuah lampu kecil.",
-   "start": 18.8,
-   "end": 20.66,
-   "pred": 2.57
-  },
-  {
-   "shot": 3,
-   "text": "Sepanjang hari, tanpa pernah mati!",
-   "start": 21.02,
-   "end": 23.18,
-   "pred": 2.43
+   "text": "Di garis khatulistiwa, Bumi berputar dengan kecepatan sekitar seribu enam ratus tujuh puluh kilometer per jam!",
+   "start": 7.78,
+   "end": 14.22,
+   "pred": 6.94
   },
   {
    "shot": 4,
-   "text": "Kenapa serakus itu?",
-   "start": 24.16,
-   "end": 24.96,
-   "pred": 1.14
-  },
-  {
-   "shot": 4,
-   "text": "Karena di dalamnya ada sekitar delapan puluh enam miliar sel saraf yang terus mengirim sinyal, bahkan saat kamu sedang tidur.",
-   "start": 25.42,
-   "end": 32.06,
-   "pred": 7.85
+   "text": "Kalau Bumi berhenti mendadak, semua yang tidak menempel kuat, seperti manusia, mobil, bahkan rumah, akan terlempar dengan kecepatan itu.",
+   "start": 15.2,
+   "end": 23.42,
+   "pred": 9.96
   },
   {
    "shot": 5,
-   "text": "Tapi ada plot twist-nya.",
-   "start": 33.1,
-   "end": 34.24,
-   "pred": 1.36
-  },
-  {
-   "shot": 5,
-   "text": "Belajar keras atau berpikir berat... ternyata tidak membuatmu kurus.",
-   "start": 34.9,
-   "end": 38.2,
-   "pred": 4.0
+   "text": "Udara juga tetap bergerak, menciptakan angin yang jauh lebih dahsyat dari badai mana pun.",
+   "start": 24.32,
+   "end": 29.28,
+   "pred": 5.61
   },
   {
    "shot": 6,
-   "text": "Otak hanya memakai sedikit sekali energi tambahan saat kamu berpikir keras.",
-   "start": 38.64,
-   "end": 42.12,
-   "pred": 4.57
-  },
-  {
-   "shot": 6,
-   "text": "Sebagian besar energinya dipakai untuk menjaga dirinya tetap hidup.",
-   "start": 42.46,
-   "end": 45.66,
-   "pred": 4.14
+   "text": "Lalu, air laut akan mengalir ke arah kutub.",
+   "start": 30.08,
+   "end": 32.68,
+   "pred": 2.8
   },
   {
    "shot": 7,
-   "text": "Dan yang lebih gila lagi, pada anak usia sekitar lima tahun, otak bisa memakai lebih dari separuh energi tubuh saat istirahat, karena sedang tumbuh dengan sangat cepat!",
-   "start": 46.72,
-   "end": 55.14,
-   "pred": 11.14
+   "text": "Lautan berkumpul di utara dan selatan, sementara di tengah Bumi muncul satu daratan raksasa.",
+   "start": 33.1,
+   "end": 38.58,
+   "pred": 5.82
   },
   {
    "shot": 8,
-   "text": "Jadi, rawat otakmu.",
-   "start": 56.88,
-   "end": 58.36,
-   "pred": 1.5
-  },
-  {
-   "shot": 8,
-   "text": "Makan yang cukup, minum air, dan jangan lupa tidur.",
-   "start": 59.02,
-   "end": 62.18,
-   "pred": 3.71
+   "text": "Dan satu hari tidak lagi dua puluh empat jam.",
+   "start": 39.36,
+   "end": 41.44,
+   "pred": 2.52
   },
   {
    "shot": 9,
-   "text": "Menurut kamu, organ apa lagi yang paling hebat di tubuh manusia?",
-   "start": 63.14,
-   "end": 66.1,
-   "pred": 4.14
+   "text": "Sisi yang menghadap matahari akan mengalami siang selama enam bulan, dan sisi lainnya, malam gelap yang membeku selama enam bulan!",
+   "start": 41.94,
+   "end": 48.78,
+   "pred": 8.41
   },
   {
-   "shot": 9,
+   "shot": 10,
+   "text": "Tapi tenang... para ilmuwan memastikan Bumi tidak akan berhenti tiba-tiba.",
+   "start": 49.74,
+   "end": 53.64,
+   "pred": 4.21
+  },
+  {
+   "shot": 11,
+   "text": "Menurut kamu, mana yang paling menyeramkan?",
+   "start": 54.32,
+   "end": 56.16,
+   "pred": 2.95
+  },
+  {
+   "shot": 11,
    "text": "Tulis di komentar!",
-   "start": 66.66,
-   "end": 67.36,
-   "pred": 1.07
+   "start": 56.66,
+   "end": 57.2,
+   "pred": 1.05
   }
  ]
 }

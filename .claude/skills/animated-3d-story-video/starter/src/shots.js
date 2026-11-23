@@ -10,87 +10,95 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // 1 home: energy drains, a brain steals it from behind the sofa
-  {shot: 1, loc: 'home', move: 'push in on the tired hero and the battery', keys: [
-    {at: 'start', pos: [1.5, 2.0, 2.0], look: [-0.3, 1.5, -4.5]},
-    {at: 'end', pos: [0.7, 1.7, 0.4], look: [-0.4, 1.4, -4.5]}]},
-  {shot: 1, from: 'mencuri', loc: 'home', move: 'over the hero to the thief', keys: [
-    {at: 'start', pos: [-1.0, 1.5, -1.0], look: [-2.3, 1.1, -5.4]},
-    {at: 'end', pos: [-1.2, 1.45, -1.8], look: [-2.35, 1.1, -5.4]}]},
-  // 2 lab: 2% vs 20%, then the reveal
-  {shot: 2, loc: 'lab', move: 'push', keys: [
-    {at: 'start', pos: [0.3, 1.95, 2.2], look: [0, 1.6, -4.6]},
-    {at: 'end', pos: [0.1, 1.8, 0.9], look: [0, 1.6, -4.6]}]},
-  {shot: 2, from: 'puluh', loc: 'lab', move: 'close on the pie', keys: [
-    {at: 'start', pos: [0.9, 1.75, -1.6], look: [1.45, 1.6, -4.4]},
-    {at: 'end', pos: [1.0, 1.7, -1.95], look: [1.45, 1.6, -4.4]}]},
-  {shot: 2, from: 'otakmu', loc: 'lab', move: 'low push on the revealed brain', keys: [
-    {at: 'start', pos: [0.4, 1.25, -1.9], look: [0.1, 1.45, -3.9]},
-    {at: 'end', pos: [0.3, 1.3, -2.35], look: [0.1, 1.45, -3.9]}]},
-  // 3 power room: brain lights the bulb, all day long
-  {shot: 3, loc: 'power', move: 'push', keys: [
-    {at: 'start', pos: [0.2, 1.8, 1.6], look: [0, 1.3, -4.0]},
-    {at: 'end', pos: [0.1, 1.65, 0.5], look: [0, 1.3, -4.0]}]},
-  {shot: 3, from: 'lampu', loc: 'power', move: 'close on the bulb', keys: [
-    {at: 'start', pos: [0.9, 1.6, -1.5], look: [1.35, 1.6, -3.7]},
-    {at: 'end', pos: [0.95, 1.6, -1.85], look: [1.35, 1.6, -3.7]}]},
-  {shot: 3, from: 'sepanjang', loc: 'power', move: 'wide with the window', keys: [
-    {at: 'start', pos: [0.6, 1.75, 0.6], look: [-0.3, 1.8, -4.6]},
-    {at: 'end', pos: [0.2, 1.7, 0.1], look: [-0.3, 1.8, -4.6]}]},
-  // 4 neurons
-  {shot: 4, loc: 'neuro', move: 'close-up question', keys: [
-    {at: 'start', pos: [-0.6, 1.5, -0.4], look: [-1.1, 1.45, -2.3]},
-    {at: 'end', pos: [-0.7, 1.5, -0.65], look: [-1.1, 1.45, -2.3]}]},
-  {shot: 4, from: 'miliar', loc: 'neuro', lift: false, move: 'crane up into the network', keys: [
-    {at: 'start', pos: [0.2, 1.9, 2.4], look: [0, 2.7, -5.0]},
-    {at: 'end', pos: [0, 2.5, 1.4], look: [0, 3.0, -5.5]}]},
-  {shot: 4, from: 'tidur', loc: 'neuro', move: 'sleeping under firing neurons', keys: [
-    {at: 'start', pos: [1.6, 1.8, -0.6], look: [1.0, 1.5, -3.8]},
-    {at: 'end', pos: [1.5, 1.7, -1.0], look: [1.0, 1.5, -3.8]}]},
-  // 5 study
-  {shot: 5, loc: 'study', move: 'push to the plot twist', keys: [
-    {at: 'start', pos: [0.6, 1.8, 1.2], look: [-0.3, 1.5, -3.6]},
-    {at: 'end', pos: [0.4, 1.7, 0.4], look: [-0.3, 1.5, -3.6]}]},
-  {shot: 5, from: 'belajar', loc: 'study', move: 'close-up studying hard', keys: [
-    {at: 'start', pos: [0.1, 1.5, -1.1], look: [-0.4, 1.4, -3.2]},
-    {at: 'end', pos: [0.0, 1.5, -1.35], look: [-0.4, 1.4, -3.2]}]},
-  {shot: 5, from: 'kurus', loc: 'study', move: 'on the scale', keys: [
-    {at: 'start', pos: [2.2, 1.4, 0.4], look: [1.45, 1.0, -2.3]},
-    {at: 'end', pos: [2.1, 1.45, 0.1], look: [1.45, 1.05, -2.3]}]},
-  // 6 lab: where the energy goes
-  {shot: 6, loc: 'lab', move: 'close on the pie', keys: [
-    {at: 'start', pos: [1.0, 1.85, -1.0], look: [1.55, 1.4, -4.4]},
-    {at: 'end', pos: [1.05, 1.8, -1.4], look: [1.55, 1.4, -4.4]}]},
-  {shot: 6, from: 'sebagian', loc: 'lab', move: 'wide: hero, brain and pie', keys: [
-    {at: 'start', pos: [0.2, 1.85, 1.0], look: [0.4, 1.5, -4.3]},
-    {at: 'end', pos: [0.1, 1.75, 0.3], look: [0.4, 1.5, -4.3]}]},
-  // 7 playroom
-  {shot: 7, loc: 'kids', lift: false, move: 'push on the kid', keys: [
-    {at: 'start', pos: [0.4, 1.6, 1.2], look: [0, 1.0, -3.2]},
-    {at: 'end', pos: [0.3, 1.45, 0.2], look: [0, 1.0, -3.2]}]},
-  {shot: 7, from: 'lima', loc: 'kids', lift: false, move: 'low close on the kid', keys: [
-    {at: 'start', pos: [0.35, 1.35, -0.9], look: [0.1, 1.3, -2.6]},
-    {at: 'end', pos: [0.3, 1.35, -1.15], look: [0.1, 1.3, -2.6]}]},
-  {shot: 7, from: 'separuh', loc: 'kids', lift: false, move: 'pie on the wall with the kid', keys: [
-    {at: 'start', pos: [0.3, 1.55, -0.3], look: [1.0, 1.45, -4.6]},
-    {at: 'end', pos: [0.25, 1.5, -0.6], look: [1.0, 1.45, -4.6]}]},
-  {shot: 7, from: 'tumbuh', loc: 'kids', lift: false, move: 'pull back', keys: [
-    {at: 'start', pos: [0.3, 1.3, -0.9], look: [0.1, 1.3, -2.6]},
-    {at: 'end', pos: [0.4, 1.7, 0.8], look: [-0.2, 1.3, -3.4]}]},
-  // 8 home: eat, drink, sleep
-  {shot: 8, loc: 'home', move: 'push at the table', keys: [
-    {at: 'start', pos: [0.6, 1.65, -0.2], look: [-0.5, 1.35, -3.2]},
-    {at: 'end', pos: [0.4, 1.6, -0.7], look: [-0.5, 1.35, -3.2]}]},
-  {shot: 8, from: 'tidur2', loc: 'home', move: 'to the bed', keys: [
-    {at: 'start', pos: [1.5, 1.7, -2.1], look: [2.5, 1.2, -5.0]},
-    {at: 'end', pos: [1.6, 1.65, -2.4], look: [2.5, 1.2, -5.0]}]},
-  // 9 home: closing question
-  {shot: 9, loc: 'home', move: 'push on the hero among organs', keys: [
-    {at: 'start', pos: [0.1, 1.8, 1.0], look: [-0.25, 1.65, -3.0]},
-    {at: 'end', pos: [0.05, 1.75, 0.4], look: [-0.25, 1.65, -3.0]}]},
-  {shot: 9, from: 'komentar', loc: 'home', move: 'pull back to the sign', keys: [
-    {at: 'start', pos: [0.05, 1.8, 0.4], look: [-0.4, 2.1, -5.5]},
-    {at: 'end', pos: [0.3, 1.9, 1.4], look: [-0.5, 2.1, -5.5]}]},
+  // 1 planet: "What happens... if Earth suddenly stops spinning?" — orbit in, then close on the hero as it halts
+  {shot: 1, loc: 'planet', move: 'orbit + crane to the top of the globe', keys: [
+    {at: 'start', pos: [4.5, 2.6, 4.0], look: [0, 1.6, -6]},
+    {at: 'end', pos: [1.3, 4.4, -2.7], look: [0, 4.0, -6]}]},
+  {shot: 1, from: 'berhenti', loc: 'planet', move: 'close-up', keys: [
+    {at: 'start', pos: [0.6, 4.6, -4.15], look: [0, 4.3, -6]},
+    {at: 'end', pos: [0.4, 4.55, -4.4], look: [0, 4.3, -6]}]},
+  // 2 town: calm, then speed lines
+  {shot: 2, loc: 'town', move: 'push', keys: [
+    {at: 'start', pos: [1.6, 1.9, 3.2], look: [0, 1.1, -2.6]},
+    {at: 'end', pos: [0.7, 1.55, 1.1], look: [0, 1.15, -2.2]}]},
+  {shot: 2, from: 'cepat', loc: 'town', move: 'close-up', keys: [
+    {at: 'start', pos: [0.3, 1.45, -0.1], look: [0, 1.35, -1.3]},
+    {at: 'end', pos: [0.15, 1.42, -0.3], look: [0, 1.35, -1.3]}]},
+  // 3 planet: equator speed
+  {shot: 3, loc: 'planet', move: 'push on the spinning globe', keys: [
+    {at: 'start', pos: [1.3, 1.2, 3.8], look: [0, 0.3, -6]},
+    {at: 'end', pos: [0.5, 0.7, 2.2], look: [0, 0.2, -6]}]},
+  {shot: 3, from: 'seribu', loc: 'planet', move: 'push to the speed sign', keys: [
+    {at: 'start', pos: [0.5, 0.35, 0.8], look: [0, 0.0, -2.5]},
+    {at: 'end', pos: [0.2, 0.2, 0.2], look: [0, 0.0, -2.5]}]},
+  // 4 town: the Earth stops, everything flies east
+  {shot: 4, loc: 'town', move: 'wide, slow push', keys: [
+    {at: 'start', pos: [0.4, 2.3, 5.6], look: [0, 1.3, -3.0]},
+    {at: 'end', pos: [0.1, 2.0, 4.6], look: [0, 1.3, -3.0]}]},
+  {shot: 4, from: 'manusia', loc: 'town', move: 'track right with the flyers', keys: [
+    {at: 'start', pos: [-0.4, 1.7, 3.0], look: [0.8, 1.4, -2.5]},
+    {at: 'end', pos: [1.8, 2.0, 3.4], look: [4.0, 1.9, -3.5]}]},
+  {shot: 4, from: 'terlempar', loc: 'town', move: 'pull back wide', keys: [
+    {at: 'start', pos: [0.4, 1.8, 2.6], look: [0.6, 1.5, -1.5]},
+    {at: 'end', pos: [1.6, 2.6, 4.6], look: [4.4, 2.6, -1.5]}]},
+  // 5 town in the storm: hero clings to the lamp post
+  {shot: 5, loc: 'town', lift: false, move: 'push', keys: [
+    {at: 'start', pos: [0.8, 2.1, 4.6], look: [2.6, 1.6, -2.0]},
+    {at: 'end', pos: [2.0, 1.95, 2.6], look: [3.0, 1.7, -1.2]}]},
+  {shot: 5, from: 'angin', loc: 'town', lift: false, move: 'close-up on the face in the wind', keys: [
+    {at: 'start', pos: [3.1, 2.0, 0.55], look: [2.85, 1.8, -0.7]},
+    {at: 'end', pos: [3.0, 1.95, 0.35], look: [2.85, 1.8, -0.7]}]},
+  // 6 beach: the sea drains away
+  {shot: 6, loc: 'beach', move: 'crane down', keys: [
+    {at: 'start', pos: [0.9, 2.6, 2.6], look: [0, 0.8, -6]},
+    {at: 'end', pos: [0.5, 1.7, 1.4], look: [0, 0.9, -6]}]},
+  {shot: 6, from: 'mengalir', loc: 'beach', move: 'low angle over the hero to the horizon', keys: [
+    {at: 'start', pos: [-0.9, 0.9, 1.0], look: [0.4, 1.2, -6]},
+    {at: 'end', pos: [-0.7, 1.0, 0.5], look: [0.6, 1.2, -6]}]},
+  // 7 planet: oceans pool at the poles, a giant continent appears
+  {shot: 7, loc: 'planet', move: 'slow push on the whole globe', keys: [
+    {at: 'start', pos: [1.0, 0.7, 3.2], look: [0, 0.1, -6]},
+    {at: 'end', pos: [0.5, 0.5, 2.0], look: [0, 0.1, -6]}]},
+  {shot: 7, from: 'daratan', loc: 'planet', move: 'push to the continent band', keys: [
+    {at: 'start', pos: [0.6, 0.4, 0.4], look: [0, 0.0, -6]},
+    {at: 'end', pos: [0.3, 0.3, -0.4], look: [0, 0.0, -6]}]},
+  // 8 room: clock and 24 hours crossed out
+  {shot: 8, loc: 'room', move: 'push', keys: [
+    {at: 'start', pos: [1.3, 1.75, 1.4], look: [-0.3, 1.6, -4.5]},
+    {at: 'end', pos: [0.7, 1.65, 0.2], look: [-0.3, 1.6, -4.5]}]},
+  {shot: 8, from: 'jam24', loc: 'room', move: 'close on the crossed-out sign', keys: [
+    {at: 'start', pos: [-0.5, 1.75, -1.5], look: [-1.2, 1.8, -4.8]},
+    {at: 'end', pos: [-0.6, 1.75, -1.9], look: [-1.25, 1.85, -4.8]}]},
+  // 9 desert -> frozen night
+  {shot: 9, loc: 'desert', move: 'low push looking up to the sun', keys: [
+    {at: 'start', pos: [0.9, 1.3, 1.8], look: [0, 1.7, -4]},
+    {at: 'end', pos: [0.5, 1.4, 0.6], look: [0, 1.6, -4]}]},
+  {shot: 9, from: 'siang', loc: 'desert', move: 'close-up sweating', keys: [
+    {at: 'start', pos: [0.3, 1.45, -0.3], look: [-0.1, 1.35, -1.6]},
+    {at: 'end', pos: [0.2, 1.42, -0.5], look: [-0.1, 1.35, -1.6]}]},
+  {shot: 9, from: 'lainnya', loc: 'frozen', move: 'push in the snow', keys: [
+    {at: 'start', pos: [-0.9, 1.9, 2.2], look: [0.2, 1.1, -2.6]},
+    {at: 'end', pos: [-0.4, 1.7, 1.0], look: [0.2, 1.1, -2.6]}]},
+  {shot: 9, from: 'membeku', loc: 'frozen', move: 'close-up frozen', keys: [
+    {at: 'start', pos: [0.35, 1.45, 0.3], look: [0, 1.3, -1.6]},
+    {at: 'end', pos: [0.5, 1.55, 0.6], look: [0, 1.3, -1.6]}]},
+  // 10 lab: scientists say no
+  {shot: 10, loc: 'lab', move: 'push', keys: [
+    {at: 'start', pos: [0.2, 1.9, 1.8], look: [0.2, 1.5, -4.6]},
+    {at: 'end', pos: [0.1, 1.75, 0.6], look: [0.2, 1.5, -4.6]}]},
+  {shot: 10, from: 'ilmuwan', loc: 'lab', move: 'two-shot board + scientist', keys: [
+    {at: 'start', pos: [-0.3, 1.7, -1.2], look: [-0.6, 1.7, -5.2]},
+    {at: 'end', pos: [-0.1, 1.7, -1.5], look: [-0.4, 1.7, -5.2]}]},
+  {shot: 10, from: 'tidak', loc: 'lab', move: 'close-up relieved hero', keys: [
+    {at: 'start', pos: [1.25, 1.55, -0.35], look: [0.9, 1.5, -2.0]},
+    {at: 'end', pos: [1.3, 1.6, -0.1], look: [0.9, 1.55, -2.0]}]},
+  // 11 planet: closing question
+  {shot: 11, loc: 'planet', move: 'push on the hero on top of the world', keys: [
+    {at: 'start', pos: [1.1, 4.5, -2.6], look: [0, 4.1, -6]},
+    {at: 'end', pos: [0.5, 4.4, -3.7], look: [0, 4.15, -6]}]},
+  {shot: 11, from: 'komentar', loc: 'planet', move: 'pull back to the whole globe', keys: [
+    {at: 'start', pos: [0.5, 4.5, -3.5], look: [0, 4.3, -6]},
+    {at: 'end', pos: [1.6, 4.5, 0.4], look: [0, 3.3, -6]}]},
 ];
 
 export function warpU(T, t) {
