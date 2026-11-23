@@ -1,0 +1,580 @@
+{
+ "source": "silence-align",
+ "words": [
+  {
+   "word": "Part",
+   "start": 0.38,
+   "end": 0.673
+  },
+  {
+   "word": "tiga.",
+   "start": 0.693,
+   "end": 0.985
+  },
+  {
+   "word": "Diangkat",
+   "start": 1.374,
+   "end": 1.871
+  },
+  {
+   "word": "ke",
+   "start": 1.891,
+   "end": 2.062
+  },
+  {
+   "word": "Tempat",
+   "start": 2.082,
+   "end": 2.47
+  },
+  {
+   "word": "yang",
+   "start": 2.49,
+   "end": 2.769
+  },
+  {
+   "word": "Tinggi.",
+   "start": 2.789,
+   "end": 3.178
+  },
+  {
+   "word": "Allah",
+   "start": 4.179,
+   "end": 4.548
+  },
+  {
+   "word": "SWT",
+   "start": 4.568,
+   "end": 4.817
+  },
+  {
+   "word": "berfirman:",
+   "start": 4.837,
+   "end": 5.445
+  },
+  {
+   "word": "\"Dan",
+   "start": 5.99,
+   "end": 6.199
+  },
+  {
+   "word": "Kami",
+   "start": 6.219,
+   "end": 6.479
+  },
+  {
+   "word": "telah",
+   "start": 6.499,
+   "end": 6.81
+  },
+  {
+   "word": "mengangkatnya",
+   "start": 6.83,
+   "end": 7.549
+  },
+  {
+   "word": "ke",
+   "start": 7.569,
+   "end": 7.727
+  },
+  {
+   "word": "tempat",
+   "start": 7.747,
+   "end": 8.292
+  },
+  {
+   "word": "yang",
+   "start": 8.312,
+   "end": 8.572
+  },
+  {
+   "word": "tinggi.\"",
+   "start": 8.592,
+   "end": 8.954
+  },
+  {
+   "word": "Q",
+   "start": 9.59,
+   "end": 9.698
+  },
+  {
+   "word": "S",
+   "start": 9.718,
+   "end": 9.827
+  },
+  {
+   "word": "Maryam",
+   "start": 9.847,
+   "end": 10.211
+  },
+  {
+   "word": "ayat",
+   "start": 10.231,
+   "end": 10.493
+  },
+  {
+   "word": "lima",
+   "start": 10.513,
+   "end": 10.775
+  },
+  {
+   "word": "puluh",
+   "start": 10.795,
+   "end": 11.108
+  },
+  {
+   "word": "tujuh.",
+   "start": 11.128,
+   "end": 11.441
+  },
+  {
+   "word": "Tempat",
+   "start": 12.307,
+   "end": 12.786
+  },
+  {
+   "word": "yang",
+   "start": 12.806,
+   "end": 13.655
+  },
+  {
+   "word": "tinggi…",
+   "start": 13.675,
+   "end": 14.154
+  },
+  {
+   "word": "Apa",
+   "start": 15.122,
+   "end": 15.354
+  },
+  {
+   "word": "maksudnya?",
+   "start": 15.374,
+   "end": 15.942
+  },
+  {
+   "word": "Ribuan",
+   "start": 15.962,
+   "end": 16.362
+  },
+  {
+   "word": "tahun",
+   "start": 16.382,
+   "end": 16.93
+  },
+  {
+   "word": "kemudian,",
+   "start": 16.95,
+   "end": 17.463
+  },
+  {
+   "word": "jawabannya",
+   "start": 17.986,
+   "end": 18.582
+  },
+  {
+   "word": "terungkap",
+   "start": 18.602,
+   "end": 19.144
+  },
+  {
+   "word": "dalam",
+   "start": 19.164,
+   "end": 19.491
+  },
+  {
+   "word": "satu",
+   "start": 19.511,
+   "end": 19.786
+  },
+  {
+   "word": "malam",
+   "start": 19.806,
+   "end": 20.772
+  },
+  {
+   "word": "yang",
+   "start": 20.792,
+   "end": 21.066
+  },
+  {
+   "word": "menakjubkan…",
+   "start": 21.086,
+   "end": 21.735
+  },
+  {
+   "word": "Isra",
+   "start": 22.567,
+   "end": 22.83
+  },
+  {
+   "word": "Mi'raj.",
+   "start": 22.85,
+   "end": 23.164
+  },
+  {
+   "word": "Saat",
+   "start": 23.184,
+   "end": 23.447
+  },
+  {
+   "word": "Rasulullah",
+   "start": 23.467,
+   "end": 24.039
+  },
+  {
+   "word": "SAW",
+   "start": 24.059,
+   "end": 24.27
+  },
+  {
+   "word": "naik",
+   "start": 24.29,
+   "end": 24.553
+  },
+  {
+   "word": "menembus",
+   "start": 24.573,
+   "end": 25.042
+  },
+  {
+   "word": "langit,",
+   "start": 25.062,
+   "end": 25.428
+  },
+  {
+   "word": "di",
+   "start": 25.743,
+   "end": 25.878
+  },
+  {
+   "word": "langit",
+   "start": 25.898,
+   "end": 26.211
+  },
+  {
+   "word": "keempat…",
+   "start": 26.231,
+   "end": 26.588
+  },
+  {
+   "word": "beliau",
+   "start": 27.016,
+   "end": 27.278
+  },
+  {
+   "word": "bertemu",
+   "start": 27.298,
+   "end": 27.599
+  },
+  {
+   "word": "seseorang.",
+   "start": 27.619,
+   "end": 27.994
+  },
+  {
+   "word": "Orang",
+   "start": 28.775,
+   "end": 29.037
+  },
+  {
+   "word": "itu",
+   "start": 29.057,
+   "end": 29.231
+  },
+  {
+   "word": "menyambut",
+   "start": 29.251,
+   "end": 29.685
+  },
+  {
+   "word": "dengan",
+   "start": 29.705,
+   "end": 30.438
+  },
+  {
+   "word": "hangat:",
+   "start": 30.458,
+   "end": 30.763
+  },
+  {
+   "word": "\"Selamat",
+   "start": 30.783,
+   "end": 31.13
+  },
+  {
+   "word": "datang,",
+   "start": 31.15,
+   "end": 31.455
+  },
+  {
+   "word": "wahai",
+   "start": 31.694,
+   "end": 32.004
+  },
+  {
+   "word": "saudara",
+   "start": 32.024,
+   "end": 32.434
+  },
+  {
+   "word": "yang",
+   "start": 32.454,
+   "end": 32.713
+  },
+  {
+   "word": "saleh…",
+   "start": 32.733,
+   "end": 33.042
+  },
+  {
+   "word": "dan",
+   "start": 33.429,
+   "end": 33.604
+  },
+  {
+   "word": "nabi",
+   "start": 33.624,
+   "end": 33.843
+  },
+  {
+   "word": "yang",
+   "start": 33.863,
+   "end": 34.081
+  },
+  {
+   "word": "saleh.\"",
+   "start": 34.101,
+   "end": 34.362
+  },
+  {
+   "word": "Siapakah",
+   "start": 35.202,
+   "end": 36.476
+  },
+  {
+   "word": "dia?",
+   "start": 36.496,
+   "end": 36.798
+  },
+  {
+   "word": "Dialah…",
+   "start": 37.285,
+   "end": 37.705
+  },
+  {
+   "word": "Nabi",
+   "start": 37.725,
+   "end": 38.028
+  },
+  {
+   "word": "Idris",
+   "start": 38.048,
+   "end": 38.41
+  },
+  {
+   "word": "AS.",
+   "start": 38.43,
+   "end": 38.616
+  },
+  {
+   "word": "Seorang",
+   "start": 39.552,
+   "end": 39.938
+  },
+  {
+   "word": "manusia",
+   "start": 39.958,
+   "end": 40.345
+  },
+  {
+   "word": "biasa",
+   "start": 40.365,
+   "end": 40.655
+  },
+  {
+   "word": "yang",
+   "start": 40.675,
+   "end": 40.918
+  },
+  {
+   "word": "tekun",
+   "start": 40.938,
+   "end": 41.229
+  },
+  {
+   "word": "belajar…",
+   "start": 41.249,
+   "end": 41.636
+  },
+  {
+   "word": "sabar",
+   "start": 41.986,
+   "end": 42.345
+  },
+  {
+   "word": "berdakwah…",
+   "start": 42.365,
+   "end": 42.958
+  },
+  {
+   "word": "dan",
+   "start": 43.235,
+   "end": 43.417
+  },
+  {
+   "word": "jujur",
+   "start": 43.437,
+   "end": 43.709
+  },
+  {
+   "word": "kepada",
+   "start": 43.729,
+   "end": 44.046
+  },
+  {
+   "word": "Allah…",
+   "start": 44.066,
+   "end": 44.338
+  },
+  {
+   "word": "dimuliakan",
+   "start": 44.816,
+   "end": 45.349
+  },
+  {
+   "word": "hingga",
+   "start": 45.369,
+   "end": 46.0
+  },
+  {
+   "word": "ke",
+   "start": 46.02,
+   "end": 46.169
+  },
+  {
+   "word": "langit.",
+   "start": 46.189,
+   "end": 46.53
+  },
+  {
+   "word": "Hikmahnya:",
+   "start": 47.577,
+   "end": 48.338
+  },
+  {
+   "word": "Ilmu",
+   "start": 48.659,
+   "end": 48.936
+  },
+  {
+   "word": "yang",
+   "start": 48.956,
+   "end": 49.232
+  },
+  {
+   "word": "diiringi",
+   "start": 49.252,
+   "end": 49.745
+  },
+  {
+   "word": "iman…",
+   "start": 49.765,
+   "end": 50.042
+  },
+  {
+   "word": "dan",
+   "start": 50.315,
+   "end": 50.515
+  },
+  {
+   "word": "kesabaran",
+   "start": 50.535,
+   "end": 51.027
+  },
+  {
+   "word": "dalam",
+   "start": 51.047,
+   "end": 51.345
+  },
+  {
+   "word": "kebaikan…",
+   "start": 51.365,
+   "end": 51.808
+  },
+  {
+   "word": "akan",
+   "start": 52.018,
+   "end": 52.268
+  },
+  {
+   "word": "mengangkat",
+   "start": 52.288,
+   "end": 52.834
+  },
+  {
+   "word": "derajat",
+   "start": 52.854,
+   "end": 53.252
+  },
+  {
+   "word": "seseorang,",
+   "start": 53.272,
+   "end": 53.768
+  },
+  {
+   "word": "di",
+   "start": 54.005,
+   "end": 54.13
+  },
+  {
+   "word": "dunia",
+   "start": 54.15,
+   "end": 54.399
+  },
+  {
+   "word": "dan",
+   "start": 54.419,
+   "end": 54.849
+  },
+  {
+   "word": "di",
+   "start": 54.869,
+   "end": 54.994
+  },
+  {
+   "word": "akhirat.",
+   "start": 55.014,
+   "end": 55.346
+  },
+  {
+   "word": "Ikuti",
+   "start": 55.759,
+   "end": 56.097
+  },
+  {
+   "word": "terus",
+   "start": 56.117,
+   "end": 56.455
+  },
+  {
+   "word": "kisah",
+   "start": 56.475,
+   "end": 56.813
+  },
+  {
+   "word": "para",
+   "start": 56.833,
+   "end": 57.117
+  },
+  {
+   "word": "nabi",
+   "start": 57.137,
+   "end": 57.42
+  },
+  {
+   "word": "selanjutnya!",
+   "start": 57.44,
+   "end": 58.108
+  }
+ ]
+}

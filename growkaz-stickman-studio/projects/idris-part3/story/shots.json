@@ -1,0 +1,338 @@
+{
+ "title": "Kisah Nabi Idris - Part 3",
+ "duration": 59.9,
+ "shots": [
+  {
+   "id": "f01",
+   "start": 0.0,
+   "end": 4.05,
+   "line": "Part tiga. Diangkat ke Tempat yang Tinggi.",
+   "scene": "f01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "f02",
+   "start": 4.05,
+   "end": 12.15,
+   "line": "Allah SWT berfirman: \"Dan Kami telah mengangkatnya ke tempat yang tinggi.\" Q S Maryam ayat lima puluh tujuh.",
+   "scene": "f02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 2.4,
+     "name": "shimmer",
+     "gain": -10
+    },
+    {
+     "at": 5.6,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "f03",
+   "start": 12.15,
+   "end": 15.85,
+   "line": "Tempat yang tinggi… Apa maksudnya?",
+   "scene": "f03",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 3.0,
+     "name": "pop",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "f04",
+   "start": 15.85,
+   "end": 23.05,
+   "line": "Ribuan tahun kemudian, jawabannya terungkap dalam satu malam yang menakjubkan… Isra Mi'raj.",
+   "scene": "f04",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 4.5,
+     "name": "riser",
+     "gain": -10
+    },
+    {
+     "at": 6.8,
+     "name": "shimmer",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "f05",
+   "start": 23.05,
+   "end": 26.85,
+   "line": "Saat Rasulullah SAW naik menembus langit, di langit keempat…",
+   "scene": "f05",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -8
+    },
+    {
+     "at": 1.4,
+     "name": "whoosh",
+     "gain": -10
+    },
+    {
+     "at": 2.5,
+     "name": "whoosh",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "f06",
+   "start": 26.85,
+   "end": 28.65,
+   "line": "beliau bertemu seseorang.",
+   "scene": "f06",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "f07",
+   "start": 28.65,
+   "end": 35.05,
+   "line": "Orang itu menyambut dengan hangat: \"Selamat datang, wahai saudara yang saleh… dan nabi yang saleh.\"",
+   "scene": "f07",
+   "sfx": [
+    {
+     "at": 2.2,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "f08",
+   "start": 35.05,
+   "end": 37.15,
+   "line": "Siapakah dia?",
+   "scene": "f08",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "f09",
+   "start": 37.15,
+   "end": 39.45,
+   "line": "Dialah… Nabi Idris AS.",
+   "scene": "f09",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "stinger",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "f10",
+   "start": 39.45,
+   "end": 41.85,
+   "line": "Seorang manusia biasa yang tekun belajar…",
+   "scene": "f10",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "f11",
+   "start": 41.85,
+   "end": 43.1,
+   "line": "sabar berdakwah…",
+   "scene": "f11",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "pop",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "f12",
+   "start": 43.1,
+   "end": 44.7,
+   "line": "dan jujur kepada Allah…",
+   "scene": "f12",
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ]
+  },
+  {
+   "id": "f13",
+   "start": 44.7,
+   "end": 47.45,
+   "line": "dimuliakan hingga ke langit.",
+   "scene": "f13",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "riser",
+     "gain": -8
+    },
+    {
+     "at": 1.6,
+     "name": "shimmer",
+     "gain": -6
+    }
+   ]
+  },
+  {
+   "id": "f14",
+   "start": 47.45,
+   "end": 55.65,
+   "line": "Hikmahnya: Ilmu yang diiringi iman… dan kesabaran dalam kebaikan… akan mengangkat derajat seseorang, di dunia dan di akhirat.",
+   "scene": "f14",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "bars": "none",
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 2.1,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 3.0,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 4.8,
+     "name": "ding",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "f15",
+   "start": 55.65,
+   "end": 59.9,
+   "line": "Ikuti terus kisah para nabi selanjutnya!",
+   "scene": "f15",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "pop",
+     "gain": -8
+    }
+   ]
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 15.85,
+   "mood": "wonder",
+   "intensity": 0.45
+  },
+  {
+   "start": 15.85,
+   "end": 35.05,
+   "mood": "wonder",
+   "intensity": 0.7
+  },
+  {
+   "start": 35.05,
+   "end": 47.45,
+   "mood": "triumph",
+   "intensity": 0.55
+  },
+  {
+   "start": 47.45,
+   "end": 59.9,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ],
+ "sfx": []
+}
