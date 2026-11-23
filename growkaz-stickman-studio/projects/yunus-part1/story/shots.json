@@ -1,0 +1,374 @@
+{
+ "title": "Kisah Nabi Yunus - Part 1",
+ "duration": 62.3,
+ "shots": [
+  {
+   "id": "u01",
+   "start": 0.0,
+   "end": 4.95,
+   "line": "Pernahkah kamu membayangkan… hidup di dalam perut ikan raksasa?",
+   "scene": "u01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -20
+   }
+  },
+  {
+   "id": "u02",
+   "start": 4.95,
+   "end": 9.15,
+   "line": "Gelap. Sempit. Di dasar lautan.",
+   "scene": "u02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 2.3,
+     "name": "heartbeat",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  },
+  {
+   "id": "u03",
+   "start": 9.15,
+   "end": 14.75,
+   "line": "Ini kisah nyata. Kisah seorang nabi… Yunus bin Matta AS.",
+   "scene": "u03",
+   "in": {
+    "type": "flash",
+    "dur": 0.25
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 3.3,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "u04",
+   "start": 14.75,
+   "end": 16.95,
+   "line": "Allah mengutusnya ke negeri Ninawa.",
+   "scene": "u04",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "u05",
+   "start": 16.95,
+   "end": 19.65,
+   "line": "Penduduknya lebih dari seratus ribu orang.",
+   "scene": "u05",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -16
+   }
+  },
+  {
+   "id": "u06",
+   "start": 19.65,
+   "end": 22.85,
+   "line": "Dan semuanya… menyembah berhala.",
+   "scene": "u06",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -22
+   }
+  },
+  {
+   "id": "u07",
+   "start": 22.85,
+   "end": 25.8,
+   "line": "Tahun demi tahun, Nabi Yunus berdakwah.",
+   "scene": "u07",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "u08",
+   "start": 25.8,
+   "end": 29.6,
+   "line": "\"Sembahlah Allah… tinggalkan berhala-berhala itu!\"",
+   "scene": "u08",
+   "bars": "scope"
+  },
+  {
+   "id": "u09",
+   "start": 29.6,
+   "end": 31.55,
+   "line": "Tapi mereka menutup telinga.",
+   "scene": "u09",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -20
+   }
+  },
+  {
+   "id": "u10",
+   "start": 31.55,
+   "end": 32.9,
+   "line": "Mereka mengejek.",
+   "scene": "u10",
+   "amb": {
+    "name": "murmur",
+    "gain": -14
+   }
+  },
+  {
+   "id": "u11",
+   "start": 32.9,
+   "end": 34.6,
+   "line": "Mereka menolak.",
+   "scene": "u11",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "hit",
+     "gain": -10
+    }
+   ]
+  },
+  {
+   "id": "u12",
+   "start": 34.6,
+   "end": 37.5,
+   "line": "Hati Nabi Yunus pun lelah… dan kecewa.",
+   "scene": "u12",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "u13",
+   "start": 37.5,
+   "end": 42.35,
+   "line": "Ia memperingatkan, \"Azab Allah akan datang kepada kalian!\"",
+   "scene": "u13",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "thunder",
+     "gain": -8
+    },
+    {
+     "at": 1.7,
+     "name": "impact",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "u14",
+   "start": 42.35,
+   "end": 46.85,
+   "line": "Lalu… Nabi Yunus pergi meninggalkan kaumnya dalam keadaan marah.",
+   "scene": "u14",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.6,
+     "name": "footstep",
+     "gain": -14
+    },
+    {
+     "at": 2.2,
+     "name": "footstep",
+     "gain": -14
+    },
+    {
+     "at": 2.8,
+     "name": "footstep",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "u15",
+   "start": 46.85,
+   "end": 49.85,
+   "line": "Padahal… Allah belum mengizinkannya pergi.",
+   "scene": "u15",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0,
+     "name": "freeze",
+     "gain": -8
+    }
+   ]
+  },
+  {
+   "id": "u16",
+   "start": 49.85,
+   "end": 55.45,
+   "line": "Ia tidak tahu… keputusan itu akan membawanya ke ujian paling gelap dalam hidupnya.",
+   "scene": "u16",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "thunder",
+     "gain": -8
+    },
+    {
+     "at": 3.5,
+     "name": "riser",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -16
+   }
+  },
+  {
+   "id": "u17",
+   "start": 55.45,
+   "end": 62.3,
+   "line": "Dan ia juga tidak tahu… apa yang terjadi pada kaumnya… setelah ia pergi.",
+   "scene": "u17",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 9.15,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 9.15,
+   "end": 22.85,
+   "mood": "wonder",
+   "intensity": 0.4
+  },
+  {
+   "start": 22.85,
+   "end": 34.6,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 34.6,
+   "end": 49.85,
+   "mood": "sad",
+   "intensity": 0.45
+  },
+  {
+   "start": 49.85,
+   "end": 62.3,
+   "mood": "dark",
+   "intensity": 0.65
+  }
+ ],
+ "sfx": []
+}
