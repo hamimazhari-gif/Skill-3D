@@ -1,0 +1,402 @@
+{
+ "title": "Kisah Nabi Yunus - Part 2",
+ "duration": 61.7,
+ "shots": [
+  {
+   "id": "v01",
+   "start": 0.0,
+   "end": 4.8,
+   "line": "Part dua. Undian di Tengah Badai.",
+   "scene": "v01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -22
+   }
+  },
+  {
+   "id": "v02",
+   "start": 4.8,
+   "end": 10.25,
+   "line": "Nabi Yunus tiba di tepi laut. Ia menumpang sebuah kapal yang penuh muatan.",
+   "scene": "v02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.3,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "v03",
+   "start": 10.25,
+   "end": 12.9,
+   "line": "Awalnya, laut tenang.",
+   "scene": "v03",
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "v04",
+   "start": 12.9,
+   "end": 16.9,
+   "line": "Lalu… langit menghitam. Angin mengamuk.",
+   "scene": "v04",
+   "sfx": [
+    {
+     "at": 1.3,
+     "name": "thunder",
+     "gain": -8
+    },
+    {
+     "at": 2.6,
+     "name": "wind",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -16
+   }
+  },
+  {
+   "id": "v05",
+   "start": 16.9,
+   "end": 20.65,
+   "line": "Ombak setinggi bukit menghantam kapal!",
+   "scene": "v05",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "impact",
+     "gain": -3
+    },
+    {
+     "at": 0.4,
+     "name": "whoosh",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -12
+   }
+  },
+  {
+   "id": "v06",
+   "start": 20.65,
+   "end": 24.3,
+   "line": "Kapal mulai oleng… hampir tenggelam!",
+   "scene": "v06",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "hit",
+     "gain": -8
+    },
+    {
+     "at": 1.5,
+     "name": "hit",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -12
+   }
+  },
+  {
+   "id": "v07",
+   "start": 24.3,
+   "end": 28.75,
+   "line": "\"Kapal terlalu berat! Salah satu dari kita harus turun ke laut!\"",
+   "scene": "v07",
+   "bars": "scope",
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "v08",
+   "start": 28.75,
+   "end": 33.85,
+   "line": "Diadakanlah undian. Nama siapa yang keluar? Yunus.",
+   "scene": "v08",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 2.0,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 4.2,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -20
+   }
+  },
+  {
+   "id": "v09",
+   "start": 33.85,
+   "end": 36.7,
+   "line": "Diulang lagi… Yunus.",
+   "scene": "v09",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 1.7,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -20
+   }
+  },
+  {
+   "id": "v10",
+   "start": 36.7,
+   "end": 40.6,
+   "line": "Dan lagi… tetap… Yunus.",
+   "scene": "v10",
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "heartbeat",
+     "gain": -10
+    },
+    {
+     "at": 2.3,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -20
+   }
+  },
+  {
+   "id": "v11",
+   "start": 40.6,
+   "end": 46.15,
+   "line": "Nabi Yunus sadar. Ini bukan kebetulan. Ini teguran dari Allah.",
+   "scene": "v11",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 3.6,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -20
+   }
+  },
+  {
+   "id": "v12",
+   "start": 46.15,
+   "end": 49.15,
+   "line": "Ia pun terjun ke laut yang mengamuk.",
+   "scene": "v12",
+   "sfx": [
+    {
+     "at": 0.7,
+     "name": "whoosh",
+     "gain": -8
+    },
+    {
+     "at": 1.5,
+     "name": "impact",
+     "gain": -4
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "v13",
+   "start": 49.15,
+   "end": 51.4,
+   "line": "Di dalam gelapnya air…",
+   "scene": "v13",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "slowmo",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -16
+   }
+  },
+  {
+   "id": "v14",
+   "start": 51.4,
+   "end": 53.95,
+   "line": "sesuatu yang sangat besar mendekat…",
+   "scene": "v14",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "heartbeat",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -14
+   }
+  },
+  {
+   "id": "v15",
+   "start": 53.95,
+   "end": 58.3,
+   "line": "membuka mulutnya… dan menelan Nabi Yunus bulat-bulat!",
+   "scene": "v15",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.4,
+     "name": "whoosh",
+     "gain": -6
+    },
+    {
+     "at": 2.2,
+     "name": "impact",
+     "gain": -3
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -14
+   }
+  },
+  {
+   "id": "v16",
+   "start": 58.3,
+   "end": 61.7,
+   "line": "Apakah ini akhir hidupnya?",
+   "scene": "v16",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 0.9,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 12.9,
+   "mood": "calm",
+   "intensity": 0.35
+  },
+  {
+   "start": 12.9,
+   "end": 28.75,
+   "mood": "action",
+   "intensity": 0.85
+  },
+  {
+   "start": 28.75,
+   "end": 46.15,
+   "mood": "tension",
+   "intensity": 0.6
+  },
+  {
+   "start": 46.15,
+   "end": 61.7,
+   "mood": "dark",
+   "intensity": 0.7
+  }
+ ],
+ "sfx": []
+}
