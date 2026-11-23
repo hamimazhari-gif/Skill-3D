@@ -12,12 +12,14 @@ const PX = 420; // canvas pixels per metre
 //   shadows: characters cast real shadows on the ground and walls.
 export const DESIGNS = {
   classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0, shading: false, shadows: false},
-  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.07, shading: true, shadows: true},
+  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, shading: true, shadows: true},
   bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: -0.04, shading: true, shadows: true},
 };
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
+// How much higher the head sits than in the classic design (cameras aimed at faces add this).
+export const headLift = (name) => { const d = DESIGNS[name] || DESIGNS.classic; return (d.legExtra || 0) + (d.torsoExtra || 0); };
 // Shared tint for every character part (set per frame from the scene light, so characters sit in the light).
 export const CHAR_TINT = new THREE.Color('#ffffff');
 const SHADE = 'rgba(64,38,58,';
@@ -131,6 +133,14 @@ export const EXPRESSIONS = {
   sleep: {eyes: 'blink', brows: 'none', mouth: 'flat'},
   drowsy: {eyes: 'tired', brows: 'sad', mouth: 'wavy', extras: ['gloom']},
   paranoid: {eyes: 'squint', brows: 'angry', mouth: 'wavy', extras: ['sweat']},
+  // teeth showing
+  grimace: {eyes: 'wide', brows: 'sad', mouth: 'teeth', extras: ['sweat']},
+  nervous: {eyes: 'open', brows: 'sad', mouth: 'teethSmall', extras: ['sweat']},
+  toothy: {eyes: 'closed', brows: 'up', mouth: 'toothy', extras: ['blush']},
+  cheesy: {eyes: 'open', brows: 'up', mouth: 'toothy', extras: ['sparkle']},
+  scream: {eyes: 'wide', brows: 'up', mouth: 'scream', extras: ['shock', 'sweat']},
+  gritted: {eyes: 'angry', brows: 'angry', mouth: 'teeth', extras: ['anger']},
+  scheming: {eyes: 'calm', brows: 'skeptic', mouth: 'teethSmirk'},
 };
 
 function drawFace(o, f, r) {
@@ -180,7 +190,36 @@ function drawFace(o, f, r) {
     x.fillStyle = '#5a2328'; x.beginPath(); x.moveTo(mx - w, my - h * 0.2); x.quadraticCurveTo(mx, my - h * 0.35, mx + w, my - h * 0.2); x.quadraticCurveTo(mx + w * 0.8, my + h, mx, my + h); x.quadraticCurveTo(mx - w * 0.8, my + h, mx - w, my - h * 0.2); x.closePath(); x.fill(); x.stroke();
     x.save(); x.clip(); x.fillStyle = '#e8737a'; x.beginPath(); x.ellipse(mx, my + h * 0.95, w * 0.6, h * 0.45, 0, 0, 7); x.fill(); x.fillStyle = '#fff'; x.fillRect(mx - w, my - h * 0.4, w * 2, h * 0.28); x.restore();
   };
+  // clenched teeth: rounded box with a tooth grid
+  const teethBox = (w, h, dy = 0) => {
+    const x0 = mx - w, y0 = my - h + dy, rr = h * 0.7;
+    x.beginPath(); x.moveTo(x0 + rr, y0); x.lineTo(x0 + 2 * w - rr, y0); x.quadraticCurveTo(x0 + 2 * w, y0, x0 + 2 * w, y0 + rr); x.lineTo(x0 + 2 * w, y0 + 2 * h - rr);
+    x.quadraticCurveTo(x0 + 2 * w, y0 + 2 * h, x0 + 2 * w - rr, y0 + 2 * h); x.lineTo(x0 + rr, y0 + 2 * h); x.quadraticCurveTo(x0, y0 + 2 * h, x0, y0 + 2 * h - rr); x.lineTo(x0, y0 + rr); x.quadraticCurveTo(x0, y0, x0 + rr, y0); x.closePath();
+    x.fillStyle = '#fffdf6'; x.fill(); x.save(); x.clip(); x.lineWidth = 4;
+    x.beginPath(); x.moveTo(x0, y0 + h); x.lineTo(x0 + 2 * w, y0 + h); for (let i = 1; i < 6; i++) { const xx = x0 + 2 * w * i / 6; x.moveTo(xx, y0); x.lineTo(xx, y0 + 2 * h); } x.stroke(); x.restore();
+    x.lineWidth = 7; x.stroke();
+  };
+  // big smile showing the upper teeth
+  const toothy = (w, h) => {
+    x.beginPath(); x.moveTo(mx - w, my - h * 0.25); x.quadraticCurveTo(mx, my - h * 0.1, mx + w, my - h * 0.25); x.quadraticCurveTo(mx + w * 0.85, my + h, mx, my + h); x.quadraticCurveTo(mx - w * 0.85, my + h, mx - w, my - h * 0.25); x.closePath();
+    x.fillStyle = '#5a2328'; x.fill(); x.save(); x.clip();
+    x.fillStyle = '#e8737a'; x.beginPath(); x.ellipse(mx, my + h * 1.0, w * 0.55, h * 0.4, 0, 0, 7); x.fill();
+    x.fillStyle = '#fffdf6'; x.fillRect(mx - w, my - h * 0.5, w * 2, h * 0.75); x.lineWidth = 4; x.beginPath();
+    for (let i = 1; i < 6; i++) { const xx = mx - w + 2 * w * i / 6; x.moveTo(xx, my - h * 0.5); x.lineTo(xx, my + h * 0.25); } x.moveTo(mx - w, my + h * 0.25); x.lineTo(mx + w, my + h * 0.25); x.stroke(); x.restore();
+    x.lineWidth = 7; x.beginPath(); x.moveTo(mx - w, my - h * 0.25); x.quadraticCurveTo(mx, my - h * 0.1, mx + w, my - h * 0.25); x.quadraticCurveTo(mx + w * 0.85, my + h, mx, my + h); x.quadraticCurveTo(mx - w * 0.85, my + h, mx - w, my - h * 0.25); x.closePath(); x.stroke();
+  };
   switch (f.mouth) {
+    case 'teeth': teethBox(R * 0.22, R * 0.085); break;
+    case 'teethSmall': teethBox(R * 0.15, R * 0.065); break;
+    case 'teethSmirk': x.save(); x.translate(mx, my); x.rotate(-0.18); x.translate(-mx, -my); teethBox(R * 0.16, R * 0.06); x.restore(); break;
+    case 'toothy': toothy(R * 0.24, R * 0.2); break;
+    case 'scream': {
+      x.fillStyle = '#5a2328'; x.beginPath(); x.ellipse(mx, my + R * 0.04, R * 0.18, R * 0.24, 0, 0, 7); x.fill();
+      x.save(); x.clip(); x.fillStyle = '#e8737a'; x.beginPath(); x.ellipse(mx, my + R * 0.26, R * 0.12, R * 0.08, 0, 0, 7); x.fill();
+      x.fillStyle = '#fffdf6'; x.fillRect(mx - R * 0.2, my - R * 0.22, R * 0.4, R * 0.08); x.fillRect(mx - R * 0.2, my + R * 0.2, R * 0.4, R * 0.07);
+      x.lineWidth = 3; x.beginPath(); for (let i = 1; i < 5; i++) { const xx = mx - R * 0.2 + R * 0.4 * i / 5; x.moveTo(xx, my - R * 0.22); x.lineTo(xx, my - R * 0.14); x.moveTo(xx, my + R * 0.2); x.lineTo(xx, my + R * 0.27); } x.stroke(); x.restore();
+      x.lineWidth = 7; x.beginPath(); x.ellipse(mx, my + R * 0.04, R * 0.18, R * 0.24, 0, 0, 7); x.stroke(); break;
+    }
     case 'grin': dShape(R * 0.2, R * 0.16); break;
     case 'laugh': dShape(R * 0.26, R * 0.26); break;
     case 'open': openShape(R * 0.08, R * 0.1, false); break;
@@ -213,8 +252,9 @@ function drawFace(o, f, r) {
 }
 
 function drawTorso(o, r) {
-  const W = 0.66, H = 0.74, c = canvas(W * PX, H * PX), x = c.getContext('2d');
-  const cx = W / 2 * PX, top = 0.06 * PX, bot = 0.68 * PX, tw = 0.15 * PX, bw = 0.25 * PX;
+  const TX = D.torsoExtra || 0;
+  const W = 0.66, H = 0.74 + TX, c = canvas(W * PX, H * PX), x = c.getContext('2d');
+  const cx = W / 2 * PX, top = 0.06 * PX, bot = (0.68 + TX) * PX, tw = 0.15 * PX, bw = 0.25 * PX;
   const hw = (t) => {
     let w = tw + (bw - tw) * Math.pow(Math.sin(Math.min(1, t / 0.82) * Math.PI / 2), 1.3);
     if (t > 0.82) w = bw * Math.sqrt(Math.max(0, 1 - Math.pow((t - 0.82) / 0.18, 2)));
@@ -340,8 +380,8 @@ export function makeChar(name, o = {}) {
   const s = o.scale || 1;
   g.scale.setScalar(s);
 
-  const LX = D.legExtra || 0;
-  const hipY = 0.64 + LX, shY = 1.1 + LX, neckY = 1.12 + LX;
+  const LX = D.legExtra || 0, TX = D.torsoExtra || 0;
+  const hipY = 0.64 + LX, shY = 1.1 + LX + TX, neckY = 1.12 + LX + TX;
   const legs = [];
   for (const sx of [-1, 1]) {
     const piv = new THREE.Group(); piv.position.set(sx * 0.075, hipY, -0.02);
@@ -363,7 +403,7 @@ export function makeChar(name, o = {}) {
     arms.push({up, fore, hand, sx});
   }
   const headPiv = new THREE.Group(); headPiv.position.set(0, neckY, 0.03); body.add(headPiv);
-  const headY = (1.42 - neckY) + (HEAD_H / 2 - (1 - HEAD_CY));
+  const headY = (1.42 - 1.12) + (HEAD_H / 2 - (1 - HEAD_CY)); // head sits on the neck, so a taller body lifts it
   const head = partMesh(drawHeadBase(p, r), HEAD_W, HEAD_H); head.position.set(0, headY, 0); headPiv.add(head);
   const face = partMesh(null, HEAD_W, HEAD_H, false); face.position.set(0, headY, 0.004); headPiv.add(face);
   const faceCache = new Map();

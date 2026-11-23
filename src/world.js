@@ -144,14 +144,14 @@ export function buildWorld(lang, T, EVt, L) {
       {t: 0, pose: 'wave', expr: 'happy'},
       {t: E('bumi') + 0.1, pose: 'idle', expr: 'neutral'},
       {t: E('berhenti') + 0.12, expr: 'shocked', pose: 'armsUp', action: 'jump', dur: 0.6},
-      {t: E('berhenti') + 0.9, expr: 'worried', pose: 'headHold', action: 'tremble', dur: 1.0},
+      {t: E('berhenti') + 0.9, expr: 'grimace', pose: 'headHold', action: 'tremble', dur: 1.0},
       {t: cut(3), pose: 'wave', expr: 'happy'},
       {t: E('seribu') + 0.1, pose: 'cheer', expr: 'excited', action: 'hop', dur: 0.5},
       {t: cut(11), pose: 'idle', expr: 'thinking'},
       {t: E('seram') + 0.1, pose: 'shrug', expr: 'confused'},
-      {t: E('komentar') - 0.05, pose: 'point', expr: 'excited', action: 'jump', dur: 0.6},
+      {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},
     ]);
-    const cmt = P.banner(L.comment, 1.7, 0.5, {poleH: 2.35, bg: '#c75b5b'}); at(cmt, 0, R - 0.08, GZ - 0.55); g.add(cmt);
+    const cmt = P.banner(L.comment, 1.7, 0.5, {poleH: 2.85, bg: '#c75b5b'}); at(cmt, 0, R - 0.08, GZ - 0.55); g.add(cmt);
     fx(g, FX.glints([0, R + 2.0, GZ - 0.4], E('komentar'), {n: 28}), (t) => inShots(t, 11));
     fx(g, FX.confetti([0, R + 2.4, GZ], E('komentar') + 0.05), (t) => inShots(t, 11));
     fx(g, FX.glints([0, -0.1, GZ + R + 0.6], E('seribu'), {n: 22}), (t) => inShots(t, 3));
@@ -204,23 +204,23 @@ export function buildWorld(lang, T, EVt, L) {
     const n2 = ch('pal2', {seed: 65}, g, 2.5, -1.6, -0.3);
     hero.act([
       {t: 0, pose: 'hold', expr: 'happy'},
-      {t: E('sadari') + 0.1, pose: 'hold', expr: 'smug', action: 'nod', dur: 0.6},
+      {t: E('sadari') + 0.1, pose: 'hold', expr: 'scheming', action: 'nod', dur: 0.6},
       {t: E('cepat') + 0.1, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
       {t: cut(4), pose: 'hold', expr: 'neutral'},
       {t: E('mendadak') + 0.12, pose: 'armsUp', expr: 'shocked', action: 'tremble', dur: 0.8},
-      {t: E('manusia') + 0.1, pose: 'headHold', expr: 'worried'},
-      {t: E('terlempar') + 0.05, pose: 'armsUp', expr: 'shocked'},
+      {t: E('manusia') + 0.1, pose: 'headHold', expr: 'grimace'},
+      {t: E('terlempar') + 0.05, pose: 'armsUp', expr: 'scream'},
     ]);
     [n1, n2].forEach((n, i) => n.act([
       {t: 0, pose: i ? 'hips' : 'wave', expr: 'happy'},
-      {t: E('mendadak') + 0.15 + i * 0.08, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.5},
+      {t: E('mendadak') + 0.15 + i * 0.08, pose: 'armsUp', expr: i ? 'scream' : 'shocked', action: 'jump', dur: 0.5},
     ]));
     // hero clinging to the lamp post in the wind (shot 5): pivot at the post, body streaming downwind (screen right)
     const pivot = new THREE.Group(); at(pivot, 2.3, 1.75, -0.7); g.add(pivot);
     const hero2 = ch('hero', {seed: 66}, pivot, 0, 0, 0);
-    hero2.group.position.set(1.85, 0, 0); hero2.group.rotation.z = Math.PI / 2;
-    hero2.act([{t: 0, pose: 'armsUp', expr: 'shocked'}, {t: E('angin') + 0.1, expr: 'worried', action: 'tremble', dur: 1.6},
-      {t: E('badai') + 0.1, expr: 'cry'}]);
+    hero2.group.position.set(2.05, 0, 0); hero2.group.rotation.z = Math.PI / 2;
+    hero2.act([{t: 0, pose: 'armsUp', expr: 'shocked'}, {t: E('angin') + 0.1, expr: 'gritted', action: 'tremble', dur: 1.6},
+      {t: E('badai') + 0.1, expr: 'scream'}]);
     const spd = streaks(g, {n: 70, x0: -7, x1: 7, y0: 0.4, y1: 3.2, z0: -2.6, z1: 0.6, dir: -1, speed: 16, vis: (t) => inShots(t, 2) && t > E('cepat') - 0.1});
     const wind = streaks(g, {n: 120, x0: -8, x1: 9, y0: 0.2, y1: 4.5, z0: -6, z1: 1.5, dir: 1, speed: 18, len: 1.6, color: '#dfe8f0', opacity: 0.5, seed: 9, vis: (t) => inShots(t, 5)});
     fx(g, FX.rain([0, -2, 18, 10], {n: 700, slant: 1.1, speed: 14, opacity: 0.45}), (t) => inShots(t, 5));
@@ -275,7 +275,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: 0, pose: 'hips', expr: 'happy'},
       {t: E('laut') + 0.1, pose: 'idle', expr: 'surprised'},
       {t: E('mengalir') + 0.15, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.6},
-      {t: E('kutub') + 0.1, pose: 'point', expr: 'worried', action: 'tremble', dur: 0.6},
+      {t: E('kutub') + 0.1, pose: 'point', expr: 'nervous', action: 'tremble', dur: 0.6},
     ]);
     const edge0 = -3.2;
     updaters.push((t) => {
@@ -329,7 +329,7 @@ export function buildWorld(lang, T, EVt, L) {
     const hero = ch('hero', {seed: 69}, g, -0.1, -1.6, 0);
     hero.act([
       {t: 0, pose: 'wave', expr: 'tired'},
-      {t: E('siang') + 0.1, pose: 'wave', expr: 'worried', action: 'slump', dur: 1.0},
+      {t: E('siang') + 0.1, pose: 'wave', expr: 'grimace', action: 'slump', dur: 1.0},
     ]);
     fx(g, FX.glints([-0.1, 1.6, -1.5], E('siang'), {n: 20, color: '#ffd890'}), (t) => inShots(t, 9));
     updaters.push((t) => {
@@ -354,7 +354,7 @@ export function buildWorld(lang, T, EVt, L) {
     const sub = sign(L.night6Sub, 1.5, 0.32, {bg: '#dfe8ff', frame: '#1f2a40'}); at(sub, 1.6, 1.32, -3.17, -0.25); g.add(sub);
     const hero = ch('hero', {seed: 70}, g, 0.0, -1.6, 0);
     hero.act([
-      {t: 0, pose: 'cross', expr: 'worried', action: 'tremble', dur: 3},
+      {t: 0, pose: 'cross', expr: 'gritted', action: 'tremble', dur: 3},
       {t: E('membeku') + 0.1, pose: 'cross', expr: 'shocked'},
     ]);
     const ice = P.iceBlock(0.75, 1.75, 0.5); at(ice, 0.0, 0, -1.6); g.add(ice);
@@ -389,10 +389,10 @@ export function buildWorld(lang, T, EVt, L) {
     const sB = ch('scientist', {seed: 72, hat: 'none', jacket: '#f3f0e6', hair: '#3a2a26', glasses: false}, g, 2.15, -3.7, -0.3);
     const hero = ch('hero', {seed: 73}, g, 0.95, -2.0, -0.2);
     sA.act([{t: 0, pose: 'present', expr: 'smug'}, {t: E('ilmuwan') + 0.1, pose: 'present', expr: 'proud', action: 'nod', dur: 0.7},
-      {t: E('tidak') + 0.1, pose: 'stop', expr: 'happy', action: 'shake', dur: 0.7}]);
+      {t: E('tidak') + 0.1, pose: 'stop', expr: 'cheesy', action: 'shake', dur: 0.7}]);
     sB.act([{t: 0, pose: 'chin', expr: 'thinking'}, {t: E('ilmuwan') + 0.2, pose: 'point', expr: 'happy'}, {t: E('tidak') + 0.2, pose: 'hips', expr: 'proud', action: 'nod', dur: 0.6}]);
     hero.act([{t: 0, pose: 'idle', expr: 'worried'}, {t: E('tenang') + 0.1, pose: 'idle', expr: 'surprised'},
-      {t: E('tidak') + 0.3, pose: 'cheer', expr: 'laugh', action: 'jump', dur: 0.6}]);
+      {t: E('tidak') + 0.3, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6}]);
     fx(g, FX.glints([0.95, 2.2, -5.2], E('tidak') + 0.2, {n: 20}), (t) => inShots(t, 10));
     updaters.push((t) => { mini.spin.rotation.y = t * 1.2; chk.scale.setScalar(pop(t, E('tidak') + 0.15, 0.35)); });
   }

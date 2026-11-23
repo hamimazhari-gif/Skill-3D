@@ -208,7 +208,7 @@ const TH = {
   id: {top: 'KALAU BUMI', mid: 'BERHENTI?!'},
   en: {top: 'IF EARTH', mid: 'STOPPED?!'},
 };
-const THUMB = (EVt) => ({t: EVt.berhenti + 0.45, pos: [0.9, 4.75, -3.3], look: [0, 4.6, -6]});
+const THUMB = (EVt) => ({t: EVt.berhenti + 0.45, pos: [0.9, 4.95, -3.1], look: [0, 4.8, -6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

@@ -2,7 +2,12 @@
 // inside that shot (the framing then runs until the next framing / shot end). Keys: {at: 'start' | 'end' | EV, pos, look}
 // in location-local coordinates.
 import * as THREE from 'three';
-import {LOC} from './world';
+import {LOC, CHAR_DESIGN} from './world';
+import {headLift} from './char';
+
+// Framings were planned for classic-height characters; keys aimed at people (look height > 0.9 m) rise with the head.
+const LIFT = headLift(CHAR_DESIGN) - 0.03;
+const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // 1 planet: "What happens... if Earth suddenly stops spinning?" — orbit in, then close on the hero as it halts
@@ -37,10 +42,10 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [0.4, 1.8, 2.6], look: [0.6, 1.5, -1.5]},
     {at: 'end', pos: [1.6, 2.6, 4.6], look: [4.4, 2.6, -1.5]}]},
   // 5 town in the storm: hero clings to the lamp post
-  {shot: 5, loc: 'town', move: 'push', keys: [
+  {shot: 5, loc: 'town', lift: false, move: 'push', keys: [
     {at: 'start', pos: [0.8, 2.1, 4.6], look: [2.6, 1.6, -2.0]},
     {at: 'end', pos: [2.0, 1.95, 2.6], look: [3.0, 1.7, -1.2]}]},
-  {shot: 5, from: 'angin', loc: 'town', move: 'close-up on the face in the wind', keys: [
+  {shot: 5, from: 'angin', loc: 'town', lift: false, move: 'close-up on the face in the wind', keys: [
     {at: 'start', pos: [3.1, 2.0, 0.55], look: [2.85, 1.8, -0.7]},
     {at: 'end', pos: [3.0, 1.95, 0.35], look: [2.85, 1.8, -0.7]}]},
   // 6 beach: the sea drains away
@@ -85,8 +90,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.3, 1.7, -1.2], look: [-0.6, 1.7, -5.2]},
     {at: 'end', pos: [-0.1, 1.7, -1.5], look: [-0.4, 1.7, -5.2]}]},
   {shot: 10, from: 'tidak', loc: 'lab', move: 'close-up relieved hero', keys: [
-    {at: 'start', pos: [1.15, 1.5, -0.85], look: [0.9, 1.35, -2.0]},
-    {at: 'end', pos: [1.2, 1.55, -0.6], look: [0.9, 1.4, -2.0]}]},
+    {at: 'start', pos: [1.25, 1.55, -0.35], look: [0.9, 1.5, -2.0]},
+    {at: 'end', pos: [1.3, 1.6, -0.1], look: [0.9, 1.55, -2.0]}]},
   // 11 planet: closing question
   {shot: 11, loc: 'planet', move: 'push on the hero on top of the world', keys: [
     {at: 'start', pos: [1.1, 4.5, -2.6], look: [0, 4.1, -6]},
@@ -114,8 +119,8 @@ export function buildCameras(T, EVt) {
     const ox = LOC[p.loc];
     const times = p.keys.map((k) => (k.at === 'start' ? t0 : k.at === 'end' ? t1 - 0.05 : EVt[k.at] + 0.15));
     for (let j = 1; j < times.length; j++) times[j] = Math.max(times[j], times[j - 1] + 0.35);
-    const pos = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.pos[0] + ox, k.pos[1], k.pos[2])), false, 'centripetal');
-    const look = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.look[0] + ox, k.look[1], k.look[2])), false, 'centripetal');
+    const pos = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.pos[0] + ox, k.pos[1] + ly(p, k), k.pos[2])), false, 'centripetal');
+    const look = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.look[0] + ox, k.look[1] + ly(p, k), k.look[2])), false, 'centripetal');
     return {...p, t0, t1, times, pos, look};
   });
 }
