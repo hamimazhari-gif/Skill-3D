@@ -757,3 +757,103 @@ export function glyph(text, size = 0.3, color = '#fff3df') {
   s.scale.set(size, size, 1);
   return s;
 }
+
+// ================= Earth-stops-spinning story props =================
+// Painted Earth globe. Returns {group, spin (rotating part), setStop(u)}: u 0 = today's Earth, 1 = stopped Earth
+// (oceans pooled at both poles, one giant continent around the equator). Equirectangular canvas texture.
+export function globe(R = 3, o = {}) {
+  const g = new THREE.Group();
+  const W = 1024, H = 512;
+  const c = canvas(W, H), x = c.getContext('2d'); const tex = texFrom(c);
+  const r0 = rng(o.seed || 41);
+  // continent blobs (lon, lat, size) roughly Earth-like
+  const land = [[-100, 45, 70], [-60, -15, 55], [15, 50, 55], [20, 5, 60], [90, 45, 80], [130, -25, 40], [-40, 72, 28]];
+  const blobs = [];
+  for (const [lo, la, s] of land) for (let i = 0; i < 9; i++) blobs.push([lo + (r0() - 0.5) * s, la + (r0() - 0.5) * s * 0.55, s * (0.18 + r0() * 0.22)]);
+  const P = (lo, la) => [(lo + 180) / 360 * W, (90 - la) / 180 * H];
+  let last = -1;
+  function draw(u) {
+    const q = Math.round(u * 24) / 24; if (q === last) return; last = q;
+    x.fillStyle = '#4f8fc8'; x.fillRect(0, 0, W, H);
+    x.strokeStyle = 'rgba(240,248,255,0.25)'; x.lineWidth = 3;
+    for (let i = 0; i < 70; i++) { const px = (i * 137) % W, py = (i * 71) % H; x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + 14, py - 5, px + 28, py); x.stroke(); }
+    x.globalAlpha = 1 - q;
+    for (const [lo, la, s] of blobs) {
+      const [px, py] = P(lo, la); x.fillStyle = Math.abs(la) > 30 && lo > 60 ? '#a8b86a' : (la < 25 && la > -25 && lo > -20 && lo < 60 ? '#d8b878' : '#7fae5a');
+      x.beginPath(); x.ellipse(px, py, s / 360 * W, s / 180 * H * 0.8, 0, 0, 7); x.fill();
+    }
+    x.globalAlpha = 1;
+    // polar ice
+    x.fillStyle = '#f4f8fb'; x.fillRect(0, 0, W, H * 0.045); x.fillRect(0, H * 0.955, W, H * 0.045);
+    if (q > 0) {
+      // stopped Earth: land band around the equator with wobbly coasts, oceans at the poles
+      const band = q * 0.2 * H;
+      x.fillStyle = '#c9a86a'; x.beginPath(); x.moveTo(0, H / 2 - band);
+      for (let i = 0; i <= 64; i++) x.lineTo(i / 64 * W, H / 2 - band + Math.sin(i * 1.7) * 10 * q);
+      for (let i = 64; i >= 0; i--) x.lineTo(i / 64 * W, H / 2 + band + Math.sin(i * 2.3) * 10 * q);
+      x.fill();
+      x.fillStyle = '#7fae5a'; x.globalAlpha = q;
+      for (let i = 0; i < 26; i++) { x.beginPath(); x.ellipse((i * 97) % W, H / 2 + Math.sin(i * 1.9) * band * 0.6, 40, 16, 0, 0, 7); x.fill(); }
+      x.globalAlpha = 1;
+    }
+    tex.needsUpdate = true;
+  }
+  draw(0);
+  const spin = new THREE.Group(); g.add(spin);
+  const body = ink(new THREE.SphereGeometry(R, 64, 40), toon(tex), {hull: 0.05, edges: false});
+  body.traverse((m) => { m.castShadow = false; }); spin.add(body);
+  // thin cloud shell
+  const clouds = new THREE.Group(); spin.add(clouds);
+  for (let i = 0; i < 9; i++) {
+    const a = r0() * 6.28, la = (r0() - 0.5) * 1.3;
+    const cl = ball(0.35 + r0() * 0.3, '#ffffff', {sy: 0.35, hull: 0.01, seg: 10});
+    cl.position.set(Math.cos(la) * Math.cos(a) * (R + 0.08), Math.sin(la) * (R + 0.08), Math.cos(la) * Math.sin(a) * (R + 0.08));
+    cl.lookAt(0, 0, 0); cl.rotateX(Math.PI / 2); cl.traverse((m) => { m.castShadow = false; }); clouds.add(cl);
+  }
+  return {group: g, spin, clouds, setStop: draw};
+}
+
+// Starfield on a sphere around a point (space background).
+export function stars(n = 500, r = 70, seed = 9) {
+  const rr = rng(seed); const pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) { const a = rr() * 6.28, z = rr() * 2 - 1, s = Math.sqrt(1 - z * z); pos.set([Math.cos(a) * s * r, z * r, Math.sin(a) * s * r], i * 3); }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const p = new THREE.Points(geo, new THREE.PointsMaterial({color: '#fff6dc', size: 2.2, sizeAttenuation: false, fog: false}));
+  p.frustumCulled = false; return p;
+}
+
+// Glowing sun ball with halo (place far away).
+export function sunBall(r = 3, color = '#ffd760') {
+  const g = new THREE.Group();
+  const c = canvas(256, 256), x = c.getContext('2d');
+  const gr = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(255,240,180,0.9)'); gr.addColorStop(0.35, 'rgba(255,210,110,0.4)'); gr.addColorStop(1, 'rgba(255,200,100,0)');
+  x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false})); halo.scale.setScalar(r * 5); g.add(halo);
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(r, 32, 20), new THREE.MeshBasicMaterial({color, fog: false})));
+  return g;
+}
+
+export function cactus(h = 1.6) {
+  const g = new THREE.Group(); const m = '#6f9a4f';
+  const t = cyl(0.18, 0.2, h, toon(m, {paint: {seed: 66, stains: 4}})); g.add(t);
+  const cap = ball(0.18, m); at(cap, 0, h, 0); g.add(cap);
+  for (const s of [-1, 1]) {
+    const a = cyl(0.11, 0.12, 0.45, m); at(a, s * 0.3, h * 0.45, 0); g.add(a);
+    const j = box(0.32, 0.18, 0.18, m, {center: true}); at(j, s * 0.16, h * 0.45, 0); g.add(j);
+    const k = ball(0.11, m); at(k, s * 0.3, h * 0.45 + 0.45, 0); g.add(k);
+  }
+  return g;
+}
+
+export function iceBlock(w = 0.9, h = 0.7, d = 0.8) {
+  return box(w, h, d, new THREE.MeshToonMaterial({color: '#cfeaf6', gradientMap: gradientMap(), transparent: true, opacity: 0.42, depthWrite: false}), {hull: 0.02, edges: true});
+}
+
+export function telescope() {
+  const g = new THREE.Group();
+  for (const a of [0, 2.1, 4.2]) { const l = cyl(0.025, 0.03, 1.2, '#5a3a2a'); at(l, Math.sin(a) * 0.25, 0, Math.cos(a) * 0.25, 0, Math.cos(a) * 0.22, -Math.sin(a) * 0.22); g.add(l); }
+  const tube = cyl(0.09, 0.13, 1.1, '#c9a462', {center: true}); at(tube, 0, 1.25, 0, 0, 0, -1.0); g.add(tube);
+  const lens = cyl(0.14, 0.14, 0.08, '#3a3a40', {center: true}); lens.position.set(0.47, 1.55, 0); lens.rotation.z = -1.0; g.add(lens);
+  return g;
+}

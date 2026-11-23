@@ -102,39 +102,39 @@ function cues(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
   return [
     ['05-airy-whoosh.mp3', 0.0, 0.22],
-    ['04-counter-tick-number-roll.wav', EVt.tujuh - 0.1, 0.32],
-    ['08-heavy-whoosh.wav', c(2) - 0.35, 0.28],
-    ['06-digital-glitch-tech-blip.mp3', EVt.mabuk, 0.3],
-    ['02-error-denied-buzz.wav', EVt.marah + 0.1, 0.3],
-    ['03-subtle-digital-impact.mp3', EVt.lambat + 0.25, 0.4],
-    ['05-airy-whoosh.mp3', c(3) - 0.2, 0.2],
-    ['04-counter-tick-number-roll-2.wav', EVt.detik, 0.25],
-    ['04-soft-ui-pop.mp3', EVt.micro + 0.05, 0.35],
-    ['08-heavy-whoosh.wav', c(4) - 0.35, 0.28],
-    ['06-deep-cinematic-boom.wav', EVt.kendara + 0.05, 0.4],
-    ['07-smooth-transition-whoosh.mp3', c(5) - 0.4, 0.28],
-    ['pop-bubble-sound-effect.mp3', EVt.melihat + 0.05, 0.35],
-    ['04-soft-ui-pop.mp3', EVt.mendengar, 0.3],
-    ['07-riser-build-up.wav', EVt.halu - 1.4, 0.28],
-    ['06-digital-glitch-tech-blip.mp3', EVt.halu + 0.05, 0.42],
-    ['05-airy-whoosh.mp3', c(6) - 0.2, 0.2],
-    ['pop-bubble-sound-effect.mp3', EVt.tidak2 + 0.1, 0.3],
-    ['02-error-denied-buzz.wav', EVt.curiga + 0.1, 0.22],
-    ['04-counter-tick-number-roll.wav', EVt.ingatan, 0.22],
-    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.28],
-    ['04-counter-tick-number-roll-2.wav', EVt.tahun, 0.28],
-    ['08-soft-success-chime.mp3', EVt.sebelas, 0.32],
-    ['07-smooth-transition-whoosh.mp3', c(8) - 0.4, 0.28],
-    ['04-soft-ui-pop.mp3', EVt.mengira + 0.1, 0.32],
-    ['03-subtle-digital-impact.mp3', EVt.terkenal + 0.05, 0.4],
-    ['09-notification-ding.wav', EVt.terkenal + 0.3, 0.3],
-    ['08-heavy-whoosh.wav', c(9) - 0.35, 0.28],
-    ['02-error-denied-buzz.wav', EVt.jangan + 0.1, 0.28],
-    ['08-soft-success-chime.mp3', EVt.tidurlah + 0.1, 0.22],
-    ['05-airy-whoosh.mp3', c(10) - 0.35, 0.25],
-    ['04-counter-tick-number-roll.wav', EVt.jam, 0.25],
+    ['06-deep-cinematic-boom.wav', EVt.berhenti + 0.1, 0.35],
+    ['08-heavy-whoosh.wav', c(2) - 0.35, 0.26],
+    ['07-smooth-transition-whoosh.mp3', EVt.cepat, 0.32],
+    ['05-airy-whoosh.mp3', c(3) - 0.3, 0.22],
+    ['04-counter-tick-number-roll.wav', EVt.seribu, 0.3],
+    ['04-soft-ui-pop.mp3', EVt.khatulistiwa, 0.3],
+    ['08-heavy-whoosh.wav', c(4) - 0.35, 0.26],
+    ['06-deep-cinematic-boom.wav', EVt.mendadak + 0.05, 0.42],
+    ['pop-bubble-sound-effect.mp3', EVt.manusia + 0.05, 0.3],
+    ['03-subtle-digital-impact.mp3', EVt.rumah + 0.1, 0.38],
+    ['08-heavy-whoosh.wav', EVt.terlempar + 0.05, 0.32],
+    ['07-smooth-transition-whoosh.mp3', EVt.angin, 0.3],
+    ['06-deep-cinematic-boom.wav', EVt.badai + 0.05, 0.32],
+    ['05-airy-whoosh.mp3', c(6) - 0.3, 0.22],
+    ['07-riser-build-up.wav', EVt.mengalir, 0.2],
+    ['04-soft-ui-pop.mp3', EVt.kutub + 0.05, 0.3],
+    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.26],
+    ['pop-bubble-sound-effect.mp3', EVt.utara, 0.28],
+    ['pop-bubble-sound-effect.mp3', EVt.selatan, 0.28],
+    ['09-notification-ding.wav', EVt.daratan + 0.1, 0.3],
+    ['05-airy-whoosh.mp3', c(8) - 0.3, 0.22],
+    ['04-counter-tick-number-roll-2.wav', c(8) + 0.1, 0.25],
+    ['02-error-denied-buzz.wav', EVt.jam24 + 0.25, 0.28],
+    ['07-smooth-transition-whoosh.mp3', c(9) - 0.4, 0.26],
+    ['08-soft-success-chime.mp3', EVt.siang, 0.22],
+    ['05-airy-whoosh.mp3', EVt.lainnya - 0.25, 0.25],
+    ['03-subtle-digital-impact.mp3', EVt.membeku + 0.05, 0.38],
+    ['08-heavy-whoosh.wav', c(10) - 0.35, 0.26],
+    ['08-soft-success-chime.mp3', EVt.tidak + 0.2, 0.3],
+    ['05-airy-whoosh.mp3', c(11) - 0.3, 0.24],
+    ['pop-bubble-sound-effect.mp3', EVt.seram + 0.1, 0.28],
     ['08-soft-success-chime.mp3', EVt.komentar, 0.35],
-    ['mouse-click-sound-effect.mp3', EVt.komentar + 0.45, 0.4, 0.45],
+    ['mouse-click-sound-effect.mp3', EVt.komentar + 0.4, 0.4, 0.45],
   ];
 }
 
@@ -178,8 +178,9 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [2, 4, 5, 7, 8, 9, 10];
-  for (const k of DIPS) { const ct = T.CUTS[k - 1]; dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2); }
+  const DIPS = [2, 3, 4, 6, 7, 8, 9, 10, 11];
+  const dipT = [...DIPS.map((k) => T.CUTS[k - 1]), EVt.lainnya - 0.12];
+  for (const ct of dipT) dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2);
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
@@ -200,12 +201,13 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: '7 HARI', mid: 'TANPA TIDUR?!'},
-  en: {top: '7 DAYS', mid: 'NO SLEEP?!'},
+  id: {top: 'KALAU BUMI', mid: 'BERHENTI?!'},
+  en: {top: 'IF EARTH', mid: 'STOPPED?!'},
 };
-const THUMB_T = {id: 36.6, en: 35.66};
+const THUMB = (EVt) => ({t: EVt.berhenti + 0.45, pos: [0.9, 4.75, -3.3], look: [0, 4.6, -6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
+  const {EVt} = useStory(lang);
   const tx = TH[lang];
   const ink = '#351f22';
   const word = (txt, size, bg, fg, rot) => (
@@ -215,7 +217,7 @@ export const Thumb = ({lang}) => {
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
       <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
-        <Scene lang={lang} thumb={{t: THUMB_T[lang], pos: [0.3, 1.25, -1.0], look: [0.1, 1.05, -3.7]}} />
+        <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}

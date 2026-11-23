@@ -1,0 +1,124 @@
+{
+ "duration": 65.04,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "What happens... if you don't sleep for seven days?",
+   "start": 0.16,
+   "end": 4.06,
+   "pred": 3.02
+  },
+  {
+   "shot": 2,
+   "text": "Day one. After twenty-four hours awake, your brain works like you're drunk.",
+   "start": 4.74,
+   "end": 9.66,
+   "pred": 5.3
+  },
+  {
+   "shot": 2,
+   "text": "It's hard to focus, you get irritated easily, and your reactions slow down.",
+   "start": 10.18,
+   "end": 15.3,
+   "pred": 5.79
+  },
+  {
+   "shot": 3,
+   "text": "Day two. Your body starts forcing itself to sleep.",
+   "start": 16.0,
+   "end": 19.2,
+   "pred": 3.26
+  },
+  {
+   "shot": 3,
+   "text": "You can doze off for a few seconds without even noticing.",
+   "start": 19.64,
+   "end": 22.38,
+   "pred": 3.75
+  },
+  {
+   "shot": 4,
+   "text": "This is called microsleep, and it's extremely dangerous behind the wheel.",
+   "start": 22.84,
+   "end": 27.54,
+   "pred": 5.39
+  },
+  {
+   "shot": 5,
+   "text": "Days three and four. Your brain starts to glitch.",
+   "start": 28.32,
+   "end": 31.64,
+   "pred": 3.18
+  },
+  {
+   "shot": 5,
+   "text": "You might see or hear things that aren't really there.",
+   "start": 32.08,
+   "end": 34.64,
+   "pred": 3.51
+  },
+  {
+   "shot": 5,
+   "text": "Hallucinations!",
+   "start": 35.0,
+   "end": 35.76,
+   "pred": 1.14
+  },
+  {
+   "shot": 6,
+   "text": "Days five to seven. It gets harder to tell what's real and what's not.",
+   "start": 36.62,
+   "end": 40.2,
+   "pred": 4.32
+  },
+  {
+   "shot": 6,
+   "text": "Your thoughts get messy, you become paranoid, and your memory fades.",
+   "start": 40.84,
+   "end": 44.8,
+   "pred": 5.47
+  },
+  {
+   "shot": 7,
+   "text": "In nineteen sixty-four, a teenager named Randy Gardner stayed awake for eleven days straight!",
+   "start": 45.66,
+   "end": 51.22,
+   "pred": 6.77
+  },
+  {
+   "shot": 8,
+   "text": "He hallucinated so badly, he believed he was a famous football player.",
+   "start": 51.8,
+   "end": 55.42,
+   "pred": 5.14
+  },
+  {
+   "shot": 9,
+   "text": "So... never try this!",
+   "start": 56.14,
+   "end": 58.1,
+   "pred": 1.14
+  },
+  {
+   "shot": 9,
+   "text": "Get seven to nine hours of sleep every night.",
+   "start": 58.48,
+   "end": 61.52,
+   "pred": 2.94
+  },
+  {
+   "shot": 10,
+   "text": "What's the longest you've ever stayed awake?",
+   "start": 61.98,
+   "end": 63.4,
+   "pred": 2.86
+  },
+  {
+   "shot": 10,
+   "text": "Tell me in the comments!",
+   "start": 63.98,
+   "end": 64.7,
+   "pred": 1.55
+  }
+ ]
+}

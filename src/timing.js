@@ -3,7 +3,7 @@ import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 10;
+export const SHOTS = 11;
 export const TAIL = 0.7; // hold after the last word
 
 const DATA = {en: EN, id: ID};
@@ -36,30 +36,25 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "7 hari tanpa tidur" (Indonesian + English).
+// Word events per language: [sentenceIndex, word, occurrence]. Story: "Bumi berhenti berputar" (Indonesian + English).
 export const EV = {
-  tidak: {en: [0, 'don'], id: [0, 'tidak']}, tujuh: {en: [0, 'seven'], id: [0, 'tujuh']},
-  day1: {en: [1, 'day'], id: [1, 'hari']}, jam24: {en: [1, 'twenty'], id: [1, 'dua']}, mabuk: {en: [1, 'drunk'], id: [1, 'mabuk']},
-  fokus: {en: [2, 'focus'], id: [2, 'fokus']}, marah: {en: [2, 'irritated'], id: [2, 'marah']}, lambat: {en: [2, 'slow'], id: [2, 'melambat']},
-  day2: {en: [3, 'day'], id: [3, 'hari']}, paksa: {en: [3, 'forcing'], id: [3, 'memaksa']},
-  tertidur: {en: [4, 'doze'], id: [4, 'tertidur']}, detik: {en: [4, 'seconds'], id: [4, 'detik']}, micro: {en: [4, 'noticing'], id: [4, 'microsleep']},
-  sangat: {en: [5, 'microsleep'], id: [5, 'sangat']}, bahaya: {en: [5, 'extremely'], id: [5, 'berbahaya']}, kendara: {en: [5, 'wheel'], id: [5, 'berkendara']},
-  day3: {en: [6, 'days'], id: [6, 'hari']}, kacau: {en: [6, 'glitch'], id: [6, 'kacau']},
-  melihat: {en: [7, 'you'], id: [7, 'melihat']}, mendengar: {en: [7, 'things'], id: [7, 'mendengar']}, tidakada: {en: [7, 'really'], id: [7, 'tidak']},
-  halu: {en: [8, 'hallucinations'], id: [8, 'halusinasi']},
-  day5: {en: [9, 'days'], id: [9, 'hari']}, sulit: {en: [9, 'harder'], id: [9, 'sulit']}, nyata: {en: [9, 'real'], id: [9, 'nyata']}, tidak2: {en: [9, 'not'], id: [9, 'tidak']},
-  pikiran: {en: [10, 'thoughts'], id: [10, 'pikiran']}, curiga: {en: [10, 'paranoid'], id: [10, 'curiga']}, ingatan: {en: [10, 'memory'], id: [10, 'ingatan']},
-  tahun: {en: [11, 'nineteen'], id: [11, 'tahun']}, remaja: {en: [11, 'teenager'], id: [11, 'remaja']}, randy: {en: [11, 'randy'], id: [11, 'randy']}, sebelas: {en: [11, 'eleven'], id: [11, 'sebelas']},
-  ia: {en: [12, 'he'], id: [12, 'ia']}, mengira: {en: [12, 'believed'], id: [12, 'mengira']}, pemain: {en: [12, 'famous'], id: [12, 'pemain']}, terkenal: {en: [12, 'player'], id: [12, 'terkenal']},
-  jadi: {en: [13, 'so'], id: [13, 'jadi']}, jangan: {en: [13, 'never'], id: [13, 'jangan']},
-  tidurlah: {en: [14, 'get'], id: [14, 'tidurlah']}, tujuh2: {en: [14, 'seven'], id: [14, 'tujuh']}, malam: {en: [14, 'night'], id: [14, 'malam']},
-  begadang: {en: [15, 'longest'], id: [15, 'begadang']}, jam: {en: [15, 'awake'], id: [15, 'jam']},
-  tulis: {en: [16, 'tell'], id: [16, 'tulis']}, komentar: {en: [16, 'comments'], id: [16, 'komentar']},
+  bumi: {en: [0, 'earth'], id: [0, 'bumi']}, berhenti: {en: [0, 'stops'], id: [0, 'berhenti']},
+  sadari: {en: [1, 'noticing'], id: [1, 'sadari']}, cepat: {en: [1, 'fast'], id: [1, 'cepat']},
+  khatulistiwa: {en: [2, 'equator'], id: [2, 'khatulistiwa']}, seribu: {en: [2, 'thousand'], id: [2, 'seribu']}, kmjam: {en: [2, 'hour'], id: [2, 'jam']},
+  mendadak: {en: [3, 'suddenly'], id: [3, 'mendadak']}, manusia: {en: [3, 'people'], id: [3, 'manusia']}, mobil: {en: [3, 'cars'], id: [3, 'mobil']},
+  rumah: {en: [3, 'houses'], id: [3, 'rumah']}, terlempar: {en: [3, 'thrown'], id: [3, 'terlempar']},
+  udara: {en: [4, 'air'], id: [4, 'udara']}, angin: {en: [4, 'winds'], id: [4, 'angin']}, badai: {en: [4, 'hurricane'], id: [4, 'badai']},
+  laut: {en: [5, 'oceans'], id: [5, 'laut']}, mengalir: {en: [5, 'flow'], id: [5, 'mengalir']}, kutub: {en: [5, 'poles'], id: [5, 'kutub']},
+  utara: {en: [6, 'north'], id: [6, 'utara']}, selatan: {en: [6, 'south'], id: [6, 'selatan']}, daratan: {en: [6, 'continent'], id: [6, 'daratan']},
+  hari: {en: [7, 'day'], id: [7, 'hari']}, jam24: {en: [7, 'twenty'], id: [7, 'dua']},
+  matahari: {en: [8, 'sun'], id: [8, 'matahari']}, siang: {en: [8, 'daylight'], id: [8, 'siang']}, lainnya: {en: [8, 'other'], id: [8, 'lainnya']}, membeku: {en: [8, 'freeze'], id: [8, 'membeku']},
+  tenang: {en: [9, 'worry'], id: [9, 'tenang']}, ilmuwan: {en: [9, 'scientists'], id: [9, 'ilmuwan']}, tidak: {en: [9, 'won'], id: [9, 'tidak']},
+  seram: {en: [10, 'scares'], id: [10, 'menyeramkan']}, tulis: {en: [11, 'tell'], id: [11, 'tulis']}, komentar: {en: [11, 'comments'], id: [11, 'komentar']},
 };
 
 export const LABELS = {
-  en: {day1: 'DAY 1', day2: 'DAY 2', day34: 'DAYS 3-4', day57: 'DAYS 5-7', day7: 'DAY 7', year: '1964', record: '11 DAYS',
-    recordSub: '264 HOURS AWAKE', sleep: '7-9 HOURS', sleepSub: 'EVERY NIGHT', comment: 'COMMENT!', score: 'TOUCHDOWN!'},
-  id: {day1: 'HARI 1', day2: 'HARI 2', day34: 'HARI 3-4', day57: 'HARI 5-7', day7: 'HARI 7', year: '1964', record: '11 HARI',
-    recordSub: '264 JAM TANPA TIDUR', sleep: '7-9 JAM', sleepSub: 'SETIAP MALAM', comment: 'KOMENTAR!', score: 'GOL!'},
+  en: {speed: '1,670 KM/H', equator: 'EQUATOR', north: 'NORTH', south: 'SOUTH', poles: 'TO THE POLES', beach: 'BEACH', hours: '24 HOURS',
+    day6: '6 MONTHS', day6Sub: 'OF DAYLIGHT', night6: '6 MONTHS', night6Sub: 'OF DARKNESS', safe: 'EARTH: SAFE', comment: 'COMMENT!', shop: 'BAKERY'},
+  id: {speed: '1.670 KM/JAM', equator: 'KHATULISTIWA', north: 'UTARA', south: 'SELATAN', poles: 'KE KUTUB', beach: 'PANTAI', hours: '24 JAM',
+    day6: '6 BULAN', day6Sub: 'SIANG TERUS', night6: '6 BULAN', night6Sub: 'MALAM GELAP', safe: 'BUMI: AMAN', comment: 'KOMENTAR!', shop: 'TOKO ROTI'},
 };
