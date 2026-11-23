@@ -91,7 +91,7 @@ function drawHeadBase(o, r) {
     fr.push([cx + RX * 0.62, cy - RY * 0.66]);
     fr.push([cx + RX * 0.2, cy - RY * 0.62]); fr.push([cx - RX * 0.3, cy - RY * 0.5]); fr.push([cx - RX * 0.7, cy - RY * 0.3]); fr.push([cx - RX * 0.95, cy - RY * 0.12]);
   } else if (hairStyle === 'bald') { // old man: bald crown, white hair only around the sides, forehead wrinkles
-    for (const sd of [-1, 1]) inkShape(x, wobble(ellipse(cx + sd * RX * 0.9, cy - RY * 0.12, RX * 0.2, RY * 0.36, 30), r, 2), o.hair, r, 8, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.25));
+    for (const sd of [-1, 1]) inkShape(x, wobble(ellipse(cx + sd * RX * 0.9, cy - RY * 0.22, RX * 0.12, RY * 0.22, 30), r, 2), o.hair, r, 8, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.25));
     x.save(); x.strokeStyle = 'rgba(53,31,34,0.55)'; x.lineCap = 'round'; x.lineWidth = R * 0.035;
     for (const k of [0, 1]) { x.beginPath(); x.arc(cx, cy - RY * (0.5 - k * 0.12) + R * 0.9, R * 0.95, Math.PI * 1.4, Math.PI * 1.6); x.stroke(); }
     x.restore();

@@ -65,7 +65,7 @@ export const SHOT_PLAN = [
   // 7 Earth gets overcrowded; the fight for food, water, housing
   {shot: 7, loc: 'earth', lift: false, move: 'push in on the filling planet', keys: [
     {at: 'start', pos: [0, 1.7, 4.5], look: [0, 1.6, -6.0]},
-    {at: 'end', pos: [0, 1.7, 0.6], look: [0, 1.6, -6.0]}]},
+    {at: 'end', pos: [0, 1.8, -1.3], look: [0, 1.65, -6.0]}]},
   {shot: 7, from: 'makanan', loc: 'street', move: 'into the crowd at the stall', keys: [
     {at: 'start', pos: [0.2, 2.2, 1.6], look: [0, 1.4, -4.0]},
     {at: 'end', pos: [0.1, 1.85, 0.3], look: [0, 1.4, -3.5]}]},

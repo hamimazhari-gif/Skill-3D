@@ -203,7 +203,7 @@ const TH = {
   id: {top: 'HIDUP', mid: '500 TAHUN?!'},
   en: {top: 'LIVE TO', mid: '500?!'},
 };
-const THUMB = (EVt) => ({t: EVt.setengah + 0.7, pos: [0.15, 1.9, -0.7], look: [0.4, 1.75, -4.2]});
+const THUMB = (EVt) => ({t: EVt.setengah + 0.7, pos: [-0.1, 1.9, -0.6], look: [0.15, 1.75, -4.2]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

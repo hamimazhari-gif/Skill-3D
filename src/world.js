@@ -1,6 +1,6 @@
 // All locations in one scene at different x offsets. Story: "Hidup 500 tahun / Living to 500".
 import * as THREE from 'three';
-import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, INK, rng} from './kit';
+import {toon, box, cyl, ball, cone, at, sign, paintTex, pop, smooth, INK, rng} from './kit';
 import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
@@ -216,7 +216,7 @@ export function buildWorld(lang, T, EVt, L) {
     updaters.push((t) => {
       const late = t > E('skripsi') - 0.3;
       stacks.forEach((s, i) => s.scale.setScalar(i < 3 ? 1 : pop(t, E('ilmu') + (i - 3) * 0.18, 0.3)));
-      if (late) hero.group.position.set(0.25, 0, -2.9); else hero.group.position.set(-0.3, 0, -2.55);
+      if (late) hero.group.position.set(0.5, 0, -2.6); else hero.group.position.set(-0.3, 0, -2.55);
       const u = smooth((t - E('skripsi') + 0.05) / 0.25);
       book.position.y = 2.6 * (1 - u); book.visible = t > E('skripsi') - 0.1;
     });
@@ -258,7 +258,7 @@ export function buildWorld(lang, T, EVt, L) {
     town(g, 20);
     const school = P.house(9, 3.2, 3, {seed: 51, color: '#e8d4a8', roof: '#7a4a3a'}); at(school, 0, 0, -11); g.add(school);
     const ban = P.banner(L.reunion, 3.2, 0.8, {poleH: 3.9, bg: '#4f8fc8', frame: '#2a4a6a'}); at(ban, 0, 0, -8.2); g.add(ban);
-    const gens = sign(L.gens, 2.0, 0.5, {bg: '#f2d24a', frame: '#8a6a2a'}); at(gens, 0, 2.95, -7.0); g.add(gens);
+    const gens = sign(L.gens, 2.0, 0.5, {bg: '#f2d24a', frame: '#8a6a2a'}); at(gens, -1.55, 2.55, -4.3, 0.25); g.add(gens);
     const front = [[-1.65, -2.7], [-0.55, -2.55], [0.55, -2.6], [1.65, -2.75]];
     const hero = ch('hero', {seed: 5}, g, front[1][0], front[1][1], 0.05);
     const mates = [0, 2, 3].map((k, i) => ch('hero', {...CROWD[i + 3], seed: 50 + i}, g, front[k][0], front[k][1], front[k][0] < 0 ? 0.25 : -0.25));
@@ -302,7 +302,7 @@ export function buildWorld(lang, T, EVt, L) {
     const poster = sign(L.retire, 1.7, 0.6, {bg: '#f2d24a', frame: '#8a6a2a'}); at(poster, -1.3, 2.35, -5.85); g.add(poster);
     const clk = P.wallClock(0.32); at(clk.group, 1.1, 2.6, -5.85); clk.set(9, 25); g.add(clk.group);
     const tc = P.timeClock(L.clockIn); at(tc.group, 1.75, 0, -3.5, -0.3); g.add(tc.group);
-    const late = sign(L.late, 0.9, 0.38, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(late, 1.05, 2.25, -3.3, -0.1); g.add(late);
+    const late = sign(L.late, 0.7, 0.3, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(late, 0.45, 2.3, -3.7, -0.1); g.add(late);
     const boss = ch('boss', {seed: 61}, g, 0.75, -3.4, -0.2);
     const gp = ch('grandpa', {seed: 62}, g, -0.6, -2.7, 0.25);
     const cane = cyl(0.025, 0.025, 0.9, '#6b3f2a'); held(gp, cane, {y: -0.85, x: 0.02, z: 0.05});
@@ -334,15 +334,15 @@ export function buildWorld(lang, T, EVt, L) {
       // points on the camera-facing half
       const a = (r() - 0.5) * 2.4, la = (r() - 0.5) * 2.2;
       const n = new THREE.Vector3(Math.sin(a) * Math.cos(la), Math.sin(la), Math.cos(a) * Math.cos(la));
-      const o = i % 4 === 0 ? (() => { const h = new THREE.Group(); const b = box(0.16, 0.12, 0.14, ['#e6c99a', '#d8b48a', '#c9d8c0'][i % 3], {hull: 0.006}); h.add(b); const rf = P.gableRoof(0.18, 0.16, 0.08, '#b5543c'); at(rf, 0, 0.12, 0.08); h.add(rf); return h; })()
-        : P.tinyPerson(CROWD[i % CROWD.length].jacket, 0.11);
+      const o = i % 4 === 0 ? (() => { const h = new THREE.Group(); const b = box(0.26, 0.2, 0.22, ['#e6c99a', '#d8b48a', '#c9d8c0'][i % 3], {hull: 0.006}); h.add(b); const rf = cone(0.21, 0.16, '#b5543c', {seg: 4}); at(rf, 0, 0.2, 0, Math.PI / 4); h.add(rf); return h; })()
+        : P.tinyPerson(CROWD[i % CROWD.length].jacket, 0.2);
       o.position.copy(n.clone().multiplyScalar(2.3)); o.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), n);
       G.spin.add(o); pins.push({o, t0: i < 18 ? 0 : E('semua') + (i - 18) / 72 * (E('penuh') - E('semua') + 0.4)});
     }
     fx(g, FX.sparks([0, 3.4, -4.4], E('penuh'), {n: 30, color: '#ff9a5a'}), (t) => inShots(t, 7));
     updaters.push((t) => {
       st.visible = inShots(t, 7);
-      G.spin.rotation.y = -0.2 + t * 0.05;
+      G.spin.rotation.y = -0.15 + Math.max(0, t - cut(7)) * 0.04;
       pins.forEach(({o, t0}) => { o.visible = t > t0; o.scale.setScalar(pop(t, t0, 0.3)); });
       const w = t > E('penuh') ? Math.sin((t - E('penuh')) * 18) * 0.04 * Math.max(0, 1 - (t - E('penuh')) / 1.2) : 0;
       G.group.rotation.z = w; G.group.scale.setScalar(1 + (t > E('penuh') ? 0.03 * Math.abs(Math.sin(t * 6)) : 0));
@@ -388,7 +388,7 @@ export function buildWorld(lang, T, EVt, L) {
     const loafK = held(kid, P.loaf(0.9), {y: -0.02, z: 0.08});
     const hearts = [0, 1, 2].map((i) => { const h = P.heart(['#d8413a', '#e86a8a', '#d8413a'][i]); h.scale.setScalar(0.5); g.add(h); return h; });
     const wish = [P.plane(), P.bookStack(5, 9), P.footballBall(), P.cake('500').group];
-    const WP = [[-0.95, 2.6, -2.6], [0.9, 2.5, -2.6], [-0.85, 1.85, -2.3], [0.85, 1.8, -2.3]];
+    const WP = [[-0.95, 2.25, -2.5], [0.95, 2.3, -2.6], [-0.9, 1.55, -2.3], [0.9, 1.5, -2.3]];
     wish.forEach((o, i) => { o.traverse((m) => { m.castShadow = false; }); g.add(o); });
     const q = P.glyph('?', 0.6, '#f2d24a'); g.add(q);
     const cmt = sign(L.comment, 1.8, 0.55, {bg: '#c75b5b', fg: '#fff3df', frame: '#8a3f2a'}); at(cmt, -0.1, 3.05, -3.3); g.add(cmt);
@@ -409,7 +409,7 @@ export function buildWorld(lang, T, EVt, L) {
       const s9 = inShots(t, 9), s10 = inShots(t, 10), given = t > E('manfaat') + 0.1;
       kid.group.visible = s9; loafH.visible = s9 && !given && t > E('penting'); loafK.visible = s9 && given;
       hearts.forEach((h, i) => { const t0 = E('manfaat') + 0.2 + i * 0.15; h.visible = s9 && t > t0; h.scale.setScalar(0.45 * pop(t, t0, 0.35)); h.position.set(0.5 + (i - 1) * 0.35, 2.1 + i % 2 * 0.2 + (t - t0) * 0.12, -2.7); h.rotation.y = Math.sin(t * 2 + i) * 0.4; });
-      wish.forEach((o, i) => { o.visible = s10; const k = pop(t, E('ngapain') + i * 0.2, 0.4) * [0.22, 1.0, 1.6, 0.45][i]; o.scale.setScalar(k); o.position.set(WP[i][0], WP[i][1] + Math.sin(t * 2 + i) * 0.05, WP[i][2]); o.rotation.y = 0.5 + Math.sin(t + i) * 0.3; });
+      wish.forEach((o, i) => { o.visible = s10; const k = pop(t, E('ngapain') + i * 0.2, 0.4) * [0.11, 1.0, 1.6, 0.42][i]; o.scale.setScalar(k); o.position.set(WP[i][0], WP[i][1] + Math.sin(t * 2 + i) * 0.05, WP[i][2]); o.rotation.y = 0.5 + Math.sin(t + i) * 0.3; });
       q.visible = s10 && t < E('komentar') - 0.1; q.scale.setScalar(0.6 * pop(t, cut(10) + 0.2, 0.35)); q.position.set(0.15, 2.95 + Math.sin(t * 3) * 0.05, -2.6);
       cmt.visible = s10; cmt.scale.setScalar(pop(t, E('komentar') - 0.1, 0.4));
     });
