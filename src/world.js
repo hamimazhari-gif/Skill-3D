@@ -74,6 +74,13 @@ export function buildWorld(lang, T, EVt, L) {
   const E = (k) => EVt[k];
   const cut = (k) => T.CUTS[k - 1];
   const inShots = (t, a, b = a) => t >= cut(a) && t < cut(b + 1);
+  // Dialogue: the speaker's mouth moves only while the voice is audible (voiced segments from the audio) and the
+  // face changes through the line: exprs = [[fraction of the sentence, expression, pose?], ...].
+  const speak = (c, si, exprs = []) => {
+    const S = T.S[si]; const at0 = (f) => S.start + f * (S.end - S.start);
+    c.act([...(S.voiced || [[S.start, S.end]]).map(([a, b]) => ({t: a, action: 'talk', dur: b - a})),
+      ...exprs.map(([f, e, p]) => ({t: at0(f), expr: e, ...(p ? {pose: p} : {})}))]);
+  };
   const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
   const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, o.ry ?? 0, o.rx ?? 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
   const noteTex = P.noteTex(L.noteVal, {seed: 5});
@@ -123,6 +130,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('beli') + 0.1, pose: 'chin', expr: 'scheming'},
       {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},
     ]);
+    speak(A, 4, [[0, 'toothy'], [0.22, 'cheesy', 'cheer'], [0.45, 'excited', 'armsUp'], [0.62, 'scheming', 'chin'], [0.85, 'laugh', 'point']]);
     B.act([
       {t: 0, pose: 'limp', expr: 'tired', action: 'slump', dur: 2.5},
       {t: E('miskin') + 0.15, expr: 'cry'},
@@ -174,6 +182,9 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('ehem') - 0.1, pose: 'facepalm', expr: 'nervous', action: 'tremble', dur: 0.8},
       {t: E('matikan') + 0.1, pose: 'tap', expr: 'grimace'},
     ]);
+    speak(king, 2, [[0, 'confused', 'shrug'], [0.45, 'smug', 'hips'], [0.7, 'cheesy', 'presentBoth']]);
+    speak(king, 3, [[0, 'excited', 'point'], [0.3, 'scheming'], [0.45, 'toothy', 'armsUp'], [0.7, 'laugh', 'hips']]);
+    speak(king, 8, [[0, 'nervous', 'facepalm'], [0.3, 'grimace'], [0.55, 'scheming', 'tap'], [0.85, 'nervous']]);
     // notes flying out of the chute
     const flying = []; const r = rng(33);
     for (let i = 0; i < 26; i++) { const b = P.banknote(L.noteVal, {tex: noteTex, w: 0.3}); g.add(b); flying.push({b, ph: r(), vx: (r() - 0.5) * 1.6, vy: 2.2 + r() * 1.4, rs: 2 + r() * 3}); }
@@ -192,7 +203,7 @@ export function buildWorld(lang, T, EVt, L) {
       press.lever.rotation.z = s6 && t > E('matikan') ? -0.9 * smooth((t - E('matikan')) / 0.3) : 0;
       press.group.position.y = running ? Math.abs(Math.sin(t * 18)) * 0.02 : 0;
       flying.forEach((f) => {
-        f.b.visible = running; if (!running) return;
+        f.b.visible = running && s2; if (!f.b.visible) return;
         const u = (t * 0.9 + f.ph) % 1, tt = u * 1.4;
         f.b.position.set(origin.x + f.vx * tt * 0.6 - 0.4 * tt, origin.y + f.vy * tt - 2.4 * tt * tt, origin.z + 0.9 * tt);
         if (f.b.position.y < 0.03) f.b.position.y = 0.03;
@@ -249,6 +260,8 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('sekarang7') + 0.1, pose: 'carry', expr: 'cry', action: 'slump', dur: 1.5},
       {t: E('huhu'), expr: 'cry', action: 'tremble', dur: 1.2},
     ]);
+    speak(baker, 6, [[0, 'nervous', 'beg'], [0.25, 'grimace', 'point'], [0.5, 'worried', 'headHold'], [0.72, 'nervous'], [0.85, 'scream', 'armsUp']]);
+    speak(c1, 7, [[0, 'sad', 'carry'], [0.2, 'worried', 'present'], [0.42, 'shocked'], [0.55, 'cry', 'carry'], [0.8, 'cry']]);
     c2.act([{t: 0, pose: 'carry', expr: 'toothy'}, {t: E('sama') + 0.2, expr: 'worried', action: 'shake', dur: 0.6}, {t: E('naik2') + 0.2, pose: 'headHold', expr: 'shocked'}]);
     c3.act([{t: 0, pose: 'carry', expr: 'happy'}, {t: E('roti5') + 0.2, expr: 'confused'}, {t: E('naik3') + 0.2, expr: 'furious', action: 'shake', dur: 0.6}]);
     fx(g, FX.sparks([0.55, 1.6, -3.1], E('naik3'), {n: 24}), (t) => inShots(t, 5));
@@ -262,7 +275,7 @@ export function buildWorld(lang, T, EVt, L) {
       loafHand.visible = sold; s1.visible = true;
       const thought = sh6 && t > E('pagi') && t < E('sekarang7') - 0.1;
       goat.visible = thought; bubble.visible = bubbleRim.visible = thought;
-      goat.scale.setScalar(0.4 * pop(t, E('kambing') - 0.2, 0.35)); goat.position.y = 2.18 + Math.sin(t * 4) * 0.02;
+      goat.scale.setScalar(0.4 * pop(t, E('pagi') + 0.15, 0.35)); goat.position.y = 2.18 + Math.sin(t * 4) * 0.02;
       bubble.scale.setScalar(pop(t, E('pagi'), 0.3)); bubbleRim.scale.copy(bubble.scale);
       c2.group.visible = c3.group.visible = !sh6;
     });
