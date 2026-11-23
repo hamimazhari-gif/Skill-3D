@@ -27,7 +27,7 @@ Gaya tokoh yang selalu dipakai (disetujui pengguna):
 - Badan panjang dengan kaki kurus panjang.
 - Desain tokoh (bentuk kepala, rambut, proporsi, warna) berbeda di setiap video.
 - Tokoh bergerak natural: berjalan, berlari, berbalik (`move`, `face`), dengan langkah kaki dan ayunan tangan.
-- Kepala besar, kulit putih-krem cerah, garis luar hitam tebal dan rata, mata kelopak tebal + pupil setengah lingkaran, alis tebal pendek, mulut kecil (seperti video contoh).
+- Kepala besar, warna kulit tetap seperti semula, garis luar hitam tebal dan rata, mata kelopak tebal + pupil setengah lingkaran, alis tebal pendek, mulut kecil (seperti video contoh).
 - Tangan dan kaki seperti video contoh: garis hitam tipis, lutut menekuk, tangan bulatan hitam kecil, kaki kecil hitam.
 - Tokoh selalu menghadap kamera (tanpa gambar samping/belakang) — permintaan pengguna.
 - Latar dan benda realistik dan kaya: tekstur bermotif (karpet berornamen, wallpaper, lantai kayu berserat, batu, rumput), ruangan penuh benda (rak, guci, lukisan, tirai, tanaman, lentera), padang rumput bergoyang, gunung berkabut, lampu yang berpendar, kontras cahaya hangat-dingin.
