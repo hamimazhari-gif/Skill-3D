@@ -10,10 +10,11 @@ import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import {makeChar, setCharDesign, CHAR_TINT} from './char';
 import * as P from './props';
-import {box, cyl, ball, at, toon, paintTex, CREAM, INK, smooth} from './kit';
+import {box, cyl, ball, at, toon, paintTex, patternTex, patternMat, CREAM, INK, smooth} from './kit';
 import {GradeShader, applyGrade, LOOK_PRESETS} from './lighting';
 
 export const DEMO_SECONDS = 12;
@@ -21,12 +22,12 @@ const FPS = 30;
 
 function buildPark() {
   setCharDesign('bean');
-  const g = new THREE.Group(); const chars = [];
-  const grass = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), toon(paintTex('#6f9a4f', {seed: 4, grain: 900, stains: 30, chips: 0, scratches: 0, repeat: [30, 30]}), {rough: 0.95}));
+  const g = new THREE.Group(); const chars = []; const updaters = [];
+  const grass = new THREE.Mesh(new THREE.PlaneGeometry(160, 160), patternMat('grass', {base: '#5f8a3f', repeat: [40, 40], seed: 4, rough: 0.95, bump: 2}));
   grass.rotation.x = -Math.PI / 2; grass.receiveShadow = true; g.add(grass);
-  const path = new THREE.Mesh(new THREE.PlaneGeometry(40, 2.2), toon(paintTex('#b8ad9a', {seed: 6, cobbles: true, repeat: [12, 1]}), {rough: 0.9, bump: 3}));
+  const path = new THREE.Mesh(new THREE.PlaneGeometry(40, 2.2), patternMat('stone', {base: '#a89a86', repeat: [14, 1], seed: 6, bump: 3}));
   path.rotation.x = -Math.PI / 2; path.position.set(0, 0.01, -2.0); path.receiveShadow = true; g.add(path);
-  const path2 = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 7), toon(paintTex('#b8ad9a', {seed: 7, cobbles: true, repeat: [1, 3.5]}), {rough: 0.9, bump: 3}));
+  const path2 = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 7), patternMat('stone', {base: '#a89a86', repeat: [1, 3.5], seed: 7, bump: 3}));
   path2.rotation.x = -Math.PI / 2; path2.position.set(2.6, 0.012, -5.0); path2.receiveShadow = true; g.add(path2);
   for (let i = 0; i < 9; i++) { const tr = P.tree({seed: 10 + i, h: 2.4 + (i % 3) * 0.5}); at(tr, -14 + i * 3.6, 0, -9 - (i % 2) * 2.5); g.add(tr); }
   for (const [x, z] of [[-6, 2.5], [7, 1.8]]) { const tr = P.tree({seed: 40 + x, h: 2.8}); at(tr, x, 0, z); g.add(tr); }
@@ -41,7 +42,14 @@ function buildPark() {
   [[-9, '#e6c99a', '#b5543c'], [-3, '#c9d4e8', '#4f7fa6'], [3.5, '#f0d8b0', '#c75b5b'], [10, '#d8e4c0', '#7a5236']].forEach(([x, c, rf], i) => {
     const h = P.house(4.0, 3.2, 3.5, {color: c, roof: rf, seed: 60 + i}); at(h, x, 0, -15); g.add(h);
   });
-  for (let i = 0; i < 26; i++) { const f = box(0.08, 0.9, 0.08, toon('#f3ece0', {rough: 0.6})); at(f, -13 + i, 0, -6.2); g.add(f); }
+  for (let i = 0; i < 26; i++) { const f = box(0.08, 0.9, 0.08, patternMat('woodfloor', {base: '#e8dcc8', planks: 1, seed: 40 + i})); at(f, -13 + i, 0, -6.2); g.add(f); }
+  // tall grass meadow behind the fence and a strip in the foreground, pebbles along the path
+  const meadow = P.grassField([0, -10.5, 34, 7], {n: 5000, h: 0.7, color: '#4f7a33', tip: '#d8d08a', flowers: 0.05}); g.add(meadow.obj); updaters.push(meadow.update);
+  const fg = P.grassField([0, 2.4, 22, 2.4], {n: 1400, h: 0.3, color: '#3f6a2a', tip: '#8aa85a', flowers: 0, seed: 19}); g.add(fg.obj); updaters.push(fg.update);
+  g.add(P.pebbles([0, -0.85, 24, 0.3], 50, 5)); g.add(P.pebbles([0, -3.15, 24, 0.3], 50, 6));
+  const mts = P.mountains({village: true}); g.add(mts);
+  // warm lanterns on the benches and by the path
+  for (const [x, y, z] of [[5.7, 0.49, -3.6], [1.2, 0, -0.75], [-6.5, 0, -0.75]]) { const ln = P.lantern({seed: x}); at(ln.group, x, y, z); g.add(ln.group); updaters.push(ln.update); }
   const rail = box(26, 0.07, 0.06, toon('#f3ece0')); at(rail, -0.5, 0.75, -6.2); g.add(rail);
   // walker: crosses (side view), comes to camera (front), walks away (back), then runs (three-quarter)
   const A = makeChar('hero', {seed: 3, jacket: '#c75b5b', lower: '#34445e', hat: 'none', hairStyle: 'tuft'}); at(A.group, -3.0, 0, -2.0); g.add(A.group); chars.push(A);
@@ -57,7 +65,7 @@ function buildPark() {
   // stander for the orbit: the camera circles her, so her drawing switches front -> 3/4 -> side -> back
   const B = makeChar('hero', {seed: 8, jacket: '#5a9a8a', lower: '#3a4a5a', hat: 'none', hairStyle: 'fringe'}); at(B.group, -0.8, 0, -2.6); g.add(B.group); chars.push(B);
   B.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: 2.0, pose: 'wave', expr: 'happy'}, {t: 9.6, pose: 'point', expr: 'cheesy'}]);
-  return {g, chars};
+  return {g, chars, updaters};
 }
 
 // camera keys: [t, pos, look]
@@ -102,6 +110,7 @@ function DemoScene() {
   const composer = useMemo(() => {
     const c = new EffectComposer(gl); c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 4, aperture: 0.0012, maxblur: 0.005}); c.addPass(bokeh);
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.75, 0.55, 1.0));
     const grade = new ShaderPass(GradeShader); c.addPass(grade); c.addPass(new OutputPass()); c.grade = grade; c.bokeh = bokeh; return c;
   }, [gl, scene, camera]);
   useEffect(() => { composer.setSize(size.width, size.height); composer.setPixelRatio(gl.getPixelRatio()); }, [composer, size, gl]);
@@ -113,16 +122,18 @@ function DemoScene() {
       gl.shadowMap.enabled = true; gl.shadowMap.type = THREE.PCFSoftShadowMap;
       const pm = new THREE.PMREMGenerator(gl); scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.45;
       gl.toneMapping = THREE.NeutralToneMapping;
-      scene.fog = new THREE.Fog('#e8eef2', 18, 70);
+      scene.fog = new THREE.Fog('#f0c89a', 16, 95);
     }
-    const lk = LOOK_PRESETS.day;
+    const lk = {...LOOK_PRESETS.goldenHour, clouds: 0.9};
     const {pos, look} = camAtDemo(t);
     camera.position.copy(pos); camera.lookAt(look); camera.fov = 70; camera.near = 0.1; camera.far = 500; camera.updateProjectionMatrix();
     built.sky.position.copy(camera.position);
-    built.sky.material.uniforms.top.value.set(lk.skyTop); built.sky.material.uniforms.bottom.value.set(lk.skyBottom); built.sky.material.uniforms.clouds.value = 0.85;
-    built.key.position.set(-8, 12, 6); built.key.target.position.set(0, 0, -2); built.key.target.updateMatrixWorld(); built.key.intensity = 2.6;
-    CHAR_TINT.set('#ffffff').lerp(new THREE.Color(lk.hemiSky || '#dcecff'), 0.15);
-    applyGrade(composer.grade, {sat: 1.05, contrast: 1.03, tintAmt: 0, vignette: 0.28});
+    built.sky.material.uniforms.top.value.set('#6f86b8'); built.sky.material.uniforms.bottom.value.set('#ffc890'); built.sky.material.uniforms.clouds.value = 0.9;
+    built.key.color.set('#ffc07a'); built.key.position.set(-14, 7, -6); built.key.target.position.set(0, 0, -2); built.key.target.updateMatrixWorld(); built.key.intensity = 2.8;
+    built.hemi.color.set('#9ab0e0'); built.hemi.groundColor.set('#6a5a3a'); built.hemi.intensity = 1.1;
+    CHAR_TINT.set('#ffffff').lerp(new THREE.Color('#ffd8a8'), 0.18);
+    applyGrade(composer.grade, {sat: 1.08, contrast: 1.06, tint: '#ffc880', tintAmt: 0.08, vignette: 0.36});
+    for (const u of built.updaters) u(t);
     for (const c of built.chars) c.update(t, camera.position);
     composer.bokeh.uniforms.focus.value = pos.distanceTo(look);
     composer.render();

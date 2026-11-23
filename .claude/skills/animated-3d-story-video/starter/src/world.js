@@ -20,7 +20,7 @@ const CAST = {
 // Lighting plan (camera_plan.md): a warm home that turns mysterious while the energy is stolen, joyful for the advice;
 // a cool lab turning joyful when the brain is revealed; a dark room lit only when the bulb switches on; a purple
 // neuron space; an evening study desk going tense on the plot twist; a bright joyful playroom.
-const homeWarm = {...LOOK_PRESETS.interiorWarm, keyPos: [-4, 8, 8]};
+const homeWarm = {...LOOK_PRESETS.interiorWarm, keyI: 2.1, hemiI: 0.95, keyPos: [-4, 8, 8], grade: {sat: 1.05, contrast: 1.08, tint: '#ffc890', tintAmt: 0.08, vignette: 0.45}};
 const labCool = {...LOOK_PRESETS.interiorCool, keyPos: [-4, 8, 8]};
 const darkRoom = {...LOOK_PRESETS.night, fog: '#141824', near: 8, far: 30, keyI: 0.9, hemiI: 0.95, keyPos: [-4, 8, 6], moon: false, hemiSky: '#7a88b8', hemiGround: '#3a3550',
   grade: {sat: 0.9, contrast: 1.06, tint: '#8a9ad8', tintAmt: 0.1, vignette: 0.5}};
@@ -100,6 +100,16 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(8, 3.6, 7, {wall: '#efdcbc', floor: '#b08a5e', wain: '#7a9a6a'}));
     const sofa = P.sofa('#c75b5b'); at(sofa, -2.4, 0, -5.0); g.add(sofa);
     const bd = P.bed({color: '#8a5a3a', sheet: '#7fa6c9'}); at(bd, 2.55, 0, -4.7); g.add(bd);
+    // set dressing: rug, shelf, framed picture, plants, curtains, floor lamp, jars
+    const rg = P.rug(3.2, 2.2, {seed: 4}); rg.position.set(-0.4, 0, -3.0); g.add(rg);
+    const sh = P.shelf(1.3, 1.9, {seed: 11}); at(sh, -3.55, 0, -3.2, Math.PI / 2); g.add(sh);
+    const pic = P.pictureFrame(1.0, 0.7); at(pic, 2.6, 2.3, -5.85); g.add(pic);
+    const pl1 = P.pottedPlant(1.1, 3); at(pl1, -3.4, 0, -5.5); g.add(pl1);
+    const pl2 = P.pottedPlant(0.9, 8); at(pl2, 1.45, 0, -5.55); g.add(pl2);
+    for (const cx2 of [-1.75, 0.25]) { const ct = P.curtain(0.55, 2.1, '#8a3f4a'); at(ct, cx2 + (cx2 < 0 ? 0 : 0.9), 0.9, -5.8); g.add(ct); }
+    const fl = P.lantern({intensity: 3}); at(fl.group, 3.55, 0.9, -5.3); g.add(fl.group); updaters.push(fl.update);
+    const lampPole = cyl(0.03, 0.05, 0.9, toon('#3a3430', {rough: 0.4, metal: 0.7})); at(lampPole, 3.55, 0, -5.3); g.add(lampPole);
+    const j1 = P.jar(0.12, 0.34, '#4f7fa6'); at(j1, -1.4, 0.75, -4.05); g.add(j1);
     const tbl = box(1.1, 0.75, 0.7, toon('#9a6a42', {paint: {planks: 3, seed: 97}})); at(tbl, -1.0, 0, -3.9); g.add(tbl);
     const pl = P.plate(); at(pl, -1.2, 0.75, -3.85); g.add(pl);
     const gls = P.waterGlass(); at(gls, -0.65, 0.75, -3.8); g.add(gls);
