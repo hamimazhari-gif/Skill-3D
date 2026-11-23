@@ -857,3 +857,146 @@ export function telescope() {
   const lens = cyl(0.14, 0.14, 0.08, '#3a3a40', {center: true}); lens.position.set(0.47, 1.55, 0); lens.rotation.z = -1.0; g.add(lens);
   return g;
 }
+
+// ================= Brain-energy story props =================
+// Brain mascot: two wrinkled pink hemispheres with a cartoon face. Returns {group, setFace(kind)} kind: 'sly'|'happy'|'shock'|'sleep'.
+export function brainMascot(o = {}) {
+  const g = new THREE.Group();
+  const c = canvas(512, 256), x = c.getContext('2d');
+  x.fillStyle = o.color || '#f2a3b3'; x.fillRect(0, 0, 512, 256);
+  x.strokeStyle = 'rgba(150,60,90,0.65)'; x.lineWidth = 7; x.lineCap = 'round';
+  const r = rng(o.seed || 23);
+  for (let i = 0; i < 34; i++) { let px = r() * 512, py = r() * 256; x.beginPath(); x.moveTo(px, py); for (let k = 0; k < 5; k++) { px += (r() - 0.3) * 40; py += (r() - 0.5) * 34; x.quadraticCurveTo(px - 10, py + 12, px, py); } x.stroke(); }
+  const tex = texFrom(c);
+  for (const s of [-1, 1]) {
+    const h = ink(new THREE.SphereGeometry(0.5, 32, 22), toon(tex), {hull: 0.025, edges: false});
+    h.scale.set(0.58, 0.72, 0.95); h.position.set(s * 0.27, 0, 0); h.traverse((m) => { m.castShadow = true; }); g.add(h);
+  }
+  const stem = cyl(0.09, 0.12, 0.3, '#e88aa0'); at(stem, 0.05, -0.62, -0.1, 0, 0.3); g.add(stem);
+  // face decal
+  const faces = {};
+  const mk = (kind) => {
+    const fc = canvas(256, 192), f = fc.getContext('2d'); f.lineCap = 'round'; f.lineJoin = 'round'; f.strokeStyle = INK;
+    for (const s of [-1, 1]) {
+      const ex = 128 + s * 46, ey = 70;
+      if (kind === 'sleep') { f.lineWidth = 9; f.beginPath(); f.arc(ex, ey, 20, 0.15 * Math.PI, 0.85 * Math.PI); f.stroke(); continue; }
+      f.fillStyle = '#fff'; f.lineWidth = 8; f.beginPath(); f.ellipse(ex, ey, kind === 'shock' ? 30 : 26, kind === 'shock' ? 34 : 30, 0, 0, 7); f.fill(); f.stroke();
+      f.fillStyle = INK; f.beginPath(); f.arc(ex + (kind === 'sly' ? 8 : 0), ey + 4, kind === 'shock' ? 8 : 12, 0, 7); f.fill();
+      if (kind === 'sly') { f.fillStyle = o.color || '#f2a3b3'; f.fillRect(ex - 32, ey - 38, 64, 30); f.lineWidth = 8; f.beginPath(); f.moveTo(ex - 30, ey - 8 + s * 6); f.lineTo(ex + 30, ey - 8 - s * 6); f.stroke(); }
+    }
+    f.lineWidth = 8;
+    if (kind === 'sly') { f.beginPath(); f.moveTo(86, 140); f.quadraticCurveTo(140, 168, 178, 128); f.stroke(); }
+    else if (kind === 'happy') { f.fillStyle = '#5a2328'; f.beginPath(); f.moveTo(88, 128); f.quadraticCurveTo(128, 186, 168, 128); f.closePath(); f.fill(); f.stroke(); f.fillStyle = '#fffdf6'; f.fillRect(96, 128, 64, 12); }
+    else if (kind === 'shock') { f.fillStyle = '#5a2328'; f.beginPath(); f.ellipse(128, 145, 18, 24, 0, 0, 7); f.fill(); f.stroke(); }
+    else { f.beginPath(); f.moveTo(110, 145); f.lineTo(146, 145); f.stroke(); }
+    return texFrom(fc);
+  };
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.46), new THREE.MeshBasicMaterial({transparent: true, depthWrite: false}));
+  face.position.set(0, -0.02, 0.5); g.add(face);
+  const setFace = (k) => { if (!faces[k]) faces[k] = mk(k); face.material.map = faces[k]; face.material.needsUpdate = true; };
+  setFace('sly');
+  return {group: g, setFace};
+}
+
+// Pie chart on a standing board: draw(slices, u) with slices [{frac, color, label}], u = reveal 0..1 of the highlighted (first) slice.
+export function pieChart(R = 0.9, o = {}) {
+  const g = new THREE.Group();
+  const W = 512, c = canvas(W, W), x = c.getContext('2d'); const tex = texFrom(c);
+  let key = '';
+  function draw(slices, u = 1) {
+    const k = JSON.stringify(slices) + Math.round(u * 30); if (k === key) return; key = k;
+    x.clearRect(0, 0, W, W); const cx = W / 2, cy = W / 2, rr = W * 0.46;
+    let a = -Math.PI / 2; const n = slices.length;
+    slices.forEach((sl, i) => {
+      let span = sl.frac * Math.PI * 2;
+      if (i === 0) span *= u; if (i === n - 1) span += slices[0].frac * Math.PI * 2 * (1 - u);
+      if (span <= 0.0001) return;
+      x.fillStyle = sl.color; x.beginPath(); x.moveTo(cx, cy); x.arc(cx, cy, rr, a, a + span); x.closePath(); x.fill();
+      x.strokeStyle = INK; x.lineWidth = 10; x.stroke();
+      if (sl.label && span > 0.35) {
+        const m = a + span / 2; x.fillStyle = sl.fg || '#fffdf6'; x.font = `900 ${sl.size || 64}px "Inter Display"`; x.textAlign = 'center'; x.textBaseline = 'middle';
+        x.lineWidth = 12; x.strokeStyle = INK; x.strokeText(sl.label, cx + Math.cos(m) * rr * 0.58, cy + Math.sin(m) * rr * 0.58); x.fillText(sl.label, cx + Math.cos(m) * rr * 0.58, cy + Math.sin(m) * rr * 0.58);
+      }
+      a += span;
+    });
+    x.strokeStyle = INK; x.lineWidth = 14; x.beginPath(); x.arc(cx, cy, rr, 0, 7); x.stroke();
+    tex.needsUpdate = true;
+  }
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(R, 48), new THREE.MeshBasicMaterial({map: tex, transparent: true}));
+  disc.position.z = 0.04; g.add(disc);
+  const back = cyl(R + 0.05, R + 0.05, 0.06, o.rim || '#f3e7d3', {center: true, hull: 0.015}); back.rotation.x = Math.PI / 2; g.add(back);
+  return {group: g, draw};
+}
+
+// Light bulb with a screw base: returns {group, set(on 0..1)}.
+export function bulb(s = 1) {
+  const g = new THREE.Group();
+  const glassMat = new THREE.MeshBasicMaterial({color: '#fff6c8', transparent: true, opacity: 0.55});
+  const glass = new THREE.Mesh(new THREE.SphereGeometry(0.28 * s, 24, 18), glassMat); glass.position.y = 0.42 * s; g.add(glass);
+  const hullB = new THREE.Mesh(new THREE.SphereGeometry(0.29 * s, 24, 18), new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide})); hullB.position.y = 0.42 * s; g.add(hullB);
+  const neck = cyl(0.12 * s, 0.13 * s, 0.22 * s, '#b8bcc4'); at(neck, 0, 0.0, 0); g.add(neck);
+  for (let i = 0; i < 3; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.13 * s, 0.015 * s, 6, 20), toon('#8a8e96')); r.rotation.x = Math.PI / 2; r.position.y = 0.05 * s + i * 0.06 * s; g.add(r); }
+  const fil = new THREE.Mesh(new THREE.TorusGeometry(0.07 * s, 0.012 * s, 6, 16, Math.PI), new THREE.MeshBasicMaterial({color: '#6a4a2a'})); fil.position.y = 0.42 * s; g.add(fil);
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex(), transparent: true, depthWrite: false, opacity: 0, color: '#ffe08a'})); halo.scale.setScalar(1.6 * s); halo.position.y = 0.42 * s; g.add(halo);
+  const light = new THREE.PointLight('#ffd98a', 0, 7, 1.6); light.position.y = 0.45 * s; g.add(light);
+  return {group: g, set(on) { glassMat.color.set(on > 0.5 ? '#fff3a0' : '#e8eef2'); glassMat.opacity = 0.5 + on * 0.45; fil.material.color.set(on > 0.5 ? '#fffbe0' : '#6a4a2a'); halo.material.opacity = on * 0.9; light.intensity = on * 4; }};
+}
+let _glow;
+function glowTex() {
+  if (_glow) return _glow;
+  const c = canvas(128, 128), x = c.getContext('2d'); const gr = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.4, 'rgba(255,255,255,0.45)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = gr; x.fillRect(0, 0, 128, 128);
+  _glow = texFrom(c); return _glow;
+}
+export function glowSprite(color = '#ffe08a', size = 0.3) {
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex(), color, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending})); s.scale.setScalar(size); return s;
+}
+
+// Bathroom scale with a dial; returns {group, set(kg)}.
+export function bathScale(label = 'KG') {
+  const g = new THREE.Group();
+  const base = box(0.62, 0.1, 0.62, '#eef0ee'); g.add(base);
+  const top = box(0.56, 0.02, 0.56, '#c9ccd0', {hull: 0.006}); at(top, 0, 0.1, 0); g.add(top);
+  const c = canvas(256, 128), x = c.getContext('2d'); const tex = texFrom(c);
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(0.4, 0.2), new THREE.MeshBasicMaterial({map: tex})); face.rotation.x = -Math.PI / 2.6; face.position.set(0, 0.13, 0.22); g.add(face);
+  let last = null;
+  return {group: g, set(v) { const t = Math.round(v * 10) / 10; if (t === last) return; last = t; x.fillStyle = '#1f2a28'; x.fillRect(0, 0, 256, 128); x.fillStyle = '#7dff9a'; x.font = '900 70px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(`${t.toFixed(1)} ${label}`, 128, 66); tex.needsUpdate = true; }};
+}
+
+// Toy block with a letter.
+export function toyBlock(letter, color, s = 0.32) {
+  const c = canvas(128, 128), x = c.getContext('2d'); x.fillStyle = color; x.fillRect(0, 0, 128, 128); x.strokeStyle = INK; x.lineWidth = 10; x.strokeRect(8, 8, 112, 112);
+  x.fillStyle = '#fffdf6'; x.font = '900 84px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(letter, 64, 70);
+  return box(s, s, s, toon(texFrom(c)), {hull: 0.012});
+}
+
+export function lungs() {
+  const g = new THREE.Group();
+  for (const s of [-1, 1]) { const l = ball(0.22, '#f0909a', {sy: 1.4, sz: 0.7}); at(l, s * 0.2, 0, 0); g.add(l); }
+  const tr = cyl(0.04, 0.05, 0.3, '#e8c8c0'); at(tr, 0, 0.18, 0); g.add(tr);
+  return g;
+}
+export function eyeball() {
+  const g = new THREE.Group(); g.add(ball(0.2, '#fbf8f2'));
+  const iris = new THREE.Mesh(new THREE.CircleGeometry(0.09, 24), new THREE.MeshBasicMaterial({color: '#4f7fa6'})); iris.position.z = 0.201; g.add(iris);
+  const pup = new THREE.Mesh(new THREE.CircleGeometry(0.045, 20), new THREE.MeshBasicMaterial({color: INK})); pup.position.z = 0.203; g.add(pup);
+  return g;
+}
+export function plate() {
+  const g = new THREE.Group(); const p = cyl(0.2, 0.16, 0.03, '#fbf8f2', {hull: 0.008}); g.add(p);
+  const rice = ball(0.1, '#fbf6ea', {sy: 0.5}); at(rice, -0.05, 0.03, 0); g.add(rice);
+  const egg = cyl(0.06, 0.06, 0.02, '#f2d24a'); at(egg, 0.07, 0.03, 0.02); g.add(egg);
+  const veg = ball(0.05, '#6f9a4f'); at(veg, 0.05, 0.05, -0.07); g.add(veg);
+  return g;
+}
+export function waterGlass() {
+  const g = new THREE.Group();
+  const gl = cyl(0.06, 0.05, 0.16, new THREE.MeshBasicMaterial({color: '#dff2fb', transparent: true, opacity: 0.6}), {hull: 0.006}); g.add(gl);
+  const w = cyl(0.052, 0.045, 0.1, '#8fd0ef', {hull: 0}); at(w, 0, 0.01, 0); g.add(w);
+  return g;
+}
+export function bookStack(n = 4, seed = 3) {
+  const g = new THREE.Group(); const r = rng(seed); let y = 0;
+  for (let i = 0; i < n; i++) { const h = 0.05 + r() * 0.03; const b = box(0.32 + r() * 0.06, h, 0.24, ['#c75b5b', '#4f7fa6', '#e8c35a', '#5a9a8a', '#9a6fb0'][i % 5], {hull: 0.008}); at(b, (r() - 0.5) * 0.04, y, 0, (r() - 0.5) * 0.3); g.add(b); y += h; }
+  return g;
+}

@@ -18,7 +18,7 @@ export const DESIGNS = {
   pill: {head: 'pill', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
