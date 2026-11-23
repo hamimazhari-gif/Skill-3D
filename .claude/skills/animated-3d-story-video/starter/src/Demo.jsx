@@ -44,8 +44,9 @@ function buildPark() {
   });
   for (let i = 0; i < 26; i++) { const f = box(0.08, 0.9, 0.08, patternMat('woodfloor', {base: '#e8dcc8', planks: 1, seed: 40 + i})); at(f, -13 + i, 0, -6.2); g.add(f); }
   // tall grass meadow behind the fence and a strip in the foreground, pebbles along the path
-  const meadow = P.grassField([0, -10.5, 34, 7], {n: 5000, h: 0.7, color: '#4f7a33', tip: '#d8d08a', flowers: 0.05}); g.add(meadow.obj); updaters.push(meadow.update);
-  const fg = P.grassField([0, 2.4, 22, 2.4], {n: 1400, h: 0.3, color: '#3f6a2a', tip: '#8aa85a', flowers: 0, seed: 19}); g.add(fg.obj); updaters.push(fg.update);
+  const meadow = P.grassField([0, -10.5, 36, 8], {n: 26000, h: 0.65, color: '#4a7a2e', tip: '#c8c87a', dry: 0.2, flowers: 0.025}); g.add(meadow.obj); updaters.push(meadow.update);
+  const fg = P.grassField([0, 2.0, 24, 3.6], {n: 22000, h: 0.26, color: '#4a7a2e', tip: '#a8c06a', dry: 0.1, flowers: 0.01, seed: 19});
+  for (const [zc, dz] of [[-4.6, 2.2], [-0.15, 0.9]]) { const mid = P.grassField([0, zc, 30, dz], {n: 9000, h: 0.2, seed: 30 + zc, flowers: 0.01}); g.add(mid.obj); updaters.push(mid.update); } g.add(fg.obj); updaters.push(fg.update);
   g.add(P.pebbles([0, -0.85, 24, 0.3], 50, 5)); g.add(P.pebbles([0, -3.15, 24, 0.3], 50, 6));
   const mts = P.mountains({village: true}); g.add(mts);
   // warm lanterns on the benches and by the path
