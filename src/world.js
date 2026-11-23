@@ -310,7 +310,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: 0, pose: 'limp', expr: 'tired', action: 'walk', dur: 1.6},
       {t: E('empat') + 0.1, pose: 'limp', expr: 'sad', action: 'slump', dur: 1.0},
     ]);
-    speak(gp, 13, [[0, 'nervous', 'beg'], [0.25, 'grimace'], [0.45, 'worried', 'headHold'], [0.7, 'tired', 'limp'], [0.88, 'nervous', 'shrug']]);
+    speak(gp, 13, [[0, 'nervous', 'beg'], [0.25, 'grimace'], [0.45, 'worried', 'hammerDown'], [0.7, 'tired', 'limp'], [0.88, 'nervous', 'shrug']]);
     gp.act([{t: E('lutut') + 0.1, action: 'tremble', dur: 1.4}]);
     boss.act([{t: 0, pose: 'cross', expr: 'annoyed'}, {t: E('pensiun') + 0.1, pose: 'tap', expr: 'smug'}, {t: E('maaf') + 0.1, pose: 'facepalm', expr: 'irritated'}, {t: E('lutut') + 0.3, pose: 'cross', expr: 'disgusted'}]);
     speak(boss, 12, [[0, 'annoyed', 'cross'], [0.35, 'angry', 'point'], [0.75, 'irritated', 'hips']]);
