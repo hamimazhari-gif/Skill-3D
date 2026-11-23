@@ -1,0 +1,836 @@
+{
+ "gap": 2.0,
+ "duration": 1063.04,
+ "bab": [
+  {
+   "n": 0,
+   "title": "PENDAHULUAN",
+   "card": null,
+   "start": 0.262,
+   "hold": null,
+   "end": 76.034999
+  },
+  {
+   "n": 1,
+   "title": "MATAHARI YANG TERBIT",
+   "card": 77.58500000000001,
+   "start": 78.185,
+   "hold": 80.385,
+   "end": 192.428999
+  },
+  {
+   "n": 2,
+   "title": "DARAH HITAM BERNAMA MINYAK",
+   "card": 193.979,
+   "start": 194.579,
+   "hold": 196.779,
+   "end": 301.14299900000003
+  },
+  {
+   "n": 3,
+   "title": "PERJUDIAN SANG LAKSAMANA",
+   "card": 302.693,
+   "start": 303.293,
+   "hold": 305.493,
+   "end": 408.66399900000005
+  },
+  {
+   "n": 4,
+   "title": "ARMADA HANTU",
+   "card": 410.214,
+   "start": 410.814,
+   "hold": 413.014,
+   "end": 526.582999
+  },
+  {
+   "n": 5,
+   "title": "TANDA-TANDA YANG TERABAIKAN",
+   "card": 528.1329999999999,
+   "start": 528.733,
+   "hold": 530.933,
+   "end": 644.663999
+  },
+  {
+   "n": 6,
+   "title": "TORA! TORA! TORA!",
+   "card": 646.2139999999999,
+   "start": 646.814,
+   "hold": 649.014,
+   "end": 791.245999
+  },
+  {
+   "n": 7,
+   "title": "SETELAH ASAP REDA",
+   "card": 792.7959999999999,
+   "start": 793.396,
+   "hold": 795.596,
+   "end": 942.0399990000001
+  },
+  {
+   "n": 8,
+   "title": "HARI YANG AKAN DIKENANG",
+   "card": 943.59,
+   "start": 944.19,
+   "hold": 946.3900000000001,
+   "end": 1063.04
+  }
+ ],
+ "paras": [
+  {
+   "i": 1,
+   "bab": 0,
+   "start": 0.262,
+   "end": 4.028,
+   "text": "Minggu pagi, tujuh Desember, seribu sembilan ratus empat puluh satu."
+  },
+  {
+   "i": 2,
+   "bab": 0,
+   "start": 4.953,
+   "end": 25.798,
+   "text": "Di Pulau Oahu, Hawaii, matahari baru saja naik di balik pegunungan. Laut di Pearl Harbor setenang kaca. Para pelaut masih tertidur di dek kapal. Sebagian bersiap sarapan. Sebagian lagi merapikan seragam untuk ke gereja. Sebuah band militer bersiap memainkan lagu kebangsaan saat bendera dinaikkan pukul delapan tepat."
+  },
+  {
+   "i": 3,
+   "bab": 0,
+   "start": 27.173,
+   "end": 38.96,
+   "text": "Tak seorang pun tahu, sekitar tiga ratus kilometer di utara sana, enam kapal induk Jepang telah menempuh perjalanan rahasia selama hampir dua minggu. Tanpa suara radio. Tanpa jejak."
+  },
+  {
+   "i": 4,
+   "bab": 0,
+   "start": 40.159,
+   "end": 44.98,
+   "text": "Dan di langit, ratusan pesawat sedang terbang lurus... ke arah mereka."
+  },
+  {
+   "i": 5,
+   "bab": 0,
+   "start": 47.354,
+   "end": 56.587,
+   "text": "Hanya dalam sekitar sembilan puluh menit, lebih dari dua ribu empat ratus nyawa melayang. Armada terkuat Amerika di Pasifik terbakar di pelabuhannya sendiri."
+  },
+  {
+   "i": 6,
+   "bab": 0,
+   "start": 57.681,
+   "end": 64.786,
+   "text": "Pagi itu, sebuah negara yang ingin menjauh dari perang justru terseret ke tengah-tengahnya. Dan dunia berubah untuk selamanya."
+  },
+  {
+   "i": 7,
+   "bab": 0,
+   "start": 65.988,
+   "end": 74.869,
+   "text": "Ini adalah kisah tentang ambisi, tentang minyak, tentang sebuah perjudian besar... dan tentang satu pagi yang tak akan pernah dilupakan sejarah."
+  },
+  {
+   "i": 8,
+   "bab": 1,
+   "start": 78.185,
+   "end": 83.827,
+   "text": "Untuk memahami pagi itu, kita harus mundur jauh ke belakang. Hampir sembilan puluh tahun sebelumnya."
+  },
+  {
+   "i": 9,
+   "bab": 1,
+   "start": 84.922,
+   "end": 98.475,
+   "text": "Tahun seribu delapan ratus lima puluh tiga, kapal-kapal perang Amerika di bawah Komodor Matthew Perry berlabuh di Teluk Edo. Mereka memaksa Jepang, yang selama dua abad menutup diri, membuka pintunya bagi dunia."
+  },
+  {
+   "i": 10,
+   "bab": 1,
+   "start": 99.355,
+   "end": 114.136,
+   "text": "Jepang belajar dengan cepat. Lewat Restorasi Meiji, negeri feodal itu berubah menjadi negara industri modern hanya dalam beberapa dekade. Pabrik berdiri. Rel kereta dibangun. Angkatan laut modern dilahirkan."
+  },
+  {
+   "i": 11,
+   "bab": 1,
+   "start": 114.977,
+   "end": 134.19,
+   "text": "Lalu Jepang mulai menunjukkan kekuatannya. Tahun seribu delapan ratus sembilan puluh lima, Tiongkok dikalahkan. Tahun seribu sembilan ratus lima, giliran Rusia, sebuah kekaisaran Eropa, ditaklukkan di laut. Dunia terkejut. Sebuah bangsa Asia mampu mengalahkan kekuatan Barat."
+  },
+  {
+   "i": 12,
+   "bab": 1,
+   "start": 135.127,
+   "end": 142.413,
+   "text": "Namun Jepang adalah negeri kepulauan yang miskin sumber daya. Untuk menggerakkan pabrik dan armadanya, Jepang butuh batu bara, besi, karet, dan yang terpenting, minyak."
+  },
+  {
+   "i": 13,
+   "bab": 1,
+   "start": 143.148,
+   "end": 147.083,
+   "text": "Di kalangan militer, muncul keyakinan bahwa jawabannya adalah sebuah kekaisaran."
+  },
+  {
+   "i": 14,
+   "bab": 1,
+   "start": 147.787,
+   "end": 170.399,
+   "text": "Tahun seribu sembilan ratus tiga puluh satu, tentara Jepang merebut Manchuria. Ketika dikecam dunia internasional, Jepang keluar dari Liga Bangsa-Bangsa. Tahun seribu sembilan ratus tiga puluh tujuh, perang besar dengan Tiongkok meletus. Kota demi kota jatuh, dan jutaan orang menderita."
+  },
+  {
+   "i": 15,
+   "bab": 1,
+   "start": 171.3,
+   "end": 174.898,
+   "text": "Tahun seribu sembilan ratus empat puluh, Jepang bersekutu dengan Jerman dan Italia."
+  },
+  {
+   "i": 16,
+   "bab": 1,
+   "start": 175.755,
+   "end": 189.684,
+   "text": "Di seberang Pasifik, Amerika Serikat mengamati dengan gelisah. Sebagai peringatan, Presiden Franklin D. Roosevelt memindahkan markas Armada Pasifik dari California ke sebuah pelabuhan di tengah samudra."
+  },
+  {
+   "i": 17,
+   "bab": 1,
+   "start": 190.463,
+   "end": 191.77,
+   "text": "Namanya... Pearl Harbor."
+  },
+  {
+   "i": 18,
+   "bab": 2,
+   "start": 194.579,
+   "end": 196.825,
+   "text": "Perang modern berjalan di atas satu hal: minyak."
+  },
+  {
+   "i": 19,
+   "bab": 2,
+   "start": 197.503,
+   "end": 209.329,
+   "text": "Kapal perang membutuhkannya. Pesawat membutuhkannya. Tank, truk, dan pabrik, semuanya membutuhkannya. Dan di sinilah titik lemah terbesar Jepang. Lebih dari delapan puluh persen minyaknya dibeli dari satu negara."
+  },
+  {
+   "i": 20,
+   "bab": 2,
+   "start": 210.088,
+   "end": 211.07,
+   "text": "Amerika Serikat."
+  },
+  {
+   "i": 21,
+   "bab": 2,
+   "start": 211.966,
+   "end": 218.105,
+   "text": "Washington tahu itu. Maka, langkah demi langkah, Amerika mulai menekan. Penjualan besi tua dan bahan bakar pesawat ke Jepang dibatasi."
+  },
+  {
+   "i": 22,
+   "bab": 2,
+   "start": 219.099,
+   "end": 232.901,
+   "text": "Tetapi Jepang tidak mundur. Pada Juli seribu sembilan ratus empat puluh satu, pasukannya bergerak masuk ke selatan Indochina Prancis, wilayah yang kini menjadi Vietnam. Dari sana, pesawat Jepang bisa menjangkau Malaya, Filipina, dan Hindia Belanda."
+  },
+  {
+   "i": 23,
+   "bab": 2,
+   "start": 233.942,
+   "end": 245.893,
+   "text": "Jawaban Amerika datang cepat dan keras. Seluruh aset Jepang di Amerika dibekukan. Dan pada satu Agustus seribu sembilan ratus empat puluh satu, ekspor minyak ke Jepang dihentikan total. Inggris dan Belanda mengikuti."
+  },
+  {
+   "i": 24,
+   "bab": 2,
+   "start": 246.632,
+   "end": 251.273,
+   "text": "Bagi Tokyo, ini bukan sekadar sanksi. Ini adalah jerat yang perlahan mencekik."
+  },
+  {
+   "i": 25,
+   "bab": 2,
+   "start": 252.171,
+   "end": 262.877,
+   "text": "Angkatan Laut Jepang menghitung: tanpa pasokan baru, cadangan bahan bakar mereka hanya cukup untuk kurang dari dua tahun. Setiap hari yang berlalu, kapal-kapal mereka makin dekat untuk lumpuh di pelabuhan."
+  },
+  {
+   "i": 26,
+   "bab": 2,
+   "start": 263.916,
+   "end": 271.333,
+   "text": "Pilihan pun menyempit menjadi dua. Mundur dari Tiongkok dan Indochina, seperti tuntutan Amerika. Atau merebut sendiri sumber minyak terdekat."
+  },
+  {
+   "i": 27,
+   "bab": 2,
+   "start": 272.07,
+   "end": 278.888,
+   "text": "Dan sumber minyak terdekat itu ada di selatan. Di Hindia Belanda. Di tanah yang hari ini kita kenal sebagai Indonesia."
+  },
+  {
+   "i": 28,
+   "bab": 2,
+   "start": 279.802,
+   "end": 293.291,
+   "text": "Pada Oktober seribu sembilan ratus empat puluh satu, Jenderal Hideki Tojo, tokoh garis keras dari angkatan darat, menjadi perdana menteri. Rapat kekaisaran memutuskan: jika perundingan dengan Amerika tidak berhasil sampai awal Desember, Jepang akan berperang."
+  },
+  {
+   "i": 29,
+   "bab": 2,
+   "start": 294.235,
+   "end": 300.361,
+   "text": "Namun ada satu penghalang besar di jalan menuju selatan. Armada Pasifik Amerika Serikat... di Pearl Harbor."
+  },
+  {
+   "i": 30,
+   "bab": 3,
+   "start": 303.293,
+   "end": 308.437,
+   "text": "Orang yang ditugasi menjawab masalah itu adalah Laksamana Isoroku Yamamoto, Panglima Armada Gabungan Jepang."
+  },
+  {
+   "i": 31,
+   "bab": 3,
+   "start": 309.374,
+   "end": 322.228,
+   "text": "Ironisnya, Yamamoto adalah salah satu orang Jepang yang paling memahami Amerika. Ia pernah belajar di Universitas Harvard dan bertugas sebagai atase angkatan laut di Washington. Ia melihat sendiri pabrik-pabrik raksasa dan ladang-ladang minyak di sana."
+  },
+  {
+   "i": 32,
+   "bab": 3,
+   "start": 322.991,
+   "end": 329.847,
+   "text": "Ia tahu Jepang tidak akan menang dalam perang panjang melawan Amerika. Maka ia mencari cara agar perang itu tidak menjadi panjang."
+  },
+  {
+   "i": 33,
+   "bab": 3,
+   "start": 330.591,
+   "end": 338.92,
+   "text": "Jawabannya: hancurkan Armada Pasifik dalam satu pukulan kejutan. Lumpuhkan Amerika di hari pertama, dan rebut wilayah selatan sebelum mereka sempat bangkit."
+  },
+  {
+   "i": 34,
+   "bab": 3,
+   "start": 339.725,
+   "end": 359.478,
+   "text": "Inspirasinya datang dari Eropa. Pada November seribu sembilan ratus empat puluh, pesawat-pesawat torpedo tua dari sebuah kapal induk Inggris menyerang armada Italia di pelabuhan Taranto. Dalam satu malam, tiga kapal tempur Italia lumpuh. Untuk pertama kalinya, terbukti bahwa kapal induk bisa menghancurkan armada yang berlabuh."
+  },
+  {
+   "i": 35,
+   "bab": 3,
+   "start": 360.107,
+   "end": 370.19,
+   "text": "Tapi Pearl Harbor punya masalah sendiri. Airnya dangkal, hanya sekitar dua belas meter. Torpedo biasa yang dijatuhkan dari pesawat akan menukik dan menancap di dasar lumpur."
+  },
+  {
+   "i": 36,
+   "bab": 3,
+   "start": 370.924,
+   "end": 376.414,
+   "text": "Para insinyur Jepang memecahkannya dengan menambahkan sirip kayu pada torpedo agar tetap mengapung dangkal."
+  },
+  {
+   "i": 37,
+   "bab": 3,
+   "start": 377.147,
+   "end": 388.109,
+   "text": "Berbulan-bulan, para pilot berlatih di Teluk Kagoshima, yang bentuknya mirip Pearl Harbor. Mereka terbang begitu rendah di atas kota hingga warga mengeluh. Tak satu pun dari mereka tahu apa sasaran sebenarnya."
+  },
+  {
+   "i": 38,
+   "bab": 3,
+   "start": 388.705,
+   "end": 397.076,
+   "text": "Sementara itu, di Honolulu, seorang mata-mata Jepang yang menyamar sebagai pegawai konsulat diam-diam mencatat posisi kapal-kapal Amerika, hari demi hari."
+  },
+  {
+   "i": 39,
+   "bab": 3,
+   "start": 397.842,
+   "end": 408.07,
+   "text": "Namun Yamamoto sendiri tidak pernah yakin. Kepada para pemimpin Jepang, ia berkata ia hanya bisa menjamin enam bulan kemenangan. Setelah itu... tak ada yang bisa ia janjikan."
+  },
+  {
+   "i": 40,
+   "bab": 4,
+   "start": 410.814,
+   "end": 420.715,
+   "text": "Pertengahan November seribu sembilan ratus empat puluh satu. Satu per satu kapal perang Jepang meninggalkan pangkalannya, berlayar terpisah melalui rute berbeda agar tidak menarik perhatian."
+  },
+  {
+   "i": 41,
+   "bab": 4,
+   "start": 421.414,
+   "end": 427.801,
+   "text": "Tujuan mereka adalah Teluk Hitokappu, di Kepulauan Kuril. Sebuah teluk terpencil, dingin, dan nyaris tak berpenghuni."
+  },
+  {
+   "i": 42,
+   "bab": 4,
+   "start": 428.52,
+   "end": 445.73,
+   "text": "Di sana berkumpul kekuatan laut terbesar yang pernah disiapkan Jepang. Enam kapal induk: Akagi, Kaga, Soryu, Hiryu, Shokaku, dan Zuikaku. Lebih dari empat ratus pesawat. Dikawal kapal tempur, kapal penjelajah, kapal perusak, dan kapal-kapal tanker."
+  },
+  {
+   "i": 43,
+   "bab": 4,
+   "start": 446.102,
+   "end": 454.335,
+   "text": "Komandonya dipegang Wakil Laksamana Chuichi Nagumo, seorang perwira senior yang justru tidak pernah memimpin kapal induk dan diam-diam meragukan rencana ini."
+  },
+  {
+   "i": 44,
+   "bab": 4,
+   "start": 455.008,
+   "end": 458.034,
+   "text": "Pagi hari, dua puluh enam November, armada itu berangkat."
+  },
+  {
+   "i": 45,
+   "bab": 4,
+   "start": 458.708,
+   "end": 475.321,
+   "text": "Radio dimatikan sepenuhnya. Sampah dilarang dibuang ke laut, agar tak meninggalkan jejak. Rutenya melewati Pasifik utara yang ganas, jauh dari jalur kapal dagang. Di tengah gelombang tinggi, kapal-kapal harus mengisi bahan bakar di laut, sebuah pekerjaan yang berbahaya."
+  },
+  {
+   "i": 46,
+   "bab": 4,
+   "start": 476.354,
+   "end": 483.514,
+   "text": "Nagumo membawa perintah yang jelas. Jika mereka ketahuan, atau jika perundingan berhasil, mereka harus putar balik."
+  },
+  {
+   "i": 47,
+   "bab": 4,
+   "start": 484.538,
+   "end": 494.844,
+   "text": "Hampir bersamaan, di Washington, Menteri Luar Negeri Cordell Hull menyerahkan sebuah nota kepada para diplomat Jepang. Isinya menuntut Jepang menarik pasukannya dari Tiongkok dan Indochina."
+  },
+  {
+   "i": 48,
+   "bab": 4,
+   "start": 495.619,
+   "end": 503.657,
+   "text": "Di Tokyo, nota itu dibaca sebagai ultimatum. Tanggal satu Desember, rapat kekaisaran mengambil keputusan akhir: perang."
+  },
+  {
+   "i": 49,
+   "bab": 4,
+   "start": 504.914,
+   "end": 508.14,
+   "text": "Keesokan harinya, sebuah pesan singkat dikirim ke armada di tengah laut:"
+  },
+  {
+   "i": 50,
+   "bab": 4,
+   "start": 509.112,
+   "end": 512.565,
+   "text": "\"Niitakayama nobore. Satu, dua, nol, delapan.\""
+  },
+  {
+   "i": 51,
+   "bab": 4,
+   "start": 513.656,
+   "end": 520.771,
+   "text": "Artinya: \"Dakilah Gunung Niitaka.\" Sebuah sandi. Serangan dilaksanakan pada tanggal delapan Desember, waktu Jepang."
+  },
+  {
+   "i": 52,
+   "bab": 4,
+   "start": 521.794,
+   "end": 523.655,
+   "text": "Tanggal tujuh Desember di Hawaii."
+  },
+  {
+   "i": 53,
+   "bab": 4,
+   "start": 524.418,
+   "end": 525.435,
+   "text": "Tidak ada lagi jalan pulang."
+  },
+  {
+   "i": 54,
+   "bab": 5,
+   "start": 528.733,
+   "end": 530.091,
+   "text": "Amerika tidak sepenuhnya buta."
+  },
+  {
+   "i": 55,
+   "bab": 5,
+   "start": 530.755,
+   "end": 542.819,
+   "text": "Para ahli sandinya telah berhasil membongkar kode diplomatik Jepang. Washington tahu perang sudah sangat dekat. Pada dua puluh tujuh November, peringatan perang dikirim ke para komandan di Pasifik, termasuk di Hawaii."
+  },
+  {
+   "i": 56,
+   "bab": 5,
+   "start": 543.7,
+   "end": 546.281,
+   "text": "Tapi pertanyaannya: di mana Jepang akan menyerang?"
+  },
+  {
+   "i": 57,
+   "bab": 5,
+   "start": 547.364,
+   "end": 565.63,
+   "text": "Hampir semua orang menduga sasarannya Filipina, Malaya, atau Hindia Belanda. Ribuan kilometer dari Hawaii. Di Oahu, ancaman yang paling ditakuti justru sabotase dari dalam. Maka pesawat-pesawat dijejerkan rapat, sayap bertemu sayap, di tengah lapangan udara agar mudah dijaga."
+  },
+  {
+   "i": 58,
+   "bab": 5,
+   "start": 566.693,
+   "end": 569.621,
+   "text": "Tanpa disadari, mereka telah menjadi sasaran yang sempurna."
+  },
+  {
+   "i": 59,
+   "bab": 5,
+   "start": 570.707,
+   "end": 581.579,
+   "text": "Malam enam Desember, Presiden Roosevelt membaca terjemahan pesan panjang dari Tokyo untuk kedutaannya. Setelah membacanya, ia berkata kepada penasihatnya, kurang lebih: ini berarti perang."
+  },
+  {
+   "i": 60,
+   "bab": 5,
+   "start": 582.337,
+   "end": 584.106,
+   "text": "Tapi tetap tak ada yang menyebut Pearl Harbor."
+  },
+  {
+   "i": 61,
+   "bab": 5,
+   "start": 585.009,
+   "end": 595.738,
+   "text": "Pukul enam lewat empat puluh lima pagi, tujuh Desember. Kapal perusak USS Ward melihat sebuah kapal selam kecil mencoba menyelinap masuk ke pelabuhan. Ward menembak dan menenggelamkannya."
+  },
+  {
+   "i": 62,
+   "bab": 5,
+   "start": 596.704,
+   "end": 606.272,
+   "text": "Itulah tembakan pertama Amerika dalam Perang Pasifik, lebih dari satu jam sebelum bom pertama jatuh. Laporannya dikirim, tetapi bergerak lambat dari meja ke meja."
+  },
+  {
+   "i": 63,
+   "bab": 5,
+   "start": 607.376,
+   "end": 620.107,
+   "text": "Pukul tujuh lewat dua menit, di stasiun radar Opana di utara Oahu, dua prajurit muda melihat sesuatu yang belum pernah mereka lihat. Sebuah titik besar di layar. Puluhan pesawat, mendekat dari utara."
+  },
+  {
+   "i": 64,
+   "bab": 5,
+   "start": 621.057,
+   "end": 629.255,
+   "text": "Mereka melapor. Perwira jaga yang baru bertugas mengira itu rombongan pesawat pembom B tujuh belas Amerika yang dijadwalkan tiba dari California pagi itu."
+  },
+  {
+   "i": 65,
+   "bab": 5,
+   "start": 630.069,
+   "end": 632.202,
+   "text": "Jawabannya singkat: \"Jangan khawatir.\""
+  },
+  {
+   "i": 66,
+   "bab": 5,
+   "start": 633.324,
+   "end": 642.159,
+   "text": "Sementara itu di Washington, pegawai kedutaan Jepang masih bergulat mengetik pesan resmi pemutusan perundingan. Pesan itu seharusnya diserahkan sebelum serangan dimulai."
+  },
+  {
+   "i": 67,
+   "bab": 5,
+   "start": 643.049,
+   "end": 643.823,
+   "text": "Pesan itu terlambat."
+  },
+  {
+   "i": 68,
+   "bab": 6,
+   "start": 646.814,
+   "end": 649.006,
+   "text": "Pukul enam lewat sepuluh menit, waktu Hawaii."
+  },
+  {
+   "i": 69,
+   "bab": 6,
+   "start": 649.831,
+   "end": 662.814,
+   "text": "Di tengah laut yang bergelombang, sekitar tiga ratus dua puluh kilometer di utara Oahu, gelombang pertama pesawat Jepang lepas landas. Seratus delapan puluh tiga pesawat: pembom torpedo, pembom tukik, dan pesawat tempur Zero."
+  },
+  {
+   "i": 70,
+   "bab": 6,
+   "start": 663.608,
+   "end": 668.244,
+   "text": "Di pesawat terdepan duduk Komandan Mitsuo Fuchida, pemimpin seluruh serangan udara."
+  },
+  {
+   "i": 71,
+   "bab": 6,
+   "start": 669.099,
+   "end": 681.417,
+   "text": "Pukul tujuh lewat empat puluh, Oahu muncul di bawah mereka. Fuchida memandang ke arah pelabuhan. Ia hampir tak percaya. Kapal-kapal tempur Amerika berjajar rapi, berpasangan, tanpa satu pun tanda siaga."
+  },
+  {
+   "i": 72,
+   "bab": 6,
+   "start": 682.219,
+   "end": 688.299,
+   "text": "Pukul tujuh lewat lima puluh tiga, ia memerintahkan operator radionya mengirim tiga kata kepada armada:"
+  },
+  {
+   "i": 73,
+   "bab": 6,
+   "start": 688.866,
+   "end": 690.08,
+   "text": "\"Tora... Tora... Tora.\""
+  },
+  {
+   "i": 74,
+   "bab": 6,
+   "start": 690.852,
+   "end": 692.808,
+   "text": "Artinya: kejutan berhasil."
+  },
+  {
+   "i": 75,
+   "bab": 6,
+   "start": 693.666,
+   "end": 696.25,
+   "text": "Pukul tujuh lewat lima puluh lima, bom pertama jatuh."
+  },
+  {
+   "i": 76,
+   "bab": 6,
+   "start": 697.137,
+   "end": 707.529,
+   "text": "Lapangan udara Wheeler, Hickam, dan Kaneohe dihantam lebih dulu. Pesawat-pesawat yang berjejer rapat itu terbakar satu demi satu, sebagian besar tanpa sempat mengudara."
+  },
+  {
+   "i": 77,
+   "bab": 6,
+   "start": 708.278,
+   "end": 714.734,
+   "text": "Di saat yang sama, pembom torpedo terbang rendah di atas air, menuju barisan kapal tempur yang dikenal sebagai Battleship Row."
+  },
+  {
+   "i": 78,
+   "bab": 6,
+   "start": 715.579,
+   "end": 726.773,
+   "text": "Torpedo demi torpedo menghantam USS Oklahoma. Kapal itu miring, lalu terbalik, menjebak ratusan pelaut di dalam lambungnya. USS West Virginia tenggelam ke dasar pelabuhan."
+  },
+  {
+   "i": 79,
+   "bab": 6,
+   "start": 727.867,
+   "end": 734.045,
+   "text": "Lalu, pukul delapan lewat sepuluh menit, sebuah bom menembus dek USS Arizona dan menyulut gudang amunisinya."
+  },
+  {
+   "i": 80,
+   "bab": 6,
+   "start": 736.19,
+   "end": 752.718,
+   "text": "Ledakannya mengguncang seluruh pelabuhan. Bola api raksasa membubung ke langit. Dalam hitungan detik, kapal itu tenggelam. Lebih dari seribu seratus awaknya gugur bersamanya. Hampir separuh dari seluruh korban tewas hari itu."
+  },
+  {
+   "i": 81,
+   "bab": 6,
+   "start": 753.867,
+   "end": 762.193,
+   "text": "Namun di tengah kekacauan, perlawanan mulai bangkit. Pelaut berlarian ke senjata antipesawat. Mereka menembak dengan apa pun yang ada."
+  },
+  {
+   "i": 82,
+   "bab": 6,
+   "start": 763.354,
+   "end": 783.364,
+   "text": "Sekitar pukul delapan lewat lima puluh, gelombang kedua tiba, seratus tujuh puluh pesawat. Kali ini, langit sudah penuh tembakan. USS Nevada, satu-satunya kapal tempur yang berhasil bergerak, mencoba lolos ke laut lepas. Dihujani bom, awaknya sengaja mengandaskan kapal itu agar tidak tenggelam dan menyumbat pintu pelabuhan."
+  },
+  {
+   "i": 83,
+   "bab": 6,
+   "start": 784.635,
+   "end": 788.266,
+   "text": "Menjelang pukul sepuluh pagi, pesawat terakhir Jepang berbalik ke utara."
+  },
+  {
+   "i": 84,
+   "bab": 6,
+   "start": 789.059,
+   "end": 790.355,
+   "text": "Dan Pearl Harbor... terbakar."
+  },
+  {
+   "i": 85,
+   "bab": 7,
+   "start": 793.396,
+   "end": 800.582,
+   "text": "Ketika suara mesin pesawat menghilang, yang tersisa adalah api, asap, dan jeritan."
+  },
+  {
+   "i": 86,
+   "bab": 7,
+   "start": 801.436,
+   "end": 810.836,
+   "text": "Minyak dari kapal-kapal yang bocor terbakar di permukaan air. Pelaut-pelaut berenang menembus lautan api. Sekoci kecil hilir mudik menarik siapa pun yang masih hidup."
+  },
+  {
+   "i": 87,
+   "bab": 7,
+   "start": 811.658,
+   "end": 824.334,
+   "text": "Di lambung USS Oklahoma yang terbalik, terdengar ketukan dari dalam. Para pekerja galangan memotong baja kapal selama berjam-jam, hingga keesokan harinya. Tiga puluh dua pelaut berhasil diselamatkan dari perut kapal itu."
+  },
+  {
+   "i": 88,
+   "bab": 7,
+   "start": 825.328,
+   "end": 843.588,
+   "text": "Hari itu juga melahirkan pahlawan-pahlawan tak terduga. Doris Miller, seorang juru masak berkulit hitam di USS West Virginia, mengangkat komandannya yang terluka lalu mengambil alih senapan mesin antipesawat. Padahal ia tak pernah dilatih menggunakannya. Ia menjadi orang Afrika-Amerika pertama yang menerima Navy Cross."
+  },
+  {
+   "i": 89,
+   "bab": 7,
+   "start": 844.577,
+   "end": 859.968,
+   "text": "Ketika semuanya dihitung, angkanya mengerikan. Dua ribu empat ratus tiga orang tewas, termasuk enam puluh delapan warga sipil. Seribu seratus tujuh puluh delapan lainnya terluka. Kedelapan kapal tempur rusak atau tenggelam. Hampir dua ratus pesawat hancur."
+  },
+  {
+   "i": 90,
+   "bab": 7,
+   "start": 861.295,
+   "end": 875.524,
+   "text": "Di pihak Jepang, kerugiannya kecil. Dua puluh sembilan pesawat, lima kapal selam mini, dan seratus dua puluh sembilan prajurit. Salah satu awak kapal selam mini, Kazuo Sakamaki, terdampar dan ditangkap. Ia menjadi tawanan perang Jepang pertama."
+  },
+  {
+   "i": 91,
+   "bab": 7,
+   "start": 876.906,
+   "end": 879.498,
+   "text": "Di atas kertas, ini adalah kemenangan gemilang."
+  },
+  {
+   "i": 92,
+   "bab": 7,
+   "start": 880.948,
+   "end": 884.801,
+   "text": "Tapi ada yang tidak ada di pelabuhan pagi itu. Kapal-kapal induk Amerika."
+  },
+  {
+   "i": 93,
+   "bab": 7,
+   "start": 885.788,
+   "end": 899.81,
+   "text": "Enterprise tertahan cuaca buruk dalam perjalanan pulang. Lexington sedang mengantar pesawat ke Pulau Midway. Saratoga berada di San Diego. Ketiganya selamat. Kelak, kapal induklah, bukan kapal tempur, yang menentukan perang di Pasifik."
+  },
+  {
+   "i": 94,
+   "bab": 7,
+   "start": 900.776,
+   "end": 916.695,
+   "text": "Di anjungan Akagi, para perwira mendesak Nagumo melancarkan serangan ketiga. Sasarannya: tangki-tangki minyak dan galangan perbaikan. Nagumo menolak. Ia tak tahu di mana kapal induk Amerika berada, dan ia tak mau mempertaruhkan armadanya. Ia memerintahkan pulang."
+  },
+  {
+   "i": 95,
+   "bab": 7,
+   "start": 917.859,
+   "end": 930.349,
+   "text": "Keputusan itu sangat mahal. Jutaan barel minyak di Oahu tetap utuh. Galangan kapal pun tetap utuh. Dalam beberapa bulan, sebagian besar kapal yang tenggelam diangkat, diperbaiki, dan kembali bertempur."
+  },
+  {
+   "i": 96,
+   "bab": 7,
+   "start": 931.504,
+   "end": 941.079,
+   "text": "Bertahun-tahun kemudian, Laksamana Jepang Hara Tadaichi merangkumnya dengan pahit: Jepang meraih kemenangan taktis besar di Pearl Harbor... dan karena itulah kalah perang."
+  },
+  {
+   "i": 97,
+   "bab": 8,
+   "start": 944.19,
+   "end": 951.831,
+   "text": "Keesokan harinya, delapan Desember seribu sembilan ratus empat puluh satu, Presiden Franklin D. Roosevelt berdiri di hadapan Kongres Amerika Serikat."
+  },
+  {
+   "i": 98,
+   "bab": 8,
+   "start": 952.471,
+   "end": 958.769,
+   "text": "Ia menyebut tanggal tujuh Desember sebagai \"a date which will live in infamy\"... hari yang akan selalu dikenang sebagai aib."
+  },
+  {
+   "i": 99,
+   "bab": 8,
+   "start": 959.518,
+   "end": 969.011,
+   "text": "Kurang dari satu jam kemudian, Kongres menyatakan perang terhadap Jepang. Hanya satu suara yang menolak. Tiga hari setelahnya, Jerman dan Italia menyatakan perang terhadap Amerika."
+  },
+  {
+   "i": 100,
+   "bab": 8,
+   "start": 969.995,
+   "end": 975.624,
+   "text": "Amerika, yang selama bertahun-tahun berusaha menjauh dari perang, kini terjun sepenuhnya ke dalam Perang Dunia Kedua."
+  },
+  {
+   "i": 101,
+   "bab": 8,
+   "start": 976.648,
+   "end": 994.209,
+   "text": "Jepang sempat berjaya. Beberapa jam setelah Pearl Harbor, Filipina dan Malaya diserang. Singapura jatuh. Pada Maret seribu sembilan ratus empat puluh dua, Hindia Belanda menyerah. Ladang-ladang minyak yang begitu diincar akhirnya dikuasai Jepang, dan babak baru pun dimulai dalam sejarah Indonesia."
+  },
+  {
+   "i": 102,
+   "bab": 8,
+   "start": 995.132,
+   "end": 999.402,
+   "text": "Tepat seperti perkiraan Yamamoto, kemenangan itu bertahan sekitar enam bulan."
+  },
+  {
+   "i": 103,
+   "bab": 8,
+   "start": 1000.133,
+   "end": 1017.88,
+   "text": "Juni seribu sembilan ratus empat puluh dua, di dekat Pulau Midway, pesawat-pesawat dari kapal induk Amerika, kapal-kapal yang lolos dari Pearl Harbor, menenggelamkan empat kapal induk Jepang. Akagi, Kaga, Soryu, dan Hiryu. Empat dari enam kapal yang dulu menyerang Pearl Harbor."
+  },
+  {
+   "i": 104,
+   "bab": 8,
+   "start": 1018.66,
+   "end": 1031.87,
+   "text": "Sejak itu, gelombang perang berbalik. Raksasa industri yang dibangunkan pagi itu tak bisa ditidurkan kembali. Tiga setengah tahun kemudian, pada Agustus seribu sembilan ratus empat puluh lima, perang berakhir dengan kekalahan Jepang."
+  },
+  {
+   "i": 105,
+   "bab": 8,
+   "start": 1032.62,
+   "end": 1039.42,
+   "text": "Hari ini, bangkai USS Arizona masih terbaring di dasar Pearl Harbor. Ratusan awaknya masih bersemayam di dalamnya."
+  },
+  {
+   "i": 106,
+   "bab": 8,
+   "start": 1040.26,
+   "end": 1049.12,
+   "text": "Dan lebih dari delapan puluh tahun berlalu, tetes demi tetes minyak masih naik dari kapal itu ke permukaan. Orang-orang menyebutnya \"air mata hitam\" Arizona."
+  },
+  {
+   "i": 107,
+   "bab": 8,
+   "start": 1049.83,
+   "end": 1052.45,
+   "text": "Seolah kapal itu sendiri... menolak untuk lupa."
+  },
+  {
+   "i": 108,
+   "bab": 8,
+   "start": 1053.19,
+   "end": 1062.73,
+   "text": "Dan mungkin, itulah pelajaran terbesar dari Pearl Harbor. Bahwa satu keputusan, satu perjudian, satu pagi... bisa mengubah nasib jutaan manusia."
+  }
+ ]
+}

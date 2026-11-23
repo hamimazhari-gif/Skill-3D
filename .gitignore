@@ -8,3 +8,12 @@ video_kaz/bed.wav
 video_kaz/*.mp4
 __pycache__/
 video_kaz/narration_gap.wav
+pearl/parts/
+pearl/stills/
+pearl/bed.wav
+pearl/*.mp4
+pearl/narasi_full.wav
+pearl/narration_gap.wav
+pearl/src/
+pearl/overview.jpg
+pearl/render.log
