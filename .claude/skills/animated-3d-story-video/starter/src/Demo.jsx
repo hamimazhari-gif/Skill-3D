@@ -110,7 +110,7 @@ function DemoScene() {
   const composer = useMemo(() => {
     const c = new EffectComposer(gl); c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 4, aperture: 0.0012, maxblur: 0.005}); c.addPass(bokeh);
-    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.75, 0.55, 1.0));
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.6, 0.5, 1.6));
     const grade = new ShaderPass(GradeShader); c.addPass(grade); c.addPass(new OutputPass()); c.grade = grade; c.bokeh = bokeh; return c;
   }, [gl, scene, camera]);
   useEffect(() => { composer.setSize(size.width, size.height); composer.setPixelRatio(gl.getPixelRatio()); }, [composer, size, gl]);

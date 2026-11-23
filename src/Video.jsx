@@ -70,7 +70,7 @@ function Scene({lang, thumb}) {
     const bokeh = new BokehPass(scene, camera, {focus: 3, aperture: 0.0016, maxblur: 0.0055});
     c.addPass(bokeh);
     // glow around light sources only (lamps, fire, moon, lit windows are HDR > 1; characters stay below the threshold)
-    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.75, 0.55, 1.0));
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(540, 960), 0.6, 0.5, 1.6));
     const grade = new ShaderPass(GradeShader); c.addPass(grade); c.grade = grade;
     c.addPass(new OutputPass());
     c.bokeh = bokeh;

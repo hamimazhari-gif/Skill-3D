@@ -408,7 +408,7 @@ export function moon(r = 6) {
   x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false}));
   halo.scale.setScalar(r * 5); g.add(halo);
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false})); disc.material.color.multiplyScalar(1.8);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 40), new THREE.MeshBasicMaterial({color: '#fff6dc', fog: false})); disc.material.color.multiplyScalar(3.0);
   g.add(disc);
   g.userData.faceCamera = true;
   return g;
@@ -844,7 +844,7 @@ export function sunBall(r = 3, color = '#ffd760') {
   gr.addColorStop(0, 'rgba(255,240,180,0.9)'); gr.addColorStop(0.35, 'rgba(255,210,110,0.4)'); gr.addColorStop(1, 'rgba(255,200,100,0)');
   x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: texFrom(c), transparent: true, depthWrite: false, fog: false})); halo.scale.setScalar(r * 5); g.add(halo);
-  const sm = new THREE.MeshBasicMaterial({color, fog: false}); sm.color.multiplyScalar(2.2); g.add(new THREE.Mesh(new THREE.SphereGeometry(r, 32, 20), sm));
+  const sm = new THREE.MeshBasicMaterial({color, fog: false}); sm.color.multiplyScalar(3.5); g.add(new THREE.Mesh(new THREE.SphereGeometry(r, 32, 20), sm));
   return g;
 }
 
@@ -953,7 +953,7 @@ export function bulb(s = 1) {
   const fil = new THREE.Mesh(new THREE.TorusGeometry(0.07 * s, 0.012 * s, 6, 16, Math.PI), new THREE.MeshBasicMaterial({color: '#6a4a2a'})); fil.position.y = 0.42 * s; g.add(fil);
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex(), transparent: true, depthWrite: false, opacity: 0, color: '#ffe08a'})); halo.scale.setScalar(1.6 * s); halo.position.y = 0.42 * s; g.add(halo);
   const light = new THREE.PointLight('#ffd98a', 0, 7, 1.6); light.position.y = 0.45 * s; g.add(light);
-  return {group: g, set(on) { glassMat.color.set(on > 0.5 ? '#fff3a0' : '#e8eef2'); glassMat.opacity = 0.5 + on * 0.45; fil.material.color.set(on > 0.5 ? '#fffbe0' : '#6a4a2a'); halo.material.opacity = on * 0.9; light.intensity = on * 4; }};
+  return {group: g, set(on) { glassMat.color.set(on > 0.5 ? '#fff3a0' : '#e8eef2'); if (on > 0.5) glassMat.color.multiplyScalar(1 + on * 2.5); glassMat.opacity = 0.5 + on * 0.45; fil.material.color.set(on > 0.5 ? '#fffbe0' : '#6a4a2a'); halo.material.opacity = on * 0.9; light.intensity = on * 4; }};
 }
 let _glow;
 function glowTex() {
@@ -1017,7 +1017,7 @@ export function bookStack(n = 4, seed = 3) {
 
 // ================= Set dressing & nature (rich, layered worlds like the reference) =================
 // Emissive (HDR, blooms) basic material for light sources: lamp glass, flames, lit windows, moon.
-export function hdr(color, k = 2.5) { const m = new THREE.MeshBasicMaterial({color}); m.color.multiplyScalar(k); return m; }
+export function hdr(color, k = 3.5) { const m = new THREE.MeshBasicMaterial({color}); m.color.multiplyScalar(k); return m; }
 
 export function rug(w = 2.4, d = 1.6, o = {}) {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), patternMat('carpet', {base: o.base || '#b8433a', accent: o.accent || '#e8b44a', accent2: o.accent2 || '#2f3f6a', dark: o.dark || '#22263a', seed: o.seed || 3}));
@@ -1082,7 +1082,7 @@ export function pottedPlant(h = 1.0, seed = 4) {
 export function lantern(o = {}) {
   const g = new THREE.Group(); const metal = toon('#3a3430', {rough: 0.4, metal: 0.7});
   const top = cone(0.14, 0.12, metal); at(top, 0, 0.32, 0); g.add(top);
-  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.26, 12), hdr(o.color || '#ffcf7a', 2.2)); glass.position.y = 0.17; g.add(glass);
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.26, 12), hdr(o.color || '#ffcf7a', 3.5)); glass.position.y = 0.17; g.add(glass);
   for (let i = 0; i < 4; i++) { const bar = box(0.015, 0.28, 0.015, metal, {center: true}); const a = i / 4 * 6.28; at(bar, Math.cos(a) * 0.1, 0.17, Math.sin(a) * 0.1); g.add(bar); }
   const base = cyl(0.12, 0.12, 0.04, metal); g.add(base);
   const light = new THREE.PointLight(o.color || '#ffb85a', o.intensity ?? 3.5, o.distance ?? 6, 1.8); light.position.y = 0.2; g.add(light);
@@ -1124,6 +1124,6 @@ export function mountains(o = {}) {
     shp.lineTo(200, -2);
     const m = new THREE.Mesh(new THREE.ShapeGeometry(shp), new THREE.MeshStandardMaterial({color: col, roughness: 1})); m.position.z = z; g.add(m);
   });
-  if (o.village) { for (let i = 0; i < 40; i++) { const w = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), hdr('#ffc870', 2.4)); w.position.set(-60 + r() * 120, 0.6 + r() * 2.2, -56 + r() * 4); g.add(w); } }
+  if (o.village) { for (let i = 0; i < 40; i++) { const w = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.35), hdr('#ffc870', 3.5)); w.position.set(-60 + r() * 120, 0.6 + r() * 2.2, -56 + r() * 4); g.add(w); } }
   return g;
 }
