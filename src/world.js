@@ -11,7 +11,7 @@ export const LOC = {home: 0, lab: 40, power: 80, neuro: 120, study: 160, kids: 2
 export {LOOK_PRESETS, MOODS} from './lighting';
 
 // Cast look for this story (palette overrides on top of char.js PALETTES). Design: 'pill' (new for this video).
-export const CHAR_DESIGN = 'pill';
+export const CHAR_DESIGN = 'classic'; // round face like the no-sleep video (user request)
 const CAST = {
   hero: {jacket: '#3f8fbf', lower: '#2f3a4a', tie: '#f2d24a', hair: '#3a2a26', hat: 'none', hairStyle: 'fringe', pocket: '#2f6f9a'},
   kid: {jacket: '#f2c84a', lower: '#5a7fb0', tie: '#c75b5b', hair: '#3a2a26', hat: 'none', hairStyle: 'tuft', pocket: '#d9a83a', scale: 0.62},
