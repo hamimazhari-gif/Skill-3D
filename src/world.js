@@ -229,7 +229,8 @@ export function buildWorld(lang, T, EVt, L) {
     const book = P.bigBook(L.thesis, 0.95, 1.9, 1.0); at(book, 1.45, 0, -3.7, -0.25); g.add(book);
     const ward = P.wardrobe('#9a6a4a', 1.0, 1.9, 0.6); at(ward, 2.75, 0, -4.0, -0.25); g.add(ward);
     hero.act([
-      {t: 0, pose: 'carryBoth', expr: 'tired', action: 'slump', dur: 1.5},
+      {t: 0, pose: 'hold', expr: 'tired', action: 'slump', dur: 1.5},
+      {t: cut(3) + 2.1, pose: 'carryBoth', expr: 'tired'},
       {t: E('ilmu') + 0.1, pose: 'headHold', expr: 'grimace', action: 'tremble', dur: 0.6},
       {t: E('skripsi') + 0.15, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.5},
       {t: E('lemari') + 0.1, pose: 'present', expr: 'nervous'},
@@ -409,7 +410,7 @@ export function buildWorld(lang, T, EVt, L) {
     const hero = ch('hero', {seed: 9}, g, -0.2, -2.7, 0.1);
     const kid = ch('kid', {seed: 91, scale: 0.68}, g, 0.85, -2.85, -0.4);
     const loafH = held(hero, P.loaf(0.9), {y: -0.02, z: 0.08});
-    walkPath(hero, [[cut(9), -2.9, -2.1], [cut(9) + 2.4, -0.2, -2.7], [E('manfaat') - 1.0, -0.2, -2.7], [E('manfaat') - 0.35, 0.2, -2.75], [cut(10), 0.2, -2.75], [cut(10) + 0.01, -0.2, -2.7]]);
+    walkPath(hero, [[cut(9), -2.9, -2.1], [cut(9) + 2.4, -0.45, -2.7], [E('manfaat') - 1.0, -0.45, -2.7], [E('manfaat') - 0.35, 0.0, -2.75], [cut(10), 0.0, -2.75], [cut(10) + 0.01, -0.2, -2.7]]);
     const loafK = held(kid, P.loaf(0.9), {y: -0.02, z: 0.08});
     const hearts = [0, 1, 2].map((i) => { const h = P.heart(['#d8413a', '#e86a8a', '#d8413a'][i]); h.scale.setScalar(0.5); g.add(h); return h; });
     const wish = [P.plane(), P.bookStack(5, 9), P.footballBall(), P.cake('500').group];

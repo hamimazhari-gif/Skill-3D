@@ -24,7 +24,7 @@ export const SHOT_PLAN = [
     {at: 'end', pos: [-0.3, 1.5, -1.3], look: [0, 1.45, -2.6], roll: 0.14}]},
   // 2 party: top shot on the cake, orbit around the hero's line, the life bar
   {shot: 2, loc: 'party', move: 'overhead on the cake, crane down to the party', keys: [
-    {at: 'start', pos: [1.1, 3.25, -1.5], look: [0.45, 0.7, -3.3]},
+    {at: 'start', pos: [0.2, 3.25, -1.4], look: [-0.05, 0.75, -3.3]},
     {at: 'end', pos: [0.2, 2.0, -0.2], look: [0, 1.4, -3.8]}]},
   {shot: 2, from: 'santai', loc: 'party', move: 'orbit around the boasting hero', keys: [
     {at: 'start', pos: [-1.75, 1.45, -1.6], look: [-0.55, 1.45, -3.0]},
