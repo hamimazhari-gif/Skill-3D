@@ -9,9 +9,9 @@ for a, b, spec, k in beats:
 wh += [round(b['card'] + .2, 2) for b in K.BAG if b['n'] > 1]
 cues = dict(duration=K.DUR,
             whoosh=wh,
-            type=[[round(t0, 2), len(txt)] for _, txt, t0, _ in K.TAGS] + [[round(K.TITLE[0] + .2, 2), 23]] + [[round(b['card'] + .2, 2), 9] for b in K.BAG] +
+            type=[[round(t0, 2), len(txt)] for _, txt, t0, _ in K.TAGS] + [[round(K.TITLE[0] + .2, 2), 23]] +
                  [[round(th[2] + .3, 2), len(th[0])] for th in K.THESIS],
-            thud=[round(b['card'] + .9, 2) for b in K.BAG if b['n'] > 1] + [round(s[3], 2) for s in K.STAMPS] + [round(y[0], 2) for y in K.YEARS] + [round(K.TITLE[0] + 1.0, 2), round(K.END, 2)],
+            thud=[round(b['card'] + .2, 2) for b in K.BAG if b['n'] > 1] + [round(s[3], 2) for s in K.STAMPS] + [round(y[0], 2) for y in K.YEARS] + [round(K.TITLE[0] + 1.0, 2), round(K.END, 2)],
             scratch=[[round(e[3], 2), e[4]] for e in K.ELLS] + [[round(l[2], 2), l[3]] for l in K.LINES],
             tension=[K.P('3.1'), K.P('5.9'), K.P('5.14'), K.P('6.14'), K.P('10.15')],
             film=[[round(K.INS0, 2), round(K.INS1, 2)]])

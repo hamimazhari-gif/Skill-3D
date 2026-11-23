@@ -521,17 +521,15 @@ def screen_overlays(img, t):
             a = (ss((t-c0)/.4) if bg_['n'] > 1 else 1) * (1-ss((t-c1+.2)/.5))
             out *= 1 - .62*a
             pil = pil_of(out); d = ImageDraw.Draw(pil, 'RGBA'); al = int(255*a)
-            lab = f"BAGIAN {bg_['n']}"; n = min(len(lab), int(max(0, t-c0-.2)*16))
-            text_center(d, 330, lab[:n] + ('_' if n < len(lab) else ''), font(MONO, 50), (225, 225, 215, al))
-            title = bg_['title']; main, sub = (title.split(':', 1) + [''])[:2]
-            if t > c0 + .9:
-                a2 = int(al*ss((t-c0-.9)/.5))
+            title = bg_['title']; main, sub = (title.split(':', 1) + [''])[:2]      # title only, no "BAGIAN N" label
+            if t > c0 + .2:
+                a2 = int(al*ss((t-c0-.2)/.5))
                 fs = 120 if len(main) < 18 else 96 if len(main) < 26 else 78
-                text_center(d, 410, main.strip(), font(SERIF, fs), (242, 238, 228, a2))
-                u = ease((t-c0-1.3)/.6); x0 = W/2 - 300
-                d.line([(x0, 580), (x0 + 600*u, 580)], fill=RED+(a2,), width=6)
+                text_center(d, 430, main.strip(), font(SERIF, fs), (242, 238, 228, a2))
+                u = ease((t-c0-.6)/.6); x0 = W/2 - 300
+                d.line([(x0, 600), (x0 + 600*u, 600)], fill=RED+(a2,), width=6)
                 if sub.strip():
-                    text_center(d, 610, sub.strip(), font(MONO, 38), (215, 210, 196, int(a2*ss((t-c0-1.6)/.5))))
+                    text_center(d, 630, sub.strip(), font(MONO, 38), (215, 210, 196, int(a2*ss((t-c0-.9)/.5))))
             return back(pil)
     for t0, small, big, hold in YEARS:
         if t0 < t < t0 + hold + .5:
