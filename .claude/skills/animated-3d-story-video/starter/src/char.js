@@ -2,7 +2,8 @@
 // Acting: expressions (face layer swapped per frame from a texture cache), poses (two-segment arms),
 // actions (jump, hop, shake, nod, tremble, slump, talk, walk, run, spin-in) with squash & stretch.
 import * as THREE from 'three';
-import {INK, rng, canvas, texFrom} from './kit';
+import {rng, canvas, texFrom} from './kit';
+const INK = '#141216'; // near-black, like the reference outlines
 
 const PX = 420; // canvas pixels per metre
 
@@ -12,10 +13,10 @@ const PX = 420; // canvas pixels per metre
 //   shadows: characters cast real shadows on the ground and walls.
 export const DESIGNS = {
   // House style for every design: painted shading + cloth sheen + dark rims, cast shadows, no red cheeks, long body.
-  classic: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [9, 5], legExtra: 0.02, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
-  egg: {head: 'egg', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
-  bean: {head: 'bean', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
-  pill: {head: 'pill', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  classic: {head: 'round', hair: 'fringe', skin: '#fdeee0', brows: 'thin', limb: [9, 5], legExtra: 0.02, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  egg: {head: 'egg', hair: 'side', skin: '#fff1e4', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
+  bean: {head: 'bean', hair: 'tuft', skin: '#fbe9d8', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  pill: {head: 'pill', hair: 'fringe', skin: '#fff2e6', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
 export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
@@ -23,7 +24,8 @@ let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
 // How much higher the head sits than in the classic design (cameras aimed at faces add this).
-export const headLift = (name) => { const d = DESIGNS[name] || DESIGNS.classic; return (d.legExtra || 0) + (d.torsoExtra || 0); };
+const headUp = (d) => HEAD_R * (d.head === 'bean' ? 0.9 : d.head === 'round' ? 1.0 : 1.1) - 0.07; // head centre above the neck
+export const headLift = (name) => { const d = DESIGNS[name] || DESIGNS.classic; return (d.legExtra || 0) + (d.torsoExtra || 0) + headUp(d) - 0.3; };
 // Shared tint for every character part (set per frame from the scene light, so characters sit in the light).
 export const CHAR_TINT = new THREE.Color('#ffffff');
 const SHADE = 'rgba(64,38,58,';
@@ -36,14 +38,15 @@ function paintShade(x, pts, cx, cy, R, amt = 0.3) {
   x.fillStyle = g; x.fillRect(cx - R * 3, cy - R * 3, R * 6, R * 6);
   x.restore();
 }
-const HEAD_W = 0.86, HEAD_H = 1.0, HEAD_CY = 0.62, HEAD_R = 0.29; // head canvas (metres); centre from top
-const headRY = () => (D.head === 'egg' ? 1.17 : D.head === 'bean' ? 0.86 : D.head === 'pill' ? 1.2 : 0.97);
-const headRX = () => (D.head === 'egg' ? 0.93 : D.head === 'bean' ? 1.12 : D.head === 'pill' ? 0.82 : 1.0);
+const HEAD_W = 1.0, HEAD_H = 1.3, HEAD_CY = 0.68, HEAD_R = 0.36; // bigger head, like the reference // head canvas (metres); centre from top
+const headRY = () => (D.head === 'egg' ? 1.1 : D.head === 'bean' ? 0.9 : D.head === 'pill' ? 1.1 : 1.0);
+const headRX = () => (D.head === 'egg' ? 0.96 : D.head === 'bean' ? 1.08 : D.head === 'pill' ? 0.9 : 1.0);
 
 function smoothPoly(n, fn) { const p = []; for (let i = 0; i < n; i++) p.push(fn(i / n)); return p; }
 
 // Fill a closed polygon, then ink it with a hand-drawn band of varying thickness.
 function inkShape(x, pts, fill, r, base = 10, shade) {
+  base *= 1.25; // bold, even outline like the reference
   x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(p[0], p[1]) : x.moveTo(p[0], p[1]))); x.closePath();
   if (fill) { x.fillStyle = fill; x.fill(); }
   if (shade) shade(pts);
@@ -51,7 +54,7 @@ function inkShape(x, pts, fill, r, base = 10, shade) {
   const ph = r() * 6.28, n = pts.length;
   for (let i = 0; i < n; i++) {
     const a = pts[i], b = pts[(i + 1) % n];
-    x.lineWidth = base * (0.78 + 0.3 * Math.sin(i / n * 6.28 * 3 + ph) + 0.12 * r());
+    x.lineWidth = base * (0.95 + 0.08 * Math.sin(i / n * 6.28 * 2 + ph));
     x.beginPath(); x.moveTo(a[0], a[1]); x.lineTo(b[0], b[1]); x.stroke();
   }
 }
@@ -74,9 +77,9 @@ function drawHeadBase(o, r, view = 'front') {
   const cx = HEAD_W / 2 * PX, cy = HEAD_CY * PX, R = HEAD_R * PX;
   const RX = R * headRX(), RY = R * headRY();
   const headPts = D.head === 'egg'
-    ? wobble(smoothPoly(64, (t) => { const a = t * Math.PI * 2; return [cx + Math.cos(a) * RX * (1 - 0.09 * Math.sin(a)), cy + Math.sin(a) * RY]; }), r, 2)
-    : wobble(ellipse(cx, cy, RX, RY, 64), r, 2);
-  inkShape(x, headPts, SKIN, r, 11, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.42));
+    ? smoothPoly(96, (t) => { const a = t * Math.PI * 2; return [cx + Math.cos(a) * RX * (1 - 0.06 * Math.sin(a)), cy + Math.sin(a) * RY]; })
+    : ellipse(cx, cy, RX, RY, 96);
+  inkShape(x, headPts, SKIN, r, 12, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.42));
   if (D.cheeks !== false) {
     x.fillStyle = 'rgba(232,140,120,0.35)';
     x.beginPath(); x.ellipse(cx - R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
@@ -171,11 +174,11 @@ function drawFace(o, f, r, view = 'front') {
   const cx = HEAD_W / 2 * PX, cy = HEAD_CY * PX, R = HEAD_R * PX;
   if (view === 'back') return texFrom(c);
   // eye centres and mouth placement per view (three-quarter and profile face to the right)
-  const EYES = view === 'side' ? [[1, cx + R * 0.52]] : view === 'threeq' ? [[-1, cx - R * 0.06], [1, cx + R * 0.5]] : [[-1, cx - R * 0.36], [1, cx + R * 0.36]];
+  const EYES = view === 'side' ? [[1, cx + R * 0.52]] : view === 'threeq' ? [[-1, cx - R * 0.06], [1, cx + R * 0.5]] : [[-1, cx - R * 0.4], [1, cx + R * 0.4]];
   const MX = view === 'side' ? cx + R * 0.62 : view === 'threeq' ? cx + R * 0.24 : cx, MS = view === 'side' ? 0.6 : view === 'threeq' ? 0.85 : 1;
   x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = INK;
   const lid = (ex, ey, s, kind) => { // skin cover over the top of an eye, inner = towards the nose
-    const w = R * 0.15, top = ey - R * 0.2;
+    const w = R * 0.17, top = ey - R * 0.2;
     let yi, yo; // lid edge at inner and outer side
     if (kind === 'calm') { yi = yo = ey - R * 0.01; }
     if (kind === 'angry') { yi = ey + R * 0.03; yo = ey - R * 0.08; }
@@ -183,28 +186,28 @@ function drawFace(o, f, r, view = 'front') {
     if (kind === 'tired') { yi = yo = ey + R * 0.03; }
     const xi = ex - s * w, xo = ex + s * w;
     x.fillStyle = SKIN; x.beginPath(); x.moveTo(xi, top); x.lineTo(xo, top); x.lineTo(xo, yo); x.lineTo(xi, yi); x.closePath(); x.fill();
-    x.lineWidth = 8; x.beginPath(); x.moveTo(xi, yi); x.lineTo(xo, yo); x.stroke();
+    x.lineWidth = 12; x.beginPath(); x.moveTo(xi, yi); x.lineTo(xo, yo); x.stroke();
   };
   for (const [s, ex0] of EYES) {
     const ex = ex0, ey = cy + R * 0.05;
-    const dot = (rx, ry) => { x.fillStyle = INK; x.beginPath(); x.ellipse(ex, ey, rx, ry, 0, 0, 7); x.fill(); x.fillStyle = '#fff'; x.beginPath(); x.arc(ex + R * 0.03, ey - R * 0.02, R * 0.028, 0, 7); x.fill(); };
+    const dot = (rx, ry) => { x.fillStyle = INK; x.beginPath(); x.ellipse(ex, ey, rx, ry, 0, 0, 7); x.fill(); };
     switch (f.eyes) {
-      case 'open': dot(R * 0.1, R * 0.13); break;
+      case 'open': dot(R * 0.085, R * 0.1); break;
       case 'wide':
         x.fillStyle = '#fff'; x.lineWidth = 7; x.beginPath(); x.arc(ex, ey, R * 0.17, 0, 7); x.fill(); x.stroke();
         x.fillStyle = INK; x.beginPath(); x.arc(ex, ey, R * 0.055, 0, 7); x.fill(); break;
       case 'closed': x.lineWidth = 9; x.beginPath(); x.arc(ex, ey + R * 0.06, R * 0.12, Math.PI * 1.12, Math.PI * 1.88); x.stroke(); break;
       case 'blink': x.lineWidth = 8; x.beginPath(); x.moveTo(ex - R * 0.12, ey + R * 0.02); x.quadraticCurveTo(ex, ey + R * 0.07, ex + R * 0.12, ey + R * 0.02); x.stroke(); break;
       case 'squint': x.lineWidth = 9; x.beginPath(); x.moveTo(ex - s * R * 0.12, ey - R * 0.07); x.lineTo(ex + s * R * 0.08, ey); x.lineTo(ex - s * R * 0.12, ey + R * 0.07); x.stroke(); break;
-      default: dot(R * 0.1, R * 0.12); lid(ex, ey, s, f.eyes === 'calm' ? 'calm' : f.eyes);
+      default: dot(R * 0.09, R * 0.1); lid(ex, ey, s, f.eyes === 'calm' ? 'calm' : f.eyes);
     }
     // brows
-    const by = ey - R * 0.27; x.lineWidth = D.brows === 'thick' ? 14 : 9;
+    const by = ey - R * 0.25; x.lineWidth = 15;
     const brow = (yi, yo) => { x.beginPath(); x.moveTo(ex - s * R * 0.13, by + yi); x.lineTo(ex + s * R * 0.13, by + yo); x.stroke(); };
     if (f.brows === 'up') { x.beginPath(); x.arc(ex, by + R * 0.02, R * 0.14, Math.PI * 1.2, Math.PI * 1.8); x.stroke(); }
     if (f.brows === 'angry') brow(R * 0.1, -R * 0.05);
     if (f.brows === 'sad') brow(-R * 0.07, R * 0.06);
-    if (f.brows === 'none' && D.brows === 'thick') brow(-R * 0.02, -R * 0.04);
+    if (f.brows === 'none') brow(-R * 0.01, -R * 0.03);
     if (f.brows === 'skeptic') brow(s < 0 ? -R * 0.08 : R * 0.03, s < 0 ? -R * 0.1 : R * 0.03);
   }
   // mouth
@@ -258,7 +261,7 @@ function drawFace(o, f, r, view = 'front') {
     case 'flat': x.beginPath(); x.moveTo(mx - R * 0.1, my); x.lineTo(mx + R * 0.1, my); x.stroke(); break;
     case 'wavy': x.beginPath(); for (let i = 0; i <= 6; i++) { const xx = mx - R * 0.15 + i * R * 0.05, yy = my + (i % 2 ? -1 : 1) * R * 0.03; i ? x.lineTo(xx, yy) : x.moveTo(xx, yy); } x.stroke(); break;
     case 'smirk': x.beginPath(); x.moveTo(mx - R * 0.1, my + R * 0.01); x.quadraticCurveTo(mx + R * 0.04, my + R * 0.06, mx + R * 0.14, my - R * 0.05); x.stroke(); break;
-    default: x.beginPath(); x.arc(mx, my - R * 0.02, R * 0.12, 0.25 * Math.PI, 0.75 * Math.PI); x.stroke();
+    default: x.beginPath(); x.arc(mx + R * 0.04, my - R * 0.06, R * 0.11, 0.2 * Math.PI, 0.65 * Math.PI); x.stroke();
   }
   x.restore();
   if (o.glasses) {
@@ -491,7 +494,7 @@ export function makeChar(name, o = {}) {
     arms.push({up, fore, hand, sx});
   }
   const headPiv = new THREE.Group(); headPiv.position.set(0, neckY, 0.03); body.add(headPiv);
-  const headY = (1.42 - 1.12) + (HEAD_H / 2 - (1 - HEAD_CY)); // head sits on the neck, so a taller body lifts it
+  const headY = headUp(D) + (HEAD_CY - HEAD_H / 2); // canvas centre so the head circle sits just on the neck
   const head = partMesh(drawHeadBase(p, r), HEAD_W, HEAD_H); head.position.set(0, headY, 0); headPiv.add(head);
   const headTex = {front: head.material.map};
   const headFor = (v) => { if (!headTex[v]) headTex[v] = drawHeadBase(p, rng(seed0 + 9), v); return headTex[v]; };

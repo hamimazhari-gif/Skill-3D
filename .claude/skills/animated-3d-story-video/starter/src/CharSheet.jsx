@@ -21,7 +21,7 @@ function Grid({mode, design}) {
   useFrame(() => {
     chars.forEach((c) => { if (!c.group.parent) scene.add(c.group); }); scene.background = new THREE.Color(CREAM);
     const rows = Math.ceil(items.length / 5);
-    camera.position.set(0, -(rows - 1) * 1.0 + 0.9, 14); camera.lookAt(0, -(rows - 1) * 1.0 + 0.9, 0);
+    camera.position.set(0, -(rows - 1) * 1.0 + 1.25, 14.5); camera.lookAt(0, -(rows - 1) * 1.0 + 1.25, 0);
     chars.forEach((c) => c.update(1.0, camera.position));
     gl.render(scene, camera);
   }, 1);
