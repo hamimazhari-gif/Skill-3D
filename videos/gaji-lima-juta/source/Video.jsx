@@ -1,5 +1,5 @@
 import React, {useMemo, useRef, useEffect} from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {useFrame, useThree} from '@react-three/fiber';
 import * as THREE from 'three';
@@ -264,6 +264,52 @@ export const Thumb = ({lang}) => {
         {word(tx.mid, 104, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
+    </AbsoluteFill>
+  );
+};
+
+// One square "photo" of a scene moment (no captions or overlays), for the collage thumbnail.
+export const Photo = ({lang, t, loc, pos, look}) => {
+  const {width, height} = useVideoConfig();
+  return (
+    <AbsoluteFill style={{backgroundColor: CREAM}}>
+      <ThreeCanvas width={width} height={height} linear={false} flat shadows gl={{antialias: true, preserveDrawingBuffer: true}} camera={{fov: 80, near: 0.1, far: 500}}>
+        <Scene lang={lang} thumb={{t, loc, pos, look}} />
+      </ThreeCanvas>
+    </AbsoluteFill>
+  );
+};
+
+// Collage thumbnail: polaroid photos of each person at home, pinned at angles, with the title blocks.
+const COLLAGE = [
+  {img: 'thumbparts/photo_1.png', label: 'JAKARTA', x: 30, y: 390, r: -6, w: 440},
+  {img: 'thumbparts/photo_2.png', label: 'BALI', x: 600, y: 405, r: 5, w: 440},
+  {img: 'thumbparts/photo_4.png', label: 'KOTA KECIL', x: 30, y: 1140, r: 4, w: 440},
+  {img: 'thumbparts/photo_5.png', label: 'DESA', x: 605, y: 1120, r: -5, w: 440},
+  {img: 'thumbparts/photo_3.png', label: 'JOGJA', x: 345, y: 850, r: -2, w: 390},
+]
+export const ThumbCollage = ({lang}) => {
+  const tx = TH[lang];
+  const ink = '#351f22';
+  const word = (txt, size, bg, fg, rot) => (
+    <div style={{display: 'inline-block', background: bg, color: fg, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900, fontSize: size, lineHeight: 1.05,
+      padding: '14px 34px 20px', border: `10px solid ${ink}`, borderRadius: 28, transform: `rotate(${rot}deg)`, boxShadow: `12px 14px 0 ${ink}`, letterSpacing: -1, whiteSpace: 'nowrap'}}>{txt}</div>
+  );
+  return (
+    <AbsoluteFill style={{background: 'radial-gradient(circle at 50% 45%, #f6e3c0 0%, #e8c99a 70%, #d9b07a 100%)'}}>
+      {COLLAGE.map((p, i) => (
+        <div key={i} style={{position: 'absolute', left: p.x, top: p.y, width: p.w, padding: '18px 18px 0', background: '#fffaf0', border: `6px solid ${ink}`,
+          boxShadow: `10px 14px 0 rgba(53,31,34,0.55)`, transform: `rotate(${p.r}deg)`}}>
+          <Img src={staticFile(p.img)} style={{width: p.w - 48, height: p.w - 48, display: 'block', border: `4px solid ${ink}`}} />
+          <div style={{fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 46, color: ink, textAlign: 'center', padding: '10px 0 14px'}}>{p.label}</div>
+          <div style={{position: 'absolute', top: -22, left: p.w / 2 - 55, width: 110, height: 40, background: 'rgba(242,210,74,0.8)', transform: 'rotate(-4deg)'}} />
+        </div>
+      ))}
+      <AbsoluteFill style={{alignItems: 'center', paddingTop: 70, gap: 26}}>
+        {word(tx.top, 96, '#fff3df', ink, -3)}
+        {word(tx.mid, 104, '#e8a83a', ink, 2)}
+      </AbsoluteFill>
+      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 90}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill>
     </AbsoluteFill>
   );
 };
