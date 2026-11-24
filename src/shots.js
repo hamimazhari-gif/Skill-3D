@@ -10,70 +10,85 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera (user request): one or two framings per shot, slow short pushes, no dutch angles, steady lens.
-  // 1 pre-dawn street: the knocker taps a window; the sleeper pops up; TRUE STORY
-  {shot: 1, loc: 'street', lift: false, move: 'low angle up the pole to the window, slow push', keys: [
-    {at: 'start', pos: [-1.7, 0.6, 0.5], look: [-3.6, 2.9, -3.7], fov: 76},
-    {at: 'end', pos: [-2.0, 0.7, 0.1], look: [-3.7, 3.1, -3.8], fov: 76}]},
-  {shot: 1, from: 'nyata', loc: 'street', lift: false, move: 'steady wide on the stamp', keys: [
-    {at: 'start', pos: [-0.6, 2.2, 1.6], look: [-2.3, 2.5, -3.3]},
-    {at: 'end', pos: [-0.5, 2.3, 1.9], look: [-2.3, 2.5, -3.3]}]},
-  // 2 the mill at dawn
-  {shot: 2, loc: 'factory', lift: false, move: 'wide on the mill, slow push', keys: [
-    {at: 'start', pos: [2.2, 2.6, 3.0], look: [0.2, 2.2, -4.5]},
-    {at: 'end', pos: [1.9, 2.3, 2.2], look: [0.0, 1.9, -4.0]}]},
-  {shot: 2, from: 'masalah', loc: 'factory', move: 'medium on the worker and the clock', keys: [
-    {at: 'start', pos: [-0.6, 1.1, -0.4], look: [-2.0, 1.5, -3.1]},
-    {at: 'end', pos: [-0.8, 1.1, -0.7], look: [-2.0, 1.5, -3.1]}]},
-  // 3 the title
-  {shot: 3, loc: 'street', move: 'frontal on the knocker under the banner, slight push', keys: [
-    {at: 'start', pos: [-0.1, 1.15, 2.1], look: [-0.2, 1.95, -3.0]},
-    {at: 'end', pos: [-0.1, 1.05, 1.7], look: [-0.2, 2.0, -3.0]}]},
-  // 4 the rounds: gentle pan with the knocker to the window
-  {shot: 4, loc: 'street', move: 'gentle pan with the walking knocker', keys: [
-    {at: 'start', pos: [-1.0, 1.1, 0.8], look: [-2.2, 1.6, -2.6]},
-    {at: 'end', pos: [-0.4, 1.1, 0.7], look: [0.4, 2.5, -3.4]}]},
-  // 5 bedroom A
-  {shot: 5, loc: 'bedroom', lift: false, move: 'still on the window being tapped', keys: [
-    {at: 'start', pos: [0.5, 1.75, -2.45], look: [1.3, 1.95, -4.9], fov: 76},
-    {at: 'end', pos: [0.45, 1.75, -2.4], look: [1.3, 1.95, -4.9], fov: 76}]},
-  {shot: 5, from: 'tok3', loc: 'bedroom', move: 'medium on the sleeper, slight push', keys: [
-    {at: 'start', pos: [0.3, 1.4, -1.8], look: [-0.6, 1.33, -3.9]},
-    {at: 'end', pos: [0.15, 1.4, -2.05], look: [-0.6, 1.33, -3.9]}]},
-  // 6 don't pretend: one steady framing with the knocker and the window
-  {shot: 6, loc: 'street', lift: false, move: 'steady low-medium on the knocker and the window', keys: [
-    {at: 'start', pos: [1.0, 1.3, 0.5], look: [1.95, 2.7, -3.6]},
-    {at: 'end', pos: [1.05, 1.3, 0.2], look: [1.95, 2.75, -3.6]}]},
-  // 7 London
-  {shot: 7, loc: 'london', move: 'medium-wide on the woman and the LONDON sign, slow push', keys: [
-    {at: 'start', pos: [-1.3, 1.25, 1.0], look: [-1.3, 1.6, -2.8]},
-    {at: 'end', pos: [-1.2, 1.25, 0.6], look: [-1.1, 1.6, -2.8]}]},
-  {shot: 7, from: 'sumpit', loc: 'london', lift: false, move: 'still low over-the-shoulder up the pea shooter to the window', keys: [
-    {at: 'start', pos: [-1.25, 1.3, -1.45], look: [0.6, 3.6, -4.0], fov: 76},
-    {at: 'end', pos: [-1.2, 1.35, -1.55], look: [0.65, 3.7, -4.0], fov: 76}]},
-  // 8 the pay
-  {shot: 8, loc: 'london', lift: false, move: 'steady medium on the payment', keys: [
-    {at: 'start', pos: [0.3, 1.8, -0.3], look: [-0.1, 1.95, -3.0]},
-    {at: 'end', pos: [0.2, 1.85, -0.45], look: [-0.15, 2.0, -3.0]}]},
-  // 9 bedroom B
-  {shot: 9, loc: 'bedroom', lift: false, move: 'medium on the sleeping knocker, slow push', keys: [
-    {at: 'start', pos: [11.9, 1.9, -1.3], look: [11.45, 1.6, -3.9]},
-    {at: 'end', pos: [11.85, 1.9, -1.6], look: [11.5, 1.75, -3.9]}]},
-  // 10 the night walk to sunrise
-  {shot: 10, loc: 'street', move: 'wide street, gentle pan with the knocker', keys: [
-    {at: 'start', pos: [-2.2, 1.4, 1.6], look: [-3.2, 1.9, -3.0]},
-    {at: 'end', pos: [-0.6, 1.5, 1.6], look: [-0.4, 2.2, -3.2]}]},
-  // 11 the clock shop
-  {shot: 11, loc: 'shop', lift: false, move: 'steady medium-wide on the knocker and the stall', keys: [
-    {at: 'start', pos: [-0.5, 1.6, 1.3], look: [-0.45, 1.7, -3.0]},
-    {at: 'end', pos: [-0.6, 1.6, 1.0], look: [-0.55, 1.7, -3.0]}]},
-  // 12 today
-  {shot: 12, loc: 'modern', lift: false, move: 'medium on the sleeper with the phone and counter', keys: [
-    {at: 'start', pos: [0.35, 1.8, -1.5], look: [-0.05, 1.8, -3.8]},
-    {at: 'end', pos: [0.3, 1.8, -1.7], look: [-0.05, 1.85, -3.8]}]},
-  {shot: 12, from: 'langsung', loc: 'modern', lift: false, move: 'steady frontal on the choice', keys: [
-    {at: 'start', pos: [0.25, 1.62, 0.8], look: [0.25, 2.15, -2.8], fov: 84},
-    {at: 'end', pos: [0.25, 1.6, 0.5], look: [0.25, 2.15, -2.8], fov: 84}]},
+  // Calm camera (user request): one to three framings per shot, slow short pushes, no dutch angles.
+  // 1 the note introduces itself on the ATM ledge
+  {shot: 1, loc: 'atm', lift: false, move: 'close on the note, slow push', keys: [
+    {at: 'start', pos: [-0.2, 1.12, -1.15], look: [-0.25, 1.0, -2.0]},
+    {at: 'end', pos: [-0.2, 1.12, -1.25], look: [-0.25, 1.0, -2.0]}]},
+  // 2 six o'clock: the owner withdraws, the note comes out, the kiss
+  {shot: 2, loc: 'atm', lift: false, move: 'medium-wide: clock, ATM and the owner walking in', keys: [
+    {at: 'start', pos: [-0.9, 1.7, 1.9], look: [-0.8, 1.55, -2.0]},
+    {at: 'end', pos: [-0.85, 1.65, 1.6], look: [-0.75, 1.5, -2.0]}]},
+  {shot: 2, from: 'atm', loc: 'atm', lift: false, move: 'medium on the cash slot and the owner', keys: [
+    {at: 'start', pos: [0.1, 1.45, 0.5], look: [0.0, 1.3, -2.1]},
+    {at: 'end', pos: [0.1, 1.45, 0.3], look: [0.0, 1.3, -2.1]}]},
+  {shot: 2, from: 'cium', loc: 'atm', lift: false, move: 'close on the owner and the note, hearts', keys: [
+    {at: 'start', pos: [-0.3, 1.8, -0.1], look: [-0.35, 1.85, -1.6]},
+    {at: 'end', pos: [-0.3, 1.8, -0.25], look: [-0.35, 1.85, -1.6]}]},
+  // 3 an hour later: the clock runs to seven while the owner walks off
+  {shot: 3, loc: 'atm', lift: false, move: 'steady on the street clock, the owner walks through', keys: [
+    {at: 'start', pos: [-1.9, 1.95, 1.5], look: [-2.2, 2.0, -1.6]},
+    {at: 'end', pos: [-1.9, 1.95, 1.2], look: [-2.2, 2.05, -1.6]}]},
+  // 4 the café: the note is broken into change
+  {shot: 4, loc: 'cafe', lift: false, move: 'medium on the counter, slow push', keys: [
+    {at: 'start', pos: [-0.15, 1.45, 0.1], look: [-0.1, 1.3, -2.6]},
+    {at: 'end', pos: [-0.15, 1.45, -0.1], look: [-0.1, 1.3, -2.6]}]},
+  // 5 the parking attendant from nowhere
+  {shot: 5, loc: 'parking', lift: false, move: 'medium-wide on the owner, scooter and the empty spot', keys: [
+    {at: 'start', pos: [0.2, 1.5, 2.0], look: [0.1, 1.3, -2.0]},
+    {at: 'end', pos: [0.2, 1.5, 1.7], look: [0.1, 1.3, -2.0]}]},
+  {shot: 5, from: 'tadi', loc: 'parking', lift: false, move: 'close on the owner pointing', keys: [
+    {at: 'start', pos: [1.05, 1.7, -0.1], look: [1.1, 1.75, -1.75]},
+    {at: 'end', pos: [1.05, 1.7, -0.2], look: [1.1, 1.75, -1.75]}]},
+  {shot: 5, from: 'prit', loc: 'parking', lift: false, move: 'medium on the attendant waving the owner back', keys: [
+    {at: 'start', pos: [-0.3, 1.55, 1.2], look: [-0.4, 1.45, -1.8]},
+    {at: 'end', pos: [-0.3, 1.55, 1.0], look: [-0.4, 1.45, -1.8]}]},
+  // 6 noon: the shopping app, FLASH SALE
+  {shot: 6, loc: 'room', lift: false, move: 'medium on the owner with the phone, slow push', keys: [
+    {at: 'start', pos: [-0.1, 1.7, 0.2], look: [-0.15, 1.75, -2.8]},
+    {at: 'end', pos: [-0.1, 1.7, 0.0], look: [-0.15, 1.78, -2.8]}]},
+  // 7 the 50k note shouts; checkout anyway
+  {shot: 7, loc: 'room', lift: false, move: 'close on the shouting note on the desk', keys: [
+    {at: 'start', pos: [0.65, 1.18, -1.9], look: [0.75, 1.1, -3.05]},
+    {at: 'end', pos: [0.66, 1.18, -2.0], look: [0.75, 1.1, -3.05]}]},
+  {shot: 7, from: 'kelima', loc: 'room', lift: false, move: 'the note and the stack of shoe boxes', keys: [
+    {at: 'start', pos: [1.15, 1.35, -1.5], look: [1.25, 1.05, -3.3]},
+    {at: 'end', pos: [1.15, 1.35, -1.6], look: [1.25, 1.05, -3.3]}]},
+  {shot: 7, from: 'checkout', loc: 'room', lift: false, move: 'medium on the checkout', keys: [
+    {at: 'start', pos: [-0.2, 1.7, 0.1], look: [-0.3, 1.75, -2.8]},
+    {at: 'end', pos: [-0.2, 1.7, -0.05], look: [-0.3, 1.75, -2.8]}]},
+  // 8 the kampung: hand to hand
+  {shot: 8, loc: 'kampung', lift: false, move: 'close on the lucky 20k note', keys: [
+    {at: 'start', pos: [-4.1, 1.72, -0.75], look: [-4.3, 1.66, -1.9]},
+    {at: 'end', pos: [-4.1, 1.72, -0.85], look: [-4.3, 1.66, -1.9]}]},
+  {shot: 8, from: 'sayur', loc: 'kampung', lift: false, move: 'wide street: veg cart, minibus, food stall, very slow pan', keys: [
+    {at: 'start', pos: [-0.6, 1.7, 1.8], look: [-0.6, 1.4, -2.8]},
+    {at: 'end', pos: [1.2, 1.7, 1.8], look: [1.2, 1.4, -2.8]}]},
+  {shot: 8, from: 'nenek', loc: 'kampung', lift: false, move: 'medium on grandma and the grandchild', keys: [
+    {at: 'start', pos: [5.05, 1.5, 0.7], look: [5.05, 1.4, -2.5]},
+    {at: 'end', pos: [5.05, 1.48, 0.45], look: [5.05, 1.4, -2.5]}]},
+  // 9 the kid's room: into the chicken piggy bank
+  {shot: 9, loc: 'kidroom', lift: false, move: 'medium on the kid and the piggy bank', keys: [
+    {at: 'start', pos: [0.0, 1.15, -0.7], look: [0.0, 1.0, -2.8]},
+    {at: 'end', pos: [0.0, 1.15, -0.85], look: [0.0, 1.0, -2.8]}]},
+  {shot: 9, from: 'istirahat', loc: 'kidroom', lift: false, move: 'close on the sleeping piggy bank', keys: [
+    {at: 'start', pos: [0.45, 1.45, -1.5], look: [0.4, 1.2, -3.0]},
+    {at: 'end', pos: [0.45, 1.42, -1.65], look: [0.4, 1.2, -3.0]}]},
+  // 10 night: the empty wallet
+  {shot: 10, loc: 'room', lift: false, move: 'wide night room: owner, shoe boxes, coffee cup', keys: [
+    {at: 'start', pos: [0.45, 1.65, 0.6], look: [0.45, 1.5, -2.9]},
+    {at: 'end', pos: [0.4, 1.65, 0.4], look: [0.4, 1.5, -2.9]}]},
+  {shot: 10, from: 'lho', loc: 'room', lift: false, move: 'close on the owner and the wallet', keys: [
+    {at: 'start', pos: [-0.4, 1.75, -0.85], look: [-0.5, 1.75, -2.55]},
+    {at: 'end', pos: [-0.4, 1.75, -0.95], look: [-0.5, 1.75, -2.55]}]},
+  // 11 the desk: that's me; keep a log
+  {shot: 11, loc: 'desk', lift: false, move: 'the note and the money log, slow push', keys: [
+    {at: 'start', pos: [0.05, 1.38, -1.2], look: [0.05, 1.0, -2.5]},
+    {at: 'end', pos: [0.05, 1.36, -1.32], look: [0.05, 1.0, -2.5]}]},
+  // 12 the question
+  {shot: 12, loc: 'desk', lift: false, move: 'frontal on the note and the signs', keys: [
+    {at: 'start', pos: [-0.3, 1.3, -0.9], look: [-0.3, 1.02, -2.6]},
+    {at: 'end', pos: [-0.3, 1.3, -1.0], look: [-0.3, 1.02, -2.6]}]},
 ];
 
 export function warpU(T, t) {

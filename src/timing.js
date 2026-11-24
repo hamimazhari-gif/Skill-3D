@@ -10,6 +10,34 @@ const DATA = {en: EN, id: ID};
 
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
+// Map a fraction of a sentence's letters to a time, spreading the letters over its voiced segments only.
+export function voicedAt(s, f) {
+  const segs = s.voiced && s.voiced.length ? s.voiced : [[s.start, s.end]];
+  const V = segs.reduce((a, [x, y]) => a + y - x, 0);
+  let r = f * V;
+  for (const [x, y] of segs) { if (r < y - x - 1e-6) return x + r; r -= y - x; }
+  return segs[segs.length - 1][1];
+}
+
+// Time of the letter at offset `before` (letters only) inside sentence s. When the sentence has as many
+// punctuation-separated phrases as voiced segments, each phrase is placed in its own segment; otherwise the
+// letters are spread over the voiced parts.
+export function letterTime(s, before) {
+  const toks = s.text.split(/\s+/).filter(Boolean);
+  const phrases = []; let cur = 0;
+  toks.forEach((tk, i) => { cur += norm(tk).replace(/ /g, '').length; if (/[,.!?…:;]["”']?$/.test(tk) || i === toks.length - 1) { phrases.push(cur); cur = 0; } });
+  const total = phrases.reduce((a, b) => a + b, 0) || 1;
+  const segs = s.voiced && s.voiced.length ? s.voiced : [[s.start, s.end]];
+  if (phrases.length === segs.length) {
+    let acc = 0;
+    for (let i = 0; i < phrases.length; i++) {
+      if (before < acc + phrases[i] || i === phrases.length - 1) return segs[i][0] + (segs[i][1] - segs[i][0]) * Math.min(1, (before - acc) / phrases[i]);
+      acc += phrases[i];
+    }
+  }
+  return voicedAt(s, before / total);
+}
+
 export function makeTiming(lang) {
   const d = DATA[lang];
   const S = d.sentences;
@@ -20,7 +48,7 @@ export function makeTiming(lang) {
     CUTS.push((S[i - 1].end + S[i].start) / 2);
   }
   CUTS.push(total);
-  // time of the start of a word inside sentence si (proportional by letters)
+  // time of the start of a word inside sentence si (proportional by letters over the voiced parts, pauses skipped)
   function wt(si, word, occ = 0) {
     const s = S[si];
     const text = norm(s.text);
@@ -30,40 +58,46 @@ export function makeTiming(lang) {
     for (let k = 0; k <= occ; k++) { idx = text.indexOf(w, from); from = idx + 1; }
     if (idx < 0) throw new Error(`word "${word}" not in sentence ${si} (${lang})`);
     const before = text.slice(0, idx).replace(/ /g, '').length;
-    return s.start + (s.end - s.start) * (before / letters.length);
+    return letterTime(s, before);
   }
   function shotOf(t) { for (let k = SHOTS; k >= 1; k--) if (t >= CUTS[k - 1]) return k; return 1; }
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "Knocker-upper / si pembangun orang".
+// Word events per language: [sentenceIndex, word, occurrence]. Story: "Uang seratus ribu / a banknote's day".
 export const EV = {
-  dibayar: {en: [0, 'paid'], id: [0, 'dibayar']}, bangunkan: {en: [0, 'wake'], id: [0, 'membangunkan']},
-  nyata: {en: [1, 'real'], id: [1, 'benar']},
-  inggris: {en: [2, 'britain'], id: [2, 'inggris']}, pabrik: {en: [2, 'factory'], id: [2, 'pabrik']}, subuh: {en: [2, 'dawn'], id: [2, 'subuh']},
-  masalah: {en: [3, 'problem'], id: [3, 'masalahnya']}, mahal: {en: [3, 'expensive'], id: [3, 'mahal']}, langka: {en: [3, 'rare'], id: [3, 'langka']},
-  muncul: {en: [4, 'strange'], id: [4, 'muncullah']}, knocker: {en: [4, 'knocker'], id: [4, 'knocker']},
-  setiap: {en: [5, 'every'], id: [5, 'setiap']}, tongkat: {en: [5, 'stick'], id: [5, 'tongkat']}, ketuk: {en: [5, 'tapping'], id: [5, 'mengetuk']}, pelanggan: {en: [5, 'customers'], id: [5, 'pelanggan']},
-  tok1: {en: [6, 'tap', 0], id: [6, 'tok', 0]}, tok2: {en: [6, 'tap', 1], id: [6, 'tok', 1]}, tok3: {en: [6, 'tap', 2], id: [6, 'tok', 2]},
-  iya: {en: [7, 'okay'], id: [7, 'iya']}, bangun1: {en: [7, 'awake'], id: [7, 'bangun']},
-  jangan: {en: [8, 'don'], id: [8, 'jangan']}, pura: {en: [8, 'pretending'], id: [8, 'pura']},
-  pergi: {en: [9, 'leave'], id: [9, 'pergi']}, yakin: {en: [9, 'sure'], id: [9, 'yakin']}, bangun2: {en: [9, 'really'], id: [9, 'bangun']},
-  kreatif: {en: [10, 'creative'], id: [10, 'kreatif']},
-  wanita: {en: [11, 'woman'], id: [11, 'wanita']}, london: {en: [11, 'london'], id: [11, 'london']}, sumpit: {en: [11, 'pea'], id: [11, 'sumpit']},
-  kacang: {en: [11, 'peas'], id: [11, 'kacang']}, jendela: {en: [11, 'windows'], id: [11, 'jendela']},
-  tik1: {en: [12, 'tik', 0], id: [12, 'tik', 0]}, tik2: {en: [12, 'tik', 1], id: [12, 'tik', 1]}, tik3: {en: [12, 'tik', 2], id: [12, 'tik', 2]},
-  bayar: {en: [13, 'pay'], id: [13, 'bayarannya']}, sen: {en: [13, 'pennies'], id: [13, 'sen']}, minggu: {en: [13, 'week'], id: [13, 'minggu']},
-  tunggu: {en: [14, 'wait'], id: [14, 'tunggu']}, siapa: {en: [14, 'who'], id: [14, 'siapa']}, pembangun: {en: [14, 'knocker'], id: [14, 'pembangun']},
-  jawab: {en: [15, 'answer'], id: [15, 'jawabannya']}, malam: {en: [15, 'night'], id: [15, 'malam']},
-  belum: {en: [16, 'stayed'], id: [16, 'belum']}, pulang: {en: [16, 'bed'], id: [16, 'pulang']}, semua: {en: [16, 'all'], id: [16, 'semua']},
-  hilang: {en: [17, 'disappeared'], id: [17, 'hilang']}, murah: {en: [17, 'cheap'], id: [17, 'murah']},
-  sekarang: {en: [18, 'today'], id: [18, 'sekarang']}, alarm: {en: [18, 'alarms'], id: [18, 'alarm']}, snooze: {en: [18, 'snooze'], id: [18, 'snooze']}, lima: {en: [18, 'five'], id: [18, 'lima']},
-  langsung: {en: [19, 'instant'], id: [19, 'langsung']}, tim: {en: [19, 'team'], id: [19, 'tim']}, komentar: {en: [19, 'comments'], id: [19, 'komentar']},
+  halo: {en: [0, 'hi'], id: [0, 'halo']}, seratus: {en: [0, 'hundred'], id: [0, 'seratus']},
+  hari: {en: [1, 'today'], id: [1, 'hari']}, perjalanan: {en: [1, 'journey'], id: [1, 'perjalananku']}, satuhari: {en: [1, 'single'], id: [1, 'satu']},
+  jam6: {en: [2, 'six'], id: [2, 'enam']}, atm: {en: [2, 'atm'], id: [2, 'atm']},
+  pemilik: {en: [3, 'owner'], id: [3, 'pemilikku']}, cium: {en: [3, 'kissed'], id: [3, 'menciumku']},
+  gajian: {en: [4, 'payday'], id: [4, 'gajian']}, sayang: {en: [4, 'love'], id: [4, 'sayang']},
+  tapi: {en: [5, 'but'], id: [5, 'tapi']}, sejam: {en: [5, 'hour'], id: [5, 'jam']},
+  jam7: {en: [6, 'seven'], id: [6, 'tujuh']}, pecah: {en: [6, 'broken'], id: [6, 'dipecah']}, kopi: {en: [6, 'coffee'], id: [6, 'kopi']},
+  duaribu: {en: [7, 'two'], id: [7, 'dua']}, parkir: {en: [7, 'parking'], id: [7, 'parkir']}, muncul: {en: [7, 'appeared'], id: [7, 'tiba']}, entah: {en: [7, 'nowhere'], id: [7, 'entah']},
+  tadi: {en: [8, 'definitely'], id: [8, 'padahal']},
+  prit: {en: [9, 'okay'], id: [9, 'prit']}, terus: {en: [9, 'keep'], id: [9, 'terus']}, bos: {en: [9, 'boss'], id: [9, 'bos']},
+  siang: {en: [10, 'noon'], id: [10, 'siang']}, aplikasi: {en: [10, 'app'], id: [10, 'aplikasi']},
+  flash: {en: [11, 'flash'], id: [11, 'flash']},
+  jangan: {en: [12, 'no'], id: [12, 'jangan']}, kelima: {en: [12, 'fifth'], id: [12, 'kelima']}, sepatu: {en: [12, 'shoes'], id: [12, 'sepatu']},
+  checkout: {en: [13, 'checked'], id: [13, 'checkout']},
+  sebagian: {en: [14, 'rest'], id: [14, 'sebagian']}, beruntung: {en: [14, 'luckier'], id: [14, 'beruntung']},
+  sayur: {en: [15, 'vegetable'], id: [15, 'sayur']}, angkot: {en: [15, 'minibus'], id: [15, 'angkot']}, warung: {en: [15, 'food'], id: [15, 'warung']},
+  nenek: {en: [15, 'grandmother'], id: [15, 'nenek']}, cucu: {en: [15, 'grandchild'], id: [15, 'cucunya']}, jajan: {en: [15, 'pocket'], id: [15, 'jajan']},
+  anak: {en: [16, 'kid'], id: [16, 'anak']}, celengan: {en: [16, 'chicken'], id: [16, 'celengan']},
+  istirahat: {en: [17, 'rest'], id: [17, 'istirahat']}, tenang: {en: [17, 'peace'], id: [17, 'tenang']},
+  malam: {en: [18, 'night'], id: [18, 'malam']}, dompet: {en: [18, 'wallet'], id: [18, 'dompet']},
+  lho: {en: [19, 'wait'], id: [19, 'lho']}, kemana: {en: [19, 'where'], id: [19, 'mana']}, beli: {en: [19, 'buy'], id: [19, 'beli']},
+  itulah: {en: [20, 'that'], id: [20, 'itulah']},
+  catat: {en: [21, 'track'], id: [21, 'mencatat']}, hilang: {en: [21, 'disappear'], id: [21, 'menghilang']}, sadar: {en: [21, 'noticing'], id: [21, 'sadari']},
+  tanya: {en: [22, 'what'], id: [22, 'uang']}, apa: {en: [22, 'go'], id: [22, 'apa']},
+  komentar: {en: [23, 'comments'], id: [23, 'komentar']},
 };
 
 export const LABELS = {
-  en: {true: 'TRUE STORY!', mill: 'COTTON MILL', price: 'EXPENSIVE!', rare: 'RARE', title: 'KNOCKER-UPPER', titleSub: 'THE HUMAN ALARM CLOCK', london: 'LONDON',
-    pay: 'A FEW PENNIES', paySub: 'PER WEEK', shop: 'ALARM CLOCKS', cheap: 'CHEAP!', snooze: 'SNOOZE', riser: 'INSTANT RISER', team: 'TEAM SNOOZE', comment: 'COMMENT!', who: 'WHO WAKES HIM?'},
-  id: {true: 'KISAH NYATA!', mill: 'PABRIK KAPAS', price: 'MAHAL!', rare: 'LANGKA', title: 'KNOCKER-UPPER', titleSub: 'SI PEMBANGUN ORANG', london: 'LONDON',
-    pay: 'BEBERAPA SEN', paySub: 'PER MINGGU', shop: 'JAM WEKER', cheap: 'MURAH!', snooze: 'SNOOZE', riser: 'LANGSUNG BANGUN', team: 'TIM SNOOZE', comment: 'KOMENTAR!', who: 'SIAPA YANG BANGUNIN?'},
+  en: {day: 'ONE-DAY JOURNEY', payday: 'PAYDAY!', cafe: 'TRENDY COFFEE', price: 'Rp28,000', menu: 'MENU', flash: 'FLASH SALE!', flashSub: 'ENDS IN 00:59',
+    checkout: 'CHECKOUT', shoe: '5TH PAIR', sayur: 'VEGGIES', warung: 'FOOD STALL', angkot: 'MINIBUS', jajan: 'POCKET MONEY', log: 'MONEY LOG',
+    logLines: ['Coffee  28,000', 'Parking  2,000', 'Shoes  ???', '...'], question: 'WHERE DOES IT GO?', comment: 'COMMENT!', parking: 'PARKING', empty: 'Rp0', bank: 'BANK'},
+  id: {day: 'PERJALANAN 1 HARI', payday: 'GAJIAN!', cafe: 'KOPI KEKINIAN', price: 'Rp28.000', menu: 'MENU', flash: 'FLASH SALE!', flashSub: 'SISA 00:59',
+    checkout: 'CHECKOUT', shoe: 'SEPATU KE-5', sayur: 'SAYUR', warung: 'WARUNG', angkot: 'ANGKOT', jajan: 'UANG JAJAN', log: 'CATATAN UANG',
+    logLines: ['Kopi  28.000', 'Parkir  2.000', 'Sepatu  ???', '...'], question: 'HABIS BUAT APA?', comment: 'KOMENTAR!', parking: 'PARKIR', empty: 'Rp0', bank: 'BANK'},
 };

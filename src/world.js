@@ -1,57 +1,55 @@
-// All locations in one scene at different x offsets. Story: "Knocker-upper / si pembangun orang".
+// All locations in one scene at different x offsets. Story: "Uang seratus ribu / a banknote's day".
 import * as THREE from 'three';
-import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, INK} from './kit';
+import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth} from './kit';
 import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {street: 0, factory: 40, bedroom: 80, london: 120, shop: 160, modern: 200};
+export const LOC = {atm: 0, cafe: 40, parking: 80, room: 120, kampung: 160, kidroom: 200, desk: 240};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
-// Cast look for this story (palette overrides on top of char.js PALETTES). Design: 'stout' (new for this video;
-// round no-sleep face, tuft hair, thick brows, sturdier limbs, a longer torso, short legs). Victorian flat caps,
-// bowler hats and nightcaps.
-export const CHAR_DESIGN = 'stout';
+// Cast look for this story. Design: 'tidy' (new for this video; round no-sleep face, fringe hair, thin brows,
+// slimmer limbs, medium torso and slightly longer legs). The narrator is a banknote with the same round face.
+export const CHAR_DESIGN = 'tidy';
 const CAST = {
-  knocker: {jacket: '#6a5a8a', lower: '#3a3442', tie: '#e8c35a', hair: '#3a2a26', hat: 'cap', hatColor: '#5a4a3a', hatColor2: '#46382c', pocket: '#574a72'},
-  custA: {jacket: '#e8e0d0', lower: '#7fa6c9', tie: '#7fa6c9', hair: '#5a3a2a', hat: 'nightcap', hatColor: '#7fa6c9', hatColor2: '#f3ece0', hairStyle: 'tuft', pocket: '#d8d0c0'},
-  custB: {jacket: '#f0dcc8', lower: '#c75b5b', tie: '#c75b5b', hair: '#2b2326', hat: 'nightcap', hatColor: '#c75b5b', hatColor2: '#f3ece0', pocket: '#e0c8b0'},
-  custC: {jacket: '#e6e8d8', lower: '#7fa35a', tie: '#7fa35a', hair: '#8a5a3a', hat: 'nightcap', hatColor: '#7fa35a', hatColor2: '#f3ece0', glasses: true, pocket: '#d0d4c0'},
-  mary: {jacket: '#5a7a6a', lower: '#3a4a42', tie: '#e8dcc0', hair: '#4a3026', hat: 'none', hairStyle: 'bun', pocket: '#4a6a5a'},
-  worker: {jacket: '#8a6a4a', lower: '#4a4a52', tie: '#c75b5b', hair: '#3a2a26', hat: 'cap', hatColor: '#4a5a6a', hatColor2: '#3a4a5a', pocket: '#7a5a3a'},
-  seller: {jacket: '#3a3a48', lower: '#2a2a32', tie: '#d8413a', hair: '#2b2326', hat: 'bowler', hatColor: '#2f2a30', glasses: true, pocket: '#2a2a36'},
-  modern: {jacket: '#7fa6c9', lower: '#5a7aa0', tie: '#f3ece0', hair: '#2b2326', hat: 'none', hairStyle: 'fringe', pocket: '#6a90b8'},
+  owner: {jacket: '#7fb0d8', lower: '#3a4a6a', tie: '#d8413a', hair: '#2b2326', hat: 'none', pocket: '#6a9ac8'},
+  barista: {jacket: '#4a4a52', lower: '#5a4a3a', tie: '#c9935a', hair: '#4a3026', hat: 'cap', hatColor: '#2b2b33', hatColor2: '#1f1f24', pocket: '#c9935a'},
+  attendant: {jacket: '#f08a2a', lower: '#3a3a42', tie: '#f2d24a', hair: '#2b2326', hat: 'cap', hatColor: '#2f5fa8', hatColor2: '#24488a', pocket: '#f2d24a'},
+  veg: {jacket: '#7fa35a', lower: '#5a4a3a', tie: '#e8c35a', hair: '#3a2a26', hat: 'cap', hatColor: '#d9b45a', hatColor2: '#c49a3e', pocket: '#6a8a4a'},
+  driver: {jacket: '#5a6a7a', lower: '#2a2a32', tie: '#d9774a', hair: '#2b2326', hat: 'none', glasses: true, pocket: '#4a5a6a'},
+  ibu: {jacket: '#c75b8a', lower: '#5a3a4a', tie: '#f2d24a', hair: '#2b2326', hairStyle: 'bun', hat: 'none', pocket: '#a84a72'},
+  nenek: {jacket: '#9a7ab8', lower: '#5a4a66', tie: '#e8dcc0', hair: '#d8d4cc', hairStyle: 'bun', hat: 'none', glasses: true, pocket: '#86669e'},
+  kid: {jacket: '#f2d24a', lower: '#4f7fa6', tie: '#d8413a', hair: '#3a2a26', hairStyle: 'tuft', hat: 'none', pocket: '#e0b83a'},
 };
-// palettes for the walking mill workers and the clock buyers
-const CROWD = [
-  {jacket: '#7a6a5a', lower: '#3a3a42', tie: '#d8b43a', hair: '#2b2326', hat: 'cap', hatColor: '#5a5a62'},
-  {jacket: '#5a7a8a', lower: '#3d4a52', tie: '#d9774a', hair: '#6a3a2a', hat: 'cap', hatColor: '#6a4a3a'},
-  {jacket: '#9a5a4a', lower: '#3a3a4a', tie: '#e8c35a', hair: '#3a2a26', hat: 'bowler', hatColor: '#3a3036'},
-  {jacket: '#6a8a5a', lower: '#4a4a3a', tie: '#c75b5b', hair: '#2b2326', hat: 'cap', hatColor: '#4a4a52'},
-  {jacket: '#c99a4a', lower: '#5a4a3a', tie: '#4f7fa6', hair: '#5a3a2a', hat: 'cap', hatColor: '#7a5a3a'},
-].map((p) => ({pocket: p.jacket, ...p}));
+// Banknotes (our own designs): the narrator and its change.
+const BILLS = {
+  red: {color: '#e0626e', dark: '#8a2a36', value: '100.000', short: '100'},
+  blue: {color: '#6a96d6', dark: '#24488a', value: '50.000', short: '50'},
+  green: {color: '#86be72', dark: '#3a6a3a', value: '20.000', short: '20'},
+  grey: {color: '#b4bac2', dark: '#5a6068', value: '2.000', short: '2'},
+};
 
-// Lighting plan (camera_plan.md): a blue pre-dawn street with the moon (shots 1, 3, 4, 6), a pink-orange dawn at the
-// smoking mill, a dark bedroom lit by a candle, a London street before sunrise, the knocker's night walk turning
-// into sunrise (shot 10), a daylit clock shop going sad, a cool modern bedroom turning bright for the question.
-const predawn = {...LOOK_PRESETS.night, fog: '#2a3050', skyTop: '#16203a', skyBottom: '#5a5a80', keyI: 1.9, hemiI: 1.05, near: 12, far: 50, keyPos: [-6, 12, 6]};
-const deepNight = {...LOOK_PRESETS.night, keyI: 1.5, hemiI: 0.85, keyPos: [-6, 12, 6]};
-const sunrise = {...LOOK_PRESETS.dawn, keyPos: [9, 4, 6], moon: false};
-const bedNight = {...LOOK_PRESETS.candle, key: '#ffd0a0', keyI: 1.5, hemiI: 0.9, hemiSky: '#8a90b0', grade: {sat: 0.9, contrast: 1.06, tint: '#ffc890', tintAmt: 0.06, vignette: 0.5}};
-const london = {...LOOK_PRESETS.dusk, skyTop: '#3a4270', keyPos: [-8, 5, 6]};
+// Lighting plan (camera_plan.md): blue first light at the ATM turning into dawn at six and day at seven, a warm café,
+// a sunny parking lot, a bright room at noon that turns night for the empty wallet, a golden afternoon kampung,
+// a warm evening kid's room and a soft morning desk for the closing.
+const firstLight = {...LOOK_PRESETS.dawn, skyTop: '#5a6a9a', skyBottom: '#e8b8a8', key: '#d8c0d0', keyI: 1.7, hemiI: 1.05, keyPos: [-8, 4, 6]};
+const roomNight = {...LOOK_PRESETS.night, fog: '#1a1e2a', key: '#ffd8a8', keyI: 1.5, hemiI: 0.95, hemiSky: '#8a90b8', keyPos: [3, 6, 5], moon: false,
+  grade: {sat: 0.9, contrast: 1.06, tint: '#8a9ad8', tintAmt: 0.06, vignette: 0.5}};
+const kidEvening = {...LOOK_PRESETS.interiorWarm, key: '#ffd0a0', keyI: 2.0, hemiI: 1.1, grade: {sat: 1.0, contrast: 1.03, tint: '#ffc890', tintAmt: 0.08, vignette: 0.42}};
+const deskDay = {...LOOK_PRESETS.interiorWarm, keyI: 2.5, hemiI: 1.35};
 
 export const LOOK = {
-  street: {keys: [{at: 0, ...predawn}, {at: 'nyata', ...predawn, ...MOODS.joyful}, {at: 'cut3', ...predawn},
-    {at: 'jangan', ...predawn, ...MOODS.tense}, {at: 'yakin', ...predawn},
-    {at: 'cut10', ...deepNight}, {at: 'belum', ...deepNight}, {at: 'semua', ...sunrise, ...MOODS.joyful}]},
-  factory: {keys: [{at: 0, ...LOOK_PRESETS.dawn, keyPos: [8, 5, 6]}, {at: 'mahal', ...LOOK_PRESETS.dawn, keyPos: [8, 5, 6], ...MOODS.tense}]},
-  bedroom: {keys: [{at: 0, ...bedNight}, {at: 'iya', ...bedNight, keyI: 1.9}, {at: 'cut9', ...bedNight},
-    {at: 'siapa', ...bedNight, ...MOODS.mystery}]},
-  london: {keys: [{at: 0, ...london}, {at: 'tik3', ...london, ...MOODS.joyful}, {at: 'minggu', ...london, ...MOODS.sad}]},
-  shop: {keys: [{at: 0, ...LOOK_PRESETS.day}, {at: 'hilang', ...LOOK_PRESETS.overcast, ...MOODS.sad}, {at: 'murah', ...LOOK_PRESETS.overcast, ...MOODS.nostalgic}]},
-  modern: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool}, {at: 'langsung', ...LOOK_PRESETS.interiorWarm, ...MOODS.joyful}]},
+  atm: {keys: [{at: 0, ...firstLight}, {at: 'jam6', ...LOOK_PRESETS.dawn, keyPos: [-8, 5, 6]}, {at: 'gajian', ...LOOK_PRESETS.dawn, keyPos: [-8, 5, 6], ...MOODS.joyful},
+    {at: 'cut3', ...LOOK_PRESETS.day}, {at: 'sejam', ...LOOK_PRESETS.day, ...MOODS.sad}]},
+  cafe: {...LOOK_PRESETS.interiorWarm},
+  parking: {keys: [{at: 0, ...LOOK_PRESETS.day}, {at: 'tadi', ...LOOK_PRESETS.day, ...MOODS.tense}, {at: 'prit', ...LOOK_PRESETS.day}]},
+  room: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool}, {at: 'flash', ...LOOK_PRESETS.interiorCool, ...MOODS.joyful}, {at: 'jangan', ...LOOK_PRESETS.interiorCool, ...MOODS.tense},
+    {at: 'checkout', ...LOOK_PRESETS.interiorCool, ...MOODS.sad}, {at: 'cut10', ...roomNight}, {at: 'beli', ...roomNight, ...MOODS.sad}]},
+  kampung: {keys: [{at: 0, ...LOOK_PRESETS.goldenHour}, {at: 'jajan', ...LOOK_PRESETS.goldenHour, ...MOODS.joyful}]},
+  kidroom: {keys: [{at: 0, ...kidEvening}, {at: 'istirahat', ...kidEvening, ...MOODS.nostalgic}]},
+  desk: {keys: [{at: 0, ...deskDay}, {at: 'hilang', ...deskDay, ...MOODS.mystery}, {at: 'cut12', ...deskDay, ...MOODS.joyful}]},
 };
 
 function ground(w, d, color, paint) {
@@ -65,36 +63,31 @@ const under = (g, color) => { const gr = ground(40, 40, color); gr.position.y = 
 export function storyFx(T, EVt) {
   return {
     flashes: [
-      {t: EVt.nyata, dur: 0.35, color: '#ffe9a0', strength: 0.4},
-      {t: EVt.knocker, dur: 0.35, color: '#ffe9b0', strength: 0.4},
-      {t: EVt.iya, dur: 0.3, color: '#ffd0a0', strength: 0.3},
-      {t: EVt.tik3, dur: 0.3, color: '#d8ffb0', strength: 0.3},
-      {t: EVt.semua, dur: 0.5, color: '#ffd9a0', strength: 0.4},
-      {t: EVt.murah, dur: 0.3, color: '#fff4d6', strength: 0.3},
+      {t: EVt.seratus, dur: 0.35, color: '#ffe9b0', strength: 0.3},
+      {t: EVt.gajian, dur: 0.35, color: '#ffe0d0', strength: 0.35},
+      {t: EVt.pecah, dur: 0.3, color: '#fff4d6', strength: 0.35},
+      {t: EVt.flash, dur: 0.4, color: '#ffd0c0', strength: 0.4},
+      {t: EVt.jajan, dur: 0.35, color: '#ffe9b0', strength: 0.3},
       {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4},
     ],
-    shakes: [{t: EVt.iya, dur: 0.3, amp: 0.02}],
+    shakes: [{t: EVt.pecah, dur: 0.3, amp: 0.02}, {t: EVt.jangan, dur: 0.3, amp: 0.015}, {t: EVt.kemana, dur: 0.3, amp: 0.015}],
   };
 }
-
-// taps: a 0..1 pulse 0.16 s long at each time in the list
-const pulse = (t, times, d = 0.16) => { let v = 0; for (const ti of times) { const u = (t - ti) / d; if (u > 0 && u < 1) v = Math.max(v, Math.sin(Math.PI * u)); } return v; };
-const every = (a, b, step) => { const o = []; for (let t = a; t < b; t += step) o.push(t); return o; };
 
 export function buildWorld(lang, T, EVt, L) {
   setCharDesign(CHAR_DESIGN);
   const world = new THREE.Group();
   const chars = [];
   const updaters = [];
-  const post = []; // run after characters have moved (things attached to hands in world space)
+  const post = []; // run after characters have moved (things that follow hands in world space)
   const locGroups = {};
   const addLoc = (name) => { const g = new THREE.Group(); g.position.x = LOC[name]; world.add(g); locGroups[name] = g; return g; };
   const ch = (name, o, parent, x, z, yaw = 0, y = 0) => { const c = makeChar('hero', {yaw, ...(CAST[name] || {}), ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); return c; };
+  const billChar = (kind, parent, s, x, y, z, o = {}) => { const b = BILLS[kind]; const c = makeChar('hero', {bill: b, lower: b.dark, jacket: b.dark, seed: o.seed || 5, scale: s, ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); c.s = s; return c; };
   const E = (k) => EVt[k];
   const cut = (k) => T.CUTS[k - 1];
   const inShots = (t, a, b = a) => t >= cut(a) && t < cut(b + 1);
-  // Dialogue: the speaker's mouth moves only while the voice is audible (voiced segments from the audio) and the
-  // face changes through the line: exprs = [[fraction of the sentence, expression, pose?], ...].
+  // Dialogue: mouth moves only while the voice is audible; exprs = [[fraction of the sentence, expression, pose?], ...].
   const speak = (c, si, exprs = [], from = -1) => {
     const S = T.S[si]; const at0 = (f) => S.start + f * (S.end - S.start);
     const segs = (S.voiced || [[S.start, S.end]]).map(([a, b]) => [Math.max(a, from), b]).filter(([a, b]) => b - a > 0.05);
@@ -103,8 +96,6 @@ export function buildWorld(lang, T, EVt, L) {
   };
   const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
   const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, o.ry ?? 0, o.rx ?? 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
-  // Walk a character along [[t, x, z], ...] (location-local). Moving segments play the walk (or run) cycle and turn
-  // the body toward the walking direction; a segment shorter than 0.05 s is a jump cut (teleport, no walk).
   const walkPath = (c, keys, o = {}) => {
     const rest = c.state.yaw0;
     for (let i = 0; i < keys.length - 1; i++) {
@@ -119,340 +110,363 @@ export function buildWorld(lang, T, EVt, L) {
       const moving = b - a > 0.05 && t > a && t < b && Math.hypot(x1 - x0, z1 - z0) > 0.2;
       const dir = Math.max(-1.1, Math.min(1.1, Math.atan2(x1 - x0, Math.abs(z1 - z0) + 0.001)));
       const ramp = moving ? Math.min(1, (t - a) / 0.2, (b - t) / 0.2) : 0;
-      c.state.yaw0 = rest + (dir - rest) * ramp;
+      if (!o.backwards) c.state.yaw0 = rest + (dir - rest) * ramp;
     });
   };
-  // A long pole (or a short tube) held in a hand, aimed in world space every frame. aim(t) returns
-  // {target: [x, y, z] location-local, w: 0..1 blend from 'carried upright' to 'aimed', len}.
-  const V = new THREE.Vector3(), V2 = new THREE.Vector3(), UP = new THREE.Vector3(0, 1, 0);
-  const rod = (g, c, aim, o = {}) => {
-    const r = o.r || 0.022;
-    const m = cyl(r, r * 1.15, 1, o.color || '#7a5236', {hull: 0.012}); m.traverse((k) => { k.castShadow = false; }); g.add(m);
-    const tip = ball(r * 1.8, o.tip || '#4a4048', {hull: 0.008}); g.add(tip);
-    const out = {tip: new THREE.Vector3()};
-    post.push((t) => {
-      const a = aim(t);
-      m.visible = tip.visible = !!a && c.group.visible;
-      if (!m.visible) return;
-      c.hand(typeof o.hand === 'function' ? o.hand(t, a) : (o.hand ?? 1)).getWorldPosition(V); g.worldToLocal(V);
-      const len = a.len || 3.0;
-      const carry = V2.set(V.x + (o.lean ?? 1.1), V.y + len, V.z + 0.3).sub(V).normalize();
-      const aimD = new THREE.Vector3(...a.target).sub(V); const dist = aimD.length(); aimD.normalize();
-      const d = carry.clone().lerp(aimD, a.w).normalize();
-      const L2 = a.w > 0.5 && a.reach ? dist : len;
-      m.position.copy(V); m.quaternion.setFromUnitVectors(UP, d); m.scale.set(1, L2, 1);
-      out.tip.copy(V).addScaledVector(d, L2); tip.position.copy(out.tip);
-    });
-    return out;
-  };
-  // A sleepy customer who pops up in an upper window (location-local window centre [x, y], wall front at zWall).
-  const windowCust = (g, name, wx, wy, zWall, seed) => {
-    const c = ch(name, {seed}, g, wx, zWall - 0.3, 0, wy - 1.72);
-    return c;
-  };
-  const zzz = (g, x, y, z, vis) => {
-    const zs = [0, 1, 2].map((i) => { const s = P.glyph('Z', 0.32 - i * 0.06, '#fff3df'); g.add(s); return s; });
+  const zzz = (g, x, y, z, vis, size = 0.32) => {
+    const zs = [0, 1, 2].map((i) => { const s = P.glyph('Z', size - i * 0.06 * size / 0.32, '#fff3df'); g.add(s); return s; });
     updaters.push((t) => zs.forEach((s, i) => {
       const u = ((t * 0.55 + i / 3) % 1);
-      s.visible = vis(t); s.position.set(x + u * 0.35 + Math.sin(u * 6 + i) * 0.05, y + u * 0.7, z); s.material.opacity = Math.sin(Math.PI * u); s.material.transparent = true;
+      s.visible = vis(t); s.position.set(x + u * 0.35 * size / 0.32 + Math.sin(u * 6 + i) * 0.05, y + u * 0.7 * size / 0.32, z); s.material.opacity = Math.sin(Math.PI * u); s.material.transparent = true;
     }));
   };
-  const lightUp = (plane, t0, t) => { plane.material.color.set(t > t0 ? '#ffcf7a' : '#2a2436'); };
-  const terraceRow = (g, xs, colors, seed0) => xs.map((x, i) => { const h = P.terrace(3.2, {color: colors[i % colors.length], seed: seed0 + i, roof: '#4a4252'}); at(h.group, x, 0, -4.0); g.add(h.group); return {...h, x}; });
-
-  // ---------- street: the knocker-upper's rounds (shots 1, 3, 4, 6, 10) ----------
-  {
-    const g = addLoc('street');
-    g.add(ground(70, 60, '#7a7480', {cobbles: true}));
-    const walk = box(30, 0.08, 1.0, toon('#9a94a0', {paint: {bricks: true, seed: 4}}), {edges: false}); at(walk, 0, 0, -3.5); g.add(walk);
-    const row = terraceRow(g, [-9.6, -6.4, -3.2, 0, 3.2, 6.4, 9.6], ['#b5654a', '#9a5a4a', '#c27a5a', '#a86a54'], 10);
-    const win = (hi, side) => { const h = row[hi]; return [h.x + h.upper[side][0], h.upper[side][1]]; };
-    for (const x of [-7.4, 7.2]) { const lamp = P.streetLamp(); at(lamp, x, 0, -3.25, x < 0 ? Math.PI : 0); g.add(lamp); }
-    const WA = win(2, 0), W4 = win(3, 1), WB = win(4, 0); // shot 1 / 4 / 6 windows
-    const custA = windowCust(g, 'custA', WA[0], WA[1], -4.0, 11);
-    const custB = windowCust(g, 'custB', WB[0], WB[1], -4.0, 12);
-    const cust4 = windowCust(g, 'custC', W4[0], W4[1], -4.0, 13);
-    const hero = ch('knocker', {seed: 1}, g, -3.4, -2.6, 0.15);
-    const k4 = E('ketuk') - 0.1;
-    walkPath(hero, [[0, -3.4, -2.6], [cut(3) - 0.01, -3.4, -2.6], [cut(3), 2.6, -2.4], [cut(3) + 1.6, 1.0, -2.6], [cut(4) - 0.01, 1.0, -2.6],
-      [cut(4), -2.6, -2.4], [k4, 0.2, -2.6], [cut(6) - 0.01, 0.2, -2.6], [cut(6), 1.3, -2.6], [cut(10) - 0.01, 1.3, -2.6],
-      [cut(10), -4.0, -2.4], [E('belum') + 0.2, -1.6, -2.5], [E('pulang') - 0.1, -1.6, -2.5], [cut(11), 0.6, -2.8]]);
-    // the pole: tapping (aimed at a window) or carried upright
-    const tapsA = every(0.3, E('bangunkan') + 0.4, 0.42), taps4 = every(k4 + 0.35, cut(5), 0.42);
-    const taps6 = [...every(cut(6) + 0.2, E('jangan') - 0.1, 0.42), ...every(E('pergi') - 0.1, E('yakin') + 0.2, 0.26)];
-    const seg = (t) => (t < cut(3) ? {w: WA, taps: tapsA, a: -1, b: E('nyata') + 0.2} : t < cut(4) ? null : t < cut(6) ? {w: W4, taps: taps4, a: k4 + 0.05, b: 1e9}
-      : t < cut(10) ? {w: WB, taps: taps6, a: cut(6) + 0.05, b: E('jangan') + 0.25, a2: E('pergi') - 0.3, b2: E('yakin') + 0.4} : null);
-    rod(g, hero, (t) => {
-      const s = seg(t); if (!s) return {target: [0, 0, 0], w: 0};
-      const on = (a, b) => (a === undefined ? 0 : Math.min(smooth((t - a) / 0.3), 1 - smooth((t - b) / 0.3)));
-      const w = Math.max(on(s.a, s.b), on(s.a2, s.b2));
-      const p = pulse(t, s.taps);
-      return {target: [s.w[0] + 0.33, s.w[1] - 0.42, -4.0 + 0.35 - 0.38 * p], w, reach: true};
-    }, {hand: (t, a) => (inShots(t, 6) ? 1 : a.w > 0.5 && a.target[0] > hero.group.position.x + 0.2 ? 0 : 1)});
-    hero.act([
-      {t: 0, pose: 'pointUp', expr: 'determined'},
-      {t: E('dibayar') + 0.1, pose: 'pointUp', expr: 'scheming'},
-      {t: E('nyata') + 0.05, pose: 'present', expr: 'cheesy'},
-      {t: cut(3), pose: 'hold', expr: 'happy'},
-      {t: E('knocker') + 0.1, pose: 'hips', expr: 'proud'},
-      {t: cut(4), pose: 'hold', expr: 'drowsy'},
-      {t: E('tongkat') + 0.1, pose: 'hold', expr: 'smug'},
-      {t: k4, pose: 'pointUp', expr: 'determined'},
-      {t: E('pelanggan') + 0.1, pose: 'pointUp', expr: 'happy'},
-      {t: cut(6), pose: 'pointUp', expr: 'neutral'},
-      {t: E('jangan') + 0.2, pose: 'hips', expr: 'smug'},
-      {t: E('pura') + 0.15, pose: 'hips', expr: 'annoyed'},
-      {t: E('pergi') - 0.3, pose: 'pointUp', expr: 'gritted'},
-      {t: E('yakin') + 0.4, pose: 'hips', expr: 'proud'},
-      {t: cut(10), pose: 'hold', expr: 'drowsy'},
-      {t: E('malam') + 0.1, pose: 'hold', expr: 'tired'},
-      {t: E('belum') + 0.3, pose: 'armsUp', expr: 'drowsy'},
-      {t: E('semua') - 0.2, pose: 'cheer', expr: 'happy'},
-      {t: E('semua') + 0.6, pose: 'hold', expr: 'sleep'},
-    ]);
-    // customers popping up at the windows
-    custA.act([{t: 0, pose: 'idle', expr: 'sleep'}, {t: E('bangunkan') + 0.1, pose: 'stop', expr: 'irritated'}, {t: E('nyata') + 0.2, pose: 'facepalm', expr: 'tired'}]);
-    cust4.act([{t: 0, pose: 'idle', expr: 'drowsy'}, {t: E('pelanggan') + 0.2, pose: 'wave', expr: 'tired'}]);
-    custB.act([{t: 0, pose: 'idle', expr: 'drowsy'}, {t: E('jangan') - 0.2, pose: 'wave', expr: 'nervous'}, {t: E('pura') + 0.05, pose: 'wave', expr: 'scheming'},
-      {t: E('yakin') - 0.1, pose: 'armsUp', expr: 'grimace'}, {t: E('bangun2') + 0.05, pose: 'stop', expr: 'irritated'}]);
-    const rise = (c, wy, t0, t1 = 1e9, t2 = 1e9, t3 = 1e9) => updaters.push((t) => {
-      const up = Math.min(smooth((t - t0) / 0.35), 1 - smooth((t - t1) / 0.35)) + Math.min(smooth((t - t2) / 0.3), 1 - smooth((t - t3) / 0.3));
-      c.group.position.y = wy - 1.72 - 1.0 * (1 - Math.min(1, up));
-    });
-    rise(custA, WA[1], E('bangunkan') - 0.2, cut(3) - 0.2);
-    rise(cust4, W4[1], E('pelanggan') - 0.1);
-    rise(custB, WB[1], E('jangan') - 0.35, E('pura') + 0.35, E('yakin') - 0.25);
-    // lit windows: customers waking up (shot 4), all the customers up at sunrise (shot 10)
-    const litWins = row.flatMap((h) => h.lit);
-    const coin = P.coin(0.13); g.add(coin);
-    const stamp = sign(L.true, 2.4, 0.62, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(stamp, -1.4, 2.5, -2.9, -0.12, 0, 0.08); g.add(stamp);
-    const ban = P.banner(L.title, 3.0, 0.75, {poleH: 3.7, bg: '#e8a83a', fg: '#351f22', frame: '#8a5a2a'}); at(ban, -0.6, 0, -3.35); g.add(ban);
-    const sub = sign(L.titleSub, 2.6, 0.38, {bg: '#fff3df', frame: '#8a5a2a'}); at(sub, -0.6, 2.6, -3.3); g.add(sub);
-    zzz(g, WA[0] + 0.2, WA[1] + 0.3, -3.9, (t) => t < E('bangunkan') && inShots(t, 1));
-    fx(g, FX.glints([-2.6, 2.4, -2.4], E('dibayar'), {n: 16}), (t) => inShots(t, 1));
-    fx(g, FX.confetti([0.2, 3.6, -3.0], E('knocker') + 0.05), (t) => inShots(t, 3));
-    fx(g, FX.glints([0, 4.0, -3.6], E('semua'), {n: 30}), (t) => inShots(t, 10));
-    updaters.push((t) => {
-      const s1 = inShots(t, 1), s3 = inShots(t, 3), s4 = inShots(t, 4), s6 = inShots(t, 6), s10 = inShots(t, 10);
-      hero.group.visible = s1 || s3 || s4 || s6 || s10;
-      custA.group.visible = s1; cust4.group.visible = s4; custB.group.visible = s6;
-      coin.visible = s1 && t > E('dibayar') - 0.1; coin.scale.setScalar(pop(t, E('dibayar') - 0.1, 0.35)); coin.position.set(-2.55, 2.35 + Math.sin(t * 3) * 0.05, -2.4); coin.rotation.set(Math.PI / 2, 0, t * 4);
-      stamp.visible = s1 && t > E('nyata') - 0.05; stamp.scale.setScalar(t < E('nyata') + 0.15 ? 1.6 - 0.6 * smooth((t - E('nyata') + 0.05) / 0.2) : 1);
-      ban.visible = sub.visible = s3; ban.scale.setScalar(pop(t, E('knocker') - 0.1, 0.4)); sub.scale.setScalar(pop(t, E('knocker') + 0.5, 0.35));
-      litWins.forEach((p, i) => {
-        const t4 = E('pelanggan') - 0.1 + (i % 5) * 0.12, t10 = E('belum') + 0.4 + ((i * 7) % 14) / 14 * (E('semua') - E('belum') - 0.2);
-        const on = (s4 && (i % 3 === 0) && t > t4) || (s4 && p === row[3].lit[1] && t > E('pelanggan') - 0.1) || (s1 && p === row[2].lit[0] && t > E('bangunkan') - 0.2)
-          || (s6 && p === row[4].lit[0] && t > E('jangan') - 0.35) || (s10 && t > t10);
-        p.material.color.set(on ? '#ffcf7a' : '#2a2436');
-      });
-    });
-  }
-
-  // ---------- the mill at dawn: workers walk in; alarm clocks are expensive (shot 2) ----------
-  {
-    const g = addLoc('factory');
-    g.add(ground(70, 60, '#8a7a6a', {cobbles: true}));
-    g.add(P.hills('#7a8a6a'));
-    const f = P.factory(10, 4.4); at(f.group, 0, 0, -7.5); g.add(f.group);
-    const ms = sign(L.mill, 3.2, 0.6, {bg: '#e8dcc0', frame: '#5a3a2a'}); at(ms, 0, 4.0, -7.35); g.add(ms);
-    f.tops.forEach(([x, y, z], i) => fx(g, FX.smoke([x, y, z - 7.5], 0, {every: 0.3, color: '#6a6070', size: 1.0}), (t) => inShots(t, 2)));
-    const lamp = P.streetLamp(); at(lamp, 3.8, 0, -4.2, Math.PI); g.add(lamp);
-    // a shop display with the one alarm clock nobody can afford
-    const ped = box(0.7, 1.0, 0.6, toon('#7a5236', {paint: {planks: 3, seed: 18}})); at(ped, -2.6, 0, -3.4); g.add(ped);
-    const ac = P.alarmClock(0.2); at(ac.group, -2.6, 1.0, -3.3); g.add(ac.group);
-    const tag = sign(L.price, 1.1, 0.42, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(tag, -2.2, 1.85, -3.1, -0.2, 0, -0.12); g.add(tag);
-    const rare = sign(L.rare, 0.9, 0.34, {bg: '#f2d24a', frame: '#8a6a2a'}); at(rare, -3.2, 2.25, -3.2, 0.15, 0, 0.1); g.add(rare);
-    const w0 = ch('worker', {seed: 21}, g, -1.4, -2.7, -0.25);
-    const crew = [[3.5, -3.0, 0.9, -5.6], [-3.8, -3.4, -0.6, -5.7]].map(([x0, z0, x1, z1], i) => {
-      const c = ch('hero', {...CROWD[i], seed: 22 + i}, g, x0, z0, 0);
-      walkPath(c, [[cut(2) + 0.1 * i, x0, z0], [E('masalah') + 0.5, x1, z1]]);
-      c.act([{t: 0, pose: 'limp', expr: ['drowsy', 'tired', 'sleep'][i]}, {t: E('subuh') + 0.1 * i, pose: 'armsUp', expr: 'drowsy'}, {t: E('subuh') + 0.9, pose: 'limp', expr: 'tired'}]);
-      return c;
-    });
-    walkPath(w0, [[cut(2), 0.6, -2.4], [E('subuh') + 0.2, -1.4, -2.7]]);
-    w0.act([
-      {t: 0, pose: 'limp', expr: 'drowsy'},
-      {t: E('subuh') + 0.1, pose: 'armsUp', expr: 'drowsy'},
-      {t: E('masalah') + 0.1, pose: 'point', expr: 'surprised'},
-      {t: E('mahal') + 0.1, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.5},
-      {t: E('langka') + 0.1, pose: 'shrug', expr: 'cry'},
-    ]);
-    fx(g, FX.glints([-2.6, 1.5, -3.2], E('masalah'), {n: 18}), (t) => inShots(t, 2));
-    updaters.push((t) => {
-      tag.visible = t > E('mahal') - 0.1; tag.scale.setScalar(pop(t, E('mahal') - 0.1, 0.35));
-      rare.visible = t > E('langka') - 0.1; rare.scale.setScalar(pop(t, E('langka') - 0.1, 0.35));
-      ac.ring(t, t > E('masalah') && t < E('masalah') + 1.2 ? 1 : 0);
-      crew.forEach((c) => { c.group.visible = t < E('masalah') + 0.5; });
-    });
-  }
-
-  // ---------- bedrooms: A = the customer woken by the pole (shot 5); B = the knocker asleep (shot 9) ----------
-  {
-    const g = addLoc('bedroom');
-    under(g, '#2a2228');
-    const room = (ox, o) => {
-      const r = P.room(6, 3.2, 6, o); at(r, ox, 0, 0); g.add(r);
-      const W = new THREE.Group(); at(W, ox + 1.3, 1.45, -4.88); g.add(W);
-      const pane = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 1.0), new THREE.MeshBasicMaterial({color: '#283250'})); pane.position.set(0, 0.5, -0.015); W.add(pane);
-      for (let i = 0; i < 9; i++) { const s = new THREE.Mesh(new THREE.CircleGeometry(0.012, 6), new THREE.MeshBasicMaterial({color: '#fff6dc'})); s.position.set(-0.4 + ((i * 37) % 80) / 100, 0.1 + ((i * 53) % 85) / 100, -0.01); W.add(s); }
-      for (const [x, y, w, h] of [[0, -0.02, 1.1, 0.08], [0, 1.0, 1.1, 0.08], [-0.5, 0.5, 0.07, 1.08], [0.5, 0.5, 0.07, 1.08], [0, 0.5, 0.05, 1.0], [0, 0.5, 1.0, 0.05]]) {
-        const b = box(w, h, 0.06, '#e8dcc0', {center: true}); at(b, x, y, 0.02); W.add(b);
+  // A route for a banknote: keys [{t, to: fn(V) -> sets V (location-local) | 'hand', c, i}]: the note flies on a short arc
+  // (dur s) from where it was to each new target, then stays there (following a hand while held).
+  const V = new THREE.Vector3(), V2 = new THREE.Vector3();
+  const handPos = (g, c, i, out) => { c.hand(i).getWorldPosition(out); g.worldToLocal(out); return out; };
+  const route = (g, bill, keys, o = {}) => {
+    const target = (k, out) => (k.c ? handPos(g, k.c, k.i ?? 1, out).add(new THREE.Vector3(k.dx || 0, -(0.38 * bill.s - 0.02) + (k.dy || 0), 0.04)) : out.set(...k.p));
+    post.push((t) => {
+      let i = 0; while (i < keys.length - 1 && t >= keys[i + 1].t) i++;
+      const k = keys[i]; target(k, V);
+      const dur = k.dur ?? 0.45;
+      if (i > 0 && t < k.t + dur) {
+        target(keys[i - 1], V2); const u = smooth((t - k.t) / dur);
+        V.lerpVectors(V2, V, u); V.y += Math.sin(Math.PI * u) * (k.arc ?? 0.35);
       }
-      const sill = box(1.25, 0.06, 0.2, '#e8dcc0'); at(sill, 0, -0.08, 0.08); W.add(sill);
-      const bed = P.bed({color: o.bedColor, sheet: o.sheet}); at(bed, ox - 0.6, 0, -3.3); g.add(bed);
-      const nt = box(0.5, 0.6, 0.45, toon('#7a5236', {paint: {planks: 2, seed: 33}})); at(nt, ox + 0.45, 0, -4.1); g.add(nt);
-      const cd = new THREE.Group(); at(cd, ox + 0.45, 0.6, -4.1); g.add(cd);
-      cd.add(cyl(0.05, 0.05, 0.18, '#f3ece0', {hull: 0.008})); const fl = FX.flame([0, 0.22, 0], {size: 0.12}); cd.add(fl.obj); updaters.push((t) => fl.update(t));
-      const fl2 = FX.fireLight([ox + 0.45, 1.2, -3.8], {intensity: 1.2, dist: 5}); g.add(fl2.obj); updaters.push((t) => fl2.update(t));
-      return {W, pane};
-    };
-    const A = room(0, {wall: '#c9b8a0', floor: '#7a5a42', wain: '#6a4a3a', sheet: '#7fa6c9'});
-    const B = room(12, {wall: '#b8a8b8', floor: '#6a4a3a', wain: '#5a4a5a', sheet: '#a86a5a', bedColor: '#5a4a3a'});
-    // the pole tip tapping on room A's window from outside
-    const tipA = cyl(0.018, 0.02, 0.75, '#7a5236', {hull: 0.008}); A.W.add(tipA);
-    const tokT = [E('tok1'), E('tok2'), E('tok3')];
-    const sl = ch('custA', {seed: 31}, g, -0.6, -3.95, 0);
-    sl.act([
-      {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('tok3') + 0.05, pose: 'headHold', expr: 'tired'},
+      bill.group.position.copy(V);
+      if (o.vis) bill.group.visible = o.vis(t);
+    });
+  };
+  // give an object its own copies of its (cached, shared) materials so they can be recoloured or faded
+  const ownMats = (obj) => { obj.traverse((m) => { if (m.material && !m.isLineSegments) m.material = Array.isArray(m.material) ? m.material.map((x) => x.clone()) : m.material.side === THREE.BackSide ? m.material : m.material.clone(); }); return obj; };
+  const poof = (g, p, t0, vis) => fx(g, FX.smoke(p, t0, {n: 9, life: 0.7, size: 0.32, grow: 1.8, rise: 0.25, drift: 0.6, color: '#f6efe2', opacity: 0.9}), vis);
+
+  // ---------- the ATM at first light: intro, withdrawal and the kiss, an hour later (shots 1-3) ----------
+  {
+    const g = addLoc('atm');
+    g.add(ground(70, 60, '#9a968e', {cobbles: false}));
+    const road = box(70, 0.02, 12, toon('#5a5a62', {paint: {seed: 6, stains: 30}}), {edges: false}); at(road, 0, -0.01, 7.0); g.add(road);
+    const curb = box(70, 0.14, 0.25, '#c9c4b8', {edges: false}); at(curb, 0, 0, 1.0); g.add(curb);
+    const fac = [[-5.6, '#e8c99a', '#b5543c'], [-1.9, '#9ac4c0', '#5a6a7a'], [1.9, '#e6a88a', '#7a4a3a'], [5.6, '#d8d0e8', '#5a5a7a']];
+    fac.forEach(([x, col, roof], i) => { const h = P.house(3.6, 3.4, 3, {color: col, roof, seed: 20 + i, windows: 2, doorX: i % 2 ? 0.9 : -0.9, shutter: '#5a7a8a'}); at(h, x, 0, -3.6); g.add(h); });
+    const bankS = sign(L.bank, 1.6, 0.45, {bg: '#3f6fa8', fg: '#fff3df', frame: '#24488a'}); at(bankS, 0, 3.0, -3.45); g.add(bankS);
+    const atm = P.atmBooth('ATM'); at(atm.group, 0, 0, -2.2); g.add(atm.group);
+    const slot = [atm.slot[0], atm.slot[1], -2.2 + atm.slot[2]];
+    // street clock on a post (left) and a lamp (right)
+    const post0 = cyl(0.06, 0.07, 2.6, '#3a4048'); at(post0, -2.3, 0, -1.6); g.add(post0);
+    const clk = P.wallClock(0.36, {rim: '#3a4048'}); at(clk.group, -2.3, 2.85, -1.55); g.add(clk.group);
+    const lamp = P.streetLamp(); at(lamp, 2.7, 0, -1.6); g.add(lamp);
+    const tree = P.tree ? P.tree({}) : null; if (tree) { at(tree, -4.2, 0, -2.2); g.add(tree); }
+    const day = sign(L.day, 0.72, 0.2, {bg: '#fff3df', fg: '#8a2a36', frame: '#8a2a36', depth: 0.03}); at(day, -0.25, 1.4, -2.08); g.add(day);
+    const pay = sign(L.payday, 1.2, 0.42, {bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36'}); at(pay, -0.35, 2.55, -1.75, 0.08); g.add(pay);
+
+    const bill = billChar('red', g, 0.5, -0.25, 0.76, -2.0);
+    const owner = ch('owner', {seed: 2}, g, -2.8, -1.5, 0.2);
+    walkPath(owner, [[cut(2), -2.8, -1.5], [E('jam6') + 1.0, -0.35, -1.55], [cut(3) - 0.01, -0.35, -1.55], [cut(3), -0.6, -1.45], [cut(4), -3.6, -1.25]]);
+    const grab = E('atm') + 0.45;
+    // shot 1: the note on the ATM ledge; shot 2: back in the machine, out of the slot, into the owner's hand
+    route(g, bill, [
+      {t: 0, p: [-0.25, 0.76, -2.0]},
+      {t: cut(2) - 0.01, p: [slot[0], slot[1] - 0.1, slot[2] - 0.35], dur: 0},
+      {t: E('atm') - 0.1, p: [slot[0], slot[1] - 0.05, slot[2] + 0.05], dur: 0.35, arc: 0},
+      {t: grab, c: owner, i: 1, dur: 0.3, arc: 0.1},
+      {t: E('cium') - 0.25, p: [-0.3, 1.34, -1.3], dur: 0.3, arc: 0},
+      {t: E('cium') + 0.55, c: owner, i: 1, dur: 0.3, arc: 0},
     ]);
-    speak(sl, 7, [[0, 'furious', 'stop'], [0.35, 'irritated', 'armsUp'], [0.65, 'gritted', 'stop'], [0.9, 'tired', 'facepalm']]);
-    sl.act([{t: E('iya'), action: 'jump', dur: 0.45}]);
-    zzz(g, -0.4, 2.0, -3.9, (t) => t < E('iya') - 0.1 && inShots(t, 5));
-    // room B: the knocker himself asleep, his pole against the wall and his cap on a hook
-    const kn = ch('knocker', {seed: 32, hat: 'nightcap', hatColor: '#6a5a8a', hatColor2: '#e8dcc0'}, g, 11.4, -3.95, 0);
-    const pole = cyl(0.025, 0.03, 3.0, '#7a5236', {hull: 0.01}); at(pole, 14.0, 0, -4.7, 0, 0, 0.12); g.add(pole);
-    const hook = box(0.06, 0.06, 0.12, INK); at(hook, 13.3, 2.0, -4.85); g.add(hook);
-    const cap = ball(0.2, '#5a4a3a', {sy: 0.45, hull: 0.012}); at(cap, 13.3, 1.88, -4.72); g.add(cap);
-    kn.act([
-      {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('siapa') + 0.05, pose: 'think', expr: 'confused'},
-      {t: E('pembangun') + 0.1, pose: 'shrug', expr: 'worried'},
+    // the note's size: big for its intro, small once it is in the owner's hand
+    updaters.push((t) => { const s = t < cut(2) ? 0.5 : 0.26; bill.group.scale.setScalar(s); bill.s = s; });
+    bill.act([
+      {t: 0, pose: 'wave', expr: 'cheesy'},
+      {t: E('seratus') + 0.1, pose: 'presentBoth', expr: 'proud'},
+      {t: E('hari') + 0.1, pose: 'point', expr: 'happy'},
+      {t: E('satuhari') + 0.05, pose: 'armsUp', expr: 'excited'},
+      {t: cut(2), pose: 'idle', expr: 'neutral'},
+      {t: E('atm'), pose: 'armsUp', expr: 'cheesy'},
+      {t: E('cium') + 0.05, pose: 'idle', expr: 'surprised'},
+      {t: E('cium') + 0.5, pose: 'present', expr: 'toothy'},
+      {t: E('sayang') + 0.2, pose: 'cheer', expr: 'happy'},
+      {t: cut(3), pose: 'idle', expr: 'happy'},
+      {t: E('sejam') - 0.1, pose: 'limp', expr: 'worried'},
     ]);
-    zzz(g, 11.6, 2.0, -3.9, (t) => t < E('siapa') && inShots(t, 9));
-    const qs = [0, 1, 2].map((i) => { const q = P.glyph('?', 0.45 - i * 0.08, '#f2d24a'); g.add(q); return q; });
+    owner.act([
+      {t: 0, pose: 'idle', expr: 'tired'},
+      {t: E('jam6') + 1.0, pose: 'tap', expr: 'thinking'},
+      {t: E('atm') - 0.3, pose: 'tap', expr: 'surprised'},
+      {t: grab, pose: 'hold', expr: 'excited'},
+      {t: E('cium') - 0.25, pose: 'eat', expr: 'happy'},
+    ]);
+    speak(owner, 4, [[0, 'cheesy', 'carry'], [0.55, 'toothy', 'hold']]);
+    owner.act([{t: cut(3), pose: 'hold', expr: 'happy'}, {t: E('sejam') - 0.1, pose: 'hold', expr: 'smug'}]);
+    const hearts = [0, 1, 2].map((i) => { const h = P.heart(); h.scale.setScalar(0.22 - i * 0.04); g.add(h); return h; });
+    const bigHeart = ownMats(P.heart()); g.add(bigHeart);
+    fx(g, FX.glints([-0.25, 1.1, -1.9], E('seratus'), {n: 18}), (t) => inShots(t, 1));
+    fx(g, FX.glints([slot[0], slot[1] + 0.1, slot[2] + 0.1], E('atm'), {n: 12}), (t) => inShots(t, 2));
     updaters.push((t) => {
-      const p = pulse(t, tokT, 0.2);
-      tipA.position.set(0.42 - 0.15 * p, 0.02 + 0.12 * p, 0.012); tipA.rotation.set(0, 0, 0.75);
-      tipA.visible = inShots(t, 5) && t > cut(5) && t < E('iya') + 0.6;
-      // asleep: slumped to the side; awake: upright
-      sl.group.rotation.z = 0.32 * (1 - smooth((t - E('iya') + 0.15) / 0.25)) + 0.06 * p;
-      kn.group.rotation.z = -0.3 * (1 - smooth((t - E('siapa')) / 0.3));
-      qs.forEach((q, i) => { const t0 = E('pembangun') + i * 0.18; q.visible = inShots(t, 9) && t > t0; q.scale.setScalar((0.45 - i * 0.08) * pop(t, t0, 0.35)); q.position.set(11.0 + i * 0.55, 2.45 + (i % 2) * 0.25 + Math.sin(t * 3 + i) * 0.04, -3.6); });
+      const s1 = inShots(t, 1), s2 = inShots(t, 2), s3 = inShots(t, 3);
+      owner.group.visible = s2 || s3;
+      bill.group.visible = s1 || (s2 && t > E('atm') - 0.12) || s3;
+      day.visible = s1 && t > E('perjalanan') - 0.1; day.scale.setScalar(pop(t, E('perjalanan') - 0.1, 0.4));
+      pay.visible = s2 && t > E('gajian') - 0.05; pay.scale.setScalar(pop(t, E('gajian') - 0.05, 0.4));
+      // the clock: 5:58 -> 6:00 on "six"; shot 3: spins from 6 to 7
+      const m = s3 ? 60 * smooth((t - E('tapi')) / (E('sejam') + 0.4 - E('tapi'))) : t < E('jam6') ? 58 : 60;
+      clk.set(5, m);
+      // kiss hearts float up from the note
+      bill.group.getWorldPosition(V); g.worldToLocal(V);
+      hearts.forEach((h, i) => { const t0 = E('cium') + 0.1 + i * 0.25, u = (t - t0) / 1.4; h.visible = s2 && u > 0 && u < 1; h.position.set(V.x + (i - 1) * 0.18 + Math.sin(u * 6 + i) * 0.04, V.y + 0.3 + u * 0.7, V.z + 0.1); h.scale.setScalar((0.2 - i * 0.03) * Math.sin(Math.PI * Math.min(1, u * 1.5))); });
+      // shot 3: the big love heart above the note shrinks and greys
+      const k = smooth((t - E('tapi')) / (E('sejam') + 0.3 - E('tapi')));
+      bigHeart.visible = s3 && k < 0.98; bigHeart.position.set(V.x, V.y + 0.42, V.z); bigHeart.scale.setScalar(0.28 * (1 - k) + 0.02);
+      bigHeart.traverse((m) => { if (m.material && m.material.color && m.material.side !== THREE.BackSide) m.material.color.set(k > 0.5 ? '#8a8a92' : '#d8413a'); });
     });
   }
 
-  // ---------- London: the woman with the pea shooter; the pay (shots 7, 8) ----------
+  // ---------- the trendy café: the note is broken (shot 4) ----------
   {
-    const g = addLoc('london');
-    g.add(ground(70, 60, '#6e6a74', {cobbles: true}));
-    const walk = box(30, 0.08, 1.0, toon('#8e8a96', {paint: {bricks: true, seed: 5}}), {edges: false}); at(walk, 0, 0, -3.5); g.add(walk);
-    const row = terraceRow(g, [-6.4, -3.2, 0, 3.2, 6.4], ['#c9b48a', '#8a9aa8', '#b8a07a', '#9a8a9a'], 40);
-    const post0 = P.signpost([{text: L.london, angle: 0.2, dir: 1}]); at(post0, -3.4, 0, -3.25); g.add(post0);
-    const lamp = P.streetLamp(); at(lamp, 3.9, 0, -3.25, Math.PI); g.add(lamp);
-    const W = [row[2].x + row[2].upper[1][0], row[2].upper[1][1]];
-    const mary = ch('mary', {seed: 41}, g, -0.45, -2.5, 0.2);
-    const custC = windowCust(g, 'custC', W[0], W[1], -4.0, 42);
-    const payer = ch('custC', {seed: 43}, g, 0.85, -3.55, -0.3);
-    walkPath(mary, [[cut(7), -1.8, -2.4], [cut(7) + 1.8, -0.45, -2.5], [cut(8) - 0.01, -0.45, -2.5], [cut(8), -0.15, -2.75]]);
-    const shotT = [E('kacang') + 0.1, E('tik1') - 0.3, E('tik2') - 0.3, E('tik3') - 0.3];
-    const hitT = shotT.map((x) => x + 0.3);
-    const tube = rod(g, mary, (t) => (inShots(t, 7) && t > E('sumpit') - 0.15 ? {target: [W[0], W[1], -4.0], w: 1, len: 0.42} : null), {r: 0.018, color: '#c9a462', tip: '#a8844a', hand: 1});
-    const peas = shotT.map(() => { const p = ball(0.045, '#8ab84a', {hull: 0.008}); g.add(p); return p; });
-    hitT.forEach((h) => fx(g, FX.sparks([W[0], W[1], -3.95], h, {n: 10, speed: 1.2, color: '#d8ffb0'}), (t) => inShots(t, 7)));
-    mary.act([
-      {t: 0, pose: 'idle', expr: 'neutral'},
-      {t: E('kreatif') + 0.1, pose: 'hips', expr: 'scheming'},
-      {t: E('sumpit') - 0.15, pose: 'chin', expr: 'smug'},
-      {t: E('tik3') + 0.25, pose: 'hips', expr: 'proud'},
-      {t: cut(8), pose: 'present', expr: 'happy'},
-      {t: E('sen') + 0.1, pose: 'present', expr: 'surprised'},
-      {t: E('minggu') + 0.1, pose: 'shrug', expr: 'tired'},
-    ]);
-    custC.act([{t: 0, pose: 'idle', expr: 'grimace'}, {t: E('tik3') + 0.3, pose: 'stop', expr: 'irritated'}]);
-    payer.act([{t: 0, pose: 'give', expr: 'drowsy'}, {t: E('minggu') + 0.15, pose: 'hips', expr: 'smug'}]);
-    const coins = [0, 1, 2].map(() => { const c = P.coin(0.07); g.add(c); return c; });
-    const pay = sign(L.pay, 1.9, 0.5, {bg: '#f2d24a', frame: '#8a6a2a', sub: L.paySub}); at(pay, -0.35, 2.85, -3.3, 0.05); g.add(pay);
-    fx(g, FX.glints([-0.1, 1.6, -2.6], E('sen'), {n: 14}), (t) => inShots(t, 8));
+    const g = addLoc('cafe');
+    under(g, '#2a2228');
+    g.add(P.room(7, 3.2, 6, {wall: '#e8d4b8', floor: '#9a6a4a', wain: '#5a4a42'}));
+    const counter = box(3.2, 1.05, 0.8, toon('#3a4a52', {paint: {planks: 6, seed: 41}})); at(counter, 0, 0, -2.75); g.add(counter);
+    const ctop = box(3.3, 0.06, 0.9, '#d8c8b0'); at(ctop, 0, 1.05, -2.75); g.add(ctop);
+    const em = P.espressoMachine(); at(em, 1.3, 1.1, -2.95); g.add(em);
+    const menu = sign(L.cafe, 2.4, 0.5, {bg: '#2b2b33', fg: '#f3e7d3', frame: '#5a4a42'}); at(menu, 0, 2.5, -4.85); g.add(menu);
+    const price = sign(L.price, 1.1, 0.4, {bg: '#f3e7d3', fg: '#8a2a36', frame: '#5a4a42'}); at(price, 1.5, 1.95, -4.85); g.add(price);
+    for (const x of [-1.6, 0, 1.6]) { const wire = cyl(0.01, 0.01, 0.6, '#2b2b33'); at(wire, x, 2.6, -2.6); g.add(wire); const sh = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.22, 16, 1, true), new THREE.MeshBasicMaterial({color: '#e8a83a', side: THREE.DoubleSide})); at(sh, x, 2.55, -2.6); g.add(sh); const b = ball(0.07, new THREE.MeshBasicMaterial({color: '#fff3c0'}), {hull: 0}); at(b, x, 2.45, -2.6); g.add(b); }
+    const plant = P.tree ? null : null;
+    const barista = ch('barista', {seed: 11}, g, 0.55, -3.45, -0.1);
+    const owner = ch('owner', {seed: 2}, g, -0.75, -1.9, 0.25);
+    const red = billChar('red', g, 0.3, 0, 0, 0);
+    route(g, red, [{t: 0, c: owner, i: 1}, {t: E('pecah') - 0.35, p: [-0.1, 1.12, -2.45], dur: 0.3, arc: 0.1}]);
+    poof(g, [-0.05, 1.3, -2.4], E('pecah'), (t) => inShots(t, 4));
+    // the change: 50k, 20k and 2k notes hop out onto the counter
+    const change = [['blue', -0.45], ['green', -0.05], ['grey', 0.33]].map(([k, x], i) => {
+      const b = billChar(k, g, 0.27, x, 1.11, -2.5, {seed: 30 + i});
+      b.act([{t: 0, pose: 'armsUp', expr: ['cheesy', 'surprised', 'nervous'][i]}, {t: E('kopi') + 0.2, pose: ['wave', 'present', 'idle'][i], expr: ['happy', 'happy', 'worried'][i]}]);
+      return {b, t0: E('pecah') + 0.05 + i * 0.12};
+    });
+    const cup = P.fancyCup(); held(barista, cup, {y: 0.0, z: 0.08});
+    red.act([{t: 0, pose: 'armsUp', expr: 'happy'}, {t: E('pecah') - 0.4, pose: 'headHold', expr: 'scream'}]);
+    owner.act([{t: 0, pose: 'hold', expr: 'happy'}, {t: E('pecah') - 0.4, pose: 'give', expr: 'cheesy'}, {t: E('kopi') + 0.1, pose: 'idle', expr: 'excited'}]);
+    barista.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('pecah') + 0.1, pose: 'present', expr: 'cheesy'}, {t: E('kopi') + 0.05, pose: 'give', expr: 'toothy'}]);
+    fx(g, FX.smoke([1.45, 1.65, -2.95], E('kopi') - 0.2, {n: 5, life: 0.9, size: 0.14, rise: 0.4, drift: 0.2, color: '#fbf6ea', opacity: 0.6}), (t) => inShots(t, 4));
     updaters.push((t) => {
-      const s7 = inShots(t, 7), s8 = inShots(t, 8);
-      custC.group.visible = s7; payer.group.visible = s8;
-      custC.group.position.y = W[1] - 1.72 - 1.0 * (1 - smooth((t - E('tik3') - 0.05) / 0.3));
-      peas.forEach((p, i) => {
-        const u = (t - shotT[i]) / 0.3; p.visible = s7 && u > 0 && u < 1;
-        if (p.visible) p.position.copy(tube.tip).lerp(new THREE.Vector3(W[0], W[1], -3.95), u).add(new THREE.Vector3(0, Math.sin(Math.PI * u) * 0.25, 0));
-      });
-      coins.forEach((c, i) => { const t0 = E('sen') + i * 0.18; c.visible = s8 && t > t0; c.scale.setScalar(pop(t, t0, 0.3)); c.position.set(0.3 + (i - 1) * 0.14, 1.3 + i * 0.07 + Math.sin(t * 3 + i) * 0.03, -2.45); c.rotation.set(Math.PI / 2 - 0.3, 0, t * 3 + i); });
-      pay.visible = s8 && t > E('minggu') - 0.35; pay.scale.setScalar(pop(t, E('minggu') - 0.35, 0.4));
+      red.group.visible = t < E('pecah') + 0.05;
+      change.forEach(({b, t0}) => { b.group.visible = t > t0; b.group.scale.setScalar(0.27 * pop(t, t0, 0.3)); });
+      cup.visible = t > E('kopi') - 0.2; cup.scale.setScalar(pop(t, E('kopi') - 0.2, 0.3));
     });
   }
 
-  // ---------- clock shop: cheap alarm clocks end the job (shot 11) ----------
+  // ---------- the parking attendant who came from nowhere (shot 5) ----------
   {
-    const g = addLoc('shop');
-    g.add(ground(70, 60, '#8a8478', {cobbles: true}));
-    const row = terraceRow(g, [-6.4, -3.2, 3.2, 6.4], ['#c27a5a', '#b8a07a', '#9a8a9a', '#a86a54'], 60);
-    const st = P.stall(L.shop, {awning: '#4f8fc8', signBg: '#f3efe6', w: 2.6}); at(st, 0.4, 0, -4.0); g.add(st);
-    const clocks = [];
-    for (let i = 0; i < 7; i++) { const c = P.alarmClock(0.13, {color: ['#d8413a', '#4f8fc8', '#e8a83a', '#7fa35a'][i % 4]}); at(c.group, -0.6 + i * 0.33, 0.85, -3.85 + (i % 2) * 0.12, (i - 3) * 0.12); g.add(c.group); clocks.push(c); }
-    const cheap = sign(L.cheap, 1.2, 0.48, {bg: '#7fa35a', fg: '#fff3df', frame: '#3f5a2a'}); at(cheap, 1.6, 1.55, -3.35, -0.15, 0, -0.1); g.add(cheap);
-    const seller = ch('seller', {seed: 51}, g, 0.4, -4.7, 0);
-    const buyers = [[1.75, -2.75, -0.3], [-1.0, -2.9, 0.25]].map(([x, z, y], i) => ch('hero', {...CROWD[3 + i], seed: 52 + i}, g, x, z, y));
-    const bc = buyers.map((b) => { const c = P.alarmClock(0.11); held(b, c.group, {y: 0.0, z: 0.08}); return c; });
-    const hero = ch('knocker', {seed: 55}, g, -1.9, -2.5, 0.35);
-    walkPath(hero, [[0, -1.9, -2.5], [E('hilang') + 0.4, -1.9, -2.5], [cut(12) + 0.2, -3.0, -2.3]]);
-    rod(g, hero, () => ({target: [0, 0, 0], w: 0}), {lean: 0.9});
-    hero.act([
-      {t: 0, pose: 'hold', expr: 'worried'},
-      {t: E('hilang') + 0.05, pose: 'hold', expr: 'sad'},
-      {t: E('murah') + 0.1, pose: 'hold', expr: 'cry'},
+    const g = addLoc('parking');
+    g.add(ground(70, 60, '#8e8a82'));
+    const road = box(70, 0.02, 12, toon('#5a5a62', {paint: {seed: 7, stains: 30}}), {edges: false}); at(road, 0, -0.01, 6.5); g.add(road);
+    for (let i = -3; i <= 3; i++) { const ln = box(0.08, 0.012, 1.6, '#f3efe6', {edges: false, hull: 0}); at(ln, i * 1.6 + 0.8, 0, -1.6); g.add(ln); }
+    const cafe = P.house(5.0, 3.4, 3, {color: '#c9935a', roof: '#5a3a2a', seed: 51, windows: 2, doorX: 0.8, shutter: '#3a4a52'}); at(cafe, 0.5, 0, -4.2); g.add(cafe);
+    const cs = sign(L.cafe, 2.2, 0.45, {bg: '#2b2b33', fg: '#f3e7d3', frame: '#5a4a42'}); at(cs, 0.5, 2.85, -4.05); g.add(cs);
+    const ps = sign('P', 0.5, 0.5, {bg: '#2f5fa8', fg: '#fff3df', frame: '#24488a'}); const pp = cyl(0.04, 0.04, 2.2, '#5a5a62'); at(pp, -3.2, 0, -2.6); g.add(pp); at(ps, -3.2, 2.3, -2.55); g.add(ps);
+    const tr = P.tree ? P.tree({}) : null; if (tr) { at(tr, 3.6, 0, -2.6); g.add(tr); }
+    const sc = P.scooter('#d8413a'); at(sc, 0.4, 0, -2.3); g.add(sc);
+    const owner = ch('owner', {seed: 2}, g, 1.25, -1.75, -0.2);
+    const cup = P.fancyCup(); held(owner, cup, {hand: 0, y: 0.0, z: 0.08});
+    const att = ch('attendant', {seed: 12}, g, -1.35, -1.8, 0.3);
+    const grey = billChar('grey', g, 0.24, 0, 0, 0, {seed: 33});
+    route(g, grey, [{t: 0, c: owner, i: 1}, {t: E('parkir') + 0.35, c: att, i: 0, dur: 0.55, arc: 0.45}]);
+    grey.act([{t: 0, pose: 'idle', expr: 'nervous'}, {t: E('duaribu') + 0.1, pose: 'headHold', expr: 'grimace'}, {t: E('parkir') + 0.9, pose: 'limp', expr: 'cry'}]);
+    owner.act([
+      {t: 0, pose: 'hold', expr: 'happy'},
+      {t: E('parkir') + 0.1, pose: 'give', expr: 'confused'},
+      {t: E('tadi') + 0.05, pose: 'point', expr: 'annoyed'},
+      {t: E('prit') - 0.1, pose: 'hold', expr: 'nervous'},
     ]);
-    seller.act([{t: 0, pose: 'presentBoth', expr: 'cheesy'}, {t: E('murah') + 0.1, pose: 'armsUp', expr: 'excited'}]);
-    buyers.forEach((b, i) => b.act([{t: 0, pose: 'carry', expr: 'happy'}, {t: E('murah') + 0.1 + i * 0.15, pose: 'carryBoth', expr: ['toothy', 'cheesy'][i]}]));
-    fx(g, FX.glints([1.6, 1.6, -3.3], E('murah'), {n: 20}), (t) => inShots(t, 11));
+    att.act([{t: 0, pose: 'idle', expr: 'scheming'}, {t: E('muncul'), action: 'popIn', dur: 0.45}, {t: E('parkir') + 0.3, pose: 'hold', expr: 'smug'}]);
+    speak(att, 9, [[0, 'determined', 'wave'], [0.45, 'cheesy', 'wave'], [0.85, 'smug', 'present']]);
+    // "Okay, okay, back up, boss!": the owner and his scooter roll back
+    const back0 = E('terus') - 0.05, back1 = cut(6);
+    walkPath(owner, [[0, 1.25, -1.75], [back0, 1.25, -1.75], [back1, 0.5, -1.55]], {backwards: true});
+    poof(g, [-1.35, 0.4, -1.75], E('muncul') - 0.05, (t) => inShots(t, 5));
+    const q = P.glyph('?', 0.4, '#f2d24a'); g.add(q);
+    const prit = [0, 1].map(() => { const s = P.glyph('!', 0.3, '#fff3df'); g.add(s); return s; });
     updaters.push((t) => {
-      cheap.visible = t > E('murah') - 0.1; cheap.scale.setScalar(pop(t, E('murah') - 0.1, 0.4));
-      clocks.forEach((c, i) => c.ring(t + i, t > cut(11) + 0.2 && t < E('hilang') ? 1 : 0));
-      bc.forEach((c, i) => c.ring(t + i, t > E('murah') && t < E('murah') + 1 ? 1 : 0));
+      att.group.visible = t > E('muncul') - 0.05;
+      const k = smooth((t - back0) / (back1 - back0)); sc.position.x = 0.4 - 0.75 * k;
+      q.visible = inShots(t, 5) && t > E('tadi') && t < E('prit'); q.scale.setScalar(0.4 * pop(t, E('tadi'), 0.3)); q.position.set(1.4, 2.35 + Math.sin(t * 3) * 0.04, -1.6);
+      prit.forEach((s, i) => { const t0 = E('prit') + i * 0.3, u = (t - t0) / 0.5; s.visible = u > 0 && u < 1; s.position.set(-1.0 + i * 0.25, 2.2 + u * 0.3, -1.6); s.material.opacity = 1 - u; s.material.transparent = true; });
     });
   }
 
-  // ---------- today: phone alarm, snooze five times, the question (shot 12) ----------
+  // ---------- the owner's room: flash sale at noon (shots 6, 7) and the empty wallet at night (shot 10) ----------
   {
-    const g = addLoc('modern');
+    const g = addLoc('room');
     under(g, '#2a2a30');
     g.add(P.room(6.5, 3.2, 6, {wall: '#cfe0e6', floor: '#b89a7a', wain: '#8fb0c0'}));
-    const bed = P.bed({color: '#e8dcc8', sheet: '#e8a83a'}); at(bed, -0.6, 0, -3.3); g.add(bed);
-    const nt = box(0.5, 0.55, 0.45, '#f3efe6'); at(nt, 0.45, 0, -4.1); g.add(nt);
-    const lampM = cyl(0.12, 0.16, 0.25, '#f2d24a', {hull: 0.01}); at(lampM, 0.45, 0.55, -4.15); g.add(lampM);
-    const poster = sign('Zzz', 0.9, 0.6, {bg: '#4f8fc8', fg: '#fff3df', frame: '#2a4a6a'}); at(poster, -2.0, 2.0, -4.85); g.add(poster);
-    const hero = ch('modern', {seed: 61}, g, -0.6, -3.95, 0);
-    walkPath(hero, [[0, -0.6, -3.95], [E('langsung') - 0.12, -0.6, -3.95], [E('langsung') - 0.1, 0.25, -2.6]]);
-    const ph = P.phone(); ph.scale.setScalar(2.4); held(hero, ph, {y: 0.08, z: 0.1});
-    const sz = sign(L.snooze, 0.17, 0.08, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a', depth: 0.01}); at(sz, 0, -0.01, 0.012); ph.add(sz);
-    const pressT = [0, 1, 2, 3, 4].map((i) => E('snooze') + i * (E('lima') + 0.5 - E('snooze')) / 4);
-    const counts = pressT.map((t0, i) => { const s = sign(`${L.snooze} x${i + 1}`, 1.15, 0.38, {bg: '#fff3df', fg: '#d8413a', frame: '#8a2a2a'}); at(s, 0.35, 2.3, -3.7, -0.1); g.add(s); return s; });
-    hero.act([
-      {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('alarm') + 0.05, pose: 'hold', expr: 'tired'},
-      ...pressT.map((t0, i) => ({t: t0, pose: 'hold', expr: ['drowsy', 'tired', 'drowsy', 'sleep', 'scheming'][i]})),
-      {t: E('langsung') - 0.1, pose: 'shrug', expr: 'confused'},
-      {t: E('tim') + 0.1, pose: 'chin', expr: 'scheming'},
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.1), new THREE.MeshBasicMaterial({color: '#bfe2f6'})); at(win, -1.9, 1.85, -4.88); g.add(win);
+    for (const [x, y, w, h] of [[0, -0.55, 1.45, 0.08], [0, 0.55, 1.45, 0.08], [-0.68, 0, 0.08, 1.18], [0.68, 0, 0.08, 1.18], [0, 0, 0.05, 1.1]]) { const b = box(w, h, 0.06, '#f3efe6', {center: true}); at(b, -1.9 + x, 1.85 + y, -4.84); g.add(b); }
+    const stars = [0, 1, 2, 3, 4].map((i) => { const s = new THREE.Mesh(new THREE.CircleGeometry(0.015, 6), new THREE.MeshBasicMaterial({color: '#fff6dc'})); at(s, -2.4 + i * 0.24, 1.55 + ((i * 37) % 70) / 100, -4.86); g.add(s); return s; });
+    const wclk = P.wallClock(0.28, {rim: '#4f7fa6'}); at(wclk.group, 0.6, 2.5, -4.85); g.add(wclk.group);
+    const desk = P.desk({color: '#c9a27a'}); at(desk, 0.4, 0, -3.35); g.add(desk);
+    const mon = P.monitor('#8fd0e0'); at(mon, 0.2, 0.77, -3.55); g.add(mon);
+    const lampN = cyl(0.12, 0.16, 0.25, '#f2d24a', {hull: 0.01}); at(lampN, 1.05, 0.77, -3.45); g.add(lampN);
+    const glow = FX.fireLight([1.05, 1.3, -3.2], {intensity: 1.4, dist: 6}); g.add(glow.obj);
+    // shoe boxes: four on a stack, the fifth arrives at checkout
+    const boxes = ['#e8a83a', '#4f8fc8', '#7fa35a', '#c75b8a', '#d8413a'].map((c, i) => { const b = P.shoeBox(c, i === 4 ? L.shoe : ''); at(b, 1.85, i * 0.29, -3.75, -0.3); g.add(b); return b; });
+    const owner = ch('owner', {seed: 2}, g, -0.55, -2.55, 0.15);
+    const ph = P.phone(); ph.scale.setScalar(2.4); held(owner, ph, {y: 0.08, z: 0.1});
+    const screen = ph.children[1];
+    const wal = P.wallet(); held(owner, wal.group, {y: 0.03, z: 0.12});
+    const blue = billChar('blue', g, 0.45, 0.75, 0.77, -3.05, {seed: 34});
+    const flash = sign(L.flash, 1.7, 0.6, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a', sub: L.flashSub}); at(flash, -0.7, 2.45, -2.9, 0.06); g.add(flash);
+    const chk = sign(L.checkout, 1.4, 0.42, {bg: '#4fae5a', fg: '#fff3df', frame: '#2a6a32'}); at(chk, -0.7, 2.45, -2.85, -0.04); g.add(chk);
+    const empty = sign(L.empty, 0.8, 0.36, {bg: '#fff3df', fg: '#8a2a36', frame: '#8a2a36'}); at(empty, -0.25, 2.3, -2.4, 0.05); g.add(empty);
+    const ghost = ownMats(P.shoeBox('#ffffff', '')); ghost.traverse((m) => { if (m.material && !Array.isArray(m.material) && m.material.side !== THREE.BackSide && !m.isLineSegments) { m.material.transparent = true; m.material.opacity = 0.5; } }); at(ghost, 1.85, 4 * 0.29, -3.75, -0.3); g.add(ghost);
+    const cupN = P.fancyCup(); at(cupN, -0.1, 0.77, -3.2); g.add(cupN);
+    // a fly buzzing out of the empty wallet
+    const fly = new THREE.Group(); fly.add(ball(0.03, '#2b2b33', {hull: 0.006})); for (const s of [-1, 1]) { const w = ball(0.03, '#e8f4ff', {sx: 1.4, sy: 0.5, hull: 0.004}); at(w, s * 0.035, 0.03, 0); fly.add(w); } g.add(fly);
+    owner.act([
+      {t: cut(6), pose: 'hold', expr: 'neutral'},
+      {t: E('aplikasi') + 0.1, pose: 'hold', expr: 'happy'},
+      {t: E('flash') + 0.05, pose: 'hold', expr: 'cheesy', action: 'jump', dur: 0.5},
+      {t: cut(7), pose: 'hold', expr: 'scheming'},
+      {t: E('jangan') + 0.3, pose: 'hold', expr: 'smug'},
+      {t: E('checkout') - 0.2, pose: 'tap', expr: 'toothy'},
+      {t: cut(10), pose: 'hold', expr: 'tired'},
+      {t: E('dompet') - 0.2, pose: 'hold', expr: 'neutral'},
+    ]);
+    speak(owner, 19, [[0, 'confused', 'hold'], [0.3, 'shocked', 'hold'], [0.62, 'cry', 'headHold']]);
+    speak(blue, 12, [[0, 'scream', 'stop'], [0.35, 'furious', 'headHold'], [0.7, 'gritted', 'stop']]);
+    blue.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('flash') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('checkout') - 0.2, pose: 'armsUp', expr: 'scream'}]);
+    // the 50k note is sucked into the phone at checkout
+    const tCh = E('checkout') + 0.1;
+    route(g, blue, [{t: 0, p: [0.75, 0.77, -3.05]}, {t: tCh, c: owner, i: 1, dy: 0.25, dur: 0.4, arc: 0.3}]);
+    fx(g, FX.glints([-0.7, 2.45, -2.8], E('flash'), {n: 26}), (t) => inShots(t, 6));
+    fx(g, FX.glints([-0.7, 2.45, -2.8], E('checkout') + 0.05, {n: 16, color: '#c8ffb0'}), (t) => inShots(t, 7));
+    updaters.push((t) => {
+      const day = t < cut(10);
+      win.material.color.set(day ? '#bfe2f6' : '#1e2a48'); stars.forEach((s) => { s.visible = !day; });
+      glow.update(t); glow.obj.visible = !day;
+      wclk.set(day ? 12 : 21, day ? 0 : 30);
+      owner.group.visible = true;
+      ph.visible = day; wal.group.visible = !day; wal.open(smooth((t - E('dompet') + 0.1) / 0.35));
+      screen.material.color.set(t > E('flash') - 0.05 && t < E('checkout') ? '#ff8a7a' : t > E('checkout') ? '#9ae0a0' : '#8fd0e0');
+      blue.group.visible = inShots(t, 6, 7) && t < tCh + 0.38; blue.group.scale.setScalar(0.45 * (1 - smooth((t - tCh - 0.1) / 0.3) * 0.9)); blue.s = 0.45;
+      flash.visible = inShots(t, 6, 7) && t > E('flash') - 0.05 && t < E('checkout') - 0.1; flash.scale.setScalar(pop(t, E('flash') - 0.05, 0.4) * (1 + 0.04 * Math.sin(t * 8)));
+      chk.visible = inShots(t, 7) && t > E('checkout') - 0.05; chk.scale.setScalar(pop(t, E('checkout') - 0.05, 0.35));
+      boxes[4].visible = t > E('checkout') + 0.35; boxes[4].scale.setScalar(t < cut(10) ? pop(t, E('checkout') + 0.35, 0.35) : 1);
+      ghost.visible = inShots(t, 7) && t > E('kelima') - 0.1 && t < E('checkout') + 0.35; ghost.scale.setScalar(pop(t, E('kelima') - 0.1, 0.3));
+      cupN.visible = !day;
+      empty.visible = !day && t > E('kemana') - 0.1; empty.scale.setScalar(pop(t, E('kemana') - 0.1, 0.35));
+      const fu = (t - E('dompet') - 0.25) / 2.2; fly.visible = !day && fu > 0 && fu < 1;
+      handPos(g, owner, 1, V); fly.position.set(V.x + fu * 1.4 + Math.sin(fu * 18) * 0.12, V.y + 0.1 + fu * 0.9 + Math.sin(fu * 25) * 0.06, V.z + 0.1);
+    });
+  }
+
+  // ---------- the kampung: the 20k note travels from hand to hand (shot 8) ----------
+  {
+    const g = addLoc('kampung');
+    g.add(ground(70, 60, '#a89a82'));
+    const road = box(70, 0.02, 3.2, toon('#6a6670', {paint: {seed: 8, stains: 30}}), {edges: false}); at(road, 0, -0.01, -0.2); g.add(road);
+    [[-4.6, '#e8c99a', '#b5543c'], [-1.0, '#a8c8a0', '#7a4a3a'], [2.6, '#f0d0a0', '#5a6a7a'], [6.0, '#d8b8d8', '#b5543c']].forEach(([x, col, roof], i) => {
+      const h = P.house(3.4, 3.0, 3, {color: col, roof, seed: 60 + i, windows: 2, doorX: i % 2 ? 0.8 : -0.8, shutter: '#6a8a5a'}); at(h, x, 0, -5.4); g.add(h);
+    });
+    const veg = P.stall(L.sayur, {awning: '#7fa35a', signBg: '#f3efe6', w: 2.0}); at(veg, -2.3, 0, -2.9); g.add(veg);
+    const vp = P.vegPile(4); at(vp, -2.3, 0, -2.9); g.add(vp);
+    const bus = P.minibus('#5aa8a0', L.angkot); at(bus, 0.3, 0, -4.0); g.add(bus);
+    const war = P.stall(L.warung, {awning: '#d8413a', signBg: '#fff3df', w: 2.0}); at(war, 2.6, 0, -2.9); g.add(war);
+    for (let i = 0; i < 7; i++) { const s = box(0.1, 0.32, 0.02, ['#f2d24a', '#4f8fc8', '#d8413a', '#7fa35a'][i % 4], {hull: 0.004}); at(s, 1.85 + i * 0.25, 1.75, -2.45); g.add(s); }
+    const jars = [0, 1, 2].map((i) => { const j = cyl(0.1, 0.1, 0.24, '#e8f0f0', {hull: 0.006}); at(j, 2.1 + i * 0.5, 0.85, -2.75); g.add(j); return j; });
+    const porch = box(2.2, 0.15, 1.2, toon('#b8a088', {paint: {planks: 5, seed: 66}})); at(porch, 5.3, 0, -3.2); g.add(porch);
+    const seller = ch('veg', {seed: 21}, g, -2.3, -3.55, 0);
+    const driver = ch('driver', {seed: 22}, g, 0.2, -2.65, 0);
+    const ibu = ch('ibu', {seed: 23}, g, 2.6, -3.55, 0);
+    const nenek = ch('nenek', {seed: 24}, g, 4.75, -2.6, 0.15);
+    const kid = ch('kid', {seed: 25, scale: 0.62}, g, 5.55, -2.35, -0.15);
+    const green = billChar('green', g, 0.32, -4.3, 1.4, -1.9, {seed: 35});
+    const tS = E('sayur') + 0.15, tA = E('angkot') + 0.1, tW = E('warung') + 0.1, tN = E('nenek') + 0.1, tC = E('cucu') + 0.1;
+    route(g, green, [
+      {t: 0, p: [-4.3, 1.45, -1.9]},
+      {t: tS, c: seller, i: 1, dur: 0.5, arc: 0.4},
+      {t: tA, c: driver, i: 0, dur: 0.55, arc: 0.5},
+      {t: tW, c: ibu, i: 0, dur: 0.55, arc: 0.5},
+      {t: tN, c: nenek, i: 0, dur: 0.6, arc: 0.5},
+      {t: tC, c: kid, i: 1, dur: 0.5, arc: 0.35},
+    ]);
+    green.act([
+      {t: 0, pose: 'armsUp', expr: 'happy'},
+      {t: E('beruntung') + 0.05, pose: 'cheer', expr: 'excited'},
+      {t: tS, pose: 'wave', expr: 'cheesy'},
+      {t: tW, pose: 'armsUp', expr: 'toothy'},
+      {t: tN, pose: 'present', expr: 'happy'},
+      {t: E('jajan'), pose: 'cheer', expr: 'excited'},
+    ]);
+    seller.act([{t: 0, pose: 'presentBoth', expr: 'happy'}, {t: tS - 0.2, pose: 'give', expr: 'cheesy'}, {t: tA - 0.1, pose: 'wave', expr: 'happy'}]);
+    driver.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: tA - 0.25, pose: 'hold', expr: 'happy'}, {t: tW - 0.1, pose: 'wave', expr: 'happy'}]);
+    ibu.act([{t: 0, pose: 'hips', expr: 'neutral'}, {t: tW - 0.25, pose: 'hold', expr: 'cheesy'}, {t: tN - 0.1, pose: 'present', expr: 'happy'}]);
+    nenek.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: tN - 0.25, pose: 'hold', expr: 'proud'}, {t: tC - 0.15, pose: 'give', expr: 'happy'}]);
+    kid.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: tC - 0.2, pose: 'hold', expr: 'cheesy'}, {t: E('jajan') + 0.05, pose: 'carry', expr: 'excited', action: 'jump', dur: 0.5}]);
+    fx(g, FX.glints([-4.3, 1.6, -1.9], E('beruntung'), {n: 18}), (t) => inShots(t, 8));
+    fx(g, FX.confetti([5.5, 2.0, -2.3], E('jajan') + 0.05, {n: 40}), (t) => inShots(t, 8));
+    const jaj = sign(L.jajan, 1.3, 0.38, {bg: '#86be72', fg: '#fff3df', frame: '#3a6a3a'}); at(jaj, 5.2, 2.3, -2.5); g.add(jaj);
+    updaters.push((t) => { jaj.visible = t > E('jajan') - 0.1; jaj.scale.setScalar(pop(t, E('jajan') - 0.1, 0.35)); });
+  }
+
+  // ---------- the kid's room: into the chicken piggy bank (shot 9) ----------
+  {
+    const g = addLoc('kidroom');
+    under(g, '#2a2228');
+    g.add(P.room(6, 3.0, 6, {wall: '#f2dca8', floor: '#a87a52', wain: '#d89a5a'}));
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 1.0), new THREE.MeshBasicMaterial({color: '#e8a07a'})); at(win, -1.6, 1.8, -4.88); g.add(win);
+    for (const [x, y, w, h] of [[0, -0.5, 1.25, 0.08], [0, 0.5, 1.25, 0.08], [-0.6, 0, 0.08, 1.08], [0.6, 0, 0.08, 1.08], [0, 0, 0.05, 1.0]]) { const b = box(w, h, 0.06, '#f3efe6', {center: true}); at(b, -1.6 + x, 1.8 + y, -4.84); g.add(b); }
+    const bed = P.bed({color: '#7fa6c9', sheet: '#e8a83a'}); at(bed, -2.0, 0, -3.4); g.add(bed);
+    const table = box(0.8, 0.55, 0.6, toon('#c9935a', {paint: {planks: 2, seed: 71}})); at(table, 0.4, 0, -3.0); g.add(table);
+    const pig = P.piggyChicken(1.0); at(pig.group, 0.4, 0.55, -3.0, -0.8); g.add(pig.group);
+    const slot = [0.4, 0.55 + pig.slot[1], -3.0];
+    if (P.toyBlock) ['A', 'B', 'C'].forEach((l, i) => { const b = P.toyBlock(l, ['#d8413a', '#4f8fc8', '#7fa35a'][i], 0.22); at(b, 1.6 + i * 0.26, 0, -2.6, 0.3 * i); g.add(b); });
+    const lampK = FX.fireLight([0.4, 1.6, -2.5], {intensity: 1.0, dist: 5}); g.add(lampK.obj); updaters.push((t) => lampK.update(t));
+    const kid = ch('kid', {seed: 25, scale: 0.62}, g, -0.45, -2.55, 0.2);
+    const green = billChar('green', g, 0.26, 0, 0, 0, {seed: 35});
+    const tIn = E('celengan') + 0.05;
+    route(g, green, [{t: 0, c: kid, i: 1}, {t: tIn - 0.45, p: [slot[0], slot[1] + 0.25, slot[2] + 0.05], dur: 0.4, arc: 0.25}, {t: tIn, p: [slot[0], slot[1] - 0.25, slot[2]], dur: 0.4, arc: 0}]);
+    green.act([{t: 0, pose: 'wave', expr: 'happy'}, {t: E('anak') + 0.1, pose: 'idle', expr: 'surprised'}, {t: tIn - 0.5, pose: 'armsUp', expr: 'cheesy'}]);
+    kid.act([{t: 0, pose: 'hold', expr: 'happy'}, {t: E('anak') + 0.05, pose: 'hold', expr: 'scheming'}, {t: tIn - 0.5, pose: 'give', expr: 'toothy'}, {t: E('istirahat'), pose: 'hips', expr: 'proud'}]);
+    zzz(g, slot[0] + 0.1, slot[1] + 0.15, slot[2] + 0.1, (t) => inShots(t, 9) && t > E('istirahat') - 0.2, 0.2);
+    fx(g, FX.glints([slot[0], slot[1] + 0.1, slot[2] + 0.1], tIn + 0.2, {n: 14}), (t) => inShots(t, 9));
+    updaters.push((t) => {
+      green.group.visible = t < tIn + 0.4;
+      pig.group.rotation.z = t > tIn + 0.35 && t < tIn + 0.9 ? Math.sin((t - tIn) * 40) * 0.04 : 0;
+    });
+  }
+
+  // ---------- the desk: "that's me" — keep a money log, or I disappear; the question (shots 11, 12) ----------
+  {
+    const g = addLoc('desk');
+    under(g, '#2a2228');
+    g.add(P.room(6.5, 3.2, 6, {wall: '#e6dccb', floor: '#a88a6a', wain: '#9ab8a8'}));
+    const top = box(3.2, 0.75, 1.5, toon('#c9a27a', {paint: {planks: 6, seed: 81}})); at(top, 0, 0, -2.75); g.add(top);
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 1.1), new THREE.MeshBasicMaterial({color: '#cfe8f6'})); at(win, 1.4, 1.9, -4.88); g.add(win);
+    for (const [x, y, w, h] of [[0, -0.55, 1.55, 0.08], [0, 0.55, 1.55, 0.08], [-0.73, 0, 0.08, 1.18], [0.73, 0, 0.08, 1.18], [0, 0, 0.05, 1.1]]) { const b = box(w, h, 0.06, '#f3efe6', {center: true}); at(b, 1.4 + x, 1.9 + y, -4.84); g.add(b); }
+    const nb = P.notebook(L.log, {lines: L.logLines}); at(nb, 0.45, 0.75, -2.45, -0.15); g.add(nb);
+    const cup = P.fancyCup(); at(cup, -0.95, 0.75, -2.9); g.add(cup);
+    const coins = P.coinPile ? P.coinPile(6, 4) : null; if (coins) { at(coins, -0.7, 0.75, -2.3); g.add(coins); }
+    const red = billChar('red', g, 0.7, -0.3, 0.75, -2.55, {seed: 36});
+    red.act([
+      {t: cut(11), pose: 'presentBoth', expr: 'smug'},
+      {t: E('catat') + 0.05, pose: 'point', expr: 'determined'},
+      {t: E('hilang') - 0.1, pose: 'headHold', expr: 'grimace'},
+      {t: cut(12), pose: 'shrug', expr: 'confused'},
+      {t: E('apa') + 0.05, pose: 'shrug', expr: 'thinking'},
       {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},
     ]);
-    const riser = sign(L.riser, 1.2, 0.4, {bg: '#7fa35a', fg: '#fff3df', frame: '#3f5a2a'}); at(riser, -0.62, 2.55, -2.8, 0); g.add(riser);
-    const team = sign(L.team, 1.2, 0.4, {bg: '#9a6fb0', fg: '#fff3df', frame: '#5a3a6a'}); at(team, 1.12, 2.55, -2.8, 0); g.add(team);
-    const cmt = sign(L.comment, 1.5, 0.48, {bg: '#c75b5b', fg: '#fff3df', frame: '#8a3f2a'}); at(cmt, 0.25, 3.1, -2.8); g.add(cmt);
-    fx(g, FX.confetti([0.25, 3.0, -2.8], E('komentar') + 0.05), (t) => inShots(t, 12));
-    zzz(g, -0.4, 2.0, -3.9, (t) => t < E('alarm') && inShots(t, 12));
+    const qs = sign(L.question, 1.2, 0.32, {bg: '#fff3df', fg: '#8a2a36', frame: '#8a2a36'}); at(qs, -0.3, 1.74, -2.7); g.add(qs);
+    const cmt = sign(L.comment, 1.0, 0.34, {bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36'}); at(cmt, -0.3, 2.1, -2.75); g.add(cmt);
+    fx(g, FX.glints([-0.3, 1.2, -2.5], E('hilang'), {n: 26}), (t) => inShots(t, 11));
+    poof(g, [-0.3, 1.1, -2.45], E('sadar') - 0.1, (t) => inShots(t, 11));
+    fx(g, FX.confetti([-0.3, 2.2, -2.7], E('komentar') + 0.05), (t) => inShots(t, 12));
     updaters.push((t) => {
-      const asleep = t < E('langsung') - 0.1;
-      hero.group.rotation.z = asleep ? 0.3 * (1 - smooth((t - E('alarm')) / 0.3)) + 0.25 * smooth((t - pressT[3]) / 0.4) * (1 - smooth((t - pressT[4]) / 0.3)) : 0;
-      ph.visible = asleep && t > E('alarm') - 0.2;
-      let k = -1; pressT.forEach((t0, i) => { if (t > t0) k = i; });
-      counts.forEach((s, i) => { s.visible = asleep && i === k; s.scale.setScalar(pop(t, pressT[i], 0.25)); });
-      riser.visible = t > E('langsung') - 0.1; riser.scale.setScalar(pop(t, E('langsung') - 0.1, 0.4));
-      team.visible = t > E('tim') - 0.1; team.scale.setScalar(pop(t, E('tim') - 0.1, 0.4));
+      // fading away on "disappear": flicker and shrink, gone on "noticing", back for the question
+      const gone = t > E('sadar') - 0.05 && t < cut(12);
+      const fl = t > E('hilang') && t < E('sadar') ? (Math.sin(t * 30) > 0 ? 1 : 0.92) * (1 - 0.35 * smooth((t - E('hilang')) / (E('sadar') - E('hilang')))) : 1;
+      red.group.visible = !gone; red.group.scale.setScalar(0.7 * fl * (t >= cut(12) ? pop(t, cut(12) + 0.05, 0.35) : 1));
+      qs.visible = t > E('tanya') + 0.2; qs.scale.setScalar(pop(t, E('tanya') + 0.2, 0.4));
       cmt.visible = t > E('komentar') - 0.1; cmt.scale.setScalar(pop(t, E('komentar') - 0.1, 0.4));
     });
   }

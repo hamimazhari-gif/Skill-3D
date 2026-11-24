@@ -8,7 +8,7 @@ import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
-import {makeTiming, EV, LABELS, FPS} from './timing';
+import {makeTiming, EV, LABELS, FPS, letterTime} from './timing';
 import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
@@ -102,82 +102,83 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 3, 5, 6, 7, 9, 10, 11, 12];
-const every = (a, b, step) => { const o = []; for (let t = a; t < b; t += step) o.push(t); return o; };
+const DIPS = [4, 5, 6, 8, 9, 10, 11];
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
-  // location changes: a different whoosh each time
-  const W = ['07-smooth-transition-whoosh.mp3', '08-heavy-whoosh.wav', '05-airy-whoosh.mp3', sy('swish')];
-  const k4 = E.ketuk - 0.1;
-  const press = [0, 1, 2, 3, 4].map((i) => E.snooze + i * (E.lima + 0.5 - E.snooze) / 4);
-  const shots = [E.kacang + 0.1, E.tik1 - 0.3, E.tik2 - 0.3, E.tik3 - 0.3];
+  const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
+  const pass = ['sayur', 'angkot', 'warung', 'nenek', 'cucu'].map((k) => E[k] + 0.1);
   return [
-    ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.2]),
-    // 1 street: the pole taps the window, the sleeper snores then pops up, paid coin, TRUE STORY stamp
-    ...every(0.3, E.bangunkan + 0.4, 0.42).map((t) => [sy('glass_tap'), t + 0.05, 0.2]),
-    [sy('snore'), 0.0, 0.12, Math.max(0.5, E.bangunkan)],
-    [sy('coin_drop'), E.dibayar, 0.2, 0.5],
-    [sy('slide_whistle_up'), E.bangunkan - 0.15, 0.14],
-    [sy('stamp'), E.nyata, 0.36],
-    [sy('tada'), E.nyata + 0.1, 0.14],
-    // 2 the mill: steam whistle, shuffling workers, the ringing clock, "expensive", "rare"
-    [sy('steam_whistle'), C[1] + 0.2, 0.16],
-    [sy('footsteps_walk'), C[1], 0.18, Math.max(0.6, E.subuh + 0.2 - C[1])],
-    [sy('alarm_bell'), E.masalah, 0.18, 1.2],
-    [sy('ka_ching'), E.mahal, 0.22],
-    [sy('uh_oh'), E.mahal + 0.35, 0.14],
-    [sy('slide_whistle_down'), E.langka + 0.05, 0.16],
-    // 3 the title
-    [sy('footsteps_walk'), C[2], 0.2, 1.6],
-    [sy('party_horn'), E.knocker, 0.18],
-    [sy('applause'), E.knocker + 0.2, 0.11],
-    [sy('sparkle'), E.knocker + 0.5, 0.12],
-    // 4 the rounds
-    [sy('footsteps_walk'), C[3], 0.2, Math.max(0.5, k4 - C[3])],
-    ...every(k4 + 0.35, C[4], 0.42).map((t) => [sy('glass_tap'), t + 0.05, 0.16]),
-    ...[0, 1, 2].map((i) => ['04-soft-ui-pop.mp3', E.pelanggan - 0.1 + i * 0.12, 0.16]),
-    // 5 bedroom: snoring, tok tok tok, the shout
-    [sy('snore'), C[4], 0.16, Math.max(0.3, E.tok1 - C[4])],
-    ...[E.tok1, E.tok2, E.tok3].map((t) => [sy('glass_tap'), t, 0.4]),
-    [sy('boing'), E.iya, 0.16],
-    [sy('thud'), E.iya + 0.35, 0.16],
-    // 6 don't pretend
-    ...[...every(C[5] + 0.2, E.jangan - 0.1, 0.42), ...every(E.pergi - 0.1, E.yakin + 0.2, 0.26)].map((t) => [sy('glass_tap'), t + 0.05, 0.18]),
-    [sy('slide_whistle_up'), E.jangan - 0.35, 0.12],
-    [sy('slide_whistle_down'), E.pura + 0.25, 0.16],
-    [sy('slide_whistle_up'), E.yakin - 0.25, 0.14],
-    [sy('boing'), E.bangun2, 0.12],
-    // 7 London: the pea shooter
-    [sy('footsteps_walk'), C[6], 0.2, 1.6],
-    [sy('sparkle'), E.kreatif, 0.14],
-    ...shots.map((t) => [sy('puff'), t, 0.24]),
-    ...shots.map((t) => [sy('pea_tik'), t + 0.3, 0.34]),
-    [sy('creak'), E.tik3 + 0.2, 0.16],
-    // 8 the pay
-    [sy('coin_drop'), E.sen, 0.3],
-    [sy('slide_whistle_down'), E.minggu + 0.1, 0.14],
-    // 9 who wakes the knocker?
-    [sy('snore'), C[8], 0.18, Math.max(0.3, E.siapa - C[8])],
-    [sy('clock_tick'), C[8], 0.08],
-    [sy('boing'), E.siapa + 0.05, 0.16],
-    ...[0, 1, 2].map((i) => ['pop-bubble-sound-effect.mp3', E.pembangun + i * 0.18, 0.18]),
-    // 10 night walk to sunrise
-    [sy('footsteps_walk'), C[9], 0.18, Math.max(0.5, E.belum + 0.2 - C[9])],
-    [sy('footsteps_walk'), E.pulang - 0.1, 0.18, Math.max(0.5, C[10] - E.pulang)],
-    [sy('birds'), E.semua - 0.3, 0.12, Math.max(0.5, C[10] - E.semua + 0.3)],
-    ['08-soft-success-chime.mp3', E.semua, 0.26],
-    // 11 cheap clocks
-    [sy('alarm_bell'), C[10] + 0.2, 0.14, Math.max(0.3, E.hilang - C[10] - 0.2)],
-    [sy('slide_whistle_down'), E.hilang + 0.05, 0.14],
-    [sy('ka_ching'), E.murah, 0.24],
-    [sy('crowd_cheer'), E.murah + 0.1, 0.1],
-    // 12 today: phone alarm, five snoozes, the question
-    [sy('snore'), C[11], 0.14, Math.max(0.3, E.alarm - C[11])],
-    [sy('phone_alarm'), E.alarm, 0.18, Math.max(0.5, press[4] - E.alarm)],
-    ...press.map((t) => [sy('snooze_tap'), t, 0.4]),
-    [sy('swish'), E.langsung - 0.1, 0.16],
-    ['04-soft-ui-pop.mp3', E.langsung, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.tim, 0.2],
+    ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.18]),
+    // 1 the note on the ATM: dawn birds, sparkle on "hundred thousand", the sign pops
+    [sy('birds'), 0, 0.08, C[1]],
+    ['04-soft-ui-pop.mp3', 0.25, 0.18],
+    [sy('sparkle'), E.seratus, 0.16],
+    ['pop-bubble-sound-effect.mp3', E.perjalanan - 0.1, 0.2],
+    [sy('tada'), E.satuhari, 0.12],
+    // 2 six o'clock: steps, keypad, cash dispenser, kiss, payday!
+    [sy('clock_tick'), C[1], 0.12, 1.2],
+    [sy('footsteps_walk'), C[1], 0.18, Math.max(0.6, E.jam6 + 1.0 - C[1])],
+    [sy('atm_beep'), E.jam6 + 1.0, 0.2],
+    [sy('cash_dispense'), E.atm - 0.75, 0.3],
+    [sy('kiss'), E.cium, 0.4],
+    [sy('heart_pop'), E.cium + 0.15, 0.16],
+    [sy('party_horn'), E.gajian, 0.14],
+    [sy('sparkle'), E.sayang, 0.14],
+    // 3 an hour later: walking off, the clock runs, the love fades
+    [sy('footsteps_walk'), C[2], 0.16, Math.max(0.5, C[3] - C[2] - 0.2)],
+    [sy('clock_tick'), E.tapi, 0.16, Math.max(0.5, E.sejam + 0.4 - E.tapi)],
+    [sy('slide_whistle_down'), E.sejam, 0.16],
+    // 4 the café: espresso, the note breaks (puff), change pops out, the till
+    [sy('espresso'), C[3] + 0.05, 0.14],
+    [sy('puff'), E.pecah - 0.05, 0.3],
+    [sy('ka_ching'), E.pecah + 0.05, 0.2],
+    ...[0, 1, 2].map((i) => ['pop-bubble-sound-effect.mp3', E.pecah + 0.05 + i * 0.12, 0.18]),
+    [sy('heart_pop'), E.kopi - 0.2, 0.12],
+    // 5 the parking attendant
+    [sy('scooter'), C[4] + 0.1, 0.08],
+    [sy('puff'), E.muncul - 0.05, 0.26],
+    [sy('boing'), E.muncul, 0.14],
+    [sy('paper_flutter'), E.parkir + 0.35, 0.3],
+    [sy('slide_whistle_down'), E.parkir + 0.9, 0.12],
+    [sy('uh_oh'), E.tadi + 0.1, 0.12],
+    [sy('whistle_prit'), E.prit - 0.02, 0.22],
+    [sy('scooter'), E.terus - 0.1, 0.14],
+    // 6 noon: notification, FLASH SALE
+    [sy('clock_tick'), C[5], 0.1, 1.0],
+    ['09-notification-ding.wav', E.aplikasi, 0.2],
+    ['07-riser-build-up.wav', E.flash - 0.9, 0.1, 0.9],
+    [sy('tada'), E.flash, 0.18],
+    [sy('sparkle'), E.flash + 0.15, 0.12],
+    // 7 "no! no!" — checkout anyway
+    ['02-error-denied-buzz.wav', E.jangan, 0.12],
+    ['04-soft-ui-pop.mp3', E.kelima - 0.1, 0.16],
+    ['mouse-click-sound-effect.mp3', E.checkout - 0.1, 0.45, 0.4],
+    [sy('ka_ching'), E.checkout, 0.2],
+    [sy('swish'), E.checkout + 0.1, 0.16],
+    [sy('thud'), E.checkout + 0.4, 0.18],
+    // 8 the kampung: hand to hand
+    [sy('birds'), C[7], 0.07, Math.max(0.5, C[8] - C[7])],
+    [sy('sparkle'), E.beruntung, 0.14],
+    ...pass.map((t) => [sy('paper_flutter'), t, 0.22]),
+    [sy('horn'), E.angkot + 0.2, 0.14],
+    [sy('party_horn'), E.jajan, 0.12],
+    // 9 into the piggy bank
+    [sy('slot_drop'), E.celengan + 0.3, 0.3],
+    [sy('coin_drop'), E.celengan + 0.45, 0.12],
+    [sy('snore'), E.istirahat, 0.08, Math.max(0.5, C[9] - E.istirahat - 0.2)],
+    // 10 night: the wallet is empty
+    [sy('clock_tick'), C[9], 0.12, Math.max(0.5, E.dompet - C[9])],
+    [sy('velcro'), E.dompet - 0.1, 0.3],
+    [sy('fly_buzz'), E.dompet + 0.25, 0.14],
+    [sy('uh_oh'), E.kemana, 0.12],
+    [sy('slide_whistle_down'), E.beli + 0.1, 0.14],
+    // 11 the money log; disappearing
+    [sy('page_flips'), E.catat, 0.14, 0.8],
+    ['06-digital-glitch-tech-blip.mp3', E.hilang, 0.12],
+    [sy('puff'), E.sadar - 0.1, 0.24],
+    // 12 the question
+    ['04-soft-ui-pop.mp3', C[11] + 0.05, 0.18],
+    ['pop-bubble-sound-effect.mp3', E.tanya + 0.2, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -190,8 +191,7 @@ export function captionWords(T) {
   for (const s of T.S) {
     const words = s.text.split(/\s+/).filter(Boolean);
     const letters = (w) => w.replace(/[^\p{L}\p{N}]/gu, '').length || 1;
-    const total = words.reduce((a, w) => a + letters(w), 0);
-    let acc = 0; const items = words.map((w) => { const t0 = s.start + (s.end - s.start) * acc / total; acc += letters(w); return {w, t0}; });
+    let acc = 0; const items = words.map((w) => { const t0 = letterTime(s, acc); acc += w.replace(/[^a-zA-Z0-9]/g, '').length; return {w, t0}; });
     // merge short words with the next one so chunks read naturally
     for (let i = 0; i < items.length; i++) {
       let txt = items[i].w; const t0 = items[i].t0;
@@ -246,10 +246,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PROFESI ANEH:', mid: 'ALARM MANUSIA!'},
-  en: {top: 'WEIRDEST JOB:', mid: 'HUMAN ALARM!'},
+  id: {top: 'UANG 100 RIBU', mid: 'HABIS KE MANA?!'},
+  en: {top: 'MY Rp100K', mid: 'WHERE DID IT GO?!'},
 };
-const THUMB = (EVt) => ({t: EVt.bangunkan + 0.9, pos: [-1.6, 1.0, 0.9], look: [-3.5, 3.0, -3.6]});
+const THUMB = (EVt) => ({t: EVt.seratus + 0.7, pos: [-0.15, 1.05, -1.05], look: [-0.25, 1.15, -2.0]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
