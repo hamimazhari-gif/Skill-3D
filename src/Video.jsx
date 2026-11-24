@@ -68,6 +68,7 @@ function Scene({lang, thumb}) {
   useFrame(() => {
     const t = thumb ? thumb.t : fref.current / FPS;
     let {pos, look, loc, roll, fov} = camAt(built.cams, t);
+    if (thumb && thumb.loc) loc = thumb.loc;
     if (thumb) { pos = new THREE.Vector3(...thumb.pos).add(new THREE.Vector3(LOC[loc], 0, 0)); look = new THREE.Vector3(...thumb.look).add(new THREE.Vector3(LOC[loc], 0, 0)); }
     camera.position.copy(pos); camera.lookAt(look); if (!thumb && roll) camera.rotateZ(roll);
     // camera shake on impacts (decaying, deterministic)
@@ -243,7 +244,7 @@ const TH = {
   id: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
   en: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
 };
-const THUMB = (EVt) => ({t: EVt.tempat + 1.0, pos: [0, 1.6, 2.6], look: [0, 1.4, -2.6]});
+const THUMB = (EVt) => ({t: 1.0, loc: 'poster', pos: [0, 1.55, 3.3], look: [0, 1.5, -1.0]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

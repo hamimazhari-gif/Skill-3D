@@ -6,7 +6,7 @@ import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {lineup: 0, jakarta: 40, bali: 80, jogja: 120, town: 160, desa: 200, call: 240};
+export const LOC = {lineup: 0, jakarta: 40, bali: 80, jogja: 120, town: 160, desa: 200, call: 240, poster: 280};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
@@ -41,6 +41,7 @@ const shackDay = {...LOOK_PRESETS.dusk, keyI: 1.8, hemiI: 1.05};
 
 export const LOOK = {
   lineup: {keys: [{at: 0, ...LOOK_PRESETS.day}, {at: 'beda', ...LOOK_PRESETS.day, ...MOODS.joyful}]},
+  poster: {...LOOK_PRESETS.day, ...MOODS.joyful},
   call: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool}, {at: 'cut12', ...LOOK_PRESETS.interiorWarm, ...MOODS.joyful}]},
   jakarta: {keys: [{at: 0, ...haze}, {at: 'kurus', ...haze, ...MOODS.sad}, {at: 'cut3', ...kosDim}, {at: 'sabar', ...kosDim, ...MOODS.sad}]},
   bali: {keys: [{at: 0, ...LOOK_PRESETS.sunset}, {at: 'mewah', ...LOOK_PRESETS.sunset, ...MOODS.joyful}, {at: 'balik', ...LOOK_PRESETS.sunset, ...MOODS.nostalgic}, {at: 'cut5', ...shackDay}]},
@@ -410,6 +411,26 @@ export function buildWorld(lang, T, EVt, L) {
       save.visible = s9 && t > E('tabungan') - 0.2; save.scale.set(1.3, 1.3 * smooth((t - E('tabungan') + 0.2) / 1.2), 1.3);
       veg.visible = t < E('masalah') - 0.1; ph.visible = t > E('masalah') - 0.15;
     });
+  }
+
+  // ---------- thumbnail poster: the five in their home outfits, side by side ----------
+  {
+    const g = addLoc('poster');
+    g.add(ground(70, 60, '#e8dcc4', {}));
+    const cols = ['#7a8aa0', '#f0a07a', '#5a4a6a', '#e8b84a', '#8ac06a'];
+    const names = [L.jakarta, L.bali, L.jogja, L.town, L.desa];
+    const xs = [-1.56, -0.78, 0, 0.78, 1.56];
+    xs.forEach((x, i) => {
+      const panel = box(0.76, 3.2, 0.08, toon(cols[i], {wear: false}), {hull: 0.012}); at(panel, x, 0, -1.2); g.add(panel);
+      const s = sign(names[i], 0.72, 0.22, {bg: '#fff3df', fg: '#351f22', frame: '#351f22', depth: 0.03}); at(s, x, 2.32, -1.0); g.add(s);
+    });
+    const who = ['p1r', 'p2r', 'p3r', 'p4r', 'p5r'];
+    const looks = [['headHold', 'cry'], ['carry', 'cheesy'], ['drink', 'happy'], ['hips', 'smug'], ['cheer', 'toothy']];
+    const cs = who.map((n, i) => { const c = ch(n, {seed: 3 + i}, g, xs[i], -0.75, 0); c.act([{t: 0, pose: looks[i][0], expr: looks[i][1]}]); return c; });
+    const bowl = P.noodleBowl(); held(cs[0], bowl, {hand: 0, y: 0.03, z: 0.1});
+    const ph = P.phone(); ph.scale.setScalar(2.2); held(cs[1], ph, {y: 0.06, z: 0.1});
+    const mg = P.mug('#f3efe6'); held(cs[2], mg, {y: 0.0, z: 0.08});
+    const veg = ball(0.1, '#6fae4a', {hull: 0.008}); held(cs[4], veg, {y: 0.0, z: 0.08});
   }
 
   return {world, chars, locGroups, update(t, camPos) {
