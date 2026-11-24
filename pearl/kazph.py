@@ -154,6 +154,9 @@ LAYOUT = {
     '15': (4400, 7900, 3, 850),   # Shaw explosion
     '17': (2850, 7750, -2, 950),  # Oklahoma capsized
     '19': (7300, 8150, 2, 850),   # Battleship Row 10 Dec
+    '23': (9250, 2000, 3, 600),   # Franklin D. Roosevelt portrait
+    '24': (3950, 2650, -3, 560),  # Hideki Tojo, north of Japan
+    '25': (11300, 3150, 2, 580),  # Cordell Hull, beside Washington
 }
 CARDS = {}
 def build_cards():
@@ -187,15 +190,15 @@ BEAT = {
  '5': ['13', ('11', 'Armada')], '6': '14', '7': 'WIDE*0.17',
  '8': 'WIDE*0.15', '9': ['M:TOKYO*0.5', ('02', 'Komodor')], '10': 'M:JAPAN*0.38', '11': ['M:CHINA*0.26', ('M:MANCHURIA*0.3', 'Rusia')],
  '12': 'M:JAPAN*0.34', '13': 'M:JAPAN*0.22', '14': ['M:MANCHURIA*0.34', ('M:CHINA*0.3', 'Tiongkok meletus')], '15': 'M:JAPAN*0.28',
- '16': ['M:CALIFORNIA*0.3', ('M:PEARL*0.36', 'pelabuhan')], '17': '01',
+ '16': ['M:CALIFORNIA*0.3', ('23', 'Sebagai'), ('M:CALIFORNIA*0.3', 'markas'), ('M:PEARL*0.36', 'pelabuhan')], '17': '01',
  '18': 'M:JAPAN*0.3', '19': ['M:JAPAN*0.26', ('M:CALIFORNIA*0.24', 'delapan')], '20': 'M:CALIFORNIA*0.32',
  '21': 'M:WASHINGTON*0.34', '22': ['M:SAIGON*0.36', ('03', 'Vietnam'), ('M:SAIGON*0.22', 'Malaya')],
  '23': ['M:WASHINGTON*0.3', ('M:JAPAN*0.28', 'ekspor')], '24': 'M:TOKYO*0.48', '25': 'M:JAPAN*0.34', '26': 'M:CHINA*0.24',
- '27': 'M:HINDIA*0.34', '28': 'M:TOKYO*0.42', '29': ['M:HINDIA*0.2', ('M:PEARL*0.34', 'Armada')],
+ '27': 'M:HINDIA*0.34', '28': ['M:TOKYO*0.42', ('24', 'Jenderal'), ('M:TOKYO*0.42', 'Rapat')], '29': ['M:HINDIA*0.2', ('M:PEARL*0.34', 'Armada')],
  '30': '04', '31': ['04@.5,.22*1.5', ('M:WASHINGTON*0.3', 'Harvard')], '32': '04*0.9', '33': '01*0.95',
  '34': 'WIDE*0.15', '35': '10', '36': '10@.55,.45*1.5', '37': 'M:KAGOSHIMA*0.5', '38': '01@.5,.4*1.3', '39': '04',
  '40': 'M:JAPAN*0.36', '41': 'M:HITOKAPPU*0.5', '42': ['05', ('05@.5,.5*1.25', 'Lebih')], '43': '05*0.9',
- '44': 'M:HITOKAPPU*0.34', '45': 'M:NORTHPAC*0.24', '46': '05', '47': 'M:WASHINGTON*0.36', '48': 'M:TOKYO*0.42',
+ '44': 'M:HITOKAPPU*0.34', '45': 'M:NORTHPAC*0.24', '46': '05', '47': ['M:WASHINGTON*0.36', ('25', 'Menteri'), ('M:WASHINGTON*0.3', 'Isinya')], '48': 'M:TOKYO*0.42',
  '49': 'M:NORTHPAC*0.24', '50': '05@.5,.5*1.2', '51': '05', '52': 'M:PEARL*0.36', '53': 'M:NORTHPAC*0.2',
  '54': 'M:WASHINGTON*0.32', '55': ['M:WASHINGTON*0.3', ('M:PEARL*0.3', 'Pasifik')], '56': 'WIDE*0.16',
  '57': ['M:PHILIPPINES*0.24', ('09', 'Oahu')], '58': '09@.5,.5*1.3', '59': 'M:WASHINGTON*0.4', '60': 'M:PEARL*0.4',
@@ -303,6 +306,7 @@ TAGS = [  # anchor, text, t0, screen offset
  (('p', 'MANCHURIA'), 'KELUAR DARI LIGA BANGSA-BANGSA', WD(14, 'Liga'), (60, 100)),
  (('p', 'CHINA'), '1937 · PERANG DENGAN TIONGKOK', WD(14, 'Tiongkok meletus'), (60, 40)),
  (('p', 'JAPAN'), 'BERSEKUTU: JERMAN · ITALIA', WD(15, 'Jerman'), (80, -80)),
+ (('c', '23', .5, .9), 'PRESIDEN FRANKLIN D. ROOSEVELT', WD(16, 'Franklin'), (-330, 20)),
  (('p', 'CALIFORNIA'), 'CALIFORNIA', WD(16, 'California'), (-300, -60)),
  (('p', 'PEARL'), 'PEARL HARBOR', WD(16, 'pelabuhan') + .6, (60, 40)),
  (('p', 'JAPAN'), '> 80% MINYAK DARI AS', WD(19, 'delapan'), (80, -60)),
@@ -314,7 +318,8 @@ TAGS = [  # anchor, text, t0, screen offset
  (('p', 'CHINA'), 'MUNDUR DARI TIONGKOK?', WD(26, 'Mundur'), (60, -110)),
  (('p', 'HINDIA'), 'REBUT SUMBER MINYAK?', WD(26, 'merebut'), (60, -110)),
  (('p', 'HINDIA'), 'HINDIA BELANDA · KINI INDONESIA', WD(27, 'Hindia'), (60, 40)),
- (('p', 'TOKYO'), 'HIDEKI TOJO · PERDANA MENTERI', WD(28, 'Tojo'), (60, 40)),
+ (('c', '24', .5, .9), 'JENDERAL HIDEKI TOJO', WD(28, 'Tojo'), (-250, 20)),
+ (('c', '24', .5, .9), 'PERDANA MENTERI · OKT 1941', WD(28, 'perdana'), (-250, 80)),
  (('p', 'TOKYO'), 'PERANG JIKA RUNDING GAGAL', WD(28, 'berperang') - 1.2, (60, 100)),
  (('p', 'PEARL'), 'ARMADA PASIFIK AS', WD(29, 'Armada'), (60, 40)),
  (('c', '04', .5, .25), 'LAKSAMANA ISOROKU YAMAMOTO', WD(30, 'Isoroku'), (-560, -150)),
@@ -339,7 +344,8 @@ TAGS = [  # anchor, text, t0, screen offset
  (('p', 'NORTHPAC'), 'RADIO DIMATIKAN', WD(45, 'Radio'), (-120, -140)),
  (('p', 'NORTHPAC'), 'RUTE PASIFIK UTARA', WD(45, 'Pasifik utara'), (-120, -80)),
  (('c', '05', .5, .5), 'KETAHUAN? PUTAR BALIK', WD(46, 'ketahuan'), (-300, -220)),
- (('p', 'WASHINGTON'), 'NOTA CORDELL HULL', WD(47, 'Cordell'), (-420, -110)),
+ (('c', '25', .5, .9), 'MENLU CORDELL HULL', WD(47, 'Cordell'), (-200, 20)),
+ (('p', 'WASHINGTON'), 'NOTA HULL', WD(47, 'Isinya') + .4, (-260, -110)),
  (('p', 'TOKYO'), 'DIBACA SEBAGAI ULTIMATUM', WD(48, 'ultimatum'), (60, 40)),
  (('p', 'WASHINGTON'), 'KODE JEPANG DIBONGKAR', WD(55, 'membongkar'), (-420, -110)),
  (('p', 'PEARL'), '27 NOV · PERINGATAN PERANG', WD(55, 'dua puluh tujuh'), (60, 40)),
@@ -406,7 +412,7 @@ TAGS = [  # anchor, text, t0, screen offset
  (('c', '22', .42, .6), '"AIR MATA HITAM"', WD(106, 'air mata'), (-260, -230)),
 ]
 LINES = [  # A, B, t0, dur  (straight red lines on the map)
- (('p', 'CALIFORNIA'), ('p', 'PEARL'), WD(16, 'memindahkan'), 1.0),
+ (('p', 'CALIFORNIA'), ('p', 'PEARL'), WD(16, 'California') + .3, 1.0),
  (('p', 'CALIFORNIA'), ('p', 'JAPAN'), WD(19, 'dibeli'), 1.2),
  (('p', 'SAIGON'), ('p', 'MALAYA'), WD(22, 'Malaya'), .7),
  (('p', 'SAIGON'), ('p', 'PHILIPPINES'), WD(22, 'Filipina'), .7),
@@ -416,7 +422,7 @@ LINES = [  # A, B, t0, dur  (straight red lines on the map)
  (ROUTE[0], ROUTE[1], WD(45, 'Rutenya'), .5), (ROUTE[1], ROUTE[2], WD(45, 'Rutenya') + .5, .5),
  (ROUTE[2], ROUTE[3], WD(45, 'Rutenya') + 1.0, .5), (ROUTE[3], ROUTE[4], WD(45, 'Rutenya') + 1.5, .5),
  (ROUTE[4], ROUTE[5], P(53) + .3, .6),
- (('p', 'WASHINGTON'), ('p', 'TOKYO'), WD(47, 'nota'), 1.4),
+ (('p', 'WASHINGTON'), ('p', 'TOKYO'), WD(47, 'Isinya') + .6, 1.4),
  (('p', 'CALIFORNIA'), ('p', 'PEARL'), WD(64, 'California'), 1.0),
  (ROUTE[5], ('p', 'PEARL'), WD(69, 'lepas'), .8),
  (('p', 'PEARL'), ('p', 'MIDWAY'), WD(93, 'Lexington'), .8),
@@ -455,7 +461,7 @@ YEARS = [  # t, small line, big line, hold
  (P(9) + .05, 'KOMODOR PERRY TIBA', '1853', 2.6),
  (WD(19, 'delapan') - .1, 'MINYAK JEPANG DIBELI DARI AS', '> 80%', 2.6),
  (WD(23, 'satu Agustus') - .2, '1 AGUSTUS 1941', 'EMBARGO', 2.4),
- (WD(34, 'November') - .3, 'TARANTO, ITALIA', 'NOV 1940', 2.6),
+ (WD(34, 'November') - .3, 'TARANTO, ITALIA', 'NOV 1940', 2.2),
  (P(44) + .05, '26 NOVEMBER', '1941', 2.4),
  (P(61) + .05, '7 DESEMBER · WAKTU HAWAII', '06.45', 2.3),
  (P(63) + .05, 'RADAR OPANA', '07.02', 2.2),
@@ -482,6 +488,10 @@ THESIS = [  # mono line, serif answer, t_start, t_strike, t_answer, t_end
 ]
 END = P(108) + (PEND['108'] - P(108)) * .92
 ENGINE = [(P(69), P(84))]
+# vintage 2D insert (taranto.py): iris in, carrier launch, harbour attack, intertitle, iris out. Frame-aligned.
+_fa = lambda x: round(x * FPS) / FPS
+TARANTO = dict(t0=_fa(WD(34, 'pesawat-pesawat') - .25), s2=_fa(WD(34, 'kapal induk') + .3), hit=WD(34, 'Taranto'),
+               s3=_fa(WD(34, 'Dalam') - .15), t1=_fa(WD(34, 'Untuk pertama') - .3))
 
 # ---------------------------------------------------------------- projection helpers
 def to_screen(p, C):
@@ -743,6 +753,7 @@ def render(frames, out):
     bg, stamps = setup()
     yy, xx = np.ogrid[:H, :W]; vig = (1 - .45*np.clip(((xx-W/2)/(W*.62))**2 + ((yy-H/2)/(H*.62))**2, 0, 1))[..., None].astype(np.float32)
     grains = [rng.normal(0, 7, (H, W, 1)).astype(np.float32) for _ in range(6)]
+    TR0, TR1 = round(TARANTO['t0'] * FPS), round(TARANTO['t1'] * FPS)
     if out.endswith('/'):
         os.makedirs(out, exist_ok=True); ff = None
     else:
@@ -750,7 +761,9 @@ def render(frames, out):
                                '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', out], stdin=subprocess.PIPE)
     for fi in frames:
         t = fi / FPS
-        fr = board_frame(t, fi, bg, stamps, vig, grains)
+        if TR0 <= fi < TR1:                      # vintage 2D insert (Taranto) replaces the board
+            import taranto; fr = taranto.frame(fi)
+        else: fr = board_frame(t, fi, bg, stamps, vig, grains)
         if ff: ff.stdin.write(fr.tobytes())
         else: cv2.imwrite(os.path.join(out, f'{t:07.2f}.jpg'), fr, [cv2.IMWRITE_JPEG_QUALITY, 88])
     if ff: ff.stdin.close(); ff.wait()
