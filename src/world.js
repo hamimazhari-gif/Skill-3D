@@ -312,7 +312,7 @@ export function buildWorld(lang, T, EVt, L) {
     updaters.push((t) => { const k = Math.max(0, t - E('luar') - 0.4); const dx = 0.6 * k * k; [train, car2, car3].forEach((c, i) => { c.position.x = [0, -6.3, 6.3][i] + dx; }); });
     fx(g, FX.smoke([2.6, 3.2, -4.4], cut(10), {n: 40, every: 0.14, life: 1.8, size: 0.5, grow: 2.2, rise: 1.2, drift: -0.6, color: '#f3ece0', opacity: 0.6}), (t) => inShots(t, 10));
     const lustig = ch('lustig', {seed: 1}, g, -3.8, -2.2, 0.6);
-    const bag = P.suitcase('#7a4a32'); held(lustig, bag, {y: -0.5, z: 0.06});
+    const bag = P.suitcase('#7a4a32'); held(lustig, bag, {hand: 0, y: -0.5, z: 0.06});
     walkPath(lustig, [[E('kabur') - 0.25, -3.8, -2.2], [E('kabur') + 0.9, -0.1, -2.75], [E('luar') + 0.6, 0.0, -3.1]], 'run');
     showWhen(lustig.group, (t) => t < E('luar') + 0.45);
     lustig.act([{t: 0, pose: 'idle', expr: 'scheming'}, {t: E('kabur'), pose: 'idle', expr: 'toothy'}, {t: E('luar') - 0.1, pose: 'wave', expr: 'cheesy'}]);

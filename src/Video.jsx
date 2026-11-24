@@ -286,7 +286,7 @@ export const Thumb = ({lang}) => {
         <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
-        {word(tx.top, 96, '#fff3df', ink, -3)}
+        {word(tx.top, 84, '#fff3df', ink, -3)}
         {word(tx.mid, 74, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 88, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
@@ -332,7 +332,7 @@ export const ThumbCollage = ({lang}) => {
         </div>
       ))}
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 70, gap: 26}}>
-        {word(tx.top, 96, '#fff3df', ink, -3)}
+        {word(tx.top, 84, '#fff3df', ink, -3)}
         {word(tx.mid, 74, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 90}}>{word(tx.bot, 88, '#7fb35a', '#fff3df', -2)}</AbsoluteFill>
