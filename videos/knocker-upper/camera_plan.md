@@ -5,14 +5,14 @@ bowler hats; new **nightcap** hat for the woken customers and new **bun** hair f
 
 Locations (x offsets): street 0, factory 40, bedroom 80 (room A at 0, room B at +12), london 120, shop 160, modern 200.
 
-Framings (27): low angle up the pole to the window → high close-up into the window (dutch) → crane-back to the TRUE STORY stamp;
-high crane down over the smoking mill → low push onto the worker and the alarm clock → dutch close-up; side track with the walking
-knocker under the title banner; low tracking shot along the street tilting up to the window → high angle over the lit windows;
-close-up of the window being tapped → push in with dutch on the shout; crane behind the knocker to the window → low angle on the
-stubborn knocker; side track with the walking woman → low over-the-shoulder up the pea shooter → high close-up on the window being
-hit; arc around the payment; overhead crane in bedroom B → dutch close-up; crane from moonlit roofs to a low track → wide pull
-back into the sunrise; truck from the sad knocker to the stall; overhead on the modern sleeper → descend to the phone →
-wide frontal on the choice.
+Framings (18, calm version at the user's request: "jangan terlalu banyak pergerakan kamera dan karakter"): one or two
+framings per shot, slow short pushes or gentle pans, no dutch angles, steady lens. Low angle up the pole to the window →
+steady wide on the stamp; wide on the mill → medium on the worker and the clock; frontal under the title banner; gentle pan
+with the walking knocker to the window; still on the tapped window → medium on the sleeper; steady low-medium on the knocker
+and the window; medium-wide with the London sign → still over-the-shoulder up the pea shooter; steady medium on the payment;
+medium on the sleeping knocker; wide street pan into the sunrise; steady medium-wide at the clock stall; medium on the modern
+sleeper → steady frontal on the choice. Character actions cut to the key beats (jump on the shout, the price shock and the
+final call to comment); walks shortened.
 
 Walking: the knocker walks in (shots 3, 4), walks the night street and home at sunrise (10), walks away from the clock shop
 (11); mill workers shuffle to the gate (2); the woman walks in (7).
