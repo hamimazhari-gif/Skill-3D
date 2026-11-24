@@ -42,8 +42,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.3, 1.65, 1.5], look: [-0.2, 1.65, -2.0]},
     {at: 'end', pos: [-0.3, 1.65, 1.25], look: [-0.2, 1.65, -2.0]}]},
   {shot: 8, from: 'traktir', loc: 'town', lift: false, move: 'closer on the neighbours asking for a treat', keys: [
-    {at: 'start', pos: [0.9, 1.7, 0.6], look: [0.9, 1.7, -2.2]},
-    {at: 'end', pos: [0.9, 1.7, 0.45], look: [0.9, 1.7, -2.2]}]},
+    {at: 'start', pos: [0.75, 1.7, 0.75], look: [0.75, 1.7, -2.2]},
+    {at: 'end', pos: [0.75, 1.7, 0.6], look: [0.75, 1.7, -2.2]}]},
   {shot: 9, loc: 'desa', lift: false, move: 'medium-wide garden and savings', keys: [
     {at: 'start', pos: [-0.4, 1.7, 1.8], look: [-0.4, 1.6, -2.2]},
     {at: 'end', pos: [-0.4, 1.7, 1.5], look: [-0.4, 1.6, -2.2]}]},

@@ -19,6 +19,12 @@ const CAST = {
   p3: {jacket: '#9a6a3a', lower: '#3a2a26', tie: '#e8c35a', hair: '#2b2326', hat: 'none', pocket: '#7a5230'},
   p4: {jacket: '#4f9a8a', lower: '#3a4a52', tie: '#e8c35a', hair: '#3a2a26', hat: 'none', glasses: true, pocket: '#3f8474'},
   p5: {jacket: '#7fa35a', lower: '#6b4a3a', tie: '#d8413a', hair: '#3a2a26', hat: 'caping', hatColor: '#d9b45a', pocket: '#6a8a4a'},
+  // back home: each person dressed for their place (user request)
+  p1r: {outfit: 'hoodie', jacket: '#2f3440', hood: '#454c5c', lower: '#3f5f8a', tie: '#d8413a', hair: '#2b2326', hat: 'cap', hatColor: '#1f1f24', hatColor2: '#141418', lanyard: '#d8413a'},
+  p2r: {outfit: 'hawaii', jacket: '#2fa0b8', lower: '#e8c890', legs: '#f5dcc6', tie: '#2fa0b8', hair: '#4a3026', hairStyle: 'side', hat: 'none', shades: true},
+  p3r: {outfit: 'tshirt', jacket: '#e8b04a', print: '#5a7a9a', lower: '#3f5f8a', tie: '#e8b04a', hair: '#2b2326', hat: 'none'},
+  p4r: {outfit: 'boss', jacket: '#26262e', collar: '#3a3a46', lower: '#3a3a40', tie: '#26262e', hair: '#1a1a1f', hat: 'none', chain: true, shades: true},
+  p5r: {outfit: 'farmer', jacket: '#c8b88a', lower: '#5a4a3a', legs: '#f5dcc6', tie: '#c8b88a', hair: '#3a2a26', hat: 'caping', hatColor: '#d9b45a', towel: '#f3efe6', pocket: '#b0a074'},
   driver: {jacket: '#3fa05a', lower: '#2a3a2a', tie: '#f3e7d3', hair: '#2b2326', hat: 'cap', hatColor: '#3fa05a', hatColor2: '#2a7a42', pocket: '#2f8a4a'},
   friend: {jacket: '#5a7a9a', lower: '#2a2a32', tie: '#d9774a', hair: '#3a2a26', hat: 'none', pocket: '#4a6a8a'},
   seller: {jacket: '#c9b48a', lower: '#5a4a3a', tie: '#8a3a3a', hair: '#d8d4cc', hairStyle: 'bald', hat: 'none', pocket: '#b09a72'},
@@ -149,7 +155,7 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(7, 5.2, 6, {wall: '#3a4048', floor: '#4a4a52', wain: '#2f343c'}));
     // the call screen: a panel with five windows (3 on top, 2 below); people stand behind it
     const W = 3.7, H = 2.6, y0 = 1.1;
-    const tiles = [[-1.2, 1.88, 'p1', '#7a8aa0'], [0, 1.88, 'p2', '#f0b088'], [1.2, 1.88, 'p3', '#3a3048'], [-0.6, 0.62, 'p4', '#e8c890'], [0.6, 0.62, 'p5', '#9ac87a']];
+    const tiles = [[-1.2, 1.88, 'p1r', '#7a8aa0'], [0, 1.88, 'p2r', '#f0b088'], [1.2, 1.88, 'p3r', '#3a3048'], [-0.6, 0.62, 'p4r', '#e8c890'], [0.6, 0.62, 'p5r', '#9ac87a']];
     const tw = 1.08, th = 1.12;
     const shp = new THREE.Shape(); shp.moveTo(-W / 2, 0); shp.lineTo(W / 2, 0); shp.lineTo(W / 2, H); shp.lineTo(-W / 2, H); shp.lineTo(-W / 2, 0);
     for (const [x, y] of tiles) { const hl = new THREE.Path(); hl.moveTo(x - tw / 2, y - th / 2); hl.lineTo(x + tw / 2, y - th / 2); hl.lineTo(x + tw / 2, y + th / 2); hl.lineTo(x - tw / 2, y + th / 2); hl.lineTo(x - tw / 2, y - th / 2); shp.holes.push(hl); }
@@ -196,7 +202,7 @@ export function buildWorld(lang, T, EVt, L) {
       const tw = P.tower(w, h, 3, {color: col, seed: 30 + i}); at(tw, x, 0, -8.5); g.add(tw);
     });
     const lamp = P.streetLamp(); at(lamp, -2.6, 0, -2.6, Math.PI); g.add(lamp);
-    const p1 = ch('p1', {seed: 3}, g, -0.2, -2.0, 0.1);
+    const p1 = ch('p1r', {seed: 3}, g, -0.2, -2.0, 0.1);
     const sc = P.scooter('#3fa05a'); at(sc, 1.9, 0, -2.6, -0.3); g.add(sc);
     const drv = ch('driver', {seed: 40}, g, 2.3, -3.1, -0.2);
     const wal = P.wallet('#6a4a3a'); held(p1, wal.group, {hand: 0, y: 0.03, z: 0.12}); wal.open(1);
@@ -244,7 +250,7 @@ export function buildWorld(lang, T, EVt, L) {
     const wcal = sign(L.tgl20, 0.6, 0.4, {bg: '#fff3df', fg: '#d8413a', frame: '#8a2a36'}); at(wcal, 0.9, 1.9, -3.45); K.add(wcal);
     const bulb = ball(0.07, new THREE.MeshBasicMaterial({color: '#fff3c0'}), {hull: 0}); at(bulb, 0, 2.45, -2.2); K.add(bulb);
     const cord = cyl(0.006, 0.006, 0.3, '#2b2b33'); at(cord, 0, 2.5, -2.2); K.add(cord);
-    const kp1 = ch('p1', {seed: 3}, K, -0.05, -2.3, 0);
+    const kp1 = ch('p1r', {seed: 3}, K, -0.05, -2.3, 0);
     const bowl = P.noodleBowl(); held(kp1, bowl, {y: 0.05, z: 0.1});
     speak(kp1, 8, [[0, 'tired', 'eat'], [0.4, 'sad', 'hold'], [0.75, 'cry', 'hold']]);
     fx(K, FX.smoke([-0.05, 1.35, -2.0], cut(3), {n: 6, life: 1.6, size: 0.18, rise: 0.5, color: '#fbf6ea', opacity: 0.6}), (t) => inShots(t, 3));
@@ -258,7 +264,7 @@ export function buildWorld(lang, T, EVt, L) {
     const foam = box(120, 0.02, 0.3, '#f3efe6', {edges: false, hull: 0}); at(foam, 0, 0.02, -6.2); g.add(foam);
     const sun = P.sunBall ? P.sunBall(3, '#ffb070') : null; if (sun) { at(sun, -4, 4.5, -40); g.add(sun); }
     [[-3.4, -3.6, 4.5, 0.5], [3.2, -4.2, 5.2, -0.6], [-5.6, -5, 5.6, 0.7]].forEach(([x, z, h, ln], i) => { const pt = P.coconutPalm({h, lean: ln, seed: 50 + i}); at(pt.group, x, 0, z); g.add(pt.group); });
-    const p2 = ch('p2', {seed: 4}, g, 0, -2.0, 0);
+    const p2 = ch('p2r', {seed: 4}, g, 0, -2.0, 0);
     const ph = P.phone(); ph.scale.setScalar(2.2); held(p2, ph, {y: 0.08, z: 0.1});
     const like = sign(L.like, 1.1, 0.32, {bg: '#fff3df', fg: '#d8413a', frame: '#d8413a', depth: 0.03});
     popSign(g, like, 0.85, 2.4, -2.0, E('insta') + 0.2, 1e9, (t) => inShots(t, 4));
@@ -296,7 +302,7 @@ export function buildWorld(lang, T, EVt, L) {
     const fl = FX.fireLight([0, 1.9, -1.8], {intensity: 1.8, dist: 7}); g.add(fl.obj); updaters.push((t) => fl.update(t));
     const lamp = P.streetLamp(); at(lamp, 3.4, 0, -2.4, Math.PI); g.add(lamp);
     const seller = ch('seller', {seed: 41}, g, 0.2, -3.4, 0);
-    const p3 = ch('p3', {seed: 5}, g, -0.75, -1.25, 0.15);
+    const p3 = ch('p3r', {seed: 5}, g, -0.75, -1.25, 0.15);
     const fr = ch('friend', {seed: 42}, g, 0.8, -1.25, -0.15);
     const g1 = P.mug('#f3efe6'); held(p3, g1, {y: 0.0, z: 0.08}); const g2 = P.mug('#f3efe6'); held(fr, g2, {hand: 0, y: 0.0, z: 0.08});
     const coins = P.coinPile(5, 6); g.add(coins);
@@ -328,7 +334,7 @@ export function buildWorld(lang, T, EVt, L) {
     });
     const tr = P.tree({}); at(tr, -3.0, 0, -3.4); g.add(tr);
     const fence = box(9, 0.6, 0.06, toon('#f3efe6', {paint: {planks: 20, seed: 81}})); at(fence, 0, 0, -3.3); g.add(fence);
-    const p4 = ch('p4', {seed: 6}, g, -2.8, -1.8, 0);
+    const p4 = ch('p4r', {seed: 6}, g, -2.8, -1.8, 0);
     walkPath(p4, [[cut(8), -2.8, -1.8], [E('kota') + 1.3, -0.2, -1.8]]);
     const nb1 = ch('nb1', {seed: 43}, g, 0.95, -2.3, -0.2);
     const nb2 = ch('nb2', {seed: 44}, g, 1.9, -2.5, -0.3);
@@ -363,7 +369,7 @@ export function buildWorld(lang, T, EVt, L) {
     const vh = P.villageHouse({}); at(vh, -2.6, 0, -3.6); g.add(vh);
     const rows = P.gardenRows(3, 3.2, 11); at(rows, 0.2, 0, -4.4); g.add(rows);
     const palm = P.coconutPalm({h: 6.2, lean: 0.7, seed: 61, open: true}); at(palm.group, 2.4, 0, -2.9); g.add(palm.group);
-    const p5 = ch('p5', {seed: 7}, g, -0.2, -2.0, 0);
+    const p5 = ch('p5r', {seed: 7}, g, -0.2, -2.0, 0);
     walkPath(p5, [[cut(9), -2.4, -1.8], [E('desa') + 0.6, -0.2, -2.0]]);
     // the village welcomes him home like a sultan
     const vil = [['nb1', 0.85, -2.6, -0.2], ['seller', 1.5, -3.0, -0.3]].map(([n, x, z, y], i) => ch(n, {seed: 50 + i, ...(n === 'nb1' ? {jacket: '#d8a04a', hat: 'none'} : {})}, g, x, z, y));
@@ -393,7 +399,7 @@ export function buildWorld(lang, T, EVt, L) {
     ]);
     // up in the palm tree with the phone held high (shot 10)
     const [tx, ty] = palm.top;
-    const hx = 2.4 + tx * (3.7 / 6.2) ** 2, up = ch('p5', {seed: 7}, g, hx, -2.55, 0.2, 3.7);
+    const hx = 2.4 + tx * (3.7 / 6.2) ** 2, up = ch('p5r', {seed: 7}, g, hx, -2.55, 0.2, 3.7);
     const ph2 = P.phone(); ph2.scale.setScalar(2.2); held(up, ph2, {y: 0.06, z: 0.1});
     speak(up, 24, [[0, 'worried', 'carry'], [0.3, 'scream', 'carry'], [0.6, 'cheesy', 'carry']]);
     const sig = sign('SINYAL', 0.8, 0.26, {bg: '#7fb35a', fg: '#fff3df', frame: '#3f5a2a', depth: 0.03});
