@@ -1,0 +1,29 @@
+1 | Misi hari ini: beli telur.
+1 | Modal: lima puluh ribu.
+1 | Tingkat kesulitan... mustahil.
+2 | "Pa, beli telur aja ya. Jangan beli yang lain!"
+2 | "Tenang, Ma. Lima menit beres."
+3 | Level satu: jebakan aroma roti.
+3 | Banyak toko sengaja memanggang roti dekat pintu masuk.
+3 | Wanginya bikin perut lapar... dan orang lapar, belanjanya lebih banyak.
+3 | "Satu roti aja... buat tenaga."
+4 | Level dua: labirin snack.
+4 | Telur sering ditaruh jauh di ujung toko.
+4 | Untuk sampai ke sana, kamu harus melewati lorong snack yang panjangnya... kayak jalan tol.
+5 | Level tiga: ilusi harga.
+5 | Label empat puluh sembilan ribu sembilan ratus.
+5 | Otakmu membacanya "empat puluh ribuan."
+5 | Padahal hampir lima puluh ribu!
+6 | Level empat: bos SPG.
+6 | Tester sosis gratis, senyum manis, dan tiba-tiba kamu merasa nggak enak kalau nggak beli.
+6 | "Ya udah, Mbak... dua bungkus."
+7 | Final boss: rak kasir.
+7 | Permen dan cokelat dipajang tepat di depan antrean.
+7 | Dan anakmu mulai beraksi.
+7 | "Pa... cokelat... Pa... cokelat..."
+8 | Nyawa habis.
+9 | Akhirnya, sang pahlawan pulang membawa lima kantong belanja.
+9 | "Pa... telurnya mana?"
+10 | Game over.
+11 | Tips menang: tulis daftar belanja, jangan belanja saat lapar, dan langsung ke rak yang kamu butuhkan.
+12 | Kamu biasanya kalah di level berapa? Tulis di komentar!

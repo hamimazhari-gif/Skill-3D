@@ -1,488 +1,564 @@
 {
- "duration": 71.84,
+ "duration": 80.24,
  "sentences": [
   {
    "shot": 1,
-   "text": "Lima orang.",
-   "start": 0.0,
-   "end": 0.84,
-   "pred": 0.63,
+   "text": "Misi hari ini: beli telur.",
+   "start": 0.22,
+   "end": 2.6,
+   "pred": 1.62,
    "voiced": [
     [
-     0.12,
-     0.84
+     0.22,
+     1.18
+    ],
+    [
+     1.52,
+     2.56
     ]
    ]
   },
   {
    "shot": 1,
-   "text": "Gajinya sama, lima juta per bulan.",
-   "start": 1.02,
-   "end": 3.24,
-   "pred": 2.31,
+   "text": "Modal: lima puluh ribu.",
+   "start": 2.9,
+   "end": 4.12,
+   "pred": 1.46,
    "voiced": [
     [
-     1.02,
-     1.92
-    ],
-    [
-     2.18,
+     2.9,
      3.24
+    ],
+    [
+     3.48,
+     4.1
     ]
    ]
   },
   {
    "shot": 1,
-   "text": "Tapi tinggalnya di lima tempat berbeda.",
-   "start": 3.58,
-   "end": 6.16,
-   "pred": 2.31,
+   "text": "Tingkat kesulitan... mustahil.",
+   "start": 4.44,
+   "end": 6.48,
+   "pred": 1.94,
    "voiced": [
     [
-     3.58,
-     5.4
+     4.44,
+     5.24
     ],
     [
-     5.68,
-     6.16
-    ]
-   ]
-  },
-  {
-   "shot": 1,
-   "text": "Hasilnya? Beda jauh!",
-   "start": 6.46,
-   "end": 7.22,
-   "pred": 1.12,
-   "voiced": [
-    [
-     6.46,
-     7.2
+     5.52,
+     6.46
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Orang pertama tinggal di Jakarta.",
-   "start": 7.9,
-   "end": 9.82,
-   "pred": 1.96,
+   "text": "\"Pa, beli telur aja ya. Jangan beli yang lain!\"",
+   "start": 7.36,
+   "end": 9.88,
+   "pred": 3.24,
    "voiced": [
     [
-     7.9,
-     8.92
+     7.36,
+     7.52
     ],
     [
-     9.24,
-     9.8
+     7.84,
+     8.76
+    ],
+    [
+     8.96,
+     9.88
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Bayar kos, ongkos ojol, makan siang, kopi biar kuat lembur...",
-   "start": 10.06,
-   "end": 12.78,
-   "pred": 4.47,
+   "text": "\"Tenang, Ma. Lima menit beres.\"",
+   "start": 10.4,
+   "end": 12.74,
+   "pred": 2.27,
    "voiced": [
     [
-     10.06,
-     10.68
+     10.4,
+     11.24
     ],
     [
-     10.88,
-     11.54
+     11.46,
+     12.0
     ],
     [
-     11.8,
-     12.78
-    ]
-   ]
-  },
-  {
-   "shot": 2,
-   "text": "Tanggal lima belas, dompetnya sudah kurus.",
-   "start": 13.18,
-   "end": 15.54,
-   "pred": 2.87,
-   "voiced": [
-    [
-     13.18,
-     15.54
-    ]
-   ]
-  },
-  {
-   "shot": 2,
-   "text": "Tanggal dua puluh?",
-   "start": 16.1,
-   "end": 17.14,
-   "pred": 1.05,
-   "voiced": [
-    [
-     16.1,
-     16.66
+     12.1,
+     12.72
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "\"Mi instan lagi... rasa ayam bawang, rasa kesabaran.\"",
-   "start": 17.3,
-   "end": 20.26,
-   "pred": 3.15,
+   "text": "Level satu: jebakan aroma roti.",
+   "start": 13.58,
+   "end": 15.44,
+   "pred": 2.02,
    "voiced": [
     [
-     17.3,
-     18.04
+     13.6,
+     14.2
     ],
     [
-     18.38,
-     19.18
+     14.46,
+     15.42
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Banyak toko sengaja memanggang roti dekat pintu masuk.",
+   "start": 15.68,
+   "end": 18.02,
+   "pred": 3.72,
+   "voiced": [
+    [
+     15.72,
+     17.98
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Wanginya bikin perut lapar... dan orang lapar, belanjanya lebih banyak.",
+   "start": 18.2,
+   "end": 22.08,
+   "pred": 5.1,
+   "voiced": [
+    [
+     18.2,
+     18.74
     ],
     [
-     19.4,
-     20.24
+     18.84,
+     19.0
+    ],
+    [
+     19.08,
+     19.82
+    ],
+    [
+     20.2,
+     20.9
+    ],
+    [
+     20.98,
+     21.2
+    ],
+    [
+     21.3,
+     22.08
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "\"Satu roti aja... buat tenaga.\"",
+   "start": 22.76,
+   "end": 24.76,
+   "pred": 1.7,
+   "voiced": [
+    [
+     22.76,
+     23.7
+    ],
+    [
+     23.84,
+     24.76
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Orang kedua tinggal di Bali.",
-   "start": 21.14,
-   "end": 21.98,
-   "pred": 1.61,
+   "text": "Level dua: labirin snack.",
+   "start": 25.58,
+   "end": 26.96,
+   "pred": 1.62,
    "voiced": [
     [
-     21.14,
-     21.98
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "Instagram-nya penuh foto pantai dan sunset.",
-   "start": 22.38,
-   "end": 24.38,
-   "pred": 2.52,
-   "voiced": [
-    [
-     22.46,
-     24.38
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "Kelihatan mewah.",
-   "start": 24.8,
-   "end": 25.58,
-   "pred": 0.98,
-   "voiced": [
-    [
-     24.8,
-     25.56
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "Tapi di balik kamera...",
-   "start": 25.88,
-   "end": 27.06,
-   "pred": 1.19,
-   "voiced": [
-    [
-     25.88,
-     25.98
+     25.58,
+     26.12
     ],
     [
-     26.06,
-     26.26
+     26.34,
+     26.96
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Telur sering ditaruh jauh di ujung toko.",
+   "start": 27.4,
+   "end": 28.9,
+   "pred": 2.67,
+   "voiced": [
+    [
+     27.4,
+     28.88
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Untuk sampai ke sana, kamu harus melewati lorong snack yang panjangnya... kayak jalan tol.",
+   "start": 29.16,
+   "end": 32.78,
+   "pred": 6.31,
+   "voiced": [
+    [
+     29.16,
+     29.92
     ],
     [
-     26.42,
-     27.06
+     30.04,
+     31.84
+    ],
+    [
+     32.08,
+     32.78
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "\"Nasi bungkus lagi, yang penting feed-nya estetik.\"",
-   "start": 27.28,
-   "end": 29.9,
-   "pred": 3.22,
+   "text": "Level tiga: ilusi harga.",
+   "start": 33.46,
+   "end": 35.22,
+   "pred": 1.54,
    "voiced": [
-    [
-     27.74,
-     28.56
-    ],
-    [
-     28.96,
-     29.76
-    ],
-    [
-     29.84,
-     29.9
-    ]
-   ]
-  },
-  {
-   "shot": 6,
-   "text": "Orang ketiga tinggal di Jogja.",
-   "start": 30.74,
-   "end": 31.84,
-   "pred": 1.75,
-   "voiced": [
-    [
-     30.74,
-     31.82
-    ]
-   ]
-  },
-  {
-   "shot": 6,
-   "text": "Makan di angkringan, ngopi sambil ngobrol sampai malam, dan masih bisa menabung sedikit.",
-   "start": 32.22,
-   "end": 36.94,
-   "pred": 5.94,
-   "voiced": [
-    [
-     32.24,
-     33.32
-    ],
     [
      33.46,
-     35.06
+     34.0
     ],
     [
-     35.26,
-     36.48
+     34.34,
+     35.18
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Label empat puluh sembilan ribu sembilan ratus.",
+   "start": 35.64,
+   "end": 37.66,
+   "pred": 3.24,
+   "voiced": [
+    [
+     35.64,
+     36.02
+    ],
+    [
+     36.1,
+     37.64
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Otakmu membacanya \"empat puluh ribuan.\"",
+   "start": 37.88,
+   "end": 39.8,
+   "pred": 2.59,
+   "voiced": [
+    [
+     37.88,
+     38.84
+    ],
+    [
+     38.94,
+     39.78
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Padahal hampir lima puluh ribu!",
+   "start": 40.02,
+   "end": 41.78,
+   "pred": 2.1,
+   "voiced": [
+    [
+     40.12,
+     40.52
+    ],
+    [
+     40.66,
+     41.78
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Level empat: bos SPG.",
+   "start": 42.46,
+   "end": 44.16,
+   "pred": 1.29,
+   "voiced": [
+    [
+     42.46,
+     42.9
+    ],
+    [
+     43.18,
+     43.78
+    ],
+    [
+     43.86,
+     44.16
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Tester sosis gratis, senyum manis, dan tiba-tiba kamu merasa nggak enak kalau nggak beli.",
+   "start": 44.58,
+   "end": 48.84,
+   "pred": 6.8,
+   "voiced": [
+    [
+     44.58,
+     45.38
+    ],
+    [
+     45.46,
+     45.66
+    ],
+    [
+     45.8,
+     46.52
+    ],
+    [
+     46.62,
+     47.22
+    ],
+    [
+     47.46,
+     48.84
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Ya udah, Mbak... dua bungkus.\"",
+   "start": 49.4,
+   "end": 50.8,
+   "pred": 2.1,
+   "voiced": [
+    [
+     49.4,
+     49.92
+    ],
+    [
+     50.26,
+     50.8
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "\"Hidup itu sederhana, Mas. Yang ribet itu mantan.\"",
-   "start": 37.3,
-   "end": 39.76,
-   "pred": 3.08,
+   "text": "Final boss: rak kasir.",
+   "start": 51.68,
+   "end": 53.48,
+   "pred": 1.38,
    "voiced": [
     [
-     37.32,
-     38.44
+     51.72,
+     52.36
     ],
     [
-     38.76,
-     39.76
+     52.56,
+     52.78
+    ],
+    [
+     52.98,
+     53.42
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Permen dan cokelat dipajang tepat di depan antrean.",
+   "start": 53.78,
+   "end": 56.98,
+   "pred": 3.48,
+   "voiced": [
+    [
+     53.9,
+     55.12
+    ],
+    [
+     55.22,
+     55.3
+    ],
+    [
+     55.38,
+     56.04
+    ],
+    [
+     56.38,
+     56.72
+    ],
+    [
+     56.8,
+     56.98
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Dan anakmu mulai beraksi.",
+   "start": 57.12,
+   "end": 58.22,
+   "pred": 1.7,
+   "voiced": [
+    [
+     57.12,
+     58.22
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Pa... cokelat... Pa... cokelat...\"",
+   "start": 58.9,
+   "end": 62.02,
+   "pred": 1.46,
+   "voiced": [
+    [
+     58.9,
+     59.26
+    ],
+    [
+     59.52,
+     59.74
+    ],
+    [
+     59.84,
+     60.3
+    ],
+    [
+     60.66,
+     61.08
+    ],
+    [
+     61.26,
+     61.48
+    ],
+    [
+     61.6,
+     62.02
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Orang keempat tinggal di kota kecil.",
-   "start": 40.7,
-   "end": 42.08,
-   "pred": 2.1,
+   "text": "Nyawa habis.",
+   "start": 62.64,
+   "end": 63.24,
+   "pred": 0.81,
    "voiced": [
     [
-     40.72,
-     42.08
-    ]
-   ]
-  },
-  {
-   "shot": 8,
-   "text": "Gaji lima juta sudah bikin dia dipanggil \"Bos\" sama tetangga.",
-   "start": 42.46,
-   "end": 45.36,
-   "pred": 3.43,
-   "voiced": [
-    [
-     42.46,
-     43.4
-    ],
-    [
-     43.48,
-     45.36
-    ]
-   ]
-  },
-  {
-   "shot": 8,
-   "text": "\"Bos, nanti traktir ya!\"",
-   "start": 46.02,
-   "end": 47.44,
-   "pred": 1.61,
-   "voiced": [
-    [
-     46.02,
-     46.32
-    ],
-    [
-     46.64,
-     47.44
+     62.64,
+     63.24
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Dan orang kelima pulang ke desa.",
-   "start": 48.26,
-   "end": 49.78,
-   "pred": 1.82,
+   "text": "Akhirnya, sang pahlawan pulang membawa lima kantong belanja.",
+   "start": 64.14,
+   "end": 66.68,
+   "pred": 4.61,
    "voiced": [
     [
-     48.26,
-     49.1
-    ],
-    [
-     49.24,
-     49.78
+     64.14,
+     66.64
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Makan dari kebun sendiri, nggak ada biaya kos, tabungannya terus bertambah.",
-   "start": 50.22,
-   "end": 54.08,
-   "pred": 5.17,
+   "text": "\"Pa... telurnya mana?\"",
+   "start": 67.44,
+   "end": 68.72,
+   "pred": 1.13,
    "voiced": [
     [
-     50.22,
-     51.4
+     67.44,
+     67.6
     ],
     [
-     51.56,
-     52.2
-    ],
-    [
-     52.3,
-     52.62
-    ],
-    [
-     52.86,
-     53.26
-    ],
-    [
-     53.36,
-     54.08
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "Hidupnya seperti sultan.",
-   "start": 54.52,
-   "end": 55.6,
-   "pred": 1.47,
-   "voiced": [
-    [
-     54.52,
-     55.58
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "Cuma satu masalahnya...",
-   "start": 56.02,
-   "end": 56.86,
-   "pred": 1.26,
-   "voiced": [
-    [
-     56.02,
-     56.86
+     67.94,
+     68.7
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "\"Halo? Halo?! Sinyalnya cuma ada di atas pohon kelapa!\"",
-   "start": 57.64,
-   "end": 60.06,
-   "pred": 2.87,
+   "text": "Game over.",
+   "start": 70.06,
+   "end": 70.5,
+   "pred": 0.65,
    "voiced": [
     [
-     57.66,
-     58.1
-    ],
-    [
-     58.54,
-     59.84
-    ],
-    [
-     59.92,
-     60.06
+     70.08,
+     70.5
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Jadi, kaya atau tidaknya kamu, bukan cuma ditentukan oleh besar gaji.",
-   "start": 60.88,
-   "end": 64.64,
-   "pred": 4.75,
+   "text": "Tips menang: tulis daftar belanja, jangan belanja saat lapar, dan langsung ke rak yang kamu butuhkan.",
+   "start": 71.2,
+   "end": 76.8,
+   "pred": 7.61,
    "voiced": [
     [
-     60.88,
-     61.32
+     71.2,
+     71.8
     ],
     [
-     61.64,
-     62.88
+     72.62,
+     73.04
     ],
     [
-     63.06,
-     64.64
-    ]
-   ]
-  },
-  {
-   "shot": 11,
-   "text": "Tapi juga oleh biaya hidup... dan gaya hidupmu.",
-   "start": 65.02,
-   "end": 67.54,
-   "pred": 2.52,
-   "voiced": [
-    [
-     65.02,
-     66.12
+     73.32,
+     74.14
     ],
     [
-     66.5,
-     67.54
+     74.32,
+     75.24
+    ],
+    [
+     75.34,
+     75.96
+    ],
+    [
+     76.04,
+     76.8
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Menurut kamu, gaji lima juta paling enak di kota mana?",
-   "start": 68.24,
-   "end": 70.48,
-   "pred": 3.43,
+   "text": "Kamu biasanya kalah di level berapa? Tulis di komentar!",
+   "start": 77.52,
+   "end": 80.0,
+   "pred": 3.64,
    "voiced": [
     [
-     68.26,
-     68.74
+     77.52,
+     78.8
     ],
     [
-     68.98,
-     70.48
-    ]
-   ]
-  },
-  {
-   "shot": 12,
-   "text": "Tulis di komentar!",
-   "start": 71.04,
-   "end": 71.6,
-   "pred": 1.05,
-   "voiced": [
-    [
-     71.04,
-     71.6
+     79.4,
+     80.0
     ]
    ]
   }

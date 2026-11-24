@@ -11,54 +11,51 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: one or two framings per shot, slow short pushes, no dutch angles.
-  {shot: 1, loc: 'lineup', lift: false, move: 'wide on the five people, slow push', keys: [
-    {at: 'start', pos: [0, 3.0, 2.9], look: [0, 1.25, -3.0]},
-    {at: 'end', pos: [0, 2.9, 2.6], look: [0, 1.25, -3.0]}]},
-  {shot: 2, loc: 'jakarta', lift: false, move: 'medium on the Jakarta worker, expenses fly out', keys: [
-    {at: 'start', pos: [0.5, 1.7, 1.4], look: [0.5, 1.75, -2.4]},
-    {at: 'end', pos: [0.45, 1.7, 1.15], look: [0.45, 1.75, -2.4]}]},
-  {shot: 2, from: 'tgl15', loc: 'jakarta', lift: false, move: 'closer on the thin wallet and the calendar', keys: [
-    {at: 'start', pos: [-0.6, 1.8, 0.2], look: [-0.7, 1.9, -2.3]},
-    {at: 'end', pos: [-0.6, 1.8, 0.05], look: [-0.7, 1.9, -2.3]}]},
-  {shot: 3, loc: 'jakarta', lift: false, move: 'close in the boarding room, instant noodles', keys: [
-    {at: 'start', pos: [12.0, 1.62, -0.6], look: [12.0, 1.55, -2.5]},
-    {at: 'end', pos: [12.0, 1.62, -0.75], look: [12.0, 1.55, -2.5]}]},
-  {shot: 4, loc: 'bali', lift: false, move: 'the selfie: close on him with the sea and sunset', keys: [
-    {at: 'start', pos: [0.05, 1.75, -0.45], look: [0.0, 1.72, -2.0]},
-    {at: 'end', pos: [0.05, 1.75, -0.6], look: [0.0, 1.72, -2.0]}]},
-  {shot: 4, from: 'balik', loc: 'bali', lift: false, move: 'the camera pulls back: nasi bungkus on a crate', keys: [
-    {at: 'start', pos: [0.05, 1.75, -0.6], look: [0.0, 1.72, -2.0]},
-    {at: 'end', pos: [0.45, 1.6, 1.3], look: [0.4, 1.35, -2.0]}]},
-  {shot: 5, loc: 'bali', lift: false, move: 'steady wide on him eating', keys: [
-    {at: 'start', pos: [0.45, 1.6, 1.3], look: [0.4, 1.35, -2.0]},
-    {at: 'end', pos: [0.45, 1.6, 1.15], look: [0.4, 1.35, -2.0]}]},
-  {shot: 6, loc: 'jogja', lift: false, move: 'wide on the angkringan at night', keys: [
-    {at: 'start', pos: [0, 1.7, 2.2], look: [0, 1.6, -2.4]},
-    {at: 'end', pos: [0, 1.7, 1.9], look: [0, 1.6, -2.4]}]},
-  {shot: 7, loc: 'jogja', lift: false, move: 'two-shot at the bench', keys: [
-    {at: 'start', pos: [0.05, 1.65, 1.0], look: [0.05, 1.62, -1.3]},
-    {at: 'end', pos: [0.05, 1.65, 0.85], look: [0.05, 1.62, -1.3]}]},
-  {shot: 8, loc: 'town', lift: false, move: 'medium-wide street, the worker walks home', keys: [
-    {at: 'start', pos: [-0.3, 1.65, 1.5], look: [-0.2, 1.65, -2.0]},
-    {at: 'end', pos: [-0.3, 1.65, 1.25], look: [-0.2, 1.65, -2.0]}]},
-  {shot: 8, from: 'traktir', loc: 'town', lift: false, move: 'closer on the neighbours asking for a treat', keys: [
-    {at: 'start', pos: [0.75, 1.7, 0.75], look: [0.75, 1.7, -2.2]},
-    {at: 'end', pos: [0.75, 1.7, 0.6], look: [0.75, 1.7, -2.2]}]},
-  {shot: 9, loc: 'desa', lift: false, move: 'medium-wide garden and savings', keys: [
-    {at: 'start', pos: [-0.4, 1.7, 1.8], look: [-0.4, 1.6, -2.2]},
-    {at: 'end', pos: [-0.4, 1.7, 1.5], look: [-0.4, 1.6, -2.2]}]},
-  {shot: 9, from: 'masalah', loc: 'desa', lift: false, move: 'close: no signal', keys: [
-    {at: 'start', pos: [-0.2, 1.85, 0.0], look: [-0.2, 2.0, -2.0]},
-    {at: 'end', pos: [-0.2, 1.85, -0.1], look: [-0.2, 2.0, -2.0]}]},
-  {shot: 10, loc: 'desa', lift: false, move: 'up in the coconut palm', keys: [
-    {at: 'start', pos: [2.6, 4.9, 0.4], look: [2.7, 5.45, -2.5]},
-    {at: 'end', pos: [2.6, 4.9, 0.2], look: [2.7, 5.45, -2.5]}]},
-  {shot: 11, loc: 'call', lift: false, move: 'the video call screen, slow push', keys: [
-    {at: 'start', pos: [0, 2.45, 2.4], look: [0, 2.45, -1.8]},
-    {at: 'end', pos: [0, 2.45, 2.15], look: [0, 2.45, -1.8]}]},
-  {shot: 12, loc: 'call', lift: false, move: 'the call and the question', keys: [
-    {at: 'start', pos: [0, 2.7, 2.5], look: [0, 2.75, -1.8]},
-    {at: 'end', pos: [0, 2.7, 2.3], look: [0, 2.75, -1.8]}]},
+  {shot: 1, loc: 'home', lift: false, move: 'the mission: papa, mama and kid, signs pop', keys: [
+    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.85, -2.4]},
+    {at: 'end', pos: [0, 1.75, 0.6], look: [0, 1.85, -2.4]}]},
+  {shot: 2, loc: 'home', lift: false, move: 'two-shot papa and mama', keys: [
+    {at: 'start', pos: [0.15, 1.65, 0.4], look: [0.15, 1.6, -2.4]},
+    {at: 'end', pos: [0.15, 1.65, 0.25], look: [0.15, 1.6, -2.4]}]},
+  {shot: 3, loc: 'bakery', lift: false, move: 'wide: he walks in past the bakery', keys: [
+    {at: 'start', pos: [-0.8, 1.7, 1.2], look: [-0.4, 1.5, -2.6]},
+    {at: 'end', pos: [-0.7, 1.7, 0.9], look: [-0.4, 1.5, -2.6]}]},
+  {shot: 3, from: 'satuRoti', loc: 'bakery', lift: false, move: 'close: one bread for energy', keys: [
+    {at: 'start', pos: [-0.4, 1.65, -0.6], look: [-0.45, 1.6, -2.0]},
+    {at: 'end', pos: [-0.4, 1.65, -0.7], look: [-0.45, 1.6, -2.0]}]},
+  {shot: 4, loc: 'aisle', lift: false, move: 'down the long snack aisle', keys: [
+    {at: 'start', pos: [-1.1, 1.65, 0.35], look: [1.3, 1.5, -1.9]},
+    {at: 'end', pos: [-0.6, 1.65, 0.3], look: [3.6, 1.5, -1.9]}]},
+  {shot: 5, loc: 'price', lift: false, move: 'papa and the price tag', keys: [
+    {at: 'start', pos: [0, 1.75, 0.8], look: [0, 1.85, -2.4]},
+    {at: 'end', pos: [0, 1.75, 0.6], look: [0, 1.85, -2.4]}]},
+  {shot: 5, from: 'padahal', loc: 'price', lift: false, move: 'close: almost fifty thousand!', keys: [
+    {at: 'start', pos: [-0.2, 1.9, -0.3], look: [-0.2, 2.0, -2.0]},
+    {at: 'end', pos: [-0.2, 1.9, -0.4], look: [-0.2, 2.0, -2.0]}]},
+  {shot: 6, loc: 'spg', lift: false, move: 'the sausage-sample booth', keys: [
+    {at: 'start', pos: [0.1, 1.6, 0.7], look: [0.1, 1.5, -2.6]},
+    {at: 'end', pos: [0.1, 1.6, 0.5], look: [0.1, 1.5, -2.6]}]},
+  {shot: 7, loc: 'kasir', lift: false, move: 'wide: checkout and the candy rack', keys: [
+    {at: 'start', pos: [-0.2, 1.6, 1.0], look: [-0.2, 1.4, -2.6]},
+    {at: 'end', pos: [-0.2, 1.6, 0.8], look: [-0.2, 1.4, -2.6]}]},
+  {shot: 7, from: 'anak', loc: 'kasir', lift: false, move: 'close: the kid and papa', keys: [
+    {at: 'start', pos: [-0.6, 1.4, -0.2], look: [-0.65, 1.35, -2.0]},
+    {at: 'end', pos: [-0.6, 1.4, -0.3], look: [-0.65, 1.35, -2.0]}]},
+  {shot: 8, loc: 'kasir', lift: false, move: 'close: no lives left', keys: [
+    {at: 'start', pos: [-0.35, 1.6, -0.4], look: [-0.35, 1.55, -2.0]},
+    {at: 'end', pos: [-0.35, 1.6, -0.5], look: [-0.35, 1.55, -2.0]}]},
+  {shot: 9, loc: 'home', lift: false, move: 'home with five bags', keys: [
+    {at: 'start', pos: [0.1, 1.6, 1.0], look: [0.1, 1.5, -2.4]},
+    {at: 'end', pos: [0.1, 1.6, 0.8], look: [0.1, 1.5, -2.4]}]},
+  {shot: 10, loc: 'home', lift: false, move: 'close: game over', keys: [
+    {at: 'start', pos: [-0.45, 1.6, -0.6], look: [-0.45, 1.55, -2.3]},
+    {at: 'end', pos: [-0.45, 1.6, -0.7], look: [-0.45, 1.55, -2.3]}]},
+  {shot: 11, loc: 'home', lift: false, move: 'the shopping list and the tips', keys: [
+    {at: 'start', pos: [2.1, 1.75, -0.6], look: [2.1, 1.45, -2.5]},
+    {at: 'end', pos: [2.1, 1.75, -0.75], look: [2.1, 1.45, -2.5]}]},
+  {shot: 12, loc: 'home', lift: false, move: 'the family and the question', keys: [
+    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.9, -2.4]},
+    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.9, -2.4]}]},
 ];
 
 export function warpU(T, t) {

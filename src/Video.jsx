@@ -103,19 +103,44 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 4, 6, 8, 9, 11];
-// On-screen scene titles from the user's storyboard: [first narration shot, text]
-const TITLES = [[1, 'GAJI SAMA, NASIB BEDA 😮'], [2, 'JAKARTA: BERTAHAN HIDUP 🥵'], [4, 'BALI: FEED MEWAH, DOMPET SEDERHANA 📸'],
-  [6, 'JOGJA: CUKUP & SANTAI ☕'], [8, 'KOTA KECIL: DIPANGGIL BOS 😎'], [9, 'DESA: SULTAN, TAPI SINYAL DI ATAS POHON 📶🌳'], [11, 'BUKAN SOAL BESAR GAJI… 🤔']];
+const DIPS = [3, 4, 5, 6, 7, 9];
+// Scene titles (game levels) and the HUD: lives lost on these words.
+const TITLES = [[1, 'MISI: BELI TELUR 🥚'], [3, 'LEVEL 1: JEBAKAN AROMA ROTI 🍞'], [4, 'LEVEL 2: LABIRIN SNACK 🍿'], [5, 'LEVEL 3: ILUSI HARGA 🏷️'],
+  [6, 'LEVEL 4: BOS SPG 🌭'], [7, 'FINAL BOSS: RAK KASIR 🍫'], [9, 'MISI SELESAI? 🛍️'], [10, ''], [11, 'TIPS MENANG ✅'], [12, 'KAMU KALAH DI LEVEL BERAPA? 🎮']];
+const LOSS = (E) => [E.satuRoti + 0.4, E.tol + 0.2, E.hampir + 0.3, E.dua + 0.3, E.coklat2 + 0.4];
 const Titles = ({T, t}) => {
   let cur = null; for (const [k, txt] of TITLES) if (t >= T.CUTS[k - 1]) cur = {txt, t0: T.CUTS[k - 1] + (k === 1 ? 0.25 : 0.15)};
-  if (!cur || t < cur.t0) return null;
+  if (!cur || !cur.txt || t < cur.t0) return null;
   const u = Math.min(1, (t - cur.t0) / 0.3), sc = u < 1 ? 0.6 + 0.4 * (1 + 2.70158 * Math.pow(u - 1, 3) + 1.70158 * Math.pow(u - 1, 2)) : 1;
   return (
-    <AbsoluteFill style={{alignItems: 'center', paddingTop: 120}}>
-      <div style={{maxWidth: 940, textAlign: 'center', background: '#fff3df', color: INK, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
-        fontSize: 64, lineHeight: 1.12, padding: '18px 34px 22px', border: `9px solid ${INK}`, borderRadius: 26, boxShadow: `10px 12px 0 ${INK}`,
+    <AbsoluteFill style={{alignItems: 'center', paddingTop: 110}}>
+      <div style={{maxWidth: 960, textAlign: 'center', background: '#2b2b33', color: '#f2d24a', fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
+        fontSize: 62, lineHeight: 1.12, padding: '18px 34px 22px', border: `9px solid #f2d24a`, borderRadius: 22, boxShadow: `10px 12px 0 ${INK}`,
         transform: `scale(${sc}) rotate(-1.5deg)`, letterSpacing: -1}}>{cur.txt}</div>
+    </AbsoluteFill>
+  );
+};
+const Hud = ({T, E, t}) => {
+  if (t >= T.CUTS[8]) return null;
+  const loss = LOSS(E);
+  const hearts = [0, 1, 2, 3, 4].map((i) => {
+    const lt = loss[4 - i], gone = t > lt, k = gone ? Math.max(0, 1 - (t - lt) / 0.3) : 0;
+    return <span key={i} style={{display: 'inline-block', transform: `scale(${1 + 0.6 * k})`, opacity: gone && k === 0 ? 0.35 : 1, marginRight: 6}}>{gone ? '🖤' : '❤️'}</span>;
+  });
+  return (
+    <AbsoluteFill style={{alignItems: 'flex-start', paddingTop: 300, paddingLeft: 48}}>
+      <div style={{background: 'rgba(43,43,51,0.78)', borderRadius: 18, padding: '10px 18px', fontFamily: '"Noto Color Emoji", "Inter Display"', fontSize: 52, border: `5px solid ${INK}`}}>{hearts}</div>
+      <div style={{marginTop: 12, background: 'rgba(43,43,51,0.78)', borderRadius: 14, padding: '6px 16px', color: '#fff3df', fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900, fontSize: 40, border: `5px solid ${INK}`}}>🥚 TELUR: 0/1</div>
+    </AbsoluteFill>
+  );
+};
+const GameOver = ({T, E, t}) => {
+  const t0 = E.gameover - 0.05; if (t < t0 || t >= T.CUTS[10]) return null;
+  const k = Math.min(1, (t - t0) / 0.25);
+  return (
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.45 * k})`}}>
+      <div style={{fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 150, color: '#d8413a', WebkitTextStroke: `14px ${INK}`, paintOrder: 'stroke fill',
+        textShadow: `0 12px 0 ${INK}`, transform: `scale(${1.6 - 0.6 * k})`, letterSpacing: -2, marginTop: -300}}>GAME OVER</div>
     </AbsoluteFill>
   );
 };
@@ -123,56 +148,45 @@ function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
-    ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.18]),
-    // 1 the line-up: salary, five places, "very different"
-    [sy('crowd_murmur'), 0, 0.06, C[1]],
-    [sy('ka_ching'), E.juta, 0.2],
-    [sy('sparkle'), E.juta + 0.2, 0.12],
-    ...[0, 1, 2, 3, 4].map((i) => ['pop-bubble-sound-effect.mp3', E.tempat - 0.1 + i * 0.12, 0.16]),
-    [sy('tada'), E.beda, 0.14],
-    // 2 Jakarta: traffic, expenses out of the wallet, the calendar
-    [sy('scooter'), C[1] + 0.1, 0.08],
-    ...['kos', 'ojol', 'makan', 'kopi'].map((k) => [sy('coin_drop'), E[k] - 0.05, 0.14, 0.4]),
-    [sy('horn'), E.ojol + 0.1, 0.1],
-    [sy('espresso'), E.kopi + 0.05, 0.08, 0.8],
-    [sy('paper_flutter'), E.tgl15 - 0.1, 0.18],
-    [sy('slide_whistle_down'), E.kurus, 0.14],
-    [sy('paper_flutter'), E.tgl20 - 0.1, 0.18],
-    [sy('uh_oh'), E.tgl20 + 0.2, 0.12],
-    // 3 boarding room
-    [sy('clock_tick'), C[2], 0.1, C[3] - C[2]],
-    [sy('slide_whistle_down'), E.sabar, 0.1],
-    // 4-5 Bali: waves, camera shutter, likes; the shack
-    [sy('birds'), C[3], 0.06, C[5] - C[3]],
-    ['mouse-click-sound-effect.mp3', E.insta - 0.05, 0.4, 0.4],
-    ['09-notification-ding.wav', E.insta + 0.3, 0.14],
-    [sy('heart_pop'), E.sunset, 0.14],
-    [sy('sparkle'), E.mewah, 0.16],
-    [sy('slide_whistle_down'), E.balik, 0.12],
-    [sy('paper_flutter'), C[4] + 0.1, 0.12],
-    // 6-7 Jogja: night street, coffee, coins
-    [sy('crowd_murmur'), C[5], 0.05, C[7] - C[5]],
-    [sy('frying'), C[5], 0.05, C[6] - C[5]],
-    [sy('coin_drop'), E.nabung, 0.2],
-    [sy('uh_oh'), E.mantan + 0.2, 0.1],
-    // 8 small town: "Bos!"
-    [sy('footsteps_walk'), C[7], 0.16, Math.max(0.5, E.kota + 1.3 - C[7])],
-    [sy('party_horn'), E.bos, 0.12],
-    [sy('sparkle'), E.bos + 0.1, 0.12],
-    [sy('ka_ching'), E.traktir, 0.14],
-    // 9 the village: birds, savings, sultan, no signal
-    [sy('birds'), C[8], 0.08, C[10] - C[8]],
-    [sy('coin_drop'), E.tabungan, 0.18],
-    [sy('tada'), E.sultan, 0.16],
-    ['02-error-denied-buzz.wav', E.masalah, 0.12],
-    // 10 up the palm
-    [sy('creak'), C[9] + 0.1, 0.12],
-    ['09-notification-ding.wav', E.halo + 1.0, 0.16],
-    // 11-12 the moral and the question
-    ['04-soft-ui-pop.mp3', E.biaya - 0.1, 0.18],
-    ['04-soft-ui-pop.mp3', E.gaya - 0.1, 0.18],
-    [sy('coin_drop'), E.biaya, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.kotamana - 0.2, 0.2],
+    ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
+    ...LOSS(E).map((t) => ['02-error-denied-buzz.wav', t, 0.14]),
+    ...LOSS(E).map((t) => [sy('heart_pop'), t + 0.05, 0.1]),
+    // 1-2 the mission
+    [sy('tada'), E.misi, 0.16],
+    [sy('coin_drop'), E.modal, 0.2],
+    ['06-deep-cinematic-boom.wav', E.mustahil, 0.16],
+    [sy('clock_tick'), C[1], 0.08, C[2] - C[1]],
+    [sy('swish'), E.menit, 0.14],
+    // level intros
+    ...['lv1', 'lv2', 'lv3', 'lv4'].map((k) => ['09-notification-ding.wav', E[k], 0.16]),
+    // 3 bakery
+    [sy('crowd_murmur'), C[2], 0.05, C[6] - C[2]],
+    [sy('sparkle'), E.wangi, 0.14],
+    [sy('footsteps_walk'), C[2], 0.14, Math.max(0.5, E.lapar + 0.2 - C[2])],
+    // 4 snack aisle
+    [sy('footsteps_walk'), C[3], 0.14, C[4] - C[3]],
+    [sy('slide_whistle_down'), E.tol, 0.14],
+    // 5 price
+    [sy('ka_ching'), E.label, 0.18],
+    [sy('boing'), E.otak, 0.14],
+    // 6 SPG
+    [sy('heart_pop'), E.senyum, 0.14],
+    [sy('ka_ching'), E.dua + 0.1, 0.18],
+    // 7-8 final boss
+    ['06-deep-cinematic-boom.wav', E.final, 0.2],
+    ['07-riser-build-up.wav', E.anak - 0.2, 0.1, 1.2],
+    [sy('slide_whistle_down'), E.nyawa, 0.16],
+    // 9-10 home, game over
+    [sy('footsteps_walk'), C[8], 0.14, 1.0],
+    [sy('paper_flutter'), C[8] + 0.3, 0.18],
+    [sy('uh_oh'), E.mana + 0.2, 0.12],
+    ['06-deep-cinematic-boom.wav', E.gameover - 0.05, 0.22],
+    [sy('slide_whistle_down'), E.gameover + 0.1, 0.14],
+    // 11 tips
+    ...['daftar', 'lapar2', 'rak'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
+    [sy('sparkle'), E.tips, 0.14],
+    // 12 the question
+    ['pop-bubble-sound-effect.mp3', E.levelBerapa - 0.4, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -229,6 +243,8 @@ export const Story = ({lang, captions = true}) => {
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       <Titles T={T} t={t} />
+      <Hud T={T} E={EVt} t={t} />
+      <GameOver T={T} E={EVt} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
@@ -241,10 +257,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
-  en: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
+  id: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL!', bot: 'KAMU KALAH DI LEVEL BERAPA?'},
+  en: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL!', bot: 'KAMU KALAH DI LEVEL BERAPA?'},
 };
-const THUMB = (EVt) => ({t: 1.0, loc: 'poster', pos: [0, 1.55, 3.3], look: [0, 1.5, -1.0]});
+const THUMB = (EVt) => ({t: EVt.coklat2 + 0.6, pos: [-0.3, 1.5, 0.5], look: [-0.45, 1.35, -2.2]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
