@@ -1,6 +1,6 @@
 # Camera, lighting and VFX plan — Gaji lima juta
 
-Calm camera (user rule): 16 framings, one or two per shot, slow short pushes, no dutch angles.
+Calm camera (user rule): 16 framings (the Bali pull-back is the one larger move, asked for in the storyboard), one or two per shot, slow short pushes, no dutch angles.
 
 ## Character design
 New preset `brisk` (round no-sleep face, side-swept hair, thick brows, sturdy limbs, torso +0.12 m, legs +0.03 m),
@@ -9,10 +9,10 @@ Five people with their own colours: Jakarta (grey shirt), Bali (peach top, bun),
 village (green, caping). Extras: ojol driver, angkringan seller (bald, grey hair), friend, two neighbours.
 
 ## Framings
-1 wide line-up, slow push · 2 Jakarta medium, cut on "tanggal (15)" to wallet + calendar · 3 boarding room close ·
-4 Bali selfie, cut on "balik" to a close on the face · 5 shack medium · 6 angkringan wide · 7 bench two-shot ·
-8 town street, cut on "traktir" to neighbours · 9 village garden, cut on "masalahnya" to a close with the no-signal sign ·
-10 up the palm (fronds on the camera side left out) · 11 line-up with savings stacks · 12 frontal on the question.
+1 high wide on the five with envelopes and the buses behind, slow push · 2 Jakarta medium, cut on "tanggal (15)" to wallet + calendar ·
+3 boarding room close · 4 Bali selfie close; on "balik" the camera pulls back to reveal the nasi bungkus · 5 steady wide ·
+6 angkringan wide · 7 bench two-shot · 8 town street, cut on "traktir" to the neighbours · 9 village, cut on "masalahnya" to the
+no-signal close · 10 up the palm · 11-12 the video-call screen (3 + 2 windows), slow push.
 
 ## Lighting
 Square: day (joyful on "beda"). Jakarta: hazy day, sad on "kurus"; boarding room dim and cool. Bali: sunset, joyful on
@@ -22,3 +22,6 @@ Village: bright day, joyful on "sultan".
 ## New props
 coconutPalm (option `open` leaves the camera side free), tower (office block with a lit window grid), noodleBowl,
 nasiBungkus, angkringan (cart, tarp, kettles, oil lamps, bench), villageHouse, gardenRows.
+
+## Screen titles
+Scene titles from the storyboard sit at the top (ink-bordered cream block, pop-in), the word captions stay at 63%.
