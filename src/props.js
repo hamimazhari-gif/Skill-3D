@@ -32,7 +32,7 @@ export function facade(w, h, o = {}) {
     const lintel = box(ww + 0.16, 0.1, 0.08, trim); at(lintel, wx, wy + wh, 0.02); g.add(lintel);
     const shL = box(0.32, wh, 0.05, o.shutter || '#5f8a6a'); at(shL, wx - ww / 2 - 0.2, wy, 0.03); g.add(shL);
     const shR = box(0.32, wh, 0.05, o.shutter || '#5f8a6a'); at(shR, wx + ww / 2 + 0.2, wy, 0.03); g.add(shR);
-    const bar = box(0.04, wh, 0.04, trim); at(bar, wx, wy, -depth / 2); g.add(bar);
+    if (o.bars !== false) { const bar = box(0.04, wh, 0.04, trim); at(bar, wx, wy, -depth / 2); g.add(bar); }
   }
   if (door) {
     const d = box(dw - 0.04, dh - 0.04, 0.06, o.doorColor || '#7a4a32'); at(d, dx, 0, -depth + 0.06); g.add(d);
@@ -1176,4 +1176,57 @@ export function tinyPerson(color = '#4f8fc8', s = 0.12) {
   const b = cyl(s * 0.35, s * 0.45, s * 1.1, color, {hull: 0.006, seg: 10}); g.add(b);
   const h = ball(s * 0.32, '#f5dcc6', {hull: 0.006, seg: 10}); at(h, 0, s * 1.4, 0); g.add(h);
   return g;
+}
+
+// ================= Knocker-upper story props =================
+// Two-storey brick terraced house. Front face at z=0; upper windows centred at y = h1 + 1.1 + 0.425, x = ±w/4.
+// Returns {group, upper: [[x, y], ...], lit: [planes]} — lit planes sit just behind the upper window openings.
+export function terrace(w = 3.2, o = {}) {
+  const g = new THREE.Group(); const h1 = 2.6, h2 = 2.4;
+  const col = o.color || '#b5654a';
+  const low = facade(w, h1, {color: col, windows: 2, doorX: o.doorX ?? w / 4, seed: o.seed || 1, trim: o.trim || '#e8dcc0', shutter: o.shutter || '#3f5a4a', doorColor: o.door || '#3a4a5a'});
+  g.add(low);
+  const up = facade(w, h2, {color: col, windows: 2, door: false, bars: false, seed: (o.seed || 1) + 7, trim: o.trim || '#e8dcc0', shutter: o.shutter || '#3f5a4a'});
+  up.position.y = h1; g.add(up);
+  const body = box(w, h1 + h2, 3, toon(col, {paint: {bricks: true, seed: o.seed || 1}})); at(body, 0, 0, -0.85 - 1.5); g.add(body);
+  const roof = gableRoof(w, 3.3, 1.2, o.roof || '#5a4a52'); at(roof, 0, h1 + h2 + 0.18, -1.6); g.add(roof);
+  const ch = box(0.45, 1.1, 0.45, '#8a4a3a'); at(ch, w / 3, h1 + h2 + 0.4, -1.4); g.add(ch);
+  const pot = cyl(0.09, 0.09, 0.25, '#6a3a2a'); at(pot, w / 3, h1 + h2 + 1.5, -1.4); g.add(pot);
+  const lit = [], upper = [];
+  for (const sx of [-1, 1]) {
+    const x = sx * w / 4, y = h1 + 1.1 + 0.425;
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.95), new THREE.MeshBasicMaterial({color: '#2a2436'}));
+    p.position.set(x, y, -0.7); g.add(p); lit.push(p); upper.push([x, y]);
+  }
+  return {group: g, upper, lit, h1};
+}
+
+// Brick mill with tall chimneys, big windows and a gate. Front face at z=0.
+export function factory(w = 9, h = 5, o = {}) {
+  const g = new THREE.Group();
+  const f = facade(w, h, {color: o.color || '#a85a44', windows: 5, doorX: 0, seed: 77, trim: '#d8ccb0', shutter: '#4a4a52', doorColor: '#4a3a32'});
+  g.add(f);
+  const up = facade(w, 2.6, {color: o.color || '#a85a44', windows: 6, door: false, seed: 78, trim: '#d8ccb0', shutter: '#4a4a52'}); up.position.y = h; g.add(up);
+  const body = box(w, h + 2.6, 6, toon(o.color || '#a85a44', {paint: {bricks: true, seed: 79}})); at(body, 0, 0, -0.9 - 3); g.add(body);
+  const roof = box(w + 0.4, 0.3, 6.4, '#4a4048'); at(roof, 0, h + 2.6, -3.9); g.add(roof);
+  const tops = [];
+  for (const [x, z, hh] of [[-w / 2 + 1.2, -2.5, 6.5], [w / 2 - 1.6, -4.5, 8]]) {
+    const c = cyl(0.55, 0.75, hh, toon('#8a4a3a', {paint: {bricks: true, seed: 80}})); at(c, x, h + 2.6, z); g.add(c);
+    const rim = cyl(0.65, 0.65, 0.3, '#5a3a32'); at(rim, x, h + 2.6 + hh - 0.3, z); g.add(rim);
+    tops.push([x, h + 2.6 + hh + 0.1, z]);
+  }
+  return {group: g, tops};
+}
+
+// Twin-bell alarm clock. Returns {group, set(h, m), ring(t, amount)}: ring shakes it (amount 0..1).
+export function alarmClock(r = 0.16, o = {}) {
+  const g = new THREE.Group(); const inner = new THREE.Group(); g.add(inner);
+  const wc = wallClock(r, {rim: o.color || '#d8413a'}); wc.group.position.y = r + 0.05; inner.add(wc.group);
+  for (const s of [-1, 1]) {
+    const b = ball(r * 0.42, toon(o.bell || '#e8c04a', {wear: false}), {sy: 0.8}); at(b, s * r * 0.62, r * 2.0 + 0.05, -0.02); b.rotation.z = -s * 0.5; inner.add(b);
+    const leg = cyl(0.012, 0.016, 0.07, INK); at(leg, s * r * 0.6, 0, 0, 0, 0, s * 0.35); inner.add(leg);
+  }
+  const hm = cyl(0.012, 0.012, r * 0.35, INK); at(hm, 0, r * 2.0 + 0.05, 0); inner.add(hm);
+  wc.set(5, 0);
+  return {group: g, set: wc.set, ring(t, a) { inner.rotation.z = a * 0.14 * Math.sin(t * 60); inner.position.y = a * 0.01 * Math.abs(Math.sin(t * 45)); }};
 }

@@ -102,82 +102,82 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
+const DIPS = [2, 3, 5, 6, 7, 9, 10, 11, 12];
+const every = (a, b, step) => { const o = []; for (let t = a; t < b; t += step) o.push(t); return o; };
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   // location changes: a different whoosh each time
   const W = ['07-smooth-transition-whoosh.mp3', '08-heavy-whoosh.wav', '05-airy-whoosh.mp3', sy('swish')];
+  const k4 = E.ketuk - 0.1;
+  const press = [0, 1, 2, 3, 4].map((i) => E.snooze + i * (E.lima + 0.5 - E.snooze) / 4);
+  const shots = [E.kacang + 0.1, E.tik1 - 0.3, E.tik2 - 0.3, E.tik3 - 0.3];
   return [
-    ...[2, 3, 4, 5, 6, 7, 8, 9].map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.2]),
-    // 1 street: walking in, 500 pops up, happy hop, "wait"
-    [sy('footsteps_walk'), 0.0, 0.24, E.lima - 0.2],
-    [sy('birds'), 0.0, 0.07, C[1]],
-    ['08-soft-success-chime.mp3', E.lima, 0.3],
-    [sy('boing'), E.enak + 0.1, 0.18],
-    [sy('swish'), E.tunggu - 0.12, 0.14],
-    [sy('uh_oh'), E.tunggu + 0.05, 0.2],
-    // 2 party
-    [sy('party_horn'), C[1] + 0.15, 0.2],
-    [sy('tada'), E.dua, 0.2],
-    [sy('crowd_cheer'), E.dua + 0.1, 0.1],
-    ['pop-bubble-sound-effect.mp3', E.dua + 0.05, 0.18],
-    ['04-counter-tick-number-roll.wav', E.setengah, 0.26],
-    [sy('slide_whistle_down'), E.setengah + 0.25, 0.16],
-    // 3 classroom: footsteps with the books, clock ticking, pages, the thesis lands
-    [sy('footsteps_walk'), C[2], 0.2, 2.0],
-    [sy('clock_tick'), C[2] + 0.3, 0.1],
-    [sy('page_flips'), E.ilmu, 0.22],
-    [sy('slide_whistle_down'), E.skripsi - 0.25, 0.14],
-    ['06-deep-cinematic-boom.wav', E.skripsi + 0.1, 0.32],
-    [sy('thud'), E.skripsi + 0.1, 0.3],
-    [sy('creak'), E.lemari, 0.18],
-    // 4 house: walk up, brochure, the loan
-    [sy('footsteps_walk'), C[3], 0.22, E.rumah - C[3]],
-    [sy('birds'), C[3], 0.08],
-    [sy('boing'), E.rumah + 0.1, 0.14],
-    [sy('swish'), E.brosur - 0.05, 0.2],
-    [sy('ka_ching'), E.cicilan, 0.24],
-    [sy('sparkle'), E.cicilan + 0.15, 0.12],
-    [sy('slide_whistle_down'), E.dp + 0.15, 0.2],
-    // 5 reunion: friends run in, cheering, generations pop in
-    [sy('footsteps_run'), C[4] + 0.2, 0.22, Math.max(0.6, E.terbesar - C[4] - 0.3)],
-    [sy('crowd_cheer'), E.reuni + 0.1, 0.14],
-    [sy('applause'), E.teman, 0.13],
-    [sy('heart_pop'), E.anak, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.cucu, 0.22],
-    ['04-soft-ui-pop.mp3', E.cicit, 0.22],
-    [sy('party_horn'), E.generasi, 0.16],
-    [sy('crowd_cheer'), E.generasi + 0.1, 0.14],
-    // 6 office: grandpa shuffles in on his cane, the clock, clocking in late, creaky knees
-    [sy('cane_shuffle'), C[5], 0.28, 2.6],
-    [sy('clock_tick'), C[5] + 0.2, 0.1],
-    ['09-notification-ding.wav', E.empat, 0.22],
-    [sy('punch_clock'), E.telat - 0.05, 0.3],
-    ['02-error-denied-buzz.wav', E.telat + 0.1, 0.18],
-    [sy('creak'), E.lutut + 0.1, 0.28],
-    // 7 Earth fills up; the crowd runs and fights
-    [sy('rumble'), C[6], 0.18],
-    ['07-riser-build-up.wav', E.semua, 0.18],
-    ['06-deep-cinematic-boom.wav', E.penuh, 0.32],
-    [sy('footsteps_run'), E.makanan - 0.3, 0.22, 1.0],
-    [sy('crowd_angry'), E.makanan - 0.2, 0.13],
-    [sy('swish'), E.air, 0.14],
-    [sy('thud'), E.rebutan, 0.26],
-    ['03-subtle-digital-impact.mp3', E.rebutan + 0.05, 0.2],
-    // 8 warung: frying snacks, grandpa's cane, the memory bubble
-    [sy('frying'), C[7], 0.1],
-    [sy('cane_shuffle'), C[7], 0.26, 2.2],
-    [sy('ka_ching'), E.gorengan, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.lalu - 0.4, 0.24],
-    // 9 park: birds, walking in, the kind gift
-    [sy('birds'), C[8], 0.1],
-    [sy('footsteps_walk'), C[8], 0.22, 2.4],
-    [sy('footsteps_walk'), E.manfaat - 1.0, 0.18, 0.65],
-    ['08-soft-success-chime.mp3', E.manfaat, 0.26],
-    ...[0, 1, 2].map((i) => [sy('heart_pop'), E.manfaat + 0.2 + i * 0.15, 0.16]),
-    // 10 the question
-    [sy('birds'), C[9], 0.08],
-    [sy('sparkle'), E.ngapain, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.ngapain + 0.2, 0.18],
+    ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.2]),
+    // 1 street: the pole taps the window, the sleeper snores then pops up, paid coin, TRUE STORY stamp
+    ...every(0.3, E.bangunkan + 0.4, 0.42).map((t) => [sy('glass_tap'), t + 0.05, 0.2]),
+    [sy('snore'), 0.0, 0.12, Math.max(0.5, E.bangunkan)],
+    [sy('coin_drop'), E.dibayar, 0.2, 0.5],
+    [sy('slide_whistle_up'), E.bangunkan - 0.15, 0.14],
+    [sy('stamp'), E.nyata, 0.36],
+    [sy('tada'), E.nyata + 0.1, 0.14],
+    // 2 the mill: steam whistle, shuffling workers, the ringing clock, "expensive", "rare"
+    [sy('steam_whistle'), C[1] + 0.2, 0.16],
+    [sy('footsteps_walk'), C[1], 0.18, Math.max(0.6, E.subuh + 0.2 - C[1])],
+    [sy('alarm_bell'), E.masalah, 0.18, 1.2],
+    [sy('ka_ching'), E.mahal, 0.22],
+    [sy('uh_oh'), E.mahal + 0.35, 0.14],
+    [sy('slide_whistle_down'), E.langka + 0.05, 0.16],
+    // 3 the title
+    [sy('footsteps_walk'), C[2], 0.2, 2.4],
+    [sy('party_horn'), E.knocker, 0.18],
+    [sy('applause'), E.knocker + 0.2, 0.11],
+    [sy('sparkle'), E.knocker + 0.5, 0.12],
+    // 4 the rounds
+    [sy('footsteps_walk'), C[3], 0.2, Math.max(0.5, k4 - C[3])],
+    ...every(k4 + 0.35, C[4], 0.42).map((t) => [sy('glass_tap'), t + 0.05, 0.16]),
+    ...[0, 1, 2].map((i) => ['04-soft-ui-pop.mp3', E.pelanggan - 0.1 + i * 0.12, 0.16]),
+    // 5 bedroom: snoring, tok tok tok, the shout
+    [sy('snore'), C[4], 0.16, Math.max(0.3, E.tok1 - C[4])],
+    ...[E.tok1, E.tok2, E.tok3].map((t) => [sy('glass_tap'), t, 0.4]),
+    [sy('boing'), E.iya, 0.16],
+    [sy('thud'), E.iya + 0.35, 0.16],
+    // 6 don't pretend
+    ...[...every(C[5] + 0.2, E.jangan - 0.1, 0.42), ...every(E.pergi - 0.1, E.yakin + 0.2, 0.26)].map((t) => [sy('glass_tap'), t + 0.05, 0.18]),
+    [sy('slide_whistle_up'), E.jangan - 0.35, 0.12],
+    [sy('slide_whistle_down'), E.pura + 0.25, 0.16],
+    [sy('slide_whistle_up'), E.yakin - 0.25, 0.14],
+    [sy('boing'), E.bangun2, 0.12],
+    // 7 London: the pea shooter
+    [sy('footsteps_walk'), C[6], 0.2, 1.6],
+    [sy('sparkle'), E.kreatif, 0.14],
+    ...shots.map((t) => [sy('puff'), t, 0.24]),
+    ...shots.map((t) => [sy('pea_tik'), t + 0.3, 0.34]),
+    [sy('creak'), E.tik3 + 0.2, 0.16],
+    // 8 the pay
+    [sy('coin_drop'), E.sen, 0.3],
+    [sy('slide_whistle_down'), E.minggu + 0.1, 0.14],
+    // 9 who wakes the knocker?
+    [sy('snore'), C[8], 0.18, Math.max(0.3, E.siapa - C[8])],
+    [sy('clock_tick'), C[8], 0.08],
+    [sy('boing'), E.siapa + 0.05, 0.16],
+    ...[0, 1, 2].map((i) => ['pop-bubble-sound-effect.mp3', E.pembangun + i * 0.18, 0.18]),
+    // 10 night walk to sunrise
+    [sy('footsteps_walk'), C[9], 0.18, Math.max(0.5, E.belum + 0.2 - C[9])],
+    [sy('footsteps_walk'), E.pulang - 0.1, 0.18, Math.max(0.5, C[10] - E.pulang)],
+    [sy('birds'), E.semua - 0.3, 0.12, Math.max(0.5, C[10] - E.semua + 0.3)],
+    ['08-soft-success-chime.mp3', E.semua, 0.26],
+    // 11 cheap clocks
+    [sy('alarm_bell'), C[10] + 0.2, 0.14, Math.max(0.3, E.hilang - C[10] - 0.2)],
+    [sy('slide_whistle_down'), E.hilang + 0.05, 0.14],
+    [sy('ka_ching'), E.murah, 0.24],
+    [sy('crowd_cheer'), E.murah + 0.1, 0.1],
+    // 12 today: phone alarm, five snoozes, the question
+    [sy('snore'), C[11], 0.14, Math.max(0.3, E.alarm - C[11])],
+    [sy('phone_alarm'), E.alarm, 0.18, Math.max(0.5, press[4] - E.alarm)],
+    ...press.map((t) => [sy('snooze_tap'), t, 0.4]),
+    [sy('swish'), E.langsung - 0.1, 0.16],
+    ['04-soft-ui-pop.mp3', E.langsung, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.tim, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -224,7 +224,6 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [2, 3, 4, 5, 6, 7, 8, 9];
   const dipT = DIPS.map((k) => T.CUTS[k - 1]);
   for (const ct of dipT) dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2);
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
@@ -247,10 +246,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'HIDUP', mid: '500 TAHUN?!'},
-  en: {top: 'LIVE TO', mid: '500?!'},
+  id: {top: 'PROFESI ANEH:', mid: 'ALARM MANUSIA!'},
+  en: {top: 'WEIRDEST JOB:', mid: 'HUMAN ALARM!'},
 };
-const THUMB = (EVt) => ({t: EVt.setengah + 0.7, pos: [-0.1, 1.9, -0.6], look: [0.15, 1.75, -4.2]});
+const THUMB = (EVt) => ({t: EVt.bangunkan + 0.9, pos: [-1.6, 1.0, 0.9], look: [-3.5, 3.0, -3.6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
@@ -267,7 +266,7 @@ export const Thumb = ({lang}) => {
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 118, '#fff3df', ink, -3)}
-        {word(tx.mid, 132, '#e8a83a', ink, 2)}
+        {word(tx.mid, 104, '#e8a83a', ink, 2)}
       </AbsoluteFill>
     </AbsoluteFill>
   );

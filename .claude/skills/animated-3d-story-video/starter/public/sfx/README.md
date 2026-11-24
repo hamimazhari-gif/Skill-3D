@@ -48,3 +48,9 @@ Made in code by `tools/synth_sfx.py` (numpy only, no third-party recordings; re-
 | frying.wav | street food, kitchen |
 | rumble.wav | big danger, Earth, tension bed |
 | uh_oh.wav | comic "uh-oh" on a bad surprise |
+| glass_tap.wav / glass_tap3.wav | knocking on a window pane (one tap / three taps) |
+| pea_tik.wav / puff.wav | small object hitting glass / blowpipe or breath puff |
+| alarm_bell.wav / phone_alarm.wav / snooze_tap.wav | old twin-bell alarm clock / phone alarm beeps / pressing a button |
+| steam_whistle.wav | factory or train whistle, start of a shift |
+| snore.wav | sleeping character |
+| coin_drop.wav / stamp.wav | a few coins into a palm / rubber stamp, "TRUE STORY" style pop |

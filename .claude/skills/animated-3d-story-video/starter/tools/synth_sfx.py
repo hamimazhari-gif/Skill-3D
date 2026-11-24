@@ -159,3 +159,56 @@ buf = np.zeros(int(0.9 * SR))
 for k, (f0, f1) in enumerate([(520, 470), (400, 300)]):
     dd = 0.3; place(buf, sweep(f0, f1, dd) * np.minimum(1, tl(dd) / 0.01) * np.minimum(1, (dd - tl(dd)) / 0.08), 0.02 + k * 0.33)
 save('uh_oh.wav', buf)
+
+# ===== Knocker-upper story sounds =====
+# knuckle/pole tap on a window pane: short woody knock + glassy ring
+def tap_one():
+    d = 0.22; n = int(d * SR); t = tl(d)
+    knock = np.sin(2 * np.pi * (380 + 200 * np.exp(-t * 60)) * t) * env(n, 0.001, 0.018)
+    glass = sum(np.sin(2 * np.pi * f * t) * a for f, a in [(2350, 0.5), (3710, 0.3), (5230, 0.15)]) * env(n, 0.001, 0.05)
+    return knock + 0.35 * glass + bp(noise(d), 1500, 6000) * env(n, 0.0005, 0.004) * 0.6
+save('glass_tap.wav', tap_one())
+# a quick volley of three taps
+buf = np.zeros(int(1.0 * SR))
+for k in range(3): place(buf, tap_one() * (1 - 0.1 * k), 0.02 + k * 0.28)
+save('glass_tap3.wav', buf)
+# dried pea hitting glass: tiny high tick
+d = 0.12; n = int(d * SR); t = tl(d)
+save('pea_tik.wav', (np.sin(2 * np.pi * 4200 * t) * 0.6 + np.sin(2 * np.pi * 6100 * t) * 0.3) * env(n, 0.0005, 0.02) + bp(noise(d), 3000, 9000) * env(n, 0.0002, 0.003))
+# pea shooter puff: breathy burst
+d = 0.25; n = int(d * SR)
+save('puff.wav', bp(noise(d), 400, 2500) * env(n, 0.005, 0.05) + np.sin(2 * np.pi * 180 * tl(d)) * env(n, 0.002, 0.02) * 0.4)
+# old twin-bell alarm clock: hammer hitting two bells very fast
+d = 2.0; t = tl(d); buf = np.zeros(int(d * SR))
+for k in range(int(d * 22)):
+    f = 1850 if k % 2 else 2080; tt = tl(0.09)
+    place(buf, (np.sin(2 * np.pi * f * tt) + 0.4 * np.sin(2 * np.pi * f * 2.76 * tt)) * env(len(tt), 0.0005, 0.03), k / 22)
+save('alarm_bell.wav', buf * np.minimum(1, (d - t) / 0.08))
+# phone alarm: repeating beep-beep pattern
+d = 2.4; buf = np.zeros(int(d * SR))
+for k in range(8):
+    for j in range(2): tt = tl(0.07); place(buf, np.sign(np.sin(2 * np.pi * 1320 * tt)) * 0.5 * np.minimum(1, (0.07 - tt) / 0.01), k * 0.3 + j * 0.1)
+save('phone_alarm.wav', lp(buf, 5000))
+# soft UI tap for pressing snooze
+d = 0.08; n = int(d * SR)
+save('snooze_tap.wav', np.sin(2 * np.pi * (900 - 300 * tl(d) / d) * tl(d)) * env(n, 0.001, 0.02))
+# factory steam whistle: a chord with breath noise, swell and fall
+d = 2.2; t = tl(d)
+ch = sum(np.sin(2 * np.pi * f * (1 + 0.004 * np.sin(2 * np.pi * 5 * t)) * t) * a for f, a in [(392, 1.0), (494, 0.8), (587, 0.6), (784, 0.25)])
+save('steam_whistle.wav', (ch + bp(noise(d), 500, 3000) * 0.5) * np.minimum(1, t / 0.15) * np.minimum(1, (d - t) / 0.5))
+# snore: low rasp on the in-breath, whistle on the out-breath
+d = 3.2; t = tl(d); buf = np.zeros(int(d * SR))
+for k in range(2):
+    tt = tl(0.9); e = np.sin(np.pi * tt / 0.9) ** 2
+    rasp = lp(noise(0.9), 300) * (1 + np.sin(2 * np.pi * 28 * tt)) * e * 2.5
+    place(buf, rasp, 0.05 + k * 1.6)
+    tt2 = tl(0.6); place(buf, np.sin(2 * np.pi * np.cumsum(900 + 300 * tt2) / SR) * np.sin(np.pi * tt2 / 0.6) ** 2 * 0.15, 1.0 + k * 1.6)
+save('snore.wav', buf)
+# few coins dropped into a palm
+d = 0.9; buf = np.zeros(int(d * SR))
+for k, at in enumerate([0.02, 0.2, 0.36]):
+    tt = tl(0.25); place(buf, sum(np.sin(2 * np.pi * f * tt) * a for f, a in [(3100 + 200 * k, 0.6), (4700 + 150 * k, 0.35), (6900, 0.15)]) * env(len(tt), 0.0005, 0.06), at)
+save('coin_drop.wav', buf)
+# rubber stamp "TRUE STORY!"
+d = 0.3; n = int(d * SR); t = tl(d)
+save('stamp.wav', np.sin(2 * np.pi * (140 + 120 * np.exp(-t * 50)) * t) * env(n, 0.001, 0.05) + bp(noise(d), 300, 3000) * env(n, 0.0005, 0.02) * 0.8)

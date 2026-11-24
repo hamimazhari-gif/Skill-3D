@@ -3,7 +3,7 @@ import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 10;
+export const SHOTS = 12;
 export const TAIL = 0.7; // hold after the last word
 
 const DATA = {en: EN, id: ID};
@@ -36,36 +36,34 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "Hidup 500 tahun / Living to 500".
+// Word events per language: [sentenceIndex, word, occurrence]. Story: "Knocker-upper / si pembangun orang".
 export const EV = {
-  bayang: {en: [0, 'imagine'], id: [0, 'bayangkan']}, lima: {en: [0, 'five'], id: [0, 'lima']},
-  enak: {en: [1, 'amazing'], id: [1, 'enak']}, tunggu: {en: [2, 'wait'], id: [2, 'tunggu']},
-  dua: {en: [3, 'two'], id: [3, 'dua']}, muda: {en: [3, 'young'], id: [3, 'muda']},
-  santai: {en: [4, 'relax'], id: [4, 'santai']}, setengah: {en: [4, 'halfway'], id: [4, 'setengah']},
-  kuliah: {en: [5, 'college'], id: [5, 'kuliah']}, ilmu: {en: [5, 'learn'], id: [5, 'ilmunya']},
-  skripsi: {en: [6, 'thesis'], id: [6, 'skripsinya']}, lemari: {en: [6, 'wardrobe'], id: [6, 'lemari']},
-  rumah: {en: [7, 'house'], id: [7, 'rumah']}, brosur: {en: [7, 'brochure'], id: [7, 'brosurnya']},
-  sales: {en: [8, 'only'], id: [8, 'cicilan']}, cicilan: {en: [8, 'three'], id: [8, 'tiga']}, dp: {en: [8, 'low'], id: [8, 'dp']},
-  reuni: {en: [9, 'reunion'], id: [9, 'reuni']}, terbesar: {en: [9, 'biggest'], id: [9, 'terbesar']},
-  teman: {en: [10, 'classmates'], id: [10, 'teman']}, anak: {en: [10, 'kids'], id: [10, 'anak']}, cucu: {en: [10, 'grandkids'], id: [10, 'cucu']},
-  cicit: {en: [10, 'great'], id: [10, 'cicit']}, generasi: {en: [10, 'twelve'], id: [10, 'dua belas']},
-  pensiun: {en: [11, 'retirement'], id: [11, 'pensiun']}, empat: {en: [11, 'four'], id: [11, 'empat']},
-  kakek: {en: [12, 'grandpa'], id: [12, 'kakek']}, telat: {en: [12, 'late'], id: [12, 'telat']},
-  maaf: {en: [13, 'sorry'], id: [13, 'maaf']}, lutut: {en: [13, 'knees'], id: [13, 'lututku']},
-  tapi: {en: [14, 'but'], id: [14, 'tapi']}, serius: {en: [14, 'serious'], id: [14, 'serius']},
-  semua: {en: [15, 'everyone'], id: [15, 'semua']}, penuh: {en: [15, 'overcrowded'], id: [15, 'kepenuhan']},
-  makanan: {en: [16, 'food'], id: [16, 'makanan']}, air: {en: [16, 'water'], id: [16, 'air']}, tinggal: {en: [16, 'housing'], id: [16, 'tinggal']}, rebutan: {en: [16, 'fight'], id: [16, 'rebutan']},
-  sebal: {en: [17, 'annoying'], id: [17, 'menyebalkan']}, kakek2: {en: [17, 'grandpa'], id: [17, 'kakek']}, gorengan: {en: [17, 'snack'], id: [17, 'gorengan']}, lalu: {en: [17, 'ago'], id: [17, 'lalu']},
-  jadi: {en: [18, 'so'], id: [18, 'jadi']}, pas: {en: [18, 'right'], id: [18, 'pas']},
-  penting: {en: [19, 'matters'], id: [19, 'penting']}, manfaat: {en: [19, 'meaningful'], id: [19, 'bermanfaat']},
-  ngapain: {en: [20, 'what'], id: [20, 'ngapain']}, komentar: {en: [20, 'comments'], id: [20, 'komentar']},
+  dibayar: {en: [0, 'paid'], id: [0, 'dibayar']}, bangunkan: {en: [0, 'wake'], id: [0, 'membangunkan']},
+  nyata: {en: [1, 'real'], id: [1, 'benar']},
+  inggris: {en: [2, 'britain'], id: [2, 'inggris']}, pabrik: {en: [2, 'factory'], id: [2, 'pabrik']}, subuh: {en: [2, 'dawn'], id: [2, 'subuh']},
+  masalah: {en: [3, 'problem'], id: [3, 'masalahnya']}, mahal: {en: [3, 'expensive'], id: [3, 'mahal']}, langka: {en: [3, 'rare'], id: [3, 'langka']},
+  muncul: {en: [4, 'strange'], id: [4, 'muncullah']}, knocker: {en: [4, 'knocker'], id: [4, 'knocker']},
+  setiap: {en: [5, 'every'], id: [5, 'setiap']}, tongkat: {en: [5, 'stick'], id: [5, 'tongkat']}, ketuk: {en: [5, 'tapping'], id: [5, 'mengetuk']}, pelanggan: {en: [5, 'customers'], id: [5, 'pelanggan']},
+  tok1: {en: [6, 'tap', 0], id: [6, 'tok', 0]}, tok2: {en: [6, 'tap', 1], id: [6, 'tok', 1]}, tok3: {en: [6, 'tap', 2], id: [6, 'tok', 2]},
+  iya: {en: [7, 'okay'], id: [7, 'iya']}, bangun1: {en: [7, 'awake'], id: [7, 'bangun']},
+  jangan: {en: [8, 'don'], id: [8, 'jangan']}, pura: {en: [8, 'pretending'], id: [8, 'pura']},
+  pergi: {en: [9, 'leave'], id: [9, 'pergi']}, yakin: {en: [9, 'sure'], id: [9, 'yakin']}, bangun2: {en: [9, 'really'], id: [9, 'bangun']},
+  kreatif: {en: [10, 'creative'], id: [10, 'kreatif']},
+  wanita: {en: [11, 'woman'], id: [11, 'wanita']}, london: {en: [11, 'london'], id: [11, 'london']}, sumpit: {en: [11, 'pea'], id: [11, 'sumpit']},
+  kacang: {en: [11, 'peas'], id: [11, 'kacang']}, jendela: {en: [11, 'windows'], id: [11, 'jendela']},
+  tik1: {en: [12, 'tik', 0], id: [12, 'tik', 0]}, tik2: {en: [12, 'tik', 1], id: [12, 'tik', 1]}, tik3: {en: [12, 'tik', 2], id: [12, 'tik', 2]},
+  bayar: {en: [13, 'pay'], id: [13, 'bayarannya']}, sen: {en: [13, 'pennies'], id: [13, 'sen']}, minggu: {en: [13, 'week'], id: [13, 'minggu']},
+  tunggu: {en: [14, 'wait'], id: [14, 'tunggu']}, siapa: {en: [14, 'who'], id: [14, 'siapa']}, pembangun: {en: [14, 'knocker'], id: [14, 'pembangun']},
+  jawab: {en: [15, 'answer'], id: [15, 'jawabannya']}, malam: {en: [15, 'night'], id: [15, 'malam']},
+  belum: {en: [16, 'stayed'], id: [16, 'belum']}, pulang: {en: [16, 'bed'], id: [16, 'pulang']}, semua: {en: [16, 'all'], id: [16, 'semua']},
+  hilang: {en: [17, 'disappeared'], id: [17, 'hilang']}, murah: {en: [17, 'cheap'], id: [17, 'murah']},
+  sekarang: {en: [18, 'today'], id: [18, 'sekarang']}, alarm: {en: [18, 'alarms'], id: [18, 'alarm']}, snooze: {en: [18, 'snooze'], id: [18, 'snooze']}, lima: {en: [18, 'five'], id: [18, 'lima']},
+  langsung: {en: [19, 'instant'], id: [19, 'langsung']}, tim: {en: [19, 'team'], id: [19, 'tim']}, komentar: {en: [19, 'comments'], id: [19, 'komentar']},
 };
 
 export const LABELS = {
-  en: {big500: '500 YEARS', party: 'HAPPY 250th!', cake: '250', life: 'LIFE', campus: 'SEMESTER 80', thesis: 'THESIS', forSale: 'FOR SALE',
-    loan: '300-YEAR LOAN', loanSub: 'LOW DOWN PAYMENT!', reunion: 'SCHOOL REUNION', gens: '12 GENERATIONS', retire: 'RETIRE AT 400', clockIn: 'CLOCK IN',
-    late: 'LATE!', food: 'FOOD', water: 'WATER', full: 'FULL', snacks: 'SNACKS', price: '$2', oldPrice: '1¢', oldSub: '400 YEARS AGO', comment: 'COMMENT!'},
-  id: {big500: '500 TAHUN', party: 'ULTAH KE-250!', cake: '250', life: 'HIDUP', campus: 'SEMESTER 80', thesis: 'SKRIPSI', forSale: 'DIJUAL',
-    loan: 'CICILAN 300 TAHUN', loanSub: 'DP RINGAN!', reunion: 'REUNI SD', gens: '12 GENERASI', retire: 'PENSIUN: 400', clockIn: 'ABSEN',
-    late: 'TELAT!', food: 'MAKANAN', water: 'AIR', full: 'PENUH', snacks: 'GORENGAN', price: 'Rp2.000', oldPrice: 'Rp1', oldSub: '400 TAHUN LALU', comment: 'KOMENTAR!'},
+  en: {true: 'TRUE STORY!', mill: 'COTTON MILL', price: 'EXPENSIVE!', rare: 'RARE', title: 'KNOCKER-UPPER', titleSub: 'THE HUMAN ALARM CLOCK', london: 'LONDON',
+    pay: 'A FEW PENNIES', paySub: 'PER WEEK', shop: 'ALARM CLOCKS', cheap: 'CHEAP!', snooze: 'SNOOZE', riser: 'INSTANT RISER', team: 'TEAM SNOOZE', comment: 'COMMENT!', who: 'WHO WAKES HIM?'},
+  id: {true: 'KISAH NYATA!', mill: 'PABRIK KAPAS', price: 'MAHAL!', rare: 'LANGKA', title: 'KNOCKER-UPPER', titleSub: 'SI PEMBANGUN ORANG', london: 'LONDON',
+    pay: 'BEBERAPA SEN', paySub: 'PER MINGGU', shop: 'JAM WEKER', cheap: 'MURAH!', snooze: 'SNOOZE', riser: 'LANGSUNG BANGUN', team: 'TIM SNOOZE', comment: 'KOMENTAR!', who: 'SIAPA YANG BANGUNIN?'},
 };

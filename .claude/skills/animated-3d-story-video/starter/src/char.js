@@ -16,10 +16,11 @@ export const DESIGNS = {
   egg: {head: 'round', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   bean: {head: 'round', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  stout: {head: 'round', hair: 'tuft', skin: '#f7dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.03, torsoExtra: 0.18, cheeks: false, shading: true, shadows: true},
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -86,7 +87,13 @@ function drawHeadBase(o, r) {
   const fr = [];
   const hx = (a, k = 1.02) => cx + Math.cos(a) * RX * k * (D.head === 'egg' ? 1 - 0.09 * Math.sin(a) : 1), hy = (a, k = 1.02) => cy + Math.sin(a) * RY * k;
   const hairStyle = o.hairStyle || D.hair;
-  if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
+  if (hairStyle === 'bun') { // woman: hair bun on top, locks down to the jaw, centre parting
+    inkShape(x, wobble(ellipse(cx + RX * 0.05, cy - RY * 1.08, RX * 0.34, RY * 0.28, 30), r, 2), o.hair, r, 8, (pts) => paintShade(x, pts, cx, cy - RY, RX * 0.5, 0.3));
+    for (const sd of [-1, 1]) inkShape(x, wobble(ellipse(cx + sd * RX * 0.9, cy - RY * 0.05, RX * 0.2, RY * 0.62, 30), r, 2), o.hair, r, 8, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
+    for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.04 + 0.92 * i / 40); fr.push([hx(a), hy(a)]); }
+    fr.push([cx + RX * 0.8, cy - RY * 0.3]); fr.push([cx + RX * 0.45, cy - RY * 0.5]); fr.push([cx + RX * 0.06, cy - RY * 0.66]);
+    fr.push([cx, cy - RY * 0.58]); fr.push([cx - RX * 0.06, cy - RY * 0.66]); fr.push([cx - RX * 0.45, cy - RY * 0.5]); fr.push([cx - RX * 0.8, cy - RY * 0.3]);
+  } else if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.62, cy - RY * 0.66]);
     fr.push([cx + RX * 0.2, cy - RY * 0.62]); fr.push([cx - RX * 0.3, cy - RY * 0.5]); fr.push([cx - RX * 0.7, cy - RY * 0.3]); fr.push([cx - RX * 0.95, cy - RY * 0.12]);
@@ -122,6 +129,14 @@ function drawHeadBase(o, r) {
   } else if (o.hat === 'top') {
     inkShape(x, [[cx - R * 0.62, top - R * 0.85], [cx + R * 0.62, top - R * 0.85], [cx + R * 0.68, top + R * 0.25], [cx - R * 0.68, top + R * 0.25]], o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.15, R * 0.13, 40), o.hatColor, r, 9);
+  } else if (o.hat === 'nightcap') { // floppy striped sleeping cap drooping to the right, with a pompom
+    const pts = [[cx - R * 0.98, top + R * 0.5]];
+    for (let i = 0; i <= 20; i++) { const u = i / 20; pts.push([cx - R * 0.98 + u * R * 1.5, top + R * 0.5 - Math.sin(u * Math.PI * 0.62) * R * 1.0]); }
+    pts.push([cx + R * 1.18, top - R * 0.05]); pts.push([cx + R * 1.2, top + R * 0.12]);
+    for (let i = 0; i <= 12; i++) { const u = i / 12; pts.push([cx + R * 1.05 - u * R * 0.2, top + R * 0.12 + u * R * 0.38]); }
+    inkShape(x, pts, o.hatColor || '#7fa6c9', r, 10, (q) => paintShade(x, q, cx, top, R * 1.3, 0.3));
+    inkShape(x, [[cx - R * 1.0, top + R * 0.38], [cx + R * 0.98, top + R * 0.38], [cx + R * 0.98, top + R * 0.56], [cx - R * 1.0, top + R * 0.56]], o.hatColor2 || '#f3ece0', r, 8);
+    inkShape(x, wobble(ellipse(cx + R * 1.24, top + R * 0.2, R * 0.15, R * 0.15, 20), r, 1), o.hatColor2 || '#f3ece0', r, 6);
   } else if (o.hat === 'crown') { // gold crown with five points and red jewels
     const b = top + R * 0.32, h = R * 0.62, w = R * 0.78;
     const pts = [[cx - w, b]]; for (let i = 0; i <= 8; i++) { const xx = cx - w + (2 * w) * i / 8; pts.push([xx, i % 2 ? b - h * 0.45 : b - h]); } pts.push([cx + w, b]);
