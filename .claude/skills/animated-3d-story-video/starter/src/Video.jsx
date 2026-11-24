@@ -8,7 +8,7 @@ import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
-import {makeTiming, EV, LABELS, FPS} from './timing';
+import {makeTiming, EV, LABELS, FPS, letterTime} from './timing';
 import {buildWorld, LOOK, LOC, storyFx} from './world';
 import {buildCameras, camAt} from './shots';
 import {skyDome, moon as moonDisc} from './props';
@@ -149,7 +149,7 @@ export function captionWords(T) {
     const words = s.text.split(/\s+/).filter(Boolean);
     const letters = (w) => w.replace(/[^\p{L}\p{N}]/gu, '').length || 1;
     const total = words.reduce((a, w) => a + letters(w), 0);
-    let acc = 0; const items = words.map((w) => { const t0 = s.start + (s.end - s.start) * acc / total; acc += letters(w); return {w, t0}; });
+    let acc = 0; const items = words.map((w) => { const t0 = letterTime(s, acc); acc += w.replace(/[^a-zA-Z0-9]/g, '').length; return {w, t0}; });
     // merge short words with the next one so chunks read naturally
     for (let i = 0; i < items.length; i++) {
       let txt = items[i].w; const t0 = items[i].t0;

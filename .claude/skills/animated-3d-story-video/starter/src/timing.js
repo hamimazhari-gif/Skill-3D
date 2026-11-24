@@ -10,6 +10,34 @@ const DATA = {en: EN, id: ID};
 
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
+// Map a fraction of a sentence's letters to a time, spreading the letters over its voiced segments only.
+export function voicedAt(s, f) {
+  const segs = s.voiced && s.voiced.length ? s.voiced : [[s.start, s.end]];
+  const V = segs.reduce((a, [x, y]) => a + y - x, 0);
+  let r = f * V;
+  for (const [x, y] of segs) { if (r < y - x - 1e-6) return x + r; r -= y - x; }
+  return segs[segs.length - 1][1];
+}
+
+// Time of the letter at offset `before` (letters only) inside sentence s. When the sentence has as many
+// punctuation-separated phrases as voiced segments, each phrase is placed in its own segment; otherwise the
+// letters are spread over the voiced parts.
+export function letterTime(s, before) {
+  const toks = s.text.split(/\s+/).filter(Boolean);
+  const phrases = []; let cur = 0;
+  toks.forEach((tk, i) => { cur += norm(tk).replace(/ /g, '').length; if (/[,.!?…:;]["”']?$/.test(tk) || i === toks.length - 1) { phrases.push(cur); cur = 0; } });
+  const total = phrases.reduce((a, b) => a + b, 0) || 1;
+  const segs = s.voiced && s.voiced.length ? s.voiced : [[s.start, s.end]];
+  if (phrases.length === segs.length) {
+    let acc = 0;
+    for (let i = 0; i < phrases.length; i++) {
+      if (before < acc + phrases[i] || i === phrases.length - 1) return segs[i][0] + (segs[i][1] - segs[i][0]) * Math.min(1, (before - acc) / phrases[i]);
+      acc += phrases[i];
+    }
+  }
+  return voicedAt(s, before / total);
+}
+
 export function makeTiming(lang) {
   const d = DATA[lang];
   const S = d.sentences;
@@ -30,7 +58,7 @@ export function makeTiming(lang) {
     for (let k = 0; k <= occ; k++) { idx = text.indexOf(w, from); from = idx + 1; }
     if (idx < 0) throw new Error(`word "${word}" not in sentence ${si} (${lang})`);
     const before = text.slice(0, idx).replace(/ /g, '').length;
-    return s.start + (s.end - s.start) * (before / letters.length);
+    return letterTime(s, before);
   }
   function shotOf(t) { for (let k = SHOTS; k >= 1; k--) if (t >= CUTS[k - 1]) return k; return 1; }
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};

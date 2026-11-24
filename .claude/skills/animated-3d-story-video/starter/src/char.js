@@ -18,9 +18,10 @@ export const DESIGNS = {
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
   stout: {head: 'round', hair: 'tuft', skin: '#f7dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.03, torsoExtra: 0.18, cheeks: false, shading: true, shadows: true},
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  tidy: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -93,6 +94,7 @@ function drawHeadBase(o, r) {
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.04 + 0.92 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.8, cy - RY * 0.3]); fr.push([cx + RX * 0.45, cy - RY * 0.5]); fr.push([cx + RX * 0.06, cy - RY * 0.66]);
     fr.push([cx, cy - RY * 0.58]); fr.push([cx - RX * 0.06, cy - RY * 0.66]); fr.push([cx - RX * 0.45, cy - RY * 0.5]); fr.push([cx - RX * 0.8, cy - RY * 0.3]);
+  } else if (hairStyle === 'none') { // no hair (a banknote's face)
   } else if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.62, cy - RY * 0.66]);
@@ -113,7 +115,7 @@ function drawHeadBase(o, r) {
     }
   }
   if (fr.length) inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
-  if (D.shading && (!o.hat || o.hat === 'none') && hairStyle !== 'bald') { // glossy hair streak
+  if (D.shading && (!o.hat || o.hat === 'none') && hairStyle !== 'bald' && hairStyle !== 'none') { // glossy hair streak
     x.save(); x.strokeStyle = 'rgba(255,255,255,0.32)'; x.lineCap = 'round'; x.lineWidth = R * 0.07;
     x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.22, Math.PI * 1.45); x.stroke();
     x.lineWidth = R * 0.035; x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.5, Math.PI * 1.56); x.stroke(); x.restore();
@@ -348,6 +350,31 @@ function drawTorso(o, r) {
   return {mesh: partMesh(texFrom(c), W, H), W, H};
 }
 
+// Banknote body (our own design, not a real note): a paper rectangle with a cream oval for the face, value numbers
+// in the corners, guilloche rings, painted light and an ink band. B = {color, dark, value}.
+function drawBill(B, r) {
+  const W = 0.86, H = 0.48, c = canvas(W * PX, H * PX), x = c.getContext('2d');
+  const w = W * PX, h = H * PX, m = 14;
+  const pts = [];
+  const edge = (x0, y0, x1, y1, n) => { for (let i = 0; i < n; i++) { const u = i / n; pts.push([x0 + (x1 - x0) * u, y0 + (y1 - y0) * u + (y0 === y1 ? Math.sin(u * Math.PI * 2) * 3 : 0)]); } };
+  edge(m, m, w - m, m, 20); edge(w - m, m, w - m, h - m, 10); edge(w - m, h - m, m, h - m, 20); edge(m, h - m, m, m, 10);
+  const P = wobble(pts, r, 1.5);
+  x.save(); x.beginPath(); P.forEach((q, i) => (i ? x.lineTo(...q) : x.moveTo(...q))); x.closePath(); x.clip();
+  x.fillStyle = B.color; x.fillRect(0, 0, w, h);
+  x.strokeStyle = B.dark; x.globalAlpha = 0.28; x.lineWidth = 2;
+  for (let i = 0; i < 16; i++) { x.beginPath(); x.arc(w * 0.78, h * 0.5, 14 + i * 9, 0, 7); x.stroke(); x.beginPath(); x.arc(w * 0.22, h * 0.5, 14 + i * 9, 0, 7); x.stroke(); }
+  x.globalAlpha = 1; x.lineWidth = 7; x.strokeRect(m + 16, m + 16, w - 2 * m - 32, h - 2 * m - 32);
+  x.fillStyle = '#fbf1dc'; x.beginPath(); x.ellipse(w / 2, h / 2, 0.2 * PX, 0.2 * PX, 0, 0, 7); x.fill();
+  x.lineWidth = 6; x.strokeStyle = B.dark; x.stroke();
+  x.fillStyle = B.dark; x.textBaseline = 'middle';
+  x.font = '900 46px "Inter Display"'; x.textAlign = 'left'; x.fillText(B.short || B.value, m + 30, m + 52);
+  x.textAlign = 'right'; x.font = '900 40px "Inter Display"'; x.fillText(B.value, w - m - 28, h - m - 46);
+  x.restore();
+  if (D.shading) paintShade(x, P, w / 2, h / 2, w * 0.45, 0.28);
+  inkShape(x, P, null, r, 10);
+  return {mesh: partMesh(texFrom(c), W, H), W, H};
+}
+
 function drawLimb(len, color, end, r, wTop = 9, wBot = 5) {
   if (D.limb) { wTop = Math.max(3, wTop + D.limb[0] - 9); wBot = Math.max(3, wBot + D.limb[1] - 5); }
   const W = 0.18, H = len + 0.1, c = canvas(W * PX, H * PX), x = c.getContext('2d');
@@ -443,32 +470,36 @@ export function makeChar(name, o = {}) {
   const s = o.scale || 1;
   g.scale.setScalar(s);
 
-  const LX = D.legExtra || 0, TX = D.torsoExtra || 0;
-  const hipY = 0.64 + LX, shY = 1.1 + LX + TX, neckY = 1.12 + LX + TX;
+  const B = o.bill; // a banknote character: paper body, round face in the middle, stick arms and legs
+  const LX = B ? 0 : D.legExtra || 0, TX = B ? 0 : D.torsoExtra || 0;
+  const billCY = 0.62;
+  const hipY = B ? 0.42 : 0.64 + LX, shY = B ? billCY + 0.03 : 1.1 + LX + TX, neckY = B ? billCY : 1.12 + LX + TX;
   const legs = [];
   for (const sx of [-1, 1]) {
-    const piv = new THREE.Group(); piv.position.set(sx * 0.075, hipY, -0.02);
-    const l = drawLimb(0.62 + LX, p.lower, 'shoe', r);
+    const piv = new THREE.Group(); piv.position.set(sx * (B ? 0.14 : 0.075), hipY, -0.02);
+    const l = drawLimb(B ? 0.4 : 0.62 + LX, p.lower, 'shoe', r);
     l.mesh.position.set(0, -l.H / 2 + 0.03, 0); piv.add(l.mesh); body.add(piv); legs.push(piv);
   }
-  const torso = drawTorso(p, r);
-  torso.mesh.position.set(0, 0.53 + LX + torso.H / 2, 0); body.add(torso.mesh);
+  if (B) { const bm = drawBill(B, r); bm.mesh.position.set(0, billCY, 0); body.add(bm.mesh); }
+  else { const torso = drawTorso(p, r); torso.mesh.position.set(0, 0.53 + LX + torso.H / 2, 0); body.add(torso.mesh); }
   const arms = [];
+  const UA = B ? 0.2 : 0.26, FA = B ? 0.19 : 0.25;
   for (const sx of [-1, 1]) {
-    const up = new THREE.Group(); up.position.set(sx * 0.165, shY, 0.02);
-    const a1 = drawLimb(0.26, p.jacket, 'elbow', r, 9, 7);
+    const up = new THREE.Group(); up.position.set(sx * (B ? 0.4 : 0.165), shY, 0.02);
+    const a1 = drawLimb(UA, B ? p.lower : p.jacket, 'elbow', r, 9, 7);
     a1.mesh.position.set(0, -a1.H / 2 + 0.03, 0); up.add(a1.mesh);
-    const fore = new THREE.Group(); fore.position.set(0, -0.26, 0.004); up.add(fore);
-    const a2 = drawLimb(0.25, p.jacket, 'hand', r, 7, 5);
+    const fore = new THREE.Group(); fore.position.set(0, -UA, 0.004); up.add(fore);
+    const a2 = drawLimb(FA, B ? p.lower : p.jacket, 'hand', r, 7, 5);
     a2.mesh.position.set(0, -a2.H / 2 + 0.03, 0); fore.add(a2.mesh);
-    const hand = new THREE.Group(); hand.position.set(0, -0.27, 0.02); fore.add(hand);
+    const hand = new THREE.Group(); hand.position.set(0, -FA - 0.02, 0.02); fore.add(hand);
     body.add(up);
     arms.push({up, fore, hand, sx});
   }
   const headPiv = new THREE.Group(); headPiv.position.set(0, neckY, 0.03); body.add(headPiv);
-  const headY = (1.42 - 1.12) + (HEAD_H / 2 - (1 - HEAD_CY)); // head sits on the neck, so a taller body lifts it
-  const head = partMesh(drawHeadBase(p, r), HEAD_W, HEAD_H); head.position.set(0, headY, 0); headPiv.add(head);
-  const face = partMesh(null, HEAD_W, HEAD_H, false); face.position.set(0, headY, 0.004); headPiv.add(face);
+  const HK = B ? 0.62 : 1; // face scale on a banknote
+  const headY = B ? (HEAD_CY - 0.5) * HK : (1.42 - 1.12) + (HEAD_H / 2 - (1 - HEAD_CY)); // head sits on the neck, so a taller body lifts it
+  const head = partMesh(drawHeadBase(B ? {...p, hairStyle: 'none', hat: 'none'} : p, r), HEAD_W, HEAD_H); head.position.set(0, headY, B ? 0.006 : 0); head.scale.setScalar(HK); headPiv.add(head);
+  const face = partMesh(null, HEAD_W, HEAD_H, false); face.position.set(0, headY, B ? 0.01 : 0.004); face.scale.setScalar(HK); headPiv.add(face);
   const faceCache = new Map();
   const faceTex = (f) => {
     const key = `${f.eyes}|${f.brows}|${f.mouth}|${(f.extras || []).join(',')}`;

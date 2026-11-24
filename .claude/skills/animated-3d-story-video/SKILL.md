@@ -206,3 +206,11 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 
 ## After rendering
 `ffprobe` (1080x1920, 30 fps, duration, audio present), one frame per shot in a contact sheet, then deliver mp4s, thumbnails, titles and PDFs; say what was checked, what is still wrong, and offer one next step.
+
+## Notes from "Uang seratus ribu" (a banknote's day)
+- **Object narrators:** `makeChar('hero', {bill: {color, dark, value, short}, lower: dark, scale})` builds a banknote character: paper body (own design, never a copy of real money), the same round face in a cream oval (skin colour kept), stick arms/legs, every expression, pose and lip-sync. Use the same idea for other talking objects.
+- **Passing a small character from hand to hand:** a `route(g, obj, keys)` helper in `post` (after `world.updateMatrixWorld`) moves it on short arcs between fixed points and hands (`{t, c, i}` follows `c.hand(i)` every frame). See `videos/uang-seratus-ribu/source/world.js`.
+- **Word timing inside sentences** now uses the voiced segments: `letterTime(s, letters)` puts each punctuation-separated phrase into its own voiced segment when the counts match (pauses skipped), so on-word events and captions stay on the words after "..." pauses. Run `tools/voiced.py` after `align.py`.
+- **When align.py mis-snaps** (fast TTS lines make the letter-rate model wrong): list the pauses (`gaps.py`) and look at where the fricatives (s, c, j, sh) fall in each voiced segment (high zero-crossing bursts) to match sentences by hand; write the start/end into the json and note the uncertain sentences in `script.md`.
+- `ownMats(obj)` before recolouring or fading a prop: `toon()` materials are cached and shared.
+- New sounds: atm_beep, cash_dispense, kiss, whistle_prit, scooter, espresso, paper_flutter, velcro, fly_buzz, horn, slot_drop.

@@ -1230,3 +1230,144 @@ export function alarmClock(r = 0.16, o = {}) {
   wc.set(5, 0);
   return {group: g, set: wc.set, ring(t, a) { inner.rotation.z = a * 0.14 * Math.sin(t * 60); inner.position.y = a * 0.01 * Math.abs(Math.sin(t * 45)); }};
 }
+
+// ================= "A banknote's day" story props =================
+// ATM booth, front at z=0. Returns {group, slot: [x, y, z] (cash slot mouth), screen (mesh, set its map/color)}.
+export function atmBooth(label = 'ATM', o = {}) {
+  const g = new THREE.Group(); const col = o.color || '#3f6fa8';
+  const back = box(1.5, 2.6, 1.0, toon(col, {paint: {seed: 91, stains: 8, chips: 6}})); at(back, 0, 0, -0.55); g.add(back);
+  const roof = box(1.7, 0.18, 1.2, toon(shade(col, -0.25))); at(roof, 0, 2.6, -0.5); g.add(roof);
+  const s = sign(label, 1.2, 0.36, {bg: o.signBg || '#f2d24a', frame: '#8a6a2a'}); at(s, 0, 2.32, -0.02); g.add(s);
+  const panel = box(1.1, 1.3, 0.12, toon('#d8dde4', {paint: {seed: 92, stains: 4}})); at(panel, 0, 0.6, -0.02); g.add(panel);
+  const c = canvas(256, 192), x = c.getContext('2d');
+  x.fillStyle = '#7fc4e8'; x.fillRect(0, 0, 256, 192); x.fillStyle = '#fff6e0'; x.fillRect(24, 24, 208, 30);
+  x.fillStyle = 'rgba(53,31,34,0.4)'; for (let i = 0; i < 3; i++) x.fillRect(40, 80 + i * 30, 120 + i * 20, 14);
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.4), new THREE.MeshBasicMaterial({map: texFrom(c)})); screen.position.set(0, 1.55, 0.05); g.add(screen);
+  const bezel = box(0.66, 0.5, 0.04, '#2b2b33'); at(bezel, 0, 1.3, 0.02); g.add(bezel);
+  const pad = box(0.34, 0.26, 0.08, '#4a4a52'); at(pad, -0.18, 1.0, 0.06, 0, 0.5); g.add(pad);
+  for (let i = 0; i < 12; i++) { const k = box(0.06, 0.04, 0.03, i === 11 ? '#6fb06a' : i === 9 ? '#d8413a' : '#e8e8ea', {hull: 0.004}); at(k, -0.28 + (i % 3) * 0.1, 1.04 + Math.floor(i / 3) * 0.05, 0.12 - Math.floor(i / 3) * 0.025, 0, 0.5); g.add(k); }
+  const slotBox = box(0.4, 0.09, 0.1, '#5a5a62'); at(slotBox, 0.2, 0.86, 0.06); g.add(slotBox);
+  const slit = box(0.32, 0.025, 0.02, '#151518', {hull: 0}); at(slit, 0.2, 0.892, 0.11); g.add(slit);
+  const ledge = box(1.0, 0.06, 0.35, toon('#9aa0a8')); at(ledge, 0, 0.7, 0.12); g.add(ledge);
+  return {group: g, slot: [0.2, 0.9, 0.12], screen};
+}
+
+// Motor scooter facing +x (side view along the street). Rider/seat top at about y 0.78.
+export function scooter(color = '#d8413a') {
+  const g = new THREE.Group();
+  const body = box(1.1, 0.42, 0.42, toon(color, {paint: {seed: 93, stains: 4}})); at(body, -0.1, 0.3, 0); g.add(body);
+  const seat = box(0.6, 0.1, 0.36, '#2b2b33'); at(seat, -0.25, 0.72, 0); g.add(seat);
+  const front = box(0.22, 0.75, 0.42, toon(color)); at(front, 0.5, 0.2, 0, 0, 0, -0.18); g.add(front);
+  const floor = box(0.4, 0.06, 0.4, '#3a3a40'); at(floor, 0.2, 0.25, 0); g.add(floor);
+  const stem = cyl(0.03, 0.03, 0.5, '#5a5a62'); at(stem, 0.6, 0.85, 0, 0, 0, -0.18); g.add(stem);
+  const bar = cyl(0.025, 0.025, 0.6, '#2b2b33', {center: true}); at(bar, 0.68, 1.3, 0, 0, Math.PI / 2); g.add(bar);
+  const lamp = ball(0.09, new THREE.MeshBasicMaterial({color: '#fff3b0'}), {hull: 0.01}); at(lamp, 0.72, 1.18, 0); g.add(lamp);
+  for (const x of [-0.5, 0.62]) {
+    const w = cyl(0.22, 0.22, 0.14, '#2b2b33', {center: true, seg: 20}); at(w, x, 0.22, 0, 0, Math.PI / 2); g.add(w);
+    const hub = cyl(0.1, 0.1, 0.16, '#c9ccd0', {center: true}); at(hub, x, 0.22, 0, 0, Math.PI / 2); g.add(hub);
+  }
+  return g;
+}
+
+// Trendy café counter piece: an espresso machine.
+export function espressoMachine() {
+  const g = new THREE.Group();
+  const b = box(0.7, 0.5, 0.45, toon('#c9ccd0', {wear: false})); g.add(b);
+  const top = box(0.74, 0.06, 0.48, '#2b2b33'); at(top, 0, 0.5, 0); g.add(top);
+  for (const s of [-0.18, 0.18]) { const pf = cyl(0.05, 0.05, 0.08, '#2b2b33'); at(pf, s, 0.22, 0.25); g.add(pf); const hd = box(0.03, 0.03, 0.16, '#2b2b33'); at(hd, s, 0.24, 0.36); g.add(hd); }
+  const gauge = cyl(0.06, 0.06, 0.02, '#fbf6ea', {center: true}); at(gauge, 0, 0.38, 0.23, 0, Math.PI / 2); g.add(gauge);
+  return g;
+}
+
+// Takeaway iced coffee with a dome lid, whipped cream and a straw.
+export function fancyCup(o = {}) {
+  const g = new THREE.Group();
+  g.add(cyl(0.07, 0.05, 0.2, toon(o.color || '#c9935a', {wear: false}), {hull: 0.008}));
+  const band = cyl(0.071, 0.066, 0.06, toon('#f3e7d3', {wear: false}), {hull: 0.004}); at(band, 0, 0.07, 0); g.add(band);
+  const cream = ball(0.065, '#fffaf0', {sy: 0.7, hull: 0.008}); at(cream, 0, 0.21, 0); g.add(cream);
+  const drizzle = ball(0.03, '#8a5a3a', {sy: 0.6, hull: 0.004}); at(drizzle, 0, 0.255, 0); g.add(drizzle);
+  const straw = cyl(0.008, 0.008, 0.22, '#d8413a', {hull: 0.004}); at(straw, 0.02, 0.2, 0, 0, 0, -0.2); g.add(straw);
+  return g;
+}
+
+// Angkot (Indonesian minibus) facing +x. Returns the group; door side faces +z.
+export function minibus(color = '#5aa8a0', label = 'ANGKOT') {
+  const g = new THREE.Group();
+  const body = box(3.4, 1.45, 1.6, toon(color, {paint: {seed: 95, stains: 8, chips: 8}})); at(body, 0, 0.35, 0); g.add(body);
+  const hood = box(0.7, 0.55, 1.56, toon(color)); at(hood, 1.95, 0.35, 0); g.add(hood);
+  const win = box(2.5, 0.5, 1.62, '#2a3a4a', {hull: 0}); at(win, -0.35, 1.15, 0); g.add(win);
+  const ws = box(0.06, 0.5, 1.4, '#8fc0d8', {hull: 0}); at(ws, 1.62, 1.12, 0, 0, 0, 0.2); g.add(ws);
+  const stripe = box(3.42, 0.1, 1.62, '#f2d24a', {hull: 0}); at(stripe, 0, 0.82, 0); g.add(stripe);
+  const roofS = sign(label, 1.2, 0.3, {bg: '#fff3df', frame: '#8a6a2a'}); at(roofS, 0.2, 1.85, 0.0, 0); roofS.rotation.y = 0; g.add(roofS);
+  const door = box(0.75, 1.2, 0.02, '#1f2a36', {hull: 0}); at(door, -1.2, 0.4, 0.8); g.add(door);
+  for (const x of [-1.1, 1.5]) for (const z of [-0.8, 0.8]) {
+    const w = cyl(0.3, 0.3, 0.22, '#2b2b33', {center: true, seg: 20}); at(w, x, 0.3, z, 0, Math.PI / 2); g.add(w);
+    const hub = cyl(0.13, 0.13, 0.24, '#c9ccd0', {center: true}); at(hub, x, 0.3, z, 0, Math.PI / 2); g.add(hub);
+  }
+  const hl = ball(0.1, new THREE.MeshBasicMaterial({color: '#fff3b0'}), {hull: 0.01}); at(hl, 2.3, 0.75, 0.5); g.add(hl);
+  return g;
+}
+
+// Vegetable heap on a cart table: cabbages, carrots, tomatoes, chillies.
+export function vegPile(seed = 5) {
+  const g = new THREE.Group(); const r = rng(seed);
+  for (let i = 0; i < 18; i++) {
+    const k = i % 4, x = (r() - 0.5) * 1.6, z = (r() - 0.5) * 0.6, y = 0.86 + r() * 0.08;
+    const m = k === 0 ? ball(0.11, '#7fb35a', {hull: 0.008}) : k === 1 ? cyl(0.03, 0.012, 0.2, '#e8823a', {hull: 0.006, center: true}) : k === 2 ? ball(0.06, '#d8413a', {hull: 0.006}) : cyl(0.012, 0.006, 0.12, '#c8302a', {hull: 0.004, center: true});
+    at(m, x, y + (k === 0 ? 0.08 : 0.03), z, r() * 3, 0, k % 2 ? Math.PI / 2 : 0); g.add(m);
+  }
+  return g;
+}
+
+// Chicken piggy bank (celengan ayam): painted clay chicken with a slot on its back. Faces +z.
+export function piggyChicken(s = 1) {
+  const g = new THREE.Group(); g.scale.setScalar(s);
+  const clay = toon(paintTex('#e8823a', {seed: 97, stains: 6, chips: 4}));
+  const body = ball(0.3, clay, {sx: 1.25, sy: 1.0, sz: 1.0}); at(body, 0, 0.3, 0); g.add(body);
+  const head = ball(0.15, clay); at(head, 0.32, 0.6, 0); g.add(head);
+  const comb = ball(0.08, '#d8302a', {sx: 0.5, sy: 1.0, sz: 1.2}); at(comb, 0.32, 0.77, 0); g.add(comb);
+  const beak = cone(0.05, 0.12, '#f2c94c'); at(beak, 0.48, 0.6, 0, 0, 0, -Math.PI / 2); g.add(beak);
+  const wattle = ball(0.04, '#d8302a', {sy: 1.4}); at(wattle, 0.42, 0.5, 0); g.add(wattle);
+  const tail = ball(0.16, '#d8302a', {sx: 0.5, sy: 1.2, sz: 0.9}); at(tail, -0.38, 0.5, 0, 0, 0, 0.4); g.add(tail);
+  for (const z of [-0.08, 0.08]) { const e = ball(0.022, INK, {hull: 0}); at(e, 0.42, 0.65, z * 1.3); g.add(e); }
+  for (const [y, c] of [[0.3, '#f2d24a'], [0.22, '#4f8fc8']]) { const st = cyl(0.302, 0.302, 0.03, c, {center: true, hull: 0, seg: 32}); st.scale.set(1.25, 1, 1); at(st, 0, y + 0.08, 0); g.add(st); }
+  const slot = box(0.2, 0.03, 0.04, '#2a1a14', {hull: 0}); at(slot, -0.02, 0.6, 0); g.add(slot);
+  const foot = cyl(0.18, 0.22, 0.06, clay); at(foot, 0, 0, 0); g.add(foot);
+  return {group: g, slot: [-0.02 * s, 0.61 * s, 0]};
+}
+
+// Wallet: returns {group, open(u)} (u 0 closed .. 1 open flat).
+export function wallet(color = '#6a4a3a') {
+  const g = new THREE.Group();
+  const a = box(0.22, 0.13, 0.02, toon(color, {paint: {seed: 98, stains: 4}}), {center: true, hull: 0.006}); at(a, -0.11, 0, 0); 
+  const L = new THREE.Group(); L.add(a); g.add(L);
+  const b = box(0.22, 0.13, 0.02, toon(color, {paint: {seed: 99, stains: 4}}), {center: true, hull: 0.006}); at(b, 0.11, 0, 0);
+  const R = new THREE.Group(); R.add(b); g.add(R);
+  const inner = box(0.2, 0.11, 0.005, '#3a2a22', {center: true, hull: 0}); at(inner, 0.11, 0, 0.012); R.add(inner);
+  return {group: g, open(u) { L.rotation.y = -Math.PI / 2 * (1 - u) * 0.98; R.rotation.y = 0; L.position.z = 0.0; }};
+}
+
+// Shoe box with a painted label and a sneaker on the lid.
+export function shoeBox(color = '#e8a83a', label = '') {
+  const g = new THREE.Group();
+  const b = box(0.5, 0.22, 0.3, toon(color, {wear: false})); g.add(b);
+  const lid = box(0.52, 0.06, 0.32, toon(shade(color, -0.15), {wear: false})); at(lid, 0, 0.22, 0); g.add(lid);
+  if (label) { const s = sign(label, 0.42, 0.12, {bg: '#fff3df', frame: shade(color, -0.3), depth: 0.01}); at(s, 0, 0.06, 0.155); g.add(s); }
+  return g;
+}
+
+// Open notebook with ruled lines and a heading; pencil on top.
+export function notebook(label = '', o = {}) {
+  const g = new THREE.Group();
+  const cover = box(0.9, 0.03, 0.62, toon(o.cover || '#4f7fa6', {wear: false})); g.add(cover);
+  const c = canvas(512, 360), x = c.getContext('2d');
+  x.fillStyle = '#fbf6ea'; x.fillRect(0, 0, 512, 360); x.strokeStyle = '#9ab8d8'; x.lineWidth = 3;
+  for (let i = 0; i < 9; i++) { x.beginPath(); x.moveTo(20, 80 + i * 32); x.lineTo(492, 80 + i * 32); x.stroke(); }
+  x.strokeStyle = '#d88a8a'; x.beginPath(); x.moveTo(256, 0); x.lineTo(256, 360); x.stroke();
+  x.fillStyle = INK; x.font = '900 34px "Inter Display"'; x.textAlign = 'center'; x.fillText(label, 128, 50);
+  x.font = '700 24px "Inter Display"'; x.textAlign = 'left';
+  (o.lines || []).forEach((l, i) => x.fillText(l, 22, 104 + i * 32));
+  const page = new THREE.Mesh(new THREE.PlaneGeometry(0.86, 0.58), toon(texFrom(c))); page.rotation.x = -Math.PI / 2; page.position.y = 0.032; g.add(page);
+  const pencil = cyl(0.012, 0.012, 0.42, '#f2c94c', {center: true, hull: 0.004}); at(pencil, 0.2, 0.05, 0.05, 0.6, 0, Math.PI / 2); g.add(pencil);
+  return g;
+}

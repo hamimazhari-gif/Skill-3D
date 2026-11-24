@@ -212,3 +212,66 @@ save('coin_drop.wav', buf)
 # rubber stamp "TRUE STORY!"
 d = 0.3; n = int(d * SR); t = tl(d)
 save('stamp.wav', np.sin(2 * np.pi * (140 + 120 * np.exp(-t * 50)) * t) * env(n, 0.001, 0.05) + bp(noise(d), 300, 3000) * env(n, 0.0005, 0.02) * 0.8)
+
+# ===== Uang seratus ribu (a banknote's day) =====
+# ATM keypad: three short dual-tone beeps
+d = 0.9; buf = np.zeros(int(d * SR))
+for k, (f1, f2) in enumerate([(770, 1336), (852, 1209), (697, 1477)]):
+    tt = tl(0.11); place(buf, (np.sin(2 * np.pi * f1 * tt) + np.sin(2 * np.pi * f2 * tt)) * np.minimum(1, tt / 0.005) * np.minimum(1, (0.11 - tt) / 0.01), 0.02 + k * 0.24)
+save('atm_beep.wav', buf * 0.6)
+# cash dispenser: motor whirr rising, rollers, paper riffle, a clunk
+d = 1.1; t = tl(d)
+f = 70 + 50 * np.minimum(1, t / 0.3)
+motor = lp(2 * ((np.cumsum(f) / SR) % 1) - 1, 900) * np.minimum(1, t / 0.05) * np.minimum(1, (0.85 - t) / 0.05).clip(0)
+riffle = np.zeros(len(t))
+for k in range(14): place(riffle, bp(noise(0.03), 1500, 7000) * env(int(0.03 * SR), 0.001, 0.008), 0.35 + k * 0.03)
+clunk = np.zeros(len(t)); tt = tl(0.2); place(clunk, np.sin(2 * np.pi * (160 + 80 * np.exp(-tt * 40)) * tt) * env(len(tt), 0.001, 0.04), 0.88)
+save('cash_dispense.wav', motor * 0.5 + riffle * 0.6 + clunk)
+# kiss "mwah": lip smack + short vowel
+d = 0.45; n = int(d * SR); t = tl(d)
+smack = bp(noise(d), 800, 5000) * env(n, 0.0005, 0.008) + np.sin(2 * np.pi * (500 - 300 * t) * t) * env(n, 0.001, 0.02)
+vow = np.zeros(n); tt = tl(0.28)
+v = sum(np.sin(2 * np.pi * h * 220 * (1 - 0.15 * tt / 0.28) * tt) * a for h, a in [(1, 0.5), (3, 0.3), (4, 0.25), (6, 0.1)]) * np.sin(np.pi * tt / 0.28) ** 2
+place(vow, v * 0.35, 0.06)
+save('kiss.wav', smack + vow)
+# parking attendant whistle: "prit! prit!" (trilled pea whistle)
+d = 0.8; buf = np.zeros(int(d * SR))
+for k in range(2):
+    tt = tl(0.22); trill = 0.6 + 0.4 * np.sign(np.sin(2 * np.pi * 32 * tt))
+    w = np.sin(2 * np.pi * np.cumsum(2900 + 120 * np.sin(2 * np.pi * 32 * tt)) / SR) * trill * np.minimum(1, tt / 0.01) * np.minimum(1, (0.22 - tt) / 0.03)
+    place(buf, w + bp(noise(0.22), 2000, 6000) * 0.15, 0.02 + k * 0.32)
+save('whistle_prit.wav', buf)
+# scooter engine: putter idling then a rev
+d = 2.0; t = tl(d)
+rate = 22 + 18 * np.clip((t - 0.9) / 0.5, 0, 1)
+ph = np.cumsum(rate) / SR
+pulses = np.exp(-((ph % 1) * 9)) * (1 + 0.3 * rng.standard_normal(len(t)) * 0.2)
+saw = lp(2 * ((np.cumsum(rate * 3) / SR) % 1) - 1, 600)
+save('scooter.wav', (lp(pulses, 900) * 1.2 + saw * 0.35) * np.minimum(1, t / 0.08) * np.minimum(1, (d - t) / 0.3))
+# espresso machine: pump buzz + steam hiss swell
+d = 1.6; t = tl(d)
+pump = lp(np.sign(np.sin(2 * np.pi * 100 * t)), 500) * 0.25 * np.minimum(1, t / 0.05)
+hiss = hp(noise(d), 3000) * np.sin(np.pi * np.clip((t - 0.3) / 1.2, 0, 1)) ** 2
+save('espresso.wav', (pump + hiss * 0.5) * np.minimum(1, (d - t) / 0.1))
+# paper bill fluttering through the air
+d = 0.7; buf = np.zeros(int(d * SR))
+for k in range(16): place(buf, bp(noise(0.035), 600, 4500) * env(int(0.035 * SR), 0.002, 0.012) * (0.6 + 0.4 * np.sin(k)), 0.02 + k * 0.04)
+save('paper_flutter.wav', buf)
+# wallet velcro rip
+d = 0.5; t = tl(d); buf = np.zeros(int(d * SR))
+for k in range(60): place(buf, bp(noise(0.006), 1000, 7000) * env(int(0.006 * SR), 0.0003, 0.002) * rng.uniform(0.4, 1.0), 0.02 + k * 0.0065 + rng.uniform(0, 0.002))
+save('velcro.wav', buf)
+# a fly buzzing out of the empty wallet
+d = 1.6; t = tl(d)
+f = 210 + 25 * np.sin(2 * np.pi * 3.1 * t) + 15 * np.sin(2 * np.pi * 7.3 * t)
+save('fly_buzz.wav', lp(2 * ((np.cumsum(f) / SR) % 1) - 1, 2500) * (0.6 + 0.4 * np.sin(2 * np.pi * 1.7 * t) ** 2) * np.minimum(1, t / 0.1) * np.minimum(1, (d - t) / 0.3))
+# minibus horn "tin tin"
+d = 0.7; buf = np.zeros(int(d * SR))
+for k in range(2):
+    tt = tl(0.16); place(buf, lp(np.sign(np.sin(2 * np.pi * 420 * tt)) + np.sign(np.sin(2 * np.pi * 525 * tt)), 3000) * np.minimum(1, tt / 0.005) * np.minimum(1, (0.16 - tt) / 0.01), 0.02 + k * 0.24)
+save('horn.wav', buf * 0.5)
+# a bill slipping into a clay piggy bank: paper swish + hollow clay knock
+d = 0.6; n = int(d * SR); t = tl(d); buf = np.zeros(n)
+place(buf, bp(noise(0.2), 900, 5000) * np.sin(np.pi * tl(0.2) / 0.2) * 0.5, 0.0)
+tt = tl(0.3); place(buf, sum(np.sin(2 * np.pi * f * tt) * a for f, a in [(310, 0.8), (720, 0.3), (1450, 0.1)]) * env(len(tt), 0.001, 0.05), 0.22)
+save('slot_drop.wav', buf)

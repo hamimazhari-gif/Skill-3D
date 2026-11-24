@@ -54,3 +54,11 @@ Made in code by `tools/synth_sfx.py` (numpy only, no third-party recordings; re-
 | steam_whistle.wav | factory or train whistle, start of a shift |
 | snore.wav | sleeping character |
 | coin_drop.wav / stamp.wav | a few coins into a palm / rubber stamp, "TRUE STORY" style pop |
+| atm_beep.wav / cash_dispense.wav | ATM keypad beeps / cash dispenser motor, paper riffle and clunk |
+| kiss.wav | "mwah" kiss |
+| whistle_prit.wav | parking attendant's trilled whistle ("prit! prit!") |
+| scooter.wav / horn.wav | motor scooter idling and revving / minibus horn "tin tin" |
+| espresso.wav | coffee machine pump and steam |
+| paper_flutter.wav | a banknote or paper flying through the air |
+| velcro.wav / fly_buzz.wav | wallet opening / a fly buzzing out of an empty wallet |
+| slot_drop.wav | a note slipping into a clay piggy bank |
