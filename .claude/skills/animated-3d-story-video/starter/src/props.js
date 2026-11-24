@@ -1468,3 +1468,68 @@ export function gardenRows(n = 4, len = 4, seed = 9) {
   }
   return g;
 }
+
+// ================= "Misi beli telur" story props =================
+// A supermarket shelf run along +x (front at z=0): three shelf boards packed with colourful product boxes.
+export function shelfRow(len = 6, o = {}) {
+  const g = new THREE.Group(); const r = rng(o.seed || 21);
+  const back = box(len, 2.1, 0.5, toon(o.color || '#e8e4dc', {wear: false})); at(back, len / 2, 0, -0.25); g.add(back);
+  const cols = o.colors || ['#d8413a', '#f2d24a', '#4f8fc8', '#7fa35a', '#e8823a', '#9a6fb0', '#e0626e', '#5ab8b0'];
+  for (const y of [0.05, 0.6, 1.15, 1.7]) {
+    const b = box(len, 0.05, 0.55, '#b8bcc4', {edges: false}); at(b, len / 2, y, -0.02); g.add(b);
+    let x = 0.1;
+    while (x < len - 0.25) {
+      const w = 0.16 + r() * 0.16, h = 0.25 + r() * 0.25, c = cols[Math.floor(r() * cols.length)];
+      const p = o.bags ? ball(w * 0.6, c, {sx: 1, sy: h / w * 1.1, sz: 0.5, seg: 10, hull: 0.006}) : box(w, h, 0.3, c, {hull: 0.006, edges: false});
+      at(p, x + w / 2, y + 0.05 + (o.bags ? h * 0.5 : 0), -0.05); g.add(p); x += w + 0.03;
+    }
+  }
+  return g;
+}
+
+// Price tag texture with a big "49" and small ".900" (charm pricing).
+export function priceTag(big = 'Rp49', small = '.900', o = {}) {
+  const c = canvas(1024, 512), x = c.getContext('2d');
+  x.fillStyle = o.bg || '#f2d24a'; x.fillRect(0, 0, 1024, 512); x.strokeStyle = INK; x.lineWidth = 24; x.strokeRect(12, 12, 1000, 488);
+  x.fillStyle = '#d8413a'; x.fillRect(12, 12, 1000, 90); x.fillStyle = '#fff3df'; x.font = '900 70px "Inter Display"'; x.textAlign = 'center'; x.fillText(o.head || 'PROMO!', 512, 82);
+  x.fillStyle = INK; x.textAlign = 'right'; x.font = '900 300px "Inter Display"'; x.fillText(big, 700, 420);
+  x.textAlign = 'left'; x.font = '900 110px "Inter Display"'; x.fillText(small, 712, 280);
+  const g = new THREE.Group();
+  const geo = new THREE.BoxGeometry(1.2, 0.6, 0.04);
+  const m = new THREE.Mesh(geo, [toon('#c9a040'), toon('#c9a040'), toon('#c9a040'), toon('#c9a040'), toon(texFrom(c)), toon('#c9a040')]); g.add(m);
+  return g;
+}
+
+// Shopping bag (paper/plastic) with handles.
+export function shopBag(color = '#f3efe6', o = {}) {
+  const g = new THREE.Group();
+  g.add(box(0.36, 0.42, 0.2, toon(color, {wear: false}), {hull: 0.008}));
+  const h = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.012, 6, 16, Math.PI), toon(o.handle || '#5a4a3a', {wear: false})); h.position.y = 0.42; g.add(h);
+  for (let i = 0; i < 3; i++) { const p = box(0.1, 0.12, 0.08, ['#d8413a', '#f2d24a', '#4f8fc8'][i], {hull: 0.004}); at(p, -0.1 + i * 0.1, 0.42, 0); g.add(p); }
+  return g;
+}
+
+// Egg tray with eggs.
+export function eggTray(n = 10) {
+  const g = new THREE.Group();
+  g.add(box(0.5, 0.05, 0.22, '#c9b48a', {hull: 0.006}));
+  for (let i = 0; i < n; i++) { const e = ball(0.035, '#f3e3c8', {sy: 1.25, hull: 0.004}); at(e, -0.2 + (i % 5) * 0.1, 0.08, -0.05 + Math.floor(i / 5) * 0.1); g.add(e); }
+  return g;
+}
+
+// Sausage tester: a small plate with sausage bites on toothpicks.
+export function sausagePlate() {
+  const g = new THREE.Group();
+  g.add(cyl(0.18, 0.16, 0.03, '#fbf6ea', {hull: 0.006}));
+  for (let i = 0; i < 6; i++) { const a = i / 6 * 6.28; const s = cyl(0.025, 0.025, 0.06, '#c85a3a', {hull: 0.004, center: true}); at(s, Math.cos(a) * 0.1, 0.06, Math.sin(a) * 0.1, 0, 0, Math.PI / 2); g.add(s); const tp = cyl(0.003, 0.003, 0.08, '#e8d8a8', {hull: 0}); at(tp, Math.cos(a) * 0.1, 0.08, Math.sin(a) * 0.1); g.add(tp); }
+  return g;
+}
+
+// Checkout candy rack: short shelves of chocolate bars and lollipops.
+export function candyRack() {
+  const g = new THREE.Group();
+  g.add(box(0.9, 1.2, 0.35, toon('#4f8fc8', {wear: false})));
+  for (let k = 0; k < 3; k++) for (let i = 0; i < 6; i++) { const b = box(0.11, 0.2, 0.04, ['#6a3a2a', '#d8413a', '#f2d24a', '#9a6fb0'][(i + k) % 4], {hull: 0.004}); at(b, -0.32 + i * 0.13, 0.3 + k * 0.32, 0.19, 0, -0.2); g.add(b); }
+  for (let i = 0; i < 5; i++) { const st = cyl(0.006, 0.006, 0.22, '#fbf6ea', {hull: 0}); at(st, -0.3 + i * 0.15, 1.2, 0.05); g.add(st); const l = ball(0.05, ['#e0626e', '#f2d24a', '#7fc4e8', '#7fa35a', '#e8823a'][i], {sz: 0.4, hull: 0.005}); at(l, -0.3 + i * 0.15, 1.45, 0.05); g.add(l); }
+  return g;
+}
