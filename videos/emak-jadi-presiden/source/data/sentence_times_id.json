@@ -1,0 +1,514 @@
+{
+ "duration": 79.4,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Bayangkan... kalau emak-emak jadi presiden.",
+   "start": 0.14,
+   "end": 3.16,
+   "pred": 2.49,
+   "voiced": [
+    [
+     0.16,
+     0.82
+    ],
+    [
+     1.26,
+     3.14
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Negara ini pasti berubah total!",
+   "start": 3.6,
+   "end": 5.44,
+   "pred": 1.9,
+   "voiced": [
+    [
+     3.6,
+     4.18
+    ],
+    [
+     4.3,
+     4.6
+    ],
+    [
+     4.7,
+     5.42
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Pertama, rapat kabinet maksimal lima menit.",
+   "start": 6.06,
+   "end": 8.96,
+   "pred": 3.07,
+   "voiced": [
+    [
+     6.06,
+     6.44
+    ],
+    [
+     6.8,
+     7.58
+    ],
+    [
+     7.88,
+     8.94
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Pak Menteri, presentasinya jangan muter-muter.",
+   "start": 9.8,
+   "end": 11.82,
+   "pred": 3.29,
+   "voiced": [
+    [
+     9.8,
+     10.18
+    ],
+    [
+     10.46,
+     11.82
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Intinya apa?",
+   "start": 11.94,
+   "end": 12.56,
+   "pred": 0.73,
+   "voiced": [
+    [
+     11.94,
+     12.54
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Mau mau, enggak enggak!\"",
+   "start": 12.82,
+   "end": 13.9,
+   "pred": 1.76,
+   "voiced": [
+    [
+     12.82,
+     13.36
+    ],
+    [
+     13.5,
+     13.88
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Kedua, harga cabai langsung stabil.",
+   "start": 14.76,
+   "end": 17.26,
+   "pred": 2.56,
+   "voiced": [
+    [
+     14.76,
+     15.08
+    ],
+    [
+     15.48,
+     17.24
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Karena nggak ada pedagang di negeri ini yang menang kalau udah ditawar emak-emak.",
+   "start": 17.6,
+   "end": 20.94,
+   "pred": 4.9,
+   "voiced": [
+    [
+     17.6,
+     19.86
+    ],
+    [
+     20.04,
+     20.94
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Lima belas ribu ya, Bang.",
+   "start": 21.68,
+   "end": 22.6,
+   "pred": 1.83,
+   "voiced": [
+    [
+     21.68,
+     22.6
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Kalau nggak, saya pindah ke sebelah!\"",
+   "start": 22.92,
+   "end": 24.12,
+   "pred": 2.56,
+   "voiced": [
+    [
+     22.94,
+     24.1
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Ketiga, pejabat yang telat langsung dipanggil pakai nama lengkap.",
+   "start": 24.98,
+   "end": 28.44,
+   "pred": 4.46,
+   "voiced": [
+    [
+     24.98,
+     25.4
+    ],
+    [
+     25.78,
+     26.6
+    ],
+    [
+     26.88,
+     28.44
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Bambang Sutrisno Wijaya!",
+   "start": 29.12,
+   "end": 30.58,
+   "pred": 1.54,
+   "voiced": [
+    [
+     29.18,
+     30.58
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Jam berapa ini?!\"",
+   "start": 31.08,
+   "end": 31.58,
+   "pred": 0.88,
+   "voiced": [
+    [
+     31.08,
+     31.58
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Dan seluruh menteri langsung duduk tegak.",
+   "start": 32.22,
+   "end": 34.2,
+   "pred": 2.56,
+   "voiced": [
+    [
+     32.22,
+     33.02
+    ],
+    [
+     33.2,
+     34.2
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Keempat, anggaran negara dicatat di buku tulis bergambar kartun.",
+   "start": 35.14,
+   "end": 38.76,
+   "pred": 4.39,
+   "voiced": [
+    [
+     35.14,
+     35.44
+    ],
+    [
+     35.92,
+     36.68
+    ],
+    [
+     36.84,
+     37.02
+    ],
+    [
+     37.1,
+     38.7
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Sisanya?",
+   "start": 39.24,
+   "end": 39.64,
+   "pred": 0.51,
+   "voiced": [
+    [
+     39.24,
+     39.64
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Disimpan di kaleng biskuit.",
+   "start": 40.06,
+   "end": 41.26,
+   "pred": 1.68,
+   "voiced": [
+    [
+     40.06,
+     41.26
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Bukan biskuit, isinya uang.",
+   "start": 41.72,
+   "end": 43.24,
+   "pred": 2.05,
+   "voiced": [
+    [
+     41.72,
+     42.44
+    ],
+    [
+     42.56,
+     43.22
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Lalu muncul kebijakan-kebijakan baru.",
+   "start": 43.94,
+   "end": 45.38,
+   "pred": 2.34,
+   "voiced": [
+    [
+     43.94,
+     45.38
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Lampu yang nggak dipakai wajib dimatikan.",
+   "start": 45.84,
+   "end": 48.1,
+   "pred": 2.56,
+   "voiced": [
+    [
+     45.84,
+     46.9
+    ],
+    [
+     47.1,
+     48.06
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Kantong plastik dilipat jadi segitiga dan disimpan, siapa tahu nanti butuh.",
+   "start": 48.7,
+   "end": 52.3,
+   "pred": 5.05,
+   "voiced": [
+    [
+     48.7,
+     50.88
+    ],
+    [
+     51.16,
+     52.26
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Dan barang yang hilang di seluruh negeri... dijamin ketemu, kalau emak yang nyari.",
+   "start": 52.8,
+   "end": 57.4,
+   "pred": 5.19,
+   "voiced": [
+    [
+     52.8,
+     54.4
+    ],
+    [
+     54.76,
+     55.92
+    ],
+    [
+     56.32,
+     56.58
+    ],
+    [
+     56.66,
+     57.38
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Makanya cari pakai mata, jangan pakai mulut!\"",
+   "start": 58.06,
+   "end": 60.68,
+   "pred": 3.07,
+   "voiced": [
+    [
+     58.06,
+     58.2
+    ],
+    [
+     58.3,
+     59.74
+    ],
+    [
+     59.88,
+     60.66
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Tapi kalau dipikir-pikir... emak sebenarnya memang sudah jadi presiden.",
+   "start": 61.46,
+   "end": 65.3,
+   "pred": 4.24,
+   "voiced": [
+    [
+     61.46,
+     62.54
+    ],
+    [
+     62.62,
+     62.9
+    ],
+    [
+     63.34,
+     65.3
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Presiden di rumah.",
+   "start": 65.8,
+   "end": 66.72,
+   "pred": 1.1,
+   "voiced": [
+    [
+     65.8,
+     66.7
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Yang mengatur keuangan, makanan, kesehatan, sampai urusan semua orang.",
+   "start": 67.26,
+   "end": 72.06,
+   "pred": 5.56,
+   "voiced": [
+    [
+     67.26,
+     68.68
+    ],
+    [
+     68.86,
+     69.02
+    ],
+    [
+     69.1,
+     69.68
+    ],
+    [
+     69.86,
+     70.24
+    ],
+    [
+     70.34,
+     70.6
+    ],
+    [
+     70.8,
+     72.04
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Setiap hari, tanpa cuti.",
+   "start": 72.42,
+   "end": 74.04,
+   "pred": 1.83,
+   "voiced": [
+    [
+     72.42,
+     73.16
+    ],
+    [
+     73.5,
+     74.04
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau emakmu jadi presiden, kebijakan pertamanya apa?",
+   "start": 74.84,
+   "end": 77.94,
+   "pred": 3.73,
+   "voiced": [
+    [
+     74.84,
+     76.24
+    ],
+    [
+     76.58,
+     77.56
+    ],
+    [
+     77.68,
+     77.92
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 78.42,
+   "end": 79.08,
+   "pred": 1.1,
+   "voiced": [
+    [
+     78.42,
+     79.08
+    ]
+   ]
+  }
+ ]
+}
