@@ -84,5 +84,5 @@ export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {
 const L_ID = {sold: 'TERJUAL!', paris: 'PARIS 1925', name: 'VICTOR LUSTIG', conman: 'PENIPU PALING LICIN DI EROPA', kiosk: 'KORAN',
   head: 'MENARA EIFFEL BERKARAT!', sub: 'BIAYA PERAWATAN SANGAT MAHAL', letter: 'SURAT RESMI', seal: 'SAH', hotel: 'GRAND HOTEL PARIS',
   plan: 'BESI TUA', planSub: 'DIJUAL KE PEDAGANG', secret: 'RAHASIA NEGARA', poisson: 'ANDRÉ POISSON', contract: 'KONTRAK', bribe: 'SOGOKAN?',
-  train: 'KE LUAR NEGERI', police: 'POLISI', again: 'LAGI?!', question: 'TARGET BERIKUTNYA?', comment: 'TULIS DI KOMENTAR!'};
+  train: 'KE WINA', police: 'POLISI', again: 'LAGI?!', question: 'TARGET BERIKUTNYA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

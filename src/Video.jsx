@@ -103,7 +103,26 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [3, 5, 10, 11];
+const DIPS = [3, 5, 11];
+
+// Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
+const TITLES = [['cut1', 'DIA BARU SAJA MENJUAL | MENARA EIFFEL 🗼💰'], ['mundur', ''], ['cut3', 'PARIS, 1925 ⏪'], ['victor', 'VICTOR LUSTIG: | SANG PENIPU 🎩'],
+  ['mengundang', '"INI RAHASIA NEGARA!" 🤫'], ['istri', 'ISTRINYA CURIGA… 😰'], ['cut9', 'TRIK SOGOKAN 🧠'], ['dibayar', ''], ['kabur', 'DIA BALIK LAGI?! 🤦'], ['cut12', '']];
+const Titles = ({T, E, t}) => {
+  const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
+  let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
+  if (!cur || !cur.txt) return null;
+  const u = Math.min(1, (t - cur.t0) / 0.3), s = 0.7 + 0.3 * (1 + 2.2 * Math.pow(u - 1, 3) + 1.2 * Math.pow(u - 1, 2));
+  return (
+    <AbsoluteFill style={{alignItems: 'center', paddingTop: 120}}>
+      <div style={{maxWidth: 1000, textAlign: 'center', background: '#fff3df', color: INK, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
+        fontSize: 66, lineHeight: 1.08, padding: '16px 34px 20px', border: `9px solid ${INK}`, borderRadius: 26, boxShadow: `12px 14px 0 ${INK}`,
+        transform: `scale(${s}) rotate(-1.5deg)`, letterSpacing: -1}}>
+        {cur.txt.split(' | ').map((l, i) => <div key={i}>{l}</div>)}
+      </div>
+    </AbsoluteFill>
+  );
+};
 
 // "Kita mundur satu minggu": a VHS rewind look (scanlines, colour shift, rewind sign) until the cut to 1925.
 const Rewind = ({T, E, t}) => {
@@ -115,7 +134,10 @@ const Rewind = ({T, E, t}) => {
       <AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(20,10,30,0.22) 0px, rgba(20,10,30,0.22) 4px, rgba(0,0,0,0) 4px, rgba(0,0,0,0) 9px)', mixBlendMode: 'multiply'}} />
       <AbsoluteFill style={{background: 'rgba(120,150,255,0.12)', transform: `translateX(${jit}px)`, mixBlendMode: 'screen'}} />
       <div style={{position: 'absolute', left: 0, right: 0, top: bar, height: 70, background: 'rgba(255,255,255,0.18)'}} />
-      <div style={{position: 'absolute', left: 70, top: 150, fontFamily: '"JetBrains Mono", "Noto Color Emoji", monospace', fontWeight: 800, fontSize: 64, color: '#fffaf0', textShadow: `5px 5px 0 ${INK}`}}>⏪ 1 MINGGU SEBELUMNYA</div>
+      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{fontFamily: '"JetBrains Mono", "Noto Color Emoji", monospace', fontWeight: 800, fontSize: 150, color: '#fffaf0', textShadow: `8px 8px 0 ${INK}`, marginTop: -420}}>⏪⏪</div>
+        <div style={{fontFamily: '"JetBrains Mono", monospace', fontWeight: 800, fontSize: 66, color: '#fffaf0', textShadow: `6px 6px 0 ${INK}`, letterSpacing: -2}}>1 MINGGU SEBELUMNYA</div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -125,18 +147,20 @@ function cues(T, EVt) {
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     // 1-2 the hook and the rewind
-    [sy('birds'), 0, 0.05, C[2]],
+    [sy('crowd_murmur'), 0, 0.04, C[2]],
     [sy('latch'), E.koper + 0.2, 0.3],
     [sy('ka_ching'), E.menjual, 0.2],
     ['06-deep-cinematic-boom.wav', E.eiffel1, 0.16],
     ['04-soft-ui-pop.mp3', E.bagaimana, 0.16],
-    [sy('tape_rewind'), E.mundur - 0.05, 0.3],
+    [sy('tape_rewind'), E.mundur - 0.05, 0.32],
+    [sy('slide_whistle_up'), E.mundur, 0.12],
     // 3-4 the newspaper and the idea
     [sy('crowd_murmur'), C[2], 0.05, C[4] - C[2]],
     [sy('birds'), C[2], 0.05, C[4] - C[2]],
     [sy('page_flips'), E.koran - 0.1, 0.18, 0.6],
     [sy('uh_oh'), E.mahal, 0.1],
     [sy('sparkle'), E.berbinar, 0.2],
+    ['09-notification-ding.wav', E.kalau + 0.15, 0.22],
     [sy('slide_whistle_up'), E.kujual, 0.12],
     // 5 the forgery, the disguise, the invitation
     [sy('clock_tick'), C[4], 0.08, E.mengundang - C[4]],
@@ -152,6 +176,7 @@ function cues(T, EVt) {
     [sy('sparkle'), E.termakan, 0.16],
     ['04-soft-ui-pop.mp3', E.poisson - 0.05, 0.2],
     [sy('uh_oh'), E.curiga, 0.12],
+    [sy('tense_drone'), E.curiga - 0.2, 0.22, E.hancur + 0.9 - E.curiga],
     ['07-riser-build-up.wav', E.kalauIni, 0.08, 1.8],
     ['02-error-denied-buzz.wav', E.hancur, 0.12],
     // 9 the bribe
@@ -229,6 +254,7 @@ export const Story = ({lang, captions = true}) => {
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       <Rewind T={T} E={EVt} t={t} />
+      <Titles T={T} E={EVt} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
@@ -241,10 +267,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PRIA INI MENJUAL\nMENARA EIFFEL 💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
-  en: {top: 'PRIA INI MENJUAL\nMENARA EIFFEL 💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
+  id: {top: 'DIA MENJUAL\nMENARA EIFFEL 🗼💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
+  en: {top: 'DIA MENJUAL\nMENARA EIFFEL 🗼💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.pria + 0.6, pos: [0, 1.3, 1.5], look: [0.1, 2.3, -6]});
+const THUMB = (EVt) => ({t: EVt.lagi, pos: [0, 1.4, 1.3], look: [0.05, 2.3, -6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

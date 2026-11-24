@@ -64,4 +64,4 @@ Made in code by `tools/synth_sfx.py` (numpy only, no third-party recordings; re-
 | slot_drop.wav | a note slipping into a clay piggy bank |
 | chip_levelup.wav / chip_gameover.wav | retro game: level up arpeggio / falling "game over" melody |
 | chip_coin.wav / chip_hurt.wav / chip_start.wav / chip_error.wav | retro game: coin, life lost, start jingle, error blip |
-| tape_rewind.wav / latch.wav / train_chuff.wav | VHS rewind whirr, suitcase latches, steam train chuffs |
+| tape_rewind.wav / latch.wav / train_chuff.wav / tense_drone.wav | VHS rewind whirr, suitcase latches, steam train chuffs, tense music bed |

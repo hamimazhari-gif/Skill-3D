@@ -315,3 +315,12 @@ buf = np.zeros(int(4.0 * SR)); at = 0.0; k = 0
 while at < 3.7:
     place(buf, bp(noise(0.25), 200, 2500) * env(int(0.25 * SR), 0.005, 0.07) * (1.0 if k % 2 else 0.7), at); at += 0.32 - min(0.12, k * 0.01); k += 1
 save('train_chuff.wav', buf)
+# tense music bed: low string drone with a slow heartbeat pulse and a rising high note (6 s)
+d = 6.0; t = tl(d)
+drone = sum(np.sin(2 * np.pi * f * t + 0.3 * np.sin(2 * np.pi * 0.5 * t)) * a for f, a in [(55, 0.5), (82.4, 0.3), (110, 0.25), (116.5, 0.12)])
+beat = np.zeros(len(t))
+for at in np.arange(0.2, d - 0.3, 0.8):
+    for k, off in enumerate((0.0, 0.18)):
+        tt = tl(0.25); place(beat, np.sin(2 * np.pi * (60 + 30 * np.exp(-tt * 30)) * tt) * env(len(tt), 0.003, 0.06) * (1.0 if k == 0 else 0.7), at + off)
+high = np.sin(2 * np.pi * np.cumsum(660 + 120 * t / d) / SR) * 0.08 * np.minimum(1, t / 3)
+save('tense_drone.wav', (drone * 0.6 + beat * 0.9 + high) * np.minimum(1, t / 0.6) * np.minimum(1, (d - t) / 0.6))

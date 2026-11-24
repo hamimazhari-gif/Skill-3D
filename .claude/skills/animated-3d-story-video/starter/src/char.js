@@ -544,7 +544,8 @@ export const POSES = {
   flex: {L: [1.45, 1.75], R: [1.45, 1.75]},
   drink: {L: [0.12, 0], R: [0.2, -2.45]},
   eat: {L: [0.12, 0], R: [0.35, -2.2]},
-  read: {L: [0.75, -1.0], R: [0.75, -1.0]}, // both hands in front of the chest (a newspaper, a letter)
+  read: {L: [0.75, -1.0], R: [0.75, -1.0]},
+  shh: {L: [2.1, -3.75], R: [0.12, 0]}, // finger to the lips // both hands in front of the chest (a newspaper, a letter)
 };
 
 const easeOutBack = (x) => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
