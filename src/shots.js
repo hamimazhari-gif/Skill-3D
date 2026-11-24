@@ -10,102 +10,70 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Camera language for this video: low angles looking up the long pole to the windows, high crane shots over the
-  // terraced street, close-ups inside windows, an over-the-shoulder up the pea shooter, an overhead in the bedroom,
-  // dutch angles on the rude awakenings, side tracking shots with the walking knocker, lens changes (fov).
+  // Calm camera (user request): one or two framings per shot, slow short pushes, no dutch angles, steady lens.
   // 1 pre-dawn street: the knocker taps a window; the sleeper pops up; TRUE STORY
   {shot: 1, loc: 'street', lift: false, move: 'low angle up the pole to the window, slow push', keys: [
-    {at: 'start', pos: [-1.5, 0.5, 0.7], look: [-3.5, 2.7, -3.6], fov: 74},
-    {at: 'end', pos: [-2.1, 0.65, 0.2], look: [-3.7, 3.1, -3.8], fov: 74}]},
-  {shot: 1, from: 'bangunkan', loc: 'street', lift: false, move: 'high close-up into the window, dutch', keys: [
-    {at: 'start', pos: [-3.0, 3.55, -1.4], look: [-3.95, 3.95, -4.2], roll: 0.06},
-    {at: 'end', pos: [-3.3, 3.75, -1.8], look: [-4.0, 4.0, -4.2], roll: 0.1}]},
-  {shot: 1, from: 'nyata', loc: 'street', lift: false, move: 'pull back and crane up to the stamp', keys: [
-    {at: 'start', pos: [-0.9, 2.0, 1.2], look: [-2.3, 2.4, -3.2]},
-    {at: 'end', pos: [0.2, 2.7, 2.4], look: [-2.2, 2.6, -3.4], fov: 84}]},
-  // 2 the mill at dawn: high crane down on the workers; the expensive alarm clock
-  {shot: 2, loc: 'factory', lift: false, move: 'high crane down over the mill to the workers', keys: [
-    {at: 'start', pos: [3.6, 6.8, 6.5], look: [0, 3.8, -6.5], fov: 74},
-    {at: 'end', pos: [2.4, 2.2, 2.2], look: [0.4, 1.6, -3.6]}]},
-  {shot: 2, from: 'masalah', loc: 'factory', move: 'low push onto the worker and the clock', keys: [
-    {at: 'start', pos: [-0.3, 0.9, -0.2], look: [-2.0, 1.45, -3.1]},
-    {at: 'end', pos: [-0.9, 1.0, -0.8], look: [-2.1, 1.55, -3.1]}]},
-  {shot: 2, from: 'langka', loc: 'factory', move: 'dutch close-up on the crying worker', keys: [
-    {at: 'start', pos: [-0.9, 1.5, -1.2], look: [-1.5, 1.4, -2.8], roll: -0.1},
-    {at: 'end', pos: [-1.0, 1.45, -1.45], look: [-1.55, 1.42, -2.8], roll: -0.06}]},
-  // 3 the title: the knocker walks in, banner pops
-  {shot: 3, loc: 'street', move: 'side track with the walking knocker, ending low under the banner', keys: [
-    {at: 'start', pos: [4.8, 1.0, 0.0], look: [3.4, 1.35, -2.4]},
-    {at: 'knocker', pos: [1.0, 1.0, 1.4], look: [0.2, 1.8, -3.0]},
-    {at: 'end', pos: [0.8, 0.7, 1.2], look: [0.15, 1.95, -3.0], fov: 78}]},
-  // 4 the rounds: tracking shot along the street, then high over the lit windows
-  {shot: 4, loc: 'street', move: 'low tracking shot beside the walking knocker, tilt up to the window', keys: [
-    {at: 'start', pos: [-5.4, 0.6, -0.5], look: [-6.3, 1.4, -2.4]},
-    {at: 'tongkat', pos: [-1.5, 0.65, -0.5], look: [-2.2, 1.5, -2.5]},
-    {at: 'ketuk', pos: [-0.6, 0.75, -0.3], look: [0.3, 2.3, -3.1]},
-    {at: 'end', pos: [-0.4, 0.8, -0.1], look: [0.5, 2.6, -3.4]}]},
-  {shot: 4, from: 'pelanggan', loc: 'street', lift: false, move: 'high angle over the street of lit windows', keys: [
-    {at: 'start', pos: [2.4, 5.0, 0.8], look: [-0.4, 2.6, -3.8], fov: 80},
-    {at: 'end', pos: [3.2, 5.6, 1.8], look: [-0.6, 2.5, -3.8], fov: 84}]},
-  // 5 bedroom A: the pole taps the window, the sleeper wakes up shouting
-  {shot: 5, loc: 'bedroom', lift: false, move: 'close-up on the window being tapped', keys: [
-    {at: 'start', pos: [0.55, 1.75, -2.5], look: [1.3, 1.95, -4.9], fov: 74},
-    {at: 'end', pos: [0.4, 1.7, -2.3], look: [1.25, 1.9, -4.9], fov: 74}]},
-  {shot: 5, from: 'tok3', loc: 'bedroom', move: 'push in on the sleeper, dutch on the shout', keys: [
-    {at: 'start', pos: [0.4, 1.35, -1.6], look: [-0.6, 1.3, -3.9]},
-    {at: 'iya', pos: [0.1, 1.4, -2.0], look: [-0.6, 1.35, -3.9], roll: 0.1},
-    {at: 'end', pos: [0.0, 1.45, -2.2], look: [-0.6, 1.35, -3.9], roll: 0.06}]},
-  // 6 don't pretend: over the knocker's shoulder up to the window, then a low angle on the stubborn knocker
-  {shot: 6, loc: 'street', lift: false, move: 'crane up behind the knocker to the window', keys: [
-    {at: 'start', pos: [3.2, 3.3, -2.2], look: [2.4, 3.95, -4.2]},
-    {at: 'end', pos: [2.95, 3.65, -2.6], look: [2.4, 4.0, -4.2]}]},
-  {shot: 6, from: 'pergi', loc: 'street', lift: false, move: 'low angle up at the stubborn knocker and the window', keys: [
-    {at: 'start', pos: [4.3, 0.5, -0.3], look: [2.7, 2.5, -3.4], roll: -0.07},
-    {at: 'end', pos: [4.0, 0.45, -0.1], look: [2.6, 2.6, -3.5], roll: -0.03}]},
-  // 7 London: the woman walks in; over-the-shoulder up the pea shooter; the window
-  {shot: 7, loc: 'london', move: 'sideways track with the walking woman to the LONDON sign', keys: [
-    {at: 'start', pos: [-1.8, 1.15, 0.4], look: [-2.4, 1.4, -2.4]},
-    {at: 'london', pos: [-1.3, 1.2, 0.7], look: [-1.3, 1.6, -2.8]},
-    {at: 'end', pos: [-1.2, 1.2, 0.5], look: [-1.0, 1.55, -2.7]}]},
-  {shot: 7, from: 'sumpit', loc: 'london', lift: false, move: 'low over-the-shoulder up the pea shooter to the window', keys: [
-    {at: 'start', pos: [-1.35, 1.15, -1.3], look: [0.5, 3.4, -4.0], fov: 74},
-    {at: 'end', pos: [-1.05, 1.35, -1.7], look: [0.7, 3.8, -4.0], fov: 74}]},
-  {shot: 7, from: 'tik1', loc: 'london', lift: false, move: 'high close-up on the window being hit', keys: [
-    {at: 'start', pos: [0.0, 3.6, -1.8], look: [0.8, 3.95, -4.1], roll: 0.05},
-    {at: 'end', pos: [0.2, 3.8, -2.1], look: [0.8, 4.0, -4.1], roll: 0.09}]},
-  // 8 the pay: arc around the woman and the coins
-  {shot: 8, loc: 'london', lift: false, move: 'arc around the payment', keys: [
-    {at: 'start', pos: [1.5, 1.65, -0.6], look: [0.0, 1.85, -3.0]},
-    {at: 'end', pos: [-1.3, 1.9, -0.3], look: [-0.4, 2.05, -3.0]}]},
-  // 9 bedroom B: who wakes the knocker? overhead crane down, then a dutch close-up
-  {shot: 9, loc: 'bedroom', lift: false, move: 'overhead crane down onto the sleeping knocker', keys: [
-    {at: 'start', pos: [11.7, 2.95, -2.3], look: [11.4, 0.9, -4.0], fov: 84},
-    {at: 'end', pos: [11.9, 2.2, -1.4], look: [11.4, 1.35, -3.9]}]},
-  {shot: 9, from: 'siapa', loc: 'bedroom', lift: false, move: 'dutch close-up as he wakes confused', keys: [
-    {at: 'start', pos: [12.0, 1.65, -2.0], look: [11.5, 1.7, -3.9], roll: 0.12},
-    {at: 'end', pos: [12.3, 1.8, -1.4], look: [11.7, 2.05, -3.8], roll: 0.05}]},
+    {at: 'start', pos: [-1.7, 0.6, 0.5], look: [-3.6, 2.9, -3.7], fov: 76},
+    {at: 'end', pos: [-2.0, 0.7, 0.1], look: [-3.7, 3.1, -3.8], fov: 76}]},
+  {shot: 1, from: 'nyata', loc: 'street', lift: false, move: 'steady wide on the stamp', keys: [
+    {at: 'start', pos: [-0.6, 2.2, 1.6], look: [-2.3, 2.5, -3.3]},
+    {at: 'end', pos: [-0.5, 2.3, 1.9], look: [-2.3, 2.5, -3.3]}]},
+  // 2 the mill at dawn
+  {shot: 2, loc: 'factory', lift: false, move: 'wide on the mill, slow push', keys: [
+    {at: 'start', pos: [2.2, 2.6, 3.0], look: [0.2, 2.2, -4.5]},
+    {at: 'end', pos: [1.9, 2.3, 2.2], look: [0.0, 1.9, -4.0]}]},
+  {shot: 2, from: 'masalah', loc: 'factory', move: 'medium on the worker and the clock', keys: [
+    {at: 'start', pos: [-0.6, 1.1, -0.4], look: [-2.0, 1.5, -3.1]},
+    {at: 'end', pos: [-0.8, 1.1, -0.7], look: [-2.0, 1.5, -3.1]}]},
+  // 3 the title
+  {shot: 3, loc: 'street', move: 'frontal on the knocker under the banner, slight push', keys: [
+    {at: 'start', pos: [-0.1, 1.15, 2.1], look: [-0.2, 1.95, -3.0]},
+    {at: 'end', pos: [-0.1, 1.05, 1.7], look: [-0.2, 2.0, -3.0]}]},
+  // 4 the rounds: gentle pan with the knocker to the window
+  {shot: 4, loc: 'street', move: 'gentle pan with the walking knocker', keys: [
+    {at: 'start', pos: [-1.0, 1.1, 0.8], look: [-2.2, 1.6, -2.6]},
+    {at: 'end', pos: [-0.4, 1.1, 0.7], look: [0.4, 2.5, -3.4]}]},
+  // 5 bedroom A
+  {shot: 5, loc: 'bedroom', lift: false, move: 'still on the window being tapped', keys: [
+    {at: 'start', pos: [0.5, 1.75, -2.45], look: [1.3, 1.95, -4.9], fov: 76},
+    {at: 'end', pos: [0.45, 1.75, -2.4], look: [1.3, 1.95, -4.9], fov: 76}]},
+  {shot: 5, from: 'tok3', loc: 'bedroom', move: 'medium on the sleeper, slight push', keys: [
+    {at: 'start', pos: [0.3, 1.4, -1.8], look: [-0.6, 1.33, -3.9]},
+    {at: 'end', pos: [0.15, 1.4, -2.05], look: [-0.6, 1.33, -3.9]}]},
+  // 6 don't pretend: one steady framing with the knocker and the window
+  {shot: 6, loc: 'street', lift: false, move: 'steady low-medium on the knocker and the window', keys: [
+    {at: 'start', pos: [1.0, 1.3, 0.5], look: [1.95, 2.7, -3.6]},
+    {at: 'end', pos: [1.05, 1.3, 0.2], look: [1.95, 2.75, -3.6]}]},
+  // 7 London
+  {shot: 7, loc: 'london', move: 'medium-wide on the woman and the LONDON sign, slow push', keys: [
+    {at: 'start', pos: [-1.3, 1.25, 1.0], look: [-1.3, 1.6, -2.8]},
+    {at: 'end', pos: [-1.2, 1.25, 0.6], look: [-1.1, 1.6, -2.8]}]},
+  {shot: 7, from: 'sumpit', loc: 'london', lift: false, move: 'still low over-the-shoulder up the pea shooter to the window', keys: [
+    {at: 'start', pos: [-1.25, 1.3, -1.45], look: [0.6, 3.6, -4.0], fov: 76},
+    {at: 'end', pos: [-1.2, 1.35, -1.55], look: [0.65, 3.7, -4.0], fov: 76}]},
+  // 8 the pay
+  {shot: 8, loc: 'london', lift: false, move: 'steady medium on the payment', keys: [
+    {at: 'start', pos: [0.3, 1.8, -0.3], look: [-0.1, 1.95, -3.0]},
+    {at: 'end', pos: [0.2, 1.85, -0.45], look: [-0.15, 2.0, -3.0]}]},
+  // 9 bedroom B
+  {shot: 9, loc: 'bedroom', lift: false, move: 'medium on the sleeping knocker, slow push', keys: [
+    {at: 'start', pos: [11.9, 1.9, -1.3], look: [11.45, 1.6, -3.9]},
+    {at: 'end', pos: [11.85, 1.9, -1.6], look: [11.5, 1.75, -3.9]}]},
   // 10 the night walk to sunrise
-  {shot: 10, loc: 'street', move: 'crane down from the moonlit roofs to a low track beside the knocker', keys: [
-    {at: 'start', pos: [-4.0, 4.6, 2.6], look: [-5.6, 2.2, -2.6], fov: 74},
-    {at: 'belum', pos: [-0.6, 0.95, -0.2], look: [-1.6, 1.45, -2.6]},
-    {at: 'end', pos: [-0.4, 1.0, -0.1], look: [-1.5, 1.5, -2.6]}]},
-  {shot: 10, from: 'semua', loc: 'street', lift: false, move: 'wide pull back into the sunrise', keys: [
-    {at: 'start', pos: [0.6, 1.5, 0.6], look: [1.2, 2.5, -3.4]},
-    {at: 'end', pos: [2.0, 2.6, 2.2], look: [2.4, 2.8, -3.6], fov: 84}]},
-  // 11 the clock shop: truck from the sad knocker to the cheap clocks
-  {shot: 11, loc: 'shop', lift: false, move: 'truck from the sad knocker to the stall', keys: [
-    {at: 'start', pos: [-3.4, 1.4, -0.4], look: [-2.3, 1.75, -2.8]},
-    {at: 'murah', pos: [-0.2, 1.5, 0.6], look: [0.2, 1.7, -3.3]},
-    {at: 'end', pos: [-0.5, 1.55, 0.9], look: [0.0, 1.7, -3.3]}]},
-  // 12 today: overhead on the bed, the snooze counter, then the question
-  {shot: 12, loc: 'modern', lift: false, move: 'overhead on the sleeper, descend to the phone and counter', keys: [
-    {at: 'start', pos: [-0.3, 2.9, -2.5], look: [-0.6, 0.9, -3.9]},
-    {at: 'snooze', pos: [0.4, 1.85, -1.7], look: [0.0, 1.85, -3.8]},
-    {at: 'end', pos: [0.45, 1.9, -1.6], look: [0.05, 1.95, -3.8]}]},
-  {shot: 12, from: 'langsung', loc: 'modern', lift: false, move: 'wide frontal on the choice, push in on the comment', keys: [
-    {at: 'start', pos: [0.25, 1.65, 1.0], look: [0.25, 2.1, -2.8], fov: 84},
-    {at: 'komentar', pos: [0.25, 1.6, 0.6], look: [0.25, 2.15, -2.8]},
-    {at: 'end', pos: [0.25, 1.6, 0.45], look: [0.25, 2.15, -2.8]}]},
+  {shot: 10, loc: 'street', move: 'wide street, gentle pan with the knocker', keys: [
+    {at: 'start', pos: [-2.2, 1.4, 1.6], look: [-3.2, 1.9, -3.0]},
+    {at: 'end', pos: [-0.6, 1.5, 1.6], look: [-0.4, 2.2, -3.2]}]},
+  // 11 the clock shop
+  {shot: 11, loc: 'shop', lift: false, move: 'steady medium-wide on the knocker and the stall', keys: [
+    {at: 'start', pos: [-0.5, 1.6, 1.3], look: [-0.45, 1.7, -3.0]},
+    {at: 'end', pos: [-0.6, 1.6, 1.0], look: [-0.55, 1.7, -3.0]}]},
+  // 12 today
+  {shot: 12, loc: 'modern', lift: false, move: 'medium on the sleeper with the phone and counter', keys: [
+    {at: 'start', pos: [0.35, 1.8, -1.5], look: [-0.05, 1.8, -3.8]},
+    {at: 'end', pos: [0.3, 1.8, -1.7], look: [-0.05, 1.85, -3.8]}]},
+  {shot: 12, from: 'langsung', loc: 'modern', lift: false, move: 'steady frontal on the choice', keys: [
+    {at: 'start', pos: [0.25, 1.62, 0.8], look: [0.25, 2.15, -2.8], fov: 84},
+    {at: 'end', pos: [0.25, 1.6, 0.5], look: [0.25, 2.15, -2.8], fov: 84}]},
 ];
 
 export function warpU(T, t) {

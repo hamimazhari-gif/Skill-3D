@@ -73,8 +73,7 @@ export function storyFx(T, EVt) {
       {t: EVt.murah, dur: 0.3, color: '#fff4d6', strength: 0.3},
       {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4},
     ],
-    shakes: [{t: EVt.nyata, dur: 0.25, amp: 0.02}, {t: EVt.mahal, dur: 0.3, amp: 0.02}, {t: EVt.iya, dur: 0.35, amp: 0.03},
-      {t: EVt.pergi, dur: 0.3, amp: 0.015}, {t: EVt.tunggu, dur: 0.3, amp: 0.015}, {t: EVt.lima, dur: 0.3, amp: 0.02}],
+    shakes: [{t: EVt.iya, dur: 0.3, amp: 0.02}],
   };
 }
 
@@ -135,7 +134,7 @@ export function buildWorld(lang, T, EVt, L) {
       const a = aim(t);
       m.visible = tip.visible = !!a && c.group.visible;
       if (!m.visible) return;
-      c.hand(o.hand ?? 1).getWorldPosition(V); g.worldToLocal(V);
+      c.hand(typeof o.hand === 'function' ? o.hand(t, a) : (o.hand ?? 1)).getWorldPosition(V); g.worldToLocal(V);
       const len = a.len || 3.0;
       const carry = V2.set(V.x + (o.lean ?? 1.1), V.y + len, V.z + 0.3).sub(V).normalize();
       const aimD = new THREE.Vector3(...a.target).sub(V); const dist = aimD.length(); aimD.normalize();
@@ -175,9 +174,9 @@ export function buildWorld(lang, T, EVt, L) {
     const cust4 = windowCust(g, 'custC', W4[0], W4[1], -4.0, 13);
     const hero = ch('knocker', {seed: 1}, g, -3.4, -2.6, 0.15);
     const k4 = E('ketuk') - 0.1;
-    walkPath(hero, [[0, -3.4, -2.6], [cut(3) - 0.01, -3.4, -2.6], [cut(3), 3.9, -2.3], [cut(3) + 2.4, 1.0, -2.6], [cut(4) - 0.01, 1.0, -2.6],
-      [cut(4), -6.5, -2.3], [E('tongkat'), -2.2, -2.45], [k4, 0.2, -2.6], [cut(6) - 0.01, 0.2, -2.6], [cut(6), 2.95, -2.6], [cut(10) - 0.01, 2.95, -2.6],
-      [cut(10), -6.8, -2.4], [E('belum') + 0.2, -1.6, -2.5], [E('pulang') - 0.1, -1.6, -2.5], [cut(11), 3.4, -3.0]]);
+    walkPath(hero, [[0, -3.4, -2.6], [cut(3) - 0.01, -3.4, -2.6], [cut(3), 2.6, -2.4], [cut(3) + 1.6, 1.0, -2.6], [cut(4) - 0.01, 1.0, -2.6],
+      [cut(4), -2.6, -2.4], [k4, 0.2, -2.6], [cut(6) - 0.01, 0.2, -2.6], [cut(6), 1.3, -2.6], [cut(10) - 0.01, 1.3, -2.6],
+      [cut(10), -4.0, -2.4], [E('belum') + 0.2, -1.6, -2.5], [E('pulang') - 0.1, -1.6, -2.5], [cut(11), 0.6, -2.8]]);
     // the pole: tapping (aimed at a window) or carried upright
     const tapsA = every(0.3, E('bangunkan') + 0.4, 0.42), taps4 = every(k4 + 0.35, cut(5), 0.42);
     const taps6 = [...every(cut(6) + 0.2, E('jangan') - 0.1, 0.42), ...every(E('pergi') - 0.1, E('yakin') + 0.2, 0.26)];
@@ -189,33 +188,33 @@ export function buildWorld(lang, T, EVt, L) {
       const w = Math.max(on(s.a, s.b), on(s.a2, s.b2));
       const p = pulse(t, s.taps);
       return {target: [s.w[0] + 0.33, s.w[1] - 0.42, -4.0 + 0.35 - 0.38 * p], w, reach: true};
-    });
+    }, {hand: (t, a) => (inShots(t, 6) ? 1 : a.w > 0.5 && a.target[0] > hero.group.position.x + 0.2 ? 0 : 1)});
     hero.act([
       {t: 0, pose: 'pointUp', expr: 'determined'},
       {t: E('dibayar') + 0.1, pose: 'pointUp', expr: 'scheming'},
-      {t: E('nyata') + 0.05, pose: 'present', expr: 'cheesy', action: 'hop', dur: 0.5},
+      {t: E('nyata') + 0.05, pose: 'present', expr: 'cheesy'},
       {t: cut(3), pose: 'hold', expr: 'happy'},
-      {t: E('knocker') + 0.1, pose: 'hips', expr: 'proud', action: 'jump', dur: 0.6},
+      {t: E('knocker') + 0.1, pose: 'hips', expr: 'proud'},
       {t: cut(4), pose: 'hold', expr: 'drowsy'},
-      {t: E('tongkat') + 0.1, pose: 'hold', expr: 'smug', action: 'nod', dur: 0.6},
+      {t: E('tongkat') + 0.1, pose: 'hold', expr: 'smug'},
       {t: k4, pose: 'pointUp', expr: 'determined'},
       {t: E('pelanggan') + 0.1, pose: 'pointUp', expr: 'happy'},
       {t: cut(6), pose: 'pointUp', expr: 'neutral'},
       {t: E('jangan') + 0.2, pose: 'hips', expr: 'smug'},
-      {t: E('pura') + 0.15, pose: 'cross', expr: 'annoyed', action: 'shake', dur: 0.6},
+      {t: E('pura') + 0.15, pose: 'hips', expr: 'annoyed'},
       {t: E('pergi') - 0.3, pose: 'pointUp', expr: 'gritted'},
-      {t: E('yakin') + 0.4, pose: 'hips', expr: 'proud', action: 'nod', dur: 0.6},
+      {t: E('yakin') + 0.4, pose: 'hips', expr: 'proud'},
       {t: cut(10), pose: 'hold', expr: 'drowsy'},
-      {t: E('malam') + 0.1, pose: 'hold', expr: 'tired', action: 'slump', dur: 0.8},
+      {t: E('malam') + 0.1, pose: 'hold', expr: 'tired'},
       {t: E('belum') + 0.3, pose: 'armsUp', expr: 'drowsy'},
-      {t: E('semua') - 0.2, pose: 'cheer', expr: 'happy', action: 'hop', dur: 0.5},
+      {t: E('semua') - 0.2, pose: 'cheer', expr: 'happy'},
       {t: E('semua') + 0.6, pose: 'hold', expr: 'sleep'},
     ]);
     // customers popping up at the windows
-    custA.act([{t: 0, pose: 'idle', expr: 'sleep'}, {t: E('bangunkan') + 0.1, pose: 'stop', expr: 'irritated', action: 'shake', dur: 0.6}, {t: E('nyata') + 0.2, pose: 'facepalm', expr: 'tired'}]);
+    custA.act([{t: 0, pose: 'idle', expr: 'sleep'}, {t: E('bangunkan') + 0.1, pose: 'stop', expr: 'irritated'}, {t: E('nyata') + 0.2, pose: 'facepalm', expr: 'tired'}]);
     cust4.act([{t: 0, pose: 'idle', expr: 'drowsy'}, {t: E('pelanggan') + 0.2, pose: 'wave', expr: 'tired'}]);
     custB.act([{t: 0, pose: 'idle', expr: 'drowsy'}, {t: E('jangan') - 0.2, pose: 'wave', expr: 'nervous'}, {t: E('pura') + 0.05, pose: 'wave', expr: 'scheming'},
-      {t: E('yakin') - 0.1, pose: 'armsUp', expr: 'grimace', action: 'tremble', dur: 0.5}, {t: E('bangun2') + 0.05, pose: 'stop', expr: 'irritated'}]);
+      {t: E('yakin') - 0.1, pose: 'armsUp', expr: 'grimace'}, {t: E('bangun2') + 0.05, pose: 'stop', expr: 'irritated'}]);
     const rise = (c, wy, t0, t1 = 1e9, t2 = 1e9, t3 = 1e9) => updaters.push((t) => {
       const up = Math.min(smooth((t - t0) / 0.35), 1 - smooth((t - t1) / 0.35)) + Math.min(smooth((t - t2) / 0.3), 1 - smooth((t - t3) / 0.3));
       c.group.position.y = wy - 1.72 - 1.0 * (1 - Math.min(1, up));
@@ -264,16 +263,16 @@ export function buildWorld(lang, T, EVt, L) {
     const tag = sign(L.price, 1.1, 0.42, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'}); at(tag, -2.2, 1.85, -3.1, -0.2, 0, -0.12); g.add(tag);
     const rare = sign(L.rare, 0.9, 0.34, {bg: '#f2d24a', frame: '#8a6a2a'}); at(rare, -3.2, 2.25, -3.2, 0.15, 0, 0.1); g.add(rare);
     const w0 = ch('worker', {seed: 21}, g, -1.4, -2.7, -0.25);
-    const crew = [[5.5, -1.6, 0.9, -5.6], [6.4, -2.6, 0.2, -5.9], [-6.0, -2.0, -0.6, -5.7]].map(([x0, z0, x1, z1], i) => {
+    const crew = [[3.5, -3.0, 0.9, -5.6], [-3.8, -3.4, -0.6, -5.7]].map(([x0, z0, x1, z1], i) => {
       const c = ch('hero', {...CROWD[i], seed: 22 + i}, g, x0, z0, 0);
       walkPath(c, [[cut(2) + 0.1 * i, x0, z0], [E('masalah') + 0.5, x1, z1]]);
       c.act([{t: 0, pose: 'limp', expr: ['drowsy', 'tired', 'sleep'][i]}, {t: E('subuh') + 0.1 * i, pose: 'armsUp', expr: 'drowsy'}, {t: E('subuh') + 0.9, pose: 'limp', expr: 'tired'}]);
       return c;
     });
-    walkPath(w0, [[cut(2), 4.0, -1.6], [E('subuh') + 0.2, -1.4, -2.7]]);
+    walkPath(w0, [[cut(2), 0.6, -2.4], [E('subuh') + 0.2, -1.4, -2.7]]);
     w0.act([
       {t: 0, pose: 'limp', expr: 'drowsy'},
-      {t: E('subuh') + 0.1, pose: 'armsUp', expr: 'drowsy', action: 'slump', dur: 0.8},
+      {t: E('subuh') + 0.1, pose: 'armsUp', expr: 'drowsy'},
       {t: E('masalah') + 0.1, pose: 'point', expr: 'surprised'},
       {t: E('mahal') + 0.1, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.5},
       {t: E('langka') + 0.1, pose: 'shrug', expr: 'cry'},
@@ -315,7 +314,6 @@ export function buildWorld(lang, T, EVt, L) {
     const sl = ch('custA', {seed: 31}, g, -0.6, -3.95, 0);
     sl.act([
       {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('tok1') + 0.05, pose: 'limp', expr: 'sleep', action: 'tremble', dur: 0.3},
       {t: E('tok3') + 0.05, pose: 'headHold', expr: 'tired'},
     ]);
     speak(sl, 7, [[0, 'furious', 'stop'], [0.35, 'irritated', 'armsUp'], [0.65, 'gritted', 'stop'], [0.9, 'tired', 'facepalm']]);
@@ -328,7 +326,7 @@ export function buildWorld(lang, T, EVt, L) {
     const cap = ball(0.2, '#5a4a3a', {sy: 0.45, hull: 0.012}); at(cap, 13.3, 1.88, -4.72); g.add(cap);
     kn.act([
       {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('siapa') + 0.05, pose: 'think', expr: 'confused', action: 'jump', dur: 0.4},
+      {t: E('siapa') + 0.05, pose: 'think', expr: 'confused'},
       {t: E('pembangun') + 0.1, pose: 'shrug', expr: 'worried'},
     ]);
     zzz(g, 11.6, 2.0, -3.9, (t) => t < E('siapa') && inShots(t, 9));
@@ -356,7 +354,7 @@ export function buildWorld(lang, T, EVt, L) {
     const mary = ch('mary', {seed: 41}, g, -0.45, -2.5, 0.2);
     const custC = windowCust(g, 'custC', W[0], W[1], -4.0, 42);
     const payer = ch('custC', {seed: 43}, g, 0.85, -3.55, -0.3);
-    walkPath(mary, [[cut(7), -2.6, -2.3], [cut(7) + 2.6, -0.45, -2.5], [cut(8) - 0.01, -0.45, -2.5], [cut(8), -0.15, -2.75]]);
+    walkPath(mary, [[cut(7), -1.8, -2.4], [cut(7) + 1.8, -0.45, -2.5], [cut(8) - 0.01, -0.45, -2.5], [cut(8), -0.15, -2.75]]);
     const shotT = [E('kacang') + 0.1, E('tik1') - 0.3, E('tik2') - 0.3, E('tik3') - 0.3];
     const hitT = shotT.map((x) => x + 0.3);
     const tube = rod(g, mary, (t) => (inShots(t, 7) && t > E('sumpit') - 0.15 ? {target: [W[0], W[1], -4.0], w: 1, len: 0.42} : null), {r: 0.018, color: '#c9a462', tip: '#a8844a', hand: 1});
@@ -366,12 +364,12 @@ export function buildWorld(lang, T, EVt, L) {
       {t: 0, pose: 'idle', expr: 'neutral'},
       {t: E('kreatif') + 0.1, pose: 'hips', expr: 'scheming'},
       {t: E('sumpit') - 0.15, pose: 'chin', expr: 'smug'},
-      {t: E('tik3') + 0.25, pose: 'hips', expr: 'proud', action: 'hop', dur: 0.5},
+      {t: E('tik3') + 0.25, pose: 'hips', expr: 'proud'},
       {t: cut(8), pose: 'present', expr: 'happy'},
       {t: E('sen') + 0.1, pose: 'present', expr: 'surprised'},
-      {t: E('minggu') + 0.1, pose: 'shrug', expr: 'tired', action: 'slump', dur: 0.8},
+      {t: E('minggu') + 0.1, pose: 'shrug', expr: 'tired'},
     ]);
-    custC.act([{t: 0, pose: 'idle', expr: 'grimace'}, {t: E('tik3') + 0.3, pose: 'stop', expr: 'irritated', action: 'shake', dur: 0.5}]);
+    custC.act([{t: 0, pose: 'idle', expr: 'grimace'}, {t: E('tik3') + 0.3, pose: 'stop', expr: 'irritated'}]);
     payer.act([{t: 0, pose: 'give', expr: 'drowsy'}, {t: E('minggu') + 0.15, pose: 'hips', expr: 'smug'}]);
     const coins = [0, 1, 2].map(() => { const c = P.coin(0.07); g.add(c); return c; });
     const pay = sign(L.pay, 1.9, 0.5, {bg: '#f2d24a', frame: '#8a6a2a', sub: L.paySub}); at(pay, -0.35, 2.85, -3.3, 0.05); g.add(pay);
@@ -401,16 +399,16 @@ export function buildWorld(lang, T, EVt, L) {
     const seller = ch('seller', {seed: 51}, g, 0.4, -4.7, 0);
     const buyers = [[1.75, -2.75, -0.3], [-1.0, -2.9, 0.25]].map(([x, z, y], i) => ch('hero', {...CROWD[3 + i], seed: 52 + i}, g, x, z, y));
     const bc = buyers.map((b) => { const c = P.alarmClock(0.11); held(b, c.group, {y: 0.0, z: 0.08}); return c; });
-    const hero = ch('knocker', {seed: 55}, g, -2.4, -2.5, 0.35);
-    walkPath(hero, [[0, -2.4, -2.5], [E('hilang') + 0.4, -2.4, -2.5], [cut(12) + 0.2, -5.2, -2.1]]);
+    const hero = ch('knocker', {seed: 55}, g, -1.9, -2.5, 0.35);
+    walkPath(hero, [[0, -1.9, -2.5], [E('hilang') + 0.4, -1.9, -2.5], [cut(12) + 0.2, -3.0, -2.3]]);
     rod(g, hero, () => ({target: [0, 0, 0], w: 0}), {lean: 0.9});
     hero.act([
       {t: 0, pose: 'hold', expr: 'worried'},
-      {t: E('hilang') + 0.05, pose: 'hold', expr: 'sad', action: 'slump', dur: 1.2},
+      {t: E('hilang') + 0.05, pose: 'hold', expr: 'sad'},
       {t: E('murah') + 0.1, pose: 'hold', expr: 'cry'},
     ]);
-    seller.act([{t: 0, pose: 'presentBoth', expr: 'cheesy'}, {t: E('murah') + 0.1, pose: 'armsUp', expr: 'excited', action: 'hop', dur: 0.5}]);
-    buyers.forEach((b, i) => b.act([{t: 0, pose: 'carry', expr: 'happy'}, {t: E('murah') + 0.1 + i * 0.15, pose: 'carryBoth', expr: ['toothy', 'cheesy'][i], action: 'jump', dur: 0.5}]));
+    seller.act([{t: 0, pose: 'presentBoth', expr: 'cheesy'}, {t: E('murah') + 0.1, pose: 'armsUp', expr: 'excited'}]);
+    buyers.forEach((b, i) => b.act([{t: 0, pose: 'carry', expr: 'happy'}, {t: E('murah') + 0.1 + i * 0.15, pose: 'carryBoth', expr: ['toothy', 'cheesy'][i]}]));
     fx(g, FX.glints([1.6, 1.6, -3.3], E('murah'), {n: 20}), (t) => inShots(t, 11));
     updaters.push((t) => {
       cheap.visible = t > E('murah') - 0.1; cheap.scale.setScalar(pop(t, E('murah') - 0.1, 0.4));
@@ -436,8 +434,8 @@ export function buildWorld(lang, T, EVt, L) {
     const counts = pressT.map((t0, i) => { const s = sign(`${L.snooze} x${i + 1}`, 1.15, 0.38, {bg: '#fff3df', fg: '#d8413a', frame: '#8a2a2a'}); at(s, 0.35, 2.3, -3.7, -0.1); g.add(s); return s; });
     hero.act([
       {t: 0, pose: 'limp', expr: 'sleep'},
-      {t: E('alarm') + 0.05, pose: 'hold', expr: 'tired', action: 'tremble', dur: 0.4},
-      ...pressT.map((t0, i) => ({t: t0, pose: 'hold', expr: ['drowsy', 'tired', 'drowsy', 'sleep', 'scheming'][i], action: 'nod', dur: 0.3})),
+      {t: E('alarm') + 0.05, pose: 'hold', expr: 'tired'},
+      ...pressT.map((t0, i) => ({t: t0, pose: 'hold', expr: ['drowsy', 'tired', 'drowsy', 'sleep', 'scheming'][i]})),
       {t: E('langsung') - 0.1, pose: 'shrug', expr: 'confused'},
       {t: E('tim') + 0.1, pose: 'chin', expr: 'scheming'},
       {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},

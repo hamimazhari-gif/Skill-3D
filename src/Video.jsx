@@ -128,7 +128,7 @@ function cues(T, EVt) {
     [sy('uh_oh'), E.mahal + 0.35, 0.14],
     [sy('slide_whistle_down'), E.langka + 0.05, 0.16],
     // 3 the title
-    [sy('footsteps_walk'), C[2], 0.2, 2.4],
+    [sy('footsteps_walk'), C[2], 0.2, 1.6],
     [sy('party_horn'), E.knocker, 0.18],
     [sy('applause'), E.knocker + 0.2, 0.11],
     [sy('sparkle'), E.knocker + 0.5, 0.12],
