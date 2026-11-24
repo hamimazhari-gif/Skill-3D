@@ -1,467 +1,488 @@
 {
- "duration": 89.44,
+ "duration": 71.84,
  "sentences": [
   {
    "shot": 1,
-   "text": "Halo! Aku selembar uang seratus ribu.",
-   "start": 0.22,
-   "end": 3.34,
-   "pred": 2.77,
+   "text": "Lima orang.",
+   "start": 0.0,
+   "end": 0.84,
+   "pred": 0.63,
    "voiced": [
     [
-     0.22,
-     0.82
-    ],
-    [
-     1.38,
-     2.76
-    ],
-    [
-     2.86,
-     3.34
+     0.12,
+     0.84
     ]
    ]
   },
   {
    "shot": 1,
-   "text": "Hari ini, aku mau cerita... perjalananku dalam satu hari.",
-   "start": 3.96,
-   "end": 7.68,
-   "pred": 4.62,
+   "text": "Gajinya sama, lima juta per bulan.",
+   "start": 1.02,
+   "end": 3.24,
+   "pred": 2.31,
    "voiced": [
     [
-     3.98,
-     4.5
+     1.02,
+     1.92
     ],
     [
-     4.72,
-     4.86
+     2.18,
+     3.24
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Tapi tinggalnya di lima tempat berbeda.",
+   "start": 3.58,
+   "end": 6.16,
+   "pred": 2.31,
+   "voiced": [
+    [
+     3.58,
+     5.4
     ],
     [
-     4.94,
-     5.64
-    ],
+     5.68,
+     6.16
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Hasilnya? Beda jauh!",
+   "start": 6.46,
+   "end": 7.22,
+   "pred": 1.12,
+   "voiced": [
     [
-     6.02,
-     7.64
+     6.46,
+     7.2
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Jam enam pagi, aku keluar dari ATM.",
-   "start": 8.9,
-   "end": 11.22,
-   "pred": 3.05,
+   "text": "Orang pertama tinggal di Jakarta.",
+   "start": 7.9,
+   "end": 9.82,
+   "pred": 1.96,
    "voiced": [
     [
-     8.9,
-     9.52
+     7.9,
+     8.92
     ],
     [
-     10.0,
-     11.22
+     9.24,
+     9.8
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Pemilikku langsung menciumku.",
-   "start": 12.06,
-   "end": 13.68,
-   "pred": 2.4,
+   "text": "Bayar kos, ongkos ojol, makan siang, kopi biar kuat lembur...",
+   "start": 10.06,
+   "end": 12.78,
+   "pred": 4.47,
    "voiced": [
     [
-     12.06,
-     13.68
+     10.06,
+     10.68
+    ],
+    [
+     10.88,
+     11.54
+    ],
+    [
+     11.8,
+     12.78
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "\"Akhirnya gajian! Aku sayang kamu!\"",
-   "start": 14.28,
-   "end": 17.72,
-   "pred": 2.49,
+   "text": "Tanggal lima belas, dompetnya sudah kurus.",
+   "start": 13.18,
+   "end": 15.54,
+   "pred": 2.87,
    "voiced": [
     [
-     14.28,
-     16.38
-    ],
+     13.18,
+     15.54
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Tanggal dua puluh?",
+   "start": 16.1,
+   "end": 17.14,
+   "pred": 1.05,
+   "voiced": [
     [
-     16.64,
-     17.72
+     16.1,
+     16.66
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Tapi cintanya cuma bertahan satu jam.",
-   "start": 18.64,
-   "end": 21.14,
-   "pred": 2.86,
+   "text": "\"Mi instan lagi... rasa ayam bawang, rasa kesabaran.\"",
+   "start": 17.3,
+   "end": 20.26,
+   "pred": 3.15,
    "voiced": [
     [
-     18.64,
-     18.78
+     17.3,
+     18.04
     ],
     [
-     18.9,
-     19.14
+     18.38,
+     19.18
     ],
     [
-     19.58,
-     21.12
+     19.4,
+     20.24
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Jam tujuh, aku dipecah buat beli kopi kekinian.",
-   "start": 22.0,
-   "end": 24.6,
-   "pred": 4.06,
+   "text": "Orang kedua tinggal di Bali.",
+   "start": 21.14,
+   "end": 21.98,
+   "pred": 1.61,
    "voiced": [
     [
-     22.0,
-     22.54
+     21.14,
+     21.98
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Instagram-nya penuh foto pantai dan sunset.",
+   "start": 22.38,
+   "end": 24.38,
+   "pred": 2.52,
+   "voiced": [
+    [
+     22.46,
+     24.38
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Kelihatan mewah.",
+   "start": 24.8,
+   "end": 25.58,
+   "pred": 0.98,
+   "voiced": [
+    [
+     24.8,
+     25.56
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Tapi di balik kamera...",
+   "start": 25.88,
+   "end": 27.06,
+   "pred": 1.19,
+   "voiced": [
+    [
+     25.88,
+     25.98
     ],
     [
-     22.84,
-     24.58
+     26.06,
+     26.26
+    ],
+    [
+     26.42,
+     27.06
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Lalu dua ribu dari kembalianku diambil tukang parkir... yang tiba-tiba muncul entah dari mana.",
-   "start": 25.14,
-   "end": 30.64,
-   "pred": 7.02,
+   "text": "\"Nasi bungkus lagi, yang penting feed-nya estetik.\"",
+   "start": 27.28,
+   "end": 29.9,
+   "pred": 3.22,
    "voiced": [
     [
-     25.14,
-     25.72
-    ],
-    [
-     25.82,
-     27.26
-    ],
-    [
-     27.34,
-     28.5
+     27.74,
+     28.56
     ],
     [
      28.96,
-     30.6
+     29.76
+    ],
+    [
+     29.84,
+     29.9
     ]
    ]
   },
   {
-   "shot": 5,
-   "text": "Padahal tadi nggak ada!",
-   "start": 31.28,
-   "end": 32.04,
+   "shot": 6,
+   "text": "Orang ketiga tinggal di Jogja.",
+   "start": 30.74,
+   "end": 31.84,
    "pred": 1.75,
    "voiced": [
     [
-     31.28,
-     32.04
-    ]
-   ]
-  },
-  {
-   "shot": 5,
-   "text": "\"Prit! Prit! Terus, terus, Bos!\"",
-   "start": 32.76,
-   "end": 34.32,
-   "pred": 3.05,
-   "voiced": [
-    [
-     32.76,
-     33.02
-    ],
-    [
-     33.58,
-     33.82
-    ],
-    [
-     33.92,
-     34.3
+     30.74,
+     31.82
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Siang hari, pemilikku buka aplikasi belanja.",
-   "start": 35.56,
-   "end": 38.14,
-   "pred": 3.97,
+   "text": "Makan di angkringan, ngopi sambil ngobrol sampai malam, dan masih bisa menabung sedikit.",
+   "start": 32.22,
+   "end": 36.94,
+   "pred": 5.94,
    "voiced": [
     [
-     35.56,
-     36.04
+     32.24,
+     33.32
     ],
     [
-     36.64,
-     38.14
+     33.46,
+     35.06
+    ],
+    [
+     35.26,
+     36.48
     ]
    ]
   },
   {
-   "shot": 6,
-   "text": "Muncul tulisan \"Flash Sale!\"",
-   "start": 38.74,
-   "end": 41.14,
-   "pred": 2.03,
+   "shot": 7,
+   "text": "\"Hidup itu sederhana, Mas. Yang ribet itu mantan.\"",
+   "start": 37.3,
+   "end": 39.76,
+   "pred": 3.08,
    "voiced": [
     [
-     38.74,
+     37.32,
+     38.44
+    ],
+    [
+     38.76,
      39.76
-    ],
-    [
-     40.12,
-     41.14
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "\"Jangan! Jangan! Kamu nggak butuh sepatu kelima!\"",
-   "start": 41.92,
-   "end": 44.46,
-   "pred": 3.51,
-   "voiced": [
-    [
-     41.94,
-     42.24
-    ],
-    [
-     43.04,
-     44.46
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "Tapi dia tetap checkout.",
-   "start": 45.54,
-   "end": 47.18,
-   "pred": 1.85,
-   "voiced": [
-    [
-     45.54,
-     45.98
-    ],
-    [
-     46.36,
-     46.76
-    ],
-    [
-     46.84,
-     47.16
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Sebagian diriku yang lain lebih beruntung.",
-   "start": 48.24,
-   "end": 50.12,
-   "pred": 3.32,
+   "text": "Orang keempat tinggal di kota kecil.",
+   "start": 40.7,
+   "end": 42.08,
+   "pred": 2.1,
    "voiced": [
     [
-     48.24,
-     50.12
+     40.72,
+     42.08
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Aku berpindah ke pedagang sayur, ke sopir angkot, ke ibu warung... sampai akhirnya ke seorang nenek, yang memberikanku ke cucunya sebagai uang jajan.",
-   "start": 50.7,
-   "end": 60.62,
-   "pred": 12.74,
+   "text": "Gaji lima juta sudah bikin dia dipanggil \"Bos\" sama tetangga.",
+   "start": 42.46,
+   "end": 45.36,
+   "pred": 3.43,
    "voiced": [
     [
-     50.7,
-     52.48
+     42.46,
+     43.4
     ],
     [
-     52.88,
-     53.88
+     43.48,
+     45.36
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "\"Bos, nanti traktir ya!\"",
+   "start": 46.02,
+   "end": 47.44,
+   "pred": 1.61,
+   "voiced": [
+    [
+     46.02,
+     46.32
     ],
     [
-     54.56,
-     55.62
-    ],
-    [
-     55.96,
-     56.88
-    ],
-    [
-     56.98,
-     57.64
-    ],
-    [
-     58.32,
-     60.56
+     46.64,
+     47.44
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Dan anak kecil itu... memasukkanku ke celengan ayam.",
-   "start": 61.22,
-   "end": 64.6,
-   "pred": 3.78,
+   "text": "Dan orang kelima pulang ke desa.",
+   "start": 48.26,
+   "end": 49.78,
+   "pred": 1.82,
    "voiced": [
     [
-     61.22,
-     62.12
+     48.26,
+     49.1
     ],
     [
-     62.22,
-     62.46
-    ],
-    [
-     62.86,
-     64.54
+     49.24,
+     49.78
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Akhirnya, aku bisa istirahat dengan tenang.",
-   "start": 65.48,
-   "end": 68.06,
-   "pred": 3.88,
+   "text": "Makan dari kebun sendiri, nggak ada biaya kos, tabungannya terus bertambah.",
+   "start": 50.22,
+   "end": 54.08,
+   "pred": 5.17,
    "voiced": [
     [
-     65.48,
-     65.64
+     50.22,
+     51.4
     ],
     [
-     65.72,
-     66.24
+     51.56,
+     52.2
     ],
     [
-     66.66,
-     68.04
+     52.3,
+     52.62
+    ],
+    [
+     52.86,
+     53.26
+    ],
+    [
+     53.36,
+     54.08
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Hidupnya seperti sultan.",
+   "start": 54.52,
+   "end": 55.6,
+   "pred": 1.47,
+   "voiced": [
+    [
+     54.52,
+     55.58
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Cuma satu masalahnya...",
+   "start": 56.02,
+   "end": 56.86,
+   "pred": 1.26,
+   "voiced": [
+    [
+     56.02,
+     56.86
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Malam harinya, pemilik pertamaku membuka dompet.",
-   "start": 69.38,
-   "end": 71.84,
-   "pred": 4.34,
+   "text": "\"Halo? Halo?! Sinyalnya cuma ada di atas pohon kelapa!\"",
+   "start": 57.64,
+   "end": 60.06,
+   "pred": 2.87,
    "voiced": [
     [
-     69.38,
-     70.2
+     57.66,
+     58.1
     ],
     [
-     70.48,
-     71.84
-    ]
-   ]
-  },
-  {
-   "shot": 10,
-   "text": "\"Lho... uangku ke mana? Perasaan nggak beli apa-apa!\"",
-   "start": 72.9,
-   "end": 76.58,
-   "pred": 3.51,
-   "voiced": [
-    [
-     72.9,
-     73.04
+     58.54,
+     59.84
     ],
     [
-     74.1,
-     74.78
-    ],
-    [
-     75.6,
-     76.58
+     59.92,
+     60.06
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Itulah aku.",
-   "start": 78.0,
-   "end": 78.56,
-   "pred": 0.83,
+   "text": "Jadi, kaya atau tidaknya kamu, bukan cuma ditentukan oleh besar gaji.",
+   "start": 60.88,
+   "end": 64.64,
+   "pred": 4.75,
    "voiced": [
     [
-     78.0,
-     78.56
+     60.88,
+     61.32
+    ],
+    [
+     61.64,
+     62.88
+    ],
+    [
+     63.06,
+     64.64
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Kalau kamu nggak mencatat ke mana aku pergi... aku akan menghilang tanpa kamu sadari.",
-   "start": 79.12,
-   "end": 84.44,
-   "pred": 6.28,
+   "text": "Tapi juga oleh biaya hidup... dan gaya hidupmu.",
+   "start": 65.02,
+   "end": 67.54,
+   "pred": 2.52,
    "voiced": [
     [
-     79.12,
-     80.18
+     65.02,
+     66.12
     ],
     [
-     80.26,
-     81.18
-    ],
-    [
-     81.56,
-     81.74
-    ],
-    [
-     81.82,
-     82.4
-    ],
-    [
-     82.56,
-     83.3
-    ],
-    [
-     83.62,
-     84.42
+     66.5,
+     67.54
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Uang seratus ribumu biasanya habis buat apa?",
-   "start": 85.3,
-   "end": 87.86,
-   "pred": 3.42,
+   "text": "Menurut kamu, gaji lima juta paling enak di kota mana?",
+   "start": 68.24,
+   "end": 70.48,
+   "pred": 3.43,
    "voiced": [
     [
-     85.3,
-     86.38
+     68.26,
+     68.74
     ],
     [
-     86.52,
-     87.86
+     68.98,
+     70.48
     ]
    ]
   },
   {
    "shot": 12,
    "text": "Tulis di komentar!",
-   "start": 88.44,
-   "end": 89.12,
-   "pred": 1.38,
+   "start": 71.04,
+   "end": 71.6,
+   "pred": 1.05,
    "voiced": [
     [
-     88.46,
-     89.1
+     71.04,
+     71.6
     ]
    ]
   }

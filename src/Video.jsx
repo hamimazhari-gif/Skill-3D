@@ -102,83 +102,61 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [4, 5, 6, 8, 9, 10, 11];
+const DIPS = [2, 4, 6, 8, 9, 11];
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
-  const pass = ['sayur', 'angkot', 'warung', 'nenek', 'cucu'].map((k) => E[k] + 0.1);
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.18]),
-    // 1 the note on the ATM: dawn birds, sparkle on "hundred thousand", the sign pops
-    [sy('birds'), 0, 0.08, C[1]],
-    ['04-soft-ui-pop.mp3', 0.25, 0.18],
-    [sy('sparkle'), E.seratus, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.perjalanan - 0.1, 0.2],
-    [sy('tada'), E.satuhari, 0.12],
-    // 2 six o'clock: steps, keypad, cash dispenser, kiss, payday!
-    [sy('clock_tick'), C[1], 0.12, 1.2],
-    [sy('footsteps_walk'), C[1], 0.18, Math.max(0.6, E.jam6 + 1.0 - C[1])],
-    [sy('atm_beep'), E.jam6 + 1.0, 0.2],
-    [sy('cash_dispense'), E.atm - 0.75, 0.3],
-    [sy('kiss'), E.cium, 0.4],
-    [sy('heart_pop'), E.cium + 0.15, 0.16],
-    [sy('party_horn'), E.gajian, 0.14],
-    [sy('sparkle'), E.sayang, 0.14],
-    // 3 an hour later: walking off, the clock runs, the love fades
-    [sy('footsteps_walk'), C[2], 0.16, Math.max(0.5, C[3] - C[2] - 0.2)],
-    [sy('clock_tick'), E.tapi, 0.16, Math.max(0.5, E.sejam + 0.4 - E.tapi)],
-    [sy('slide_whistle_down'), E.sejam, 0.16],
-    // 4 the café: espresso, the note breaks (puff), change pops out, the till
-    [sy('espresso'), C[3] + 0.05, 0.14],
-    [sy('puff'), E.pecah - 0.05, 0.3],
-    [sy('ka_ching'), E.pecah + 0.05, 0.2],
-    ...[0, 1, 2].map((i) => ['pop-bubble-sound-effect.mp3', E.pecah + 0.05 + i * 0.12, 0.18]),
-    [sy('heart_pop'), E.kopi - 0.2, 0.12],
-    // 5 the parking attendant
-    [sy('scooter'), C[4] + 0.1, 0.08],
-    [sy('puff'), E.muncul - 0.05, 0.26],
-    [sy('boing'), E.muncul, 0.14],
-    [sy('paper_flutter'), E.parkir + 0.35, 0.3],
-    [sy('slide_whistle_down'), E.parkir + 0.9, 0.12],
-    [sy('uh_oh'), E.tadi + 0.1, 0.12],
-    [sy('whistle_prit'), E.prit - 0.02, 0.22],
-    [sy('scooter'), E.terus - 0.1, 0.14],
-    // 6 noon: notification, FLASH SALE
-    [sy('clock_tick'), C[5], 0.1, 1.0],
-    ['09-notification-ding.wav', E.aplikasi, 0.2],
-    ['07-riser-build-up.wav', E.flash - 0.9, 0.1, 0.9],
-    [sy('tada'), E.flash, 0.18],
-    [sy('sparkle'), E.flash + 0.15, 0.12],
-    // 7 "no! no!" — checkout anyway
-    ['02-error-denied-buzz.wav', E.jangan, 0.12],
-    ['04-soft-ui-pop.mp3', E.kelima - 0.1, 0.16],
-    ['mouse-click-sound-effect.mp3', E.checkout - 0.1, 0.45, 0.4],
-    [sy('ka_ching'), E.checkout, 0.2],
-    [sy('swish'), E.checkout + 0.1, 0.16],
-    [sy('thud'), E.checkout + 0.4, 0.18],
-    // 8 the kampung: hand to hand
-    [sy('birds'), C[7], 0.07, Math.max(0.5, C[8] - C[7])],
-    [sy('sparkle'), E.beruntung, 0.14],
-    ...pass.map((t) => [sy('paper_flutter'), t, 0.22]),
-    [sy('horn'), E.angkot + 0.2, 0.14],
-    [sy('party_horn'), E.jajan, 0.12],
-    // 9 into the piggy bank
-    [sy('slot_drop'), E.celengan + 0.3, 0.3],
-    [sy('coin_drop'), E.celengan + 0.45, 0.12],
-    [sy('snore'), E.istirahat, 0.08, Math.max(0.5, C[9] - E.istirahat - 0.2)],
-    // 10 night: the wallet is empty
-    [sy('clock_tick'), C[9], 0.12, Math.max(0.5, E.dompet - C[9])],
-    [sy('velcro'), E.dompet - 0.1, 0.3],
-    [sy('fly_buzz'), E.dompet + 0.25, 0.14],
-    [sy('uh_oh'), E.kemana, 0.12],
-    [sy('slide_whistle_down'), E.beli + 0.1, 0.14],
-    // 11 the money log; disappearing
-    [sy('page_flips'), E.catat, 0.14, 0.8],
-    ['06-digital-glitch-tech-blip.mp3', E.hilang, 0.12],
-    [sy('puff'), E.sadar - 0.1, 0.24],
-    // 12 the question
-    ['04-soft-ui-pop.mp3', C[11] + 0.05, 0.18],
-    ['pop-bubble-sound-effect.mp3', E.tanya + 0.2, 0.2],
+    // 1 the line-up: salary, five places, "very different"
+    [sy('crowd_murmur'), 0, 0.06, C[1]],
+    [sy('ka_ching'), E.juta, 0.2],
+    [sy('sparkle'), E.juta + 0.2, 0.12],
+    ...[0, 1, 2, 3, 4].map((i) => ['pop-bubble-sound-effect.mp3', E.tempat - 0.1 + i * 0.12, 0.16]),
+    [sy('tada'), E.beda, 0.14],
+    // 2 Jakarta: traffic, expenses out of the wallet, the calendar
+    [sy('scooter'), C[1] + 0.1, 0.08],
+    ...['kos', 'ojol', 'makan', 'kopi'].map((k) => [sy('coin_drop'), E[k] - 0.05, 0.14, 0.4]),
+    [sy('horn'), E.ojol + 0.1, 0.1],
+    [sy('espresso'), E.kopi + 0.05, 0.08, 0.8],
+    [sy('paper_flutter'), E.tgl15 - 0.1, 0.18],
+    [sy('slide_whistle_down'), E.kurus, 0.14],
+    [sy('paper_flutter'), E.tgl20 - 0.1, 0.18],
+    [sy('uh_oh'), E.tgl20 + 0.2, 0.12],
+    // 3 boarding room
+    [sy('clock_tick'), C[2], 0.1, C[3] - C[2]],
+    [sy('slide_whistle_down'), E.sabar, 0.1],
+    // 4-5 Bali: waves, camera shutter, likes; the shack
+    [sy('birds'), C[3], 0.06, C[5] - C[3]],
+    ['mouse-click-sound-effect.mp3', E.insta - 0.05, 0.4, 0.4],
+    ['09-notification-ding.wav', E.insta + 0.3, 0.14],
+    [sy('heart_pop'), E.sunset, 0.14],
+    [sy('sparkle'), E.mewah, 0.16],
+    [sy('slide_whistle_down'), E.balik, 0.12],
+    [sy('paper_flutter'), C[4] + 0.1, 0.12],
+    // 6-7 Jogja: night street, coffee, coins
+    [sy('crowd_murmur'), C[5], 0.05, C[7] - C[5]],
+    [sy('frying'), C[5], 0.05, C[6] - C[5]],
+    [sy('coin_drop'), E.nabung, 0.2],
+    [sy('uh_oh'), E.mantan + 0.2, 0.1],
+    // 8 small town: "Bos!"
+    [sy('footsteps_walk'), C[7], 0.16, Math.max(0.5, E.kota + 1.3 - C[7])],
+    [sy('party_horn'), E.bos, 0.12],
+    [sy('sparkle'), E.bos + 0.1, 0.12],
+    [sy('ka_ching'), E.traktir, 0.14],
+    // 9 the village: birds, savings, sultan, no signal
+    [sy('birds'), C[8], 0.08, C[10] - C[8]],
+    [sy('coin_drop'), E.tabungan, 0.18],
+    [sy('tada'), E.sultan, 0.16],
+    ['02-error-denied-buzz.wav', E.masalah, 0.12],
+    // 10 up the palm
+    [sy('creak'), C[9] + 0.1, 0.12],
+    ['09-notification-ding.wav', E.halo + 1.0, 0.16],
+    // 11-12 the moral and the question
+    ['04-soft-ui-pop.mp3', E.biaya - 0.1, 0.18],
+    ['04-soft-ui-pop.mp3', E.gaya - 0.1, 0.18],
+    [sy('coin_drop'), E.biaya, 0.16],
+    ['pop-bubble-sound-effect.mp3', E.kotamana - 0.2, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -246,10 +224,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'UANG 100 RIBU', mid: 'HABIS KE MANA?!'},
-  en: {top: 'MY Rp100K', mid: 'WHERE DID IT GO?!'},
+  id: {top: 'GAJI 5 JUTA', mid: 'DI 5 KOTA BEDA!', bot: 'SIAPA PALING KAYA?'},
+  en: {top: 'GAJI 5 JUTA', mid: 'DI 5 KOTA BEDA!', bot: 'SIAPA PALING KAYA?'},
 };
-const THUMB = (EVt) => ({t: EVt.seratus + 0.7, pos: [-0.15, 1.05, -1.05], look: [-0.25, 1.15, -2.0]});
+const THUMB = (EVt) => ({t: EVt.beda + 0.6, pos: [0, 1.6, 2.4], look: [0, 1.35, -2.4]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
@@ -268,6 +246,7 @@ export const Thumb = ({lang}) => {
         {word(tx.top, 118, '#fff3df', ink, -3)}
         {word(tx.mid, 104, '#e8a83a', ink, 2)}
       </AbsoluteFill>
+      {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
     </AbsoluteFill>
   );
 };
