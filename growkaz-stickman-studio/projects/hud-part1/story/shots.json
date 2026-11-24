@@ -1,0 +1,358 @@
+{
+ "title": "Kisah Nabi Hud - Part 1",
+ "duration": 57.2,
+ "shots": [
+  {
+   "id": "h01",
+   "start": 0.0,
+   "end": 6.65,
+   "line": "Ada satu bangsa… yang Allah sebut belum pernah diciptakan yang seperti mereka di negeri mana pun.",
+   "scene": "h01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    },
+    {
+     "at": 1.2,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 2.4,
+     "name": "footstep",
+     "gain": -6
+    },
+    {
+     "at": 3.6,
+     "name": "footstep",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "h02",
+   "start": 6.65,
+   "end": 8.45,
+   "line": "Mereka adalah kaum 'Ad.",
+   "scene": "h02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.85,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "h03",
+   "start": 8.45,
+   "end": 11.35,
+   "line": "Tubuh mereka besar dan sangat kuat.",
+   "scene": "h03",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "riser",
+     "gain": -12
+    },
+    {
+     "at": 1.9,
+     "name": "impact",
+     "gain": -4
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "h04",
+   "start": 11.35,
+   "end": 16.05,
+   "line": "Kota mereka bernama Iram… kota dengan tiang-tiang yang menjulang tinggi.",
+   "scene": "h04",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 1.1,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "h05",
+   "start": 16.05,
+   "end": 20.55,
+   "line": "Di setiap bukit, mereka membangun bangunan megah… hanya untuk bermegah-megahan.",
+   "scene": "h05",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "hit",
+     "gain": -12
+    },
+    {
+     "at": 0.95,
+     "name": "hit",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "hit",
+     "gain": -12
+    },
+    {
+     "at": 1.85,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "h06",
+   "start": 20.55,
+   "end": 25.55,
+   "line": "Mereka membangun benteng-benteng kokoh… seolah-olah mereka akan hidup selamanya.",
+   "scene": "h06",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -8
+    },
+    {
+     "at": 0.0,
+     "name": "riser",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "h07",
+   "start": 25.55,
+   "end": 30.05,
+   "line": "Kebun-kebun subur. Ternak melimpah. Mata air mengalir.",
+   "scene": "h07",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 2.9,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "h08",
+   "start": 30.05,
+   "end": 33.55,
+   "line": "Semua kenikmatan ada pada mereka.",
+   "scene": "h08",
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "h09",
+   "start": 33.55,
+   "end": 36.35,
+   "line": "Tapi… mereka menyembah berhala.",
+   "scene": "h09",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  },
+  {
+   "id": "h10",
+   "start": 36.35,
+   "end": 40.55,
+   "line": "Dan ketika menyiksa, mereka menyiksa dengan kejam.",
+   "scene": "h10",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "whoosh",
+     "gain": -10
+    },
+    {
+     "at": 2.6,
+     "name": "hit",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -16
+   }
+  },
+  {
+   "id": "h11",
+   "start": 40.55,
+   "end": 44.55,
+   "line": "Mereka pun menantang: Siapa yang lebih kuat dari kami?",
+   "scene": "h11",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.6,
+     "name": "impact",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -18
+   }
+  },
+  {
+   "id": "h12",
+   "start": 44.55,
+   "end": 49.85,
+   "line": "Mereka lupa… Allah yang menciptakan mereka… jauh lebih kuat dari mereka.",
+   "scene": "h12",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -10
+    },
+    {
+     "at": 1.5,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "h13",
+   "start": 49.85,
+   "end": 57.2,
+   "line": "Lalu Allah mengutus seorang nabi dari kalangan mereka sendiri. Namanya… Hud.",
+   "scene": "h13",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "shimmer",
+     "gain": -12
+    },
+    {
+     "at": 4.75,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 33.55,
+   "mood": "epic",
+   "intensity": 0.55
+  },
+  {
+   "start": 33.55,
+   "end": 44.55,
+   "mood": "dark",
+   "intensity": 0.7
+  },
+  {
+   "start": 44.55,
+   "end": 57.2,
+   "mood": "wonder",
+   "intensity": 0.55
+  }
+ ],
+ "sfx": []
+}
