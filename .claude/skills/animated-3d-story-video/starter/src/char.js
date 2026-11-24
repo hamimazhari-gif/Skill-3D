@@ -20,10 +20,11 @@ export const DESIGNS = {
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   tidy: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
   gamer: {head: 'round', hair: 'fringe', skin: '#f6dcc4', brows: 'thick', limb: [9, 6], legExtra: 0.06, torsoExtra: 0.08, cheeks: false, shading: true, shadows: true},
+  dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -284,6 +285,16 @@ function drawFace(o, f, r) {
     case 'smirk': x.beginPath(); x.moveTo(mx - R * 0.1, my + R * 0.01); x.quadraticCurveTo(mx + R * 0.04, my + R * 0.06, mx + R * 0.14, my - R * 0.05); x.stroke(); break;
     default: x.beginPath(); x.arc(mx, my - R * 0.02, R * 0.12, 0.25 * Math.PI, 0.75 * Math.PI); x.stroke();
   }
+  if (o.mustache) { // moustache above the mouth: 'thin' pencil (curled tips) or 'thick' walrus
+    const thick = o.mustache === 'thick', w = R * (thick ? 0.3 : 0.27), hgt = R * (thick ? 0.12 : 0.055), y0 = my - R * (thick ? 0.1 : 0.09);
+    x.fillStyle = o.hair; x.lineWidth = 5; x.strokeStyle = INK;
+    for (const sd of [-1, 1]) {
+      x.beginPath(); x.moveTo(mx, y0 + hgt * 0.2);
+      x.quadraticCurveTo(mx + sd * w * 0.45, y0 - hgt * 1.1, mx + sd * w, y0 + (thick ? hgt * 0.6 : -hgt * 0.9));
+      x.quadraticCurveTo(mx + sd * w * 0.55, y0 + hgt * 0.9, mx, y0 + hgt * 0.8);
+      x.closePath(); x.fill(); x.stroke();
+    }
+  }
   if (o.shades) { // dark sunglasses over the eyes
     x.lineWidth = 7;
     for (const sd of [-1, 1]) { const ex = cx + sd * R * 0.36, ey = cy + R * 0.05; x.fillStyle = '#1a1a22'; x.beginPath(); x.ellipse(ex, ey, R * 0.22, R * 0.16, 0, 0, 7); x.fill(); x.stroke(); x.fillStyle = 'rgba(255,255,255,0.55)'; x.beginPath(); x.ellipse(ex - R * 0.08, ey - R * 0.06, R * 0.06, R * 0.03, -0.5, 0, 7); x.fill(); }
@@ -369,10 +380,25 @@ function drawTorso(o, r) {
     vneck(56, o.jacket);
   } else if (out === 'boss') { // open shiny shirt, wide collar, gold chain
     vneck(62, o.collar || '#f3e7d3');
+  } else if (out === 'suit') { // 1920s suit: white shirt V, tie, dark lapels, two buttons, pocket square
+    const vd = (waist - top) * 0.55, lap = o.lapel || '#2a2630';
+    inkShape(x, [[cx - 40, top + 2], [cx + 40, top + 2], [cx, top + vd]], '#fffdf6', r, 5);
+    inkShape(x, [[cx, top + 40], [cx + 10, top + 56], [cx + 7, top + vd - 18], [cx, top + vd - 4], [cx - 7, top + vd - 18], [cx - 10, top + 56]], o.tie, r, 5);
+    for (const sd of [-1, 1]) inkShape(x, [[cx + sd * 40, top + 2], [cx + sd * 62, top + vd * 0.35], [cx + sd * 40, top + vd * 0.42], [cx + sd * 2, top + vd]], lap, r, 5);
+    x.fillStyle = INK; for (const k of [1, 1.28]) if (top + vd * k + 14 < waist) { x.beginPath(); x.arc(cx + 4, top + vd * k + 10, 6, 0, 7); x.fill(); }
+    if (o.pocketSquare !== false) inkShape(x, [[px - 16, py - 8], [px + 16, py - 8], [px + 6, py - 26], [px - 2, py - 16], [px - 10, py - 28]], o.pocketSquare || '#fffdf6', r, 4);
   } else if (out === 'farmer') { // plain collarless shirt with buttons and a towel round the neck
     inkShape(x, ellipse(cx, top + 4, 32, 18, 24, 0, Math.PI), SKIN, r, 5);
     x.fillStyle = INK; for (let i = 0; i < 4; i++) { x.beginPath(); x.arc(cx, top + 40 + i * 32, 4, 0, 7); x.fill(); }
     pocket();
+  }
+  if (o.sash) { // official's sash over the right shoulder (blue, white, red) with a gold medal
+    x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
+    const a = [cx + bw * 0.9, top - 10], b = [cx - bw * 1.1, waist + 10];
+    ['#2f4f9a', '#fff8ee', '#d8413a'].forEach((col, i) => { x.strokeStyle = col; x.lineWidth = 16; const off = (i - 1) * 15; x.beginPath(); x.moveTo(a[0] + off, a[1] + off * 0.6); x.lineTo(b[0] + off, b[1] + off * 0.6); x.stroke(); });
+    x.strokeStyle = INK; x.lineWidth = 5; for (const off of [-23, 23]) { x.beginPath(); x.moveTo(a[0] + off, a[1] + off * 0.6); x.lineTo(b[0] + off, b[1] + off * 0.6); x.stroke(); }
+    x.restore();
+    inkShape(x, wobble(ellipse(cx - bw * 0.45, top + (waist - top) * 0.3, 15, 15, 16), r, 0.5), '#f2d24a', r, 5);
   }
   if (o.chain) { // gold chain with a pendant
     x.strokeStyle = '#8a6a1a'; x.lineWidth = 16; x.beginPath(); x.arc(cx, top - 30, 70, 0.28 * Math.PI, 0.72 * Math.PI); x.stroke();
@@ -518,6 +544,7 @@ export const POSES = {
   flex: {L: [1.45, 1.75], R: [1.45, 1.75]},
   drink: {L: [0.12, 0], R: [0.2, -2.45]},
   eat: {L: [0.12, 0], R: [0.35, -2.2]},
+  read: {L: [0.75, -1.0], R: [0.75, -1.0]}, // both hands in front of the chest (a newspaper, a letter)
 };
 
 const easeOutBack = (x) => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };

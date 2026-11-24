@@ -103,53 +103,19 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [3, 4, 5, 6, 7, 9];
+const DIPS = [3, 5, 10, 11];
 
-// Scene titles (game levels) and the HUD: lives lost on these words.
-const TITLES = [[1, 'MISI: BELI TELUR 🥚 | TINGKAT KESULITAN: MUSTAHIL 💀'], [3, 'LEVEL 1: JEBAKAN AROMA ROTI 🥐'], [4, 'LEVEL 2: LABIRIN SNACK 🌀'],
-  [5, 'LEVEL 3: ILUSI HARGA 9.900 🧠'], [6, 'LEVEL 4: BOS SPG 😇 | ❤️❤️🖤'], [7, 'FINAL BOSS: RAK KASIR 🍫 | ❤️🖤🖤'], [9, ''], [11, 'TIPS MENANG ✅'], [12, 'KAMU KALAH DI LEVEL BERAPA? 🎮']];
-// lives lost (storyboard: SPG, final boss, then none left)
-const LOSS = (E) => [E.senyum + 0.2, E.coklat2 + 0.4, E.nyawa];
-const RETRO = '"JetBrains Mono", "Noto Color Emoji", monospace';
-const Titles = ({T, t}) => {
-  let cur = null; for (const [k, txt] of TITLES) if (t >= T.CUTS[k - 1]) cur = {txt, t0: T.CUTS[k - 1] + (k === 1 ? 0.25 : 0.15)};
-  if (!cur || !cur.txt || t < cur.t0) return null;
-  const u = Math.min(1, (t - cur.t0) / 0.25), step = Math.floor(u * 4) / 4; // stepped, 8-bit style pop
-  return (
-    <AbsoluteFill style={{alignItems: 'center', paddingTop: 110}}>
-      <div style={{maxWidth: 1010, textAlign: 'center', background: '#1a1a2e', color: '#f2d24a', fontFamily: RETRO, fontWeight: 800,
-        fontSize: 58, lineHeight: 1.2, padding: '18px 26px 20px', border: '8px solid #f2d24a', outline: `8px solid ${INK}`, boxShadow: `14px 14px 0 ${INK}`,
-        transform: `scale(${0.6 + 0.4 * step})`, letterSpacing: -3}}>
-        {cur.txt.split(' | ').map((l, i) => <div key={i} style={i ? {color: '#fff3df', fontSize: 46, marginTop: 6} : {}}>{l}</div>)}
-      </div>
-    </AbsoluteFill>
-  );
-};
-// retro game screen for the hook: scanlines, a pixel frame, blinking PLAYER 1 / START
-const Retro = ({T, t}) => {
-  const end = T.CUTS[1]; if (t >= end + 0.3) return null;
-  const k = t < end ? 1 : 1 - (t - end) / 0.3;
-  const blink = Math.floor(t * 2.5) % 2 === 0;
+// "Kita mundur satu minggu": a VHS rewind look (scanlines, colour shift, rewind sign) until the cut to 1925.
+const Rewind = ({T, E, t}) => {
+  const t0 = E.mundur - 0.05, t1 = T.CUTS[2] + 0.15; if (t < t0 || t >= t1) return null;
+  const k = Math.min(1, (t - t0) / 0.15, (t1 - t) / 0.2);
+  const jit = Math.sin(t * 61) * 6, bar = ((t * 2.3) % 1) * 1920;
   return (
     <AbsoluteFill style={{opacity: k, pointerEvents: 'none'}}>
-      <AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 3px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 7px)'}} />
-      <AbsoluteFill style={{border: '22px solid #1a1a2e', boxShadow: 'inset 0 0 0 8px #f2d24a, inset 0 0 120px rgba(0,0,0,0.55)'}} />
-      <div style={{position: 'absolute', left: 60, bottom: 250, fontFamily: RETRO, fontWeight: 800, fontSize: 44, color: '#7fe08a', textShadow: `4px 4px 0 ${INK}`}}>PLAYER 1</div>
-      <div style={{position: 'absolute', right: 60, bottom: 250, fontFamily: RETRO, fontWeight: 800, fontSize: 44, color: '#f2d24a', textShadow: `4px 4px 0 ${INK}`, opacity: blink ? 1 : 0}}>▶ START</div>
-      <div style={{position: 'absolute', right: 60, top: 330, fontFamily: RETRO, fontWeight: 800, fontSize: 40, color: '#fff3df', textShadow: `4px 4px 0 ${INK}`}}>Rp50.000</div>
-    </AbsoluteFill>
-  );
-};
-const GameOver = ({T, E, t}) => {
-  // holds a little past the cut into the tips scene, then fades, so the words can be read
-  const t0 = E.gameover - 0.05, t1 = T.CUTS[10] + 0.7; if (t < t0 || t >= t1) return null;
-  const k = Math.min(1, (t - t0) / 0.25), fade = Math.min(1, (t1 - t) / 0.35);
-  return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.5 * k})`, opacity: fade}}>
-      <div style={{marginTop: -300, textAlign: 'center', transform: `scale(${1.5 - 0.5 * k})`}}>
-        <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 120, color: '#d8413a', textShadow: `8px 8px 0 ${INK}`, letterSpacing: 2}}>GAME OVER 💀</div>
-        <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 64, color: '#fff3df', textShadow: `6px 6px 0 ${INK}`, marginTop: 20}}>TELUR: 0 🥚</div>
-      </div>
+      <AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(20,10,30,0.22) 0px, rgba(20,10,30,0.22) 4px, rgba(0,0,0,0) 4px, rgba(0,0,0,0) 9px)', mixBlendMode: 'multiply'}} />
+      <AbsoluteFill style={{background: 'rgba(120,150,255,0.12)', transform: `translateX(${jit}px)`, mixBlendMode: 'screen'}} />
+      <div style={{position: 'absolute', left: 0, right: 0, top: bar, height: 70, background: 'rgba(255,255,255,0.18)'}} />
+      <div style={{position: 'absolute', left: 70, top: 150, fontFamily: '"JetBrains Mono", "Noto Color Emoji", monospace', fontWeight: 800, fontSize: 64, color: '#fffaf0', textShadow: `5px 5px 0 ${INK}`}}>⏪ 1 MINGGU SEBELUMNYA</div>
     </AbsoluteFill>
   );
 };
@@ -158,45 +124,55 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    // retro game sounds: start, coin, level up at every level change, hurt on each lost life, error, game over
-    [sy('chip_start'), 0.05, 0.22],
-    [sy('chip_coin'), E.modal + 0.15, 0.24],
-    ...[3, 4, 5, 6, 7].map((k) => [sy('chip_levelup'), C[k - 1] + 0.1, 0.24]),
-    ...LOSS(E).map((t) => [sy('chip_hurt'), t, 0.26]),
-    [sy('chip_error'), E.ribuan - 0.1, 0.24],
-    [sy('chip_gameover'), E.gameover - 0.05, 0.3],
-    [sy('chip_levelup'), E.tips, 0.18],
-    // 1-2 the mission
-    ['06-deep-cinematic-boom.wav', E.mustahil, 0.16],
-    [sy('clock_tick'), C[1], 0.08, C[2] - C[1]],
-    [sy('swish'), E.menit, 0.14],
-    // level intros
-    // 3 bakery
-    [sy('crowd_murmur'), C[2], 0.05, C[6] - C[2]],
-    [sy('sparkle'), E.wangi, 0.14],
-    [sy('footsteps_walk'), C[2], 0.14, Math.max(0.5, E.lapar + 0.2 - C[2])],
-    // 4 snack aisle
-    [sy('footsteps_walk'), C[3], 0.14, C[4] - C[3]],
-    [sy('slide_whistle_down'), E.tol, 0.14],
-    // 5 price
-    [sy('ka_ching'), E.label, 0.18],
-    [sy('boing'), E.otak, 0.14],
-    // 6 SPG
-    [sy('heart_pop'), E.senyum, 0.14],
-    [sy('ka_ching'), E.dua + 0.1, 0.18],
-    // 7-8 final boss
-    ['06-deep-cinematic-boom.wav', E.final, 0.2],
-    ['07-riser-build-up.wav', E.anak - 0.2, 0.1, 1.2],
-    [sy('slide_whistle_down'), E.nyawa, 0.16],
-    // 9-10 home, game over
-    [sy('footsteps_walk'), C[8], 0.14, 1.0],
-    [sy('paper_flutter'), C[8] + 0.3, 0.18],
-    [sy('uh_oh'), E.mana + 0.2, 0.12],
-    // 11 tips
-    ...['daftar', 'lapar2', 'rak'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
-    [sy('sparkle'), E.tips, 0.14],
+    // 1-2 the hook and the rewind
+    [sy('birds'), 0, 0.05, C[2]],
+    [sy('latch'), E.koper + 0.2, 0.3],
+    [sy('ka_ching'), E.menjual, 0.2],
+    ['06-deep-cinematic-boom.wav', E.eiffel1, 0.16],
+    ['04-soft-ui-pop.mp3', E.bagaimana, 0.16],
+    [sy('tape_rewind'), E.mundur - 0.05, 0.3],
+    // 3-4 the newspaper and the idea
+    [sy('crowd_murmur'), C[2], 0.05, C[4] - C[2]],
+    [sy('birds'), C[2], 0.05, C[4] - C[2]],
+    [sy('page_flips'), E.koran - 0.1, 0.18, 0.6],
+    [sy('uh_oh'), E.mahal, 0.1],
+    [sy('sparkle'), E.berbinar, 0.2],
+    [sy('slide_whistle_up'), E.kujual, 0.12],
+    // 5 the forgery, the disguise, the invitation
+    [sy('clock_tick'), C[4], 0.08, E.mengundang - C[4]],
+    [sy('stamp'), E.palsu + 0.4, 0.3],
+    [sy('puff'), E.menyamar, 0.25],
+    [sy('footsteps_walk'), E.mengundang, 0.14, 2.4],
+    [sy('crowd_murmur'), E.mengundang, 0.05, E.istri - E.mengundang],
+    // 6 the pitch
+    ['03-subtle-digital-impact.mp3', E.dibongkar, 0.16],
+    ['06-deep-cinematic-boom.wav', E.rahasia, 0.18],
+    [sy('swish'), E.jangan, 0.14],
+    // 7-8 Poisson, his wife, the plan wobbles
+    [sy('sparkle'), E.termakan, 0.16],
+    ['04-soft-ui-pop.mp3', E.poisson - 0.05, 0.2],
+    [sy('uh_oh'), E.curiga, 0.12],
+    ['07-riser-build-up.wav', E.kalauIni, 0.08, 1.8],
+    ['02-error-denied-buzz.wav', E.hancur, 0.12],
+    // 9 the bribe
+    ['07-riser-build-up.wav', E.jenius - 0.3, 0.1, 1.0],
+    [sy('coin_drop'), E.sogokan, 0.2],
+    [sy('tada'), E.asli, 0.16],
+    // 10 paid, the escape, the shame
+    [sy('latch'), E.dibayar, 0.3],
+    [sy('ka_ching'), E.dibayar + 0.15, 0.2],
+    [sy('steam_whistle'), E.kabur - 0.1, 0.18],
+    [sy('footsteps_run'), E.kabur - 0.2, 0.16, 1.2],
+    [sy('train_chuff'), E.luar + 0.3, 0.2, C[10] - E.luar],
+    [sy('slide_whistle_down'), E.malu, 0.14],
+    // 11 the second sale
+    [sy('birds'), C[10], 0.05, E.polisi2 - C[10]],
+    [sy('boing'), E.lagi, 0.14],
+    [sy('whistle_prit'), E.polisi2 - 0.05, 0.25],
+    [sy('footsteps_run'), E.nyaris - 0.1, 0.16, 1.4],
+    [sy('thud'), E.tertangkap, 0.16],
     // 12 the question
-    ['pop-bubble-sound-effect.mp3', E.levelBerapa - 0.4, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.target - 0.3, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -252,9 +228,7 @@ export const Story = ({lang, captions = true}) => {
       </ThreeCanvas>
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
-      <Titles T={T} t={t} />
-      <Retro T={T} t={t} />
-      <GameOver T={T} E={EVt} t={t} />
+      <Rewind T={T} E={EVt} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
@@ -267,10 +241,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL! 💀', bot: 'KAMU KALAH DI\nLEVEL BERAPA? 🎮'},
-  en: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL! 💀', bot: 'KAMU KALAH DI\nLEVEL BERAPA? 🎮'},
+  id: {top: 'PRIA INI MENJUAL\nMENARA EIFFEL 💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
+  en: {top: 'PRIA INI MENJUAL\nMENARA EIFFEL 💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.coklat2 + 0.6, pos: [-0.3, 1.5, 0.5], look: [-0.45, 1.35, -2.2]});
+const THUMB = (EVt) => ({t: EVt.pria + 0.6, pos: [0, 1.3, 1.5], look: [0.1, 2.3, -6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

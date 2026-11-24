@@ -10,52 +10,76 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: one or two framings per shot, slow short pushes, no dutch angles.
-  {shot: 1, loc: 'home', lift: false, move: 'the mission: papa, mama and kid, signs pop', keys: [
-    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.85, -2.4]},
-    {at: 'end', pos: [0, 1.75, 0.6], look: [0, 1.85, -2.4]}]},
-  {shot: 2, loc: 'home', lift: false, move: 'two-shot papa and mama', keys: [
-    {at: 'start', pos: [0.15, 1.65, 0.4], look: [0.15, 1.6, -2.4]},
-    {at: 'end', pos: [0.15, 1.65, 0.25], look: [0.15, 1.6, -2.4]}]},
-  {shot: 3, loc: 'bakery', lift: false, move: 'wide: he walks in past the bakery', keys: [
-    {at: 'start', pos: [-0.8, 1.7, 1.2], look: [-0.4, 1.5, -2.6]},
-    {at: 'end', pos: [-0.7, 1.7, 0.9], look: [-0.4, 1.5, -2.6]}]},
-  {shot: 3, from: 'satuRoti', loc: 'bakery', lift: false, move: 'close: one bread for energy', keys: [
-    {at: 'start', pos: [-0.4, 1.65, -0.6], look: [-0.45, 1.6, -2.0]},
-    {at: 'end', pos: [-0.4, 1.65, -0.7], look: [-0.45, 1.6, -2.0]}]},
-  {shot: 4, loc: 'aisle', lift: false, move: 'down the long snack aisle', keys: [
-    {at: 'start', pos: [-1.1, 1.65, 0.35], look: [1.3, 1.5, -1.9]},
-    {at: 'end', pos: [-0.6, 1.65, 0.3], look: [3.6, 1.5, -1.9]}]},
-  {shot: 5, loc: 'price', lift: false, move: 'papa and the price tag', keys: [
-    {at: 'start', pos: [0, 1.75, 0.8], look: [0, 1.85, -2.4]},
-    {at: 'end', pos: [0, 1.75, 0.6], look: [0, 1.85, -2.4]}]},
-  {shot: 5, from: 'padahal', loc: 'price', lift: false, move: 'close: almost fifty thousand!', keys: [
-    {at: 'start', pos: [-0.2, 1.9, -0.3], look: [-0.2, 2.0, -2.0]},
-    {at: 'end', pos: [-0.2, 1.9, -0.4], look: [-0.2, 2.0, -2.0]}]},
-  {shot: 6, loc: 'spg', lift: false, move: 'the sausage-sample booth', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.7], look: [0.1, 1.5, -2.6]},
-    {at: 'end', pos: [0.1, 1.6, 0.5], look: [0.1, 1.5, -2.6]}]},
-  {shot: 7, loc: 'kasir', lift: false, move: 'wide: checkout and the candy rack', keys: [
-    {at: 'start', pos: [-0.2, 1.6, 1.0], look: [-0.2, 1.4, -2.6]},
-    {at: 'end', pos: [-0.2, 1.6, 0.8], look: [-0.2, 1.4, -2.6]}]},
-  {shot: 7, from: 'anak', loc: 'kasir', lift: false, move: 'close: the kid and papa', keys: [
-    {at: 'start', pos: [-0.6, 1.4, -0.2], look: [-0.65, 1.35, -2.0]},
-    {at: 'end', pos: [-0.6, 1.4, -0.3], look: [-0.65, 1.35, -2.0]}]},
-  {shot: 8, loc: 'kasir', lift: false, move: 'close: no lives left', keys: [
-    {at: 'start', pos: [-0.35, 1.6, -0.4], look: [-0.35, 1.55, -2.0]},
-    {at: 'end', pos: [-0.35, 1.6, -0.5], look: [-0.35, 1.55, -2.0]}]},
-  {shot: 9, loc: 'home', lift: false, move: 'home with five bags', keys: [
-    {at: 'start', pos: [0.1, 1.6, 1.0], look: [0.1, 1.5, -2.4]},
-    {at: 'end', pos: [0.1, 1.6, 0.8], look: [0.1, 1.5, -2.4]}]},
-  {shot: 10, loc: 'home', lift: false, move: 'close: game over', keys: [
-    {at: 'start', pos: [-0.45, 1.6, -0.6], look: [-0.45, 1.55, -2.3]},
-    {at: 'end', pos: [-0.45, 1.6, -0.7], look: [-0.45, 1.55, -2.3]}]},
-  {shot: 11, loc: 'home', lift: false, move: 'the shopping list and the tips', keys: [
-    {at: 'start', pos: [2.1, 1.75, -0.6], look: [2.1, 1.45, -2.5]},
-    {at: 'end', pos: [2.1, 1.75, -0.75], look: [2.1, 1.45, -2.5]}]},
-  {shot: 12, loc: 'home', lift: false, move: 'the family and the question', keys: [
-    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.9, -2.4]},
-    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.9, -2.4]}]},
+  // Calm camera: one to three framings per shot, slow short pushes, no dutch angles.
+  {shot: 1, loc: 'tower', lift: false, move: 'low wide: the suitcase changes hands under the tower', keys: [
+    {at: 'start', pos: [0, 1.25, 1.9], look: [0, 2.9, -7]},
+    {at: 'end', pos: [0, 1.25, 1.6], look: [0, 2.9, -7]}]},
+  {shot: 1, from: 'pria', loc: 'tower', lift: false, move: 'push to the man in the suit', keys: [
+    {at: 'start', pos: [0.3, 1.55, 0.4], look: [0.4, 1.75, -2.2]},
+    {at: 'end', pos: [0.32, 1.55, 0.2], look: [0.42, 1.75, -2.2]}]},
+  {shot: 2, loc: 'tower', lift: false, move: 'close: Lustig, then the rewind', keys: [
+    {at: 'start', pos: [0.35, 1.68, -0.4], look: [0.45, 1.7, -2.2]},
+    {at: 'mundur', pos: [0.2, 1.5, 0.6], look: [0.1, 2.2, -4]},
+    {at: 'end', pos: [0, 1.35, 1.4], look: [0, 2.6, -6]}]},
+  {shot: 3, loc: 'cafe', lift: false, move: 'Paris street, the tower far away', keys: [
+    {at: 'start', pos: [0.2, 1.7, 3.4], look: [0.2, 2.6, -12]},
+    {at: 'victor', pos: [-0.1, 1.6, 1.0], look: [-0.2, 1.7, -3]},
+    {at: 'end', pos: [-0.15, 1.6, 0.8], look: [-0.25, 1.7, -3]}]},
+  {shot: 3, from: 'koran', loc: 'cafe', lift: false, move: 'macro: the headline', keys: [
+    {at: 'start', pos: [-0.38, 1.3, -1.15], look: [-0.42, 1.2, -2.1]},
+    {at: 'end', pos: [-0.38, 1.3, -1.25], look: [-0.42, 1.2, -2.1]}]},
+  {shot: 4, loc: 'cafe', lift: false, move: 'close: his eyes light up', keys: [
+    {at: 'start', pos: [-0.38, 1.7, -1.0], look: [-0.4, 1.68, -2.45]},
+    {at: 'end', pos: [-0.38, 1.7, -1.15], look: [-0.4, 1.68, -2.45]}]},
+  {shot: 5, loc: 'office', lift: false, move: 'macro: the forged letter gets its stamp', keys: [
+    {at: 'start', pos: [0.42, 1.45, -1.75], look: [0.42, 0.82, -2.7]},
+    {at: 'end', pos: [0.42, 1.42, -1.9], look: [0.42, 0.82, -2.7]}]},
+  {shot: 5, from: 'menyamar', loc: 'office', lift: false, move: 'the disguise', keys: [
+    {at: 'start', pos: [-0.1, 1.6, 0.3], look: [-0.25, 1.35, -2.7]},
+    {at: 'end', pos: [-0.12, 1.6, 0.15], look: [-0.27, 1.38, -2.7]}]},
+  {shot: 5, from: 'mengundang', loc: 'hotel', lift: false, move: 'wide: the grand hotel, five dealers arrive', keys: [
+    {at: 'start', pos: [0.4, 1.75, 2.5], look: [0.4, 1.6, -3.2]},
+    {at: 'end', pos: [0.3, 1.75, 2.2], look: [0.3, 1.6, -3.2]}]},
+  {shot: 6, loc: 'hotel', lift: false, move: 'Lustig presents the plan to the dealers', keys: [
+    {at: 'start', pos: [0.1, 1.75, 1.9], look: [0.1, 1.55, -3.2]},
+    {at: 'end', pos: [0.0, 1.75, 1.65], look: [0.0, 1.55, -3.2]}]},
+  {shot: 6, from: 'rahasia', loc: 'hotel', lift: false, move: 'close: state secret', keys: [
+    {at: 'start', pos: [-1.2, 1.75, -0.8], look: [-1.4, 1.85, -2.6]},
+    {at: 'end', pos: [-1.2, 1.75, -0.9], look: [-1.4, 1.85, -2.6]}]},
+  {shot: 7, loc: 'hotel', lift: false, move: 'close: Poisson takes the bait', keys: [
+    {at: 'start', pos: [1.2, 1.72, -0.8], look: [1.2, 1.85, -3.9]},
+    {at: 'end', pos: [1.2, 1.72, -1.0], look: [1.2, 1.85, -3.9]}]},
+  {shot: 7, from: 'istri', loc: 'home', lift: false, move: 'Poisson at home with his wife', keys: [
+    {at: 'start', pos: [0.1, 1.65, 0.9], look: [0.1, 1.6, -2.5]},
+    {at: 'end', pos: [0.1, 1.65, 0.7], look: [0.1, 1.6, -2.5]}]},
+  {shot: 8, loc: 'home', lift: false, move: 'close: the wife asks', keys: [
+    {at: 'start', pos: [0.45, 1.7, -0.7], look: [0.6, 1.68, -2.5]},
+    {at: 'end', pos: [0.45, 1.7, -0.8], look: [0.6, 1.68, -2.5]}]},
+  {shot: 8, from: 'rencana', loc: 'hotel', lift: false, move: 'close: Lustig sweats', keys: [
+    {at: 'start', pos: [3.25, 1.72, -0.8], look: [3.25, 1.75, -2.4]},
+    {at: 'end', pos: [3.25, 1.72, -0.9], look: [3.25, 1.75, -2.4]}]},
+  {shot: 9, loc: 'hotel', lift: false, move: 'two-shot by the window: the bribe', keys: [
+    {at: 'start', pos: [3.75, 1.7, 0.6], look: [3.75, 1.6, -2.4]},
+    {at: 'end', pos: [3.75, 1.7, 0.35], look: [3.75, 1.6, -2.4]}]},
+  {shot: 9, from: 'oh', loc: 'hotel', lift: false, move: 'close: Poisson is relieved', keys: [
+    {at: 'start', pos: [4.1, 1.72, -0.8], look: [4.2, 1.72, -2.4]},
+    {at: 'end', pos: [4.1, 1.72, -0.9], look: [4.2, 1.72, -2.4]}]},
+  {shot: 10, loc: 'tower', lift: false, move: 'the money is paid (back to the hook)', keys: [
+    {at: 'start', pos: [0, 1.5, 1.0], look: [0, 1.6, -2.2]},
+    {at: 'end', pos: [0, 1.5, 0.85], look: [0, 1.6, -2.2]}]},
+  {shot: 10, from: 'kabur', loc: 'station', lift: false, move: 'he runs for the train', keys: [
+    {at: 'start', pos: [-1.4, 1.6, 1.4], look: [-1.0, 1.45, -3.0]},
+    {at: 'end', pos: [-0.5, 1.6, 1.2], look: [0.0, 1.5, -3.0]}]},
+  {shot: 10, from: 'danPoisson', loc: 'police', lift: false, move: 'Poisson at the police door', keys: [
+    {at: 'start', pos: [-0.6, 1.65, 2.4], look: [-0.4, 1.7, -3.2]},
+    {at: 'end', pos: [-0.6, 1.65, 2.1], look: [-0.4, 1.7, -3.2]}]},
+  {shot: 11, loc: 'tower', lift: false, move: 'back in Paris: a new buyer, then the police', keys: [
+    {at: 'start', pos: [0, 1.45, 1.1], look: [0, 2.3, -6]},
+    {at: 'korban', pos: [0.5, 1.55, 1.7], look: [0.3, 1.7, -3]},
+    {at: 'end', pos: [0.3, 1.55, 1.9], look: [-0.1, 1.7, -3]}]},
+  {shot: 12, loc: 'tower', lift: false, move: 'Lustig and the question, sunset', keys: [
+    {at: 'start', pos: [0, 1.45, 0.95], look: [0, 2.6, -7]},
+    {at: 'end', pos: [0, 1.5, 0.65], look: [0, 2.6, -7]}]},
 ];
 
 export function warpU(T, t) {

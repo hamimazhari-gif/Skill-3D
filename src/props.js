@@ -1533,3 +1533,186 @@ export function candyRack() {
   for (let i = 0; i < 5; i++) { const st = cyl(0.006, 0.006, 0.22, '#fbf6ea', {hull: 0}); at(st, -0.3 + i * 0.15, 1.2, 0.05); g.add(st); const l = ball(0.05, ['#e0626e', '#f2d24a', '#7fc4e8', '#7fa35a', '#e8823a'][i], {sz: 0.4, hull: 0.005}); at(l, -0.3 + i * 0.15, 1.45, 0.05); g.add(l); }
   return g;
 }
+
+// ---------- "Menjual Menara Eiffel" (Paris 1925) ----------
+// Lattice texture for iron girders: bronze base with darker cross bracing; `alpha` cuts holes between the bars.
+function latticeTex(o = {}) {
+  const c = canvas(128, 256), x = c.getContext('2d');
+  const base = o.color || '#8a6a50', dark = o.dark || '#4a3428';
+  if (!o.alpha) { x.fillStyle = base; x.fillRect(0, 0, 128, 256); }
+  x.strokeStyle = o.alpha ? base : dark; x.lineWidth = o.alpha ? 9 : 6;
+  for (let j = 0; j < 4; j++) { const y = j * 64; x.beginPath(); x.moveTo(0, y); x.lineTo(128, y + 64); x.moveTo(128, y); x.lineTo(0, y + 64); x.stroke(); }
+  x.lineWidth = o.alpha ? 12 : 8; x.strokeStyle = o.alpha ? base : shade(base, -0.25);
+  x.strokeRect(0, 0, 128, 256); for (let j = 1; j < 4; j++) { x.beginPath(); x.moveTo(0, j * 64); x.lineTo(128, j * 64); x.stroke(); }
+  if (o.alpha) { x.globalCompositeOperation = 'destination-over'; x.fillStyle = 'rgba(0,0,0,0)'; }
+  const t = texFrom(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
+}
+// The Eiffel Tower (stylised, about h metres tall): four lattice legs, the big arches, two platforms, the tapering
+// upper section and the top deck with its spire.
+export function eiffelTower(h = 30, o = {}) {
+  const g = new THREE.Group(); const col = o.color || '#8a6a50';
+  const solid = (rep) => { const t = latticeTex({color: col}); t.repeat.set(1, rep); return new THREE.MeshToonMaterial({map: t, gradientMap: gradientMap()}); };
+  const open = (rep) => { const t = latticeTex({color: col, alpha: true}); t.repeat.set(2, rep); return new THREE.MeshToonMaterial({map: t, gradientMap: gradientMap(), transparent: true, alphaTest: 0.5, side: THREE.DoubleSide}); };
+  const beam = (a, b, r0, r1, mat) => { // square lattice beam from a to b
+    const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b), L = A.distanceTo(B);
+    const geo = new THREE.CylinderGeometry(r1, r0, L, 4, 1); geo.rotateY(Math.PI / 4);
+    const m = ink(geo, mat, {hull: Math.max(0.03, h * 0.0016), edgeAngle: 30});
+    m.position.copy(A).add(B).multiplyScalar(0.5);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), B.clone().sub(A).normalize()); g.add(m); return m;
+  };
+  const s0 = h * 0.19, h1 = h * 0.17, s1 = h * 0.105, h2 = h * 0.36, s2 = h * 0.06, h3 = h * 0.86, s3 = h * 0.014;
+  const C = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+  for (const [sx, sz] of C) {
+    beam([sx * s0, 0, sz * s0], [sx * s1, h1, sz * s1], h * 0.05, h * 0.032, solid(4));
+    beam([sx * s1 * 0.92, h1, sz * s1 * 0.92], [sx * s2, h2, sz * s2], h * 0.03, h * 0.02, solid(4));
+  }
+  // the big arches between the legs, just under the first platform
+  const archMat = toon(shade(col, -0.05), {wear: false});
+  for (let i = 0; i < 4; i++) {
+    const c = h1 * 0.22, rx = s0 - (s0 - s1) * c / h1 - h * 0.02, ry = h1 * 0.93 - c;
+    const geo = new THREE.TorusGeometry(rx, h * 0.011, 6, 28, Math.PI); geo.scale(1, ry / rx, 1);
+    const a = ink(geo, archMat, {hull: 0.03, edges: false}); a.position.y = c; a.rotation.y = i * Math.PI / 2;
+    a.translateZ(s0 - (s0 - s1) * 0.45); g.add(a);
+  }
+  // platforms with a railing band
+  const deck = (y, half, th) => {
+    const d = box(half * 2, th, half * 2, toon(shade(col, -0.1), {paint: {seed: 71}})); at(d, 0, y - th / 2, 0); g.add(d);
+    const rail = box(half * 2 + 0.1, th * 0.6, half * 2 + 0.1, solid(1)); at(rail, 0, y + th * 0.5, 0); g.add(rail);
+  };
+  deck(h1, s1 + h * 0.025, h * 0.03); deck(h2, s2 + h * 0.022, h * 0.024);
+  // upper section: an open lattice shaft that tapers to the top deck
+  const up = new THREE.CylinderGeometry(s3 * 1.414, s2 * 1.414, h3 - h2, 4, 1, true); up.rotateY(Math.PI / 4); up.translate(0, (h2 + h3) / 2, 0);
+  const upM = new THREE.Mesh(up, open(10)); upM.castShadow = true; g.add(upM);
+  for (const [sx, sz] of C) beam([sx * s2, h2, sz * s2], [sx * s3, h3, sz * s3], h * 0.012, h * 0.006, solid(8));
+  const top = box(s3 * 2 + h * 0.03, h * 0.03, s3 * 2 + h * 0.03, toon(shade(col, -0.1))); at(top, 0, h3, 0); g.add(top);
+  const cap = cyl(h * 0.01, h * 0.016, h * 0.04, shade(col, -0.15)); at(cap, 0, h3 + h * 0.03, 0); g.add(cap);
+  const spire = cyl(h * 0.002, h * 0.005, h - h3 - h * 0.07, '#5a4a40', {hull: 0.02}); at(spire, 0, h3 + h * 0.07, 0); g.add(spire);
+  return g;
+}
+
+// A 1925 newspaper held open: masthead, a big headline and a smaller line, columns of grey text.
+export function newspaper(head, sub, o = {}) {
+  const c = canvas(768, 540), x = c.getContext('2d');
+  x.fillStyle = '#efe6d0'; x.fillRect(0, 0, 768, 540);
+  x.fillStyle = INK; x.textAlign = 'center'; x.font = '900 54px "Inter Display"'; x.fillText(o.mast || 'LE JOURNAL', 384, 66);
+  x.fillRect(30, 84, 708, 6); x.font = '700 22px "Inter Display"'; x.fillText(o.date || 'PARIS — 1925', 384, 116); x.fillRect(30, 128, 708, 3);
+  x.fillStyle = '#b8323a'; x.font = '900 64px "Inter Display"';
+  const words = head.split(' '); let line = '', y = 200; const lines = [];
+  for (const w of words) { if (x.measureText(line + w).width > 680) { lines.push(line.trim()); line = ''; } line += w + ' '; } lines.push(line.trim());
+  lines.forEach((l) => { x.fillText(l, 384, y); y += 70; });
+  x.fillStyle = INK; x.font = '800 32px "Inter Display"'; x.fillText(sub, 384, y + 6);
+  x.fillStyle = 'rgba(53,31,34,0.35)'; for (let col = 0; col < 3; col++) for (let i = 0; i < 6; i++) x.fillRect(40 + col * 236, y + 40 + i * 22, 200 - (i % 3) * 30, 8);
+  // tower sketch in the corner
+  x.strokeStyle = INK; x.lineWidth = 4; x.beginPath(); x.moveTo(660, 520); x.lineTo(700, 400); x.lineTo(740, 520); x.moveTo(672, 480); x.lineTo(728, 480); x.stroke();
+  const tex = texFrom(c);
+  const w = o.w || 0.62, hgt = w * 540 / 768;
+  const g = new THREE.Group();
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, hgt), new THREE.MeshToonMaterial({map: tex, gradientMap: gradientMap(), side: THREE.DoubleSide}));
+  g.add(m); const hull = new THREE.Mesh(new THREE.PlaneGeometry(w + 0.02, hgt + 0.02), new THREE.MeshBasicMaterial({color: INK, side: THREE.DoubleSide})); hull.position.z = -0.003; g.add(hull);
+  return g;
+}
+
+// Green Paris newspaper kiosk with a domed roof, a sign band and stacked papers.
+export function kiosk(label = 'KORAN') {
+  const g = new THREE.Group();
+  const body = cyl(0.75, 0.75, 2.3, toon('#3f6a52', {paint: {seed: 77, stains: 10}}), {seg: 10}); g.add(body);
+  const band = cyl(0.8, 0.8, 0.4, '#2f5040', {seg: 10}); at(band, 0, 2.3, 0); g.add(band);
+  const dome = ball(0.82, '#2f5040', {sy: 0.55, seg: 10}); at(dome, 0, 2.7, 0); g.add(dome);
+  const fin = cone(0.08, 0.4, '#e8c35a'); at(fin, 0, 3.1, 0); g.add(fin);
+  const s = sign(label, 1.1, 0.3, {bg: '#e8c35a', fg: '#2f3a30', frame: '#2f5040', depth: 0.03}); at(s, 0, 2.5, 0.8); g.add(s);
+  for (let i = 0; i < 6; i++) { const p = box(0.36, 0.03, 0.26, i % 2 ? '#efe6d0' : '#e4d8bc', {hull: 0.006}); at(p, -0.25 + (i % 2) * 0.5, 0.9 + Math.floor(i / 2) * 0.035, 0.85, (i - 2) * 0.05); g.add(p); }
+  const shelf = box(1.2, 0.08, 0.4, '#2f5040'); at(shelf, 0, 0.82, 0.8); g.add(shelf);
+  return g;
+}
+
+// Small round cafe table with two bentwood chairs.
+export function cafeTable(o = {}) {
+  const g = new THREE.Group();
+  const top = cyl(0.36, 0.36, 0.04, o.top || '#e8e0cc'); at(top, 0, 0.74, 0); g.add(top);
+  g.add(cyl(0.03, 0.03, 0.74, '#3a3a40', {hull: 0.01}));
+  const foot = cyl(0.2, 0.22, 0.03, '#3a3a40'); g.add(foot);
+  for (const s of [-1, 1]) {
+    const ch = new THREE.Group(); const seat = cyl(0.2, 0.2, 0.04, '#7a4a32'); at(seat, 0, 0.46, 0); ch.add(seat);
+    for (const k of [[0.13, 0.13], [-0.13, 0.13], [0.13, -0.13], [-0.13, -0.13]]) { const l = cyl(0.018, 0.018, 0.46, '#5a3a2a', {hull: 0.008}); at(l, k[0], 0, k[1]); ch.add(l); }
+    const back = box(0.38, 0.4, 0.04, '#7a4a32', {hull: 0.01}); at(back, 0, 0.48, -0.18); ch.add(back);
+    at(ch, s * 0.55, 0, 0, s * -Math.PI / 2); g.add(ch);
+  }
+  if (o.cup !== false) { const cup = cyl(0.05, 0.04, 0.08, '#fbf6ea', {hull: 0.006}); at(cup, 0.1, 0.76, 0.05); g.add(cup); }
+  return g;
+}
+
+// Striped shop awning (pull-out canvas) with a valance.
+export function awning(w = 3, o = {}) {
+  const g = new THREE.Group();
+  const tex = paintTex(o.color || '#b8323a', {stripes: {n: 12, color: o.stripe || '#f3ece0'}, seed: 5});
+  const m = box(w, 0.06, 1.2, toon(tex)); m.rotation.x = 0.35; at(m, 0, 0, 0.55); g.add(m);
+  const val = box(w, 0.22, 0.04, toon(tex)); at(val, 0, -0.42, 1.12); g.add(val);
+  return g;
+}
+
+// Crystal chandelier: a gold ring with candle bulbs and a warm glow.
+export function chandelier(o = {}) {
+  const g = new THREE.Group();
+  const rod = cyl(0.015, 0.015, 0.8, '#c9982f', {hull: 0.006}); at(rod, 0, -0.8, 0); g.add(rod);
+  const ring = new THREE.TorusGeometry(0.45, 0.03, 6, 24); ring.rotateX(Math.PI / 2);
+  const rm = ink(ring, toon('#e8c04a', {wear: false}), {hull: 0.01, edges: false}); rm.position.y = -0.8; g.add(rm);
+  const bowl = ball(0.18, '#e8c04a', {sy: 0.7}); at(bowl, 0, -0.85, 0); g.add(bowl);
+  for (let i = 0; i < 8; i++) {
+    const a = i / 8 * Math.PI * 2, px = Math.cos(a) * 0.45, pz = Math.sin(a) * 0.45;
+    const cd = cyl(0.025, 0.025, 0.12, '#fbf6ea', {hull: 0.005}); at(cd, px, -0.78, pz); g.add(cd);
+    const fl = ball(0.035, new THREE.MeshBasicMaterial({color: '#ffe29a'}), {hull: 0}); at(fl, px, -0.63, pz); g.add(fl);
+    const cr = ball(0.03, '#dff0fa', {sy: 1.8, hull: 0.004}); at(cr, px * 0.8, -0.98, pz * 0.8); g.add(cr);
+  }
+  const glow = glowSprite('#ffd890', 1.8); glow.position.y = -0.7; g.add(glow);
+  return g;
+}
+
+// Painter's easel with a drawing board (custom canvas texture via `tex`, or a sign).
+export function easel(board) {
+  const g = new THREE.Group();
+  for (const s of [-1, 1]) { const l = box(0.05, 1.9, 0.05, '#7a5236', {hull: 0.01}); l.rotation.z = s * 0.12; at(l, s * 0.3, 0, 0, 0, 0, s * 0.12); g.add(l); }
+  const back = box(0.05, 1.8, 0.05, '#7a5236', {hull: 0.01}); at(back, 0, 0, -0.35, 0, -0.2); g.add(back);
+  const ledge = box(0.9, 0.05, 0.12, '#7a5236'); at(ledge, 0, 0.75, 0.06); g.add(ledge);
+  if (board) { at(board, 0, 1.22, 0.06, 0, -0.08); g.add(board); }
+  return g;
+}
+
+// A drawing of the tower with "for scrap" words, for the easel (returns a sign-like board).
+export function towerPlan(title, sub) {
+  const c = canvas(768, 900), x = c.getContext('2d');
+  x.fillStyle = '#f6efdc'; x.fillRect(0, 0, 768, 900);
+  x.strokeStyle = '#2f4f7a'; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(200, 700); x.quadraticCurveTo(330, 520, 370, 160); x.lineTo(398, 160); x.quadraticCurveTo(438, 520, 568, 700);
+  x.moveTo(250, 640); x.lineTo(518, 640); x.moveTo(318, 470); x.lineTo(450, 470); x.moveTo(384, 160); x.lineTo(384, 90); x.stroke();
+  x.beginPath(); x.ellipse(384, 700, 120, 80, 0, Math.PI, 2 * Math.PI); x.stroke();
+  x.lineWidth = 3; for (let i = 0; i < 10; i++) { x.beginPath(); x.moveTo(230 + i * 14, 690 - i * 50); x.lineTo(538 - i * 14, 690 - i * 50); x.stroke(); }
+  x.fillStyle = '#b8323a'; x.textAlign = 'center'; x.font = '900 86px "Inter Display"'; x.fillText(title, 384, 800);
+  x.fillStyle = INK; x.font = '800 44px "Inter Display"'; x.fillText(sub, 384, 862);
+  x.strokeStyle = '#b8323a'; x.lineWidth = 14; x.beginPath(); x.moveTo(170, 120); x.lineTo(600, 600); x.stroke();
+  const tex = texFrom(c);
+  const geo = new THREE.BoxGeometry(0.8, 0.94, 0.03); const side = toon('#c9a27a'); const front = toon(tex);
+  return ink(geo, [side, side, side, side, front, side], {hull: 0.012});
+}
+
+// Rubber stamp (handle + block) and an ink pad.
+export function rubberStamp() {
+  const g = new THREE.Group();
+  const block = box(0.12, 0.05, 0.08, '#7a4a32', {hull: 0.006}); g.add(block);
+  const red = box(0.12, 0.012, 0.08, '#b8323a', {hull: 0}); at(red, 0, -0.012, 0); g.add(red);
+  const st = cyl(0.015, 0.015, 0.08, '#5a3a2a', {hull: 0.005}); at(st, 0, 0.05, 0); g.add(st);
+  const knob = ball(0.035, '#3a2a26', {hull: 0.005}); at(knob, 0, 0.14, 0); g.add(knob);
+  return g;
+}
+
+// Old train carriage with windows, a door and a destination board; `loco` adds a steam engine in front.
+export function trainCar(label, o = {}) {
+  const g = new THREE.Group(); const col = o.color || '#3f5a4a';
+  const body = box(6, 2.1, 2.4, toon(col, {paint: {seed: 88, planks: 6, stains: 12}})); at(body, 0, 0.6, 0); g.add(body);
+  const roof = cyl(1.3, 1.3, 6.1, shade(col, -0.35), {seg: 16}); roof.scale.set(0.35, 1, 1); at(roof, 0, 2.62, 0, 0, 0, Math.PI / 2); g.add(roof);
+  for (let i = 0; i < 5; i++) { if (i === 2) continue; const w = box(0.7, 0.62, 0.04, new THREE.MeshBasicMaterial({color: '#ffe2a8'}), {hull: 0.01}); at(w, -2.4 + i * 1.2, 1.55, 1.21); g.add(w); }
+  const door = box(0.8, 1.7, 0.05, toon(shade(col, -0.2))); at(door, 0, 0.62, 1.22); g.add(door);
+  for (const s of [-2.2, 2.2]) for (const z of [-0.9, 0.9]) { const wh = cyl(0.45, 0.45, 0.12, '#2b2b33', {seg: 16}); wh.rotation.x = Math.PI / 2; at(wh, s, 0.45, z, 0, Math.PI / 2); g.add(wh); }
+  const step = box(0.9, 0.12, 0.4, '#3a3a40'); at(step, 0, 0.45, 1.35); g.add(step);
+  if (label) { const s = sign(label, 2.4, 0.42, {bg: '#f3ece0', fg: '#2f3a30', frame: '#2f3a30', depth: 0.04}); at(s, 0, 2.35, 1.25); g.add(s); }
+  return g;
+}

@@ -296,3 +296,22 @@ save('chip_hurt.wav', chip([660, 520, 400, 300], 0.05, 0.5))
 save('chip_start.wav', chip([392, 523, 659, 784, 659, 784], 0.08, 0.25))
 # error blip (brain error)
 save('chip_error.wav', chip([220, 180, 220, 180], 0.06, 0.5))
+
+# ===== "Menjual Menara Eiffel" =====
+# tape rewind: motor whirr with a rising squeal and chattering garble
+d = 1.4; t = tl(d)
+whirr = np.sin(2 * np.pi * np.cumsum(120 + 80 * t / d) / SR) * 0.4 + bp(noise(d), 300, 2500) * 0.25
+squeal = sweep(900, 3200, d) * 0.25 * (0.6 + 0.4 * np.sin(2 * np.pi * 23 * t))
+garble = bp(noise(d), 600, 3000) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 17 * t))) * 0.3
+x = (whirr + squeal + garble) * np.minimum(1, t / 0.05) * np.minimum(1, (d - t) / 0.15)
+save('tape_rewind.wav', x)
+# suitcase latches: two metal clicks
+buf = np.zeros(int(0.5 * SR))
+for at in (0.02, 0.2):
+    tt = tl(0.12); place(buf, (bp(noise(0.12), 2000, 8000) * 0.6 + np.sin(2 * np.pi * 2400 * tt) * 0.4) * env(len(tt), 0.0005, 0.012), at)
+save('latch.wav', buf)
+# steam train chuffs (4 s)
+buf = np.zeros(int(4.0 * SR)); at = 0.0; k = 0
+while at < 3.7:
+    place(buf, bp(noise(0.25), 200, 2500) * env(int(0.25 * SR), 0.005, 0.07) * (1.0 if k % 2 else 0.7), at); at += 0.32 - min(0.12, k * 0.01); k += 1
+save('train_chuff.wav', buf)
