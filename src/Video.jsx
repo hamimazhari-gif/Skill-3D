@@ -141,10 +141,11 @@ const Retro = ({T, t}) => {
   );
 };
 const GameOver = ({T, E, t}) => {
-  const t0 = E.gameover - 0.05; if (t < t0 || t >= T.CUTS[10]) return null;
-  const k = Math.min(1, (t - t0) / 0.25);
+  // holds a little past the cut into the tips scene, then fades, so the words can be read
+  const t0 = E.gameover - 0.05, t1 = T.CUTS[10] + 0.7; if (t < t0 || t >= t1) return null;
+  const k = Math.min(1, (t - t0) / 0.25), fade = Math.min(1, (t1 - t) / 0.35);
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.5 * k})`}}>
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.5 * k})`, opacity: fade}}>
       <div style={{marginTop: -300, textAlign: 'center', transform: `scale(${1.5 - 0.5 * k})`}}>
         <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 120, color: '#d8413a', textShadow: `8px 8px 0 ${INK}`, letterSpacing: 2}}>GAME OVER 💀</div>
         <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 64, color: '#fff3df', textShadow: `6px 6px 0 ${INK}`, marginTop: 20}}>TELUR: 0 🥚</div>
@@ -266,8 +267,8 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL!', bot: 'KAMU KALAH DI LEVEL BERAPA?'},
-  en: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL!', bot: 'KAMU KALAH DI LEVEL BERAPA?'},
+  id: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL! 💀', bot: 'KAMU KALAH DI\nLEVEL BERAPA? 🎮'},
+  en: {top: 'MISI: BELI TELUR 🥚', mid: 'KESULITAN: MUSTAHIL! 💀', bot: 'KAMU KALAH DI\nLEVEL BERAPA? 🎮'},
 };
 const THUMB = (EVt) => ({t: EVt.coklat2 + 0.6, pos: [-0.3, 1.5, 0.5], look: [-0.45, 1.35, -2.2]});
 export const Thumb = ({lang}) => {
@@ -276,8 +277,8 @@ export const Thumb = ({lang}) => {
   const tx = TH[lang];
   const ink = '#351f22';
   const word = (txt, size, bg, fg, rot) => (
-    <div style={{display: 'inline-block', background: bg, color: fg, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: size, lineHeight: 1.05,
-      padding: '14px 34px 20px', border: `10px solid ${ink}`, borderRadius: 28, transform: `rotate(${rot}deg)`, boxShadow: `12px 14px 0 ${ink}`, letterSpacing: -1, whiteSpace: 'nowrap'}}>{txt}</div>
+    <div style={{display: 'inline-block', background: bg, color: fg, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900, fontSize: size, lineHeight: 1.05,
+      padding: '14px 34px 20px', border: `10px solid ${ink}`, borderRadius: 28, transform: `rotate(${rot}deg)`, boxShadow: `12px 14px 0 ${ink}`, letterSpacing: -1, whiteSpace: 'pre', textAlign: 'center'}}>{txt}</div>
   );
   return (
     <AbsoluteFill style={{backgroundColor: CREAM}}>
@@ -286,9 +287,9 @@ export const Thumb = ({lang}) => {
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
         {word(tx.top, 96, '#fff3df', ink, -3)}
-        {word(tx.mid, 104, '#e8a83a', ink, 2)}
+        {word(tx.mid, 74, '#e8a83a', ink, 2)}
       </AbsoluteFill>
-      {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
+      {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 88, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
     </AbsoluteFill>
   );
 };
@@ -332,9 +333,9 @@ export const ThumbCollage = ({lang}) => {
       ))}
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 70, gap: 26}}>
         {word(tx.top, 96, '#fff3df', ink, -3)}
-        {word(tx.mid, 104, '#e8a83a', ink, 2)}
+        {word(tx.mid, 74, '#e8a83a', ink, 2)}
       </AbsoluteFill>
-      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 90}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill>
+      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 90}}>{word(tx.bot, 88, '#7fb35a', '#fff3df', -2)}</AbsoluteFill>
     </AbsoluteFill>
   );
 };
