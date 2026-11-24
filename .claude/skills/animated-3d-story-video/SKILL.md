@@ -214,3 +214,8 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **When align.py mis-snaps** (fast TTS lines make the letter-rate model wrong): list the pauses (`gaps.py`) and look at where the fricatives (s, c, j, sh) fall in each voiced segment (high zero-crossing bursts) to match sentences by hand; write the start/end into the json and note the uncertain sentences in `script.md`.
 - `ownMats(obj)` before recolouring or fading a prop: `toon()` materials are cached and shared.
 - New sounds: atm_beep, cash_dispense, kiss, whistle_prit, scooter, espresso, paper_flutter, velcro, fly_buzz, horn, slot_drop.
+
+## Notes from "Gaji lima juta" (one-language video)
+- **One language only:** the user may send just one voice-over. Keep `sentence_times_en.json` as a copy of the id file (timing.js imports both), mirror the EV table (`EV_ID` mapped to `{id, en}`), register only the `<Name>ID` and `ThumbID` compositions.
+- **Comparison stories (same thing in N places):** open and close on a line-up of all N people (city signs above heads, a result row at their feet), one location per person in between, each person with a spoken line.
+- New design `brisk`, new hat `caping`; new props `coconutPalm` (`open: true` keeps the camera side free of fronds for shots up in the tree), `tower`, `noodleBowl`, `nasiBungkus`, `angkringan`, `villageHouse`, `gardenRows`. The thumbnail takes an optional third block (`bot`) near the bottom when the scene leaves the lower half empty.

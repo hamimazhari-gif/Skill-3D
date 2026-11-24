@@ -19,9 +19,10 @@ export const DESIGNS = {
   stout: {head: 'round', hair: 'tuft', skin: '#f7dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.03, torsoExtra: 0.18, cheeks: false, shading: true, shadows: true},
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   tidy: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
+  brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -139,6 +140,13 @@ function drawHeadBase(o, r) {
     inkShape(x, pts, o.hatColor || '#7fa6c9', r, 10, (q) => paintShade(x, q, cx, top, R * 1.3, 0.3));
     inkShape(x, [[cx - R * 1.0, top + R * 0.38], [cx + R * 0.98, top + R * 0.38], [cx + R * 0.98, top + R * 0.56], [cx - R * 1.0, top + R * 0.56]], o.hatColor2 || '#f3ece0', r, 8);
     inkShape(x, wobble(ellipse(cx + R * 1.24, top + R * 0.2, R * 0.15, R * 0.15, 20), r, 1), o.hatColor2 || '#f3ece0', r, 6);
+  } else if (o.hat === 'caping') { // conical woven farmer's hat
+    const pts = [[cx - R * 1.55, top + R * 0.5], [cx, top - R * 0.62], [cx + R * 1.55, top + R * 0.5]];
+    for (let i = 0; i <= 12; i++) { const u = i / 12; pts.push([cx + R * 1.55 - u * R * 3.1, top + R * 0.5 + Math.sin(u * Math.PI) * R * 0.1]); }
+    inkShape(x, pts, o.hatColor || '#d9b45a', r, 10, (q) => paintShade(x, q, cx, top, R * 1.4, 0.3));
+    x.save(); x.strokeStyle = 'rgba(90,60,20,0.45)'; x.lineWidth = 4;
+    for (let k = 1; k < 6; k++) { const u = k / 6; x.beginPath(); x.moveTo(cx - R * 1.55 * u, top - R * 0.62 + R * 1.12 * u); x.lineTo(cx + R * 1.55 * u, top - R * 0.62 + R * 1.12 * u); x.stroke(); }
+    x.restore();
   } else if (o.hat === 'crown') { // gold crown with five points and red jewels
     const b = top + R * 0.32, h = R * 0.62, w = R * 0.78;
     const pts = [[cx - w, b]]; for (let i = 0; i <= 8; i++) { const xx = cx - w + (2 * w) * i / 8; pts.push([xx, i % 2 ? b - h * 0.45 : b - h]); } pts.push([cx + w, b]);

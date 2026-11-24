@@ -1371,3 +1371,100 @@ export function notebook(label = '', o = {}) {
   const pencil = cyl(0.012, 0.012, 0.42, '#f2c94c', {center: true, hull: 0.004}); at(pencil, 0.2, 0.05, 0.05, 0.6, 0, Math.PI / 2); g.add(pencil);
   return g;
 }
+
+// ================= "Gaji lima juta" story props =================
+// Coconut palm: a gently curved ringed trunk, long fronds and coconuts. Returns {group, top: [x, y, z]} (crown point).
+export function coconutPalm(o = {}) {
+  const g = new THREE.Group(); const h = o.h || 6; const lean = o.lean ?? 0.5; const r = rng(o.seed || 7);
+  const segs = 8; let x = 0, y = 0;
+  const mat = toon('#9a7a52', {paint: {stripes: {n: 14, color: '#7a5a3a'}, seed: 15}});
+  for (let i = 0; i < segs; i++) {
+    const u = i / segs, dx = lean * (Math.pow((i + 1) / segs, 2) - Math.pow(u, 2)), dy = h / segs;
+    const len = Math.hypot(dx, dy), ang = Math.atan2(dx, dy);
+    const c = cyl(0.13 - 0.04 * u, 0.15 - 0.04 * u, len + 0.02, mat, {hull: 0.012}); at(c, x, y, 0, 0, 0, -ang); g.add(c);
+    x += dx; y += dy;
+  }
+  const n = 9;
+  for (let i = 0; i < n; i++) {
+    const ay = i / n * Math.PI * 2 + r() * 0.3;
+    if (o.open && -Math.sin(ay) > 0.45) continue; // leave the camera side open
+    const piv = new THREE.Group(); piv.position.set(x, y, 0); piv.rotation.y = ay; g.add(piv);
+    const tilt = new THREE.Group(); tilt.rotation.z = -0.35 - r() * 0.35; piv.add(tilt);
+    const leaf = ball(0.5, i % 2 ? '#5f9e42' : '#4f8e3a', {sx: 3.2, sy: 0.05, sz: 0.38, seg: 12, hull: 0.014}); at(leaf, 1.45, 0, 0, 0, 0, -0.25); tilt.add(leaf);
+  }
+  for (let k = 0; k < 4; k++) { const c = ball(0.13, '#6a8a3a', {hull: 0.01}); at(c, x + Math.cos(k * 1.7) * 0.18, y - 0.2, Math.sin(k * 1.7) * 0.18); g.add(c); }
+  return {group: g, top: [x, y, 0]};
+}
+
+// Glass office tower with a lit window grid. Front at z = d/2.
+export function tower(w = 3, h = 12, d = 3, o = {}) {
+  const c = canvas(256, 512), x = c.getContext('2d');
+  x.fillStyle = o.color || '#6a8aa8'; x.fillRect(0, 0, 256, 512);
+  const r = rng(o.seed || 3);
+  for (let j = 0; j < 24; j++) for (let i = 0; i < 6; i++) { x.fillStyle = r() < (o.lit ?? 0.25) ? '#ffe9a8' : (o.glass || '#a8c8e0'); x.fillRect(12 + i * 40, 10 + j * 21, 30, 14); }
+  const tex = texFrom(c); const m = toon(tex);
+  const side = toon(shade(o.color || '#6a8aa8', -0.2), {wear: false});
+  const geo = new THREE.BoxGeometry(w, h, d); geo.translate(0, h / 2, 0);
+  return ink(geo, [side, side, side, side, m, side], {hull: 0.03});
+}
+
+// Instant noodle bowl with noodles, egg and chopsticks.
+export function noodleBowl() {
+  const g = new THREE.Group();
+  g.add(cyl(0.16, 0.1, 0.12, '#f3efe6', {hull: 0.008}));
+  const band = cyl(0.161, 0.15, 0.03, '#d8413a', {hull: 0}); at(band, 0, 0.07, 0); g.add(band);
+  const soup = cyl(0.15, 0.15, 0.01, '#e8b85a', {hull: 0}); at(soup, 0, 0.11, 0); g.add(soup);
+  for (let i = 0; i < 5; i++) { const n = new THREE.Mesh(new THREE.TorusGeometry(0.04 + i * 0.015, 0.006, 4, 16), toon('#f2d98a', {wear: false})); n.rotation.x = Math.PI / 2; n.position.set(0.01 * i, 0.122, 0); g.add(n); }
+  for (const s of [-1, 1]) { const st = cyl(0.006, 0.006, 0.36, '#c9935a', {hull: 0.003}); at(st, 0.05 + s * 0.02, 0.1, 0, 0, 0, -0.5); g.add(st); }
+  return g;
+}
+
+// Nasi bungkus: rice wrapped in brown paper on a banana leaf.
+export function nasiBungkus() {
+  const g = new THREE.Group();
+  const leaf = ball(0.18, '#5f9e42', {sx: 1.4, sy: 0.06, sz: 1.0, seg: 12, hull: 0.008}); g.add(leaf);
+  const rice = ball(0.1, '#fbf6ea', {sy: 0.55, hull: 0.008}); at(rice, 0, 0.03, 0); g.add(rice);
+  const paper = box(0.2, 0.012, 0.16, '#c9a272', {hull: 0.004}); at(paper, -0.12, 0.0, 0.08, 0.5, 0, 0.6); g.add(paper);
+  const egg = ball(0.035, '#f2c94c', {sy: 0.5, hull: 0.004}); at(egg, 0.06, 0.06, 0.03); g.add(egg);
+  return g;
+}
+
+// Angkringan: a wooden street-food cart with a tarp roof, kettles and two oil lamps. Front at z ~ 0.45.
+// Returns {group, lamps: [[x, y, z], ...]} (flame positions, location-local offsets from the cart origin).
+export function angkringan(label = '', o = {}) {
+  const g = new THREE.Group();
+  const body = box(2.0, 0.95, 0.9, toon('#8a5a3a', {paint: {planks: 5, seed: 101}})); g.add(body);
+  const top = box(2.1, 0.06, 1.0, '#6a4a32'); at(top, 0, 0.95, 0); g.add(top);
+  for (const x of [-0.95, 0.95]) for (const z of [-0.4, 0.4]) { const p = cyl(0.035, 0.035, 1.25, '#5a3a2a'); at(p, x, 0.95, z); g.add(p); }
+  const tarp = box(2.5, 0.05, 1.5, toon(o.tarp || '#d8642a', {paint: {stripes: {n: 6, color: '#e8a83a'}, seed: 102}}), {hull: 0.015}); at(tarp, 0, 2.2, 0, 0, -0.08); g.add(tarp);
+  for (const [x, c] of [[-0.6, '#3a3a40'], [-0.25, '#4a4a52']]) { const k = cyl(0.11, 0.13, 0.22, c, {hull: 0.008}); at(k, x, 1.0, -0.1); g.add(k); const sp = cyl(0.015, 0.02, 0.12, c, {hull: 0}); at(sp, x + 0.12, 1.12, -0.1, 0, 0, -0.9); g.add(sp); }
+  for (let i = 0; i < 6; i++) { const b = ball(0.06, '#c9a272', {sx: 1.3, sy: 0.7, hull: 0.005}); at(b, 0.15 + (i % 3) * 0.16, 1.02, 0.05 + Math.floor(i / 3) * 0.16); g.add(b); }
+  for (let i = 0; i < 4; i++) { const sk = cyl(0.008, 0.008, 0.24, '#c9935a', {hull: 0}); at(sk, 0.72 + (i % 2) * 0.06, 1.0, -0.15 + i * 0.06, 0, 0.2); g.add(sk); }
+  if (label) { const s = sign(label, 1.4, 0.32, {bg: '#f3e7d3', fg: '#5a2a1a', frame: '#5a3a2a'}); at(s, 0, 1.8, 0.5); g.add(s); }
+  const lamps = [];
+  for (const x of [-0.85, 0.85]) { const l = cyl(0.04, 0.05, 0.14, '#4a4a52', {hull: 0.005}); at(l, x, 1.6, 0.45); g.add(l); lamps.push([x, 1.8, 0.45]); }
+  const bench = box(2.0, 0.42, 0.3, toon('#7a5236', {paint: {planks: 2, seed: 103}})); at(bench, 0, 0, 1.15); g.add(bench);
+  return {group: g, lamps};
+}
+
+// Wooden village house on short stilts with a palm-leaf roof.
+export function villageHouse(o = {}) {
+  const g = new THREE.Group();
+  for (const x of [-1.3, 1.3]) for (const z of [-1.0, 0.8]) { const p = cyl(0.08, 0.08, 0.5, '#5a3a2a'); at(p, x, 0, z - 1.2); g.add(p); }
+  const body = box(3.0, 2.0, 2.2, toon(o.color || '#b8865a', {paint: {planks: 9, seed: 104}})); at(body, 0, 0.5, -1.3); g.add(body);
+  const roof = gableRoof(3.0, 2.2, 1.2, o.roof || '#8a6a3a'); at(roof, 0, 2.5, -1.3); g.add(roof);
+  const door = box(0.7, 1.4, 0.06, '#5a3a2a'); at(door, 0.6, 0.5, -0.17); g.add(door);
+  const win = box(0.7, 0.6, 0.06, '#3a2a22'); at(win, -0.7, 1.3, -0.17); g.add(win);
+  const steps = box(0.8, 0.25, 0.4, '#7a5236'); at(steps, 0.6, 0, 0.05); g.add(steps);
+  return g;
+}
+
+// Vegetable bed rows (garden): returns a group of soil rows with leafy plants.
+export function gardenRows(n = 4, len = 4, seed = 9) {
+  const g = new THREE.Group(); const r = rng(seed);
+  for (let i = 0; i < n; i++) {
+    const row = box(len, 0.18, 0.5, toon('#6a4a32', {paint: {seed: 105 + i}}), {edges: false}); at(row, 0, 0, i * 0.85); g.add(row);
+    for (let k = 0; k < len / 0.45; k++) { const pl = ball(0.13 + r() * 0.05, ['#6fae4a', '#5f9e42', '#8ac45a'][k % 3], {sy: 0.8, seg: 10, hull: 0.008}); at(pl, -len / 2 + 0.25 + k * 0.45, 0.25, i * 0.85); g.add(pl); if (k % 4 === 1) { const t = ball(0.05, '#d8413a', {hull: 0.005}); at(t, -len / 2 + 0.3 + k * 0.45, 0.33, i * 0.85 + 0.1); g.add(t); } }
+  }
+  return g;
+}
