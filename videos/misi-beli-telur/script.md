@@ -19,7 +19,13 @@ The silent "..." line after "Pa... telurnya mana?" is not a spoken sentence: it 
 | 11 | Home table | TIPS MENANG: the shopping list and three tips pop up |
 | 12 | Home | The family; LEVEL BERAPA? + KOMENTAR! |
 
-Screen HUD (game style): level titles at the top, five hearts (one lost per level) and "TELUR: 0/1", GAME OVER on shot 10.
+Follows the user's storyboard. Screen text (retro game font): MISI: BELI TELUR 🥚 | TINGKAT KESULITAN: MUSTAHIL 💀 ·
+LEVEL 1: JEBAKAN AROMA ROTI 🥐 · LEVEL 2: LABIRIN SNACK 🌀 · LEVEL 3: ILUSI HARGA 9.900 🧠 · LEVEL 4: BOS SPG 😇 | ❤️❤️🖤 ·
+FINAL BOSS: RAK KASIR 🍫 | ❤️🖤🖤 · GAME OVER 💀 | TELUR: 0 🥚 (plus TIPS MENANG ✅ and the closing question).
+Storyboard visuals: a retro game screen for the hook (scanlines, pixel frame, PLAYER 1 / START); the wife hands over Rp50.000
+and a paper note "TELUR"; automatic doors slide open and the bread aroma pulls him in; chip bags wave in the long aisle; the price
+tag glows and his brain shows "40 RIBUAN?" with an ERROR sign; the wife opens all five bags before asking where the eggs are.
+SFX: chiptune start, coin, level-up at every level change, hurt on each lost life, error blip, game-over melody.
 
 ## Facts / wording to watch
 These are well-known retail tactics described in consumer research and the press; they vary by store:

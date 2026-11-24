@@ -18,9 +18,10 @@ down the long snack aisle, slow pan · 5 papa and the price tag, cut on "padahal
 Home warm (tense on "mustahil", sad on game over, joyful for the tips); supermarket bright and cool, warm at the bakery,
 tense on "padahal", red danger tint for the final boss, sad on "nyawa habis".
 
-## HUD and titles
-Level titles (dark block, yellow border), hearts and "TELUR: 0/1" top left, a big red GAME OVER. Hearts are lost on
-"satu (roti)", "tol", "hampir", "dua", the second "cokelat".
+## Screen text (storyboard)
+Retro game titles (JetBrains Mono, dark block, yellow pixel border, stepped pop-in). Three lives as in the storyboard:
+lost on "senyum" (SPG), the second "cokelat" and "nyawa". Hook overlay: scanlines, pixel frame, PLAYER 1 / blinking START, Rp50.000.
+Game over: GAME OVER 💀 + TELUR: 0 🥚.
 
 ## New props
 shelfRow (packed product shelves), priceTag (big "49" + small ".900"), shopBag, eggTray, sausagePlate, candyRack.

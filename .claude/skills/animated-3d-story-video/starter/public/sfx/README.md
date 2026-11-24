@@ -62,3 +62,5 @@ Made in code by `tools/synth_sfx.py` (numpy only, no third-party recordings; re-
 | paper_flutter.wav | a banknote or paper flying through the air |
 | velcro.wav / fly_buzz.wav | wallet opening / a fly buzzing out of an empty wallet |
 | slot_drop.wav | a note slipping into a clay piggy bank |
+| chip_levelup.wav / chip_gameover.wav | retro game: level up arpeggio / falling "game over" melody |
+| chip_coin.wav / chip_hurt.wav / chip_start.wav / chip_error.wav | retro game: coin, life lost, start jingle, error blip |

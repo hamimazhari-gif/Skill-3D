@@ -275,3 +275,24 @@ d = 0.6; n = int(d * SR); t = tl(d); buf = np.zeros(n)
 place(buf, bp(noise(0.2), 900, 5000) * np.sin(np.pi * tl(0.2) / 0.2) * 0.5, 0.0)
 tt = tl(0.3); place(buf, sum(np.sin(2 * np.pi * f * tt) * a for f, a in [(310, 0.8), (720, 0.3), (1450, 0.1)]) * env(len(tt), 0.001, 0.05), 0.22)
 save('slot_drop.wav', buf)
+
+# ===== Retro game (chiptune) sounds — "Misi beli telur" =====
+def chip(notes, dur=0.09, duty=0.5, gap=0.0, vib=0.0):
+    out = []
+    for f in notes:
+        t = tl(dur); ph = (np.cumsum(f * (1 + vib * np.sin(2 * np.pi * 9 * t))) / SR) % 1
+        w = np.where(ph < duty, 1.0, -1.0) * np.minimum(1, t / 0.004) * np.minimum(1, (dur - t) / 0.01)
+        out.append(w); out.append(np.zeros(int(gap * SR)))
+    return lp(np.concatenate(out), 7000) * 0.5
+# level up: rising arpeggio C-E-G-C plus a sparkle
+save('chip_levelup.wav', np.concatenate([chip([523, 659, 784, 1047, 1319], 0.075, 0.25), chip([1568], 0.22, 0.25, vib=0.02)]))
+# game over: slow falling melody
+save('chip_gameover.wav', np.concatenate([chip([784, 740, 698], 0.22, 0.5, gap=0.03), chip([659], 0.7, 0.5, vib=0.03)]))
+# coin: two quick high notes
+save('chip_coin.wav', chip([988, 1319], 0.07, 0.25))
+# hurt / life lost: fast falling blips
+save('chip_hurt.wav', chip([660, 520, 400, 300], 0.05, 0.5))
+# start jingle
+save('chip_start.wav', chip([392, 523, 659, 784, 659, 784], 0.08, 0.25))
+# error blip (brain error)
+save('chip_error.wav', chip([220, 180, 220, 180], 0.06, 0.5))
