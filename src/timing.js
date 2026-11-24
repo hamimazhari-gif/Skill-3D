@@ -66,7 +66,7 @@ export function makeTiming(lang) {
 
 // Word events: [sentenceIndex, word, occurrence]. Story: "Pizza Bitcoin" (Indonesian only; en mirrors id).
 const EV_ID = {
-  termahal: [0, 'termahal'], triliun0: [1, 'triliun'], emas: [2, 'emas'], keju: [2, 'keju'], sosis: [2, 'sosis'],
+  termahal: [0, 'termahal'], harganya1: [1, 'harganya'], triliun0: [1, 'triliun'], bukan: [2, 'bukan'], emas: [2, 'emas'], keju: [2, 'keju'], sosis: [2, 'sosis'],
   tahun: [3, 'tahun'], laszlo0: [3, 'laszlo'], lapar: [3, 'kelaparan'], bitcoin0: [4, 'bitcoin'], digital: [4, 'digital'], harganya: [4, 'harganya'],
   forum: [5, 'forum'], siapa: [6, 'siapa'], duaPizza: [6, 'pizza'], bayar: [7, 'bayar'], sepuluhRibu: [7, 'sepuluh'],
   pemuda: [8, 'pemuda'], menerima: [8, 'menerima'], datang: [9, 'datang'], makan: [9, 'makan'], bahagia: [9, 'bahagia'], empat: [10, 'empat'], dolar: [10, 'dolar'],
@@ -82,8 +82,10 @@ const EV_ID = {
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
 const L_ID = {price: 'Rp10 TRILIUN+', notGold: 'BUKAN EMAS', cheese: 'KEJU', sausage: 'SOSIS', year: '2010', hungry: 'KRUUUK...', cheap: '1 BTC = Rp40',
-  post: ['Siapa yang mau', 'kirimin saya 2 pizza?', 'Saya bayar', '10.000 BTC!'], deal: '10.000 BTC = $41', yum: 'WORTH IT!', years: '2010 → 2026',
+  post: ['Siapa yang mau', 'kirimin saya 2 pizza?', 'Saya bayar', '10.000 BTC!'], deal: '±$41', yum: 'WORTH IT!', years: '2010 → 2026',
   houses: 'RIBUAN RUMAH', jets: 'PESAWAT JET', gor: 'GORENGAN', wait: 'TUNGGU DULU...', total: '±100.000 BTC', noRegret: 'NGGAK MENYESAL',
   world: 'BITCOIN BISA BUAT BAYAR!', day: 'BITCOIN PIZZA DAY', may: '22 MEI', up: 'NAIK', down: 'ANJLOK', risk: 'PAHAMI RISIKONYA!',
   question: 'NANGIS ATAU SANTAI?', comment: 'TULIS DI KOMENTAR!', museum: 'MUSEUM PIZZA'};
 export const LABELS = {id: L_ID, en: L_ID};
+
+export const RECEIPT = 'Rp10.000.000.000.000';

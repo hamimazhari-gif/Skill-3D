@@ -6,18 +6,21 @@ For timing, the forum quote and the "Enak banget... Worth it!" quote are split i
 ## Shot table
 | Shot | Place | What we see |
 |---|---|---|
-| 1 | Museum | A pizza under a glass dome in a spotlight, a guard; Rp10 TRILIUN+; gold bars with BUKAN EMAS; macro of the pizza: KEJU, SOSIS |
+| 1 | Street, then museum | A courier knocks on a door; a receipt unrolls down the whole highway: Rp10.000.000.000.000; then an ordinary pizza under a glass dome (no gold): KEJU, SOSIS |
 | 2 | Laszlo's room, 2010 | Calendar 2010, KRUUUK... (hungry), a pile of gold BTC coins, 1 BTC = Rp40 |
 | 3 | Room | He types; macro of the CRT forum post "Siapa yang mau kirimin saya 2 pizza? Saya bayar 10.000 BTC!" |
-| 4 | Room | The door opens, a young courier brings two pizza boxes; the boxes open, Laszlo eats; 10.000 BTC = $41 |
+| 4 | Room | The door opens, a young courier brings two pizza boxes; the boxes open, Laszlo eats; ±$41 |
 | 5 | Room | Close: "Enak banget pizzanya. Worth it!" (lip-sync), WORTH IT! |
-| 6 | Studio | A bar chart 2010 → 2026 grows exponentially, a rocket takes off; Rp10 TRILIUN+; Laszlo screams |
+| 6 | Studio | A bar chart 2010 → 2026 grows exponentially, a rocket takes off; Laszlo screams |
 | 7 | Field | Thousands of houses pop up, jets, then a tower of gorengan grows and the camera cranes up into the clouds |
-| 8 | Room | TUNGGU DULU...; a tower of pizza boxes grows; ±100.000 BTC |
+| 8 | Room | TUNGGU DULU...; a tower of pizza boxes grows, then stacks fill the whole room; ±100.000 BTC |
 | 9 | Room | The courier with yet another box: "Pak... itu pizza apa cicilan negara?" (lip-sync) |
-| 10 | Room, then studio | Laszlo shakes his head calmly: NGGAK MENYESAL; a globe with a pizza and a BTC coin orbiting: BITCOIN BISA BUAT BAYAR! |
+| 10 | Room, then studio | Laszlo shakes his head calmly, a speech bubble "Yang penting kenyang." (storyboard); a globe with a pizza and a BTC coin orbiting: BITCOIN BISA BUAT BAYAR! |
 | 11 | Room, then studio | Party: BITCOIN PIZZA DAY / 22 MEI, confetti; a chart goes up (NAIK) and crashes (ANJLOK, red light); PAHAMI RISIKONYA! |
 | 12 | Room | Laszlo eats pizza: NANGIS ATAU SANTAI? / TULIS DI KOMENTAR! |
+
+Follows the user's storyboard. Screen text: PIZZA TERMAHAL DI DUNIA 🍕💸 · BUKAN PAKAI EMAS… CUMA KEJU 🧀 · "BAYAR 10.000 BITCOIN UNTUK 2 PIZZA!" 💻 ·
+SAAT ITU CUMA ±$41 😋 · SEKARANG: LEBIH DARI Rp10 TRILIUN 📈 · TERNYATA DIA NGGAK CUMA BELI SEKALI 😭🍕🍕🍕 · 22 MEI = BITCOIN PIZZA DAY 🎉 (stays to the end).
 
 ## Facts / wording to watch
 - 22 May 2010, 10,000 BTC for two pizzas, worth about $41 then; posted on the BitcoinTalk forum; the buyer was a young man (Jeremy Sturdivant, 19). Confirmed (Fortune, Bitcoin Wiki, Cointelegraph).

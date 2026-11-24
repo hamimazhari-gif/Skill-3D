@@ -5,8 +5,9 @@ import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
+import {RECEIPT} from './timing';
 
-export const LOC = {vault: 0, room: 40, stage: 80, field: 120};
+export const LOC = {vault: 0, room: 40, stage: 80, field: 120, street: 160};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
@@ -32,6 +33,7 @@ export const LOOK = {
     {at: 'cut9', ...roomL}, {at: 'cut11', ...roomL, ...MOODS.joyful}, {at: 'cut12', ...roomL}]},
   stage: {keys: [{at: 0, ...studio}, {at: 'triliun', ...studio, ...MOODS.joyful}, {at: 'cut11', ...studio}, {at: 'anjlok', ...studio, ...MOODS.danger}]},
   field: {...LOOK_PRESETS.day, near: 30, far: 140},
+  street: {...LOOK_PRESETS.goldenHour, near: 30, far: 160},
 };
 
 const under = (g, color, size = 40) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size), toon(paintTex(color, {seed: 3}))); m.rotation.x = -Math.PI / 2; m.position.y = -0.05; g.add(m); };
@@ -118,15 +120,10 @@ export function buildWorld(lang, T, EVt, L) {
     const fl = FX.fireLight([0, 2.4, -2.6], {intensity: 2.2, dist: 5}); g.add(fl.obj); updaters.push((t) => fl.update(t));
     for (const x of [-0.9, 0.9]) { const post = cyl(0.04, 0.06, 0.9, '#c9a25a', {hull: 0.008}); at(post, x, 0, -2.2); g.add(post); }
     const rope = cyl(0.02, 0.02, 1.8, '#a82a36', {hull: 0.005, center: true}); at(rope, 0, 0.8, -2.2, 0, 0, Math.PI / 2); g.add(rope);
-    popSign(g, sign(L.price, 1.5, 0.4, {bg: '#e8c04a', fg: '#351f22', frame: '#8a6a1a'}), 0, 1.95, -2.7, E('triliun0') - 0.1, cut(2));
-    // gold bars on a side plinth: not the reason
-    const plinth = box(0.8, 0.95, 0.6, toon('#e8e4dc', {paint: {seed: 192}})); at(plinth, 1.7, 0, -3.5); g.add(plinth);
-    [[-0.15, 0], [0.15, 0], [0, 0.07]].forEach(([x, y], i) => { const b = P.goldBar(); at(b, 1.7 + x, 0.95 + y, -3.5 + (i === 2 ? 0 : 0.05)); g.add(b); });
-    popSign(g, sign(L.notGold, 1.1, 0.3, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}), 1.7, 1.55, -3.3, E('emas') - 0.05, cut(2));
     popSign(g, sign(L.cheese, 0.55, 0.2, {bg: '#f6d46a', fg: '#351f22', frame: '#8a6a1a', depth: 0.02}), -0.62, 1.45, -2.95, E('keju') - 0.05, cut(2));
     popSign(g, sign(L.sausage, 0.55, 0.2, {bg: '#a8322a', fg: '#fff3df', frame: '#6a1a1a', depth: 0.02}), 0.62, 1.45, -2.95, E('sosis') - 0.05, cut(2));
     const guard = ch('guard', {seed: 1}, g, -1.6, -3.4, 0.35);
-    guard.act([{t: 0, pose: 'cross', expr: 'smug'}, {t: E('triliun0') + 0.1, pose: 'cross', expr: 'shocked'}, {t: E('emas') + 0.1, pose: 'shrug', expr: 'confused'}, {t: E('sosis') + 0.1, pose: 'idle', expr: 'cheesy'}]);
+    guard.act([{t: 0, pose: 'cross', expr: 'smug'}, {t: E('triliun0') + 0.1, pose: 'cross', expr: 'shocked'}, {t: E('sosis') + 0.1, pose: 'idle', expr: 'cheesy'}]);
     guard.act([{t: E('triliun0'), action: 'jump', dur: 0.5}]);
     fx(g, FX.glints([0, 1.3, -2.8], E('termahal'), {n: 24}));
   }
@@ -164,9 +161,13 @@ export function buildWorld(lang, T, EVt, L) {
     // the plot twist: a tower of pizza boxes
     const stack = []; for (let i = 0; i < 14; i++) { const b = P.pizzaBox({color: i % 2 ? '#e8dcc0' : '#efe4cc'}); at(b.group, 0.75 + (i % 2) * 0.03, i * 0.065, -3.75, (i % 3 - 1) * 0.08); g.add(b.group); stack.push(b.group); }
     updaters.push((t) => stack.forEach((b, i) => { const t0 = E('ternyata') + i * ((E('berkali') - E('ternyata')) / 14); b.visible = t > t0 && t < cut(11); b.scale.setScalar(pop(t, t0, 0.25)); }));
+    // more stacks fill the room
+    const more = []; [[-2.6, -4.3], [-2.9, -2.2], [2.9, -3.3], [1.6, -2.1], [-1.9, -1.4], [2.6, -1.6], [-0.2, -4.5]].forEach(([x, z], j) => {
+      const n = 6 + (j * 3) % 7; for (let i = 0; i < n; i++) { const b = P.pizzaBox({color: (i + j) % 2 ? '#e8dcc0' : '#efe4cc'}); at(b.group, x + (i % 2) * 0.03, i * 0.065, z, (i % 3 - 1) * 0.1 + j); g.add(b.group); more.push([b.group, j, i]); } });
+    updaters.push((t) => more.forEach(([b, j, i]) => { const t0 = E('seratus') + j * 0.25 + i * 0.05; b.visible = t > t0 && t < cut(11); b.scale.setScalar(pop(t, t0, 0.25)); }));
     popSign(g, sign(L.wait, 1.3, 0.34, {bg: '#2b2b33', fg: '#f2d24a', frame: '#f2d24a'}), -0.5, 2.3, -3.0, E('tunggu') - 0.05, E('ternyata'), (t) => inShots(t, 8));
     popSign(g, sign(L.total, 1.3, 0.36, {bg: '#f2a93a', fg: '#351f22', frame: '#8a5a1a'}), 0.75, 2.45, -3.6, E('seratus') - 0.1, cut(9), (t) => inShots(t, 8));
-    popSign(g, sign(L.noRegret, 1.1, 0.3, {bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'}), -0.5, 2.25, -3.35, E('menyesal') - 0.05, cut(11), (t) => inShots(t, 10));
+    popSign(g, sign('"Yang penting kenyang."', 1.4, 0.34, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), -0.5, 2.25, -3.35, E('menyesal') - 0.05, cut(11), (t) => inShots(t, 10));
     laszlo.act([
       {t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('lapar') + 0.1, pose: 'idle', expr: 'cry'}, {t: E('bitcoin0') + 0.1, pose: 'present', expr: 'proud'}, {t: E('harganya') + 0.1, pose: 'shrug', expr: 'confused'},
       {t: cut(3), pose: 'tap', expr: 'thinking'}, {t: E('siapa') - 0.1, pose: 'tap', expr: 'scheming'}, {t: E('bayar') + 0.1, pose: 'tap', expr: 'excited'},
@@ -207,7 +208,6 @@ export function buildWorld(lang, T, EVt, L) {
     updaters.push((t) => { const u = Math.max(0, t - E('meroket')); rk.visible = inShots(t, 6) && t > E('meroket') - 0.1; rk.position.set(2.35 + u * 0.2, 3.2 + u * u * 1.4, -4.3); rk.rotation.z = -0.15; });
     fx(g, FX.smoke([2.35, 3.0, -4.3], E('meroket'), {n: 20, every: 0.08, life: 1.2, size: 0.35, grow: 2, rise: -0.4, drift: 0.1, color: '#f3ece0', opacity: 0.6}), (t) => inShots(t, 6));
     popSign(g, sign(L.years, 1.4, 0.34, {bg: '#1e2430', fg: '#e8e0c8', frame: '#e8e0c8'}), -1.3, 3.3, -5.9, E('tahunDemi') - 0.1, cut(7), (t) => inShots(t, 6));
-    popSign(g, sign(L.price, 2.2, 0.56, {bg: '#e8c04a', fg: '#351f22', frame: '#8a6a1a'}), 0.2, 2.5, -3.2, E('triliun') - 0.1, cut(7), (t) => inShots(t, 6));
     const l1 = ch('laszlo', {seed: 3}, g, -1.15, -2.6, 0.45);
     showWhen(l1.group, (t) => inShots(t, 6));
     l1.act([{t: cut(6), pose: 'idle', expr: 'neutral'}, {t: E('meroket') + 0.1, pose: 'headHold', expr: 'surprised'}, {t: E('triliun') + 0.05, pose: 'headHold', expr: 'scream'}]);
@@ -232,6 +232,33 @@ export function buildWorld(lang, T, EVt, L) {
     l2.act([{t: E('ingat') - 0.3, pose: 'pointUp', expr: 'determined'}, {t: E('naik') + 0.1, pose: 'cheer', expr: 'excited'}, {t: E('anjlok') + 0.05, pose: 'headHold', expr: 'shocked'},
       {t: E('jangan') + 0.05, pose: 'pointUp', expr: 'annoyed'}]);
     l2.act([{t: E('anjlok'), action: 'jump', dur: 0.5}, {t: E('jangan') + 0.1, action: 'shake', dur: 0.9}]);
+  }
+
+  // ---------- the street: a courier knocks, a receipt as long as the highway (1) ----------
+  {
+    const g = addLoc('street');
+    under(g, '#8fae6a', 300);
+    const road = box(5, 0.02, 240, toon('#4a4a52', {paint: {seed: 241, stains: 30}}), {edges: false}); at(road, 3.6, -0.02, -110); g.add(road);
+    for (let i = 0; i < 40; i++) { const m = box(0.15, 0.025, 1.6, '#f3efe6', {hull: 0, edges: false}); at(m, 3.6, -0.01, -2 - i * 6); g.add(m); }
+    const walk = box(2.4, 0.06, 240, toon('#c9c2b0', {paint: {seed: 242}}), {edges: false}); at(walk, 0.0, 0, -110); g.add(walk);
+    const house = P.house(4.5, 3.0, 4, {color: '#e8c35a', roof: '#b5543c', windows: 2, doorX: -0.6, seed: 4}); at(house, -2.6, 0, -3.2); g.add(house);
+    for (let i = 0; i < 10; i++) { const tr = P.tree({seed: 50 + i, h: 2.4}); at(tr, -1.6 - (i % 2) * 1.5, 0, -9 - i * 7); g.add(tr); const tr2 = P.tree({seed: 70 + i, h: 2.6}); at(tr2, 7.4 + (i % 2) * 1.2, 0, -6 - i * 7); g.add(tr2); }
+    const kurir = ch('kurir', {seed: 9}, g, -2.0, -2.6, -0.55);
+    const pb = P.pizzaBox(); held(kurir, pb.group, {hand: 0, y: 0.02, z: 0.15}); 
+    const knocks = [0.55, 0.8, 1.05, 1.9, 2.15];
+    kurir.act([{t: 0, pose: 'idle', expr: 'neutral'}, ...knocks.map((t0) => ({t: t0, pose: 'tap'})), ...knocks.map((t0) => ({t: t0 + 0.12, pose: 'hold'})),
+      {t: E('harganya1'), pose: 'idle', expr: 'surprised'}, {t: E('triliun0') + 0.05, pose: 'headHold', expr: 'shocked'}]);
+    kurir.act([{t: E('triliun0'), action: 'jump', dur: 0.5}]);
+    // the receipt: a paper strip that unrolls down the road, with the amount printed again and again
+    const c = canvas(256, 1024), x = c.getContext('2d'); x.fillStyle = '#fbfbf6'; x.fillRect(0, 0, 256, 1024);
+    x.fillStyle = '#351f22'; x.textAlign = 'center'; x.font = '800 22px "JetBrains Mono", monospace';
+    for (let i = 0; i < 16; i++) { x.fillText(i % 4 === 0 ? 'PIZZA x2' : i % 4 === 2 ? RECEIPT : '- - - - - - - - -', 128, 40 + i * 62); }
+    const tex = texFrom(c); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(1, 60);
+    const strip = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 220), new THREE.MeshBasicMaterial({map: tex})); strip.rotation.x = -Math.PI / 2;
+    const stripG = new THREE.Group(); stripG.add(strip); strip.position.z = -110; at(stripG, 3.6, 0.03, 0.6); g.add(stripG);
+    const roll = cyl(0.22, 0.22, 1.4, '#fbfbf6', {seg: 20, center: true}); roll.rotation.z = Math.PI / 2; g.add(roll);
+    updaters.push((t) => { const u = smooth((t - E('harganya1')) / 1.6); stripG.scale.z = Math.max(0.001, u); stripG.visible = t > E('harganya1') - 0.05; at(roll, 3.6, 0.22, 0.6 - 220 * u, 0, 0, Math.PI / 2); roll.visible = stripG.visible && u < 0.98; });
+    popSign(g, sign(RECEIPT, 2.6, 0.46, {bg: '#fbfbf6', fg: '#d8312a', frame: '#351f22', font: '"JetBrains Mono", monospace'}), 2.5, 2.1, -2.2, E('triliun0') - 0.1);
   }
 
   // ---------- the field: thousands of houses, jets, gorengan to the clouds (7) ----------

@@ -11,7 +11,13 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: one or two framings per shot, slow short pushes; one crane up the gorengan tower.
-  {shot: 1, loc: 'vault', lift: false, move: 'the pizza under a glass dome', keys: [
+  {shot: 1, loc: 'street', lift: false, move: 'a courier knocks on the door', keys: [
+    {at: 'start', pos: [-0.9, 1.6, 0.6], look: [-2.0, 1.4, -3]},
+    {at: 'end', pos: [-0.95, 1.6, 0.4], look: [-2.0, 1.4, -3]}]},
+  {shot: 1, from: 'harganya1', loc: 'street', lift: false, move: 'the receipt unrolls down the highway', keys: [
+    {at: 'start', pos: [1.6, 2.4, 2.6], look: [3.4, 1.0, -14]},
+    {at: 'end', pos: [1.8, 3.0, 2.8], look: [3.6, 0.8, -20]}]},
+  {shot: 1, from: 'bukan', loc: 'vault', lift: false, move: 'just an ordinary pizza', keys: [
     {at: 'start', pos: [0, 1.5, 0.5], look: [0, 1.25, -3]},
     {at: 'end', pos: [0, 1.5, 0.15], look: [0, 1.25, -3]}]},
   {shot: 1, from: 'keju', loc: 'vault', lift: false, move: 'macro: just cheese and sausage', keys: [
@@ -45,6 +51,9 @@ export const SHOT_PLAN = [
   {shot: 8, loc: 'room', lift: false, move: 'plot twist: a tower of pizza boxes', keys: [
     {at: 'start', pos: [0.1, 1.55, -0.3], look: [0.1, 1.4, -3.3]},
     {at: 'end', pos: [0.1, 1.55, -0.5], look: [0.1, 1.4, -3.3]}]},
+  {shot: 8, from: 'seratus', loc: 'room', lift: false, move: 'wide: pizza boxes fill the room', keys: [
+    {at: 'start', pos: [0, 1.95, 1.4], look: [0, 1.0, -3.0]},
+    {at: 'end', pos: [0, 1.95, 1.2], look: [0, 1.0, -3.0]}]},
   {shot: 9, loc: 'room', lift: false, move: 'close: the delivery guy asks', keys: [
     {at: 'start', pos: [1.0, 1.68, -1.6], look: [1.3, 1.62, -3.2]},
     {at: 'end', pos: [1.0, 1.68, -1.72], look: [1.3, 1.62, -3.2]}]},

@@ -106,16 +106,18 @@ function Scene({lang, thumb}) {
 const DIPS = [2, 6, 7, 8, 11, 12];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard titles yet
+const TITLES = [['cut1', 'PIZZA TERMAHAL | DI DUNIA 🍕💸'], ['bukan', 'BUKAN PAKAI EMAS… | CUMA KEJU 🧀'], ['cut2', '"BAYAR 10.000 BITCOIN | UNTUK 2 PIZZA!" 💻'],
+  ['cut4', 'SAAT ITU CUMA ±$41 😋'], ['cut6', 'SEKARANG: LEBIH DARI | Rp10 TRILIUN 📈'], ['cut8', 'TERNYATA DIA NGGAK | CUMA BELI SEKALI 😭🍕🍕🍕'], ['cut10', '22 MEI = | BITCOIN PIZZA DAY 🎉']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
   if (!cur || !cur.txt) return null;
+  const longest = Math.max(...cur.txt.split(' | ').map((l) => [...l].length)), fs = longest > 19 ? 54 : 66;
   const u = Math.min(1, (t - cur.t0) / 0.3), s = 0.7 + 0.3 * (1 + 2.2 * Math.pow(u - 1, 3) + 1.2 * Math.pow(u - 1, 2));
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: 120}}>
       <div style={{maxWidth: 1000, textAlign: 'center', background: '#fff3df', color: INK, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
-        fontSize: 66, lineHeight: 1.08, padding: '16px 34px 20px', border: `9px solid ${INK}`, borderRadius: 26, boxShadow: `12px 14px 0 ${INK}`,
+        fontSize: fs, lineHeight: 1.08, padding: '16px 34px 20px', border: `9px solid ${INK}`, borderRadius: 26, boxShadow: `12px 14px 0 ${INK}`,
         transform: `scale(${s}) rotate(-1.5deg)`, letterSpacing: -1}}>
         {cur.txt.split(' | ').map((l, i) => <div key={i}>{l}</div>)}
       </div>
@@ -146,9 +148,10 @@ function cues(T, EVt) {
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     // 1 the museum
-    [sy('sparkle'), E.termahal, 0.18],
+    ...[0.55, 0.8, 1.05, 1.9, 2.15].map((t) => [sy('thud'), t + 0.06, 0.2]),
+    [sy('paper_flutter'), E.harganya1, 0.2, 1.6],
+    [sy('sparkle'), E.bukan, 0.16],
     ['06-deep-cinematic-boom.wav', E.triliun0, 0.18],
-    ['02-error-denied-buzz.wav', E.emas, 0.12],
     ['04-soft-ui-pop.mp3', E.keju - 0.05, 0.2], ['04-soft-ui-pop.mp3', E.sosis - 0.05, 0.2],
     // 2-3 2010, hungry, the forum post
     [sy('rumble'), E.lapar, 0.14, 1.0],
@@ -261,8 +264,8 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕', mid: 'HARGANYA Rp10 TRILIUN!', bot: ''},
-  en: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕', mid: 'HARGANYA Rp10 TRILIUN!', bot: ''},
+  id: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕💸', mid: 'CUMA KEJU & SOSIS!', bot: ''},
+  en: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕💸', mid: 'CUMA KEJU & SOSIS!', bot: ''},
 };
 const THUMB = (EVt) => ({t: EVt.termahal + 0.3, loc: 'vault', pos: [0, 1.62, -1.35], look: [0, 1.05, -3]});
 export const Thumb = ({lang}) => {
