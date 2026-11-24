@@ -4,6 +4,7 @@ import { headPos } from '/engine/rig2d.js';
 import { person, bigPerson } from '../lib/_costume.js';
 // headwear: 'turban' (white), 'sultan' (tall turban + plume), 'helmet' (Byzantine), 'guru' (green-banded turban)
 export function hat(g, x, y, r, kind) {
+  if (kind === 'yeniseri') { g.fillStyle = '#f4efe2'; g.beginPath(); g.moveTo(x - r * 0.95, y - r * 0.4); g.lineTo(x - r * 0.7, y - r * 1.9); g.quadraticCurveTo(x - r * 0.2, y - r * 2.2, x + r * 0.3, y - r * 1.8); g.quadraticCurveTo(x + r * 1.6, y - r * 1.2, x + r * 1.4, y + r * 0.6); g.quadraticCurveTo(x + r * 1.0, y - r * 0.6, x + r * 0.95, y - r * 0.4); g.closePath(); g.fill(); g.fillStyle = '#c8a040'; g.fillRect(x - r * 1.0, y - r * 0.55, r * 2.0, r * 0.25); seg(g, [[x - r * 0.1, y - r * 0.55], [x - r * 0.1, y - r * 1.2]], r * 0.18, '#c8a040'); return; }
   if (kind === 'helmet') { g.fillStyle = '#8a8a96'; g.beginPath(); g.arc(x, y - r * 0.1, r * 1.08, Math.PI, 0); g.fill(); g.fillRect(x - r * 1.12, y - r * 0.15, r * 2.24, r * 0.22); seg(g, [[x, y - r * 1.15], [x, y - r * 1.6]], r * 0.18, '#a82a2a'); circle(g, x, y - r * 1.65, r * 0.22, '#c83a3a'); return; }
   const tall = kind === 'sultan' ? 1.5 : 1, band = kind === 'guru' ? '#3a7a3a' : kind === 'sultan' ? '#c8a040' : '#d8d0c0';
   g.fillStyle = '#f4efe2'; g.beginPath(); g.ellipse(x, y - r * 0.75 * tall, r * 1.12, r * 0.72 * tall, 0, 0, Math.PI * 2); g.fill();
@@ -21,7 +22,7 @@ export function skyline(g, y, s, c, o = {}) {
   // the great dome (Hagia Sophia–like silhouette)
   const hx = E.W * (0.5 + (o.domeX ?? 0)), hw = V(260, 220) * s, hb = y - V(170, 210) * s;
   g.fillRect(hx - hw, hb, hw * 2, y - hb + 4); g.beginPath(); g.arc(hx, hb, hw * 0.75, Math.PI, 0); g.fill(); g.beginPath(); g.arc(hx - hw * 0.7, hb + 10, hw * 0.4, Math.PI, 0); g.fill(); g.beginPath(); g.arc(hx + hw * 0.7, hb + 10, hw * 0.4, Math.PI, 0); g.fill();
-  seg(g, [[hx, hb - hw * 0.75], [hx, hb - hw * 0.95]], 6 * s, c); seg(g, [[hx - 14 * s, hb - hw * 0.88], [hx + 14 * s, hb - hw * 0.88]], 5 * s, c);
+  if (o.cross !== false) { seg(g, [[hx, hb - hw * 0.75], [hx, hb - hw * 0.95]], 6 * s, c); seg(g, [[hx - 14 * s, hb - hw * 0.88], [hx + 14 * s, hb - hw * 0.88]], 5 * s, c); }
   for (const dx of [-0.38, 0.4]) { const x = E.W * (0.5 + dx); g.fillRect(x - 30 * s, y - V(260, 320) * s, 60 * s, V(260, 320) * s); g.beginPath(); g.arc(x, y - V(260, 320) * s, 36 * s, Math.PI, 0); g.fill(); }
   if (o.lights) for (let i = 0; i < 40; i++) { const x = ((i * 137) % 1000) / 1000 * E.W, yy = y - ((i * 61) % 100) / 100 * V(120, 160) * s; circle(g, x, yy, 3 * s, alpha('#ffd27a', 0.7)); }
 }
