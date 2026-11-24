@@ -1,46 +1,37 @@
-// All locations in one scene at different x offsets. Story: "Kalau emak-emak jadi presiden" (comedy).
+// All locations in one scene at different x offsets. Story: "Pizza Bitcoin" (Laszlo Hanyecz, 22 May 2010).
 import * as THREE from 'three';
-import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth} from './kit';
+import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, canvas, texFrom, INK} from './kit';
 import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {palace: 0, cabinet: 40, market: 80, home: 120};
+export const LOC = {vault: 0, room: 40, stage: 80, field: 120};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
-// Cast. Design: 'cozy' (new for this video; round no-sleep face, fringe hair, thick brows, longer torso, short legs).
-export const CHAR_DESIGN = 'cozy';
-const suit = (jacket, lapel, lower, tie, o = {}) => ({outfit: 'suit', jacket, lapel, lower, tie, pocket: jacket, ...o});
-const EMAK = {hairStyle: 'hijab', hijab: '#9a2a3a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26'}; // hijab look (a minister, a shopper)
-const DASTER = {hairStyle: 'bun', hair: '#2b2326', hat: 'none', outfit: 'hawaii', jacket: '#e0809a', lower: '#d0708a', tie: '#e0809a', pocket: '#e0809a'}; // emak: daster + konde (storyboard)
+// Cast. Design: 'spry' (new for this video; round no-sleep face, tuft hair, thin brows, slim limbs).
+export const CHAR_DESIGN = 'spry';
 const CAST = {
-  emak: {...DASTER},
-  emakHome: {...DASTER},
-  m0: suit('#3f4f6a', '#2c3a52', '#2a3448', '#d8413a', {hair: '#2b2326', hat: 'peci', hatColor: '#1f1d24'}),
-  m1: {outfit: 'batik', jacket: '#4a5a8a', print: '#e8e0c8', print2: '#24304a', lower: '#2a2a33', tie: '#4a5a8a', pocket: '#4a5a8a', hair: '#2b2326', hat: 'peci', hatColor: '#1f1d24'},
-  m2: suit('#6a6a72', '#4a4a52', '#3a3a42', '#3f8a5a', {hair: '#3a2a26', hairStyle: 'side', hat: 'none', glasses: true}),
-  m3: {outfit: 'batik', jacket: '#7a3a3a', print: '#f2d24a', print2: '#3a1a1a', lower: '#2a2a33', tie: '#7a3a3a', pocket: '#7a3a3a', hair: '#d8d0c8', hairStyle: 'bald', hat: 'none', mustache: 'thick'},
-  m4: {...EMAK, hijab: '#3f6a8a', outfit: 'suit', jacket: '#3f6a8a', lapel: '#2c4c66', lower: '#2a3448', tie: '#fbf6ea', pocket: '#3f6a8a'},
-  bambang: suit('#8a8a90', '#6a6a72', '#4a4a52', '#e8c35a', {hair: '#2b2326', hat: 'peci', mustache: 'thick'}),
-  abang: {outfit: 'tshirt', jacket: '#e8823a', print: '#fff3df', print2: '#d8413a', lower: '#4a4a52', tie: '#e8823a', hair: '#2b2326', hat: 'cap', hatColor: '#3f6a8a', hatColor2: '#2c4c66', towel: '#fbf6ea'},
-  tetangga: {outfit: 'farmer', jacket: '#7fa35a', lower: '#4a4a52', tie: '#7fa35a', pocket: '#6f934a', hair: '#2b2326', hairStyle: 'tuft', hat: 'none', towel: '#f2d24a'},
-  shopper: {...EMAK, hijab: '#4f8a6a', outfit: 'hawaii', jacket: '#7fc4e8', lower: '#5a8ab0', tie: '#7fc4e8', pocket: '#7fc4e8'},
-  bapak: {outfit: 'tshirt', jacket: '#4f7fa6', print: '#f2d24a', print2: '#d8413a', lower: '#5a4a3a', tie: '#4f7fa6', hair: '#2b2326', hairStyle: 'fringe', hat: 'none', mustache: 'thick'},
-  kid: {outfit: 'tshirt', jacket: '#d8413a', print: '#fff3df', print2: '#4f7fa6', lower: '#3f5f8a', tie: '#d8413a', hair: '#3a2a26', hairStyle: 'tuft', hat: 'none'},
+  laszlo: {outfit: 'tshirt', jacket: '#5a9a6a', print: '#f2d24a', print2: '#e8823a', lower: '#3f5f8a', tie: '#5a9a6a', hair: '#6a4a32', hairStyle: 'side', hat: 'none', glasses: true},
+  kurir: {outfit: 'tshirt', jacket: '#3f6a8a', print: '#fff3df', print2: '#f2d24a', lower: '#2a3448', tie: '#3f6a8a', hair: '#2b2326', hat: 'cap', hatColor: '#f2d24a', hatColor2: '#d8a82a'},
+  guard: {outfit: 'farmer', jacket: '#2f3a4a', lower: '#22283a', tie: '#2f3a4a', pocket: '#283244', hair: '#2b2326', hat: 'cap', hatColor: '#2f3a4a', hatColor2: '#c9a25a', mustache: 'thick'},
+  p1: {hairStyle: 'hijab', hijab: '#4f8a6a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'hawaii', jacket: '#7fc4e8', lower: '#5a8ab0', tie: '#7fc4e8', pocket: '#7fc4e8'},
+  p2: {outfit: 'tshirt', jacket: '#d8413a', print: '#fff3df', print2: '#4f7fa6', lower: '#5a4a3a', tie: '#d8413a', hair: '#2b2326', hairStyle: 'fringe', hat: 'none', mustache: 'thick'},
+  p3: {outfit: 'tshirt', jacket: '#f2d24a', print: '#d8413a', print2: '#4f7fa6', lower: '#3f5f8a', tie: '#f2d24a', hair: '#3a2a26', hairStyle: 'tuft', hat: 'none'},
 };
 
-// Lighting: a warm grand hall for the inauguration, a cool meeting room (tense when she scolds, red when Bambang is late),
-// a bright market, a warm home that turns joyful when she is "president at home".
-const hall = {...LOOK_PRESETS.interiorWarm, keyI: 2.5, hemiI: 1.35};
-const meet = {...LOOK_PRESETS.interiorCool, keyI: 2.5, hemiI: 1.4};
-const homeL = {...LOOK_PRESETS.interiorWarm, keyI: 2.4, hemiI: 1.3};
+// Lighting: a dark museum with a spotlight, Laszlo's warm 2010 room, a dark studio for the charts (green when it rockets,
+// red when it crashes), a sunny field for the comparisons.
+const museum = {...LOOK_PRESETS.interiorCool, keyI: 1.6, hemiI: 0.75, grade: {sat: 1.0, contrast: 1.1, tint: '#c8d8ff', tintAmt: 0.06, vignette: 0.55}};
+const roomL = {...LOOK_PRESETS.interiorWarm, keyI: 2.4, hemiI: 1.3};
+const studio = {...LOOK_PRESETS.interiorCool, keyI: 1.9, hemiI: 0.95, fog: '#141824', grade: {sat: 1.05, contrast: 1.08, tintAmt: 0, vignette: 0.5}};
 export const LOOK = {
-  palace: {keys: [{at: 0, ...hall}, {at: 'total', ...hall, ...MOODS.joyful}, {at: 'cut2', ...hall}, {at: 'dimatikan', ...hall, keyI: 1.1, hemiI: 0.7}, {at: 'cut9', ...hall}]},
-  cabinet: {keys: [{at: 0, ...meet}, {at: 'muter', ...meet, ...MOODS.tense}, {at: 'cut3', ...meet}, {at: 'bambang', ...meet, ...MOODS.danger}, {at: 'tegak', ...meet}]},
-  market: {keys: [{at: 0, ...LOOK_PRESETS.day}, {at: 'sebelah', ...LOOK_PRESETS.day, ...MOODS.joyful}]},
-  home: {keys: [{at: 0, ...homeL}, {at: 'rumah', ...homeL, ...MOODS.joyful}]},
+  vault: {...museum},
+  room: {keys: [{at: 0, ...roomL}, {at: 'lapar', ...roomL, ...MOODS.sad}, {at: 'forum', ...roomL}, {at: 'bahagia', ...roomL, ...MOODS.joyful}, {at: 'tunggu', ...roomL, ...MOODS.tense},
+    {at: 'cut9', ...roomL}, {at: 'cut11', ...roomL, ...MOODS.joyful}, {at: 'cut12', ...roomL}]},
+  stage: {keys: [{at: 0, ...studio}, {at: 'triliun', ...studio, ...MOODS.joyful}, {at: 'cut11', ...studio}, {at: 'anjlok', ...studio, ...MOODS.danger}]},
+  field: {...LOOK_PRESETS.day, near: 30, far: 140},
 };
 
 const under = (g, color, size = 40) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size), toon(paintTex(color, {seed: 3}))); m.rotation.x = -Math.PI / 2; m.position.y = -0.05; g.add(m); };
@@ -49,16 +40,30 @@ const under = (g, color, size = 40) => { const m = new THREE.Mesh(new THREE.Plan
 export function storyFx(T, EVt) {
   return {
     flashes: [
-      {t: EVt.total, dur: 0.35, color: '#fff4d6', strength: 0.4},
-      {t: EVt.enggak, dur: 0.3, color: '#ffc0b0', strength: 0.3},
-      {t: EVt.stabil, dur: 0.3, color: '#ffe9b0', strength: 0.3},
-      {t: EVt.uang, dur: 0.3, color: '#ffe9b0', strength: 0.35},
-      {t: EVt.rumah, dur: 0.35, color: '#fff4d6', strength: 0.4},
+      {t: EVt.triliun0, dur: 0.35, color: '#ffe9b0', strength: 0.4},
+      {t: EVt.bahagia, dur: 0.3, color: '#ffe9b0', strength: 0.25},
+      {t: EVt.triliun, dur: 0.4, color: '#fff4d6', strength: 0.45},
+      {t: EVt.tunggu, dur: 0.3, color: '#ffffff', strength: 0.35},
+      {t: EVt.seratus, dur: 0.3, color: '#ffe9b0', strength: 0.3},
+      {t: EVt.anjlok, dur: 0.35, color: '#ff8a7a', strength: 0.35},
       {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4},
     ],
-    shakes: [{t: EVt.enggak, dur: 0.3, amp: 0.015}, {t: EVt.sebelah, dur: 0.3, amp: 0.012}, {t: EVt.bambang, dur: 0.4, amp: 0.025}, {t: EVt.mulut, dur: 0.3, amp: 0.015}],
+    shakes: [{t: EVt.meroket, dur: 0.5, amp: 0.02}, {t: EVt.triliun, dur: 0.35, amp: 0.02}, {t: EVt.tunggu, dur: 0.3, amp: 0.015}, {t: EVt.anjlok, dur: 0.4, amp: 0.025}],
   };
 }
+
+// a gold Bitcoin coin texture (B with two strokes)
+let _btc;
+function btcTex() {
+  if (_btc) return _btc;
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.fillStyle = '#f2a93a'; x.beginPath(); x.arc(128, 128, 126, 0, 7); x.fill();
+  x.strokeStyle = '#c8822a'; x.lineWidth = 10; x.beginPath(); x.arc(128, 128, 108, 0, 7); x.stroke();
+  x.fillStyle = '#fff8e8'; x.font = '900 150px "Inter Display"'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('B', 132, 136);
+  x.fillRect(104, 40, 12, 30); x.fillRect(134, 40, 12, 30); x.fillRect(104, 196, 12, 30); x.fillRect(134, 196, 12, 30);
+  _btc = texFrom(c); return _btc;
+}
+const btcCoin = (r = 0.06) => P.coin(r, {tex: btcTex(), color: '#c8822a'});
 
 export function buildWorld(lang, T, EVt, L) {
   setCharDesign(CHAR_DESIGN);
@@ -97,199 +102,158 @@ export function buildWorld(lang, T, EVt, L) {
   const lamp = (g, x, z, ry = 0) => { const l = P.streetLamp(); at(l, x, 0, z, ry); g.add(l); return l; };
   const parisRow = (g, xs, z, seed) => xs.forEach((x, i) => { const tr = P.terrace(3.2, {color: ['#e8dcc0', '#ded0b0', '#efe3c8', '#d9c9a6'][(i + seed) % 4], roof: '#5a6a7a', trim: '#fbf6ea', shutter: '#4f6a7a', door: '#3a4a5a', seed: seed + i}).group; at(tr, x, 0, z); g.add(tr); });
 
-  const seat = (c, y0, f) => updaters.push((t) => { c.group.position.y = f ? f(t) : y0; }); // seated behind a table: body lowered
 
-  // ---------- the palace: inauguration (1), the budget (7), new policies (8) ----------
+  // ---------- the museum: the most expensive pizza in the world (1) ----------
   {
-    const g = addLoc('palace');
-    under(g, '#2a2228');
-    g.add(P.room(12, 4, 7, {wall: '#efe3c8', floor: '#9a3a36', wain: '#c9a25a', floorPaint: {planks: 0}}));
-    for (const x of [-4.6, -1.6, 1.6]) { const col = box(0.45, 4, 0.45, toon('#f6efe0', {paint: {seed: 5}})); at(col, x * 1.25, 0, -5.6); g.add(col); }
-    const pod = P.podium(L.podium); at(pod, 0, 0, -2.9); g.add(pod);
-    const flags = [-1.35, 1.35].map((x, i) => { const f = P.flag(2.7, {phase: i}); at(f.group, x, 0, -3.5); g.add(f.group); updaters.push((t) => f.update(t)); return f; });
-    popSign(g, sign(L.banner, 2.6, 0.62, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}), 0, 3.15, -5.7, E('presiden0') - 0.1, cut(2), (t) => inShots(t, 1));
-    popSign(g, sign(L.change, 1.7, 0.42, {bg: '#f2d24a', fg: '#351f22', frame: '#8a6a1a'}), 0, 2.55, -3.0, E('berubah') - 0.05, cut(2), (t) => inShots(t, 1));
-    fx(g, FX.confetti([0, 3.0, -2.8], E('total')), (t) => inShots(t, 1));
-    const emak = ch('emak', {seed: 1}, g, -1.6, -3.0, 0.6);
-    showWhen(emak.group, (t) => inShots(t, 1));
-    walkPath(emak, [[0.15, -1.6, -3.0], [1.25, -0.25, -3.45], [1.4, 0, -3.45]]);
-    const lad = P.ladle(); held(emak, lad, {y: 0.02, z: 0.08, rz: 0.4});
-    const taps = [1.6, 1.95, 2.3];
-    emak.act([{t: 0, pose: 'hold', expr: 'determined'}, ...taps.map((t0) => ({t: t0, pose: 'tap', expr: 'smug'})), ...taps.map((t0) => ({t: t0 + 0.17, pose: 'hold', expr: 'smug'})),
-      {t: E('presiden0') + 0.1, pose: 'hips', expr: 'proud'}, {t: E('berubah') + 0.05, pose: 'pointUp', expr: 'determined'}, {t: E('total') + 0.05, pose: 'cheer', expr: 'cheesy'}]);
-    const fans = [['m0', -2.3, -2.9, 0.35], ['m2', 2.3, -2.9, -0.35]].map(([k, x, z, y]) => { const c = ch(k, {seed: 30 + x}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 1));
-      c.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('presiden0'), pose: 'presentBoth', expr: 'surprised'}, {t: E('total'), pose: 'cheer', expr: 'excited'}]); return c; });
-    // the office corner: desk, cartoon budget book, biscuit tin of money, ceiling lamps, folded bags
-    const ox = 4.7;
-    const desk = P.desk({color: '#7a4a32'}); at(desk, ox, 0, -3.2); g.add(desk);
-    const book = P.cartoonBook(L.book); at(book, ox - 0.45, 0.86, -3.05, 0.15, -0.35); g.add(book);
-    const calc = P.calculator(); at(calc, ox + 0.05, 0.77, -2.95, -0.2); g.add(calc);
-    const tin = P.biscuitTin({label: L.tin}); at(tin.group, ox + 0.35, 0.77, -3.1); g.add(tin.group);
-    updaters.push((t) => { tin.group.visible = t > E('kaleng') - 0.1; tin.group.scale.setScalar(pop(t, E('kaleng') - 0.1, 0.35)); tin.open(smooth((t - E('uang') + 0.25) / 0.4)); });
-    fx(g, FX.glints([ox + 0.35, 1.05, -3.0], E('uang'), {n: 22}), (t) => inShots(t, 7));
-    const lamps = [-1, 0, 1].map((k) => {
-      const l = new THREE.Group(); const cord = cyl(0.01, 0.01, 0.6, '#3a3a40', {hull: 0}); at(cord, 0, -0.6, 0); l.add(cord);
-      const sh = cyl(0.06, 0.2, 0.18, '#e8c35a', {hull: 0.008}); at(sh, 0, -0.78, 0); l.add(sh);
-      const bulbM = new THREE.MeshBasicMaterial({color: '#fff3c8'}); const b = ball(0.07, bulbM, {hull: 0}); at(b, 0, -0.8, 0); l.add(b);
-      const glow = P.glowSprite('#ffe2a0', 1.3); glow.position.y = -0.85; l.add(glow);
-      at(l, ox + k * 1.0, 4.0, -2.9); g.add(l);
-      updaters.push((t) => { const on = t < E('dimatikan') + 0.1 + (k + 1) * 0.12; glow.visible = on; bulbM.color.set(on ? '#fff3c8' : '#8a8478'); });
-      return l; });
-    popSign(g, sign('PENGUMUMAN RESMI', 1.9, 0.44, {bg: '#fbf6ea', fg: '#2f4f7a', frame: '#2f4f7a'}), ox, 3.15, -5.75, E('kebijakan') - 0.1, cut(9), (t) => inShots(t, 8));
-    popSign(g, sign(L.rule1, 1.4, 0.32, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), ox - 0.85, 2.6, -5.7, E('lampu') - 0.05, cut(9), (t) => inShots(t, 8));
-    popSign(g, sign(L.rule2, 1.4, 0.32, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), ox + 0.85, 2.6, -5.7, E('kantong') - 0.05, cut(9), (t) => inShots(t, 8));
-    const bags = [0, 1, 2, 3, 4, 5].map((i) => { const b = P.foldedBag(['#f3efe6', '#e0626e', '#7fc4e8', '#f2d24a', '#7fa35a', '#f3efe6'][i]); g.add(b); return b; });
-    updaters.push((t) => bags.forEach((b, i) => { const t0 = E('segitiga') + i * 0.18; b.visible = inShots(t, 8) && t > t0; b.scale.setScalar(pop(t, t0, 0.3)); at(b, ox - 0.55 + i * 0.2, 0.86, -2.92, 0.15 * (i % 2 ? 1 : -1)); }));
-    const boss = ch('emak', {seed: 2}, g, ox, -3.9, 0);
-    showWhen(boss.group, (t) => inShots(t, 7, 8));
-    boss.act([{t: cut(7), pose: 'tap', expr: 'thinking'}, {t: E('anggaran') + 0.05, pose: 'present', expr: 'proud'}, {t: E('kartun') + 0.05, pose: 'present', expr: 'cheesy'}, {t: E('sisanya') - 0.05, pose: 'shrug', expr: 'smug'},
-      {t: E('kaleng') + 0.05, pose: 'present', expr: 'scheming'}, {t: E('bukan') + 0.05, pose: 'stop', expr: 'smug'}, {t: E('uang') + 0.1, pose: 'presentBoth', expr: 'toothy'},
-      {t: cut(8), pose: 'hips', expr: 'determined'}, {t: E('lampu') + 0.05, pose: 'pointUp', expr: 'annoyed'}, {t: E('dimatikan') + 0.3, pose: 'hips', expr: 'smug'},
-      {t: E('kantong') + 0.05, pose: 'present', expr: 'proud'}, {t: E('siapa') + 0.05, pose: 'chin', expr: 'scheming'}]);
+    const g = addLoc('vault');
+    under(g, '#14161c');
+    g.add(P.room(8, 4, 7, {wall: '#2c3444', floor: '#4a4450', wain: '#c9a25a', floorPaint: {planks: 0}}));
+    const ms = sign(L.museum, 2.0, 0.42, {bg: '#1e2430', fg: '#e8c04a', frame: '#c9a25a'}); at(ms, 0, 3.1, -5.8); g.add(ms);
+    const ped = P.glassDome(0.45); at(ped, 0, 0, -3.0); g.add(ped);
+    const pz = P.pizza(0.32); at(pz, 0, 1.06, -3.0); g.add(pz);
+    updaters.push((t) => { pz.rotation.y = t * 0.25; });
+    const spot = P.glowSprite('#fff2c8', 1.4); at(spot, 0, 1.6, -3.0); g.add(spot);
+    const beam = new THREE.Mesh(new THREE.ConeGeometry(0.9, 3.0, 24, 1, true), new THREE.MeshBasicMaterial({color: '#fff6d8', transparent: true, opacity: 0.05, depthWrite: false, side: THREE.DoubleSide}));
+    beam.position.set(0, 2.55, -3.0); g.add(beam);
+    const fl = FX.fireLight([0, 2.4, -2.6], {intensity: 2.2, dist: 5}); g.add(fl.obj); updaters.push((t) => fl.update(t));
+    for (const x of [-0.9, 0.9]) { const post = cyl(0.04, 0.06, 0.9, '#c9a25a', {hull: 0.008}); at(post, x, 0, -2.2); g.add(post); }
+    const rope = cyl(0.02, 0.02, 1.8, '#a82a36', {hull: 0.005, center: true}); at(rope, 0, 0.8, -2.2, 0, 0, Math.PI / 2); g.add(rope);
+    popSign(g, sign(L.price, 1.5, 0.4, {bg: '#e8c04a', fg: '#351f22', frame: '#8a6a1a'}), 0, 1.95, -2.7, E('triliun0') - 0.1, cut(2));
+    // gold bars on a side plinth: not the reason
+    const plinth = box(0.8, 0.95, 0.6, toon('#e8e4dc', {paint: {seed: 192}})); at(plinth, 1.7, 0, -3.5); g.add(plinth);
+    [[-0.15, 0], [0.15, 0], [0, 0.07]].forEach(([x, y], i) => { const b = P.goldBar(); at(b, 1.7 + x, 0.95 + y, -3.5 + (i === 2 ? 0 : 0.05)); g.add(b); });
+    popSign(g, sign(L.notGold, 1.1, 0.3, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}), 1.7, 1.55, -3.3, E('emas') - 0.05, cut(2));
+    popSign(g, sign(L.cheese, 0.55, 0.2, {bg: '#f6d46a', fg: '#351f22', frame: '#8a6a1a', depth: 0.02}), -0.62, 1.45, -2.95, E('keju') - 0.05, cut(2));
+    popSign(g, sign(L.sausage, 0.55, 0.2, {bg: '#a8322a', fg: '#fff3df', frame: '#6a1a1a', depth: 0.02}), 0.62, 1.45, -2.95, E('sosis') - 0.05, cut(2));
+    const guard = ch('guard', {seed: 1}, g, -1.6, -3.4, 0.35);
+    guard.act([{t: 0, pose: 'cross', expr: 'smug'}, {t: E('triliun0') + 0.1, pose: 'cross', expr: 'shocked'}, {t: E('emas') + 0.1, pose: 'shrug', expr: 'confused'}, {t: E('sosis') + 0.1, pose: 'idle', expr: 'cheesy'}]);
+    guard.act([{t: E('triliun0'), action: 'jump', dur: 0.5}]);
+    fx(g, FX.glints([0, 1.3, -2.8], E('termahal'), {n: 24}));
   }
 
-  // ---------- the cabinet room: the 5-minute meeting (2), late Bambang (5), sitting up straight (6) ----------
+  // ---------- Laszlo's room, 2010 (2-5, 8-10, the party 11, the question 12) ----------
   {
-    const g = addLoc('cabinet');
-    under(g, '#1e2228');
-    g.add(P.room(10, 3.6, 7, {wall: '#e4e8ec', floor: '#6a5a4a', wain: '#4f6a7a'}));
-    const table = box(5.4, 0.76, 1.1, toon('#7a4a32', {paint: {planks: 5, seed: 121}})); at(table, 0.6, 0, -3.4); g.add(table);
-    for (let i = 0; i < 5; i++) { const n = sign(['', 'MENTERI', 'MENTERI', 'MENTERI', 'MENTERI'][i] || 'MENTERI', 0.42, 0.12, {bg: '#fbf6ea', fg: '#351f22', frame: '#351f22', depth: 0.03, border: false}); at(n, -1.4 + i, 0.8, -2.95, 0, -0.3); g.add(n); }
-    const screen = P.muterScreen(L.screen); at(screen, -3.0, 1.0, -5.8); g.add(screen);
-    const cs = sign(L.cabinet, 1.6, 0.36, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}); at(cs, 1.3, 2.95, -5.8); g.add(cs);
-    const clock = P.wallClock(0.3, {rim: '#2b2b33'}); at(clock.group, -1.0, 2.75, -5.85); g.add(clock.group); clock.set(9, 47);
-    const door = box(1.0, 2.2, 0.08, toon('#7a4a32', {paint: {planks: 3, seed: 7}})); g.add(door);
-    const doorPiv = new THREE.Group(); at(doorPiv, -4.7, 0, -5.8); doorPiv.add(door); at(door, 0.5, 0, 0); g.add(doorPiv);
-    const doorFrame = box(1.15, 2.3, 0.05, '#2b2226'); at(doorFrame, -4.2, 0, -5.88); g.add(doorFrame);
-    updaters.push((t) => { doorPiv.rotation.y = 1.4 * smooth((t - E('telat') + 0.3) / 0.6); });
-    const chairs = [-1.4, -0.4, 0.6, 1.6, 2.6].map((x, i) => { const c = box(0.5, 1.2, 0.08, toon('#2f3a4a', {paint: {seed: 130 + i}})); at(c, x, 0, -4.4); g.add(c); return c; });
-    const mins = [['m1', -0.4], ['m2', 0.6], ['m3', 1.6], ['m4', 2.6]].map(([k, x], i) => {
-      const c = ch(k, {seed: 40 + i}, g, x, -4.05, -0.05 * i);
-      seat(c, 0, (t) => (t < cut(5) ? -0.4 : t < E('tegak') - 0.1 ? -0.52 : -0.4 + 0.04 * Math.max(0, 1 - (t - E('tegak') + 0.1) / 0.3)));
-      c.act([{t: 0, pose: 'idle', expr: ['tired', 'sleep', 'drowsy', 'tired'][i]}, {t: E('pakMenteri') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('enggak') + 0.05, pose: 'idle', expr: 'shocked'},
-        {t: cut(5), pose: 'idle', expr: ['sleep', 'drowsy', 'tired', 'drowsy'][i]}, {t: E('bambang') + 0.05, pose: 'idle', expr: 'shocked'}, {t: E('jam') + 0.1, pose: 'idle', expr: 'grimace'},
-        {t: E('tegak') - 0.1, pose: 'idle', expr: ['determined', 'nervous', 'determined', 'nervous'][i]}]);
-      c.act([{t: E('enggak'), action: 'tremble', dur: 0.6}, {t: E('tegak') - 0.1, action: 'jump', dur: 0.4}]);
+    const g = addLoc('room');
+    under(g, '#2a2228');
+    g.add(P.room(7, 3, 6, {wall: '#c9d6c0', floor: '#9a7a5a', wain: '#6a8a9a'}));
+    const desk = P.desk({color: '#b08454'}); at(desk, -1.3, 0, -3.7); g.add(desk);
+    const crt = P.crtMonitor(L.post); at(crt, -1.55, 0.77, -3.75); g.add(crt);
+    const kb = box(0.45, 0.03, 0.16, '#d8d0bc', {hull: 0.006}); at(kb, -1.55, 0.77, -3.3); g.add(kb);
+    const coins = new THREE.Group(); const cr = (s) => { let v = s; return () => (v = (v * 9301 + 49297) % 233280) / 233280; }; const rr = cr(7);
+    for (let i = 0; i < 26; i++) { const c = btcCoin(0.05); at(c, -0.75 + (rr() - 0.5) * 0.35, 0.78 + Math.floor(i / 6) * 0.012, -3.6 + (rr() - 0.5) * 0.3, rr() * 6, (rr() - 0.5) * 0.3); coins.add(c); }
+    g.add(coins);
+    const doorF = box(1.1, 2.2, 0.06, '#3a2a26'); at(doorF, 2.2, 0, -4.92); g.add(doorF);
+    const door = box(1.0, 2.1, 0.06, toon('#7a4a32', {paint: {planks: 3, seed: 8}})); const dp = new THREE.Group(); at(dp, 1.7, 0, -4.86); at(door, 0.5, 0, 0); dp.add(door); g.add(dp);
+    updaters.push((t) => { const o1 = smooth((t - E('pemuda') + 0.2) / 0.5) * (1 - smooth((t - E('bahagia')) / 0.5)), o2 = smooth((t - cut(9) + 0.3) / 0.4) * (1 - smooth((t - cut(10)) / 0.4)); dp.rotation.y = 1.3 * Math.max(o1, o2); });
+    const cal = sign(L.year, 0.5, 0.36, {bg: '#fbf6ea', fg: '#d8312a', frame: '#d8312a'}); popSign(g, cal, 0.2, 2.2, -4.85, E('tahun') - 0.1, 1e9, (t) => !inShots(t, 11));
+    const tbl = box(0.9, 0.42, 0.6, toon('#8a5a3a', {paint: {planks: 3, seed: 15}})); at(tbl, 0.45, 0, -2.6); g.add(tbl);
+    const laszlo = ch('laszlo', {seed: 1}, g, -0.5, -3.1, 0.1);
+    popSign(g, sign(L.hungry, 0.9, 0.28, {bg: '#fff3df', fg: '#d8413a', frame: '#351f22', depth: 0.03}), -0.15, 1.15, -2.6, E('lapar') - 0.05, E('bitcoin0') + 0.6, (t) => inShots(t, 2));
+    popSign(g, sign(L.cheap, 1.1, 0.3, {bg: '#f2a93a', fg: '#351f22', frame: '#8a5a1a'}), -0.75, 1.35, -3.5, E('harganya') - 0.1, cut(3), (t) => inShots(t, 2));
+    // the delivery: two boxes arrive and open on the little table
+    const kurir = ch('kurir', {seed: 2}, g, 2.2, -4.6, -0.3);
+    showWhen(kurir.group, (t) => (t > E('pemuda') - 0.3 && t < E('bahagia') + 0.6) || inShots(t, 9));
+    walkPath(kurir, [[E('pemuda') - 0.2, 2.2, -4.6], [E('datang') - 0.4, 1.25, -3.0], [E('datang') + 0.6, 1.25, -3.0], [E('bahagia') + 0.5, 2.2, -4.6], [cut(9) - 0.02, 2.2, -4.6], [cut(9), 1.3, -3.2]]);
+    const carried = [0, 1].map((i) => { const b = P.pizzaBox(); held(kurir, b.group, {hand: 1, y: 0.02 + i * 0.06, z: 0.15}); showWhen(b.group, (t) => t < E('datang') - 0.1); return b; });
+    const boxes = [0, 1].map((i) => { const b = P.pizzaBox(); at(b.group, 0.25 + i * 0.45, 0.42, -2.6, (i - 0.5) * 0.2); g.add(b.group); updaters.push((t) => { b.group.visible = t > E('datang') - 0.1 && t < cut(6); b.open(smooth((t - E('makan') + 0.1 - i * 0.2) / 0.4)); }); return b; });
+    const third = P.pizzaBox(); held(kurir, third.group, {hand: 1, y: 0.02, z: 0.15}); showWhen(third.group, (t) => inShots(t, 9));
+    const slice = P.pizzaSlice(0.16); held(laszlo, slice, {y: 0.03, z: 0.1, rx: -0.4}); showWhen(slice, (t) => (t > E('makan') && t < cut(6)) || t >= cut(11));
+    popSign(g, sign(L.deal, 1.5, 0.36, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), 0.2, 2.2, -3.0, E('empat') - 0.1, cut(5), (t) => inShots(t, 4));
+    popSign(g, sign(L.yum, 1.0, 0.3, {bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'}), -0.5, 2.25, -3.0, E('worth') - 0.05, cut(6), (t) => inShots(t, 5));
+    fx(g, FX.glints([0.45, 0.7, -2.6], E('makan'), {n: 20}), (t) => inShots(t, 4));
+    // the plot twist: a tower of pizza boxes
+    const stack = []; for (let i = 0; i < 14; i++) { const b = P.pizzaBox({color: i % 2 ? '#e8dcc0' : '#efe4cc'}); at(b.group, 0.75 + (i % 2) * 0.03, i * 0.065, -3.75, (i % 3 - 1) * 0.08); g.add(b.group); stack.push(b.group); }
+    updaters.push((t) => stack.forEach((b, i) => { const t0 = E('ternyata') + i * ((E('berkali') - E('ternyata')) / 14); b.visible = t > t0 && t < cut(11); b.scale.setScalar(pop(t, t0, 0.25)); }));
+    popSign(g, sign(L.wait, 1.3, 0.34, {bg: '#2b2b33', fg: '#f2d24a', frame: '#f2d24a'}), -0.5, 2.3, -3.0, E('tunggu') - 0.05, E('ternyata'), (t) => inShots(t, 8));
+    popSign(g, sign(L.total, 1.3, 0.36, {bg: '#f2a93a', fg: '#351f22', frame: '#8a5a1a'}), 0.75, 2.45, -3.6, E('seratus') - 0.1, cut(9), (t) => inShots(t, 8));
+    popSign(g, sign(L.noRegret, 1.1, 0.3, {bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'}), -0.5, 2.25, -3.35, E('menyesal') - 0.05, cut(11), (t) => inShots(t, 10));
+    laszlo.act([
+      {t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('lapar') + 0.1, pose: 'idle', expr: 'cry'}, {t: E('bitcoin0') + 0.1, pose: 'present', expr: 'proud'}, {t: E('harganya') + 0.1, pose: 'shrug', expr: 'confused'},
+      {t: cut(3), pose: 'tap', expr: 'thinking'}, {t: E('siapa') - 0.1, pose: 'tap', expr: 'scheming'}, {t: E('bayar') + 0.1, pose: 'tap', expr: 'excited'},
+      {t: E('pemuda') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('datang') + 0.1, pose: 'cheer', expr: 'excited'}, {t: E('makan') + 0.05, pose: 'eat', expr: 'happy'}, {t: E('empat') + 0.1, pose: 'eat', expr: 'cheesy'},
+      {t: cut(8), pose: 'idle', expr: 'neutral'}, {t: E('tunggu') + 0.05, pose: 'stop', expr: 'surprised'}, {t: E('ternyata') + 0.1, pose: 'idle', expr: 'nervous'}, {t: E('seratus') + 0.1, pose: 'shrug', expr: 'cheesy'},
+      {t: cut(9), pose: 'idle', expr: 'cheesy'}, {t: E('cicilan') + 0.1, pose: 'shrug', expr: 'nervous'},
+      {t: cut(10), pose: 'idle', expr: 'smug'}, {t: E('menyesal') + 0.05, pose: 'hips', expr: 'proud'},
+      {t: cut(11), pose: 'cheer', expr: 'excited'}, {t: cut(12), pose: 'eat', expr: 'happy'}, {t: E('santai') + 0.1, pose: 'eat', expr: 'cheesy'}, {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy'}]);
+    laszlo.act([{t: E('tunggu'), action: 'tremble', dur: 0.6}, {t: E('geleng'), action: 'shake', dur: 0.8}]);
+    speak(laszlo, 11, [[0, 'happy', 'eat'], [0.6, 'cheesy', 'eat']]);
+    speak(laszlo, 12, [[0, 'excited', 'pointUp']]);
+    kurir.act([{t: E('pemuda') - 0.2, pose: 'carry', expr: 'neutral'}, {t: E('datang') - 0.1, pose: 'give', expr: 'cheesy'}, {t: E('datang') + 0.6, pose: 'wave', expr: 'happy'},
+      {t: cut(9), pose: 'give', expr: 'confused'}]);
+    speak(kurir, 20, [[0, 'confused', 'give'], [0.5, 'grimace', 'give']]);
+    // the party (11)
+    const party = [['p1', -1.7, -2.7, 0.3], ['p2', 1.45, -2.9, -0.3], ['p3', 0.65, -2.35, -0.1]].map(([k, x, z, y], i) => {
+      const c = ch(k, {seed: 30 + i, scale: k === 'p3' ? 0.62 : 1}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 11) && t < E('ingat'));
+      const s = P.pizzaSlice(0.14); held(c, s, {y: 0.03, z: 0.1, rx: -0.4});
+      c.act([{t: cut(11), pose: 'cheer', expr: ['excited', 'toothy', 'laugh'][i]}, {t: E('mei') + 0.1, pose: 'eat', expr: 'happy'}, {t: E('pizzaDay') + 0.1, pose: 'cheer', expr: 'excited'}]);
       return c; });
-    const presenter = ch('m0', {seed: 50}, g, -1.9, -4.7, -0.5);
-    const pointer = cyl(0.01, 0.01, 0.6, '#3a3a40', {hull: 0.004, center: true}); held(presenter, pointer, {y: 0.0, z: 0.05, rz: 1.2});
-    showWhen(presenter.group, (t) => t < cut(5));
-    presenter.act([{t: 0, pose: 'point', expr: 'cheesy'}, {t: E('pakMenteri') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('muter') + 0.1, pose: 'idle', expr: 'nervous'},
-      {t: E('intinya') + 0.05, pose: 'shrug', expr: 'grimace'}, {t: E('enggak') + 0.05, pose: 'headHold', expr: 'scream'}]);
-    presenter.act([{t: E('enggak'), action: 'jump', dur: 0.5}]);
-    const emak = ch('emak', {seed: 3}, g, 3.9, -2.9, -0.55);
-    emak.act([{t: 0, pose: 'cross', expr: 'annoyed'}, {t: E('lima') + 0.05, pose: 'pointUp', expr: 'determined'}, {t: cut(5), pose: 'cross', expr: 'thinking'},
-      {t: E('telat') + 0.05, pose: 'hips', expr: 'annoyed'}, {t: E('seluruh') + 0.1, pose: 'cross', expr: 'smug'}]);
-    speak(emak, 3, [[0, 'annoyed', 'point'], [0.55, 'irritated', 'hips']]);
-    speak(emak, 4, [[0, 'angry', 'shrug']]);
-    speak(emak, 5, [[0, 'furious', 'point'], [0.5, 'gritted', 'stop']]);
-    speak(emak, 11, [[0, 'furious', 'point']]);
-    speak(emak, 12, [[0, 'angry', 'hips']]);
-    emak.act([{t: E('mau'), action: 'shake', dur: 0.6}]);
-    const bam = ch('bambang', {seed: 60}, g, -4.2, -5.5, 0.4);
-    showWhen(bam.group, (t) => t > E('telat') - 0.1 && t < cut(7));
-    walkPath(bam, [[E('telat'), -4.2, -5.5], [E('bambang') - 0.2, -3.2, -4.6], [cut(6) + 0.1, -3.2, -4.6], [E('tegak') - 0.25, -1.4, -4.05]], 'walk');
-    seat(bam, 0, (t) => -0.4 * smooth((t - E('tegak') + 0.25) / 0.2));
-    bam.act([{t: E('telat'), pose: 'idle', expr: 'nervous'}, {t: E('bambang') + 0.05, pose: 'armsUp', expr: 'shocked'}, {t: E('jam') + 0.05, pose: 'beg', expr: 'grimace'},
-      {t: cut(6), pose: 'idle', expr: 'nervous'}, {t: E('tegak') - 0.1, pose: 'idle', expr: 'determined'}]);
-    bam.act([{t: E('bambang'), action: 'jump', dur: 0.5}, {t: E('jam'), action: 'tremble', dur: 0.8}]);
-    popSign(g, sign('BAMBANG', 1.2, 0.46, {bg: '#fff3df', fg: '#b8232a', frame: '#351f22', sub: 'SUTRISNO WIJAYA'}), -3.2, 2.6, -4.4, E('bambang') - 0.05, cut(6), (t) => inShots(t, 5));
-    fx(g, FX.glints([1.1, 1.5, -3.9], E('tegak'), {n: 24}), (t) => inShots(t, 6));
+    popSign(g, sign(L.day, 2.2, 0.46, {bg: '#f2a93a', fg: '#351f22', frame: '#8a5a1a', sub: L.may}), 0, 2.45, -4.6, E('sejak') - 0.1, E('ingat'), (t) => inShots(t, 11));
+    fx(g, FX.confetti([0, 2.8, -2.8], E('pizzaDay')), (t) => inShots(t, 11));
+    popSign(g, sign(L.question, 1.6, 0.4, {bg: '#fff3df', fg: '#8a2a36', frame: '#8a2a36'}), -0.5, 2.55, -2.8, E('nangis') - 0.2, 1e9, (t) => inShots(t, 12));
+    popSign(g, sign(L.comment, 1.5, 0.36, {bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36'}), -0.5, 2.12, -2.75, E('komentar') - 0.1, 1e9, (t) => inShots(t, 12));
+    fx(g, FX.confetti([-0.5, 2.8, -2.6], E('komentar') + 0.05, {seed: 21}), (t) => inShots(t, 12));
   }
 
-  // ---------- the market: chilli prices (3), the bargain (4) ----------
+  // ---------- the studio: the price rockets (6), the world learns (10), up and down (11) ----------
   {
-    const g = addLoc('market');
-    under(g, '#c9b48a', 120);
-    const ground = box(30, 0.02, 20, toon('#cbb894', {paint: {seed: 141, stains: 22}}), {edges: false}); at(ground, 0, -0.03, -4); g.add(ground);
-    for (const [x, c] of [[-5.2, '#e8c35a'], [-1.8, '#d9c9a6'], [1.6, '#ead2a2'], [5.0, '#d8b88a']]) { const f = P.facade(3.4, 3.4, {color: c, windows: 2, doorX: 0.6, seed: Math.round(x * 3 + 20), trim: '#8a6a4a'}); at(f, x, 0, -7.2); g.add(f); }
-    const chili = P.chiliStall({sub: 'CABAI / KG'}); at(chili.group, 0, 0, -3.2); g.add(chili.group);
-    chili.board(L.price0); chili.board('Rp50.000'); chili.board('Rp30.000'); chili.board(L.price1);
-    const tPrice = E('sebelah') + 0.45;
-    updaters.push((t) => chili.setPrice(t < E('stabil') ? L.price0 : t < E('ditawar') ? 'Rp50.000' : t < tPrice ? 'Rp30.000' : L.price1));
-    fx(g, FX.glints([-0.5, 1.2, -2.5], tPrice, {n: 20}), (t) => inShots(t, 4));
-    const nb = box(1.6, 0.8, 0.9, toon('#6a8a5a', {paint: {planks: 4, seed: 151}})); at(nb, 2.6, 0, -3.6); g.add(nb);
-    const veg = P.vegPile(); at(veg, 2.6, 0, -3.6); g.add(veg);
-    const nroof = box(2.0, 0.08, 1.4, toon('#d8413a', {paint: {stripes: {n: 10, color: '#f3ece0'}}})); at(nroof, 2.6, 2.3, -3.4); g.add(nroof);
-    for (const s of [-1, 1]) { const p = cyl(0.04, 0.04, 2.3, '#6a4a32', {hull: 0.01}); at(p, 2.6 + s * 0.9, 0, -2.9); g.add(p); }
-    const ls = box(1.6, 0.8, 0.9, toon('#8a6a4a', {paint: {planks: 4, seed: 152}})); at(ls, -2.7, 0, -3.8); g.add(ls);
-    const veg2 = P.vegPile(); at(veg2, -2.7, 0, -3.8); g.add(veg2);
-    popSign(g, sign(L.neighbor + ' →', 1.0, 0.3, {bg: '#f2d24a', fg: '#351f22', frame: '#8a6a1a'}), 2.6, 2.7, -3.2, E('sebelah') - 0.1, cut(5), (t) => inShots(t, 4));
-    const abang = ch('abang', {seed: 70}, g, 0.1, -4.05, -0.1);
-    const tetangga = ch('tetangga', {seed: 71}, g, 2.6, -4.4, -0.3);
-    const shopper = ch('shopper', {seed: 72}, g, -2.6, -2.7, 0.2);
-    const emak = ch('emak', {seed: 4}, g, -0.95, -2.25, 0.45);
-    const bag = P.shopBag('#e8c35a'); held(emak, bag, {hand: 0, y: -0.38, z: 0.08});
-    emak.act([{t: cut(3), pose: 'idle', expr: 'thinking'}, {t: E('stabil') + 0.05, pose: 'hips', expr: 'smug'}, {t: E('ditawar') + 0.05, pose: 'point', expr: 'scheming'}]);
-    speak(emak, 8, [[0, 'cheesy', 'point'], [0.6, 'smug', 'hips']]);
-    speak(emak, 9, [[0, 'scheming', 'cross'], [0.45, 'annoyed', 'point']]);
-    emak.act([{t: E('pindah'), action: 'lean', dur: 1.0, amount: -0.12}, {t: E('sebelah') + 0.6, pose: 'cheer', expr: 'toothy'}]);
-    abang.act([{t: cut(3), pose: 'present', expr: 'cheesy'}, {t: E('menang') + 0.05, pose: 'idle', expr: 'nervous'}, {t: E('ditawar') + 0.1, pose: 'idle', expr: 'worried'},
-      {t: E('limaBelas') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('bang') + 0.1, pose: 'beg', expr: 'grimace'}, {t: E('sebelah') + 0.1, pose: 'facepalm', expr: 'cry'}, {t: tPrice + 0.2, pose: 'give', expr: 'cry'}]);
-    abang.act([{t: E('limaBelas'), action: 'jump', dur: 0.5}]);
-    tetangga.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('sebelah'), pose: 'wave', expr: 'excited'}]);
-    shopper.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('ditawar'), pose: 'cheer', expr: 'excited'}]);
+    const g = addLoc('stage');
+    under(g, '#14161c');
+    const fl0 = box(30, 0.04, 14, toon('#262a36', {paint: {seed: 221}}), {edges: false}); at(fl0, 0, -0.03, -3); g.add(fl0);
+    const wall = box(30, 9, 0.2, toon('#1e2840', {paint: {seed: 222}}), {edges: false}); at(wall, 0, 0, -6.2); g.add(wall);
+    const H = Array.from({length: 17}, (_, i) => 0.04 + 3.0 * Math.pow(i / 16, 4));
+    const chart = P.barChart(H, {w: 4.2}); at(chart.group, 0.4, 0, -4.4); g.add(chart.group);
+    updaters.push((t) => chart.show(smooth((t - E('tahunDemi')) / (E('meroket') + 0.6 - E('tahunDemi')))));
+    const rk = P.rocket(); g.add(rk);
+    updaters.push((t) => { const u = Math.max(0, t - E('meroket')); rk.visible = inShots(t, 6) && t > E('meroket') - 0.1; rk.position.set(2.35 + u * 0.2, 3.2 + u * u * 1.4, -4.3); rk.rotation.z = -0.15; });
+    fx(g, FX.smoke([2.35, 3.0, -4.3], E('meroket'), {n: 20, every: 0.08, life: 1.2, size: 0.35, grow: 2, rise: -0.4, drift: 0.1, color: '#f3ece0', opacity: 0.6}), (t) => inShots(t, 6));
+    popSign(g, sign(L.years, 1.4, 0.34, {bg: '#1e2430', fg: '#e8e0c8', frame: '#e8e0c8'}), -1.3, 3.3, -5.9, E('tahunDemi') - 0.1, cut(7), (t) => inShots(t, 6));
+    popSign(g, sign(L.price, 2.2, 0.56, {bg: '#e8c04a', fg: '#351f22', frame: '#8a6a1a'}), 0.2, 2.5, -3.2, E('triliun') - 0.1, cut(7), (t) => inShots(t, 6));
+    const l1 = ch('laszlo', {seed: 3}, g, -1.15, -2.6, 0.45);
+    showWhen(l1.group, (t) => inShots(t, 6));
+    l1.act([{t: cut(6), pose: 'idle', expr: 'neutral'}, {t: E('meroket') + 0.1, pose: 'headHold', expr: 'surprised'}, {t: E('triliun') + 0.05, pose: 'headHold', expr: 'scream'}]);
+    l1.act([{t: E('triliun'), action: 'jump', dur: 0.5}]);
+    // the globe: the world learns that bitcoin can pay for things
+    const GX = -9;
+    const gl = P.globe(1.1); at(gl.group, GX, 1.9, -4.3); g.add(gl.group);
+    const gfl = FX.fireLight([GX, 2.6, -2.4], {intensity: 2.0, dist: 6}); g.add(gfl.obj); updaters.push((t) => gfl.update(t)); updaters.push((t) => { gl.group.rotation.y = t * 0.4; });
+    const orb = P.pizza(0.2); g.add(orb); const oc = btcCoin(0.12); g.add(oc);
+    updaters.push((t) => { const a = t * 1.6; orb.position.set(GX + Math.cos(a) * 1.6, 1.9 + Math.sin(a) * 0.35, -4.3 + Math.sin(a) * 1.0); orb.rotation.x = 1.2; oc.position.set(GX + Math.cos(a + Math.PI) * 1.6, 1.9 - Math.sin(a) * 0.35, -4.3 - Math.sin(a) * 1.0); oc.rotation.set(1.57, 0, a); });
+    popSign(g, sign(L.world, 2.3, 0.4, {bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'}), GX, 3.55, -3.9, E('dunia') - 0.1, cut(11), (t) => inShots(t, 10));
+    // up and down (11): a second chart that rises and crashes
+    const CX = 9;
+    const H2 = [0.4, 0.7, 0.6, 1.1, 1.6, 1.4, 2.1, 2.6, 2.4, 3.0, 1.6, 0.9, 0.5];
+    const ch2 = P.barChart(H2, {w: 3.6, crashN: 3}); at(ch2.group, CX + 0.3, 0, -4.4); g.add(ch2.group);
+    updaters.push((t) => ch2.show(smooth((t - E('ingat')) / (E('naik') + 0.5 - E('ingat'))) * 10 / 13 + smooth((t - E('anjlok') + 0.3) / 0.6) * 3 / 13));
+    popSign(g, sign(L.up, 0.8, 0.3, {bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'}), CX - 0.6, 3.5, -4.2, E('naik') - 0.05, cut(12), (t) => inShots(t, 11));
+    popSign(g, sign(L.down, 1.0, 0.3, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}), CX + 1.3, 2.2, -4.0, E('anjlok') - 0.05, cut(12), (t) => inShots(t, 11));
+    popSign(g, sign(L.risk, 2.0, 0.44, {bg: '#f2d24a', fg: '#351f22', frame: '#351f22'}), CX, 2.65, -3.0, E('jangan') - 0.1, cut(12), (t) => inShots(t, 11));
+    const l2 = ch('laszlo', {seed: 4}, g, CX - 1.15, -2.5, 0.4);
+    showWhen(l2.group, (t) => inShots(t, 11) && t > E('ingat') - 0.3);
+    l2.act([{t: E('ingat') - 0.3, pose: 'pointUp', expr: 'determined'}, {t: E('naik') + 0.1, pose: 'cheer', expr: 'excited'}, {t: E('anjlok') + 0.05, pose: 'headHold', expr: 'shocked'},
+      {t: E('jangan') + 0.05, pose: 'pointUp', expr: 'annoyed'}]);
+    l2.act([{t: E('anjlok'), action: 'jump', dur: 0.5}, {t: E('jangan') + 0.1, action: 'shake', dur: 0.9}]);
   }
 
-  // ---------- home: lost things (9), president at home (10-11), the question (12) ----------
+  // ---------- the field: thousands of houses, jets, gorengan to the clouds (7) ----------
   {
-    const g = addLoc('home');
-    under(g, '#2a2228');
-    g.add(P.room(8, 3.2, 6, {wall: '#f0dcb8', floor: '#a87a52', wain: '#7fa35a'}));
-    const sofa = P.sofa('#6a8ab0'); at(sofa, -2.4, 0, -4.1); g.add(sofa);
-    const tv = P.tv(); at(tv.group, 0.5, 0, -4.5); g.add(tv.group); updaters.push((t) => tv.update(t));
-    const ct = box(1.0, 0.42, 0.6, toon('#8a5a3a', {paint: {planks: 3, seed: 161}})); at(ct, -0.5, 0, -3.1); g.add(ct);
-    const clock = P.wallClock(0.26, {rim: '#d8413a'}); at(clock.group, 0.2, 2.45, -4.85); g.add(clock.group); clock.set(7, 10); clock.group.position.x = -1.2;
-    const KX = 2.45; // the kitchen corner
-    const stove = P.stoveCounter(1.6); at(stove, KX, 0, -3.4); g.add(stove);
-    const pot = P.cookPot('#b8c0c8'); at(pot, KX + 0.32, 0.93, -3.4); g.add(pot);
-    fx(g, FX.smoke([KX + 0.32, 1.25, -3.4], cut(10), {n: 60, every: 0.2, life: 1.6, size: 0.25, grow: 2.0, rise: 0.6, drift: 0.05, color: '#fbf6ea', opacity: 0.5}), (t) => inShots(t, 10, 11));
-    const cal = P.calendar(L.noLeave, {crossed: true});
-    popSign(g, cal, KX - 0.25, 2.78, -3.6, E('cuti') - 0.1, 1e9, (t) => inShots(t, 11));
-    const rem = P.remote(); g.add(rem);
-    const bapak = ch('bapak', {seed: 80}, g, -1.3, -3.6, 0.2);
-    const kid = ch('kid', {seed: 81, scale: 0.62}, g, 1.4, -3.0, -0.2);
-    const emak = ch('emakHome', {seed: 5}, g, 0.7, -2.6, -0.3);
-    const queen = ch('emakHome', {seed: 6, hat: 'crown'}, g, KX - 0.25, -4.05, 0.15);
-    const queen2 = ch('emakHome', {seed: 7, hat: 'crown'}, g, 0, -2.8, 0); showWhen(queen2.group, (t) => t >= cut(12));
-    const tQ = E('rumah') - 0.05;
-    showWhen(emak.group, (t) => t < tQ); showWhen(queen.group, (t) => t >= tQ && t < cut(12));
-    walkPath(emak, [[cut(9), 0.7, -2.6], [cut(10) - 0.03, 0.7, -2.6], [cut(10), KX - 0.25, -4.05]]);
-    const lad1 = P.ladle(), lad2 = P.ladle(); held(emak, lad1, {y: 0.02, z: 0.08, rz: 0.4}); held(queen, lad2, {y: 0.02, z: 0.08, rz: 0.4}); showWhen(lad1, (t) => t >= cut(10));
-    const stir = (c, a, b) => { const cues = []; for (let t0 = a; t0 < b; t0 += 0.45) cues.push({t: t0, pose: 'tap'}, {t: t0 + 0.22, pose: 'hold'}); c.act(cues); };
-    stir(emak, cut(10) + 0.2, tQ); stir(queen, tQ + 0.6, E('keuangan') - 0.1); stir(queen, E('setiap'), cut(12) - 0.1);
-    fx(g, FX.smoke([KX - 0.25, 1.3, -3.85], tQ - 0.1, {n: 10, every: 0.015, life: 0.7, size: 0.5, grow: 1.8, rise: 0.4, drift: 0.2, color: '#fff3df', opacity: 0.85}), (t) => inShots(t, 10));
-    fx(g, FX.glints([KX - 0.25, 2.1, -3.85], tQ, {n: 26}), (t) => inShots(t, 10));
-    // the remote: on the table, then in her hand
-    const remH = P.remote(); held(emak, remH, {y: 0.0, z: 0.08}); showWhen(remH, (t) => t > E('ketemu') && t < cut(10));
-    updaters.push((t) => { rem.visible = t <= E('ketemu'); at(rem, -0.4, 0.43, -3.0, 0.4); });
-    popSign(g, sign(L.found, 0.9, 0.32, {bg: '#3f8a5a', fg: '#fff3df', frame: '#1f5a3a'}), 0.2, 2.35, -2.6, E('ketemu') - 0.05, cut(10), (t) => inShots(t, 9));
-    emak.act([{t: cut(9), pose: 'idle', expr: 'neutral'}, {t: E('hilang') + 0.1, pose: 'hips', expr: 'smug'}, {t: E('ketemu') - 0.05, pose: 'present', expr: 'cheesy'}, {t: E('nyari') + 0.1, pose: 'hips', expr: 'proud'}]);
-    speak(emak, 22, [[0, 'annoyed', 'present'], [0.5, 'furious', 'pointUp']]);
-    emak.act([{t: cut(10), pose: 'hold', expr: 'tired'}, {t: E('sebenarnya') + 0.05, expr: 'thinking'}, {t: E('sudah'), expr: 'happy'}]);
-    bapak.act([{t: cut(9), pose: 'shrug', expr: 'confused'}, {t: E('hilang') + 0.1, pose: 'headHold', expr: 'worried'}, {t: E('ketemu') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('mulut') + 0.1, pose: 'facepalm', expr: 'nervous'},
-      {t: cut(11), pose: 'idle', expr: 'neutral'}, {t: E('semua') + 0.1, pose: 'wave', expr: 'cheesy'}, {t: cut(12), pose: 'idle', expr: 'happy'}, {t: E('komentar'), pose: 'point', expr: 'cheesy'}]);
-    walkPath(bapak, [[cut(11), -1.3, -3.6], [E('semua') - 0.2, KX - 1.2, -3.6], [E('semua') + 0.5, KX - 1.75, -3.3], [cut(12) - 0.02, KX - 1.75, -3.3], [cut(12), -1.3, -2.9]]);
-    showWhen(bapak.group, (t) => !inShots(t, 10));
-    kid.act([{t: cut(9), pose: 'shrug', expr: 'confused'}, {t: E('ketemu') + 0.1, pose: 'idle', expr: 'cheesy'}, {t: E('mulut'), pose: 'cheer', expr: 'laugh'}, {t: cut(11), pose: 'idle', expr: 'neutral'},
-      {t: E('semua') + 0.15, pose: 'cheer', expr: 'excited'}, {t: cut(12), pose: 'wave', expr: 'toothy'}]);
-    walkPath(kid, [[cut(11), 1.4, -3.0], [E('semua') - 0.1, KX + 1.5, -3.2], [E('semua') + 0.5, KX + 1.5, -3.2], [cut(12) - 0.02, KX + 1.5, -3.2], [cut(12), 1.3, -2.7]]);
-    showWhen(kid.group, (t) => !inShots(t, 10));
-    queen.act([{t: tQ, pose: 'hips', expr: 'proud'}, {t: tQ + 0.6, expr: 'happy'}, {t: E('keuangan') - 0.05, pose: 'presentBoth', expr: 'proud'}, {t: E('makanan') + 0.05, pose: 'present', expr: 'cheesy'},
-      {t: E('kesehatan') + 0.05, pose: 'presentBoth', expr: 'determined'}, {t: E('setiap') + 0.05, expr: 'tired'}, {t: E('cuti') + 0.1, expr: 'happy'}]);
-    queen2.act([{t: cut(12), pose: 'shrug', expr: 'happy'}, {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy'}]);
-    // what she runs, popping around her
-    const wl = P.wallet(); wl.open(1); const wal = wl.group; const aid = new THREE.Group();
-    aid.add(box(0.36, 0.26, 0.2, '#fbf6ea', {hull: 0.01})); const cross = sign('+', 0.2, 0.2, {bg: '#fbf6ea', fg: '#d8312a', frame: '#fbf6ea', depth: 0.01, border: false}); at(cross, 0, 0.13, 0.105); aid.add(cross);
-    [[wal, 'keuangan', L.money, KX - 0.95, 2.15], [P.cookPot(), 'makanan', L.food, KX + 0.85, 2.15], [aid, 'kesehatan', L.health, KX - 0.95, 1.4]].forEach(([obj, k, lab, x, y]) => {
-      const grp = new THREE.Group(); obj.scale.setScalar(1.3); grp.add(obj);
-      const l = sign(lab, 0.8, 0.2, {bg: '#fff3df', fg: '#351f22', frame: '#351f22', depth: 0.02}); at(l, 0, -0.18, 0.1); grp.add(l);
-      popSign(g, grp, x, y, -3.0, E(k) - 0.05, cut(12), (t) => inShots(t, 11));
-    });
-    popSign(g, sign(L.all, 0.9, 0.24, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), KX + 0.85, 1.4, -3.0, E('semua') - 0.05, cut(12), (t) => inShots(t, 11));
-    popSign(g, sign(L.question, 1.8, 0.42, {bg: '#fff3df', fg: '#8a2a36', frame: '#8a2a36'}), 0, 2.72, -2.2, E('emakmu') - 0.1, 1e9, (t) => inShots(t, 12));
-    popSign(g, sign(L.comment, 1.5, 0.36, {bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36'}), 0, 2.28, -2.15, E('komentar') - 0.1, 1e9, (t) => inShots(t, 12));
-    fx(g, FX.confetti([0, 2.9, -2.6], E('komentar') + 0.05), (t) => inShots(t, 12));
+    const g = addLoc('field');
+    under(g, '#8fae6a', 300);
+    const grass = box(80, 0.03, 80, toon('#8fae6a', {paint: {seed: 231, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -20); g.add(grass);
+    const houses = []; let k = 0;
+    for (let row = 0; row < 4; row++) for (let i = 0; i < 4; i++) { const h = P.house(1.5, 1.3, 1.5, {color: ['#e8c35a', '#e0809a', '#7fc4e8', '#f3efe6'][(row + i) % 4], roof: ['#b5543c', '#4f6a7a', '#7a4a32'][(row * 2 + i) % 3], windows: 1, seed: k}); at(h, -8.0 + i * 1.8 + (row % 2) * 0.9, 0, -4 - row * 2.6); g.add(h); houses.push([h, k++]); }
+    updaters.push((t) => houses.forEach(([h, i]) => { const t0 = E('rumah') - 0.3 + i * 0.05; h.visible = t > t0; h.scale.setScalar(pop(t, t0, 0.3)); }));
+    const jets = [0, 1, 2].map((i) => { const p = P.plane(); p.scale.setScalar(0.32); at(p, 2.7 + i * 1.2, 0, -4.5 - i * 2.8, -0.5); g.add(p); return p; });
+    updaters.push((t) => jets.forEach((p, i) => { const t0 = E('jet') - 0.2 + i * 0.15; p.visible = t > t0; p.scale.setScalar(0.32 * pop(t, t0, 0.3)); }));
+    popSign(g, sign(L.houses, 1.6, 0.36, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), -3.6, 2.6, -4.5, E('rumah') - 0.1, cut(8));
+    popSign(g, sign(L.jets, 1.5, 0.36, {bg: '#fff3df', fg: '#351f22', frame: '#351f22'}), 3.6, 2.6, -5.0, E('jet') - 0.1, cut(8));
+    // the gorengan tower, up into the clouds
+    const tower = new THREE.Group(); at(tower, 0, 0, -4.8); g.add(tower);
+    const pieces = []; const rr = (() => { let v = 5; return () => (v = (v * 9301 + 49297) % 233280) / 233280; })();
+    for (let i = 0; i < 240; i++) { const p = P.gorengan(i % 3); at(p, (rr() - 0.5) * 0.12, i * 0.055, (rr() - 0.5) * 0.12, rr() * 6, (rr() - 0.5) * 0.3); tower.add(p); pieces.push(p); }
+    updaters.push((t) => { const n = Math.floor(240 * smooth((t - E('gorengan') + 0.2) / (E('awan') + 0.8 - E('gorengan')))); pieces.forEach((p, i) => { p.visible = i < n; }); });
+    popSign(g, sign(L.gor, 1.3, 0.34, {bg: '#e8a83a', fg: '#351f22', frame: '#8a5a1a'}), 0, 1.0, -3.9, E('gorengan') - 0.1, cut(8));
+    [[0, 12.8, -5.2, 1.6], [-4, 12, -7, 1.3], [4.5, 11.5, -8, 1.4], [-2, 13.5, -9, 1.2]].forEach(([x, y, z, s], i) => { const c = P.cloud(s, 7 + i); at(c, x, y, z); g.add(c); });
+    fx(g, FX.glints([0, 12.6, -4.6], E('awan') + 0.4, {n: 26}));
   }
 
   return {world, chars, locGroups, update(t, camPos) {

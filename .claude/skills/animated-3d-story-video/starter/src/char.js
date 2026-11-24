@@ -20,12 +20,13 @@ export const DESIGNS = {
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   tidy: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
   gamer: {head: 'round', hair: 'fringe', skin: '#f6dcc4', brows: 'thick', limb: [9, 6], legExtra: 0.06, torsoExtra: 0.08, cheeks: false, shading: true, shadows: true},
+  spry: {head: 'round', hair: 'tuft', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
   cozy: {head: 'round', hair: 'fringe', skin: '#f5dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.0, torsoExtra: 0.17, cheeks: false, shading: true, shadows: true},
   dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }

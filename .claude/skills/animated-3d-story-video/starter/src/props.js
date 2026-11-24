@@ -1877,3 +1877,96 @@ export function stoveCounter(w = 1.6) {
   return g;
 }
 function P_glow(c, sz) { return glowSprite(c, sz); }
+
+// ---------- "Pizza Bitcoin" ----------
+// Round pizza: crust, sauce, cheese, sausage slices. `slice` cuts one wedge out.
+export function pizza(r = 0.2, o = {}) {
+  const c = canvas(512, 512), x = c.getContext('2d'); const rr = rng(o.seed || 9);
+  x.fillStyle = '#d89a4a'; x.beginPath(); x.arc(256, 256, 254, 0, 7); x.fill();
+  x.fillStyle = '#c8402a'; x.beginPath(); x.arc(256, 256, 222, 0, 7); x.fill();
+  x.fillStyle = '#f6d46a'; for (let i = 0; i < 26; i++) { x.beginPath(); x.ellipse(256 + (rr() - 0.5) * 340, 256 + (rr() - 0.5) * 340, 50 + rr() * 30, 40 + rr() * 30, rr() * 3, 0, 7); x.fill(); }
+  x.fillStyle = 'rgba(255,240,180,0.6)'; for (let i = 0; i < 30; i++) { x.beginPath(); x.arc(256 + (rr() - 0.5) * 380, 256 + (rr() - 0.5) * 380, 6 + rr() * 10, 0, 7); x.fill(); }
+  for (let i = 0; i < 12; i++) { const a = rr() * 6.28, d = rr() * 170; const px = 256 + Math.cos(a) * d, py = 256 + Math.sin(a) * d;
+    x.fillStyle = '#a8322a'; x.beginPath(); x.arc(px, py, 24, 0, 7); x.fill(); x.strokeStyle = '#6a1a1a'; x.lineWidth = 4; x.stroke(); x.fillStyle = 'rgba(255,200,180,0.5)'; x.beginPath(); x.arc(px - 7, py - 7, 6, 0, 7); x.fill(); }
+  x.strokeStyle = INK; x.lineWidth = 8; x.beginPath(); x.arc(256, 256, 250, 0, 7); x.stroke();
+  const top = new THREE.MeshToonMaterial({map: texFrom(c), gradientMap: gradientMap()});
+  const side = toon('#c8823a', {wear: false});
+  const th0 = o.wedge ? -0.35 : o.slice ? Math.PI * 0.2 : 0, th = o.wedge ? 0.7 : o.slice ? Math.PI * 1.75 : Math.PI * 2;
+  const geo = new THREE.CylinderGeometry(r, r, r * 0.12, 40, 1, false, th0, th); geo.translate(0, r * 0.06, 0);
+  return ink(geo, [side, top, side], {hull: Math.max(0.006, r * 0.03), edges: false});
+}
+// A single slice (wedge) of pizza to hold.
+export function pizzaSlice(r = 0.16) { return pizza(r, {wedge: true, seed: 4}); }
+// Cardboard pizza box; open(u) lifts the lid and shows the pizza.
+export function pizzaBox(o = {}) {
+  const g = new THREE.Group(); const w = o.w || 0.42, col = o.color || '#e8dcc0';
+  g.add(box(w, 0.05, w, toon(col, {paint: {seed: 181}}), {hull: 0.008}));
+  const pz = pizza(w * 0.44); at(pz, 0, 0.02, 0); g.add(pz);
+  const lidP = new THREE.Group(); at(lidP, 0, 0.05, -w / 2); g.add(lidP);
+  const lid = box(w, 0.012, w, toon(col, {paint: {seed: 182}}), {hull: 0.008}); at(lid, 0, 0, w / 2); lidP.add(lid);
+  const logo = sign(o.label || 'PIZZA', w * 0.7, w * 0.3, {bg: '#d8312a', fg: '#fff3df', frame: '#d8312a', depth: 0.004, border: false}); at(logo, 0, 0.012, w / 2, 0, -Math.PI / 2); lidP.add(logo);
+  return {group: g, open(u) { lidP.rotation.x = -1.9 * u; pz.visible = u > 0.05; }};
+}
+// Museum pedestal with a glass dome and a spotlight glow.
+export function glassDome(r = 0.45) {
+  const g = new THREE.Group();
+  g.add(cyl(r * 1.1, r * 1.25, 1.0, toon('#e8e4dc', {paint: {seed: 191}}), {seg: 32}));
+  const top = cyl(r * 1.2, r * 1.2, 0.05, '#c9a25a', {seg: 32}); at(top, 0, 1.0, 0); g.add(top);
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshBasicMaterial({color: '#dff4ff', transparent: true, opacity: 0.22, depthWrite: false}));
+  dome.position.y = 1.05; g.add(dome);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(r, 0.012, 6, 40), new THREE.MeshBasicMaterial({color: INK})); rim.rotation.x = Math.PI / 2; rim.position.y = 1.05; g.add(rim);
+  const hl = new THREE.Mesh(new THREE.SphereGeometry(r * 1.002, 16, 8, 0.5, 0.5, 0.35, 0.5), new THREE.MeshBasicMaterial({color: '#ffffff', transparent: true, opacity: 0.35, depthWrite: false, side: THREE.DoubleSide})); hl.position.y = 1.05; g.add(hl);
+  return g;
+}
+// Gold bar (trapezoid block).
+export function goldBar() {
+  const s = new THREE.Shape(); s.moveTo(-0.13, 0); s.lineTo(0.13, 0); s.lineTo(0.1, 0.07); s.lineTo(-0.1, 0.07); s.closePath();
+  const geo = new THREE.ExtrudeGeometry(s, {depth: 0.1, bevelEnabled: false}); geo.translate(0, 0, -0.05);
+  return ink(geo, toon('#e8c04a', {emissive: '#6a4a00', emissiveIntensity: 0.25}), {hull: 0.006});
+}
+// Old CRT monitor with a canvas screen (a forum post), on a beige case.
+export function crtMonitor(lines, o = {}) {
+  const g = new THREE.Group();
+  const body = box(0.62, 0.52, 0.5, toon('#d8d0bc', {paint: {seed: 201}})); at(body, 0, 0.06, 0); g.add(body);
+  const back = box(0.42, 0.36, 0.3, toon('#c8c0ac', {paint: {seed: 202}})); at(back, 0, 0.14, -0.35); g.add(back);
+  const st = box(0.3, 0.06, 0.26, '#c8c0ac'); g.add(st);
+  const c = canvas(640, 480), x = c.getContext('2d');
+  x.fillStyle = '#e8eef4'; x.fillRect(0, 0, 640, 480); x.fillStyle = '#3a5a8a'; x.fillRect(0, 0, 640, 56);
+  x.fillStyle = '#fff'; x.font = '800 30px "Inter Display"'; x.fillText(o.title || 'FORUM BITCOIN', 20, 38);
+  x.fillStyle = '#d8e2ec'; x.fillRect(20, 76, 600, 384); x.strokeStyle = '#3a5a8a'; x.lineWidth = 3; x.strokeRect(20, 76, 600, 384);
+  x.fillStyle = '#3a5a8a'; x.font = '800 24px "Inter Display"'; x.fillText(o.user || 'laszlo · 2010', 40, 112);
+  x.fillStyle = INK; x.font = '800 34px "Inter Display"'; lines.forEach((l, i) => x.fillText(l, 40, 170 + i * 52));
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.38), new THREE.MeshBasicMaterial({map: texFrom(c)})); scr.position.set(0, 0.32, 0.252); g.add(scr);
+  return g;
+}
+// Bar chart on a stand: n bars whose heights grow on show(u) (0..1), last bars can crash.
+export function barChart(heights, o = {}) {
+  const g = new THREE.Group(); const n = heights.length, w = o.w || 3.6, bw = w / n * 0.7;
+  const base = box(w + 0.3, 0.06, 0.4, '#2b2b33'); g.add(base);
+  const bars = heights.map((h, i) => { const b = box(bw, 1, 0.25, toon(o.color || '#3fb06a', {wear: false}), {hull: 0.01}); at(b, -w / 2 + (i + 0.5) * w / n, 0.06, 0); g.add(b); return b; });
+  return {group: g, bars, show(u, crash = 0) { bars.forEach((b, i) => { const k = Math.max(0, Math.min(1, u * n - i)); let h = heights[i] * k; if (crash > 0 && i >= n - (o.crashN || 4)) h *= 1 - 0.8 * crash; b.scale.y = Math.max(0.001, h); b.visible = k > 0; }); }};
+}
+// Cartoon rocket with fins and a flame.
+export function rocket(o = {}) {
+  const g = new THREE.Group();
+  g.add(cyl(0.18, 0.18, 0.8, o.color || '#f3efe6', {seg: 20}));
+  const nose = cone(0.18, 0.4, '#d8413a', {seg: 20}); at(nose, 0, 0.8, 0); g.add(nose);
+  const win = cyl(0.08, 0.08, 0.03, '#7fc4e8', {hull: 0.006}); at(win, 0, 0.5, 0.18, 0, Math.PI / 2); g.add(win);
+  for (let i = 0; i < 3; i++) { const f = box(0.04, 0.3, 0.22, '#d8413a', {hull: 0.008}); const p = new THREE.Group(); at(f, 0, -0.05, 0.22); p.add(f); p.rotation.y = i * Math.PI * 2 / 3; g.add(p); }
+  const fl = cone(0.13, 0.4, new THREE.MeshBasicMaterial({color: '#ffb03a'}), {hull: 0}); fl.rotation.x = Math.PI; fl.position.y = 0.02; g.add(fl);
+  const glow = glowSprite('#ffb03a', 1.0); glow.position.y = -0.25; g.add(glow);
+  return g;
+}
+// One piece of gorengan (fried snack): bakwan disk, tempe block or pisang goreng capsule.
+export function gorengan(kind = 0) {
+  if (kind === 0) return cyl(0.12, 0.13, 0.05, toon('#c8822a', {paint: {seed: 211}}), {hull: 0.008});
+  if (kind === 1) return box(0.22, 0.04, 0.14, toon('#d89a3a', {paint: {seed: 212}}), {hull: 0.008});
+  const geo = new THREE.CapsuleGeometry(0.05, 0.16, 4, 10); geo.rotateZ(Math.PI / 2);
+  return ink(geo, toon('#e0a84a', {paint: {seed: 213}}), {hull: 0.008, edges: false});
+}
+// Puffy cartoon cloud.
+export function cloud(s = 1, seed = 3) {
+  const g = new THREE.Group(); const r = rng(seed);
+  for (let i = 0; i < 6; i++) { const b = ball((0.6 + r() * 0.5) * s, '#fbfbf8', {seg: 12, hull: 0.03 * s}); at(b, (i - 2.5) * 0.55 * s, (r() - 0.3) * 0.4 * s, (r() - 0.5) * 0.4 * s); g.add(b); }
+  return g;
+}

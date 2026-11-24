@@ -10,82 +10,59 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: one to four framings per shot, slow short pushes, no dutch angles.
-  {shot: 1, loc: 'palace', lift: false, move: 'wide: the new president at the podium', keys: [
-    {at: 'start', pos: [0, 1.7, 1.3], look: [0, 1.85, -4]},
-    {at: 'end', pos: [0, 1.7, 1.0], look: [0, 1.85, -4]}]},
-  {shot: 1, from: 'berubah', loc: 'palace', lift: false, move: 'close: changes everything', keys: [
-    {at: 'start', pos: [0, 1.75, -1.2], look: [0, 1.68, -3.45]},
-    {at: 'end', pos: [0, 1.75, -1.35], look: [0, 1.68, -3.45]}]},
-  {shot: 2, loc: 'cabinet', lift: false, move: 'the cabinet meeting, a long presentation', keys: [
-    {at: 'start', pos: [-0.7, 1.8, 1.0], look: [-0.9, 1.45, -4.4]},
-    {at: 'end', pos: [-0.7, 1.8, 0.75], look: [-0.9, 1.45, -4.4]}]},
-  {shot: 2, from: 'pakMenteri', loc: 'cabinet', lift: false, move: 'close: emak scolds', keys: [
-    {at: 'start', pos: [3.15, 1.72, -1.15], look: [3.9, 1.66, -2.9]},
-    {at: 'end', pos: [3.2, 1.72, -1.3], look: [3.9, 1.66, -2.9]}]},
-  {shot: 2, from: 'intinya', loc: 'cabinet', lift: false, move: 'close: the minister sweats', keys: [
-    {at: 'start', pos: [-1.55, 1.72, -2.85], look: [-1.9, 1.66, -4.7]},
-    {at: 'end', pos: [-1.6, 1.72, -3.0], look: [-1.9, 1.66, -4.7]}]},
-  {shot: 2, from: 'mau', loc: 'cabinet', lift: false, move: 'close: mau mau, enggak enggak', keys: [
-    {at: 'start', pos: [3.15, 1.72, -1.15], look: [3.9, 1.66, -2.9]},
-    {at: 'end', pos: [3.2, 1.72, -1.3], look: [3.9, 1.66, -2.9]}]},
-  {shot: 3, loc: 'market', lift: false, move: 'the market: chilli prices', keys: [
-    {at: 'start', pos: [-0.2, 1.75, 1.1], look: [-0.2, 1.45, -3.2]},
-    {at: 'end', pos: [-0.2, 1.75, 0.85], look: [-0.2, 1.45, -3.2]}]},
-  {shot: 3, from: 'menang', loc: 'market', lift: false, move: 'close: the seller is nervous', keys: [
-    {at: 'start', pos: [0.1, 1.75, -1.7], look: [0.1, 1.6, -4.05]},
-    {at: 'end', pos: [0.1, 1.75, -1.85], look: [0.1, 1.6, -4.05]}]},
-  {shot: 4, loc: 'market', lift: false, move: 'two-shot: the bargain', keys: [
-    {at: 'start', pos: [-0.35, 1.7, 0.4], look: [-0.35, 1.45, -3.3]},
-    {at: 'end', pos: [-0.35, 1.7, 0.2], look: [-0.35, 1.45, -3.3]}]},
-  {shot: 4, from: 'pindah', loc: 'market', lift: false, move: 'wider: I will go next door', keys: [
-    {at: 'start', pos: [0.8, 1.75, 1.5], look: [0.8, 1.5, -3.4]},
-    {at: 'end', pos: [0.8, 1.75, 1.3], look: [0.8, 1.5, -3.4]}]},
-  {shot: 5, loc: 'cabinet', lift: false, move: 'the door: Bambang sneaks in late', keys: [
-    {at: 'start', pos: [-2.5, 1.7, -1.1], look: [-3.4, 1.5, -5.0]},
-    {at: 'end', pos: [-2.55, 1.7, -1.3], look: [-3.4, 1.5, -5.0]}]},
-  {shot: 5, from: 'bambang', loc: 'cabinet', lift: false, move: 'close: emak calls his full name', keys: [
-    {at: 'start', pos: [3.15, 1.72, -1.15], look: [3.9, 1.66, -2.9]},
-    {at: 'end', pos: [3.2, 1.72, -1.3], look: [3.9, 1.66, -2.9]}]},
-  {shot: 5, from: 'jam', loc: 'cabinet', lift: false, move: 'close: Bambang trembles', keys: [
-    {at: 'start', pos: [-2.95, 1.72, -2.6], look: [-3.2, 1.62, -4.6]},
-    {at: 'end', pos: [-2.95, 1.72, -2.75], look: [-3.2, 1.62, -4.6]}]},
-  {shot: 6, loc: 'cabinet', lift: false, move: 'all ministers sit up straight', keys: [
-    {at: 'start', pos: [0.6, 1.55, 0.05], look: [0.6, 1.25, -4.0]},
-    {at: 'end', pos: [0.6, 1.55, -0.1], look: [0.6, 1.25, -4.0]}]},
-  {shot: 7, loc: 'palace', lift: false, move: 'emak at her desk', keys: [
-    {at: 'start', pos: [4.7, 1.6, -0.5], look: [4.7, 1.3, -3.6]},
-    {at: 'end', pos: [4.7, 1.6, -0.7], look: [4.7, 1.3, -3.6]}]},
-  {shot: 7, from: 'buku', loc: 'palace', lift: false, move: 'macro: the cartoon budget book', keys: [
-    {at: 'start', pos: [4.25, 1.5, -2.15], look: [4.25, 0.8, -3.05]},
-    {at: 'end', pos: [4.25, 1.48, -2.25], look: [4.25, 0.8, -3.05]}]},
-  {shot: 7, from: 'kaleng', loc: 'palace', lift: false, move: 'the biscuit tin full of money', keys: [
-    {at: 'start', pos: [4.95, 1.5, -1.7], look: [5.0, 1.1, -3.3]},
-    {at: 'end', pos: [4.95, 1.48, -1.85], look: [5.0, 1.1, -3.3]}]},
-  {shot: 8, loc: 'palace', lift: false, move: 'new policies: lamps off', keys: [
-    {at: 'start', pos: [4.7, 1.7, -0.5], look: [4.7, 1.95, -4.5]},
-    {at: 'end', pos: [4.7, 1.7, -0.7], look: [4.7, 1.95, -4.5]}]},
-  {shot: 8, from: 'kantong', loc: 'palace', lift: false, move: 'macro: plastic bags folded into triangles', keys: [
-    {at: 'start', pos: [4.7, 1.4, -1.85], look: [4.7, 0.95, -3.0]},
-    {at: 'end', pos: [4.7, 1.38, -1.95], look: [4.7, 0.95, -3.0]}]},
-  {shot: 9, loc: 'home', lift: false, move: 'lost remote: found in one second', keys: [
-    {at: 'start', pos: [-0.2, 1.65, 0.7], look: [-0.2, 1.4, -3.0]},
-    {at: 'end', pos: [-0.2, 1.65, 0.5], look: [-0.2, 1.4, -3.0]}]},
-  {shot: 9, from: 'makanya', loc: 'home', lift: false, move: 'closer: look with your eyes', keys: [
-    {at: 'start', pos: [0.45, 1.72, -1.0], look: [0.65, 1.6, -2.6]},
-    {at: 'end', pos: [0.45, 1.72, -1.12], look: [0.65, 1.6, -2.6]}]},
-  {shot: 10, loc: 'home', lift: false, move: 'close: emak is already a president', keys: [
-    {at: 'start', pos: [2.2, 1.72, -2.05], look: [2.2, 1.55, -4.05]},
-    {at: 'end', pos: [2.2, 1.72, -2.2], look: [2.2, 1.55, -4.05]}]},
-  {shot: 10, from: 'rumah', loc: 'home', lift: false, move: 'president at home', keys: [
-    {at: 'start', pos: [2.3, 1.75, -1.2], look: [2.3, 1.55, -4.0]},
-    {at: 'end', pos: [2.3, 1.75, -1.35], look: [2.3, 1.55, -4.0]}]},
-  {shot: 11, loc: 'home', lift: false, move: 'everything she runs', keys: [
-    {at: 'start', pos: [2.2, 1.75, 0.5], look: [2.2, 1.75, -3.4]},
-    {at: 'end', pos: [2.2, 1.75, 0.3], look: [2.2, 1.75, -3.4]}]},
-  {shot: 12, loc: 'home', lift: false, move: 'the family and the question', keys: [
-    {at: 'start', pos: [0, 1.75, 1.1], look: [0, 2.0, -3]},
-    {at: 'end', pos: [0, 1.75, 0.9], look: [0, 2.0, -3]}]},
+  // Calm camera: one or two framings per shot, slow short pushes; one crane up the gorengan tower.
+  {shot: 1, loc: 'vault', lift: false, move: 'the pizza under a glass dome', keys: [
+    {at: 'start', pos: [0, 1.5, 0.5], look: [0, 1.25, -3]},
+    {at: 'end', pos: [0, 1.5, 0.15], look: [0, 1.25, -3]}]},
+  {shot: 1, from: 'keju', loc: 'vault', lift: false, move: 'macro: just cheese and sausage', keys: [
+    {at: 'start', pos: [0, 1.75, -2.15], look: [0, 1.08, -3.0]},
+    {at: 'end', pos: [0, 1.72, -2.25], look: [0, 1.08, -3.0]}]},
+  {shot: 2, loc: 'room', lift: false, move: '2010: hungry Laszlo and his bitcoins', keys: [
+    {at: 'start', pos: [-0.3, 1.55, -0.1], look: [-0.5, 1.3, -3.3]},
+    {at: 'end', pos: [-0.3, 1.55, -0.3], look: [-0.5, 1.3, -3.3]}]},
+  {shot: 3, loc: 'room', lift: false, move: 'he types on the forum', keys: [
+    {at: 'start', pos: [-0.75, 1.55, -1.1], look: [-0.95, 1.2, -3.5]},
+    {at: 'end', pos: [-0.8, 1.55, -1.25], look: [-0.95, 1.2, -3.5]}]},
+  {shot: 3, from: 'siapa', loc: 'room', lift: false, move: 'macro: the forum post', keys: [
+    {at: 'start', pos: [-1.55, 1.17, -2.8], look: [-1.55, 1.08, -3.5]},
+    {at: 'end', pos: [-1.55, 1.16, -2.88], look: [-1.55, 1.08, -3.5]}]},
+  {shot: 4, loc: 'room', lift: false, move: 'the delivery arrives', keys: [
+    {at: 'start', pos: [0.4, 1.6, 1.0], look: [0.4, 1.3, -3.2]},
+    {at: 'end', pos: [0.4, 1.6, 0.8], look: [0.4, 1.3, -3.2]}]},
+  {shot: 4, from: 'makan', loc: 'room', lift: false, move: 'Laszlo eats happily', keys: [
+    {at: 'start', pos: [0, 1.5, -0.8], look: [0, 1.2, -3.0]},
+    {at: 'end', pos: [0, 1.5, -0.95], look: [0, 1.2, -3.0]}]},
+  {shot: 5, loc: 'room', lift: false, move: 'close: worth it!', keys: [
+    {at: 'start', pos: [-0.45, 1.68, -1.7], look: [-0.5, 1.62, -3.1]},
+    {at: 'end', pos: [-0.45, 1.68, -1.82], look: [-0.5, 1.62, -3.1]}]},
+  {shot: 6, loc: 'stage', lift: false, move: 'the price rockets', keys: [
+    {at: 'start', pos: [-0.1, 1.75, 1.2], look: [0.1, 1.9, -4.4]},
+    {at: 'end', pos: [-0.1, 1.75, 0.9], look: [0.1, 1.9, -4.4]}]},
+  {shot: 7, loc: 'field', lift: false, move: 'houses, jets, then gorengan up to the clouds', keys: [
+    {at: 'start', pos: [0, 3.2, 7], look: [0, 1.8, -8]},
+    {at: 'gorengan', pos: [0, 1.9, 1.8], look: [0, 2.6, -4.8]},
+    {at: 'end', pos: [0, 11.5, 4.5], look: [0, 12.3, -5]}]},
+  {shot: 8, loc: 'room', lift: false, move: 'plot twist: a tower of pizza boxes', keys: [
+    {at: 'start', pos: [0.1, 1.55, -0.3], look: [0.1, 1.4, -3.3]},
+    {at: 'end', pos: [0.1, 1.55, -0.5], look: [0.1, 1.4, -3.3]}]},
+  {shot: 9, loc: 'room', lift: false, move: 'close: the delivery guy asks', keys: [
+    {at: 'start', pos: [1.0, 1.68, -1.6], look: [1.3, 1.62, -3.2]},
+    {at: 'end', pos: [1.0, 1.68, -1.72], look: [1.3, 1.62, -3.2]}]},
+  {shot: 10, loc: 'room', lift: false, move: 'close: no regrets', keys: [
+    {at: 'start', pos: [-0.45, 1.68, -1.6], look: [-0.5, 1.62, -3.1]},
+    {at: 'end', pos: [-0.45, 1.68, -1.72], look: [-0.5, 1.62, -3.1]}]},
+  {shot: 10, from: 'dunia', loc: 'stage', lift: false, move: 'the world learns bitcoin can pay', keys: [
+    {at: 'start', pos: [-9, 2.1, -0.2], look: [-9, 2.3, -4.3]},
+    {at: 'end', pos: [-9, 2.1, -0.4], look: [-9, 2.3, -4.3]}]},
+  {shot: 11, loc: 'room', lift: false, move: 'Bitcoin Pizza Day party', keys: [
+    {at: 'start', pos: [0, 1.6, 1.0], look: [0, 1.6, -3.5]},
+    {at: 'end', pos: [0, 1.6, 0.8], look: [0, 1.6, -3.5]}]},
+  {shot: 11, from: 'ingat', loc: 'stage', lift: false, move: 'up... and down', keys: [
+    {at: 'start', pos: [8.9, 1.75, 1.0], look: [9.1, 1.75, -4.4]},
+    {at: 'end', pos: [8.9, 1.75, 0.8], look: [9.1, 1.75, -4.4]}]},
+  {shot: 12, loc: 'room', lift: false, move: 'cry or chill?', keys: [
+    {at: 'start', pos: [-0.5, 1.7, -0.4], look: [-0.5, 1.8, -3.0]},
+    {at: 'end', pos: [-0.5, 1.7, -0.6], look: [-0.5, 1.8, -3.0]}]},
 ];
 
 export function warpU(T, t) {

@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 3, 5, 7, 9];
+const DIPS = [2, 6, 7, 8, 11, 12];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'KALAU EMAK-EMAK | JADI PRESIDEN 👩‍🦱🎤'], ['cut2', 'RAPAT MAKSIMAL 5 MENIT ⏱️'], ['cut3', 'HARGA CABAI | LANGSUNG STABIL 🌶️📉'],
-  ['cut5', 'TELAT? DIPANGGIL | NAMA LENGKAP 😨'], ['cut7', 'APBN DISIMPAN DI | KALENG BISKUIT 🍪'], ['cut8', 'KEBIJAKAN BARU 📜'], ['cut10', 'EMAK: PRESIDEN DI RUMAH | SETIAP HARI ❤️']];
+const TITLES = []; // no storyboard titles yet
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -146,55 +145,54 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    // 1 the inauguration
-    [sy('crowd_murmur'), 0, 0.05, E.total],
-    [sy('footsteps_walk'), 0.15, 0.12, 1.1],
-    ...[1.6, 1.95, 2.3].map((t) => [sy('thud'), t + 0.08, 0.22]),
-    ['06-deep-cinematic-boom.wav', E.presiden0, 0.14],
-    [sy('crowd_cheer'), E.total - 0.1, 0.16, 1.6],
-    [sy('party_horn'), E.total, 0.14],
-    // 2 the 5-minute cabinet meeting
-    [sy('clock_tick'), C[1], 0.08, C[2] - C[1]],
-    [sy('snore'), C[1] + 0.3, 0.08, E.pakMenteri - C[1] - 0.3],
-    ['04-soft-ui-pop.mp3', E.lima - 0.1, 0.2],
-    [sy('slide_whistle_down'), E.muter, 0.1],
-    ['02-error-denied-buzz.wav', E.enggak, 0.14],
-    // 3-4 the market
-    [sy('crowd_murmur'), C[2], 0.06, C[4] - C[2]],
-    ['08-soft-success-chime.mp3', E.stabil, 0.2],
-    [sy('uh_oh'), E.menang, 0.12],
-    [sy('boing'), E.limaBelas + 0.1, 0.14],
-    [sy('swish'), E.pindah, 0.14],
-    [sy('ka_ching'), E.sebelah + 0.45, 0.2],
-    // 5-6 late Bambang
-    [sy('creak'), E.telat - 0.3, 0.2],
-    [sy('footsteps_walk'), E.telat, 0.1, E.bambang - E.telat],
-    ['06-deep-cinematic-boom.wav', E.bambang, 0.2],
-    [sy('slide_whistle_up'), E.tegak - 0.15, 0.14],
-    [sy('thud'), E.tegak, 0.14],
-    // 7 the budget
-    [sy('page_flips'), E.buku, 0.16, 0.6],
-    ['04-soft-ui-pop.mp3', E.kaleng - 0.1, 0.2],
-    [sy('glass_tap'), E.uang - 0.25, 0.2],
-    [sy('ka_ching'), E.uang, 0.2],
-    // 8 new policies
-    ['09-notification-ding.wav', E.kebijakan - 0.1, 0.2],
-    [sy('stamp'), E.lampu, 0.2], [sy('stamp'), E.kantong, 0.2],
-    ...[0, 1, 2].map((k) => ['mouse-click-sound-effect.mp3', E.dimatikan + 0.1 + k * 0.12, 0.35, 0.3]),
-    ...[0, 1, 2, 3, 4, 5].map((i) => [sy('paper_flutter'), E.segitiga + i * 0.18, 0.06, 0.25]),
-    // 9 lost things
-    [sy('slide_whistle_down'), E.hilang, 0.12],
-    [sy('sparkle'), E.ketemu, 0.2],
-    ['08-soft-success-chime.mp3', E.ketemu + 0.1, 0.2],
-    ['02-error-denied-buzz.wav', E.mulut, 0.1],
-    // 10-11 president at home
-    [sy('frying'), C[9], 0.07, C[11] - C[9]],
-    [sy('puff'), E.rumah - 0.15, 0.2],
-    [sy('tada'), E.rumah, 0.16],
-    ...['keuangan', 'makanan', 'kesehatan', 'semua'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
-    [sy('stamp'), E.cuti - 0.05, 0.2],
+    // 1 the museum
+    [sy('sparkle'), E.termahal, 0.18],
+    ['06-deep-cinematic-boom.wav', E.triliun0, 0.18],
+    ['02-error-denied-buzz.wav', E.emas, 0.12],
+    ['04-soft-ui-pop.mp3', E.keju - 0.05, 0.2], ['04-soft-ui-pop.mp3', E.sosis - 0.05, 0.2],
+    // 2-3 2010, hungry, the forum post
+    [sy('rumble'), E.lapar, 0.14, 1.0],
+    [sy('coin_drop'), E.bitcoin0, 0.16],
+    [sy('uh_oh'), E.harganya, 0.1],
+    ['03-typing-keyboard-burst.wav', C[2] + 0.2, 0.2],
+    ['03-typing-keyboard-burst.wav', E.siapa, 0.18],
+    ['09-notification-ding.wav', E.bayar + 0.2, 0.2],
+    // 4-5 the delivery
+    [sy('creak'), E.pemuda - 0.2, 0.18],
+    [sy('footsteps_walk'), E.pemuda - 0.2, 0.12, 1.4],
+    ['04-soft-ui-pop.mp3', E.datang, 0.2],
+    [sy('tada'), E.bahagia, 0.12],
+    [sy('ka_ching'), E.dolar, 0.16],
+    [sy('sparkle'), E.worth, 0.18],
+    // 6 to the moon
+    ['07-riser-build-up.wav', E.tahunDemi, 0.12, 2.0],
+    [sy('slide_whistle_up'), E.meroket, 0.16],
+    ['06-deep-cinematic-boom.wav', E.triliun, 0.2],
+    [sy('crowd_cheer'), E.triliun + 0.1, 0.1, 1.4],
+    // 7 houses, jets, gorengan
+    ...[0, 1, 2].map((i) => ['04-soft-ui-pop.mp3', E.rumah - 0.3 + i * 0.25, 0.16]),
+    ['05-airy-whoosh.mp3', E.jet - 0.1, 0.2],
+    [sy('frying'), E.gorengan, 0.08, E.awan + 1.0 - E.gorengan],
+    [sy('slide_whistle_up'), E.awan - 0.3, 0.14],
+    // 8-9 plot twist
+    [sy('slide_whistle_down'), E.tunggu, 0.14],
+    ['06-deep-cinematic-boom.wav', E.twist, 0.14],
+    ...Array.from({length: 7}, (_, i) => ['pop-bubble-sound-effect.mp3', E.ternyata + i * (E.berkali - E.ternyata) / 7, 0.12]),
+    [sy('ka_ching'), E.seratus, 0.18],
+    [sy('creak'), C[8] - 0.2, 0.15],
+    [sy('boing'), E.cicilan, 0.14],
+    // 10 no regrets, the world
+    [sy('sparkle'), E.menyesal, 0.16],
+    ['08-soft-success-chime.mp3', E.dunia, 0.22],
+    // 11 pizza day, up and down
+    [sy('party_horn'), E.pizzaDay, 0.16],
+    [sy('crowd_cheer'), E.sejak, 0.08, E.ingat - E.sejak],
+    [sy('slide_whistle_up'), E.naik, 0.14],
+    [sy('slide_whistle_down'), E.anjlok, 0.16],
+    ['02-error-denied-buzz.wav', E.anjlok + 0.1, 0.12],
+    [sy('alarm_bell'), E.jangan, 0.08, 0.8],
     // 12 the question
-    ['pop-bubble-sound-effect.mp3', E.emakmu - 0.1, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.nangis - 0.2, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -263,10 +261,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 👩‍🦱🎤', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
-  en: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 👩‍🦱🎤', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
+  id: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕', mid: 'HARGANYA Rp10 TRILIUN!', bot: ''},
+  en: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕', mid: 'HARGANYA Rp10 TRILIUN!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.enggak + 0.3, loc: 'cabinet', pos: [3.2, 1.62, -1.25], look: [3.85, 1.45, -2.9]});
+const THUMB = (EVt) => ({t: EVt.termahal + 0.3, loc: 'vault', pos: [0, 1.62, -1.35], look: [0, 1.05, -3]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

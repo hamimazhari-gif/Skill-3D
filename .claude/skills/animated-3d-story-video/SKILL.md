@@ -245,3 +245,9 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Props:** `flag()` (waving red-white, `{group, update}`), `podium(label)`, `muterScreen(title)`, `chiliStall()` (`setPrice(text)`), `biscuitTin()` (`open(u)` shows money), `cartoonBook(title)`, `foldedBag()`, `calendar(title, {crossed})`, `cookPot()`, `remote()`, `ladle()`, `calculator()`, `stoveCounter()`. `P.wallet()` and `P.tv()` return `{group, ...}`.
 - **A book or paper lying on a desk:** tilt the near edge up (`rx` negative) and lift it, or its lower half sinks into the desk.
 - **When the audio and the text disagree:** look for missing lines with pauses + pitch (quotes in the character voice are higher) + sibilant/plosive maps; leave unspoken lines out of the timing file (keep them in `narration_id.txt`), say so in `script.md` and tell the user.
+
+## Notes from "Pizza Bitcoin" (money story, 103 s)
+- **Props:** `pizza(r, {slice, wedge})`, `pizzaSlice`, `pizzaBox()` (`open(u)`), `glassDome`, `goldBar`, `crtMonitor(lines)` (readable forum post for a macro shot), `barChart(heights)` (`show(u, crash)` for "meroket" and "anjlok"), `rocket`, `gorengan(kind)` (stack 200+ for a tower into the clouds), `cloud`. A coin with any face: `P.coin(r, {tex})`.
+- **A crane shot:** a third key in the middle (`{at: <word>, ...}`) then the end key high up; the tower grows by showing more pieces over time.
+- **Signs cast shadows on the back wall:** put wall signs close to the wall, or the shadow reads as a stray black box.
+- **Money claims tied to a live price** ("lebih dari sepuluh triliun"): note in `script.md` the price at which the claim holds.
