@@ -25,3 +25,9 @@ nasiBungkus, angkringan (cart, tarp, kettles, oil lamps, bench), villageHouse, g
 
 ## Screen titles
 Scene titles from the storyboard sit at the top (ink-bordered cream block, pop-in), the word captions stay at 63%.
+
+## Outfits back home (user request)
+At the bus terminal everyone wears office shirts. In their own places (and on the video call):
+Jakarta — dark hoodie, black cap, office lanyard, jeans · Bali — turquoise floral beach shirt, shorts, sunglasses ·
+Jogja — mustard T-shirt with a small print, jeans · small town — black "boss" shirt, gold chain, sunglasses ·
+village — faded collarless farmer's shirt, rolled-up trousers, towel round the neck, caping.

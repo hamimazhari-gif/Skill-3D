@@ -283,7 +283,12 @@ function drawFace(o, f, r) {
     case 'smirk': x.beginPath(); x.moveTo(mx - R * 0.1, my + R * 0.01); x.quadraticCurveTo(mx + R * 0.04, my + R * 0.06, mx + R * 0.14, my - R * 0.05); x.stroke(); break;
     default: x.beginPath(); x.arc(mx, my - R * 0.02, R * 0.12, 0.25 * Math.PI, 0.75 * Math.PI); x.stroke();
   }
-  if (o.glasses) {
+  if (o.shades) { // dark sunglasses over the eyes
+    x.lineWidth = 7;
+    for (const sd of [-1, 1]) { const ex = cx + sd * R * 0.36, ey = cy + R * 0.05; x.fillStyle = '#1a1a22'; x.beginPath(); x.ellipse(ex, ey, R * 0.22, R * 0.16, 0, 0, 7); x.fill(); x.stroke(); x.fillStyle = 'rgba(255,255,255,0.55)'; x.beginPath(); x.ellipse(ex - R * 0.08, ey - R * 0.06, R * 0.06, R * 0.03, -0.5, 0, 7); x.fill(); }
+    x.beginPath(); x.moveTo(cx - R * 0.14, cy + R * 0.02); x.lineTo(cx + R * 0.14, cy + R * 0.02); x.stroke();
+  }
+  if (o.glasses && !o.shades) {
     x.lineWidth = 7;
     for (const s of [-1, 1]) { x.beginPath(); x.arc(cx + s * R * 0.36, cy + R * 0.04, R * 0.2, 0, 7); x.stroke(); }
     x.beginPath(); x.moveTo(cx - R * 0.16, cy); x.lineTo(cx + R * 0.16, cy); x.stroke();
@@ -328,13 +333,61 @@ function drawTorso(o, r) {
   x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
   x.fillStyle = o.jacket; x.fillRect(0, 0, W * PX, H * PX);
   x.fillStyle = o.lower; x.fillRect(0, top + (bot - top) * 0.64, W * PX, H * PX);
-  x.strokeStyle = INK; x.lineWidth = 6; x.beginPath(); x.moveTo(0, top + (bot - top) * 0.64); x.lineTo(W * PX, top + (bot - top) * 0.64); x.stroke();
+  const waist = top + (bot - top) * 0.64, out = o.outfit || 'shirt';
+  if (out === 'hawaii') { // floral beach shirt
+    const rr = rng(11);
+    for (let i = 0; i < 26; i++) {
+      const fx = cx - bw + rr() * bw * 2, fy = top + rr() * (waist - top), k = 9 + rr() * 6;
+      x.fillStyle = ['#fff3df', '#f2d24a', '#e8737a'][i % 3];
+      for (let j = 0; j < 5; j++) { const a2 = j / 5 * 6.28; x.beginPath(); x.arc(fx + Math.cos(a2) * k * 0.7, fy + Math.sin(a2) * k * 0.7, k * 0.5, 0, 7); x.fill(); }
+      x.fillStyle = '#e8a83a'; x.beginPath(); x.arc(fx, fy, k * 0.35, 0, 7); x.fill();
+      x.fillStyle = 'rgba(60,140,80,0.8)'; x.beginPath(); x.ellipse(fx + k, fy + k * 0.6, k * 0.8, k * 0.3, 0.6, 0, 7); x.fill();
+    }
+  }
+  if (out === 'boss') { x.fillStyle = 'rgba(255,255,255,0.18)'; for (let yy = top; yy < waist; yy += 22) x.fillRect(0, yy, W * PX, 6); }
+  x.fillStyle = o.lower; x.fillRect(0, waist, W * PX, H * PX);
+  x.strokeStyle = INK; x.lineWidth = 6; x.beginPath(); x.moveTo(0, waist); x.lineTo(W * PX, waist); x.stroke();
   x.restore();
   const py = top + (bot - top) * 0.42, px = cx - bw * 0.58;
-  inkShape(x, wobble([[px - 18, py], [px + 18, py], [px + 16, py + 30], [px - 16, py + 30]], r, 2), o.pocket || o.lower, r, 5);
-  inkShape(x, [[cx, top + 52], [cx - 36, top + 6], [cx - 6, top + 2]], '#fffdf6', r, 5);
-  inkShape(x, [[cx, top + 52], [cx + 36, top + 6], [cx + 6, top + 2]], '#fffdf6', r, 5);
-  inkShape(x, [[cx, top + 40], [cx + 11, top + 58], [cx + 7, top + 140], [cx, top + 156], [cx - 7, top + 140], [cx - 11, top + 58]], o.tie, r, 5);
+  const pocket = () => inkShape(x, wobble([[px - 18, py], [px + 18, py], [px + 16, py + 30], [px - 16, py + 30]], r, 2), o.pocket || o.lower, r, 5);
+  const vneck = (d, col) => { inkShape(x, [[cx - 30, top + 2], [cx + 30, top + 2], [cx, top + d]], SKIN, r, 5); if (col) { inkShape(x, [[cx, top + d], [cx - 44, top + 4], [cx - 22, top]], col, r, 5); inkShape(x, [[cx, top + d], [cx + 44, top + 4], [cx + 22, top]], col, r, 5); } };
+  if (out === 'shirt') {
+    pocket();
+    inkShape(x, [[cx, top + 52], [cx - 36, top + 6], [cx - 6, top + 2]], '#fffdf6', r, 5);
+    inkShape(x, [[cx, top + 52], [cx + 36, top + 6], [cx + 6, top + 2]], '#fffdf6', r, 5);
+    inkShape(x, [[cx, top + 40], [cx + 11, top + 58], [cx + 7, top + 140], [cx, top + 156], [cx - 7, top + 140], [cx - 11, top + 58]], o.tie, r, 5);
+  } else if (out === 'tshirt') { // crew neck tee with a small chest print
+    inkShape(x, ellipse(cx, top + 4, 34, 18, 24, 0, Math.PI), SKIN, r, 5);
+    if (o.print) { inkShape(x, wobble(ellipse(cx, top + 92, 30, 30, 24), r, 1), o.print, r, 5); inkShape(x, [[cx - 12, top + 100], [cx, top + 78], [cx + 12, top + 100]], o.print2 || '#fff3df', r, 4); }
+  } else if (out === 'hoodie') { // hood bunched behind the neck, drawstrings, kangaroo pocket
+    inkShape(x, ellipse(cx, top + 8, 62, 30, 30, 0, Math.PI), o.hood || o.jacket, r, 7);
+    inkShape(x, ellipse(cx, top + 4, 30, 14, 20, 0, Math.PI), SKIN, r, 5);
+    for (const sx of [-1, 1]) { x.strokeStyle = '#fff3df'; x.lineWidth = 5; x.beginPath(); x.moveTo(cx + sx * 16, top + 22); x.lineTo(cx + sx * 18, top + 86); x.stroke(); x.fillStyle = '#fff3df'; x.beginPath(); x.arc(cx + sx * 18, top + 88, 5, 0, 7); x.fill(); }
+    const ky = waist - 70; inkShape(x, [[cx - 62, ky + 66], [cx - 46, ky], [cx + 46, ky], [cx + 62, ky + 66]], o.hood || o.jacket, r, 6);
+  } else if (out === 'hawaii') { // open collar, lapels in the shirt colour
+    vneck(56, o.jacket);
+  } else if (out === 'boss') { // open shiny shirt, wide collar, gold chain
+    vneck(62, o.collar || '#f3e7d3');
+  } else if (out === 'farmer') { // plain collarless shirt with buttons and a towel round the neck
+    inkShape(x, ellipse(cx, top + 4, 32, 18, 24, 0, Math.PI), SKIN, r, 5);
+    x.fillStyle = INK; for (let i = 0; i < 4; i++) { x.beginPath(); x.arc(cx, top + 40 + i * 32, 4, 0, 7); x.fill(); }
+    pocket();
+  }
+  if (o.chain) { // gold chain with a pendant
+    x.strokeStyle = '#8a6a1a'; x.lineWidth = 16; x.beginPath(); x.arc(cx, top - 30, 70, 0.28 * Math.PI, 0.72 * Math.PI); x.stroke();
+    x.strokeStyle = '#f2d24a'; x.lineWidth = 10; x.setLineDash([10, 5]); x.beginPath(); x.arc(cx, top - 30, 70, 0.28 * Math.PI, 0.72 * Math.PI); x.stroke(); x.setLineDash([]);
+    inkShape(x, wobble(ellipse(cx, top + 52, 17, 20, 16), r, 0.5), '#f2d24a', r, 5);
+  }
+  if (o.lanyard) { // office ID on a lanyard
+    x.strokeStyle = o.lanyard; x.lineWidth = 7; x.beginPath(); x.moveTo(cx - 26, top + 6); x.lineTo(cx - 4, top + 96); x.moveTo(cx + 26, top + 6); x.lineTo(cx + 4, top + 96); x.stroke();
+    inkShape(x, [[cx - 20, top + 96], [cx + 20, top + 96], [cx + 20, top + 146], [cx - 20, top + 146]], '#fbf6ea', r, 4);
+    x.fillStyle = o.lanyard; x.fillRect(cx - 14, top + 104, 28, 12);
+  }
+  if (o.towel) { // small towel draped round the neck, hanging down one side
+    inkShape(x, [[cx - 46, top + 2], [cx + 46, top + 2], [cx + 40, top + 22], [cx - 40, top + 22]], o.towel, r, 5);
+    inkShape(x, [[cx + 22, top + 14], [cx + 46, top + 14], [cx + 44, top + 128], [cx + 20, top + 128]], o.towel, r, 5);
+    x.strokeStyle = '#d8413a'; x.lineWidth = 4; x.beginPath(); x.moveTo(cx + 22, top + 112); x.lineTo(cx + 44, top + 112); x.stroke();
+  }
   if (D.shading) {
     x.save(); x.beginPath(); pts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
     // fabric: fine vertical weave lines
@@ -485,7 +538,7 @@ export function makeChar(name, o = {}) {
   const legs = [];
   for (const sx of [-1, 1]) {
     const piv = new THREE.Group(); piv.position.set(sx * (B ? 0.14 : 0.075), hipY, -0.02);
-    const l = drawLimb(B ? 0.4 : 0.62 + LX, p.lower, 'shoe', r);
+    const l = drawLimb(B ? 0.4 : 0.62 + LX, p.legs || p.lower, 'shoe', r);
     l.mesh.position.set(0, -l.H / 2 + 0.03, 0); piv.add(l.mesh); body.add(piv); legs.push(piv);
   }
   if (B) { const bm = drawBill(B, r); bm.mesh.position.set(0, billCY, 0); body.add(bm.mesh); }
