@@ -12,8 +12,8 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 export const SHOT_PLAN = [
   // Calm camera: one or two framings per shot, slow short pushes, no dutch angles.
   {shot: 1, loc: 'lineup', lift: false, move: 'wide on the five people, slow push', keys: [
-    {at: 'start', pos: [0, 1.75, 3.3], look: [0, 1.7, -2.4]},
-    {at: 'end', pos: [0, 1.72, 2.95], look: [0, 1.7, -2.4]}]},
+    {at: 'start', pos: [0, 3.0, 2.9], look: [0, 1.25, -3.0]},
+    {at: 'end', pos: [0, 2.9, 2.6], look: [0, 1.25, -3.0]}]},
   {shot: 2, loc: 'jakarta', lift: false, move: 'medium on the Jakarta worker, expenses fly out', keys: [
     {at: 'start', pos: [0.5, 1.7, 1.4], look: [0.5, 1.75, -2.4]},
     {at: 'end', pos: [0.45, 1.7, 1.15], look: [0.45, 1.75, -2.4]}]},
@@ -23,15 +23,15 @@ export const SHOT_PLAN = [
   {shot: 3, loc: 'jakarta', lift: false, move: 'close in the boarding room, instant noodles', keys: [
     {at: 'start', pos: [12.0, 1.62, -0.6], look: [12.0, 1.55, -2.5]},
     {at: 'end', pos: [12.0, 1.62, -0.75], look: [12.0, 1.55, -2.5]}]},
-  {shot: 4, loc: 'bali', lift: false, move: 'sunset selfie on the beach, slow push', keys: [
-    {at: 'start', pos: [0.2, 1.6, 1.3], look: [0.2, 1.8, -2.0]},
-    {at: 'end', pos: [0.2, 1.6, 1.0], look: [0.2, 1.8, -2.0]}]},
-  {shot: 4, from: 'balik', loc: 'bali', lift: false, move: 'close: the smile drops behind the camera', keys: [
-    {at: 'start', pos: [0.05, 1.7, -0.6], look: [0.0, 1.68, -2.0]},
-    {at: 'end', pos: [0.05, 1.7, -0.7], look: [0.0, 1.68, -2.0]}]},
-  {shot: 5, loc: 'bali', lift: false, move: 'the shack: nasi bungkus', keys: [
-    {at: 'start', pos: [9.3, 1.55, 0.2], look: [9.3, 1.4, -2.0]},
-    {at: 'end', pos: [9.3, 1.55, 0.0], look: [9.3, 1.4, -2.0]}]},
+  {shot: 4, loc: 'bali', lift: false, move: 'the selfie: close on him with the sea and sunset', keys: [
+    {at: 'start', pos: [0.05, 1.75, -0.45], look: [0.0, 1.72, -2.0]},
+    {at: 'end', pos: [0.05, 1.75, -0.6], look: [0.0, 1.72, -2.0]}]},
+  {shot: 4, from: 'balik', loc: 'bali', lift: false, move: 'the camera pulls back: nasi bungkus on a crate', keys: [
+    {at: 'start', pos: [0.05, 1.75, -0.6], look: [0.0, 1.72, -2.0]},
+    {at: 'end', pos: [0.45, 1.6, 1.3], look: [0.4, 1.35, -2.0]}]},
+  {shot: 5, loc: 'bali', lift: false, move: 'steady wide on him eating', keys: [
+    {at: 'start', pos: [0.45, 1.6, 1.3], look: [0.4, 1.35, -2.0]},
+    {at: 'end', pos: [0.45, 1.6, 1.15], look: [0.4, 1.35, -2.0]}]},
   {shot: 6, loc: 'jogja', lift: false, move: 'wide on the angkringan at night', keys: [
     {at: 'start', pos: [0, 1.7, 2.2], look: [0, 1.6, -2.4]},
     {at: 'end', pos: [0, 1.7, 1.9], look: [0, 1.6, -2.4]}]},
@@ -53,12 +53,12 @@ export const SHOT_PLAN = [
   {shot: 10, loc: 'desa', lift: false, move: 'up in the coconut palm', keys: [
     {at: 'start', pos: [2.6, 4.9, 0.4], look: [2.7, 5.45, -2.5]},
     {at: 'end', pos: [2.6, 4.9, 0.2], look: [2.7, 5.45, -2.5]}]},
-  {shot: 11, loc: 'lineup', lift: false, move: 'the five again with their savings', keys: [
-    {at: 'start', pos: [0, 1.75, 2.8], look: [0, 1.6, -2.3]},
-    {at: 'end', pos: [0, 1.75, 2.5], look: [0, 1.6, -2.3]}]},
-  {shot: 12, loc: 'lineup', lift: false, move: 'frontal on the question', keys: [
-    {at: 'start', pos: [0, 1.8, 3.1], look: [0, 1.95, -2.4]},
-    {at: 'end', pos: [0, 1.8, 2.9], look: [0, 1.95, -2.4]}]},
+  {shot: 11, loc: 'call', lift: false, move: 'the video call screen, slow push', keys: [
+    {at: 'start', pos: [0, 2.45, 2.4], look: [0, 2.45, -1.8]},
+    {at: 'end', pos: [0, 2.45, 2.15], look: [0, 2.45, -1.8]}]},
+  {shot: 12, loc: 'call', lift: false, move: 'the call and the question', keys: [
+    {at: 'start', pos: [0, 2.7, 2.5], look: [0, 2.75, -1.8]},
+    {at: 'end', pos: [0, 2.7, 2.3], look: [0, 2.75, -1.8]}]},
 ];
 
 export function warpU(T, t) {

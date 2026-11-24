@@ -123,5 +123,5 @@ export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {
 
 const L_ID = {salary: 'GAJI Rp5 JUTA', salarySub: 'PER BULAN', jakarta: 'JAKARTA', bali: 'BALI', jogja: 'JOGJA', town: 'KOTA KECIL', desa: 'DESA',
   kos: 'KOS', ojol: 'OJOL', makan: 'MAKAN SIANG', kopi: 'KOPI', tgl15: 'TGL 15', tgl20: 'TGL 20', like: 'LIKE 999+', angkringan: 'ANGKRINGAN',
-  nabung: 'TABUNGAN', bos: 'BOS!', sultan: 'SULTAN', signal: 'TIDAK ADA SINYAL', biaya: 'BIAYA HIDUP', gaya: 'GAYA HIDUP', question: 'KOTA MANA?', comment: 'KOMENTAR!'};
+  nabung: 'TABUNGAN', kredit: 'KREDIT MOTOR', bos: 'BOS!', sultan: 'SULTAN', signal: 'TIDAK ADA SINYAL', biaya: 'BIAYA HIDUP', gaya: 'GAYA HIDUP', question: 'KOTA MANA?', comment: 'KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

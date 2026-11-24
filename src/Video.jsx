@@ -103,6 +103,21 @@ function Scene({lang, thumb}) {
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
 const DIPS = [2, 4, 6, 8, 9, 11];
+// On-screen scene titles from the user's storyboard: [first narration shot, text]
+const TITLES = [[1, 'GAJI SAMA, NASIB BEDA 😮'], [2, 'JAKARTA: BERTAHAN HIDUP 🥵'], [4, 'BALI: FEED MEWAH, DOMPET SEDERHANA 📸'],
+  [6, 'JOGJA: CUKUP & SANTAI ☕'], [8, 'KOTA KECIL: DIPANGGIL BOS 😎'], [9, 'DESA: SULTAN, TAPI SINYAL DI ATAS POHON 📶🌳'], [11, 'BUKAN SOAL BESAR GAJI… 🤔']];
+const Titles = ({T, t}) => {
+  let cur = null; for (const [k, txt] of TITLES) if (t >= T.CUTS[k - 1]) cur = {txt, t0: T.CUTS[k - 1] + (k === 1 ? 0.25 : 0.15)};
+  if (!cur || t < cur.t0) return null;
+  const u = Math.min(1, (t - cur.t0) / 0.3), sc = u < 1 ? 0.6 + 0.4 * (1 + 2.70158 * Math.pow(u - 1, 3) + 1.70158 * Math.pow(u - 1, 2)) : 1;
+  return (
+    <AbsoluteFill style={{alignItems: 'center', paddingTop: 120}}>
+      <div style={{maxWidth: 940, textAlign: 'center', background: '#fff3df', color: INK, fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
+        fontSize: 64, lineHeight: 1.12, padding: '18px 34px 22px', border: `9px solid ${INK}`, borderRadius: 26, boxShadow: `10px 12px 0 ${INK}`,
+        transform: `scale(${sc}) rotate(-1.5deg)`, letterSpacing: -1}}>{cur.txt}</div>
+    </AbsoluteFill>
+  );
+};
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
@@ -212,6 +227,7 @@ export const Story = ({lang, captions = true}) => {
       </ThreeCanvas>
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
+      <Titles T={T} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
@@ -224,10 +240,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'GAJI 5 JUTA', mid: 'DI 5 KOTA BEDA!', bot: 'SIAPA PALING KAYA?'},
-  en: {top: 'GAJI 5 JUTA', mid: 'DI 5 KOTA BEDA!', bot: 'SIAPA PALING KAYA?'},
+  id: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
+  en: {top: 'GAJI SAMA 5 JUTA', mid: 'NASIB BEDA! 😮', bot: 'SIAPA PALING KAYA?'},
 };
-const THUMB = (EVt) => ({t: EVt.beda + 0.6, pos: [0, 1.6, 2.4], look: [0, 1.35, -2.4]});
+const THUMB = (EVt) => ({t: EVt.tempat + 1.0, pos: [0, 1.6, 2.6], look: [0, 1.4, -2.6]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
