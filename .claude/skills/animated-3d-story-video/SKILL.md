@@ -242,6 +242,6 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 
 ## Notes from "Kalau emak-emak jadi presiden" (comedy, Indonesian everyday life)
 - **Indonesian character kit:** `hairStyle: 'hijab'` (+ `hijab` colour, `brooch`), `hat: 'peci'` (always pass `hatColor: '#1f1d24'`, the palette default is yellow), outfit `batik` (`print`, `print2`, `round`, `pin`), the flowery `hawaii` outfit doubles as a daster; `hat: 'crown'` sits on a hijab.
-- **Props:** `flag()` (waving red-white, `{group, update}`), `podium(label)`, `muterScreen(title)`, `chiliStall()` (`setPrice(text)`), `biscuitTin()` (`open(u)` shows money), `cartoonBook(title)`, `foldedBag()`, `calendar(title, {crossed})`, `cookPot()`, `remote()`. `P.wallet()` and `P.tv()` return `{group, ...}`.
+- **Props:** `flag()` (waving red-white, `{group, update}`), `podium(label)`, `muterScreen(title)`, `chiliStall()` (`setPrice(text)`), `biscuitTin()` (`open(u)` shows money), `cartoonBook(title)`, `foldedBag()`, `calendar(title, {crossed})`, `cookPot()`, `remote()`, `ladle()`, `calculator()`, `stoveCounter()`. `P.wallet()` and `P.tv()` return `{group, ...}`.
 - **A book or paper lying on a desk:** tilt the near edge up (`rx` negative) and lift it, or its lower half sinks into the desk.
 - **When the audio and the text disagree:** look for missing lines with pauses + pitch (quotes in the character voice are higher) + sibilant/plosive maps; leave unspoken lines out of the timing file (keep them in `narration_id.txt`), say so in `script.md` and tell the user.

@@ -106,7 +106,8 @@ function Scene({lang, thumb}) {
 const DIPS = [2, 3, 5, 7, 9];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard titles yet
+const TITLES = [['cut1', 'KALAU EMAK-EMAK | JADI PRESIDEN 👩‍🦱🎤'], ['cut2', 'RAPAT MAKSIMAL 5 MENIT ⏱️'], ['cut3', 'HARGA CABAI | LANGSUNG STABIL 🌶️📉'],
+  ['cut5', 'TELAT? DIPANGGIL | NAMA LENGKAP 😨'], ['cut7', 'APBN DISIMPAN DI | KALENG BISKUIT 🍪'], ['cut8', 'KEBIJAKAN BARU 📜'], ['cut10', 'EMAK: PRESIDEN DI RUMAH | SETIAP HARI ❤️']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,6 +148,8 @@ function cues(T, EVt) {
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     // 1 the inauguration
     [sy('crowd_murmur'), 0, 0.05, E.total],
+    [sy('footsteps_walk'), 0.15, 0.12, 1.1],
+    ...[1.6, 1.95, 2.3].map((t) => [sy('thud'), t + 0.08, 0.22]),
     ['06-deep-cinematic-boom.wav', E.presiden0, 0.14],
     [sy('crowd_cheer'), E.total - 0.1, 0.16, 1.6],
     [sy('party_horn'), E.total, 0.14],
@@ -176,12 +179,14 @@ function cues(T, EVt) {
     [sy('ka_ching'), E.uang, 0.2],
     // 8 new policies
     ['09-notification-ding.wav', E.kebijakan - 0.1, 0.2],
+    [sy('stamp'), E.lampu, 0.2], [sy('stamp'), E.kantong, 0.2],
     ...[0, 1, 2].map((k) => ['mouse-click-sound-effect.mp3', E.dimatikan + 0.1 + k * 0.12, 0.35, 0.3]),
     ...[0, 1, 2, 3, 4, 5].map((i) => [sy('paper_flutter'), E.segitiga + i * 0.18, 0.06, 0.25]),
     // 9 lost things
     [sy('sparkle'), E.mata - 0.1, 0.18],
     ['02-error-denied-buzz.wav', E.mulut, 0.1],
     // 10-11 president at home
+    [sy('frying'), C[9], 0.07, C[11] - C[9]],
     [sy('puff'), E.rumah - 0.15, 0.2],
     [sy('tada'), E.rumah, 0.16],
     ...['keuangan', 'makanan', 'kesehatan', 'semua'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
@@ -256,8 +261,8 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 🇮🇩', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
-  en: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 🇮🇩', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
+  id: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 👩‍🦱🎤', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
+  en: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 👩‍🦱🎤', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
 };
 const THUMB = (EVt) => ({t: EVt.enggak + 0.3, loc: 'cabinet', pos: [3.2, 1.62, -1.25], look: [3.85, 1.45, -2.9]});
 export const Thumb = ({lang}) => {

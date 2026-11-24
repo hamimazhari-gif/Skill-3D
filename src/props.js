@@ -1851,3 +1851,29 @@ export function remote() {
   for (let i = 0; i < 6; i++) { const k = box(0.012, 0.008, 0.012, '#c9ccd0', {hull: 0}); at(k, -0.013 + (i % 2) * 0.026, 0.025, -0.02 + Math.floor(i / 2) * 0.03); g.add(k); }
   return g;
 }
+
+// Soup ladle (sendok sayur).
+export function ladle() {
+  const g = new THREE.Group();
+  const h = cyl(0.012, 0.012, 0.32, '#c9ccd0', {hull: 0.005, center: true}); h.position.y = 0.06; g.add(h);
+  const cup = ball(0.055, '#c9ccd0', {sy: 0.6, hull: 0.006}); cup.position.y = -0.12; g.add(cup);
+  return g;
+}
+// Pocket calculator with a display and a key grid.
+export function calculator() {
+  const g = new THREE.Group();
+  g.add(box(0.16, 0.025, 0.24, '#3a3a40', {hull: 0.006}));
+  const d = box(0.12, 0.006, 0.05, '#b8d8a8', {hull: 0}); at(d, 0, 0.025, -0.08); g.add(d);
+  for (let i = 0; i < 12; i++) { const k = box(0.025, 0.008, 0.025, i % 4 === 3 ? '#e8823a' : '#e8e4dc', {hull: 0}); at(k, -0.045 + (i % 4) * 0.03, 0.025, -0.02 + Math.floor(i / 4) * 0.035); g.add(k); }
+  return g;
+}
+// Kitchen counter with a two-burner stove.
+export function stoveCounter(w = 1.6) {
+  const g = new THREE.Group();
+  g.add(box(w, 0.86, 0.7, toon('#e8e0cc', {paint: {seed: 171}})));
+  const top = box(w + 0.06, 0.05, 0.74, '#8a7a6a'); at(top, 0, 0.86, 0); g.add(top);
+  for (const s of [-1, 1]) { const b = cyl(0.13, 0.13, 0.03, '#2b2b33', {hull: 0.006}); at(b, s * 0.32, 0.91, 0); g.add(b); }
+  const fl = P_glow('#7fb0ff', 0.35); fl.position.set(0.32, 0.95, 0); g.add(fl);
+  return g;
+}
+function P_glow(c, sz) { return glowSprite(c, sz); }

@@ -72,14 +72,14 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.2, 1.65, 0.7], look: [-0.2, 1.4, -3.0]},
     {at: 'end', pos: [-0.2, 1.65, 0.5], look: [-0.2, 1.4, -3.0]}]},
   {shot: 10, loc: 'home', lift: false, move: 'close: emak is already a president', keys: [
-    {at: 'start', pos: [0, 1.72, -0.85], look: [0, 1.64, -2.6]},
-    {at: 'end', pos: [0, 1.72, -1.0], look: [0, 1.64, -2.6]}]},
+    {at: 'start', pos: [2.2, 1.72, -2.05], look: [2.2, 1.55, -4.05]},
+    {at: 'end', pos: [2.2, 1.72, -2.2], look: [2.2, 1.55, -4.05]}]},
   {shot: 10, from: 'rumah', loc: 'home', lift: false, move: 'president at home', keys: [
-    {at: 'start', pos: [0, 1.75, -0.3], look: [0, 1.9, -2.8]},
-    {at: 'end', pos: [0, 1.75, -0.45], look: [0, 1.9, -2.8]}]},
+    {at: 'start', pos: [2.3, 1.75, -1.2], look: [2.3, 1.55, -4.0]},
+    {at: 'end', pos: [2.3, 1.75, -1.35], look: [2.3, 1.55, -4.0]}]},
   {shot: 11, loc: 'home', lift: false, move: 'everything she runs', keys: [
-    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.75, -2.6]},
-    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.75, -2.6]}]},
+    {at: 'start', pos: [2.2, 1.75, 0.5], look: [2.2, 1.75, -3.4]},
+    {at: 'end', pos: [2.2, 1.75, 0.3], look: [2.2, 1.75, -3.4]}]},
   {shot: 12, loc: 'home', lift: false, move: 'the family and the question', keys: [
     {at: 'start', pos: [0, 1.75, 1.1], look: [0, 2.0, -3]},
     {at: 'end', pos: [0, 1.75, 0.9], look: [0, 2.0, -3]}]},
