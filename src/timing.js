@@ -64,25 +64,28 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Menjual Menara Eiffel" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau emak-emak jadi presiden" (Indonesian only; en mirrors id).
+// The audio skips "Dan barang yang hilang di seluruh negeri..." so that line is not in the timing data.
 const EV_ID = {
-  koper: [0, 'koper'], tangan: [0, 'tangan'], pria: [1, 'pria'], menjual: [1, 'menjual'], eiffel1: [1, 'eiffel'],
-  bagaimana: [2, 'bagaimana'], mundur: [3, 'mundur'], minggu: [3, 'minggu'],
-  paris: [4, 'paris'], tahun: [4, 'tahun'], victor: [5, 'victor'], penipu: [5, 'penipu'], koran: [5, 'koran'], berkarat: [5, 'berkarat'], biaya: [5, 'biaya'], mahal: [5, 'mahal'],
-  berbinar: [6, 'berbinar'], kalau: [7, 'kalau'], kujual: [7, 'kujual'],
-  palsu: [8, 'memalsukan'], menyamar: [8, 'menyamar'], mengundang: [8, 'mengundang'], lima: [8, 'lima'], hotel: [8, 'hotel'],
-  tuan: [9, 'tuan'], dibongkar: [9, 'dibongkar'], besi: [9, 'besi'], ingat: [10, 'ingat'], rahasia: [10, 'rahasia'], jangan: [11, 'jangan'],
-  termakan: [12, 'termakan'], poisson: [13, 'poisson'], istri: [14, 'istrinya'], curiga: [14, 'curiga'],
-  kalauIni: [15, 'kalau'], kenapa: [15, 'kenapa'], rencana: [16, 'rencana'], hancur: [16, 'hancur'],
-  jenius: [17, 'jenius'], diam: [17, 'diam'], sogokan: [17, 'sogokan'], lega: [18, 'lega'], oh: [19, 'oh'], asli: [19, 'asli'],
-  dibayar: [20, 'dibayar'], kabur: [21, 'kabur'], luar: [21, 'luar'], danPoisson: [22, 'poisson'], malu: [23, 'malu'], polisi1: [23, 'polisi'],
-  belum: [24, 'belum'], kembali: [25, 'kembali'], lagi: [25, 'lagi'], korban: [26, 'korbannya'], polisi2: [26, 'polisi'], nyaris: [26, 'nyaris'], tertangkap: [26, 'tertangkap'],
-  target: [27, 'target'], komentar: [28, 'komentar'],
+  bayangkan: [0, 'bayangkan'], emak0: [0, 'emak'], presiden0: [0, 'presiden'], berubah: [1, 'berubah'], total: [1, 'total'],
+  pertama: [2, 'pertama'], rapat: [2, 'rapat'], lima: [2, 'lima'], menit: [2, 'menit'],
+  pakMenteri: [3, 'menteri'], muter: [3, 'muter'], intinya: [4, 'intinya'], mau: [5, 'mau'], enggak: [5, 'enggak'],
+  kedua: [6, 'kedua'], cabai: [6, 'cabai'], stabil: [6, 'stabil'], pedagang: [7, 'pedagang'], menang: [7, 'menang'], ditawar: [7, 'ditawar'],
+  limaBelas: [8, 'lima'], bang: [8, 'bang'], kalauNggak: [9, 'kalau'], pindah: [9, 'pindah'], sebelah: [9, 'sebelah'],
+  ketiga: [10, 'ketiga'], telat: [10, 'telat'], namaLengkap: [10, 'nama'], bambang: [11, 'bambang'], jam: [12, 'jam'],
+  seluruh: [13, 'seluruh'], tegak: [13, 'tegak'],
+  keempat: [14, 'keempat'], anggaran: [14, 'anggaran'], buku: [14, 'buku'], kartun: [14, 'kartun'], sisanya: [15, 'sisanya'], kaleng: [16, 'kaleng'], bukan: [17, 'bukan'], uang: [17, 'uang'],
+  lalu: [18, 'lalu'], kebijakan: [18, 'kebijakan'], lampu: [19, 'lampu'], dimatikan: [19, 'dimatikan'], kantong: [20, 'kantong'], segitiga: [20, 'segitiga'], siapa: [20, 'siapa'],
+  makanya: [21, 'makanya'], mata: [21, 'mata'], mulut: [21, 'mulut'],
+  tapi: [22, 'tapi'], sebenarnya: [22, 'sebenarnya'], sudah: [22, 'sudah'], rumah: [23, 'rumah'],
+  keuangan: [24, 'keuangan'], makanan: [24, 'makanan'], kesehatan: [24, 'kesehatan'], semua: [24, 'semua'], setiap: [25, 'setiap'], cuti: [25, 'cuti'],
+  emakmu: [26, 'emakmu'], kebijakan2: [26, 'kebijakan'], komentar: [27, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {sold: 'TERJUAL!', paris: 'PARIS 1925', name: 'VICTOR LUSTIG', conman: 'PENIPU PALING LICIN DI EROPA', kiosk: 'KORAN',
-  head: 'MENARA EIFFEL BERKARAT!', sub: 'BIAYA PERAWATAN SANGAT MAHAL', letter: 'SURAT RESMI', seal: 'SAH', hotel: 'GRAND HOTEL PARIS',
-  plan: 'BESI TUA', planSub: 'DIJUAL KE PEDAGANG', secret: 'RAHASIA NEGARA', poisson: 'ANDRÉ POISSON', contract: 'KONTRAK', bribe: 'SOGOKAN?',
-  train: 'KE WINA', police: 'POLISI', again: 'LAGI?!', question: 'TARGET BERIKUTNYA?', comment: 'TULIS DI KOMENTAR!'};
+const L_ID = {banner: 'PRESIDEN: EMAK', podium: 'PRESIDEN', change: 'BERUBAH TOTAL!', screen: 'RENCANA STRATEGIS', timer: 'MAKS. 5 MENIT',
+  cabinet: 'RAPAT KABINET', price0: 'Rp80.000', price1: 'Rp15.000', stable: 'HARGA CABAI: STABIL', neighbor: 'SEBELAH',
+  bambang: 'BAMBANG SUTRISNO WIJAYA', book: 'ANGGARAN\nNEGARA', tin: 'BISKUIT', policy: 'KEBIJAKAN BARU', rule1: '1. MATIKAN LAMPU', rule2: '2. LIPAT KANTONG',
+  found: 'KETEMU!', home: 'PRESIDEN DI RUMAH', money: 'KEUANGAN', food: 'MAKANAN', health: 'KESEHATAN', all: 'SEMUA ORANG', noLeave: 'TANPA CUTI',
+  question: 'KEBIJAKAN PERTAMANYA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

@@ -1,472 +1,523 @@
 {
- "duration": 70.92,
+ "duration": 82.76,
  "sentences": [
   {
    "shot": 1,
-   "text": "Koper berisi uang itu berpindah tangan.",
-   "start": 0.24,
-   "end": 2.18,
-   "pred": 2.06,
+   "text": "Bayangkan... kalau emak-emak jadi presiden.",
+   "start": 0.22,
+   "end": 3.1,
+   "pred": 2.78,
    "voiced": [
     [
-     0.24,
-     1.24
+     0.22,
+     0.8
     ],
     [
-     1.46,
-     2.18
+     1.2,
+     1.46
+    ],
+    [
+     1.56,
+     3.1
     ]
    ]
   },
   {
    "shot": 1,
-   "text": "Dan pria berjas ini... baru saja menjual Menara Eiffel.",
-   "start": 2.54,
-   "end": 5.5,
-   "pred": 2.68,
+   "text": "Negara ini pasti berubah total!",
+   "start": 3.48,
+   "end": 5.48,
+   "pred": 2.12,
    "voiced": [
     [
-     2.54,
-     3.64
+     3.48,
+     4.14
     ],
     [
-     3.82,
-     5.5
+     4.3,
+     4.54
+    ],
+    [
+     4.62,
+     5.44
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Bagaimana caranya?",
-   "start": 5.94,
-   "end": 6.6,
-   "pred": 1.0,
+   "text": "Pertama, rapat kabinet maksimal lima menit.",
+   "start": 6.2,
+   "end": 9.38,
+   "pred": 3.43,
    "voiced": [
     [
-     5.94,
-     6.6
+     6.2,
+     6.64
+    ],
+    [
+     7.02,
+     7.26
+    ],
+    [
+     7.34,
+     7.44
+    ],
+    [
+     7.52,
+     9.38
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Kita mundur satu minggu.",
-   "start": 6.94,
-   "end": 7.82,
-   "pred": 1.25,
+   "text": "\"Pak Menteri, presentasinya jangan muter-muter.",
+   "start": 10.72,
+   "end": 13.44,
+   "pred": 3.67,
    "voiced": [
     [
-     6.94,
-     7.8
+     10.72,
+     11.2
+    ],
+    [
+     11.72,
+     12.94
+    ],
+    [
+     13.04,
+     13.44
     ]
    ]
   },
   {
-   "shot": 3,
-   "text": "Paris, tahun seribu sembilan ratus dua puluh lima.",
-   "start": 8.36,
-   "end": 10.8,
-   "pred": 2.93,
+   "shot": 2,
+   "text": "Intinya apa?",
+   "start": 13.7,
+   "end": 14.52,
+   "pred": 0.82,
    "voiced": [
     [
-     8.36,
-     9.84
-    ],
-    [
-     10.22,
-     10.8
-    ]
-   ]
-  },
-  {
-   "shot": 3,
-   "text": "Victor Lustig, penipu paling licin di Eropa, membaca sebuah berita di koran: Menara Eiffel berkarat, dan biaya perawatannya sangat mahal.",
-   "start": 11.04,
-   "end": 16.8,
-   "pred": 8.17,
-   "voiced": [
-    [
-     11.04,
-     12.44
-    ],
-    [
-     12.68,
-     13.88
+     13.7,
+     14.18
     ],
     [
      14.26,
-     15.1
+     14.52
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Mau mau, enggak enggak!\"",
+   "start": 15.0,
+   "end": 16.24,
+   "pred": 1.96,
+   "voiced": [
+    [
+     15.0,
+     15.62
     ],
     [
-     15.4,
-     16.78
+     15.7,
+     16.22
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Kedua, harga cabai langsung stabil.",
+   "start": 17.3,
+   "end": 19.3,
+   "pred": 2.86,
+   "voiced": [
+    [
+     17.32,
+     17.66
+    ],
+    [
+     18.0,
+     19.28
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Karena nggak ada pedagang di negeri ini yang menang kalau udah ditawar emak-emak.",
+   "start": 19.72,
+   "end": 23.16,
+   "pred": 5.47,
+   "voiced": [
+    [
+     19.72,
+     23.06
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Matanya berbinar.",
-   "start": 17.36,
-   "end": 18.2,
-   "pred": 0.94,
+   "text": "\"Lima belas ribu ya, Bang.",
+   "start": 23.92,
+   "end": 26.5,
+   "pred": 2.04,
    "voiced": [
     [
-     17.36,
-     18.2
+     23.92,
+     24.86
+    ],
+    [
+     25.14,
+     25.56
+    ],
+    [
+     25.64,
+     26.5
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "\"Kalau begitu... kenapa tidak kujual saja?\"",
-   "start": 19.0,
-   "end": 21.32,
-   "pred": 2.0,
+   "text": "Kalau nggak, saya pindah ke sebelah!\"",
+   "start": 27.66,
+   "end": 31.1,
+   "pred": 2.86,
    "voiced": [
     [
-     19.0,
-     19.64
+     27.68,
+     28.1
     ],
     [
-     20.18,
-     21.32
+     28.54,
+     29.44
+    ],
+    [
+     29.6,
+     31.1
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Ia memalsukan surat resmi, menyamar sebagai pejabat pemerintah, dan mengundang lima pedagang besi tua ke hotel paling mewah di Paris.",
-   "start": 21.88,
-   "end": 28.22,
-   "pred": 7.67,
+   "text": "Ketiga, pejabat yang telat langsung dipanggil pakai nama lengkap.",
+   "start": 31.94,
+   "end": 35.42,
+   "pred": 4.98,
    "voiced": [
     [
-     21.88,
-     23.08
+     31.94,
+     33.94
     ],
     [
-     23.34,
-     24.76
+     34.6,
+     34.98
     ],
     [
-     24.88,
-     25.82
-    ],
+     35.06,
+     35.42
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Bambang Sutrisno Wijaya!",
+   "start": 36.44,
+   "end": 37.8,
+   "pred": 1.71,
+   "voiced": [
     [
-     25.9,
-     28.2
+     36.46,
+     37.8
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Jam berapa ini?!\"",
+   "start": 38.8,
+   "end": 39.22,
+   "pred": 0.98,
+   "voiced": [
+    [
+     38.8,
+     39.2
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "\"Tuan-tuan, menara ini akan dibongkar dan dijual sebagai besi tua.",
-   "start": 28.66,
-   "end": 31.4,
-   "pred": 3.68,
+   "text": "Dan seluruh menteri langsung duduk tegak.",
+   "start": 39.68,
+   "end": 42.18,
+   "pred": 2.86,
    "voiced": [
     [
-     28.66,
-     29.14
+     39.68,
+     42.16
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Keempat, anggaran negara dicatat di buku tulis bergambar kartun.",
+   "start": 42.54,
+   "end": 45.66,
+   "pred": 4.9,
+   "voiced": [
+    [
+     42.56,
+     43.14
     ],
     [
-     29.34,
-     31.38
-    ]
-   ]
-  },
-  {
-   "shot": 6,
-   "text": "Tapi ingat... ini rahasia negara.",
-   "start": 31.78,
-   "end": 33.3,
-   "pred": 1.56,
-   "voiced": [
-    [
-     31.78,
-     32.1
+     43.26,
+     44.48
     ],
     [
-     32.44,
-     33.3
-    ]
-   ]
-  },
-  {
-   "shot": 6,
-   "text": "Jangan bilang siapa-siapa.\"",
-   "start": 33.58,
-   "end": 34.4,
-   "pred": 1.37,
-   "voiced": [
-    [
-     33.58,
-     34.4
+     45.04,
+     45.66
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Satu pedagang langsung termakan.",
-   "start": 35.1,
-   "end": 36.44,
-   "pred": 1.75,
+   "text": "Sisanya?",
+   "start": 45.86,
+   "end": 46.56,
+   "pred": 0.57,
    "voiced": [
     [
-     35.1,
-     36.42
+     45.92,
+     46.56
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Namanya André Poisson.",
-   "start": 36.62,
-   "end": 37.62,
-   "pred": 1.18,
+   "text": "Disimpan di kaleng biskuit.",
+   "start": 47.48,
+   "end": 49.4,
+   "pred": 1.88,
    "voiced": [
     [
-     36.62,
-     37.6
+     47.48,
+     47.88
+    ],
+    [
+     48.0,
+     49.4
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Tapi istrinya mulai curiga.",
-   "start": 37.96,
-   "end": 39.18,
-   "pred": 1.43,
+   "text": "Bukan biskuit, isinya uang.",
+   "start": 49.9,
+   "end": 51.54,
+   "pred": 2.29,
    "voiced": [
     [
-     37.96,
-     39.16
+     49.9,
+     51.52
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "\"Kalau ini urusan pemerintah, kenapa semuanya serba rahasia?\"",
-   "start": 39.82,
-   "end": 42.36,
-   "pred": 3.49,
+   "text": "Lalu muncul kebijakan-kebijakan baru.",
+   "start": 52.12,
+   "end": 54.54,
+   "pred": 2.61,
    "voiced": [
     [
-     39.82,
-     41.06
+     52.12,
+     52.78
     ],
     [
-     41.24,
-     42.32
+     52.9,
+     54.54
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Rencana Lustig hampir hancur.",
-   "start": 42.94,
-   "end": 44.16,
-   "pred": 1.56,
+   "text": "Lampu yang nggak dipakai wajib dimatikan.",
+   "start": 54.76,
+   "end": 56.94,
+   "pred": 2.86,
    "voiced": [
     [
-     42.96,
-     44.12
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "Lalu ia melakukan langkah paling jenius... ia diam-diam minta uang sogokan.",
-   "start": 44.36,
-   "end": 48.18,
-   "pred": 3.74,
-   "voiced": [
-    [
-     44.38,
-     46.22
+     54.76,
+     55.64
     ],
     [
-     46.56,
-     48.16
+     56.36,
+     56.94
     ]
    ]
   },
   {
-   "shot": 9,
-   "text": "Dan Poisson malah lega.",
-   "start": 48.7,
-   "end": 49.54,
-   "pred": 1.18,
+   "shot": 8,
+   "text": "Kantong plastik dilipat jadi segitiga dan disimpan, siapa tahu nanti butuh.",
+   "start": 56.94,
+   "end": 60.78,
+   "pred": 5.63,
    "voiced": [
     [
-     48.7,
-     49.54
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "\"Oh, cuma pejabat asli yang berani minta sogokan!\"",
-   "start": 49.92,
-   "end": 52.3,
-   "pred": 2.81,
-   "voiced": [
-    [
-     49.92,
-     50.26
+     56.94,
+     58.28
     ],
-    [
-     50.56,
-     52.26
-    ]
-   ]
-  },
-  {
-   "shot": 10,
-   "text": "Uang dibayar.",
-   "start": 52.86,
-   "end": 53.48,
-   "pred": 0.69,
-   "voiced": [
-    [
-     52.86,
-     53.46
-    ]
-   ]
-  },
-  {
-   "shot": 10,
-   "text": "Lustig langsung kabur ke luar negeri.",
-   "start": 53.7,
-   "end": 55.16,
-   "pred": 1.93,
-   "voiced": [
-    [
-     53.7,
-     53.96
-    ],
-    [
-     54.04,
-     55.14
-    ]
-   ]
-  },
-  {
-   "shot": 10,
-   "text": "Dan Poisson?",
-   "start": 55.6,
-   "end": 56.24,
-   "pred": 0.62,
-   "voiced": [
-    [
-     55.6,
-     56.22
-    ]
-   ]
-  },
-  {
-   "shot": 10,
-   "text": "Terlalu malu untuk lapor polisi.",
-   "start": 56.52,
-   "end": 57.76,
-   "pred": 1.68,
-   "voiced": [
-    [
-     56.52,
-     57.74
-    ]
-   ]
-  },
-  {
-   "shot": 11,
-   "text": "Tapi Lustig belum puas.",
-   "start": 58.38,
-   "end": 59.94,
-   "pred": 1.18,
-   "voiced": [
     [
      58.38,
-     58.52
+     59.24
     ],
     [
-     58.6,
-     58.82
+     59.32,
+     59.66
     ],
     [
-     58.96,
-     59.92
+     59.92,
+     60.78
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Makanya cari pakai mata, jangan pakai mulut!\"",
+   "start": 61.68,
+   "end": 63.92,
+   "pred": 3.43,
+   "voiced": [
+    [
+     61.68,
+     62.56
+    ],
+    [
+     62.68,
+     63.92
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Tapi kalau dipikir-pikir... emak sebenarnya memang sudah jadi presiden.",
+   "start": 64.96,
+   "end": 68.9,
+   "pred": 4.73,
+   "voiced": [
+    [
+     64.96,
+     65.68
+    ],
+    [
+     65.76,
+     66.02
+    ],
+    [
+     66.7,
+     67.12
+    ],
+    [
+     67.34,
+     68.88
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Presiden di rumah.",
+   "start": 69.58,
+   "end": 70.4,
+   "pred": 1.22,
+   "voiced": [
+    [
+     69.58,
+     70.38
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Beberapa waktu kemudian, ia kembali ke Paris... untuk menjual Menara Eiffel lagi!",
-   "start": 60.16,
-   "end": 64.04,
-   "pred": 4.43,
+   "text": "Yang mengatur keuangan, makanan, kesehatan, sampai urusan semua orang.",
+   "start": 70.98,
+   "end": 75.56,
+   "pred": 6.2,
    "voiced": [
     [
-     60.16,
-     61.16
+     71.0,
+     71.36
     ],
     [
-     61.3,
-     62.3
+     71.46,
+     71.7
     ],
     [
-     62.54,
-     64.02
+     71.82,
+     72.42
+    ],
+    [
+     72.7,
+     73.22
+    ],
+    [
+     73.38,
+     74.02
+    ],
+    [
+     74.1,
+     75.56
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Kali ini korbannya lapor polisi, dan Lustig nyaris tertangkap.",
-   "start": 64.42,
-   "end": 67.3,
-   "pred": 3.62,
+   "text": "Setiap hari, tanpa cuti.",
+   "start": 75.96,
+   "end": 77.62,
+   "pred": 2.04,
    "voiced": [
     [
-     64.42,
-     65.7
+     75.96,
+     76.22
     ],
     [
-     65.84,
-     66.38
+     76.3,
+     76.56
     ],
     [
-     66.54,
-     67.3
+     76.96,
+     77.42
+    ],
+    [
+     77.5,
+     77.6
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Menurutmu, siapa target lustig selanjutnya?",
-   "start": 67.96,
-   "end": 69.68,
-   "pred": 2.68,
+   "text": "Kalau emakmu jadi presiden, kebijakan pertamanya apa?",
+   "start": 78.56,
+   "end": 81.02,
+   "pred": 4.16,
    "voiced": [
     [
-     67.96,
-     68.46
+     78.58,
+     79.72
     ],
     [
-     68.58,
-     69.66
+     80.0,
+     81.0
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Tulis dikolom komentar",
-   "start": 70.06,
-   "end": 70.76,
-   "pred": 1.25,
+   "text": "Tulis di komentar!",
+   "start": 81.86,
+   "end": 82.5,
+   "pred": 1.22,
    "voiced": [
     [
-     70.06,
-     70.76
+     81.86,
+     82.48
     ]
    ]
   }

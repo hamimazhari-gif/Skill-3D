@@ -239,3 +239,9 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Storyboard titles keyed to words:** `TITLES = [[EV name or 'cutN', text], ...]` (each stays until the next, '' hides it) lets a title start mid-shot on the word where that scene begins.
 - **Seated people behind a table:** lower the character group (y -0.4) once they reach their place; the table hides the legs and a chair back behind them sells it.
 - **Finger to the lips (`shh`):** the near arm folds up to the chin (`L: [2.1, -3.75]`); arm angles are screen-plane: first = shoulder (0 down, + outward, ±π up), second = elbow bend relative to it.
+
+## Notes from "Kalau emak-emak jadi presiden" (comedy, Indonesian everyday life)
+- **Indonesian character kit:** `hairStyle: 'hijab'` (+ `hijab` colour, `brooch`), `hat: 'peci'` (always pass `hatColor: '#1f1d24'`, the palette default is yellow), outfit `batik` (`print`, `print2`, `round`, `pin`), the flowery `hawaii` outfit doubles as a daster; `hat: 'crown'` sits on a hijab.
+- **Props:** `flag()` (waving red-white, `{group, update}`), `podium(label)`, `muterScreen(title)`, `chiliStall()` (`setPrice(text)`), `biscuitTin()` (`open(u)` shows money), `cartoonBook(title)`, `foldedBag()`, `calendar(title, {crossed})`, `cookPot()`, `remote()`. `P.wallet()` and `P.tv()` return `{group, ...}`.
+- **A book or paper lying on a desk:** tilt the near edge up (`rx` negative) and lift it, or its lower half sinks into the desk.
+- **When the audio and the text disagree:** look for missing lines with pauses + pitch (quotes in the character voice are higher) + sibilant/plosive maps; leave unspoken lines out of the timing file (keep them in `narration_id.txt`), say so in `script.md` and tell the user.

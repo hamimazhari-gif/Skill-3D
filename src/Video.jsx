@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [3, 5, 11];
+const DIPS = [2, 3, 5, 7, 9];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'DIA BARU SAJA MENJUAL | MENARA EIFFEL 🗼💰'], ['mundur', ''], ['cut3', 'PARIS, 1925 ⏪'], ['victor', 'VICTOR LUSTIG: | SANG PENIPU 🎩'],
-  ['mengundang', '"INI RAHASIA NEGARA!" 🤫'], ['istri', 'ISTRINYA CURIGA… 😰'], ['cut9', 'TRIK SOGOKAN 🧠'], ['dibayar', ''], ['kabur', 'DIA BALIK LAGI?! 🤦'], ['cut12', '']];
+const TITLES = []; // no storyboard titles yet
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -146,58 +145,49 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    // 1-2 the hook and the rewind
-    [sy('crowd_murmur'), 0, 0.04, C[2]],
-    [sy('latch'), E.koper + 0.2, 0.3],
-    [sy('ka_ching'), E.menjual, 0.2],
-    ['06-deep-cinematic-boom.wav', E.eiffel1, 0.16],
-    ['04-soft-ui-pop.mp3', E.bagaimana, 0.16],
-    [sy('tape_rewind'), E.mundur - 0.05, 0.32],
-    [sy('slide_whistle_up'), E.mundur, 0.12],
-    // 3-4 the newspaper and the idea
-    [sy('crowd_murmur'), C[2], 0.05, C[4] - C[2]],
-    [sy('birds'), C[2], 0.05, C[4] - C[2]],
-    [sy('page_flips'), E.koran - 0.1, 0.18, 0.6],
-    [sy('uh_oh'), E.mahal, 0.1],
-    [sy('sparkle'), E.berbinar, 0.2],
-    ['09-notification-ding.wav', E.kalau + 0.15, 0.22],
-    [sy('slide_whistle_up'), E.kujual, 0.12],
-    // 5 the forgery, the disguise, the invitation
-    [sy('clock_tick'), C[4], 0.08, E.mengundang - C[4]],
-    [sy('stamp'), E.palsu + 0.4, 0.3],
-    [sy('puff'), E.menyamar, 0.25],
-    [sy('footsteps_walk'), E.mengundang, 0.14, 2.4],
-    [sy('crowd_murmur'), E.mengundang, 0.05, E.istri - E.mengundang],
-    // 6 the pitch
-    ['03-subtle-digital-impact.mp3', E.dibongkar, 0.16],
-    ['06-deep-cinematic-boom.wav', E.rahasia, 0.18],
-    [sy('swish'), E.jangan, 0.14],
-    // 7-8 Poisson, his wife, the plan wobbles
-    [sy('sparkle'), E.termakan, 0.16],
-    ['04-soft-ui-pop.mp3', E.poisson - 0.05, 0.2],
-    [sy('uh_oh'), E.curiga, 0.12],
-    [sy('tense_drone'), E.curiga - 0.2, 0.22, E.hancur + 0.9 - E.curiga],
-    ['07-riser-build-up.wav', E.kalauIni, 0.08, 1.8],
-    ['02-error-denied-buzz.wav', E.hancur, 0.12],
-    // 9 the bribe
-    ['07-riser-build-up.wav', E.jenius - 0.3, 0.1, 1.0],
-    [sy('coin_drop'), E.sogokan, 0.2],
-    [sy('tada'), E.asli, 0.16],
-    // 10 paid, the escape, the shame
-    [sy('latch'), E.dibayar, 0.3],
-    [sy('ka_ching'), E.dibayar + 0.15, 0.2],
-    [sy('steam_whistle'), E.kabur - 0.1, 0.18],
-    [sy('footsteps_run'), E.kabur - 0.2, 0.16, 1.2],
-    [sy('train_chuff'), E.luar + 0.3, 0.2, C[10] - E.luar],
-    [sy('slide_whistle_down'), E.malu, 0.14],
-    // 11 the second sale
-    [sy('birds'), C[10], 0.05, E.polisi2 - C[10]],
-    [sy('boing'), E.lagi, 0.14],
-    [sy('whistle_prit'), E.polisi2 - 0.05, 0.25],
-    [sy('footsteps_run'), E.nyaris - 0.1, 0.16, 1.4],
-    [sy('thud'), E.tertangkap, 0.16],
+    // 1 the inauguration
+    [sy('crowd_murmur'), 0, 0.05, E.total],
+    ['06-deep-cinematic-boom.wav', E.presiden0, 0.14],
+    [sy('crowd_cheer'), E.total - 0.1, 0.16, 1.6],
+    [sy('party_horn'), E.total, 0.14],
+    // 2 the 5-minute cabinet meeting
+    [sy('clock_tick'), C[1], 0.08, C[2] - C[1]],
+    [sy('snore'), C[1] + 0.3, 0.08, E.pakMenteri - C[1] - 0.3],
+    ['04-soft-ui-pop.mp3', E.lima - 0.1, 0.2],
+    [sy('slide_whistle_down'), E.muter, 0.1],
+    ['02-error-denied-buzz.wav', E.enggak, 0.14],
+    // 3-4 the market
+    [sy('crowd_murmur'), C[2], 0.06, C[4] - C[2]],
+    ['08-soft-success-chime.mp3', E.stabil, 0.2],
+    [sy('uh_oh'), E.menang, 0.12],
+    [sy('boing'), E.limaBelas + 0.1, 0.14],
+    [sy('swish'), E.pindah, 0.14],
+    [sy('ka_ching'), E.sebelah + 0.45, 0.2],
+    // 5-6 late Bambang
+    [sy('creak'), E.telat - 0.3, 0.2],
+    [sy('footsteps_walk'), E.telat, 0.1, E.bambang - E.telat],
+    ['06-deep-cinematic-boom.wav', E.bambang, 0.2],
+    [sy('slide_whistle_up'), E.tegak - 0.15, 0.14],
+    [sy('thud'), E.tegak, 0.14],
+    // 7 the budget
+    [sy('page_flips'), E.buku, 0.16, 0.6],
+    ['04-soft-ui-pop.mp3', E.kaleng - 0.1, 0.2],
+    [sy('glass_tap'), E.uang - 0.25, 0.2],
+    [sy('ka_ching'), E.uang, 0.2],
+    // 8 new policies
+    ['09-notification-ding.wav', E.kebijakan - 0.1, 0.2],
+    ...[0, 1, 2].map((k) => ['mouse-click-sound-effect.mp3', E.dimatikan + 0.1 + k * 0.12, 0.35, 0.3]),
+    ...[0, 1, 2, 3, 4, 5].map((i) => [sy('paper_flutter'), E.segitiga + i * 0.18, 0.06, 0.25]),
+    // 9 lost things
+    [sy('sparkle'), E.mata - 0.1, 0.18],
+    ['02-error-denied-buzz.wav', E.mulut, 0.1],
+    // 10-11 president at home
+    [sy('puff'), E.rumah - 0.15, 0.2],
+    [sy('tada'), E.rumah, 0.16],
+    ...['keuangan', 'makanan', 'kesehatan', 'semua'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
+    [sy('stamp'), E.cuti - 0.05, 0.2],
     // 12 the question
-    ['pop-bubble-sound-effect.mp3', E.target - 0.3, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.emakmu - 0.1, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
     ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
@@ -253,7 +243,6 @@ export const Story = ({lang, captions = true}) => {
       </ThreeCanvas>
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
-      <Rewind T={T} E={EVt} t={t} />
       <Titles T={T} E={EVt} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
@@ -267,10 +256,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'DIA MENJUAL\nMENARA EIFFEL 🗼💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
-  en: {top: 'DIA MENJUAL\nMENARA EIFFEL 🗼💰', mid: 'BAGAIMANA CARANYA?', bot: ''},
+  id: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 🇮🇩', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
+  en: {top: 'KALAU EMAK-EMAK\nJADI PRESIDEN 🇮🇩', mid: 'NEGARA BERUBAH TOTAL!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.lagi, pos: [0, 1.4, 1.3], look: [0.05, 2.3, -6]});
+const THUMB = (EVt) => ({t: EVt.enggak + 0.3, loc: 'cabinet', pos: [3.2, 1.62, -1.25], look: [3.85, 1.45, -2.9]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

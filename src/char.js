@@ -20,11 +20,12 @@ export const DESIGNS = {
   lanky: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thin', limb: [7, 5], legExtra: 0.08, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   tidy: {head: 'round', hair: 'fringe', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
   gamer: {head: 'round', hair: 'fringe', skin: '#f6dcc4', brows: 'thick', limb: [9, 6], legExtra: 0.06, torsoExtra: 0.08, cheeks: false, shading: true, shadows: true},
+  cozy: {head: 'round', hair: 'fringe', skin: '#f5dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.0, torsoExtra: 0.17, cheeks: false, shading: true, shadows: true},
   dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -97,6 +98,16 @@ function drawHeadBase(o, r) {
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.04 + 0.92 * i / 40); fr.push([hx(a), hy(a)]); }
     fr.push([cx + RX * 0.8, cy - RY * 0.3]); fr.push([cx + RX * 0.45, cy - RY * 0.5]); fr.push([cx + RX * 0.06, cy - RY * 0.66]);
     fr.push([cx, cy - RY * 0.58]); fr.push([cx - RX * 0.06, cy - RY * 0.66]); fr.push([cx - RX * 0.45, cy - RY * 0.5]); fr.push([cx - RX * 0.8, cy - RY * 0.3]);
+  } else if (hairStyle === 'hijab') { // headscarf: cloth around the head and under the chin, the face left open
+    const col = o.hijab || '#9a2a3a';
+    const outer = smoothPoly(72, (t) => { const a = t * Math.PI * 2, sn = Math.sin(a); return [cx + Math.cos(a) * RX * (1.14 + (sn > 0 ? 0.16 * sn : 0)), cy + sn * RY * (sn > 0 ? 1.34 : 1.12)]; });
+    inkShape(x, wobble(outer, r, 2), col, r, 10, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY) * 1.2, 0.34));
+    x.save(); x.strokeStyle = 'rgba(40,20,30,0.28)'; x.lineWidth = R * 0.04; x.lineCap = 'round';
+    for (const k of [0, 1]) { x.beginPath(); x.arc(cx + RX * 0.1, cy + RY * (1.02 + k * 0.14), RX * (0.62 - k * 0.1), Math.PI * 0.15, Math.PI * 0.85); x.stroke(); }
+    x.restore();
+    const face = wobble(ellipse(cx, cy + RY * 0.12, RX * 0.8, RY * 0.84, 56), r, 1.5);
+    inkShape(x, face, SKIN, r, 8, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.36));
+    if (o.brooch) inkShape(x, ellipse(cx + RX * 0.62, cy + RY * 0.92, R * 0.07, R * 0.07, 16), o.brooch, r, 5);
   } else if (hairStyle === 'none') { // no hair (a banknote's face)
   } else if (hairStyle === 'side') { // side-swept hair: covers the crown, sweeps down over one temple
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.06 + 0.9 * i / 40); fr.push([hx(a), hy(a)]); }
@@ -118,7 +129,7 @@ function drawHeadBase(o, r) {
     }
   }
   if (fr.length) inkShape(x, fr, o.hair, r, 9, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.3));
-  if (D.shading && (!o.hat || o.hat === 'none') && hairStyle !== 'bald' && hairStyle !== 'none') { // glossy hair streak
+  if (D.shading && (!o.hat || o.hat === 'none') && hairStyle !== 'bald' && hairStyle !== 'none' && hairStyle !== 'hijab') { // glossy hair streak
     x.save(); x.strokeStyle = 'rgba(255,255,255,0.32)'; x.lineCap = 'round'; x.lineWidth = R * 0.07;
     x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.22, Math.PI * 1.45); x.stroke();
     x.lineWidth = R * 0.035; x.beginPath(); x.arc(cx, cy, Math.max(RX, RY) * 0.82, Math.PI * 1.5, Math.PI * 1.56); x.stroke(); x.restore();
@@ -128,6 +139,13 @@ function drawHeadBase(o, r) {
   if (o.hat === 'cap') {
     inkShape(x, ellipse(cx, top + R * 0.42, R * 0.98, R * 0.62, 40, Math.PI, Math.PI * 2).concat([[cx + R * 0.98, top + R * 0.42]]), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, [[cx - R * 0.95, top + R * 0.36], [cx + R * 1.45, top + R * 0.36], [cx + R * 1.4, top + R * 0.5], [cx - R * 0.95, top + R * 0.5]], o.hatColor2 || o.hatColor, r, 9);
+  } else if (o.hat === 'peci') { // Indonesian black velvet cap: a short oval drum on top of the head
+    const pts = [[cx - R * 0.8, top + R * 0.42], [cx - R * 0.74, top - R * 0.16]];
+    for (let i = 0; i <= 16; i++) { const u = i / 16; pts.push([cx - R * 0.74 + u * R * 1.48, top - R * 0.16 - Math.sin(u * Math.PI) * R * 0.07]); }
+    pts.push([cx + R * 0.8, top + R * 0.42]);
+    for (let i = 0; i <= 16; i++) { const u = 1 - i / 16; pts.push([cx - R * 0.8 + u * R * 1.6, top + R * 0.42 + Math.sin(u * Math.PI) * R * 0.06]); }
+    inkShape(x, pts, o.hatColor || '#1f1d24', r, 10, (q) => paintShade(x, q, cx, top, R * 1.2, 0.3));
+    x.save(); x.strokeStyle = 'rgba(255,255,255,0.22)'; x.lineWidth = R * 0.05; x.beginPath(); x.moveTo(cx - R * 0.55, top - R * 0.08); x.lineTo(cx - R * 0.55, top + R * 0.36); x.stroke(); x.restore();
   } else if (o.hat === 'bowler') {
     inkShape(x, ellipse(cx, top + R * 0.25, R * 0.82, R * 0.75, 40, Math.PI, Math.PI * 2), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.25, R * 0.13, 40), o.hatColor, r, 9);
@@ -356,6 +374,15 @@ function drawTorso(o, r) {
       x.fillStyle = 'rgba(60,140,80,0.8)'; x.beginPath(); x.ellipse(fx + k, fy + k * 0.6, k * 0.8, k * 0.3, 0.6, 0, 7); x.fill();
     }
   }
+  if (out === 'batik' || o.batik) {
+    const fg = o.print || '#e8c35a', dk = o.print2 || '#3a2420';
+    for (let yy = top - 10; yy < waist + 40; yy += 46) for (let xx = cx - bw - 30, j = 0; xx < cx + bw + 40; xx += 46, j++) {
+      const ox = xx + ((Math.round((yy - top) / 46) % 2) ? 23 : 0);
+      x.fillStyle = fg; for (const [dx, dy, rot] of [[0, -11, 0], [0, 11, 0], [-11, 0, 1.57], [11, 0, 1.57]]) { x.beginPath(); x.ellipse(ox + dx, yy + dy, 7, 11, rot, 0, 7); x.fill(); }
+      x.fillStyle = dk; x.beginPath(); x.arc(ox, yy, 3.5, 0, 7); x.fill();
+      x.strokeStyle = dk; x.lineWidth = 2; for (const [dx, dy, rot] of [[0, -11, 0], [0, 11, 0], [-11, 0, 1.57], [11, 0, 1.57]]) { x.beginPath(); x.ellipse(ox + dx, yy + dy, 7, 11, rot, 0, 7); x.stroke(); }
+    }
+  }
   if (out === 'boss') { x.fillStyle = 'rgba(255,255,255,0.18)'; for (let yy = top; yy < waist; yy += 22) x.fillRect(0, yy, W * PX, 6); }
   x.fillStyle = o.lower; x.fillRect(0, waist, W * PX, H * PX);
   x.strokeStyle = INK; x.lineWidth = 6; x.beginPath(); x.moveTo(0, waist); x.lineTo(W * PX, waist); x.stroke();
@@ -380,6 +407,11 @@ function drawTorso(o, r) {
     vneck(56, o.jacket);
   } else if (out === 'boss') { // open shiny shirt, wide collar, gold chain
     vneck(62, o.collar || '#f3e7d3');
+  } else if (out === 'batik') { // batik shirt / blouse: small collar, buttons down the front
+    if (o.round) inkShape(x, ellipse(cx, top + 4, 34, 18, 24, 0, Math.PI), SKIN, r, 5);
+    else { inkShape(x, [[cx, top + 40], [cx - 38, top + 4], [cx - 8, top]], o.jacket, r, 5); inkShape(x, [[cx, top + 40], [cx + 38, top + 4], [cx + 8, top]], o.jacket, r, 5); }
+    x.fillStyle = INK; for (let i = 0; i < 4; i++) { const yy = top + 52 + i * 34; if (yy < waist - 10) { x.beginPath(); x.arc(cx, yy, 4.5, 0, 7); x.fill(); } }
+    if (o.pin) { inkShape(x, [[px - 14, py - 30], [px + 14, py - 30], [px + 14, py - 16], [px - 14, py - 16]], '#d8413a', r, 4); inkShape(x, [[px - 14, py - 16], [px + 14, py - 16], [px + 14, py - 2], [px - 14, py - 2]], '#fbf6ea', r, 4); }
   } else if (out === 'suit') { // 1920s suit: white shirt V, tie, dark lapels, two buttons, pocket square
     const vd = (waist - top) * 0.55, lap = o.lapel || '#2a2630';
     inkShape(x, [[cx - 40, top + 2], [cx + 40, top + 2], [cx, top + vd]], '#fffdf6', r, 5);

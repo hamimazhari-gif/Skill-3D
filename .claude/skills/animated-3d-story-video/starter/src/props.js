@@ -1716,3 +1716,138 @@ export function trainCar(label, o = {}) {
   if (label) { const s = sign(label, 2.4, 0.42, {bg: '#f3ece0', fg: '#2f3a30', frame: '#2f3a30', depth: 0.04}); at(s, 0, 2.35, 1.25); g.add(s); }
   return g;
 }
+
+// ---------- "Kalau emak-emak jadi presiden" ----------
+// Red-and-white flag on a pole (cloth waves via update(t)).
+export function flag(h = 2.6, o = {}) {
+  const g = new THREE.Group();
+  g.add(cyl(0.03, 0.035, h, '#c9c2b0', {hull: 0.01}));
+  const knob = ball(0.06, '#e8c35a', {hull: 0.008}); at(knob, 0, h + 0.02, 0); g.add(knob);
+  const c = canvas(256, 170), x = c.getContext('2d'); x.fillStyle = o.top || '#d8312a'; x.fillRect(0, 0, 256, 85); x.fillStyle = o.bottom || '#fbf6ea'; x.fillRect(0, 85, 256, 85);
+  const geo = new THREE.PlaneGeometry(0.9, 0.6, 12, 1); geo.translate(0.45, 0, 0);
+  const base = geo.attributes.position.array.slice();
+  const cloth = new THREE.Mesh(geo, new THREE.MeshToonMaterial({map: texFrom(c), gradientMap: gradientMap(), side: THREE.DoubleSide}));
+  cloth.position.set(0.03, h - 0.35, 0); cloth.castShadow = true; g.add(cloth);
+  const edge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(0.9, 0.6)), new THREE.LineBasicMaterial({color: INK})); edge.position.set(0.48, h - 0.35, 0); g.add(edge);
+  return {group: g, update(t) { const a = geo.attributes.position.array; for (let i = 0; i < a.length; i += 3) { const u = base[i] / 0.9; a[i + 2] = Math.sin(t * 4 + base[i] * 6 + (o.phase || 0)) * 0.06 * u; } geo.attributes.position.needsUpdate = true; edge.visible = false; }};
+}
+
+// Speaker's podium with a microphone and a front plate.
+export function podium(label, o = {}) {
+  const g = new THREE.Group();
+  const body = box(0.9, 1.1, 0.55, toon(o.color || '#7a4a32', {paint: {planks: 4, seed: 101}})); g.add(body);
+  const top = box(1.0, 0.06, 0.65, shade(o.color || '#7a4a32', -0.2)); at(top, 0, 1.1, 0.03, 0, -0.15); g.add(top);
+  if (label) { const s = sign(label, 0.7, 0.3, {bg: o.plate || '#e8c35a', fg: INK, frame: '#8a6a1a', depth: 0.03}); at(s, 0, 0.62, 0.29); g.add(s); }
+  const st = cyl(0.012, 0.012, 0.3, '#3a3a40', {hull: 0.005}); at(st, 0.15, 1.12, 0.1, 0, 0.35); g.add(st);
+  const mic = ball(0.04, '#2b2b33', {sy: 1.4, hull: 0.006}); at(mic, 0.15, 1.42, 0.2); g.add(mic);
+  return g;
+}
+
+// Presentation screen with a tangled, going-round-in-circles chart.
+export function muterScreen(title) {
+  const c = canvas(1024, 640), x = c.getContext('2d');
+  x.fillStyle = '#f6f8fa'; x.fillRect(0, 0, 1024, 640);
+  x.fillStyle = INK; x.textAlign = 'center'; x.font = '900 56px "Inter Display"'; x.fillText(title, 512, 80);
+  x.strokeStyle = '#4f7fa6'; x.lineWidth = 10; x.lineCap = 'round'; x.beginPath();
+  for (let i = 0; i <= 400; i++) { const t = i / 400, a = t * Math.PI * 11; const px = 130 + t * 760 + Math.cos(a) * 70 * Math.sin(t * Math.PI), py = 360 + Math.sin(a) * 120 * Math.sin(t * Math.PI) + Math.sin(t * 13) * 30; i ? x.lineTo(px, py) : x.moveTo(px, py); }
+  x.stroke();
+  x.fillStyle = '#d8413a'; x.beginPath(); x.moveTo(900, 330); x.lineTo(940, 360); x.lineTo(900, 390); x.fill();
+  x.font = '800 36px "Inter Display"'; x.fillStyle = '#7a6a6c'; x.fillText('SLIDE 1 / 87', 860, 600);
+  const g = new THREE.Group();
+  const frame = box(2.3, 1.45, 0.06, '#2b2b33'); g.add(frame);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(2.16, 1.32), new THREE.MeshBasicMaterial({map: texFrom(c)})); m.position.set(0, 0.725, 0.035); g.add(m);
+  return g;
+}
+
+// Market stall piled with red chillies and a price board (returns {group, setPrice(text)}).
+export function chiliStall(o = {}) {
+  const g = new THREE.Group();
+  const table = box(1.8, 0.8, 0.9, toon('#8a6a4a', {paint: {planks: 4, seed: 111}})); g.add(table);
+  for (let i = 0; i < 3; i++) { const tray = box(0.5, 0.06, 0.6, '#d8c8a0'); at(tray, -0.58 + i * 0.58, 0.8, 0); g.add(tray); }
+  const r = rng(o.seed || 7); const chilis = new THREE.Group();
+  const chGeo = new THREE.CapsuleGeometry(0.018, 0.09, 3, 6); const red = toon('#d8312a', {wear: false}), grn = toon('#3f8a3a', {wear: false}), org = toon('#e8823a', {wear: false});
+  for (let i = 0; i < 240; i++) { const k = i % 3, m = new THREE.Mesh(chGeo, k === 2 && i % 2 ? org : (k === 1 && i % 5 === 0 ? grn : red)); const tx = -0.58 + Math.floor(i / 80) * 0.58;
+    m.position.set(tx + (r() - 0.5) * 0.44, 0.86 + r() * 0.1 * (1 - Math.abs(r() - 0.5)), (r() - 0.5) * 0.5); m.rotation.set(r() * 3, r() * 3, r() * 3); m.castShadow = true; chilis.add(m); }
+  g.add(chilis);
+  const roof = box(2.2, 0.08, 1.4, toon('#2f7a52', {paint: {stripes: {n: 10, color: '#f3ece0'}}})); at(roof, 0, 2.3, 0.1); g.add(roof);
+  for (const s of [-1, 1]) { const p = cyl(0.04, 0.04, 2.3, '#6a4a32', {hull: 0.01}); at(p, s * 1.0, 0, 0.6); g.add(p); }
+  const boards = {};
+  const make = (txt) => { if (!boards[txt]) { const b = sign(txt, 0.8, 0.38, {bg: '#fff3df', fg: '#b8232a', frame: '#351f22', sub: o.sub || 'CABAI / KG'}); at(b, -0.5, 1.2, 0.62, 0.25); b.visible = false; g.add(b); boards[txt] = b; } return boards[txt]; };
+  return {group: g, setPrice(txt) { make(txt); for (const k in boards) boards[k].visible = k === txt; }, board: make};
+}
+
+// Round biscuit tin with a lid; open(u) lifts the lid and shows the bank notes inside.
+export function biscuitTin(o = {}) {
+  const g = new THREE.Group();
+  const c = canvas(512, 128), x = c.getContext('2d'); x.fillStyle = '#2f5f9a'; x.fillRect(0, 0, 512, 128);
+  x.fillStyle = '#e8c35a'; for (let i = 0; i < 8; i++) { x.beginPath(); x.arc(32 + i * 64, 64, 22, 0, 7); x.fill(); }
+  x.fillStyle = '#fbf6ea'; x.font = '900 34px "Inter Display"'; x.textAlign = 'center'; x.fillText(o.label || 'BISKUIT', 256, 76);
+  const side = new THREE.MeshToonMaterial({map: texFrom(c), gradientMap: gradientMap()});
+  const bodyGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.16, 32, 1, true); bodyGeo.translate(0, 0.08, 0);
+  g.add(ink(bodyGeo, side, {hull: 0.008, edges: false}));
+  const bottom = cyl(0.2, 0.2, 0.01, '#2f5f9a', {hull: 0}); g.add(bottom);
+  const money = noteStack(5, {value: o.value || '100.000', color: '#e0808a', w: 0.2}); at(money, -0.05, 0.02, 0); g.add(money);
+  const money2 = noteStack(5, {value: o.value || '100.000', color: '#e0808a', w: 0.2}); at(money2, 0.06, 0.02, 0.05, 0.6); g.add(money2);
+  const lid = new THREE.Group(); const lt = cyl(0.21, 0.21, 0.035, '#2f5f9a', {hull: 0.008}); lid.add(lt);
+  const emb = cyl(0.12, 0.12, 0.01, '#e8c35a', {hull: 0}); at(emb, 0, 0.035, 0); lid.add(emb);
+  at(lid, 0, 0.16, 0); g.add(lid);
+  return {group: g, open(u) { lid.position.set(0.18 * u, 0.16 + 0.22 * Math.sin(Math.min(1, u) * Math.PI / 2), -0.05 * u); lid.rotation.z = -1.1 * u; money.visible = money2.visible = u > 0.05; }};
+}
+
+// School exercise book with a cartoon on the cover (a smiling cat) and a title.
+export function cartoonBook(title, o = {}) {
+  const c = canvas(512, 700), x = c.getContext('2d');
+  x.fillStyle = o.cover || '#7fc4e8'; x.fillRect(0, 0, 512, 700);
+  x.fillStyle = '#fbf6ea'; x.fillRect(40, 470, 432, 190); x.strokeStyle = INK; x.lineWidth = 6; x.strokeRect(40, 470, 432, 190);
+  x.fillStyle = INK; x.textAlign = 'center'; x.font = '900 52px "Inter Display"'; title.split('\n').forEach((l, i) => x.fillText(l, 256, 545 + i * 60));
+  // cartoon cat
+  x.fillStyle = '#f2b24a'; x.beginPath(); x.arc(256, 250, 130, 0, 7); x.fill(); x.lineWidth = 8; x.stroke();
+  for (const s of [-1, 1]) { x.beginPath(); x.moveTo(256 + s * 120, 190); x.lineTo(256 + s * 100, 80); x.lineTo(256 + s * 40, 140); x.closePath(); x.fill(); x.stroke(); }
+  x.fillStyle = INK; for (const s of [-1, 1]) { x.beginPath(); x.ellipse(256 + s * 48, 235, 14, 22, 0, 0, 7); x.fill(); }
+  x.beginPath(); x.arc(256, 290, 30, 0.15 * Math.PI, 0.85 * Math.PI); x.stroke();
+  x.fillStyle = '#e0626e'; x.beginPath(); x.arc(256, 268, 10, 0, 7); x.fill();
+  x.strokeStyle = INK; x.lineWidth = 5; for (const s of [-1, 1]) for (const k of [-1, 0, 1]) { x.beginPath(); x.moveTo(256 + s * 60, 280 + k * 12); x.lineTo(256 + s * 140, 270 + k * 24); x.stroke(); }
+  x.fillStyle = '#ffd84a'; for (const [px, py] of [[80, 70], [440, 400], [430, 90]]) { x.beginPath(); for (let i = 0; i < 10; i++) { const a = i / 10 * 6.28, rr = i % 2 ? 12 : 30; x.lineTo(px + Math.cos(a) * rr, py + Math.sin(a) * rr); } x.fill(); }
+  const tex = texFrom(c); const side = toon('#fbf6ea', {wear: false}); const front = toon(tex);
+  const geo = new THREE.BoxGeometry(0.42, 0.03, 0.58); geo.translate(0, 0.015, 0);
+  return ink(geo, [side, side, front, side, side, side], {hull: 0.008});
+}
+
+// Plastic shopping bag folded into a neat triangle.
+export function foldedBag(color = '#f3efe6') {
+  const s = new THREE.Shape(); s.moveTo(-0.07, -0.06); s.lineTo(0.07, -0.06); s.lineTo(0, 0.08); s.closePath();
+  const geo = new THREE.ExtrudeGeometry(s, {depth: 0.025, bevelEnabled: false});
+  return ink(geo, toon(color, {wear: false}), {hull: 0.006});
+}
+
+// Wall calendar: a month grid; `crossed` draws a red X on every day; title on top.
+export function calendar(title, o = {}) {
+  const c = canvas(512, 600), x = c.getContext('2d');
+  x.fillStyle = '#fbf6ea'; x.fillRect(0, 0, 512, 600);
+  x.fillStyle = '#d8413a'; x.fillRect(0, 0, 512, 110); x.fillStyle = '#fbf6ea'; x.font = '900 56px "Inter Display"'; x.textAlign = 'center'; x.fillText(title, 256, 76);
+  x.font = '800 30px "Inter Display"'; x.fillStyle = INK;
+  for (let i = 0; i < 35; i++) { const cx = 40 + (i % 7) * 72, cy = 160 + Math.floor(i / 7) * 88; if (i < 31) x.fillText(String(i + 1), cx + 20, cy + 20);
+    if (o.crossed && i < 31) { x.strokeStyle = '#d8312a'; x.lineWidth = 6; x.beginPath(); x.moveTo(cx - 4, cy - 14); x.lineTo(cx + 44, cy + 36); x.moveTo(cx + 44, cy - 14); x.lineTo(cx - 4, cy + 36); x.stroke(); } }
+  const tex = texFrom(c); const side = toon('#d8413a', {wear: false}); const front = toon(tex);
+  const geo = new THREE.BoxGeometry(0.6, 0.7, 0.02);
+  return ink(geo, [side, side, side, side, front, side], {hull: 0.008});
+}
+
+// Cooking pot with a lid and a ladle.
+export function cookPot(color = '#8a9aa8') {
+  const g = new THREE.Group();
+  g.add(cyl(0.2, 0.18, 0.24, color, {hull: 0.01}));
+  const lid = cyl(0.21, 0.21, 0.025, shade(color, -0.15), {hull: 0.008}); at(lid, 0, 0.24, 0); g.add(lid);
+  const kn = ball(0.035, '#3a3a40', {hull: 0.005}); at(kn, 0, 0.28, 0); g.add(kn);
+  for (const s of [-1, 1]) { const h = box(0.08, 0.025, 0.04, '#3a3a40', {hull: 0.005}); at(h, s * 0.24, 0.18, 0); g.add(h); }
+  return g;
+}
+
+// TV remote control.
+export function remote() {
+  const g = new THREE.Group();
+  g.add(box(0.06, 0.025, 0.2, '#2b2b33', {hull: 0.006}));
+  const b = box(0.02, 0.01, 0.02, '#d8413a', {hull: 0}); at(b, 0, 0.025, -0.07); g.add(b);
+  for (let i = 0; i < 6; i++) { const k = box(0.012, 0.008, 0.012, '#c9ccd0', {hull: 0}); at(k, -0.013 + (i % 2) * 0.026, 0.025, -0.02 + Math.floor(i / 2) * 0.03); g.add(k); }
+  return g;
+}
