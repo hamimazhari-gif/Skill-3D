@@ -1,0 +1,450 @@
+{
+ "title": "Kisah Nabi Hud - Part 3",
+ "duration": 88.4,
+ "shots": [
+  {
+   "id": "k01",
+   "start": 0.0,
+   "end": 4.45,
+   "line": "Part tiga. Awan yang Ternyata Bukan Hujan.",
+   "scene": "k01",
+   "in": {
+    "type": "fade",
+    "dur": 0.5
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "k02",
+   "start": 4.45,
+   "end": 8.45,
+   "line": "Dikisahkan, kemarau panjang melanda negeri 'Ad.",
+   "scene": "k02",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "k03",
+   "start": 8.45,
+   "end": 11.15,
+   "line": "Tanah retak. Kebun mengering.",
+   "scene": "k03",
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "hit",
+     "gain": -14
+    },
+    {
+     "at": 1.5,
+     "name": "hit",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "k04",
+   "start": 11.15,
+   "end": 14.95,
+   "line": "Mereka menunggu hujan… berhari-hari.",
+   "scene": "k04",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "tick",
+     "gain": -14
+    },
+    {
+     "at": 1.25,
+     "name": "tick",
+     "gain": -14
+    },
+    {
+     "at": 1.9,
+     "name": "tick",
+     "gain": -14
+    },
+    {
+     "at": 2.5,
+     "name": "tick",
+     "gain": -14
+    },
+    {
+     "at": 3.1,
+     "name": "tick",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "k05",
+   "start": 14.95,
+   "end": 20.75,
+   "line": "Lalu suatu hari… terlihat awan hitam besar bergerak ke arah lembah mereka.",
+   "scene": "k05",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 2.0,
+     "name": "thunder",
+     "gain": -16
+    },
+    {
+     "at": 3.0,
+     "name": "riser",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "k06",
+   "start": 20.75,
+   "end": 26.15,
+   "line": "Mereka bersorak gembira! Inilah awan yang akan menurunkan hujan untuk kita!",
+   "scene": "k06",
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "cheer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "murmur",
+    "gain": -16
+   }
+  },
+  {
+   "id": "k07",
+   "start": 26.15,
+   "end": 32.65,
+   "line": "Tapi Nabi Hud berkata: Bukan… itulah azab yang kalian minta untuk disegerakan!",
+   "scene": "k07",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 2.3,
+     "name": "stinger",
+     "gain": -6
+    },
+    {
+     "at": 3.6,
+     "name": "thunder",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -18
+   }
+  },
+  {
+   "id": "k08",
+   "start": 32.65,
+   "end": 37.85,
+   "line": "Angin datang… Dingin. Kencang. Menderu.",
+   "scene": "k08",
+   "in": {
+    "type": "flash",
+    "dur": 0.2
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "whoosh",
+     "gain": -6
+    },
+    {
+     "at": 1.0,
+     "name": "wind",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -8
+   }
+  },
+  {
+   "id": "k09",
+   "start": 37.85,
+   "end": 43.25,
+   "line": "Selama tujuh malam… delapan hari… tanpa henti!",
+   "scene": "k09",
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 1.6,
+     "name": "tick",
+     "gain": -12
+    },
+    {
+     "at": 2.0,
+     "name": "thunder",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -8
+   }
+  },
+  {
+   "id": "k10",
+   "start": 43.25,
+   "end": 46.95,
+   "line": "Angin itu menghancurkan segala sesuatu yang dilaluinya.",
+   "scene": "k10",
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "impact",
+     "gain": -6
+    },
+    {
+     "at": 1.9,
+     "name": "impact",
+     "gain": -8
+    },
+    {
+     "at": 2.6,
+     "name": "impact",
+     "gain": -8
+    },
+    {
+     "at": 3.3,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -8
+   }
+  },
+  {
+   "id": "k11",
+   "start": 46.95,
+   "end": 55.95,
+   "line": "Tubuh-tubuh raksasa itu terangkat… lalu terhempas ke tanah… bergelimpangan… seperti batang-batang pohon kurma yang lapuk.",
+   "scene": "k11",
+   "bars": "scope",
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "whoosh",
+     "gain": -6
+    },
+    {
+     "at": 2.8,
+     "name": "impact",
+     "gain": -4
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -8
+   }
+  },
+  {
+   "id": "k12",
+   "start": 55.95,
+   "end": 61.85,
+   "line": "Bangsa terkuat itu… lenyap. Yang tersisa hanya bekas rumah-rumah mereka.",
+   "scene": "k12",
+   "in": {
+    "type": "dip",
+    "dur": 0.6
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "slowmo",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   }
+  },
+  {
+   "id": "k13",
+   "start": 61.85,
+   "end": 66.75,
+   "line": "Sementara Nabi Hud dan orang-orang beriman… diselamatkan oleh Allah.",
+   "scene": "k13",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 2.7,
+     "name": "shimmer",
+     "gain": -8
+    },
+    {
+     "at": 0.5,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 1.2,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   }
+  },
+  {
+   "id": "k14",
+   "start": 66.75,
+   "end": 75.35,
+   "line": "Hikmahnya: Sekuat apa pun manusia… tak ada yang bisa melawan kehendak Allah. Dan jangan pernah menantang azab-Nya.",
+   "scene": "k14",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 4.2,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "k15",
+   "start": 75.35,
+   "end": 84.15,
+   "line": "Tahukah kamu? Setiap kali melihat awan mendung, Rasulullah SAW terlihat gelisah… karena teringat kisah kaum 'Ad.",
+   "scene": "k15",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 3.0,
+     "name": "thunder",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "k16",
+   "start": 84.15,
+   "end": 88.4,
+   "line": "Ikuti terus kisah para nabi selanjutnya!",
+   "scene": "k16",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "captions": false,
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "stinger",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 20.75,
+   "mood": "mystery",
+   "intensity": 0.45
+  },
+  {
+   "start": 20.75,
+   "end": 32.65,
+   "mood": "tension",
+   "intensity": 0.6
+  },
+  {
+   "start": 32.65,
+   "end": 55.95,
+   "mood": "action",
+   "intensity": 0.9
+  },
+  {
+   "start": 55.95,
+   "end": 66.75,
+   "mood": "sad",
+   "intensity": 0.5
+  },
+  {
+   "start": 66.75,
+   "end": 88.4,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ],
+ "sfx": []
+}
