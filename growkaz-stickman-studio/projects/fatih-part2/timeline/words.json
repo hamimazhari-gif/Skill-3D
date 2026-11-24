@@ -1,0 +1,765 @@
+{
+ "source": "silence-align",
+ "words": [
+  {
+   "word": "Part",
+   "start": 0.334,
+   "end": 0.568
+  },
+  {
+   "word": "dua.",
+   "start": 0.588,
+   "end": 0.776
+  },
+  {
+   "word": "Kapal",
+   "start": 0.796,
+   "end": 1.076
+  },
+  {
+   "word": "yang",
+   "start": 1.096,
+   "end": 1.33
+  },
+  {
+   "word": "Berlayar",
+   "start": 1.35,
+   "end": 1.769
+  },
+  {
+   "word": "di",
+   "start": 1.789,
+   "end": 1.931
+  },
+  {
+   "word": "Atas",
+   "start": 1.951,
+   "end": 2.185
+  },
+  {
+   "word": "Bukit.",
+   "start": 2.205,
+   "end": 2.485
+  },
+  {
+   "word": "April",
+   "start": 3.7,
+   "end": 4.048
+  },
+  {
+   "word": "empat",
+   "start": 4.068,
+   "end": 4.416
+  },
+  {
+   "word": "belas",
+   "start": 4.436,
+   "end": 4.784
+  },
+  {
+   "word": "lima",
+   "start": 4.804,
+   "end": 5.096
+  },
+  {
+   "word": "puluh",
+   "start": 5.116,
+   "end": 5.464
+  },
+  {
+   "word": "tiga.",
+   "start": 5.484,
+   "end": 5.775
+  },
+  {
+   "word": "Sultan",
+   "start": 6.915,
+   "end": 7.277
+  },
+  {
+   "word": "Muhammad",
+   "start": 7.297,
+   "end": 7.761
+  },
+  {
+   "word": "datang",
+   "start": 7.781,
+   "end": 8.143
+  },
+  {
+   "word": "dengan",
+   "start": 8.163,
+   "end": 8.525
+  },
+  {
+   "word": "pasukan",
+   "start": 8.545,
+   "end": 8.958
+  },
+  {
+   "word": "besar…",
+   "start": 8.978,
+   "end": 9.289
+  },
+  {
+   "word": "dan",
+   "start": 9.764,
+   "end": 9.952
+  },
+  {
+   "word": "meriam",
+   "start": 9.972,
+   "end": 10.298
+  },
+  {
+   "word": "raksasa",
+   "start": 10.318,
+   "end": 10.69
+  },
+  {
+   "word": "yang",
+   "start": 10.71,
+   "end": 10.944
+  },
+  {
+   "word": "dentumannya",
+   "start": 10.964,
+   "end": 11.521
+  },
+  {
+   "word": "mengguncang",
+   "start": 11.541,
+   "end": 12.098
+  },
+  {
+   "word": "tanah.",
+   "start": 12.118,
+   "end": 12.399
+  },
+  {
+   "word": "Tembok",
+   "start": 13.712,
+   "end": 14.053
+  },
+  {
+   "word": "kota",
+   "start": 14.073,
+   "end": 14.318
+  },
+  {
+   "word": "digempur",
+   "start": 14.338,
+   "end": 14.776
+  },
+  {
+   "word": "siang",
+   "start": 14.796,
+   "end": 15.089
+  },
+  {
+   "word": "dan",
+   "start": 15.109,
+   "end": 15.306
+  },
+  {
+   "word": "malam.",
+   "start": 15.326,
+   "end": 15.619
+  },
+  {
+   "word": "Tapi",
+   "start": 16.578,
+   "end": 16.792
+  },
+  {
+   "word": "setiap",
+   "start": 16.812,
+   "end": 17.111
+  },
+  {
+   "word": "kali",
+   "start": 17.131,
+   "end": 17.345
+  },
+  {
+   "word": "hancur…",
+   "start": 17.365,
+   "end": 17.665
+  },
+  {
+   "word": "para",
+   "start": 18.279,
+   "end": 18.51
+  },
+  {
+   "word": "penjaga",
+   "start": 18.53,
+   "end": 18.898
+  },
+  {
+   "word": "menambalnya",
+   "start": 18.918,
+   "end": 19.469
+  },
+  {
+   "word": "kembali.",
+   "start": 19.489,
+   "end": 19.857
+  },
+  {
+   "word": "Di",
+   "start": 21.116,
+   "end": 21.232
+  },
+  {
+   "word": "laut,",
+   "start": 21.252,
+   "end": 21.447
+  },
+  {
+   "word": "kapal-kapal",
+   "start": 22.084,
+   "end": 22.595
+  },
+  {
+   "word": "Utsmani",
+   "start": 22.615,
+   "end": 22.988
+  },
+  {
+   "word": "tertahan",
+   "start": 23.008,
+   "end": 23.427
+  },
+  {
+   "word": "oleh",
+   "start": 23.447,
+   "end": 23.681
+  },
+  {
+   "word": "rantai",
+   "start": 23.701,
+   "end": 24.027
+  },
+  {
+   "word": "raksasa.",
+   "start": 24.047,
+   "end": 24.42
+  },
+  {
+   "word": "Mereka",
+   "start": 25.467,
+   "end": 25.784
+  },
+  {
+   "word": "tak",
+   "start": 25.804,
+   "end": 25.986
+  },
+  {
+   "word": "bisa",
+   "start": 26.006,
+   "end": 26.233
+  },
+  {
+   "word": "masuk",
+   "start": 26.253,
+   "end": 26.525
+  },
+  {
+   "word": "ke",
+   "start": 26.545,
+   "end": 26.682
+  },
+  {
+   "word": "teluk",
+   "start": 26.702,
+   "end": 26.974
+  },
+  {
+   "word": "Tanduk",
+   "start": 26.994,
+   "end": 27.311
+  },
+  {
+   "word": "Emas.",
+   "start": 27.331,
+   "end": 27.558
+  },
+  {
+   "word": "Minggu",
+   "start": 28.847,
+   "end": 29.209
+  },
+  {
+   "word": "demi",
+   "start": 29.229,
+   "end": 29.489
+  },
+  {
+   "word": "minggu…",
+   "start": 29.509,
+   "end": 29.87
+  },
+  {
+   "word": "pengepungan",
+   "start": 30.437,
+   "end": 30.971
+  },
+  {
+   "word": "seakan",
+   "start": 30.991,
+   "end": 31.304
+  },
+  {
+   "word": "tak",
+   "start": 31.324,
+   "end": 31.503
+  },
+  {
+   "word": "ada",
+   "start": 31.523,
+   "end": 31.703
+  },
+  {
+   "word": "hasil.",
+   "start": 31.723,
+   "end": 31.991
+  },
+  {
+   "word": "Banyak",
+   "start": 32.837,
+   "end": 33.124
+  },
+  {
+   "word": "yang",
+   "start": 33.144,
+   "end": 33.348
+  },
+  {
+   "word": "mulai",
+   "start": 33.368,
+   "end": 33.614
+  },
+  {
+   "word": "putus",
+   "start": 33.634,
+   "end": 33.879
+  },
+  {
+   "word": "asa.",
+   "start": 33.899,
+   "end": 34.063
+  },
+  {
+   "word": "Lalu",
+   "start": 35.446,
+   "end": 35.686
+  },
+  {
+   "word": "Sultan",
+   "start": 35.706,
+   "end": 36.041
+  },
+  {
+   "word": "muda",
+   "start": 36.061,
+   "end": 36.301
+  },
+  {
+   "word": "itu",
+   "start": 36.321,
+   "end": 36.514
+  },
+  {
+   "word": "memandang",
+   "start": 36.534,
+   "end": 37.011
+  },
+  {
+   "word": "sebuah",
+   "start": 37.031,
+   "end": 37.366
+  },
+  {
+   "word": "bukit…",
+   "start": 37.386,
+   "end": 37.674
+  },
+  {
+   "word": "dan",
+   "start": 38.431,
+   "end": 38.639
+  },
+  {
+   "word": "mendapat",
+   "start": 38.659,
+   "end": 39.122
+  },
+  {
+   "word": "ide",
+   "start": 39.142,
+   "end": 39.35
+  },
+  {
+   "word": "yang",
+   "start": 39.37,
+   "end": 39.63
+  },
+  {
+   "word": "terdengar",
+   "start": 39.65,
+   "end": 40.163
+  },
+  {
+   "word": "gila.",
+   "start": 40.183,
+   "end": 40.442
+  },
+  {
+   "word": "Kalau",
+   "start": 41.692,
+   "end": 41.959
+  },
+  {
+   "word": "kapal",
+   "start": 41.979,
+   "end": 42.245
+  },
+  {
+   "word": "tidak",
+   "start": 42.265,
+   "end": 42.532
+  },
+  {
+   "word": "bisa",
+   "start": 42.552,
+   "end": 42.774
+  },
+  {
+   "word": "lewat",
+   "start": 42.794,
+   "end": 43.06
+  },
+  {
+   "word": "laut…",
+   "start": 43.08,
+   "end": 43.303
+  },
+  {
+   "word": "maka",
+   "start": 44.093,
+   "end": 44.345
+  },
+  {
+   "word": "kapal",
+   "start": 44.365,
+   "end": 44.668
+  },
+  {
+   "word": "akan",
+   "start": 44.688,
+   "end": 45.189
+  },
+  {
+   "word": "lewat",
+   "start": 45.209,
+   "end": 45.511
+  },
+  {
+   "word": "darat!",
+   "start": 45.531,
+   "end": 45.834
+  },
+  {
+   "word": "Di",
+   "start": 47.0,
+   "end": 47.137
+  },
+  {
+   "word": "bawah",
+   "start": 47.157,
+   "end": 47.429
+  },
+  {
+   "word": "gelapnya",
+   "start": 47.449,
+   "end": 47.856
+  },
+  {
+   "word": "malam,",
+   "start": 47.876,
+   "end": 48.148
+  },
+  {
+   "word": "ribuan",
+   "start": 48.664,
+   "end": 49.022
+  },
+  {
+   "word": "prajurit",
+   "start": 49.042,
+   "end": 49.5
+  },
+  {
+   "word": "bekerja.",
+   "start": 49.52,
+   "end": 49.929
+  },
+  {
+   "word": "Batang-batang",
+   "start": 50.673,
+   "end": 51.273
+  },
+  {
+   "word": "kayu",
+   "start": 51.293,
+   "end": 51.526
+  },
+  {
+   "word": "dibentangkan",
+   "start": 51.546,
+   "end": 52.146
+  },
+  {
+   "word": "di",
+   "start": 52.166,
+   "end": 52.307
+  },
+  {
+   "word": "atas",
+   "start": 52.327,
+   "end": 52.559
+  },
+  {
+   "word": "bukit.",
+   "start": 52.579,
+   "end": 52.858
+  },
+  {
+   "word": "Kayu-kayu",
+   "start": 53.688,
+   "end": 54.09
+  },
+  {
+   "word": "itu",
+   "start": 54.11,
+   "end": 54.29
+  },
+  {
+   "word": "dilumuri",
+   "start": 54.31,
+   "end": 54.713
+  },
+  {
+   "word": "minyak",
+   "start": 54.733,
+   "end": 55.046
+  },
+  {
+   "word": "dan",
+   "start": 55.066,
+   "end": 55.246
+  },
+  {
+   "word": "lemak.",
+   "start": 55.266,
+   "end": 55.535
+  },
+  {
+   "word": "Lalu…",
+   "start": 56.535,
+   "end": 56.84
+  },
+  {
+   "word": "puluhan",
+   "start": 57.538,
+   "end": 57.921
+  },
+  {
+   "word": "kapal",
+   "start": 57.941,
+   "end": 58.229
+  },
+  {
+   "word": "perang",
+   "start": 58.249,
+   "end": 58.585
+  },
+  {
+   "word": "ditarik…",
+   "start": 58.605,
+   "end": 58.988
+  },
+  {
+   "word": "naik",
+   "start": 59.725,
+   "end": 59.955
+  },
+  {
+   "word": "ke",
+   "start": 59.975,
+   "end": 60.113
+  },
+  {
+   "word": "atas",
+   "start": 60.133,
+   "end": 60.363
+  },
+  {
+   "word": "bukit…",
+   "start": 60.383,
+   "end": 60.658
+  },
+  {
+   "word": "dan",
+   "start": 61.345,
+   "end": 61.513
+  },
+  {
+   "word": "meluncur",
+   "start": 61.533,
+   "end": 61.909
+  },
+  {
+   "word": "turun",
+   "start": 61.929,
+   "end": 62.181
+  },
+  {
+   "word": "ke",
+   "start": 62.201,
+   "end": 62.327
+  },
+  {
+   "word": "sisi",
+   "start": 62.347,
+   "end": 62.557
+  },
+  {
+   "word": "lain!",
+   "start": 62.577,
+   "end": 62.786
+  },
+  {
+   "word": "Pagi",
+   "start": 63.739,
+   "end": 63.956
+  },
+  {
+   "word": "harinya…",
+   "start": 63.976,
+   "end": 64.324
+  },
+  {
+   "word": "penduduk",
+   "start": 65.142,
+   "end": 65.551
+  },
+  {
+   "word": "Konstantinopel",
+   "start": 65.571,
+   "end": 66.252
+  },
+  {
+   "word": "terbangun.",
+   "start": 66.272,
+   "end": 66.726
+  },
+  {
+   "word": "Mereka",
+   "start": 67.715,
+   "end": 67.983
+  },
+  {
+   "word": "melihat",
+   "start": 68.003,
+   "end": 68.31
+  },
+  {
+   "word": "ke",
+   "start": 68.33,
+   "end": 68.445
+  },
+  {
+   "word": "arah",
+   "start": 68.465,
+   "end": 68.656
+  },
+  {
+   "word": "teluk…",
+   "start": 68.676,
+   "end": 68.906
+  },
+  {
+   "word": "dan",
+   "start": 69.614,
+   "end": 69.771
+  },
+  {
+   "word": "tak",
+   "start": 69.791,
+   "end": 69.947
+  },
+  {
+   "word": "percaya",
+   "start": 69.967,
+   "end": 70.281
+  },
+  {
+   "word": "dengan",
+   "start": 70.301,
+   "end": 70.575
+  },
+  {
+   "word": "mata",
+   "start": 70.595,
+   "end": 70.791
+  },
+  {
+   "word": "mereka",
+   "start": 70.811,
+   "end": 71.085
+  },
+  {
+   "word": "sendiri.",
+   "start": 71.105,
+   "end": 71.418
+  },
+  {
+   "word": "Kapal-kapal",
+   "start": 72.282,
+   "end": 72.841
+  },
+  {
+   "word": "Utsmani…",
+   "start": 72.861,
+   "end": 73.269
+  },
+  {
+   "word": "sudah",
+   "start": 73.888,
+   "end": 74.152
+  },
+  {
+   "word": "berada",
+   "start": 74.172,
+   "end": 74.48
+  },
+  {
+   "word": "di",
+   "start": 74.5,
+   "end": 74.633
+  },
+  {
+   "word": "dalam",
+   "start": 74.653,
+   "end": 74.918
+  },
+  {
+   "word": "teluk!",
+   "start": 74.938,
+   "end": 75.202
+  }
+ ]
+}
