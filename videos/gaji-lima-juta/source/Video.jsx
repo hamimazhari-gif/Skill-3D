@@ -259,7 +259,7 @@ export const Thumb = ({lang}) => {
         <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
-        {word(tx.top, 118, '#fff3df', ink, -3)}
+        {word(tx.top, 96, '#fff3df', ink, -3)}
         {word(tx.mid, 104, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 84, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
