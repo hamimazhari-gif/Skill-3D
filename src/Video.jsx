@@ -183,7 +183,9 @@ function cues(T, EVt) {
     ...[0, 1, 2].map((k) => ['mouse-click-sound-effect.mp3', E.dimatikan + 0.1 + k * 0.12, 0.35, 0.3]),
     ...[0, 1, 2, 3, 4, 5].map((i) => [sy('paper_flutter'), E.segitiga + i * 0.18, 0.06, 0.25]),
     // 9 lost things
-    [sy('sparkle'), E.mata - 0.1, 0.18],
+    [sy('slide_whistle_down'), E.hilang, 0.12],
+    [sy('sparkle'), E.ketemu, 0.2],
+    ['08-soft-success-chime.mp3', E.ketemu + 0.1, 0.2],
     ['02-error-denied-buzz.wav', E.mulut, 0.1],
     // 10-11 president at home
     [sy('frying'), C[9], 0.07, C[11] - C[9]],

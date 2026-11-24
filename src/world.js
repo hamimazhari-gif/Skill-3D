@@ -261,17 +261,17 @@ export function buildWorld(lang, T, EVt, L) {
     fx(g, FX.smoke([KX - 0.25, 1.3, -3.85], tQ - 0.1, {n: 10, every: 0.015, life: 0.7, size: 0.5, grow: 1.8, rise: 0.4, drift: 0.2, color: '#fff3df', opacity: 0.85}), (t) => inShots(t, 10));
     fx(g, FX.glints([KX - 0.25, 2.1, -3.85], tQ, {n: 26}), (t) => inShots(t, 10));
     // the remote: on the table, then in her hand
-    const remH = P.remote(); held(emak, remH, {y: 0.0, z: 0.08}); showWhen(remH, (t) => t > E('mata') - 0.2 && t < cut(10));
-    updaters.push((t) => { rem.visible = t < E('mata') - 0.2; at(rem, -0.4, 0.43, -3.0, 0.4); });
-    popSign(g, sign(L.found, 0.9, 0.32, {bg: '#3f8a5a', fg: '#fff3df', frame: '#1f5a3a'}), 0.2, 2.35, -2.6, E('mata') - 0.1, cut(10), (t) => inShots(t, 9));
-    emak.act([{t: cut(9), pose: 'hips', expr: 'annoyed'}, {t: E('mata') - 0.2, pose: 'present', expr: 'furious'}]);
-    speak(emak, 21, [[0, 'annoyed', 'present'], [0.5, 'furious', 'pointUp']]);
+    const remH = P.remote(); held(emak, remH, {y: 0.0, z: 0.08}); showWhen(remH, (t) => t > E('ketemu') && t < cut(10));
+    updaters.push((t) => { rem.visible = t <= E('ketemu'); at(rem, -0.4, 0.43, -3.0, 0.4); });
+    popSign(g, sign(L.found, 0.9, 0.32, {bg: '#3f8a5a', fg: '#fff3df', frame: '#1f5a3a'}), 0.2, 2.35, -2.6, E('ketemu') - 0.05, cut(10), (t) => inShots(t, 9));
+    emak.act([{t: cut(9), pose: 'idle', expr: 'neutral'}, {t: E('hilang') + 0.1, pose: 'hips', expr: 'smug'}, {t: E('ketemu') - 0.05, pose: 'present', expr: 'cheesy'}, {t: E('nyari') + 0.1, pose: 'hips', expr: 'proud'}]);
+    speak(emak, 22, [[0, 'annoyed', 'present'], [0.5, 'furious', 'pointUp']]);
     emak.act([{t: cut(10), pose: 'hold', expr: 'tired'}, {t: E('sebenarnya') + 0.05, expr: 'thinking'}, {t: E('sudah'), expr: 'happy'}]);
-    bapak.act([{t: cut(9), pose: 'headHold', expr: 'confused'}, {t: E('mata'), pose: 'idle', expr: 'surprised'}, {t: E('mulut') + 0.1, pose: 'facepalm', expr: 'nervous'},
+    bapak.act([{t: cut(9), pose: 'shrug', expr: 'confused'}, {t: E('hilang') + 0.1, pose: 'headHold', expr: 'worried'}, {t: E('ketemu') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('mulut') + 0.1, pose: 'facepalm', expr: 'nervous'},
       {t: cut(11), pose: 'idle', expr: 'neutral'}, {t: E('semua') + 0.1, pose: 'wave', expr: 'cheesy'}, {t: cut(12), pose: 'idle', expr: 'happy'}, {t: E('komentar'), pose: 'point', expr: 'cheesy'}]);
     walkPath(bapak, [[cut(11), -1.3, -3.6], [E('semua') - 0.2, KX - 1.2, -3.6], [E('semua') + 0.5, KX - 1.75, -3.3], [cut(12) - 0.02, KX - 1.75, -3.3], [cut(12), -1.3, -2.9]]);
     showWhen(bapak.group, (t) => !inShots(t, 10));
-    kid.act([{t: cut(9), pose: 'idle', expr: 'cheesy'}, {t: E('mulut'), pose: 'cheer', expr: 'laugh'}, {t: cut(11), pose: 'idle', expr: 'neutral'},
+    kid.act([{t: cut(9), pose: 'shrug', expr: 'confused'}, {t: E('ketemu') + 0.1, pose: 'idle', expr: 'cheesy'}, {t: E('mulut'), pose: 'cheer', expr: 'laugh'}, {t: cut(11), pose: 'idle', expr: 'neutral'},
       {t: E('semua') + 0.15, pose: 'cheer', expr: 'excited'}, {t: cut(12), pose: 'wave', expr: 'toothy'}]);
     walkPath(kid, [[cut(11), 1.4, -3.0], [E('semua') - 0.1, KX + 1.5, -3.2], [E('semua') + 0.5, KX + 1.5, -3.2], [cut(12) - 0.02, KX + 1.5, -3.2], [cut(12), 1.3, -2.7]]);
     showWhen(kid.group, (t) => !inShots(t, 10));

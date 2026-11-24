@@ -1,11 +1,8 @@
 # Kalau emak-emak jadi presiden (comedy)
 
-The narration is the user's own text (Indonesian), used unchanged. Runtime about 83 s (set by the audio).
+The narration is the user's own text (Indonesian), used unchanged. Runtime about 80 s (set by the audio).
 
-**Audio note:** the voice-over seems to skip the line "Dan barang yang hilang di seluruh negeri... dijamin ketemu, kalau emak yang nyari."
-(right after "...siapa tahu nanti butuh." the next speech is emak's high-pitched quote "Makanya cari pakai mata..."), and
-"Lampu yang nggak dipakai wajib dimatikan." is very short. Found by pause, pitch and sibilant analysis (no speech recognition here),
-so the timing file (`narration_timing_id.txt`) leaves that line out; `narration_id.txt` keeps the full text.
+Uses the user's second voice-over (79.4 s), which includes every line; the first upload skipped "Dan barang yang hilang...".
 
 ## Shot table
 | Shot | Place | What we see |
@@ -18,7 +15,7 @@ so the timing file (`narration_timing_id.txt`) leaves that line out; `narration_
 | 6 | Cabinet room | All ministers snap upright, Bambang drops into his chair |
 | 7 | Palace office | Emak taps a calculator; the budget in a school book with a cartoon cat (ANGGARAN NEGARA); a biscuit tin opens: full of money |
 | 8 | Palace office | PENGUMUMAN RESMI with stamp sounds; 1. MATIKAN LAMPU (the lamps go out one by one); 2. LIPAT KANTONG (plastic bags folded into triangles) |
-| 9 | Home | Bapak can't find the remote, emak finds it at once: "Makanya cari pakai mata, jangan pakai mulut!" (lip-sync), KETEMU! |
+| 9 | Home | Bapak and the kid can't find the remote; "dijamin ketemu": emak picks it up at once (KETEMU!), then a close-up: "Makanya cari pakai mata, jangan pakai mulut!" (lip-sync), KETEMU! |
 | 10 | Home kitchen | Emak cooks at the stove (steam, frying sound), tired then smiling; puff: a crown appears |
 | 11 | Home kitchen | KEUANGAN (wallet), MAKANAN (pot), KESEHATAN (first-aid box), SEMUA ORANG (the family); calendar TANPA CUTI with every day crossed |
 | 12 | Home | The family; KEBIJAKAN PERTAMANYA? / TULIS DI KOMENTAR! |

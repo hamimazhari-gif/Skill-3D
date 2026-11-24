@@ -65,7 +65,6 @@ export function makeTiming(lang) {
 }
 
 // Word events: [sentenceIndex, word, occurrence]. Story: "Kalau emak-emak jadi presiden" (Indonesian only; en mirrors id).
-// The audio skips "Dan barang yang hilang di seluruh negeri..." so that line is not in the timing data.
 const EV_ID = {
   bayangkan: [0, 'bayangkan'], emak0: [0, 'emak'], presiden0: [0, 'presiden'], berubah: [1, 'berubah'], total: [1, 'total'],
   pertama: [2, 'pertama'], rapat: [2, 'rapat'], lima: [2, 'lima'], menit: [2, 'menit'],
@@ -76,10 +75,11 @@ const EV_ID = {
   seluruh: [13, 'seluruh'], tegak: [13, 'tegak'],
   keempat: [14, 'keempat'], anggaran: [14, 'anggaran'], buku: [14, 'buku'], kartun: [14, 'kartun'], sisanya: [15, 'sisanya'], kaleng: [16, 'kaleng'], bukan: [17, 'bukan'], uang: [17, 'uang'],
   lalu: [18, 'lalu'], kebijakan: [18, 'kebijakan'], lampu: [19, 'lampu'], dimatikan: [19, 'dimatikan'], kantong: [20, 'kantong'], segitiga: [20, 'segitiga'], siapa: [20, 'siapa'],
-  makanya: [21, 'makanya'], mata: [21, 'mata'], mulut: [21, 'mulut'],
-  tapi: [22, 'tapi'], sebenarnya: [22, 'sebenarnya'], sudah: [22, 'sudah'], rumah: [23, 'rumah'],
-  keuangan: [24, 'keuangan'], makanan: [24, 'makanan'], kesehatan: [24, 'kesehatan'], semua: [24, 'semua'], setiap: [25, 'setiap'], cuti: [25, 'cuti'],
-  emakmu: [26, 'emakmu'], kebijakan2: [26, 'kebijakan'], komentar: [27, 'komentar'],
+  hilang: [21, 'hilang'], ketemu: [21, 'ketemu'], nyari: [21, 'nyari'],
+  makanya: [22, 'makanya'], mata: [22, 'mata'], mulut: [22, 'mulut'],
+  tapi: [23, 'tapi'], sebenarnya: [23, 'sebenarnya'], sudah: [23, 'sudah'], rumah: [24, 'rumah'],
+  keuangan: [25, 'keuangan'], makanan: [25, 'makanan'], kesehatan: [25, 'kesehatan'], semua: [25, 'semua'], setiap: [26, 'setiap'], cuti: [26, 'cuti'],
+  emakmu: [27, 'emakmu'], kebijakan2: [27, 'kebijakan'], komentar: [28, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 

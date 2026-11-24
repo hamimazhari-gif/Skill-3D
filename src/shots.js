@@ -71,6 +71,9 @@ export const SHOT_PLAN = [
   {shot: 9, loc: 'home', lift: false, move: 'lost remote: found in one second', keys: [
     {at: 'start', pos: [-0.2, 1.65, 0.7], look: [-0.2, 1.4, -3.0]},
     {at: 'end', pos: [-0.2, 1.65, 0.5], look: [-0.2, 1.4, -3.0]}]},
+  {shot: 9, from: 'makanya', loc: 'home', lift: false, move: 'closer: look with your eyes', keys: [
+    {at: 'start', pos: [0.45, 1.72, -1.0], look: [0.65, 1.6, -2.6]},
+    {at: 'end', pos: [0.45, 1.72, -1.12], look: [0.65, 1.6, -2.6]}]},
   {shot: 10, loc: 'home', lift: false, move: 'close: emak is already a president', keys: [
     {at: 'start', pos: [2.2, 1.72, -2.05], look: [2.2, 1.55, -4.05]},
     {at: 'end', pos: [2.2, 1.72, -2.2], look: [2.2, 1.55, -4.05]}]},
