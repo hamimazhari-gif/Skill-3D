@@ -103,6 +103,10 @@ export function buildWorld(lang, T, EVt, L) {
     const mama = ch('mama', {seed: 2}, g, 0.75, -2.5, -0.15);
     const kid = ch('kid', {seed: 3, scale: 0.62}, g, -1.35, -2.4, 0.2);
     const note = P.banknote('50.000', {w: 0.3, color: '#6a96d6', dark: '#24488a'}); held(papa, note, {y: 0.02, z: 0.1});
+    const noteM = P.banknote('50.000', {w: 0.3, color: '#6a96d6', dark: '#24488a'}); held(mama, noteM, {y: 0.02, z: 0.1});
+    const paper = sign(L.eggs, 0.24, 0.16, {bg: '#fffaf0', fg: '#351f22', frame: '#e8e0d0', depth: 0.006, border: false}); held(mama, paper, {hand: 0, y: 0.0, z: 0.1});
+    const paperP = sign(L.eggs, 0.24, 0.16, {bg: '#fffaf0', fg: '#351f22', frame: '#e8e0d0', depth: 0.006, border: false}); held(papa, paperP, {hand: 0, y: 0.0, z: 0.1});
+    const tGive = E('modal') + 0.15;
     const mission = sign(L.mission, 1.7, 0.42, {bg: '#2b2b33', fg: '#f2d24a', frame: '#f2d24a'});
     const money = sign(L.money, 1.4, 0.34, {bg: '#6a96d6', fg: '#fff3df', frame: '#24488a'});
     const hard = sign(L.hard, 1.7, 0.36, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'});
@@ -112,7 +116,11 @@ export function buildWorld(lang, T, EVt, L) {
     // five bags when he comes home
     const bags = [0, 1, 2, 3, 4].map((i) => { const b = P.shopBag(['#f3efe6', '#e8c35a', '#e0626e', '#7fc4e8', '#f3efe6'][i]); g.add(b); return b; });
     held(papa, bags[0], {hand: 0, y: -0.38, z: 0.08}); held(papa, bags[1], {hand: 1, y: -0.38, z: 0.08});
-    [[-1.0, -1.95], [0.1, -1.85], [-0.6, -1.6]].forEach(([x, z], i) => at(bags[i + 2], x, 0, z, 0.3 * i));
+    [[0.35, -1.85], [1.1, -1.95], [0.75, -1.55]].forEach(([x, z], i) => at(bags[i + 2], x, 0, z, 0.3 * i));
+    // mama opens the bags: bread, snacks, sausages, chocolate, the 49.900 box... no eggs
+    const loot = [P.loaf(0.5), ball(0.12, '#e8823a', {sy: 1.4, sz: 0.5, hull: 0.006}), box(0.26, 0.16, 0.08, '#c85a3a', {hull: 0.006}), box(0.12, 0.22, 0.04, '#6a3a2a', {hull: 0.004}), box(0.3, 0.26, 0.2, '#f2d24a', {hull: 0.006}), ball(0.12, '#d8413a', {sy: 1.4, sz: 0.5, hull: 0.006})];
+    loot.forEach((o) => g.add(o));
+    const tLoot = (i) => E('kantong') + 0.3 + i * 0.28;
     // tips: the shopping list on the table
     const table = box(1.4, 0.75, 0.8, toon('#b08454', {paint: {planks: 4, seed: 12}})); at(table, 2.1, 0, -2.4); g.add(table);
     const nb = P.notebook(L.list, {lines: L.listLines, cover: '#d8413a'}); at(nb, 2.15, 0.75, -2.3, -0.1); g.add(nb);
@@ -138,7 +146,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy'},
     ]);
     speak(papa, 4, [[0, 'smug', 'hips'], [0.5, 'cheesy', 'point']]);
-    mama.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('tenang') + 0.1, pose: 'hips', expr: 'thinking'}, {t: cut(9), pose: 'idle', expr: 'surprised'},
+    mama.act([{t: 0, pose: 'present', expr: 'determined'}, {t: tGive - 0.1, pose: 'give', expr: 'smug'}, {t: tGive + 0.5, pose: 'idle', expr: 'neutral'}, {t: E('tenang') + 0.1, pose: 'hips', expr: 'thinking'}, {t: cut(9), pose: 'idle', expr: 'surprised'}, {t: E('kantong') + 0.2, pose: 'hold', expr: 'confused'},
       {t: E('gameover'), pose: 'facepalm', expr: 'annoyed'}, {t: cut(11), pose: 'idle', expr: 'happy'}, {t: cut(12), pose: 'wave', expr: 'happy'}]);
     speak(mama, 3, [[0, 'neutral', 'point'], [0.45, 'annoyed', 'stop']]);
     speak(mama, 25, [[0, 'annoyed', 'hips'], [0.4, 'irritated', 'hips']]);
@@ -148,9 +156,10 @@ export function buildWorld(lang, T, EVt, L) {
     const dots = P.glyph('...', 0.6, '#fff3df'); g.add(dots);
     updaters.push((t) => {
       const back = t >= cut(9);
-      note.visible = !back && t > E('modal') - 0.15; note.scale.setScalar(pop(t, E('modal') - 0.15, 0.3));
+      note.visible = paperP.visible = !back && t > tGive; noteM.visible = paper.visible = t < tGive;
       bags.forEach((b) => { b.visible = back && t < cut(11); });
       kc.visible = back && t < cut(11);
+      loot.forEach((o, i) => { const u = (t - tLoot(i)) / 0.5, src = bags[2 + (i % 3)].position; o.visible = back && t < cut(11) && u > 0; const k = Math.min(1, Math.max(0, u)); o.position.set(src.x + (i % 3 - 1) * 0.25 * k, 0.4 + Math.sin(Math.PI * k) * 0.9 + (1 - k) * 0.0 - k * 0.3, src.z + 0.25 * k); o.rotation.z = k * 3; });
       dots.visible = inShots(t, 9) && t > T.S[25].end + 0.1; dots.position.set(-0.3, 2.35, -2.2);
       clock.set(back ? 11 : 8, back ? 45 : 0);
     });
@@ -161,7 +170,9 @@ export function buildWorld(lang, T, EVt, L) {
     const g = addLoc('bakery');
     storeRoom(g);
     const frame = box(2.2, 2.4, 0.1, '#c9ccd0'); at(frame, -2.6, 0, -4.8); g.add(frame);
-    const glass = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 2.2), new THREE.MeshBasicMaterial({color: '#cfe8f6'})); at(glass, -2.6, 1.1, -4.74); g.add(glass);
+    const doors = [-1, 1].map((sd) => { const d = box(0.98, 2.2, 0.04, new THREE.MeshBasicMaterial({color: '#cfe8f6', transparent: true, opacity: 0.6}), {hull: 0.01}); at(d, -2.6 + sd * 0.5, 0.02, -4.7); g.add(d); return {d, sd}; });
+    const outside = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 2.2), new THREE.MeshBasicMaterial({color: '#bfe2f6'})); at(outside, -2.6, 1.1, -4.78); g.add(outside);
+    updaters.push((t) => doors.forEach(({d, sd}) => { const k = smooth((t - cut(3) - 0.05) / 0.5) * (1 - smooth((t - E('roti') - 0.6) / 0.6)); d.position.x = -2.6 + sd * (0.5 + 0.9 * k); }));
     const counter = box(2.6, 1.0, 0.8, toon('#c9935a', {paint: {planks: 5, seed: 31}})); at(counter, 0.9, 0, -2.9); g.add(counter);
     for (let i = 0; i < 6; i++) { const lf = P.loaf(0.9); at(lf, 0.3 + (i % 3) * 0.45, 1.02, -3.05 + Math.floor(i / 3) * 0.3, 0.3 * i); g.add(lf); }
     const oven = box(1.4, 1.6, 0.8, toon('#5a5a62', {wear: false})); at(oven, 1.0, 0, -4.4); g.add(oven);
@@ -196,6 +207,9 @@ export function buildWorld(lang, T, EVt, L) {
     const tol = sign(L.tol, 1.8, 0.5, {bg: '#2f7a42', fg: '#fff3df', frame: '#fff3df'}); at(tol, 2.4, 2.8, -1.6, -0.5); g.add(tol);
     const km = sign(L.km + ' →', 1.6, 0.34, {bg: '#2f7a42', fg: '#fff3df', frame: '#fff3df'}); at(km, 2.4, 2.35, -1.6, -0.5); g.add(km);
     const eggSign = sign(L.eggs, 1.4, 0.5, {bg: '#f2d24a', fg: '#351f22', frame: '#8a6a2a'}); at(eggSign, 36, 2.5, -2.0, -0.6); g.add(eggSign);
+    const chips = [0, 1, 2, 3, 4, 5, 6].map((i) => { const b = new THREE.Group(); const body = ball(0.22, ['#d8413a', '#f2d24a', '#4f8fc8', '#e8823a', '#7fa35a', '#9a6fb0', '#e0626e'][i], {sy: 1.35, sz: 0.45, hull: 0.01}); body.position.y = 0.3; b.add(body);
+      const lab = sign('KRIPIK', 0.3, 0.1, {bg: '#fff3df', fg: '#d8413a', frame: '#fff3df', depth: 0.005, border: false}); at(lab, 0, 0.32, 0.1); b.add(lab); at(b, 1.0 + i * 1.3, 0.62 + (i % 2) * 0.55, -2.45); g.add(b); return b; });
+    updaters.push((t) => chips.forEach((b, i) => { b.rotation.z = Math.sin(t * 5 + i * 1.3) * 0.35; b.position.y = 0.62 + (i % 2) * 0.55 + Math.abs(Math.sin(t * 5 + i * 1.3)) * 0.04; }));
     const papa = ch('papa', {seed: 1}, g, 0.2, -1.6, 0.3);
     walkPath(papa, [[cut(4), 0.2, -1.6], [E('lorong'), 1.4, -1.6], [cut(5), 3.0, -1.6]]);
     const bag = P.shopBag('#f3efe6'); held(papa, bag, {hand: 0, y: -0.38, z: 0.08});
@@ -209,10 +223,15 @@ export function buildWorld(lang, T, EVt, L) {
     storeRoom(g);
     const sh = P.shelfRow(5, {seed: 25}); at(sh, -2.5, 0, -3.4); g.add(sh);
     const tag = P.priceTag('Rp49', '.900'); at(tag, 0.6, 1.65, -2.6); g.add(tag);
+    const glow = P.glowSprite('#ffe08a', 2.0); at(glow, 0.6, 1.65, -2.7); g.add(glow);
+    updaters.push((t) => { glow.material.opacity = 0.55 + 0.35 * Math.sin(t * 6); glow.scale.setScalar(1.8 + 0.2 * Math.sin(t * 6)); });
+    const err = sign('ERROR!', 0.7, 0.24, {bg: '#d8413a', fg: '#fff3df', frame: '#351f22', depth: 0.03});
+    popSign(g, err, -1.05, 2.0, -1.85, E('ribuan') - 0.1, E('padahal') - 0.05);
     const papa = ch('papa', {seed: 1}, g, -0.6, -2.0, 0.2);
     const brain = sign(L.brain, 0.9, 0.36, {bg: '#fff3df', fg: '#4f7fa6', frame: '#4f7fa6'});
     const real = sign(L.real, 1.5, 0.4, {bg: '#d8413a', fg: '#fff3df', frame: '#8a2a2a'});
     popSign(g, brain, -0.6, 2.45, -1.9, E('otak') + 0.1, E('padahal') - 0.05);
+    updaters.push((t) => { if (t > E('ribuan') - 0.1 && t < E('padahal')) { const j = Math.sin(t * 47) > 0.6; brain.position.x = -0.6 + (j ? 0.03 : 0); } });
     popSign(g, real, -0.25, 2.5, -1.9, E('padahal') + 0.1);
     const bubbles = [0, 1].map((i) => { const b = ball(0.05 + i * 0.03, '#fff3df', {hull: 0.006}); at(b, -0.45 + i * 0.08, 2.05 + i * 0.13, -1.9); g.add(b); return b; });
     updaters.push((t) => bubbles.forEach((b) => { b.visible = t > E('otak') && t < E('padahal') - 0.05; }));

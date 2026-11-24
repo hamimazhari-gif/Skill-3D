@@ -104,33 +104,39 @@ function Scene({lang, thumb}) {
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
 const DIPS = [3, 4, 5, 6, 7, 9];
+
 // Scene titles (game levels) and the HUD: lives lost on these words.
-const TITLES = [[1, 'MISI: BELI TELUR 🥚'], [3, 'LEVEL 1: JEBAKAN AROMA ROTI 🍞'], [4, 'LEVEL 2: LABIRIN SNACK 🍿'], [5, 'LEVEL 3: ILUSI HARGA 🏷️'],
-  [6, 'LEVEL 4: BOS SPG 🌭'], [7, 'FINAL BOSS: RAK KASIR 🍫'], [9, 'MISI SELESAI? 🛍️'], [10, ''], [11, 'TIPS MENANG ✅'], [12, 'KAMU KALAH DI LEVEL BERAPA? 🎮']];
-const LOSS = (E) => [E.satuRoti + 0.4, E.tol + 0.2, E.hampir + 0.3, E.dua + 0.3, E.coklat2 + 0.4];
+const TITLES = [[1, 'MISI: BELI TELUR 🥚 | TINGKAT KESULITAN: MUSTAHIL 💀'], [3, 'LEVEL 1: JEBAKAN AROMA ROTI 🥐'], [4, 'LEVEL 2: LABIRIN SNACK 🌀'],
+  [5, 'LEVEL 3: ILUSI HARGA 9.900 🧠'], [6, 'LEVEL 4: BOS SPG 😇 | ❤️❤️🖤'], [7, 'FINAL BOSS: RAK KASIR 🍫 | ❤️🖤🖤'], [9, ''], [11, 'TIPS MENANG ✅'], [12, 'KAMU KALAH DI LEVEL BERAPA? 🎮']];
+// lives lost (storyboard: SPG, final boss, then none left)
+const LOSS = (E) => [E.senyum + 0.2, E.coklat2 + 0.4, E.nyawa];
+const RETRO = '"JetBrains Mono", "Noto Color Emoji", monospace';
 const Titles = ({T, t}) => {
   let cur = null; for (const [k, txt] of TITLES) if (t >= T.CUTS[k - 1]) cur = {txt, t0: T.CUTS[k - 1] + (k === 1 ? 0.25 : 0.15)};
   if (!cur || !cur.txt || t < cur.t0) return null;
-  const u = Math.min(1, (t - cur.t0) / 0.3), sc = u < 1 ? 0.6 + 0.4 * (1 + 2.70158 * Math.pow(u - 1, 3) + 1.70158 * Math.pow(u - 1, 2)) : 1;
+  const u = Math.min(1, (t - cur.t0) / 0.25), step = Math.floor(u * 4) / 4; // stepped, 8-bit style pop
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: 110}}>
-      <div style={{maxWidth: 960, textAlign: 'center', background: '#2b2b33', color: '#f2d24a', fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900,
-        fontSize: 62, lineHeight: 1.12, padding: '18px 34px 22px', border: `9px solid #f2d24a`, borderRadius: 22, boxShadow: `10px 12px 0 ${INK}`,
-        transform: `scale(${sc}) rotate(-1.5deg)`, letterSpacing: -1}}>{cur.txt}</div>
+      <div style={{maxWidth: 1010, textAlign: 'center', background: '#1a1a2e', color: '#f2d24a', fontFamily: RETRO, fontWeight: 800,
+        fontSize: 58, lineHeight: 1.2, padding: '18px 26px 20px', border: '8px solid #f2d24a', outline: `8px solid ${INK}`, boxShadow: `14px 14px 0 ${INK}`,
+        transform: `scale(${0.6 + 0.4 * step})`, letterSpacing: -3}}>
+        {cur.txt.split(' | ').map((l, i) => <div key={i} style={i ? {color: '#fff3df', fontSize: 46, marginTop: 6} : {}}>{l}</div>)}
+      </div>
     </AbsoluteFill>
   );
 };
-const Hud = ({T, E, t}) => {
-  if (t >= T.CUTS[8]) return null;
-  const loss = LOSS(E);
-  const hearts = [0, 1, 2, 3, 4].map((i) => {
-    const lt = loss[4 - i], gone = t > lt, k = gone ? Math.max(0, 1 - (t - lt) / 0.3) : 0;
-    return <span key={i} style={{display: 'inline-block', transform: `scale(${1 + 0.6 * k})`, opacity: gone && k === 0 ? 0.35 : 1, marginRight: 6}}>{gone ? '🖤' : '❤️'}</span>;
-  });
+// retro game screen for the hook: scanlines, a pixel frame, blinking PLAYER 1 / START
+const Retro = ({T, t}) => {
+  const end = T.CUTS[1]; if (t >= end + 0.3) return null;
+  const k = t < end ? 1 : 1 - (t - end) / 0.3;
+  const blink = Math.floor(t * 2.5) % 2 === 0;
   return (
-    <AbsoluteFill style={{alignItems: 'flex-start', paddingTop: 300, paddingLeft: 48}}>
-      <div style={{background: 'rgba(43,43,51,0.78)', borderRadius: 18, padding: '10px 18px', fontFamily: '"Noto Color Emoji", "Inter Display"', fontSize: 52, border: `5px solid ${INK}`}}>{hearts}</div>
-      <div style={{marginTop: 12, background: 'rgba(43,43,51,0.78)', borderRadius: 14, padding: '6px 16px', color: '#fff3df', fontFamily: '"Inter Display", "Noto Color Emoji"', fontWeight: 900, fontSize: 40, border: `5px solid ${INK}`}}>🥚 TELUR: 0/1</div>
+    <AbsoluteFill style={{opacity: k, pointerEvents: 'none'}}>
+      <AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 3px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 7px)'}} />
+      <AbsoluteFill style={{border: '22px solid #1a1a2e', boxShadow: 'inset 0 0 0 8px #f2d24a, inset 0 0 120px rgba(0,0,0,0.55)'}} />
+      <div style={{position: 'absolute', left: 60, bottom: 250, fontFamily: RETRO, fontWeight: 800, fontSize: 44, color: '#7fe08a', textShadow: `4px 4px 0 ${INK}`}}>PLAYER 1</div>
+      <div style={{position: 'absolute', right: 60, bottom: 250, fontFamily: RETRO, fontWeight: 800, fontSize: 44, color: '#f2d24a', textShadow: `4px 4px 0 ${INK}`, opacity: blink ? 1 : 0}}>▶ START</div>
+      <div style={{position: 'absolute', right: 60, top: 330, fontFamily: RETRO, fontWeight: 800, fontSize: 40, color: '#fff3df', textShadow: `4px 4px 0 ${INK}`}}>Rp50.000</div>
     </AbsoluteFill>
   );
 };
@@ -138,9 +144,11 @@ const GameOver = ({T, E, t}) => {
   const t0 = E.gameover - 0.05; if (t < t0 || t >= T.CUTS[10]) return null;
   const k = Math.min(1, (t - t0) / 0.25);
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.45 * k})`}}>
-      <div style={{fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 150, color: '#d8413a', WebkitTextStroke: `14px ${INK}`, paintOrder: 'stroke fill',
-        textShadow: `0 12px 0 ${INK}`, transform: `scale(${1.6 - 0.6 * k})`, letterSpacing: -2, marginTop: -300}}>GAME OVER</div>
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', background: `rgba(20,10,14,${0.5 * k})`}}>
+      <div style={{marginTop: -300, textAlign: 'center', transform: `scale(${1.5 - 0.5 * k})`}}>
+        <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 120, color: '#d8413a', textShadow: `8px 8px 0 ${INK}`, letterSpacing: 2}}>GAME OVER 💀</div>
+        <div style={{fontFamily: RETRO, fontWeight: 800, fontSize: 64, color: '#fff3df', textShadow: `6px 6px 0 ${INK}`, marginTop: 20}}>TELUR: 0 🥚</div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -149,16 +157,19 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    ...LOSS(E).map((t) => ['02-error-denied-buzz.wav', t, 0.14]),
-    ...LOSS(E).map((t) => [sy('heart_pop'), t + 0.05, 0.1]),
+    // retro game sounds: start, coin, level up at every level change, hurt on each lost life, error, game over
+    [sy('chip_start'), 0.05, 0.22],
+    [sy('chip_coin'), E.modal + 0.15, 0.24],
+    ...[3, 4, 5, 6, 7].map((k) => [sy('chip_levelup'), C[k - 1] + 0.1, 0.24]),
+    ...LOSS(E).map((t) => [sy('chip_hurt'), t, 0.26]),
+    [sy('chip_error'), E.ribuan - 0.1, 0.24],
+    [sy('chip_gameover'), E.gameover - 0.05, 0.3],
+    [sy('chip_levelup'), E.tips, 0.18],
     // 1-2 the mission
-    [sy('tada'), E.misi, 0.16],
-    [sy('coin_drop'), E.modal, 0.2],
     ['06-deep-cinematic-boom.wav', E.mustahil, 0.16],
     [sy('clock_tick'), C[1], 0.08, C[2] - C[1]],
     [sy('swish'), E.menit, 0.14],
     // level intros
-    ...['lv1', 'lv2', 'lv3', 'lv4'].map((k) => ['09-notification-ding.wav', E[k], 0.16]),
     // 3 bakery
     [sy('crowd_murmur'), C[2], 0.05, C[6] - C[2]],
     [sy('sparkle'), E.wangi, 0.14],
@@ -180,8 +191,6 @@ function cues(T, EVt) {
     [sy('footsteps_walk'), C[8], 0.14, 1.0],
     [sy('paper_flutter'), C[8] + 0.3, 0.18],
     [sy('uh_oh'), E.mana + 0.2, 0.12],
-    ['06-deep-cinematic-boom.wav', E.gameover - 0.05, 0.22],
-    [sy('slide_whistle_down'), E.gameover + 0.1, 0.14],
     // 11 tips
     ...['daftar', 'lapar2', 'rak'].map((k) => ['04-soft-ui-pop.mp3', E[k] - 0.05, 0.2]),
     [sy('sparkle'), E.tips, 0.14],
@@ -243,7 +252,7 @@ export const Story = ({lang, captions = true}) => {
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       <Titles T={T} t={t} />
-      <Hud T={T} E={EVt} t={t} />
+      <Retro T={T} t={t} />
       <GameOver T={T} E={EVt} t={t} />
       {captions ? <Captions T={T} t={t} /> : null}
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />

@@ -127,6 +127,6 @@ const EV_ID = {
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
 const L_ID = {mission: 'MISI: BELI TELUR', money: 'MODAL Rp50.000', hard: 'KESULITAN: MUSTAHIL', bakery: 'ROTI HANGAT', tol: 'TOL SNACK', eggs: 'TELUR', km: 'TELUR 5 KM',
-  brain: '40-AN?', real: 'HAMPIR 50 RIBU!', spg: 'GRATIS!', kasir: 'KASIR', list: 'DAFTAR BELANJA', listLines: ['1. Telur', '(cuma itu)'],
+  brain: '40 RIBUAN?', real: 'HAMPIR 50 RIBU!', spg: 'GRATIS!', kasir: 'KASIR', list: 'DAFTAR BELANJA', listLines: ['1. Telur', '(cuma itu)'],
   tip1: 'TULIS DAFTAR', tip2: 'JANGAN LAPAR', tip3: 'LANGSUNG KE RAK', question: 'LEVEL BERAPA?', comment: 'KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};
