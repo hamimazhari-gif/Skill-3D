@@ -16,6 +16,8 @@ const ANDI = {outfit: 'tshirt', jacket: '#4f9a8a', print: '#f2d24a', print2: '#d
 const CAST = {
   andi: ANDI,
   andiP: {...ANDI, jacket: '#7fa6d8', print: null, lower: '#7fa6d8', hat: 'nightcap', hatColor: '#7fa6d8', hatColor2: '#fbf6ea'},
+  ibu: {hairStyle: 'hijab', hijab: '#e8a0b8', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'tshirt', jacket: '#e8a0b8', lower: '#e8a0b8', tie: '#e8a0b8'},
+  kid: {outfit: 'tshirt', jacket: '#f2d24a', lower: '#f2d24a', tie: '#f2d24a', hair: '#2b2326', hairStyle: 'fringe', hat: 'none'},
   seller: {outfit: 'farmer', jacket: '#e8a83a', lower: '#4a4a52', pocket: '#d8982a', tie: '#e8a83a', hair: '#2b2326', hairStyle: 'side', hat: 'none', towel: '#fbf6ea', mustache: 'thin'},
 };
 
@@ -105,8 +107,7 @@ export function buildWorld(lang, T, EVt, L) {
       const t0 = E('punah') - 0.4 + i * 0.05, a0 = i / 16 * Math.PI * 2, rad = 1.55 + (i % 3) * 0.18, yy = (i % 5 - 2) * 0.35;
       bug(g, ins, 0.32, (t) => { const a = a0 + t * 0.9; return [Math.cos(a) * rad, 1.8 + yy + Math.sin(t * 3 + i) * 0.08, -3.6 + Math.sin(a) * rad, -a]; }, (t) => t < t0);
       fx(g, FX.glints([0, 0, 0], t0, {n: 6, seed: i}), (t) => t > t0 - 0.05 && t < t0 + 1.2); }
-    label(g, L.gone, 0, 3.45, -3.2, E('punah') - 0.05, cut(2), {w: 1.9, h: 0.4, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'});
-  }
+      }
 
   // ---------- the bedroom: no more mosquitoes (2), the bad feeling (3), "you may come back" (11) ----------
   {
@@ -118,8 +119,23 @@ export function buildWorld(lang, T, EVt, L) {
     const ns = box(0.45, 0.5, 0.4, toon('#8a6242', {paint: {seed: 411}})); at(ns, -0.35, 0, -4.4); g.add(ns);
     const coil = P.mosquitoCoil(); g.add(coil);
     updaters.push((t) => { const u = Math.max(0, t - E('obat') - 0.05); const k = Math.min(u, 1.0); at(coil, -0.35 + k * 1.6, 0.5 + k * 2.2 - k * k * 2.6, -4.4 + k * 1.0, 0, k * 8, k * 6); coil.visible = !(u > 0.95) || t > cut(11); if (t > cut(11)) at(coil, -0.35, 0.5, -4.4); });
-    const andiP = ch('andiP', {seed: 1}, g, -0.6, -3.0, 0.2); showWhen(andiP.group, (t) => inShots(t, 2) && t < E('hariPertama') - 0.1);
-    andiP.act([{t: 0, pose: 'cheer', expr: 'excited'}, {t: E('nyamuk1') + 0.05, pose: 'armsUp', expr: 'toothy'}, {t: E('obat') - 0.15, pose: 'give', expr: 'cheesy'}]);
+    const andiP = ch('andiP', {seed: 1}, g, -0.6, -3.0, 0.2); showWhen(andiP.group, (t) => (inShots(t, 1) && t < E('bumi') + 0.2) || (inShots(t, 2) && t < E('hariPertama') - 0.1));
+    // the hook: he slaps a mosquito and a wish comes true
+    const SLAP = 0.75;
+    bug(g, P.mosquito(), 0.3, (t) => { const a = t * 3; return [-0.35 + Math.cos(a) * 0.3, 2.05 + Math.sin(t * 7) * 0.06, -2.8 + Math.sin(a) * 0.2, -a]; }, (t) => t < SLAP);
+    fx(g, FX.glints([-0.4, 1.95, -2.8], SLAP, {n: 10, seed: 3}));
+    popSign(g, sign('PERMINTAAN DIKABULKAN:', 2.2, 0.62, {bg: '#7a5aa8', fg: '#fff3df', frame: '#f2d24a', sub: 'SEMUA SERANGGA HILANG!'}), -0.5, 2.5, -3.0, E('serangga0') - 0.1, E('bumi') + 0.3);
+    fx(g, FX.glints([-0.5, 2.7, -3.0], E('serangga0') - 0.05, {n: 40, color: '#f2d24a'}));
+    andiP.act([{t: 0, pose: 'idle', expr: 'annoyed'}, {t: SLAP - 0.3, pose: 'hammerUp', expr: 'gritted'}, {t: SLAP - 0.05, pose: 'hammerDown', expr: 'determined'},
+      {t: E('serangga0') + 0.05, pose: 'idle', expr: 'surprised'}, {t: E('serangga0') + 0.6, pose: 'cheer', expr: 'excited'}]);
+    andiP.act([{t: E('serangga0') + 0.6, action: 'jump', dur: 0.5}]);
+    // the party: the family cheers, the mosquito net goes
+    const fam = [['ibu', -1.6, -3.4, 0.4], ['kid', 0.25, -2.6, -0.2]].map(([k, x, z, y], i) => { const c = ch(k, {seed: 20 + i, scale: k === 'kid' ? 0.7 : 1}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 2) && t < E('hariPertama') - 0.1);
+      c.act([{t: cut(2), pose: 'cheer', expr: i ? 'toothy' : 'laugh'}, {t: E('tidur'), pose: 'armsUp', expr: 'excited'}]); c.act([{t: E('akhirnya') + 0.2 + i * 0.3, action: 'jump', dur: 0.5}, {t: E('obat') + i * 0.2, action: 'hop', dur: 0.4}]); return c; });
+    fx(g, FX.confetti([-0.5, 2.9, -2.8], E('akhirnya') + 0.1), (t) => inShots(t, 2));
+    const net = box(1.6, 1.5, 2.3, new THREE.MeshBasicMaterial({color: '#fbfbf8', transparent: true, opacity: 0.28, depthWrite: false}), {hull: 0.006}); g.add(net);
+    updaters.push((t) => { const u = smooth((t - E('obat') - 0.1) / 0.8); at(net, 1.2 + u * 1.5, 0.5 + u * 2.5, -3.7, Math.PI / 2, 0, u * 0.8); net.visible = u < 0.98 && t < cut(3); });
+    andiP.act([{t: cut(2), pose: 'cheer', expr: 'excited'}, {t: E('nyamuk1') + 0.05, pose: 'armsUp', expr: 'toothy'}, {t: E('obat') - 0.15, pose: 'give', expr: 'cheesy'}]);
     andiP.act([{t: E('akhirnya'), action: 'jump', dur: 0.5}, {t: E('tidur') - 0.1, action: 'hop', dur: 0.4}]);
     speak(andiP, 1, [[0, 'excited', 'cheer'], [0.35, 'toothy', 'armsUp'], [0.7, 'cheesy', 'give']]);
     const sleeper = ch('andiP', {seed: 2, noFace: true}, g, 2.55, -3.7, 0); showWhen(sleeper.group, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
@@ -130,11 +146,14 @@ export function buildWorld(lang, T, EVt, L) {
     label(g, L.heaven, 1.0, 1.95, -3.5, E('surga') - 0.05, cut(3), {w: 1.2, h: 0.38, bg: '#f2d24a', vis: (t) => inShots(t, 2)});
     fx(g, FX.glints([0.9, 1.4, -3.4], E('surga'), {n: 30}), (t) => inShots(t, 2));
     // the next morning: something feels wrong
-    const andi3 = ch('andi', {seed: 3}, g, -1.1, -3.4, 0.25); showWhen(andi3.group, (t) => inShots(t, 3) || inShots(t, 11));
+    const andi3 = ch('andi', {seed: 3}, g, -1.1, -3.4, 0.25);
+    const LAND = E('jangan') - 0.2; showWhen(andi3.group, (t) => inShots(t, 3) || inShots(t, 11));
     andi3.act([{t: cut(3), pose: 'hips', expr: 'happy'}, {t: E('tapi') + 0.1, pose: 'idle', expr: 'confused'}, {t: E('bertahan') + 0.05, pose: 'chin', expr: 'worried'},
-      {t: cut(11), pose: 'hips', expr: 'thinking'}, {t: E('boleh') - 0.1, pose: 'present', expr: 'happy'}, {t: E('jangan') - 0.05, pose: 'point', expr: 'smug'}]);
-    speak(andi3, 20, [[0, 'thinking', 'hips'], [0.35, 'happy', 'present'], [0.65, 'smug', 'point']]);
-    const mq = bug(g, P.mosquito(), 0.35, (t) => { const u = smooth((t - E('yaSudah') + 0.3) / 1.0); const a = t * 2.2; return [-0.2 + Math.cos(a) * 0.35 - (1 - u) * 3, 2.0 + Math.sin(t * 5) * 0.08, -3.1 + Math.sin(a) * 0.25, -a]; }, (t) => inShots(t, 11));
+      {t: cut(11), pose: 'beg', expr: 'cry'}, {t: E('boleh') - 0.1, pose: 'present', expr: 'happy'}, {t: LAND + 0.1, pose: 'give', expr: 'nervous'}, {t: E('gigit') + 0.1, pose: 'give', expr: 'cheesy'}]);
+    speak(andi3, 20, [[0, 'cry', 'beg'], [0.35, 'happy', 'present'], [0.75, 'nervous', 'give']]);
+    const mq = bug(g, P.mosquito(), 0.35, (t) => { const u = smooth((t - E('yaSudah') + 0.3) / 1.0); const a = t * 2.2; const l = smooth((t - LAND + 0.5) / 0.5);
+      const fx0 = -0.6 + Math.cos(a) * 0.35 - (1 - u) * 3, fy0 = 2.2 + Math.sin(t * 5) * 0.08, fz0 = -3.1 + Math.sin(a) * 0.25; return [fx0 + (-0.55 - fx0) * l, fy0 + (1.42 - fy0) * l, fz0 + (-3.15 - fz0) * l, -a * (1 - l)]; }, (t) => inShots(t, 11));
+    [P.bee(), P.butterfly('#f2a93a'), P.bee(), P.butterfly('#7fc4e8')].forEach((ins, i) => bug(g, ins, 0.25, (t) => { const u = smooth((t - E('yaSudah') + 0.1 - i * 0.2) / 1.2); const a = t * 1.3 + i * 1.6; return [-1.1 + Math.cos(a) * 1.2 + (1 - u) * (i % 2 ? 4 : -4), 2.3 + (i % 2) * 0.3 + Math.sin(t * 4 + i) * 0.1, -3.0 + Math.sin(a) * 0.5, -a]; }, (t) => inShots(t, 11)));
     label(g, L.ok, -1.1, 2.75, -3.2, E('boleh') - 0.1, 1e9, {w: 1.5, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a', vis: (t) => inShots(t, 11)});
     label(g, L.noBite, -1.1, 2.4, -3.15, E('jangan') - 0.1, 1e9, {w: 1.5, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a', vis: (t) => inShots(t, 11)});
   }
@@ -150,9 +169,9 @@ export function buildWorld(lang, T, EVt, L) {
     const andi = ch('andi', {seed: 4}, g, -0.75, -2.6, 0.3);
     andi.act([{t: cut(4), pose: 'idle', expr: 'confused'}, {t: E('berbuah') + 0.05, pose: 'shrug', expr: 'confused'}, {t: E('lebah') + 0.1, pose: 'point', expr: 'surprised'}, {t: E('bunga') + 0.1, pose: 'idle', expr: 'happy'}]);
     problem(g, 1, 0.55, 2.65, -3.4, 'masalah1', E('lebah') - 0.12);
-    label(g, L.noFruit, 0.55, 2.28, -3.35, E('berbuah') - 0.1, E('lebah') - 0.12, {w: 1.5, fg: '#d8413a'});
-    const b1 = bug(g, P.bee(), 0.3, (t) => { const u = t - E('lebah'); return [0.2 + Math.cos(u * 1.4) * 0.9, 0.85 + Math.sin(u * 5) * 0.12, -3.3 + Math.sin(u * 1.4) * 0.5, -u * 1.4]; }, (t) => inShots(t, 4) && t > E('lebah') - 0.1);
+        const b1 = bug(g, P.bee(), 0.3, (t) => { const u = t - E('lebah'); return [0.2 + Math.cos(u * 1.4) * 0.9, 0.85 + Math.sin(u * 5) * 0.12, -3.3 + Math.sin(u * 1.4) * 0.5, -u * 1.4]; }, (t) => inShots(t, 4) && t > E('lebah') - 0.1);
     const b2 = bug(g, P.butterfly('#f2a93a'), 0.35, (t) => { const u = t - E('kupu'); return [1.1 + Math.cos(-u) * 0.7, 1.0 + Math.sin(u * 3) * 0.15, -3.6 + Math.sin(-u) * 0.4, u]; }, (t) => inShots(t, 4) && t > E('kupu') - 0.1);
+    label(g, 'DULU...', -0.4, 1.6, -3.0, E('lebah') - 0.1, cut(5), {w: 0.8, h: 0.24, bg: '#e8d8b0'});
     fx(g, FX.glints([0.3, 0.7, -3.3], E('menyerbuki'), {n: 26, color: '#f2d24a'}), (t) => inShots(t, 4));
   }
 
@@ -188,15 +207,23 @@ export function buildWorld(lang, T, EVt, L) {
     const big = box(0.5, 0.75, 0.08, '#5a2f1f', {hull: 0.01}); const bigW = box(0.52, 0.4, 0.09, '#d8413a', {hull: 0.008}); const bigG = new THREE.Group(); at(big, 0, 0, 0); at(bigW, 0, 0.18, 0); bigG.add(big, bigW); g.add(bigG);
     updaters.push((t) => { bigG.visible = inShots(t, 6) && t > E('cokelat') - 0.1 && t < E('hilang') + 0.4; bigG.scale.setScalar(pop(t, E('cokelat') - 0.1, 0.35)); at(bigG, 0.4, 1.5 + Math.sin(t * 2) * 0.03, -3.2, Math.sin(t) * 0.2); });
     fx(g, FX.smoke([0.4, 1.8, -3.2], E('hilang') + 0.35, {n: 8, every: 0.03, life: 0.8, size: 0.3, grow: 2, rise: 0.3, color: '#fbf6ea', opacity: 0.7}), (t) => inShots(t, 6));
-    problem(g, 2, 0.4, 2.75, -3.4, 'masalah2', cut(7));
-    label(g, L.chocoGone, 0.4, 2.4, -3.35, E('cokelat') - 0.05, E('kakao'), {w: 2.0, fg: '#d8413a'});
-    const mid = bug(g, P.mosquito(), 0.16, (t) => [-2.0 + Math.cos(t * 3) * 0.25, 1.2 + Math.sin(t * 6) * 0.06, -3.6 + Math.sin(t * 3) * 0.2, -t * 3], (t) => inShots(t, 6) && t > E('agas') - 0.15 && t < E('hilang') + 99 && t < E('kopi'));
+    problem(g, 2, 0.4, 2.75, -3.4, 'masalah2', E('kakao'));
+        const mid = bug(g, P.mosquito(), 0.16, (t) => [-2.0 + Math.cos(t * 3) * 0.25, 1.2 + Math.sin(t * 6) * 0.06, -3.6 + Math.sin(t * 3) * 0.2, -t * 3], (t) => inShots(t, 6) && t > E('agas') - 0.15 && t < E('hilang') + 99 && t < E('kopi'));
     const ring = new THREE.Mesh(new THREE.RingGeometry(0.28, 0.33, 32), new THREE.MeshBasicMaterial({color: '#f2d24a'})); g.add(ring); updaters.push((t) => { ring.visible = inShots(t, 6) && t > E('agas') - 0.1 && t < E('kopi'); ring.position.set(-2.0, 1.2, -3.3); ring.scale.setScalar(pop(t, E('agas') - 0.1, 0.3)); });
     label(g, L.midge, -2.0, 1.75, -3.3, E('agas') - 0.1, E('kopi'), {w: 0.7, bg: '#f2d24a'});
     const cup = P.mug('#fbf6ea'); cup.scale.setScalar(2.2); g.add(cup); updaters.push((t) => { cup.visible = inShots(t, 6) && t > E('kopi') - 0.1; at(cup, 0.4, 1.2, -3.2); cup.scale.setScalar(2.2 * pop(t, E('kopi') - 0.1, 0.35)); });
     fx(g, FX.smoke([0.4, 1.55, -3.2], E('kopi'), {n: 10, every: 0.2, life: 1.4, size: 0.15, grow: 2, rise: 0.5, color: '#fbf6ea', opacity: 0.5}), (t) => inShots(t, 6));
-    label(g, L.coffee, 0.4, 2.4, -3.35, E('kopi') - 0.05, cut(7), {w: 2.0, fg: '#8a4a2a'});
+        const fr = box(0.9, 1.9, 0.7, toon('#e8eef4', {paint: {seed: 455}})); at(fr, 2.3, 0, -3.6); g.add(fr);
+    for (let r = 0; r < 3; r++) { const sh = box(0.8, 0.03, 0.55, '#c9d8e4', {hull: 0}); at(sh, 2.3, 0.4 + r * 0.45, -3.55); g.add(sh); }
+    const inner = box(0.82, 1.75, 0.02, '#c9e4f0', {hull: 0}); at(inner, 2.3, 0.08, -3.93); g.add(inner);
+    const fd = box(0.9, 1.9, 0.06, toon('#f3f6f8', {paint: {seed: 456}})); const fdp = new THREE.Group(); at(fdp, 1.85, 0, -3.22); at(fd, 0.45, 0, 0); fdp.add(fd); g.add(fdp);
+    const hd = box(0.04, 0.5, 0.05, '#9aa8b4', {hull: 0.004}); at(hd, 0.8, 0.9, 0.05); fdp.add(hd);
+    updaters.push((t) => { fdp.rotation.y = -1.9 * smooth((t - E('cokelat') + 0.3) / 0.4) * (1 - smooth((t - E('kakao') + 0.3) / 0.4)); });
+    label(g, 'KOSONG!', 2.3, 1.05, -3.3, E('hilang') - 0.1, E('kakao'), {w: 0.75, h: 0.24, fg: '#d8413a'});
+    const price1 = sign('KOPI Rp5.000', 1.3, 0.34, {bg: '#3a2a26', fg: '#fff3df', frame: '#c9a25a'}), price2 = sign('KOPI Rp50.000!', 1.3, 0.34, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
+    popSign(g, price1, 0.4, 1.85, -3.1, E('kopi') - 0.1, E('berkurang') - 0.05); popSign(g, price2, 0.4, 1.85, -3.1, E('berkurang') - 0.05, cut(7));
     const andi = ch('andi', {seed: 7}, g, -0.9, -2.8, 0.3);
+    walkPath(andi, [[E('menyakitkan') - 0.4, -0.9, -2.8], [E('cokelat') - 0.4, 1.4, -2.7], [E('kakao') - 0.3, 1.4, -2.7], [E('kakao'), -0.9, -2.8]]);
     andi.act([{t: cut(6), pose: 'idle', expr: 'happy'}, {t: E('menyakitkan') + 0.05, pose: 'idle', expr: 'worried'}, {t: E('hilang') + 0.1, pose: 'headHold', expr: 'shocked'},
       {t: E('kakao') + 0.1, pose: 'point', expr: 'confused'}, {t: E('kopi') + 0.1, pose: 'headHold', expr: 'cry'},
       {t: E('apa') - 0.1, pose: 'headHold', expr: 'scream'}, {t: E('kembalilah') - 0.25, pose: 'armsUp', expr: 'cry'}]);
@@ -219,6 +246,7 @@ export function buildWorld(lang, T, EVt, L) {
     const animals = [['burung', P.bird(), -1.6, -2.6, 0.9], ['katak', P.frog(), -0.9, -3.2, 0.9], ['kadal', P.lizard(), 0.9, -2.6, 0.9], ['ikan', P.fish('#e8a83a'), 0.1, -3.1, 1.5]];
     animals.forEach(([k, a, x, z, s], i) => { a.scale.setScalar(s); at(a, x, k === 'ikan' ? 0.15 : 0.04, z, k === 'kadal' ? -2.6 : 0.5); g.add(a); a.visible = false;
       updaters.push((t) => { a.visible = t > E(k) - 0.05; const p = pop(t, E(k) - 0.05, 0.35); const sad = smooth((t - E('kelaparan')) / 0.5); a.scale.setScalar(s * p * (1 - 0.15 * sad)); a.position.y = (k === 'ikan' ? 0.15 + Math.abs(Math.sin(t * 3)) * 0.2 * (1 - sad) : 0.04); });
+      const pl = cyl(0.16, 0.13, 0.025, '#fbf8f2', {hull: 0.006}); at(pl, x + 0.15, 0.03, z + 0.3, 0, 0.5); g.add(pl); updaters.push((t) => { pl.visible = t > E('kelaparan') - 0.1; pl.scale.setScalar(pop(t, E('kelaparan') - 0.1 + i * 0.08, 0.3)); });
       label(g, L.hungry, x, 0.95 + (i % 2) * 0.25, z + 0.1, E('kelaparan') - 0.05 + i * 0.08, cut(9), {w: 0.75, h: 0.22, fg: '#d8413a'}); });
     label(g, L.threat, 2.1, 2.6, -3.9, E('terancam') - 0.1, cut(9), {w: 1.6, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'});
   }
@@ -230,7 +258,7 @@ export function buildWorld(lang, T, EVt, L) {
     const ground = box(40, 0.03, 30, toon('#7a7a4a', {paint: {seed: 481, stains: 30}}), {edges: false}); at(ground, 0, -0.03, -8); g.add(ground);
     for (let i = 0; i < 10; i++) { const tr = P.tree({seed: 490 + i, h: 3.0}); at(tr, -5 + i * 1.1, 0, -5.5 - (i % 3) * 1.2); g.add(tr); }
     const piles = [[-1.6, -3.4, 0.9, 1], [1.4, -3.6, 1.0, 2], [0.2, -4.6, 1.1, 3], [-2.6, -4.8, 0.8, 4]].map(([x, z, r, sd]) => { const p = P.leafPile(r, sd); at(p, x, 0, z); g.add(p); return p; });
-    updaters.push((t) => piles.forEach((p, i) => { const u = smooth((t - E('menumpuk') + 0.3 - i * 0.2) / 1.2) + smooth((t - E('tanpa4')) / 1.5) * 0.8; p.scale.set(1 + u * 0.3, 0.3 + u * 1.6, 1 + u * 0.3); }));
+    updaters.push((t) => piles.forEach((p, i) => { const u = smooth((t - E('menumpuk') + 0.3 - i * 0.2) / 1.2) + smooth((t - E('tanpa4')) / 1.5) * 0.8; p.scale.set(1 + u * 0.5, 0.3 + u * 2.4 + smooth((t - E('bau') + 0.4) / 1.0) * 3.5, 1 + u * 0.5); }));
     const poops = [[0.8, -2.8], [-0.5, -3.1], [2.0, -2.9]].map(([x, z], i) => { const p = P.poop(); at(p, x, 0, z); g.add(p); updaters.push((t) => { p.visible = t > E('kumbang') + 0.2 + i * 0.15; p.scale.setScalar(pop(t, E('kumbang') + 0.2 + i * 0.15, 0.3)); }); return p; });
     problem(g, 4, 0, 2.75, -3.4, 'masalah4', E('semut'));
     label(g, L.pile, 0, 2.4, -3.35, E('menumpuk') - 0.1, E('semut'), {w: 2.1, fg: '#8a5a2a'});
@@ -239,6 +267,10 @@ export function buildWorld(lang, T, EVt, L) {
       label(g, k.toUpperCase(), x, 0.7, -2.55, E(k) - 0.05, E('tanpa4'), {w: 0.7, h: 0.2}); });
     fx(g, FX.smoke([0, 0.4, -3.6], E('bau') - 0.3, {n: 24, every: 0.08, life: 1.6, size: 0.4, grow: 2, rise: 0.5, drift: 0.4, color: '#9ad04a', opacity: 0.45}));
     label(g, L.smell, 1.3, 2.3, -3.2, E('bau') - 0.05, cut(10), {w: 0.9, h: 0.36, bg: '#9ad04a'});
+    const hs = P.house(2.6, 2.4, 2.4, {color: '#e8dcc0', roof: '#b5543c', windows: 1, seed: 48}); at(hs, 2.6, 0, -6.0); g.add(hs);
+    for (const [x, z, r] of [[1.0, -2.9, 0.6], [-1.3, -3.0, -0.4]]) { const bn = new THREE.Group(); for (const s2 of [-1, 1]) { const b = cyl(0.025, 0.025, 0.3, '#f3efe6', {hull: 0.004}); at(b, 0, 0.03, 0, 0, Math.PI / 2, s2 * 0.6); bn.add(b); } at(bn, x, 0, z, r); g.add(bn); }
+    [['ibu', 0.9, -2.5, -0.3], ['kid', 0.15, -2.2, 0]].forEach(([k, x, z, y], i) => { const c = ch(k, {seed: 30 + i, scale: k === 'kid' ? 0.7 : 1}, g, x, z, y); showWhen(c.group, (t) => t > E('tanpa4') - 0.3);
+      c.act([{t: 0, pose: 'idle', expr: 'confused'}, {t: E('bau') - 0.05 + i * 0.1, pose: 'shh', expr: 'disgusted'}]); c.act([{t: E('bau'), action: 'tremble', dur: 1.2}]); });
     const andi = ch('andi', {seed: 8}, g, -0.9, -2.4, 0.3); showWhen(andi.group, (t) => t > E('tanpa4') - 0.3);
     andi.act([{t: 0, pose: 'idle', expr: 'confused'}, {t: E('bau') - 0.1, pose: 'shh', expr: 'disgusted'}]); andi.act([{t: E('bau'), action: 'tremble', dur: 1.2}]);
   }

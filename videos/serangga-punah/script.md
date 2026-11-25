@@ -1,6 +1,6 @@
 # Kalau semua serangga punah — script
 
-Narasi dan voice-over dari pengguna (89,7 s), tidak diubah. Belum ada storyboard: tidak ada teks judul di layar, hanya caption kata-per-kata dan papan "MASALAH 1-4" di dunia.
+Narasi dan voice-over dari pengguna (89,7 s), tidak diubah. Mengikuti storyboard pengguna (7 adegan dengan teks layar): hook pria menepuk nyamuk + tulisan ajaib 'PERMINTAAN DIKABULKAN', keluarga berpesta dan kelambu terbang, lebah hanya kenangan ('DULU...'), kulkas tanpa cokelat dan harga kopi melonjak (Rp5.000 → Rp50.000), hewan dengan piring kosong, tumpukan sampah setinggi rumah dan semua menutup hidung, penutup memohon ke langit lalu nyamuk hinggap dan dibiarkan. Papan di dunia yang isinya sama dengan teks layar dihapus.
 
 | Shot | Lokasi | Isi |
 |---|---|---|

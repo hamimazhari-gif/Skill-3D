@@ -11,7 +11,10 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: slow pushes, close cuts onto the small things (insects, fruit, the midge).
-  {shot: 1, loc: 'space', lift: false, move: 'the Earth and its insects', keys: [
+  {shot: 1, loc: 'bedroom', lift: false, move: 'he slaps a mosquito, the wish comes true', keys: [
+    {at: 'start', pos: [-0.5, 1.9, -0.1], look: [-0.5, 1.9, -3.2]},
+    {at: 'end', pos: [-0.5, 1.9, -0.35], look: [-0.5, 1.9, -3.2]}]},
+  {shot: 1, from: 'bumi', loc: 'space', lift: false, move: 'the Earth and its insects', keys: [
     {at: 'start', pos: [0, 1.9, 0.6], look: [0, 1.9, -3.6]},
     {at: 'end', pos: [0, 1.9, 0.1], look: [0, 1.9, -3.6]}]},
   {shot: 2, loc: 'bedroom', lift: false, move: 'no more mosquitoes!', keys: [
@@ -36,8 +39,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.6, 1.4, -0.3], look: [-0.6, 1.05, -2.6]},
     {at: 'end', pos: [-0.6, 1.4, -0.45], look: [-0.6, 1.05, -2.6]}]},
   {shot: 6, loc: 'choco', lift: false, move: 'chocolate almost gone', keys: [
-    {at: 'start', pos: [-0.2, 1.75, 0.2], look: [-0.2, 1.6, -3.6]},
-    {at: 'end', pos: [-0.2, 1.75, -0.1], look: [-0.2, 1.6, -3.6]}]},
+    {at: 'start', pos: [1.0, 1.75, 0.6], look: [1.0, 1.55, -3.6]},
+    {at: 'end', pos: [1.0, 1.75, 0.3], look: [1.0, 1.55, -3.6]}]},
   {shot: 6, from: 'kakao', loc: 'choco', lift: false, move: 'the cocoa flower and the midge', keys: [
     {at: 'start', pos: [-1.6, 1.15, -1.8], look: [-2.1, 1.15, -3.8]},
     {at: 'end', pos: [-1.65, 1.15, -1.95], look: [-2.1, 1.15, -3.8]}]},
