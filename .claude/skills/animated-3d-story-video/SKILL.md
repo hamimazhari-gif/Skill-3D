@@ -267,3 +267,8 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **A character inside a rotated group (a car) turns edge-on** (the face planes keep the parent's rotation): keep the character in the location group and move it with the car in an updater instead.
 - **Props:** `lookoutTower`, `bucket`, `bear()` (`{group, legs}`), `fishingRod`, `rangerHat({burnt})`, `cloud(s, seed, color)` (dark storm clouds; add white eye balls and slanted brows for a cloud that "follows" someone).
 - **Close cameras:** a medium shot of one standing character needs the camera about 2.5-3 m away (fov 80); 4 m reads small on a phone.
+
+## Notes from "Kalau semua serangga punah" (what-if, 90 s)
+- **A character asleep in bed (user feedback: "tenggelam ke dalam kasur"):** never lie a character on its side behind a thick blanket seen from the front — it reads as sinking into the mattress. Lay it on its back on top of the mattress: `c.group.rotation.set(-Math.PI / 2, 0, 0)`, body height just above the mattress, option `noFace: true` (no turning toward the camera), `scale` ~0.85 to fit the bed, head on the pillow, a thin blanket (`box`, 0.04 m) over the legs and chest only, `P.bed({noBlanket: true})`, and a high camera looking down (about 2.3 m above the mattress, 1.3 m in front).
+- **Insects:** `P.bee()`, `butterfly(color)`, `ant(color)`, `mosquito()`, `beetle(color)` return `{group, wings, flap(t)}` (about 1 m long at scale 1; use 0.2-0.5). `cape(color)` for hero insects. Animals: `bird`, `frog`, `lizard` (+ `fish`). Others: `cacaoTree`, `fruit(kind)`, `leafPile`, `poop`, `mosquitoCoil`, `chainTower(labels)` (`fall(u)`).
+- **A wish / magic text in the world:** a purple sign with a gold frame and `sub` line, popping with gold glints.

@@ -25,10 +25,11 @@ export const DESIGNS = {
   dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   breezy: {head: 'round', hair: 'fringe', skin: '#f3d6bc', brows: 'thick', limb: [9, 5], legExtra: 0.07, torsoExtra: 0.13, cheeks: false, shading: true, shadows: true},
   sturdy: {head: 'round', hair: 'side', skin: '#f2d4b8', brows: 'thick', limb: [10, 6], legExtra: 0.02, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
+  nimble: {head: 'round', hair: 'tuft', skin: '#f7dcc8', brows: 'thin', limb: [9, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy', 'nimble'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -751,6 +752,7 @@ export function makeChar(name, o = {}) {
       let a = Math.atan2(camPos.x - tmp.x, camPos.z - tmp.z) - state.yaw0;
       a = Math.atan2(Math.sin(a), Math.cos(a));
       body.rotation.y = state.yaw0 - g.rotation.y + Math.max(-0.7, Math.min(0.7, a)) + spin;
+      if (p.noFace) body.rotation.y = spin; // lying down: keep the face planes flat to the front
     }
   }
   const api = {group: g, state, act, update, arms, hand: (i) => arms[i].hand, headPiv};

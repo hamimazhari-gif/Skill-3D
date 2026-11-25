@@ -620,8 +620,10 @@ export function bed(o = {}) {
   const head = box(1.4, 1.15, 0.1, toon(c, {paint: {planks: 4, seed: 82}})); at(head, 0, 0, -1.05); g.add(head);
   const foot = box(1.4, 0.6, 0.08, toon(c, {paint: {planks: 3, seed: 83}})); at(foot, 0, 0, 1.05); g.add(foot);
   const pil = ball(0.28, '#f6f1e6', {sx: 1.6, sy: 0.45, sz: 0.8}); at(pil, 0, 0.62, -0.82); g.add(pil);
-  const blanket = box(1.26, 0.3, 1.45, toon(sheet, {paint: {seed: 84, stains: 4}})); at(blanket, 0, 0.5, 0.25); g.add(blanket);
-  const fold = box(1.28, 0.08, 0.3, '#f3ece0'); at(fold, 0, 0.78, -0.4); g.add(fold);
+  if (!o.noBlanket) { // made bed (leave it out when a character lies in it)
+    const blanket = box(1.26, 0.3, 1.45, toon(sheet, {paint: {seed: 84, stains: 4}})); at(blanket, 0, 0.5, 0.25); g.add(blanket);
+    const fold = box(1.28, 0.08, 0.3, '#f3ece0'); at(fold, 0, 0.78, -0.4); g.add(fold);
+  }
   return g;
 }
 
@@ -2096,4 +2098,113 @@ export function rangerHat(o = {}) {
   const band = cyl(0.165, 0.165, 0.04, '#5a3a26', {seg: 4, hull: 0.004}); band.rotation.y = Math.PI / 4; band.position.y = 0.02; g.add(band);
   if (o.burnt) for (let i = 0; i < 4; i++) { const h = cyl(0.035, 0.035, 0.025, '#2b2326', {hull: 0}); at(h, Math.cos(i * 1.7) * 0.22, 0.004, Math.sin(i * 1.7) * 0.22); g.add(h); }
   return g;
+}
+
+// ---------- "Kalau semua serangga punah" ----------
+const wingMat = () => new THREE.MeshBasicMaterial({color: '#e8f6ff', transparent: true, opacity: 0.6, side: THREE.DoubleSide, depthWrite: false});
+const wingPlane = (w, h, mat) => { const m = new THREE.Mesh(new THREE.CircleGeometry(1, 16), mat); m.scale.set(w, h, 1); return m; };
+// Insects, about 1 unit long at scale 1 (scale them down in the scene). Each returns {group, wings} — flap the wings with flap(t).
+function insect(parts, wings) { const g = new THREE.Group(); parts.forEach((p) => g.add(p)); wings.forEach((w) => g.add(w)); return {group: g, wings, flap(t) { wings.forEach((w, i) => { w.rotation.x = (i % 2 ? -1 : 1) * (0.4 + Math.sin(t * 40) * 0.5) + (w.userData.rx || 0); }); }}; }
+let _beeTex;
+export function bee() {
+  if (!_beeTex) { const c = canvas(128, 64), x = c.getContext('2d'); x.fillStyle = '#f2c23a'; x.fillRect(0, 0, 128, 64); x.fillStyle = '#2b2326'; for (let i = 0; i < 4; i++) x.fillRect(20 + i * 26, 0, 12, 64); _beeTex = texFrom(c); }
+  const body = ball(0.3, toon(_beeTex, {wear: false}), {sx: 1.5, sy: 1, sz: 1, hull: 0.02}); body.rotation.y = Math.PI / 2;
+  const head = ball(0.2, '#2b2326', {hull: 0.015}); at(head, 0, 0.02, 0.45);
+  const eyes = [-1, 1].map((s) => { const e = ball(0.07, '#fbfbf8', {hull: 0}); at(e, s * 0.1, 0.08, 0.6); return e; });
+  const st = cone(0.06, 0.18, '#2b2326', {hull: 0.006}); st.rotation.x = -Math.PI / 2; st.position.z = -0.42;
+  const m = wingMat(); const wings = [-1, 1].map((s) => { const w = new THREE.Group(); const p = wingPlane(0.32, 0.18, m); p.position.set(s * 0.3, 0, 0); p.rotation.x = Math.PI / 2; w.add(p); w.position.set(0, 0.25, 0.05); w.rotation.z = s * 0.3; return w; });
+  const r = insect([body, head, ...eyes, st], wings); r.flap = (t) => wings.forEach((w, i) => { w.rotation.z = (i ? 1 : -1) * (0.3 + Math.sin(t * 50) * 0.6); }); return r;
+}
+export function butterfly(color = '#e8737a') {
+  const body = ball(0.08, '#2b2326', {sx: 1, sy: 1, sz: 5, hull: 0.01});
+  const wings = [-1, 1].map((s) => { const w = new THREE.Group(); const m = toon(color, {wear: false}); m.side = THREE.DoubleSide;
+    const a = new THREE.Mesh(new THREE.CircleGeometry(0.32, 20), m); a.position.set(s * 0.3, 0, 0.15); a.rotation.x = -Math.PI / 2; w.add(a);
+    const b = new THREE.Mesh(new THREE.CircleGeometry(0.22, 20), m); b.position.set(s * 0.22, 0, -0.22); b.rotation.x = -Math.PI / 2; w.add(b);
+    const d = new THREE.Mesh(new THREE.CircleGeometry(0.08, 12), new THREE.MeshBasicMaterial({color: '#fbf6ea', side: THREE.DoubleSide})); d.position.set(s * 0.32, 0.005, 0.15); d.rotation.x = -Math.PI / 2; w.add(d);
+    return w; });
+  const r = insect([body], wings); r.flap = (t) => wings.forEach((w, i) => { w.rotation.z = (i ? 1 : -1) * (Math.sin(t * 14) * 0.7 + 0.2); }); return r;
+}
+export function ant(color = '#3a2a26') {
+  const parts = [[0, 0.22, 0.13], [0.0, 0.16, 0.1], [-0.33, 0.2, 0.17]].map(([z, r], i) => { const b = ball(r, color, {hull: 0.012}); at(b, 0, 0.25, [0.38, 0.05, -0.33][i]); return b; });
+  for (let i = 0; i < 6; i++) { const s = i % 2 ? 1 : -1, z = 0.12 - Math.floor(i / 2) * 0.12; const l = cyl(0.015, 0.015, 0.32, color, {hull: 0}); at(l, s * 0.1, 0.0, z, 0, 0, s * 0.7); parts.push(l); }
+  for (const s of [-1, 1]) { const a = cyl(0.012, 0.012, 0.3, color, {hull: 0}); at(a, s * 0.05, 0.35, 0.48, 0, 0.6, s * 0.4); parts.push(a); }
+  return insect(parts, []);
+}
+export function mosquito() {
+  const body = ball(0.07, '#4a4048', {sx: 1, sy: 1, sz: 5, hull: 0.008});
+  const head = ball(0.07, '#4a4048', {hull: 0.006}); at(head, 0, 0.02, 0.38);
+  const nose = cyl(0.008, 0.008, 0.3, '#2b2326', {hull: 0}); at(nose, 0, 0.0, 0.42, 0, Math.PI / 2 + 0.3);
+  const legs = []; for (let i = 0; i < 6; i++) { const s = i % 2 ? 1 : -1; const l = cyl(0.008, 0.008, 0.5, '#4a4048', {hull: 0}); at(l, s * 0.05, -0.02, 0.15 - Math.floor(i / 2) * 0.15, 0, 0, s * 2.4); legs.push(l); }
+  const m = wingMat(); const wings = [-1, 1].map((s) => { const w = new THREE.Group(); const p = wingPlane(0.3, 0.1, m); p.position.set(s * 0.3, 0, 0); p.rotation.x = Math.PI / 2; w.add(p); w.position.set(0, 0.06, 0.05); return w; });
+  const r = insect([body, head, nose, ...legs], wings); r.flap = (t) => wings.forEach((w, i) => { w.rotation.z = (i ? 1 : -1) * (Math.sin(t * 60) * 0.5); }); return r;
+}
+export function beetle(color = '#3a5a3a') {
+  const shell = ball(0.3, toon(color, {emissive: '#203020', emissiveIntensity: 0.2}), {sx: 1, sy: 0.6, sz: 1.25, hull: 0.015}); at(shell, 0, 0.2, 0);
+  const line = box(0.01, 0.2, 0.7, INK, {hull: 0}); at(line, 0, 0.2, 0); 
+  const head = ball(0.14, '#2b2326', {hull: 0.01}); at(head, 0, 0.18, 0.4);
+  const parts = [shell, line, head]; for (let i = 0; i < 6; i++) { const s = i % 2 ? 1 : -1, z = 0.15 - Math.floor(i / 2) * 0.15; const l = cyl(0.02, 0.02, 0.3, '#2b2326', {hull: 0}); at(l, s * 0.25, 0.0, z, 0, 0, s * 0.8); parts.push(l); }
+  return insect(parts, []);
+}
+// A tiny cape (for hero insects).
+export function cape(color = '#d8413a') { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.45, 0.5), new THREE.MeshBasicMaterial({color, side: THREE.DoubleSide})); m.position.set(0, 0.25, -0.35); m.rotation.x = -0.9; return m; }
+// Simple cartoon animals.
+export function bird(color = '#4f8fc8') {
+  const g = new THREE.Group(); const b = ball(0.3, color, {sx: 1.2, sy: 1, sz: 1, hull: 0.015}); at(b, 0, 0.35, 0); g.add(b);
+  const h = ball(0.2, color, {hull: 0.012}); at(h, 0.3, 0.62, 0); g.add(h);
+  const bk = cone(0.07, 0.18, '#f2a93a', {hull: 0.006}); bk.rotation.z = -Math.PI / 2; bk.position.set(0.48, 0.62, 0); g.add(bk);
+  for (const s of [-1, 1]) { const e = ball(0.04, INK, {hull: 0}); at(e, 0.42, 0.7, s * 0.1); g.add(e); const w = ball(0.16, shade(color, -0.1), {sx: 1.3, sy: 0.5, sz: 0.6, hull: 0.01}); at(w, -0.05, 0.4, s * 0.25); g.add(w); }
+  for (const s of [-1, 1]) { const l = cyl(0.015, 0.015, 0.2, '#f2a93a', {hull: 0}); at(l, 0, 0.0, s * 0.1); g.add(l); }
+  return g;
+}
+export function frog(color = '#6abf4f') {
+  const g = new THREE.Group(); const b = ball(0.3, color, {sx: 1.2, sy: 0.75, sz: 1, hull: 0.015}); at(b, 0, 0.22, 0); g.add(b);
+  for (const s of [-1, 1]) { const e = ball(0.11, color, {hull: 0.01}); at(e, s * 0.16, 0.46, 0.12); g.add(e); const p = ball(0.06, '#fbfbf8', {hull: 0}); at(p, s * 0.16, 0.5, 0.2); g.add(p); const q = ball(0.03, INK, {hull: 0}); at(q, s * 0.16, 0.51, 0.25); g.add(q);
+    const leg = ball(0.13, shade(color, -0.1), {sx: 1, sy: 0.5, sz: 1.4, hull: 0.01}); at(leg, s * 0.28, 0.08, -0.05); g.add(leg); }
+  const m = box(0.3, 0.02, 0.02, INK, {hull: 0}); at(m, 0, 0.26, 0.29); g.add(m);
+  return g;
+}
+export function lizard(color = '#8ab04a') {
+  const g = new THREE.Group(); const b = ball(0.18, color, {sx: 2.4, sy: 0.6, sz: 0.9, hull: 0.012}); at(b, 0, 0.12, 0); g.add(b);
+  const h = ball(0.13, color, {sx: 1.4, sy: 0.8, sz: 1, hull: 0.01}); at(h, 0.5, 0.15, 0); g.add(h);
+  const tail = cone(0.08, 0.6, color, {hull: 0.008}); tail.rotation.z = Math.PI / 2; tail.position.set(-0.38, 0.12, 0); g.add(tail);
+  for (const s of [-1, 1]) { const e = ball(0.035, INK, {hull: 0}); at(e, 0.58, 0.22, s * 0.08); g.add(e); for (const x of [-0.2, 0.25]) { const l = cyl(0.025, 0.025, 0.14, color, {hull: 0.004}); at(l, x, 0.0, s * 0.15, 0, s * 0.6); g.add(l); } }
+  return g;
+}
+// Cacao tree: a trunk with big ridged pods growing straight from it, a leafy crown.
+export function cacaoTree(o = {}) {
+  const g = new THREE.Group(); const h = o.h || 2.4;
+  g.add(cyl(0.14, 0.2, h, toon('#7a5236', {paint: {seed: 401}})));
+  const rr = rng(o.seed || 7);
+  for (let i = 0; i < 5; i++) { const c = ball(0.7 + rr() * 0.3, '#4f8a4a', {seg: 12, hull: 0.03}); at(c, (rr() - 0.5) * 1.2, h + (rr() - 0.3) * 0.5, (rr() - 0.5) * 0.8); g.add(c); }
+  const pods = []; for (let i = 0; i < (o.pods ?? 6); i++) { const a = i * 2.1, y = 0.6 + (i % 3) * 0.45; const p = ball(0.1, ['#e8a83a', '#c95a2a', '#d8c03a'][i % 3], {sx: 0.8, sy: 1.6, sz: 0.8, hull: 0.008}); at(p, Math.cos(a) * 0.2, y, Math.sin(a) * 0.2); g.add(p); pods.push(p); }
+  g.userData.pods = pods; return g;
+}
+// Fruit: apple, mango, tomato (small balls with a leaf).
+export function fruit(kind = 'apple') {
+  const g = new THREE.Group(); const c = {apple: '#d8413a', mango: '#f2a93a', tomato: '#e8433a', melon: '#4f9a3a'}[kind];
+  const s = {apple: [1, 0.95, 1], mango: [0.8, 1.15, 0.8], tomato: [1, 0.8, 1], melon: [1.3, 1, 1]}[kind];
+  const b = ball(0.12, c, {sx: s[0], sy: s[1], sz: s[2], hull: 0.008}); at(b, 0, 0.12, 0); g.add(b);
+  const lf = ball(0.04, '#4f8a4a', {sx: 1.6, sy: 0.4, sz: 0.8, hull: 0.004}); at(lf, 0.03, 0.25, 0); g.add(lf);
+  return g;
+}
+// A pile of dry leaves (grows with scale.y), a brown poop swirl, green stink waves.
+export function leafPile(r = 0.8, seed = 3) {
+  const g = new THREE.Group(); const rr = rng(seed);
+  for (let i = 0; i < 26; i++) { const l = ball(0.12, ['#c9822a', '#a8642a', '#d8a83a', '#8a5a2a'][i % 4], {sx: 1.6, sy: 0.25, sz: 1, seg: 8, hull: 0.006}); const a = rr() * 6.28, d = rr() * r; at(l, Math.cos(a) * d, rr() * 0.5 * (1 - d / r) + 0.05, Math.sin(a) * d, rr() * 6, (rr() - 0.5) * 0.6); g.add(l); }
+  return g;
+}
+export function poop() {
+  const g = new THREE.Group(); [[0.16, 0], [0.12, 0.09], [0.07, 0.17]].forEach(([r, y]) => { const b = ball(r, '#7a4a2a', {sy: 0.55, hull: 0.008}); at(b, 0, y + r * 0.4, 0); g.add(b); }); return g;
+}
+// Mosquito coil (obat nyamuk) on a small stand.
+export function mosquitoCoil() {
+  const g = new THREE.Group(); const pts = []; for (let i = 0; i <= 80; i++) { const a = i / 80 * Math.PI * 6, r = 0.04 + i / 80 * 0.14; pts.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r)); }
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 160, 0.012, 5), toon('#3a7a4a', {wear: false})); tube.position.y = 0.03; g.add(tube);
+  const st = cyl(0.2, 0.2, 0.02, '#9aa8b4', {hull: 0.005}); g.add(st); return g;
+}
+// Food-chain tower: labelled blocks stacked bottom to top; fall(u) knocks them over once the bottom one is gone.
+export function chainTower(labels, o = {}) {
+  const g = new THREE.Group(); const cols = ['#e8a83a', '#6abf4f', '#8ab04a', '#4f8fc8', '#c95a2a'];
+  const blocks = labels.map((t, i) => { const b = sign(t, 1.2, 0.5, {bg: cols[i % cols.length], fg: '#351f22', frame: '#351f22', depth: 0.5}); at(b, 0, 0.25 + i * 0.52, 0); g.add(b); return b; });
+  return {group: g, blocks, fall(u) { blocks.forEach((b, i) => { if (i === 0) { b.visible = u <= 0; return; } const k = Math.max(0, Math.min(1, u * 1.4 - i * 0.08)); b.position.set(k * (0.5 + i * 0.35), Math.max(0.25, 0.25 + i * 0.52 - k * k * (i * 0.52 + 0.3)), k * 0.3 * (i % 2 ? 1 : -1)); b.rotation.z = -k * (0.6 + i * 0.25); }); }};
 }
