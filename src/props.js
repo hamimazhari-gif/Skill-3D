@@ -2421,7 +2421,7 @@ export function talkPhone(o = {}) {
       if (mood === 'dying') { x.beginPath(); x.moveTo(ex - 18, ey - 18); x.lineTo(ex + 18, ey + 18); x.moveTo(ex + 18, ey - 18); x.lineTo(ex - 18, ey + 18); x.stroke(); }
       else { x.beginPath(); x.arc(ex, ey, mood === 'soft' ? 14 : 20, 0, 7); x.fill(); x.fillStyle = '#fbfbf8'; x.beginPath(); x.arc(ex - 6, ey - 6, 6, 0, 7); x.fill(); x.fillStyle = '#351f22'; }
       if (mood === 'angry') { x.beginPath(); x.moveTo(ex - s * 30, ey - 50); x.lineTo(ex + s * 20, ey - 30); x.stroke(); }
-      if (mood === 'sad' || mood === 'soft') { x.beginPath(); x.moveTo(ex - s * 26, ey - 32); x.lineTo(ex + s * 24, ey - 46); x.stroke(); } }
+      if (mood === 'sad' || mood === 'soft') { x.beginPath(); x.moveTo(ex - s * 26, ey - 46); x.lineTo(ex + s * 24, ey - 32); x.stroke(); } }
     x.fillStyle = '#5a1a2a';
     if (open) { x.beginPath(); x.ellipse(150, 350, mood === 'angry' ? 44 : 32, mood === 'angry' ? 36 : 24, 0, 0, 7); x.fill(); x.stroke(); }
     else if (mood === 'sad' || mood === 'dying') { x.beginPath(); x.arc(150, 375, 34, Math.PI * 1.15, Math.PI * 1.85); x.stroke(); }

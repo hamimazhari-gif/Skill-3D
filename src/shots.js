@@ -11,36 +11,36 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: two-shots of him and the phone, close-ups on the turn.
-  {shot: 1, loc: 'kamar', lift: false, move: 'late night: the phone speaks', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.2], look: [0.1, 1.4, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, -0.1], look: [0.1, 1.4, -3.3]}]},
+  {shot: 1, loc: 'kamar', lift: false, move: 'lying on the bed, a face on the phone', keys: [
+    {at: 'start', pos: [-1.0, 3.0, -2.5], look: [-1.0, 0.75, -3.75]},
+    {at: 'end', pos: [-1.0, 2.9, -2.65], look: [-1.0, 0.75, -3.75]}]},
   {shot: 1, from: 'halo', loc: 'kamar', lift: false, move: 'close: "I want to complain"', keys: [
     {at: 'start', pos: [0.75, 1.3, -1.6], look: [0.75, 1.15, -3.4]},
     {at: 'end', pos: [0.75, 1.3, -1.75], look: [0.75, 1.15, -3.4]}]},
   {shot: 2, loc: 'kamar', lift: false, move: '47 times', keys: [
-    {at: 'start', pos: [0.6, 1.55, -0.6], look: [0.6, 1.45, -3.3]},
-    {at: 'end', pos: [0.6, 1.55, -0.85], look: [0.6, 1.45, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 3, loc: 'kamar', lift: false, move: '9 hours a day', keys: [
-    {at: 'start', pos: [0.5, 1.55, -0.5], look: [0.6, 1.45, -3.3]},
-    {at: 'end', pos: [0.5, 1.55, -0.75], look: [0.6, 1.45, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 4, loc: 'kamar', lift: false, move: '300 selfies', keys: [
-    {at: 'start', pos: [0.8, 1.55, -0.6], look: [0.9, 1.45, -3.3]},
-    {at: 'end', pos: [0.8, 1.55, -0.85], look: [0.9, 1.45, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 5, loc: 'kamar', lift: false, move: 'a full cart and Rp12.000', keys: [
-    {at: 'start', pos: [0.6, 1.5, -0.5], look: [0.7, 1.3, -3.2]},
-    {at: 'end', pos: [0.6, 1.5, -0.75], look: [0.7, 1.3, -3.2]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 6, loc: 'kamar', lift: false, move: '1% battery', keys: [
-    {at: 'start', pos: [0.3, 1.55, -0.6], look: [0.4, 1.45, -3.3]},
-    {at: 'end', pos: [0.3, 1.55, -0.85], look: [0.4, 1.45, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 7, loc: 'kamar', lift: false, move: 'he goes quiet', keys: [
     {at: 'start', pos: [-0.6, 1.6, -1.4], look: [-0.6, 1.6, -3.1]},
     {at: 'end', pos: [-0.6, 1.6, -1.55], look: [-0.6, 1.6, -3.1]}]},
   {shot: 8, loc: 'kamar', lift: false, move: 'mum called three times', keys: [
-    {at: 'start', pos: [0.5, 1.6, -0.6], look: [0.6, 1.6, -3.3]},
-    {at: 'end', pos: [0.5, 1.6, -0.85], look: [0.6, 1.6, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 9, loc: 'kamar', lift: false, move: '9 hours vs 3 minutes', keys: [
-    {at: 'start', pos: [0.4, 1.6, -0.5], look: [0.5, 1.6, -3.3]},
-    {at: 'end', pos: [0.4, 1.6, -0.75], look: [0.5, 1.6, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 10, loc: 'kamar', lift: false, move: 'he puts the phone down and calls', keys: [
     {at: 'start', pos: [-0.5, 1.6, -1.2], look: [-0.6, 1.5, -3.1]},
     {at: 'end', pos: [-0.5, 1.6, -1.35], look: [-0.6, 1.5, -3.1]}]},
@@ -48,11 +48,11 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.15, 1.65, -1.4], look: [-0.2, 1.6, -3.2]},
     {at: 'end', pos: [-0.15, 1.65, -1.55], look: [-0.2, 1.6, -3.2]}]},
   {shot: 11, loc: 'kamar', lift: false, move: 'the people inside the phone', keys: [
-    {at: 'start', pos: [0.6, 1.7, -0.3], look: [0.6, 1.8, -3.3]},
-    {at: 'end', pos: [0.6, 1.7, -0.55], look: [0.6, 1.8, -3.3]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
   {shot: 12, loc: 'kamar', lift: false, move: 'the question', keys: [
-    {at: 'start', pos: [0.1, 1.7, -0.3], look: [0.1, 1.7, -3.0]},
-    {at: 'end', pos: [0.1, 1.7, -0.5], look: [0.1, 1.7, -3.0]}]},
+    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
 ];
 
 export function warpU(T, t) {

@@ -106,7 +106,8 @@ function Scene({lang, thumb}) {
 const DIPS = [];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard yet: only captions
+const TITLES = [['cut1', 'KALAU HP BISA | NGOMONG JUJUR… 📱😳'], ['cut2', 'DIBUKA 47 KALI, | ISINYA SAMA 🔁'], ['cut3', '"9 JAM SEHARI, | KAMU NGAPAIN AJA?" ⏰'], ['cut4', '300 SELFIE, BEDANYA | CUMA SUDUT 2 DERAJAT 🤳'],
+  ['cut5', 'KERANJANG PENUH, | SALDO KOSONG 🛒💸'], ['cut6', '"AKU SEKARAT, KAMU | MASIH MAIN GAME?!" 🪫'], ['cut7', 'YANG PALING PENTING, JUSTRU | SERING KITA ABAIKAN 📞❤️']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,7 +148,7 @@ function cues(T, EVt) {
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     ['09-notification-ding.wav', E.halo - 0.3, 0.18], [sy('boing'), E.protes, 0.12],
-    ...Array.from({length: 6}, (_, i) => ['04-soft-ui-pop.mp3', E.empat + i * 0.12, 0.08]), [sy('clock_tick'), E.sembilan, 0.14, 1.5], [sy('ka_ching'), E.digaji, 0.1],
+    ...Array.from({length: 4}, (_, i) => ['04-soft-ui-pop.mp3', E.aplikasi - 0.4 + i * ((E.empat + 0.3 - E.aplikasi) / 4), 0.14]), [sy('swish'), E.kantoran - 0.2, 0.14], [sy('clock_tick'), E.sembilan, 0.14, 1.5], [sy('ka_ching'), E.digaji, 0.1],
     [sy('page_flips'), E.galeri, 0.12, 1.2], ['02-error-denied-buzz.wav', E.penuh, 0.12],
     ['04-soft-ui-pop.mp3', E.keranjang, 0.18], [sy('coin_drop'), E.ribu, 0.12], [sy('uh_oh'), E.doa, 0.1],
     [sy('alarm_bell'), E.persen, 0.06, 0.8], [sy('chip_gameover'), E.game, 0.1], [sy('chip_coin'), E.game + 0.4, 0.08],
