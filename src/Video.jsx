@@ -226,7 +226,7 @@ const TH = {
   id: {top: 'KENAPA AIR LAUT\nASIN? 🌊', mid: 'SUNGAI KOK TAWAR?', bot: ''},
   en: {top: 'KENAPA AIR LAUT\nASIN? 🌊', mid: 'SUNGAI KOK TAWAR?', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.asin + 0.4, loc: 'pantai', pos: [-0.1, 1.55, -0.8], look: [-0.1, 1.5, -3.2]});
+const THUMB = (EVt) => ({t: EVt.asin + 0.4, loc: 'pantai', pos: [-0.2, 0.85, -2.1], look: [-0.2, 0.7, -3.8]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

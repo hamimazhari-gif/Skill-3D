@@ -304,3 +304,10 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Two characters + signs:** for a man talking to a big object, use one wide two-shot (camera centred between them, ~4 m back) and put the signs above the object, inside the frame, instead of beside it.
 - **Re-render only what changed:** delete the affected `out/chunks_<Comp>/part_N.mp4*` (and `audio.wav`) and run `tools/render_chunks.sh` again; finished chunks are kept.
 - **Props:** `talkPhone`, `selfieGrid`, `cart`.
+
+## Notes from "Kenapa laut asin" (science explainer, 95 s)
+- **Swimming in the sea:** lower the character into the water (`group.position.y ≈ -0.45` with a small bob) — the opaque ground plane under the thin sea box hides the legs; frame it low (camera ~0.9 m high).
+- **Things with faces:** `P.saltCrystal(s)` and `P.droplet(s)` (cute face via a shared helper; the mouth arc must not be rotated or it reads as a frown). Add a tiny stick arm (`cyl` + ball, rotating) when a prop has to wave.
+- **A time-lapse of years:** a row of signs ('−1 MILIAR TAHUN' … 'SEKARANG') popping one after another over the sentence.
+- **Huge scales:** a mountain of salt (`P.mountain` recoloured white, scaled up to ~50 m) next to a 58 m tower, seen from 60-70 m away; put big signs (14 × 3.6 m) in front of it.
+- **Props:** `saltCrystal`, `droplet`, `mountain(h, r, {volcano, color})`, `raft`; `P.sack(label)` for a labelled sack.
