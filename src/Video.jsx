@@ -235,7 +235,7 @@ const TH = {
   id: {top: 'DISAMBAR PETIR\n7 KALI ⚡', mid: 'DAN TETAP SELAMAT!', bot: ''},
   en: {top: 'DISAMBAR PETIR\n7 KALI ⚡', mid: 'DAN TETAP SELAMAT!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.petir0 + 0.2, loc: 'park', pos: [0, 1.75, 0.2], look: [0, 1.9, -2.6]});
+const THUMB = (EVt) => ({t: EVt.petir0 + 0.16, loc: 'park', pos: [0, 1.6, 0.1], look: [0, 2.2, -2.6]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

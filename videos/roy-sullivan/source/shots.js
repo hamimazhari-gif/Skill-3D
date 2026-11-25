@@ -1,0 +1,104 @@
+// Camera plan: framings. Each entry is one framing inside narration shot `shot`; `from` (EV name) starts a hard cut
+// inside that shot (the framing then runs until the next framing / shot end). Keys: {at: 'start' | 'end' | EV, pos, look}
+// in location-local coordinates.
+import * as THREE from 'three';
+import {LOC, CHAR_DESIGN} from './world';
+import {headLift} from './char';
+
+// Framings were planned for classic-height characters; keys aimed at people (look height > 0.9 m) rise with the head.
+const LIFT = headLift(CHAR_DESIGN) - 0.03;
+const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
+
+export const SHOT_PLAN = [
+  // Calm camera: slow pushes; a cut to a close-up after most strikes.
+  {shot: 1, loc: 'park', lift: false, move: 'a man in a storm is struck', keys: [
+    {at: 'start', pos: [0, 1.8, 0.4], look: [0, 1.85, -2.6]},
+    {at: 'end', pos: [0, 1.75, 0.1], look: [0, 1.8, -2.6]}]},
+  {shot: 2, loc: 'park', lift: false, move: 'Roy Sullivan, park ranger', keys: [
+    {at: 'start', pos: [0, 1.7, 0.5], look: [0, 1.65, -2.6]},
+    {at: 'end', pos: [0, 1.72, 0.2], look: [0, 1.7, -2.6]}]},
+  {shot: 2, from: 'sepertinya', loc: 'park', lift: false, move: 'lightning loves him', keys: [
+    {at: 'start', pos: [0.1, 2.0, 0.6], look: [0.1, 2.6, -3.4]},
+    {at: 'end', pos: [0.1, 2.0, 0.35], look: [0.1, 2.6, -3.4]}]},
+  {shot: 3, loc: 'park', lift: false, move: 'strike 1 at the lookout tower', keys: [
+    {at: 'start', pos: [1.2, 2.3, -0.2], look: [1.6, 2.8, -5.5]},
+    {at: 'end', pos: [1.3, 1.75, -1.9], look: [1.4, 1.55, -4.9]}]},
+  {shot: 4, loc: 'road', lift: false, move: 'strike 2: the truck', keys: [
+    {at: 'start', pos: [0.2, 1.95, 0.2], look: [0, 1.45, -4.2]},
+    {at: 'end', pos: [0.2, 1.95, -0.1], look: [0, 1.45, -4.2]}]},
+  {shot: 4, from: 'alis', loc: 'road', move: 'close: no eyebrows', keys: [
+    {at: 'start', pos: [1.25, 1.62, -1.6], look: [1.3, 1.55, -2.9]},
+    {at: 'end', pos: [1.25, 1.62, -1.7], look: [1.3, 1.55, -2.9]}]},
+  {shot: 5, loc: 'park', lift: false, move: 'strikes 3 and 4 by the ranger hut', keys: [
+    {at: 'start', pos: [-1.9, 1.75, -0.4], look: [-1.9, 1.6, -3.4]},
+    {at: 'end', pos: [-1.9, 1.75, -0.65], look: [-1.9, 1.6, -3.4]}]},
+  {shot: 6, loc: 'town', lift: false, move: 'the bucket goes everywhere', keys: [
+    {at: 'start', pos: [-2.3, 1.7, -0.3], look: [-2.4, 1.55, -3.1]},
+    {at: 'end', pos: [0.3, 1.75, -0.6], look: [0.4, 1.65, -3.0]}]},
+  {shot: 7, loc: 'road', lift: false, move: 'strike 5 and the cloud that follows', keys: [
+    {at: 'start', pos: [-4, 2.4, 3.0], look: [-4, 2.4, -4.4]},
+    {at: 'menyetir', pos: [-3.6, 2.4, 3.2], look: [-3.6, 2.4, -4.4]},
+    {at: 'end', pos: [6.5, 2.4, 3.4], look: [7.0, 2.4, -4.4]}]},
+  {shot: 7, from: 'pergi', loc: 'road', move: 'close: "go away!"', keys: [
+    {at: 'start', pos: [8.3, 1.75, -0.6], look: [8.5, 2.0, -2.8]},
+    {at: 'end', pos: [8.3, 1.75, -0.75], look: [8.5, 2.0, -2.8]}]},
+  {shot: 8, loc: 'town', lift: false, move: 'friends get scared and run', keys: [
+    {at: 'start', pos: [0, 1.8, 0.5], look: [0, 1.7, -3.0]},
+    {at: 'end', pos: [0, 1.95, 1.2], look: [0, 2.0, -3.0]}]},
+  {shot: 8, from: 'maaf', loc: 'town', lift: false, move: 'far apart: a phone call', keys: [
+    {at: 'start', pos: [1.5, 1.85, 1.3], look: [1.5, 1.7, -3.0]},
+    {at: 'end', pos: [1.5, 1.85, 1.1], look: [1.5, 1.7, -3.0]}]},
+  {shot: 9, loc: 'park', lift: false, move: 'strike 6: the legs', keys: [
+    {at: 'start', pos: [0.6, 1.7, -0.2], look: [0.6, 1.55, -3.0]},
+    {at: 'end', pos: [0.6, 1.7, -0.45], look: [0.6, 1.55, -3.0]}]},
+  {shot: 10, loc: 'lake', lift: false, move: 'strike 7 while fishing, then the bear', keys: [
+    {at: 'start', pos: [0.5, 1.75, -0.6], look: [0.5, 1.65, -3.8]},
+    {at: 'beruang', pos: [-0.6, 1.8, 0.6], look: [-0.9, 1.4, -3.5]},
+    {at: 'end', pos: [-1.2, 1.8, 0.9], look: [-1.8, 1.4, -3.4]}]},
+  {shot: 11, loc: 'lake', move: 'close: a truly unlucky day', keys: [
+    {at: 'start', pos: [0.6, 1.62, -2.0], look: [0.6, 1.55, -3.6]},
+    {at: 'end', pos: [0.6, 1.62, -2.1], look: [0.6, 1.55, -3.6]}]},
+  {shot: 11, from: 'tercatat', loc: 'museum', lift: false, move: 'Guinness World Records, two burnt hats', keys: [
+    {at: 'start', pos: [0, 1.9, 0.4], look: [0, 1.9, -5.0]},
+    {at: 'topi', pos: [0, 1.75, -1.4], look: [0, 1.45, -4.5]},
+    {at: 'end', pos: [0, 1.7, -1.8], look: [0, 1.4, -4.5]}]},
+  {shot: 12, loc: 'town', lift: false, move: 'would you stand next to him?', keys: [
+    {at: 'start', pos: [0, 1.9, 0.7], look: [0, 2.05, -3.0]},
+    {at: 'end', pos: [0, 1.9, 0.45], look: [0, 2.05, -3.0]}]},
+];
+
+export function warpU(T, t) {
+  const n = T.length; if (t <= T[0]) return 0; if (t >= T[n - 1]) return 1;
+  const sec = []; for (let i = 0; i < n - 1; i++) sec.push((1 / (n - 1)) / (T[i + 1] - T[i]));
+  const m = [0]; for (let i = 1; i < n - 1; i++) m.push(2 * sec[i - 1] * sec[i] / (sec[i - 1] + sec[i])); m.push(0);
+  let i = 0; while (t > T[i + 1]) i++;
+  const h = T[i + 1] - T[i], x = (t - T[i]) / h, x2 = x * x, x3 = x2 * x;
+  return (2 * x3 - 3 * x2 + 1) * (i / (n - 1)) + (x3 - 2 * x2 + x) * h * m[i] + (-2 * x3 + 3 * x2) * ((i + 1) / (n - 1)) + (x3 - x2) * h * m[i + 1];
+}
+
+// Build per-framing curves and key times. A framing with `from` cuts in 0.12 s before its word.
+export function buildCameras(T, EVt) {
+  const start = (p) => (p.from ? Math.max(T.CUTS[p.shot - 1] + 0.3, EVt[p.from] - 0.12) : T.CUTS[p.shot - 1]);
+  return SHOT_PLAN.map((p, i) => {
+    const nx = SHOT_PLAN[i + 1];
+    const t0 = start(p), t1 = nx && nx.shot === p.shot ? start(nx) : T.CUTS[p.shot];
+    const ox = LOC[p.loc];
+    const times = p.keys.map((k) => (k.at === 'start' ? t0 : k.at === 'end' ? t1 - 0.05 : EVt[k.at] + 0.15));
+    for (let j = 1; j < times.length; j++) times[j] = Math.max(times[j], times[j - 1] + 0.35);
+    const pos = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.pos[0] + ox, k.pos[1] + ly(p, k), k.pos[2])), false, 'centripetal');
+    const look = new THREE.CatmullRomCurve3(p.keys.map((k) => new THREE.Vector3(k.look[0] + ox, k.look[1] + ly(p, k), k.look[2])), false, 'centripetal');
+    const rolls = p.keys.map((k) => k.roll || 0), fovs = p.keys.map((k) => k.fov || 80);
+    return {...p, t0, t1, times, pos, look, rolls, fovs};
+  });
+}
+
+// Camera at time t: the last framing that has started.
+export function camAt(cams, t) {
+  let c = cams[0];
+  for (const k of cams) if (t >= k.t0) c = k;
+  const u = warpU(c.times, t);
+  // roll (dutch angle, rad) and fov (lens) per key, eased between keys
+  const s = u * (c.rolls.length - 1), i = Math.min(c.rolls.length - 2, Math.floor(s)), f = s - i;
+  const e = f * f * (3 - 2 * f), mix = (a) => (a.length < 2 ? a[0] : a[i] + (a[i + 1] - a[i]) * e);
+  return {pos: c.pos.getPoint(u), look: c.look.getPoint(u), loc: c.loc, roll: mix(c.rolls), fov: mix(c.fovs)};
+}

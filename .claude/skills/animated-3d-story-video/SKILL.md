@@ -260,3 +260,10 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Lip-sync from a word:** `speak(c, sentence, exprs, fromTime)` clips the talk segments to start at a word (for "Bos bertanya, \"Ada pertanyaan?\"").
 - **Prop return shapes:** `wallClock` → `{group, set(h, m)}`, `wallet` → `{group, open(u)}`, `tv` → `{group, update(t)}`.
 - **Long renders:** `tools/render_chunks.sh Comp 4` renders in frame chunks kept on disk (a container restart or a background time limit only loses the unfinished chunk), then the audio, then joins and normalises. Run it in the background with the longest timeout.
+
+## Notes from "Roy Sullivan, disambar petir 7 kali" (true story, 91 s)
+- **Character state changes** (burnt, no eyebrows): make a second CAST entry for the same person and swap instances on the event frame with `showWhen`. Options: `soot: true` (grey smudges on the face), `noBrows: true` (eyebrows gone, singed dots), `hairStyle: 'frazzle'` (burnt hair standing up in spikes), `hat: 'ranger'` (park-ranger campaign hat).
+- **A strike:** `FX.lightning` from the sky to the head + sparks + smoke, a white screen flash and shake (`storyFx`), boom + rumble, then a counter sign ("SAMBARAN n/7") and a sign naming the injury. For a thumbnail, pick a frame where the bolt flicker is on (0.0-0.08 s or 0.13-0.2 s after the strike).
+- **A character inside a rotated group (a car) turns edge-on** (the face planes keep the parent's rotation): keep the character in the location group and move it with the car in an updater instead.
+- **Props:** `lookoutTower`, `bucket`, `bear()` (`{group, legs}`), `fishingRod`, `rangerHat({burnt})`, `cloud(s, seed, color)` (dark storm clouds; add white eye balls and slanted brows for a cloud that "follows" someone).
+- **Close cameras:** a medium shot of one standing character needs the camera about 2.5-3 m away (fov 80); 4 m reads small on a phone.

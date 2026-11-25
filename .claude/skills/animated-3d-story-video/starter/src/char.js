@@ -24,10 +24,11 @@ export const DESIGNS = {
   cozy: {head: 'round', hair: 'fringe', skin: '#f5dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.0, torsoExtra: 0.17, cheeks: false, shading: true, shadows: true},
   dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   breezy: {head: 'round', hair: 'fringe', skin: '#f3d6bc', brows: 'thick', limb: [9, 5], legExtra: 0.07, torsoExtra: 0.13, cheeks: false, shading: true, shadows: true},
+  sturdy: {head: 'round', hair: 'side', skin: '#f2d4b8', brows: 'thick', limb: [10, 6], legExtra: 0.02, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -86,6 +87,13 @@ function drawHeadBase(o, r) {
     ? wobble(smoothPoly(64, (t) => { const a = t * Math.PI * 2; return [cx + Math.cos(a) * RX * (1 - 0.09 * Math.sin(a)), cy + Math.sin(a) * RY]; }), r, 2)
     : wobble(ellipse(cx, cy, RX, RY, 64), r, 2);
   inkShape(x, headPts, SKIN, r, 11, (pts) => paintShade(x, pts, cx, cy, Math.max(RX, RY), 0.42));
+  if (o.soot) { // burnt: grey soot smudges on the face
+    const rs = rng(77); x.save(); x.beginPath(); headPts.forEach((p, i) => (i ? x.lineTo(...p) : x.moveTo(...p))); x.closePath(); x.clip();
+    for (const [dx, dy, k] of [[-0.55, 0.25, 0.2], [0.5, 0.35, 0.16], [0.1, -0.55, 0.24], [-0.2, 0.62, 0.12], [0.62, -0.2, 0.14]]) {
+      const gx = cx + dx * RX, gy = cy + dy * RY, gr = x.createRadialGradient(gx, gy, 1, gx, gy, k * R * (1 + rs() * 0.3));
+      gr.addColorStop(0, 'rgba(60,52,56,0.55)'); gr.addColorStop(1, 'rgba(60,52,56,0)'); x.fillStyle = gr; x.fillRect(gx - R, gy - R, 2 * R, 2 * R); }
+    x.restore();
+  }
   if (D.cheeks !== false) {
     x.fillStyle = 'rgba(232,140,120,0.35)';
     x.beginPath(); x.ellipse(cx - R * 0.52, cy + R * 0.3, R * 0.13, R * 0.08, 0, 0, 7); x.fill();
@@ -120,6 +128,10 @@ function drawHeadBase(o, r) {
     x.save(); x.strokeStyle = 'rgba(53,31,34,0.55)'; x.lineCap = 'round'; x.lineWidth = R * 0.035;
     for (const k of [0, 1]) { x.beginPath(); x.arc(cx, cy - RY * (0.5 - k * 0.12) + R * 0.9, R * 0.95, Math.PI * 1.4, Math.PI * 1.6); x.stroke(); }
     x.restore();
+  } else if (hairStyle === 'frazzle') { // burnt hair standing up in jagged spikes
+    const pts = []; for (let i = 0; i <= 18; i++) { const a = Math.PI * (1.0 + i / 18); const k = i % 2 ? 1.02 : 1.42 + (i % 4 === 0 ? 0.12 : 0); pts.push([hx(a, k), hy(a, k)]); }
+    for (let i = 0; i <= 12; i++) { const t = 1 - i / 12; pts.push([cx + (t - 0.5) * 2 * RX * 0.95, cy - RY * 0.45 + (i % 2 ? R * 0.12 : 0)]); }
+    inkShape(x, pts, o.hair, r, 9, (q) => paintShade(x, q, cx, cy, Math.max(RX, RY), 0.3));
   } else if (hairStyle === 'tuft') { // short cap of hair with a tuft on top
     for (let i = 0; i <= 40; i++) { const a = Math.PI * (1.12 + 0.76 * i / 40); fr.push([hx(a), hy(a)]); }
     for (let i = 0; i <= 12; i++) { const t = 1 - i / 12; fr.push([cx + (t - 0.5) * 2 * RX * 0.8, cy - RY * 0.6 + Math.sin(t * Math.PI) * RY * 0.06]); }
@@ -148,6 +160,12 @@ function drawHeadBase(o, r) {
     for (let i = 0; i <= 16; i++) { const u = 1 - i / 16; pts.push([cx - R * 0.8 + u * R * 1.6, top + R * 0.42 + Math.sin(u * Math.PI) * R * 0.06]); }
     inkShape(x, pts, o.hatColor || '#1f1d24', r, 10, (q) => paintShade(x, q, cx, top, R * 1.2, 0.3));
     x.save(); x.strokeStyle = 'rgba(255,255,255,0.22)'; x.lineWidth = R * 0.05; x.beginPath(); x.moveTo(cx - R * 0.55, top - R * 0.08); x.lineTo(cx - R * 0.55, top + R * 0.36); x.stroke(); x.restore();
+  } else if (o.hat === 'ranger') { // park ranger campaign hat: wide flat brim, pinched crown with four dents, dark band
+    const hc = o.hatColor || '#c9a26a';
+    const crown = [[cx - R * 0.62, top + R * 0.3], [cx - R * 0.5, top - R * 0.55], [cx - R * 0.18, top - R * 0.78], [cx, top - R * 0.62], [cx + R * 0.18, top - R * 0.78], [cx + R * 0.5, top - R * 0.55], [cx + R * 0.62, top + R * 0.3]];
+    inkShape(x, crown, hc, r, 10, (q) => paintShade(x, q, cx, top, R * 1.3, 0.3));
+    inkShape(x, [[cx - R * 0.6, top + R * 0.12], [cx + R * 0.6, top + R * 0.12], [cx + R * 0.61, top + R * 0.3], [cx - R * 0.61, top + R * 0.3]], o.hatColor2 || '#5a3a26', r, 6);
+    inkShape(x, ellipse(cx, top + R * 0.33, R * 1.45, R * 0.15, 40), hc, r, 9, (q) => paintShade(x, q, cx, top, R * 1.5, 0.25));
   } else if (o.hat === 'bowler') {
     inkShape(x, ellipse(cx, top + R * 0.25, R * 0.82, R * 0.75, 40, Math.PI, Math.PI * 2), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.25, R * 0.13, 40), o.hatColor, r, 9);
@@ -245,6 +263,7 @@ function drawFace(o, f, r) {
       default: dot(R * 0.1, R * 0.12); lid(ex, ey, s, f.eyes === 'calm' ? 'calm' : f.eyes);
     }
     // brows
+    x.save(); if (o.noBrows) x.globalAlpha = 0;
     const by = ey - R * 0.27; x.lineWidth = D.brows === 'thick' ? 14 : 9;
     const brow = (yi, yo) => { x.beginPath(); x.moveTo(ex - s * R * 0.13, by + yi); x.lineTo(ex + s * R * 0.13, by + yo); x.stroke(); };
     if (f.brows === 'up') { x.beginPath(); x.arc(ex, by + R * 0.02, R * 0.14, Math.PI * 1.2, Math.PI * 1.8); x.stroke(); }
@@ -252,6 +271,8 @@ function drawFace(o, f, r) {
     if (f.brows === 'sad') brow(-R * 0.07, R * 0.06);
     if (f.brows === 'none' && D.brows === 'thick') brow(-R * 0.02, -R * 0.04);
     if (f.brows === 'skeptic') brow(s < 0 ? -R * 0.08 : R * 0.03, s < 0 ? -R * 0.1 : R * 0.03);
+    x.restore();
+    if (o.noBrows) { x.fillStyle = 'rgba(60,52,56,0.6)'; for (let k = -2; k <= 2; k++) { x.beginPath(); x.arc(ex + k * R * 0.05, by + (k % 2) * R * 0.015, R * 0.018, 0, 7); x.fill(); } }
   }
   // mouth
   const my = cy + R * 0.34, mx = cx; x.lineWidth = 7;
