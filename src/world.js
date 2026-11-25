@@ -88,17 +88,20 @@ export function buildWorld(lang, T, EVt, L) {
     const sand = box(60, 0.03, 30, toon('#e8d4a0', {paint: {seed: 971, stains: 20}}), {edges: false}); at(sand, 0, -0.03, 6); g.add(sand);
     sea(g, 0, -20, 80, 34);
     for (let i = 0; i < 3; i++) { const p = P.coconutPalm({seed: 980 + i}).group; at(p, -4 + i * 8.5, 0, -1.5 - (i % 2)); g.add(p); }
-    const bimo = ch('bimo', {seed: 1}, g, -0.2, -3.2, 0.1);
+    const swim = ch('anak', {seed: 7, scale: 0.75}, g, -0.2, -3.8, 0.1); showWhen(swim.group, (t) => inShots(t, 1)); updaters.push((t) => { swim.group.position.y = -0.45 + Math.sin(t * 2.5) * 0.04; });
+    swim.act([{t: 0, pose: 'armsUp', expr: 'happy'}, {t: E('menelan') - 0.1, pose: 'idle', expr: 'grimace'}, {t: E('asin') - 0.05, pose: 'headHold', expr: 'disgusted'}, {t: E('truk') + 0.05, pose: 'point', expr: 'furious'}]);
+    swim.act([{t: E('asin'), action: 'tremble', dur: 0.8}]); speak(swim, 1, [[0, 'disgusted', 'headHold'], [0.45, 'furious', 'point']]);
+    const bimo = ch('bimo', {seed: 1}, g, -0.2, -3.2, 0.1); showWhen(bimo.group, (t) => !inShots(t, 1));
     bimo.act([{t: 0, pose: 'cheer', expr: 'happy'}, {t: E('menelan') - 0.1, pose: 'drink', expr: 'grimace'}, {t: E('asin') - 0.05, pose: 'headHold', expr: 'disgusted'}, {t: E('truk') + 0.05, pose: 'point', expr: 'furious'},
       {t: cut(11), pose: 'idle', expr: 'happy'}, {t: cut(12), pose: 'shrug', expr: 'cheesy'}, {t: E('komentar') - 0.15, pose: 'point', expr: 'cheesy'}]);
-    bimo.act([{t: E('asin'), action: 'jump', dur: 0.5}]); speak(bimo, 1, [[0, 'disgusted', 'headHold'], [0.45, 'furious', 'point']]);
-    walkPath(bimo, [[0, -0.2, -3.2], [cut(11) - 0.02, -0.2, -3.2], [cut(11), 1.6, -3.4]]);
-    fx(g, FX.splash([-0.2, 0.2, -3.0], 0.4, {n: 40}), (t) => inShots(t, 1));
-    label(g, L.salty, 0.1, 2.45, -3.0, E('asin') - 0.05, cut(2), {w: 0.9, h: 0.36, bg: '#fbfbf8', fg: '#d8312a'});
-    const ibu = ch('ibu', {seed: 2}, g, -0.9, -3.2, 0.3), anak = ch('anak', {seed: 3, scale: 0.72}, g, 0.3, -3.0, -0.2);
+    
+    walkPath(bimo, [[0, 1.6, -3.4]]);
+    fx(g, FX.splash([-0.2, 0.1, -3.6], E('menelan'), {n: 40}), (t) => inShots(t, 1));
+        const ibu = ch('ibu', {seed: 2}, g, -0.9, -3.2, 0.3), anak = ch('anak', {seed: 3, scale: 0.72}, g, 0.3, -3.0, -0.2);
     [ibu, anak].forEach((c) => showWhen(c.group, (t) => inShots(t, 11) || inShots(t, 12)));
     const bk = P.bucket({color: '#e8737a'}); held(anak, bk, {y: -0.3, z: 0.08}); const pile = ball(0.17, '#fbfbf8', {sy: 0.7, hull: 0.006}); pile.position.y = 0.32; bk.add(pile);
-    ibu.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('secukupnya'), pose: 'point', expr: 'happy'}, {t: E('jangan'), pose: 'stop', expr: 'annoyed'}]); speak(ibu, 24, [[0, 'happy', 'point'], [0.55, 'annoyed', 'stop']]);
+    const jar = cyl(0.08, 0.08, 0.16, new THREE.MeshBasicMaterial({color: '#dff4ff', transparent: true, opacity: 0.6}), {hull: 0.006}); const jl = cyl(0.085, 0.085, 0.03, '#e8737a', {hull: 0.004}); jl.position.y = 0.16; jar.add(jl); const js = cyl(0.07, 0.07, 0.08, '#fbfbf8', {hull: 0}); js.position.y = 0.01; jar.add(js); held(ibu, jar, {hand: 0, y: 0.0, z: 0.08});
+    ibu.act([{t: 0, pose: 'present', expr: 'smug'}, {t: E('secukupnya'), pose: 'point', expr: 'happy'}, {t: E('jangan'), pose: 'stop', expr: 'annoyed'}]); speak(ibu, 24, [[0, 'happy', 'point'], [0.55, 'annoyed', 'stop']]);
     anak.act([{t: 0, pose: 'carry', expr: 'cheesy'}, {t: E('jangan') + 0.2, pose: 'carry', expr: 'nervous'}]);
     const mound = cone(1.0, 0.7, toon('#fbfbf8', {wear: false}), {seg: 14, hull: 0.01}); at(mound, 1.6, 0, -4.2); g.add(mound); showWhen(mound, (t) => inShots(t, 11) || inShots(t, 12));
     label(g, L.question, 0.1, 2.6, -2.9, E('fakta') - 0.1, 1e9, {w: 2.0, h: 0.38, fg: '#8a2a36', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
@@ -121,17 +124,16 @@ export function buildWorld(lang, T, EVt, L) {
     // rain on the rocks; minerals glint as they dissolve
     fx(g, FX.rain([-2, -7, 10, 6], {from: cut(3), to: cut(4)}));
     for (let i = 0; i < 5; i++) fx(g, FX.glints([-3.2 + i * 0.9, 0.4, -6.2], E('melarutkan') + i * 0.15, {n: 10, color: '#fbfbf8', seed: i}), (t) => inShots(t, 3));
-    label(g, L.acid, -1.4, 2.6, -6.0, E('asam') - 0.1, cut(4), {w: 1.8, bg: '#bfe4ff'});
-    label(g, L.mineral, -1.4, 2.2, -5.95, E('melarutkan') - 0.1, cut(4), {w: 1.6, bg: '#fbfbf8'});
+            for (let i = 0; i < 14; i++) { const b = ball(0.05, ['#fbfbf8', '#e8d8b0', '#c8e0f0'][i % 3], {hull: 0.004}); g.add(b); const x0 = -3.2 + (i % 5) * 0.9, t0 = E('melarutkan') - 0.4 + i * 0.12;
+      updaters.push((t) => { const u = Math.max(0, Math.min(1, (t - t0) / 1.6)); b.visible = inShots(t, 3) && t > t0; at(b, x0 + Math.sin(i) * 0.2, 0.45 * (1 - u) + 0.03, -6.3 + u * 2.0); }); }
     // the courier on a raft down the river
     const rx = (t) => -3 + 7 * smooth((t - cut(4)) / (cut(5) - cut(4)));
-    const rf = P.raft(); g.add(rf); const kur = ch('kurir', {seed: 5}, g, 0, -4.2, 0.2); const bx = P.cardboardBox('GARAM', {w: 0.5, h: 0.35, d: 0.4});
+    const rf = P.raft(); g.add(rf); const kur = ch('kurir', {seed: 5}, g, 0, -4.2, 0.2); const bx = P.sack('GARAM');
     g.add(bx); updaters.push((t) => { const x = rx(t); at(rf, x, 0, -4.2); kur.group.position.set(x - 0.2, 0.16, -4.2); at(bx, x + 0.3, 0.16, -4.2); rf.visible = bx.visible = inShots(t, 4); });
     showWhen(kur.group, (t) => inShots(t, 4)); kur.act([{t: 0, pose: 'wave', expr: 'happy'}, {t: E('paket'), pose: 'present', expr: 'cheesy'}, {t: E('tanda'), pose: 'give', expr: 'excited'}]);
     speak(kur, 9, [[0, 'cheesy', 'present'], [0.5, 'excited', 'give']]);
     const pkts = Array.from({length: 4}, (_, i) => { const c = P.saltCrystal(0.6); g.add(c); updaters.push((t) => { at(c, rx(t) - 1.2 - i * 0.6, 0.06, -4.0 + (i % 2) * 0.3); c.visible = inShots(t, 4); c.rotation.y = t + i; }); return c; });
-    label(g, L.little, 0.8, 2.45, -2.4, E('sedikit') - 0.1, cut(6), {w: 1.9, bg: '#fbfbf8', vis: (t) => inShots(t, 5)});
-    const few = [0, 1].map((i) => { const c = P.saltCrystal(0.35); g.add(c); updaters.push((t) => { at(c, 1.4 + i * 0.6 + ((t * 0.6) % 2), 0.05, -4.0); c.visible = inShots(t, 5); }); return c; });
+        const few = [0, 1].map((i) => { const c = P.saltCrystal(0.35); g.add(c); updaters.push((t) => { at(c, 1.4 + i * 0.6 + ((t * 0.6) % 2), 0.05, -4.0); c.visible = inShots(t, 5); }); return c; });
     fx(g, FX.rain([0, -5, 8, 5], {from: E('diganti') - 0.2, to: E('sedikit')}));
   }
 
@@ -144,16 +146,17 @@ export function buildWorld(lang, T, EVt, L) {
     const drops = Array.from({length: 8}, (_, i) => { const d = P.droplet(0.9); g.add(d); updaters.push((t) => { const t0 = E('matahari') + i * 0.25; const u = Math.max(0, t - t0); d.visible = (inShots(t, 6) || inShots(t, 7)) && u > 0 && u < 6; at(d, -1.6 + i * 0.45, 0.05 + u * 0.9, -3.6 - (i % 3) * 0.4); d.rotation.y = Math.sin(t * 2 + i) * 0.4; }); return d; });
     const clouds = [[-1.6, 7.5, -7.5], [1.8, 8.0, -8.5]].map(([x, y, z], i) => { const c = P.cloud(0.6, 5 + i); at(c, x, y, z); g.add(c); updaters.push((t) => { c.visible = t > E('awan') - 0.2; c.scale.setScalar(pop(t, E('awan') - 0.2, 0.5)); }); return c; });
     const salt = P.saltCrystal(1.4); at(salt, 0.2, 0.05, -2.9); g.add(salt);
+    const arm = new THREE.Group(); const a1 = cyl(0.025, 0.025, 0.28, INK, {hull: 0}); arm.add(a1); const hd = ball(0.05, INK, {hull: 0}); hd.position.y = 0.28; arm.add(hd); arm.position.set(0.24, 0.25, 0); salt.add(arm); updaters.push((t) => { arm.rotation.z = -0.4 + Math.sin(t * 9) * 0.5; });
+    label(g, '"AKU NGGAK IKUT!"', 0.2, 1.25, -2.9, E('kalian') - 0.1, cut(8), {w: 1.3, h: 0.28, bg: '#fbfbf8'});
     const others = [[-0.9, -3.4], [1.1, -3.6], [-0.3, -4.1]].map(([x, z]) => { const c = P.saltCrystal(0.8); at(c, x, 0.05, z, x); g.add(c); return c; });
     updaters.push((t) => { const on = t > E('garamnya') - 0.2 && t < cut(9); salt.visible = on; others.forEach((c) => { c.visible = on; }); salt.position.y = 0.05 + (talkOf(17)(t) > 0 ? Math.abs(Math.sin(t * 9)) * 0.05 : 0); salt.rotation.z = Math.sin(t * 2) * 0.08; });
-    label(g, L.evap, -0.2, 3.1, -3.6, E('matahari') - 0.1, E('garamnya'), {w: 1.1, bg: '#bfe4ff'});
-    label(g, L.stays, 0.2, 1.75, -3.6, E('tertinggal') - 0.1, cut(8), {w: 1.7, bg: '#fbfbf8'});
-    // the cycle (8): rain back over the far mountains, a volcano under the sea
+            // the cycle (8): rain back over the far mountains, a volcano under the sea
     const vol = P.mountain(2.2, 1.8, {volcano: true, color: '#5a4a4a', seed: 953}); at(vol, 2.6, -1.4, -5.5); g.add(vol); showWhen(vol, (t) => t > E('gunung') - 0.3);
     fx(g, FX.smoke([2.6, 0.8, -5.5], E('gunung'), {n: 20, every: 0.12, life: 1.6, size: 0.4, grow: 2, rise: 1.2, color: '#9a9aa2', opacity: 0.55}), (t) => inShots(t, 8));
     fx(g, FX.sparks([2.6, 0.8, -5.5], E('gunung') + 0.1, {n: 40, color: '#ffb03a'}), (t) => inShots(t, 8));
     fx(g, FX.rain([-1, -6, 8, 5], {from: E('turun') - 0.2, to: E('jutaan') + 1.5}));
-    label(g, L.years, -0.8, 3.0, -3.6, E('jutaan') - 0.1, E('gunung'), {w: 1.4, bg: '#f2d24a'});
+        const yrs = ['−1 MILIAR TAHUN', '−500 JUTA TAHUN', '−100 JUTA TAHUN', '−10 JUTA TAHUN', '−1 JUTA TAHUN', 'SEKARANG'];
+    yrs.forEach((y, i) => { const span = (E('gunung') - 0.2 - E('turun')) / yrs.length; const t0 = E('turun') + i * span; label(g, y, 0.9, 2.55, -3.6, t0, i === yrs.length - 1 ? cut(9) : t0 + span, {w: 1.7, h: 0.4, bg: i === yrs.length - 1 ? '#3fb06a' : '#fbf6ea', fg: i === yrs.length - 1 ? '#fff3df' : '#351f22'}); });
     label(g, L.volcano, 2.0, 2.6, -4.4, E('gunung') - 0.1, cut(9), {w: 1.8, bg: '#e8737a', fg: '#fff3df', frame: '#8a2a36'});
   }
 
@@ -163,12 +166,11 @@ export function buildWorld(lang, T, EVt, L) {
     under(g, '#8fae6a', 300);
     const grass = box(120, 0.03, 80, toon('#8fae6a', {paint: {seed: 1001, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -30); g.add(grass);
     [[-14, -24, 8, '#bfd8e8'], [-7, -26, 14, '#e8dcc0'], [0, -36, 58, '#3f6a9a'], [8, -25, 18, '#f3efe6'], [15, -24, 10, '#e0c8a8']].forEach(([x, z, h, c], i) => { const b = box(4.5, h, 4.5, toon(c, {paint: {seed: 1010 + i, windows: true}})); at(b, x, 0, z); g.add(b); });
-    const saltL = box(120, 1, 50, toon('#fbfbf8', {paint: {seed: 1020, stains: 10}}), {edges: false}); at(saltL, 0, 0, -45); g.add(saltL);
-    updaters.push((t) => { const u = smooth((t - E('disebar')) / (E('lantai') + 0.3 - E('disebar'))); saltL.scale.y = Math.max(0.01, 46 * u); saltL.visible = u > 0.002; });
+    const saltL = P.mountain(1, 1, {color: '#fbfbf8', seed: 1020}); saltL.children.forEach((c) => { if (c.material && c.material.color) c.material.color.set('#fbfbf8'); }); at(saltL, -22, 0, -50); g.add(saltL);
+    updaters.push((t) => { const u = smooth((t - E('disebar')) / (E('lantai') + 0.3 - E('disebar'))); saltL.scale.set(Math.max(0.01, 40 * u), Math.max(0.01, 52 * u), Math.max(0.01, 40 * u)); saltL.visible = u > 0.002; });
     const bimo = ch('bimo', {seed: 6}, g, 0, -3.0, 0); showWhen(bimo.group, (t) => t < E('disebar'));
     bimo.act([{t: 0, pose: 'idle', expr: 'surprised'}, {t: E('dikeruk'), pose: 'headHold', expr: 'shocked'}]);
-    label(g, L.m150, -9, 36, -18, E('seratus') - 0.1, cut(11), {w: 14, h: 3.6, bg: '#f2d24a'});
-    label(g, L.floors, 0, 64, -30, E('lantai') - 0.1, cut(11), {w: 14, h: 3.6, bg: '#fbfbf8'});
+        label(g, L.floors, 0, 64, -30, E('lantai') - 0.1, cut(11), {w: 14, h: 3.6, bg: '#fbfbf8'});
   }
 
   return {world, chars, locGroups, update(t, camPos) {

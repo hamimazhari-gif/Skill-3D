@@ -12,8 +12,8 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 export const SHOT_PLAN = [
   // Calm camera: medium shots, a track along the river, a crane up the salt layer.
   {shot: 1, loc: 'pantai', lift: false, move: 'a mouthful of sea water', keys: [
-    {at: 'start', pos: [-0.1, 1.6, -0.6], look: [-0.1, 1.5, -3.2]},
-    {at: 'end', pos: [-0.1, 1.6, -0.85], look: [-0.1, 1.5, -3.2]}]},
+    {at: 'start', pos: [-0.2, 0.9, -1.6], look: [-0.2, 0.7, -3.8]},
+    {at: 'end', pos: [-0.2, 0.9, -1.75], look: [-0.2, 0.7, -3.8]}]},
   {shot: 2, loc: 'darat', lift: false, move: 'the river tastes fresh', keys: [
     {at: 'start', pos: [0.3, 1.6, -0.2], look: [0.0, 1.2, -3.6]},
     {at: 'end', pos: [0.3, 1.6, -0.45], look: [0.0, 1.2, -3.6]}]},
@@ -36,11 +36,11 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [0.6, 1.9, 0.6], look: [0.8, 1.8, -4.5]},
     {at: 'end', pos: [0.8, 1.9, 0.3], look: [1.0, 1.8, -4.5]}]},
   {shot: 9, loc: 'kota', lift: false, move: 'salt spread over the land', keys: [
-    {at: 'start', pos: [0, 1.7, 1.0], look: [0, 6.0, -30]},
-    {at: 'end', pos: [0, 10, 22], look: [0, 18, -30]}]},
+    {at: 'start', pos: [0, 2, 10], look: [-8, 14, -40]},
+    {at: 'end', pos: [0, 12, 40], look: [-8, 26, -40]}]},
   {shot: 10, loc: 'kota', lift: false, move: 'as high as 50 floors', keys: [
-    {at: 'start', pos: [0, 30, 40], look: [0, 46, -36]},
-    {at: 'end', pos: [0, 34, 46], look: [0, 50, -36]}]},
+    {at: 'start', pos: [0, 24, 60], look: [-6, 40, -38]},
+    {at: 'end', pos: [0, 28, 70], look: [-6, 44, -38]}]},
   {shot: 11, loc: 'pantai', lift: false, move: '"take only what you need"', keys: [
     {at: 'start', pos: [-0.2, 1.55, -0.2], look: [-0.2, 1.4, -3.2]},
     {at: 'end', pos: [-0.2, 1.55, -0.45], look: [-0.2, 1.4, -3.2]}]},

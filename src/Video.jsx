@@ -106,7 +106,8 @@ function Scene({lang, thumb}) {
 const DIPS = [2, 6, 9, 11];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard yet: only captions
+const TITLES = [['cut1', 'SIAPA YANG | GARAMIN LAUT? 🧂🌊'], ['cut3', 'HUJAN MELARUTKAN MINERAL | DARI BATUAN 🌧️⛰️'], ['cut4', 'SUNGAI = KURIR | GARAM KE LAUT 🚚'], ['cut5', 'SUNGAI TERUS MENGALIR, | GARAMNYA SEDIKIT 💧'],
+  ['cut6', 'AIR MENGUAP, GARAMNYA | TERTINGGAL ☀️'], ['cut8', 'TERKUMPUL SELAMA | JUTAAN TAHUN ⏳'], ['cut9', 'KALAU DIKERUK, GARAM LAUT BISA | MENUTUP DARATAN SETEBAL ±150 M 😱']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -148,10 +149,10 @@ function cues(T, EVt) {
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     [sy('birds'), 0, 0.08, 2.0], [sy('puff'), E.menelan, 0.18], [sy('boing'), E.asin, 0.14],
     [sy('birds'), C[1] + 0.1, 0.08, 3.0], [sy('sparkle'), E.tawar, 0.14], [sy('uh_oh'), E.beda, 0.1],
-    [sy('rumble'), C[2] + 0.1, 0.08, 1.5], [sy('sparkle'), E.melarutkan, 0.14],
+    [sy('rumble'), C[2] + 0.1, 0.08, 1.5], ...Array.from({length: 6}, (_, i) => ['pop-bubble-sound-effect.mp3', E.melarutkan + i * 0.25, 0.06]), [sy('sparkle'), E.melarutkan, 0.14],
     ['05-airy-whoosh.mp3', C[3] + 0.2, 0.14], [sy('stamp'), E.tanda, 0.16],
     [sy('sparkle'), E.matahari, 0.12], ...Array.from({length: 5}, (_, i) => ['pop-bubble-sound-effect.mp3', E.matahari + i * 0.25, 0.08]), ['08-soft-success-chime.mp3', E.tertinggal, 0.16],
-    [sy('heart_pop'), E.kalian, 0.12], ['06-deep-cinematic-boom.wav', E.gunung, 0.14], [sy('rumble'), E.gunung, 0.1, 1.5],
+    [sy('heart_pop'), E.kalian, 0.12], ['06-deep-cinematic-boom.wav', E.gunung, 0.14], [sy('rumble'), E.gunung, 0.1, 1.5], [sy('page_flips'), E.turun, 0.12, 3.0],
     ['07-riser-build-up.wav', E.disebar - 0.2, 0.12, 3.0], ['06-deep-cinematic-boom.wav', E.seratus, 0.14], [sy('tada'), E.lantai, 0.12],
     [sy('birds'), C[10] + 0.1, 0.08, 3.0],
     ['pop-bubble-sound-effect.mp3', E.fakta - 0.15, 0.2],

@@ -1,6 +1,6 @@
 # Kenapa laut asin — script
 
-Narasi dan voice-over dari pengguna (94,3 s), tidak diubah. Belum ada storyboard: hanya caption kata-per-kata dan label di dunia.
+Narasi dan voice-over dari pengguna (94,3 s), tidak diubah. Mengikuti storyboard pengguna (7 adegan dengan teks layar): anak berenang menelan air laut, butiran mineral terlepas dari batu saat hujan, kurir membawa karung GARAM di rakit, kristal garam melambai "AKU NGGAK IKUT!" saat air menguap, kalender tahun berganti dari −1 miliar tahun sampai SEKARANG plus gunung berapi bawah laut, gunung garam raksasa di samping gedung, Emak membawa toples kecil. Papan di dunia yang sama dengan teks layar dihapus.
 
 | Shot | Lokasi | Isi |
 |---|---|---|
