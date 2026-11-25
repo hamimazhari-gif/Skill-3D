@@ -36,8 +36,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [36, 1.9, -0.2], look: [36, 2.0, -3.6]},
     {at: 'end', pos: [36, 1.9, -0.45], look: [36, 2.0, -3.6]}]},
   {shot: 9, loc: 'body', lift: false, move: 'the brain and the eye lens stay', keys: [
-    {at: 'start', pos: [28.1, 1.6, 0.2], look: [28.2, 1.55, -3.6]},
-    {at: 'end', pos: [28.1, 1.6, -0.05], look: [28.2, 1.55, -3.6]}]},
+    {at: 'start', pos: [27.6, 1.6, 0.2], look: [27.6, 1.55, -3.6]},
+    {at: 'end', pos: [27.8, 1.6, -0.05], look: [27.8, 1.55, -3.6]}]},
   {shot: 10, loc: 'home', lift: false, move: 'memories stay', keys: [
     {at: 'start', pos: [-0.4, 1.6, -0.3], look: [-0.4, 1.7, -3.4]},
     {at: 'end', pos: [-0.4, 1.6, -0.55], look: [-0.4, 1.7, -3.4]}]},

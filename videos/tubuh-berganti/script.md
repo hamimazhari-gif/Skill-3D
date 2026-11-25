@@ -1,6 +1,6 @@
 # Tubuhmu bukan tubuh yang sama — script
 
-Narasi dan voice-over dari pengguna (80,4 s), tidak diubah. Belum ada storyboard: hanya caption kata-per-kata dan label di dunia.
+Narasi dan voice-over dari pengguna (80,4 s), tidak diubah. Mengikuti storyboard pengguna (7 adegan dengan teks layar): bayangan di cermin melambai sendiri, pekerja mini (sel bertopi proyek) di pabrik, lapisan usus seperti karpet yang terus diganti, Mama menunjuk debu "ITU SEBAGIAN KAMU!", sel darah merah pensiun dan tulang direnovasi, pekerja datang untuk sel otak yang menolak "TIDAK! SAYA DI SINI SEUMUR HIDUP!", penutup wanita dan mantannya. Papan di dunia yang sama dengan teks layar dihapus.
 
 | Shot | Lokasi | Isi |
 |---|---|---|

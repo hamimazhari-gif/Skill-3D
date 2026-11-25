@@ -15,7 +15,7 @@ export const CHAR_DESIGN = 'gentle';
 const CAST = {
   dimas: {outfit: 'tshirt', jacket: '#4f8fc8', print: '#fff3df', print2: '#f2d24a', lower: '#3a3a48', tie: '#4f8fc8', hair: '#2b2326', hairStyle: 'fringe', hat: 'none'},
   mama: {hairStyle: 'hijab', hijab: '#e0809a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'batik', jacket: '#7fb08a', print: '#fff3df', print2: '#3a5a3a', lower: '#7fb08a', tie: '#7fb08a', round: true},
-  teman: {outfit: 'hoodie', jacket: '#d8413a', lower: '#3a4050', tie: '#d8413a', hair: '#3a2a26', hairStyle: 'side', hat: 'none', glasses: true},
+  teman: {outfit: 'tshirt', jacket: '#e0626e', print: '#fff3df', print2: '#f2d24a', lower: '#3a3a48', tie: '#e0626e', hair: '#3a2a26', hairStyle: 'bun', hat: 'none'},
 };
 
 // Lighting: a warm home with a sunbeam, a bright inside-the-body factory, the pink gut, a red vessel, a calm blue brain stage.
@@ -89,24 +89,26 @@ export function buildWorld(lang, T, EVt, L) {
     const mf = box(1.0, 1.7, 0.04, '#8a5a3a'); at(mf, 0.6, 0.45, -4.88); g.add(mf);
     const ph = sign(L.lastYear, 0.5, 0.4, {bg: '#fbf6ea', fg: '#7a5aa8', frame: '#7a5236'}); at(ph, -0.8, 1.75, -4.84); g.add(ph);
     label(g, L.now, 0.6, 2.45, -4.7, E('sekarang') - 0.1, cut(2), {w: 0.7, h: 0.3, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'});
-    const dimas = ch('dimas', {seed: 1}, g, 0.1, -3.2, 0.2);
-    dimas.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('bukan0'), pose: 'headHold', expr: 'shocked'}, {t: E('tahunLalu') + 0.1, pose: 'point', expr: 'confused'},
+    const refl = ch('dimas', {seed: 4, scale: 0.55}, g, 0.6, -4.78, 0, 0.55); showWhen(refl.group, (t) => inShots(t, 1));
+    refl.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('sekarang') - 0.1, pose: 'wave', expr: 'scheming'}, {t: E('tahunLalu'), pose: 'wave', expr: 'cheesy'}]);
+    const dimas = ch('dimas', {seed: 1}, g, -0.25, -3.2, 0.2);
+    dimas.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('sekarang') + 0.2, pose: 'headHold', expr: 'shocked'}, {t: E('tahunLalu') + 0.1, pose: 'point', expr: 'confused'},
       {t: cut(5), pose: 'idle', expr: 'happy'}, {t: E('kamu8') + 0.05, pose: 'headHold', expr: 'surprised'}, {t: E('ma') - 0.1, pose: 'beg', expr: 'cry'},
       {t: cut(10), pose: 'read', expr: 'happy'}, {t: E('kenangan') + 0.05, pose: 'read', expr: 'proud'},
       {t: cut(11), pose: 'idle', expr: 'neutral'}, {t: E('berubah') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('iya') - 0.05, pose: 'hips', expr: 'smug'}, {t: E('ilmiah'), pose: 'pointUp', expr: 'scheming'},
       {t: cut(12), pose: 'shrug', expr: 'cheesy'}, {t: E('komentar') - 0.15, pose: 'point', expr: 'cheesy'}]);
     dimas.act([{t: E('bukan0'), action: 'jump', dur: 0.5}]);
     speak(dimas, 9, [[0, 'cry', 'beg']]); speak(dimas, 21, [[0, 'smug', 'hips'], [0.45, 'scheming', 'pointUp']]);
-    walkPath(dimas, [[0, 0.1, -3.2], [cut(5) - 0.02, 0.1, -3.2], [cut(5), -0.6, -3.0]]);
+    walkPath(dimas, [[0, -0.25, -3.2], [cut(5) - 0.02, -0.25, -3.2], [cut(5), -0.6, -3.0]]);
     // the sunbeam full of dust; Mama sweeps
     const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.9, 3.4, 20, 1, true), new THREE.MeshBasicMaterial({color: '#fff2c8', transparent: true, opacity: 0.14, depthWrite: false, side: THREE.DoubleSide}));
     beam.position.set(0.9, 1.5, -3.6); beam.rotation.z = -0.35; g.add(beam); showWhen(beam, (t) => inShots(t, 5));
     fx(g, FX.fall([0.9, -3.6, 1.6, 1.2], {n: 160, h: 2.8, speed: 0.08, color: '#fff2c8', size: 0.05, drift: 0.2, sway: 0.3, seed: 7, from: cut(5), to: cut(6)}));
     const mama = ch('mama', {seed: 2}, g, 1.2, -3.4, -0.3); showWhen(mama.group, (t) => inShots(t, 5));
     const br = P.broom(); held(mama, br, {y: -0.6, z: 0.08, rz: 0.4}); 
-    mama.act([{t: 0, pose: 'hold', expr: 'happy'}, {t: E('disapu') + 0.1, pose: 'hold', expr: 'confused'}]);
+    mama.act([{t: 0, pose: 'hold', expr: 'happy'}, {t: E('debu'), pose: 'point', expr: 'smug'}, {t: E('ma'), pose: 'hold', expr: 'happy'}, {t: E('disapu') + 0.1, pose: 'hold', expr: 'confused'}]);
     updaters.push((t) => { br.rotation.z = 0.4 + Math.sin(t * 6) * 0.3 * (t < E('ma') ? 1 : 0.1); });
-    label(g, L.dust, 0.9, 2.5, -3.4, E('debu') - 0.1, cut(6), {w: 1.3, bg: '#f2d24a', vis: (t) => inShots(t, 5)});
+    label(g, '"ITU SEBAGIAN KAMU!"', 0.25, 2.5, -3.4, E('kamu8') - 0.2, cut(6), {w: 1.9, bg: '#f2d24a', vis: (t) => inShots(t, 5)});
     // memories (10): photos of him as a kid, a teen, now, around a glow
     ['KECIL', 'SMA', 'SEKARANG'].forEach((txt, i) => label(g, txt, -1.3 + i * 0.95, 2.35 + (i % 2) * 0.2, -3.6, E('kenangan') - 0.2 + i * 0.15, cut(11), {w: 0.8, h: 0.55, bg: '#fbf6ea', fg: '#7a5aa8', frame: '#7a5236', vis: (t) => inShots(t, 10)}));
     const hrt = P.heart('#e0626e'); g.add(hrt); updaters.push((t) => { hrt.visible = inShots(t, 10) && t > E('tetap') - 0.1; hrt.scale.setScalar(0.35 * pop(t, E('tetap') - 0.1, 0.35)); at(hrt, -0.6, 1.95 + Math.sin(t * 3) * 0.04, -2.8); });
@@ -131,15 +133,15 @@ export function buildWorld(lang, T, EVt, L) {
       updaters.push((t) => { const u = ((t * 0.4 + i / 6) % 1); const x = -2.3 + u * 4.6; const isNew = x > 0; old.visible = !isNew; nw.visible = isNew; at(old, x, 0.72, -3.4); at(nw, x, 0.72, -3.4); nw.scale.setScalar(isNew ? Math.min(1, (x / 0.3)) : 0.01); }); }
     const gate = new THREE.Group(); for (const z of [-3.95]) { const p = box(0.12, 0.8, 0.12, '#f2c23a', {hull: 0.008}); at(p, 0, 0.7, z); gate.add(p); } const top = box(0.2, 0.2, 1.1, toon('#f2c23a', {paint: {seed: 913}})); at(top, 0, 1.45, -3.4); gate.add(top); g.add(gate);
     fx(g, FX.glints([0.5, 1.2, -3.2], E('diganti'), {n: 26}));
+    [[-0.55, -2.65, 0], [0.6, -2.65, 1]].forEach(([x, z, i]) => { const w = P.cell('#e8d8a8'); const hh = P.hardHat(); hh.position.y = 0.44; w.add(hh); w.scale.setScalar(0.9); g.add(w);
+      updaters.push((t) => { at(w, x + Math.sin(t * 3 + i) * 0.15, Math.abs(Math.sin(t * 6 + i)) * 0.08, z, Math.sin(t * 2 + i) * 0.5); }); });
     label(g, L.factory, 0, 2.7, -3.6, E('pabrik') - 0.1, cut(3), {w: 1.6, h: 0.4, bg: '#f2c23a'});
-    label(g, L.count, 0, 2.2, -3.55, E('miliar') - 0.15, cut(3), {w: 2.2, h: 0.36, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'});
-    // skin (4): flakes come off the top layer
+        // skin (4): flakes come off the top layer
     const SX = 12;
     const sk = P.skinSlab(3, 1.4); at(sk, SX, 0, -3.6); g.add(sk);
     const flakes = Array.from({length: 24}, (_, i) => { const f = box(0.12, 0.015, 0.1, '#fbf0e4', {hull: 0.004}); g.add(f); return f; });
     updaters.push((t) => flakes.forEach((f, i) => { const t0 = E('rontok') - 0.3 + (i % 8) * 0.18; const u = Math.max(0, t - t0); f.visible = inShots(t, 4) && u > 0; at(f, SX - 1.3 + (i * 0.37) % 2.6, 0.99 + u * 0.5 + Math.sin(u * 3 + i) * 0.1, -3.5 + ((i * 0.53) % 1) - 0.5 + u * 0.3, u * 2, u * 3, u); }));
-    label(g, L.skin, SX, 2.2, -3.4, E('sebulan') - 0.1, cut(5), {w: 1.8, bg: '#f6d0b8'});
-    // bone (7): a renovation site
+        // bone (7): a renovation site
     const BX = 24;
     const bn = P.bone(2.6, 0.2); at(bn, BX, 0.45, -3.6); g.add(bn);
     for (const x of [-1.4, 1.4]) { const c = P.trafficCone(); at(c, BX + x, 0, -2.7); g.add(c); }
@@ -148,9 +150,8 @@ export function buildWorld(lang, T, EVt, L) {
     const workers = [-0.7, 0.2, 0.9].map((x, i) => { const c = P.cell('#e8d8a8'); const hh = P.hardHat(); hh.position.y = 0.44; c.add(hh); g.add(c);
       updaters.push((t) => { at(c, BX + x, (i === 1 ? 1.13 : 0) + Math.abs(Math.sin(t * 5 + i)) * 0.06, -3.0 - (i === 1 ? 1.1 : 0)); c.rotation.z = Math.sin(t * 8 + i) * 0.08; }); return c; });
     fx(g, FX.sparks([BX + 0.2, 0.6, -3.4], E('renovasi'), {n: 30}));
-    label(g, L.reno, BX, 2.6, -3.6, E('renovasi') - 0.1, cut(8), {w: 1.9, bg: '#f2753a', fg: '#fff3df', frame: '#8a3a1a'});
-    label(g, L.bone, BX, 2.2, -3.55, E('sepuluh') - 0.1, cut(8), {w: 1.8, bg: '#f3efe0'});
-    // plot twist (8)
+    label(g, L.reno, BX, 2.1, -3.6, E('renovasi') - 0.1, cut(8), {w: 1.9, bg: '#f2753a', fg: '#fff3df', frame: '#8a3a1a'});
+        // plot twist (8)
     const TX = 36;
     label(g, L.seven, TX, 1.9, -3.6, E('banyak') - 0.1, 1e9, {w: 2.6, h: 0.42, bg: '#fbf6ea'});
     label(g, L.myth, TX + 0.4, 1.55, -3.3, E('mitos') - 0.05, 1e9, {w: 1.2, h: 0.5, bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
@@ -164,17 +165,18 @@ export function buildWorld(lang, T, EVt, L) {
     const tube = P.gutTube(10, 1.3); at(tube.group, 0, 0, -3.4); g.add(tube.group); updaters.push((t) => tube.update(t));
     const lining = Array.from({length: 7}, (_, i) => { const old = P.cell('#c98a98', {tired: true}), nw = P.cell('#f2a0b0'); g.add(old, nw); return [old, nw, i]; });
     updaters.push((t) => lining.forEach(([old, nw, i]) => { const x = -2.4 + i * 0.8; const sw = E('digantiU') + i * 0.12; at(old, x, 0.06, -3.9); at(nw, x, 0.06, -3.9); old.visible = t < sw; nw.visible = t >= sw; nw.scale.setScalar(pop(t, sw, 0.3)); old.rotation.z = Math.sin(t * 9 + i) * 0.08 * (t > E('keras') ? 1 : 0); }));
+    const rug = box(5.6, 0.03, 0.9, toon('#f2a0b0', {paint: {stripes: {n: 10, color: '#e88a9a'}, seed: 930}}), {hull: 0.006}); g.add(rug);
+    const rugW = P.cell('#e8d8a8'); const rugH = P.hardHat(); rugH.position.y = 0.44; rugW.add(rugH); g.add(rugW);
+    updaters.push((t) => { const u = ((t - cut(3)) / 1.6) % 1; rug.scale.x = Math.max(0.02, u); at(rug, -2.8 + 2.8 * u, 0.06, -3.2); rug.visible = inShots(t, 3); at(rugW, -2.8 + 5.6 * u, 0.08, -3.0); rugW.visible = inShots(t, 3); });
     const food = [0, 1, 2].map((i) => { const f = ball(0.12, ['#f2d24a', '#7fd0a0', '#c9822a'][i], {hull: 0.006}); g.add(f); updaters.push((t) => { at(f, -2 + ((t * 0.8 + i * 1.3) % 4), 0.2, -3.2); f.visible = inShots(t, 3); }); return f; });
-    label(g, L.gut, 0, 2.2, -3.0, E('beberapa') - 0.1, cut(4), {w: 1.9, bg: '#f2a0b0'});
-    // a red vessel with red blood cells; one retires with a party hat
+        // a red vessel with red blood cells; one retires with a party hat
     const VX = 14;
     const ves = P.gutTube(10, 1.3); at(ves.group, VX, 0, -3.4); ves.group.traverse((m) => { if (m.material && m.material.color) m.material.color.set('#a8323a'); }); g.add(ves.group); updaters.push((t) => ves.update(t));
     const rbcs = Array.from({length: 9}, (_, i) => { const r = P.redCell(0.22); g.add(r); updaters.push((t) => { at(r, VX - 4 + ((t * 1.2 + i * 0.9) % 8), 0.5 + (i % 3) * 0.35, -3.6 + (i % 2) * 0.4, t + i, 0, t * 0.5 + i); }); return r; });
     const ret = P.redCell(0.3); const hat = P.partyHat(); hat.position.set(0, 0.32, 0); ret.add(hat); g.add(ret);
     updaters.push((t) => { at(ret, VX + 0.3, 0.6 + Math.abs(Math.sin(t * 4)) * 0.1, -2.7, 0, 0, Math.sin(t * 3) * 0.2); ret.visible = t > E('pensiun') - 0.3; ret.scale.setScalar(pop(t, E('pensiun') - 0.3, 0.35)); });
     fx(g, FX.confetti([VX + 0.3, 2.0, -2.6], E('pensiun')));
-    label(g, L.blood, VX + 0.3, 2.25, -3.0, E('darah') - 0.1, cut(7), {w: 2.0, bg: '#fbf6ea', fg: '#a8323a'});
-    label(g, L.retire, VX + 0.3, 1.4, -2.6, E('pensiun') - 0.05, cut(7), {w: 0.9, h: 0.3, bg: '#f2d24a'});
+        label(g, L.retire, VX + 0.3, 1.4, -2.6, E('pensiun') - 0.05, cut(7), {w: 0.9, h: 0.3, bg: '#f2d24a'});
     // the brain and the eye lens: they stay
     const BRX = 28;
     const fl = box(12, 0.04, 10, toon('#262a36', {paint: {seed: 921}}), {edges: false}); at(fl, BRX, -0.02, -3); g.add(fl);
@@ -182,8 +184,10 @@ export function buildWorld(lang, T, EVt, L) {
     const brain = P.brainMascot(); brain.group.scale.setScalar(1.2); at(brain.group, BRX - 0.6, 1.4, -3.6); g.add(brain.group);
     updaters.push((t) => { brain.group.position.y = 1.4 + Math.sin(t * 2) * 0.05; if (t > E('kecil')) brain.setFace('happy'); });
     const eye = P.eyeball(); eye.scale.setScalar(1.6); at(eye, BRX + 1.0, 1.3, -3.4); g.add(eye); showWhen(eye, (t) => t > E('lensa') - 0.2); updaters.push((t) => { eye.scale.setScalar(1.6 * pop(t, E('lensa') - 0.2, 0.35)); });
-    label(g, L.brain, BRX + 0.1, 2.55, -3.4, E('otak') - 0.1, cut(10), {w: 2.0, bg: '#b8a0ff'});
-    label(g, L.lens, BRX + 0.4, 0.55, -3.0, E('lensa') - 0.1, cut(10), {w: 1.7, bg: '#7fc4e8'});
+        label(g, L.lens, BRX + 0.4, 0.55, -3.0, E('lensa') - 0.1, cut(10), {w: 1.7, bg: '#7fc4e8'});
+    [0, 1].forEach((i) => { const w = P.cell('#e8d8a8'); const hh = P.hardHat(); hh.position.y = 0.44; w.add(hh); g.add(w); const nc = P.cell('#f2a0b0'); nc.scale.setScalar(0.6); g.add(nc);
+      updaters.push((t) => { const u = smooth((t - E('otak') + 0.3) / 1.2), back = smooth((t - E('kecil') - 0.3) / 0.8); const x = BRX - 2.6 + 1.0 * u - 1.2 * back + i * 0.45; at(w, x, Math.abs(Math.sin(t * 7 + i)) * 0.06, -2.9 - i * 0.3, back > 0.1 ? Math.PI : 0); at(nc, x + 0.15, 0.55, -2.8 - i * 0.3); w.visible = nc.visible = inShots(t, 9); }); });
+    label(g, 'TIDAK! SAYA DI SINI SEUMUR HIDUP!', BRX - 0.2, 2.5, -3.2, E('kecil') - 0.3, cut(10), {w: 2.6, h: 0.36, bg: '#b8a0ff'});
     for (let i = 0; i < 4; i++) { const sp = P.glowSprite('#c8b8ff', 0.6); at(sp, BRX - 0.6 + Math.cos(i * 1.6) * 0.9, 1.5 + Math.sin(i * 1.6) * 0.6, -3.4); g.add(sp); }
   }
 

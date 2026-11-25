@@ -106,7 +106,9 @@ function Scene({lang, thumb}) {
 const DIPS = [2, 3, 4, 5, 6, 7, 9, 10];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard yet: only captions
+const TITLES = [['cut1', 'KAMU YANG SEKARANG ≠ | KAMU TAHUN LALU 😱'], ['cut2', '±330 MILIAR SEL | DIGANTI SETIAP HARI 🏭'], ['cut3', 'LAPISAN USUS: HANYA | BEBERAPA HARI 🔁'],
+  ['cut4', 'KULIT: DIPERBARUI SEKITAR | SEBULAN SEKALI 🧴'], ['cut6', 'SEL DARAH MERAH: ±4 BULAN | TULANG: ±10 TAHUN 🦴'], ['cut8', 'TAPI SEBAGIAN BESAR SEL OTAK | MENEMANIMU SEUMUR HIDUP 🧠'],
+  ['cut11', '"KAMU UDAH BERUBAH!" | "SECARA ILMIAH, IYA." 😂']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -146,7 +148,7 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('uh_oh'), E.bukan0, 0.12], [sy('sparkle'), E.sekarang, 0.12],
+    [sy('sparkle'), E.sekarang - 0.1, 0.14], [sy('uh_oh'), E.bukan0, 0.12], [sy('sparkle'), E.sekarang, 0.12],
     [sy('rumble'), C[1] + 0.1, 0.06, 3.0], ['07-riser-build-up.wav', E.tigaRatus - 0.2, 0.1, 1.6], ['06-deep-cinematic-boom.wav', E.miliar, 0.14], [sy('ka_ching'), E.setiapHari, 0.12],
     [sy('frying'), E.mencerna, 0.05, 2.0], ...Array.from({length: 4}, (_, i) => ['pop-bubble-sound-effect.mp3', E.digantiU + i * 0.25, 0.1]),
     [sy('paper_flutter'), E.rontok, 0.12, 1.5], [sy('sparkle'), E.debu, 0.14], [sy('swish'), E.disapu - 0.4, 0.14], [sy('swish'), E.disapu, 0.14],
