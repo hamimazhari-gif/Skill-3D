@@ -11,7 +11,7 @@ function Grid({mode, design}) {
   const {scene, camera, gl} = useThree();
   const items = mode === 'expr' ? Object.keys(EXPRESSIONS) : Object.keys(POSES);
   const chars = useMemo(() => { if (design) setCharDesign(design); return items.map((k, i) => {
-    const c = makeChar(['hero', 'fisher', 'scientist', 'buyer'][i % 4], design && i % 4 === 0 ? {jacket: '#e07a3a', hat: 'none', hairStyle: 'side'} : {});
+    const c = makeChar(['darto', 'kakek', 'darto', 'kakek'][i % 4], {});
     const cols = 5, x = (i % cols - (cols - 1) / 2) * 1.25, y = -Math.floor(i / cols) * 2.0;
     c.group.position.set(x, y, 0);
     c.act([{t: 0, [mode === 'expr' ? 'expr' : 'pose']: k}]);

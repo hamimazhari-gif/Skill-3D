@@ -1,46 +1,44 @@
-// All locations in one scene at different x offsets. Story: "Apa yang terjadi kalau Bumi tiba-tiba berhenti berputar?".
+// All locations in one scene at different x offsets. Story: "Pak Darto dan bonggol pisang" (Indonesian).
 import * as THREE from 'three';
-import {toon, box, cyl, ball, cone, at, sign, paintTex, pop, smooth, clamp01, INK, rng} from './kit';
+import {toon, box, cyl, ball, at, sign, signTex, decal, paintTex, pop, smooth, clamp01, gradientMap, rng} from './kit';
 import {makeChar, setCharDesign} from './char';
 import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {planet: 0, town: 40, beach: 80, room: 120, desert: 160, frozen: 200, lab: 240};
+export const LOC = {kebun: 0, tepi: 40, teras: 80, pagi: 120};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
-// Cast look for this story (palette overrides on top of char.js PALETTES).
-export const CHAR_DESIGN = 'egg';
+// Character design for this story: 'bean' (never used before) — round head, tuft hair, thicker limbs.
+export const CHAR_DESIGN = 'bean';
 const CAST = {
-  hero: {jacket: '#e07a3a', lower: '#34445e', tie: '#f3e7d3', hair: '#2b2326', hat: 'none', hairStyle: 'side', pocket: '#c9622a'},
-  pal1: {hairStyle: 'tuft'},
-  pal2: {hat: 'bowler', hatColor: '#4a3a56'},
-  scientist: {hairStyle: 'tuft', hair: '#8a8a8a'},
+  darto: {},
+  kakek: {},
+  kakekNight: {hat: 'none'},
 };
 
-// Lighting plan (camera_plan.md): space around the globe (dark navy, sun key from the left); a sunny town that turns to
-// danger when the Earth stops and to a storm for the winds; a bright noon beach going tense as the sea drains; a warm
-// room for the 24-hour clock; a scorching desert for six months of day and a frozen moonlit night for six months of
-// dark; a cool lab turning joyful on "tenang"; back to space, joyful, for the closing question.
-const space = {fog: '#0b1030', near: 60, far: 250, skyTop: '#060a1c', skyBottom: '#1b2352', key: '#fff2d8', keyI: 2.7, hemiI: 1.0, keyPos: [-10, 6, 6],
-  hemiSky: '#9ab0f0', hemiGround: '#2a2a4a', grade: {sat: 1.05, contrast: 1.04, tint: '#a8b8ff', tintAmt: 0.04, vignette: 0.42}};
-const townDay = {...LOOK_PRESETS.day, keyPos: [-6, 10, 7]};
-const townStorm = {...LOOK_PRESETS.storm, keyI: 1.3, hemiI: 1.3, keyPos: [-6, 10, 6]};
-const desertHot = {...LOOK_PRESETS.desert, keyPos: [-5, 12, -6], grade: {sat: 1.12, contrast: 1.08, tint: '#ffb060', tintAmt: 0.14, vignette: 0.38}};
-const frozenNight = {...LOOK_PRESETS.night, keyI: 1.4, hemiI: 1.15, keyPos: [-6, 12, -4], hemiSky: '#a0b8f0', hemiGround: '#4a5a7a',
-  grade: {sat: 0.85, contrast: 1.06, tint: '#9ac0ff', tintAmt: 0.14, vignette: 0.45}};
+// Lighting plan (camera_plan.md): a dull, overcast and sad garden while it fails (shots 1-2); the garden edge at
+// sunset ("suatu sore"), sad until "emasnya", then warmer; Kakek's porch at night lit by an oil lamp and a wall lamp
+// (moon on); Darto's yard at dawn two weeks later, sun coming up on "asam"; the garden on a fresh morning for the
+// watering, joyful when the leaves turn green, golden hour for the closing lines.
+const sad = {...LOOK_PRESETS.overcast, ...MOODS.sad, keyPos: [-5, 11, 5]};
+const fresh = {...LOOK_PRESETS.day, keyPos: [-6, 9, 7]};
+const freshJoy = {...fresh, ...MOODS.joyful};
+const golden = {...LOOK_PRESETS.goldenHour, keyPos: [-9, 5, 6], grade: {...LOOK_PRESETS.goldenHour.grade, sat: 1.14, vignette: 0.26}};
+const sunsetSad = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 0.85, vignette: 0.45}};
+const sunsetWarm = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 1.12, vignette: 0.3}};
+const porch = {...LOOK_PRESETS.night, keyI: 1.5, hemiI: 1.0, keyPos: [-6, 10, 5], hemiSky: '#8a9ac8', hemiGround: '#4a3a3a',
+  grade: {sat: 0.98, contrast: 1.06, tint: '#ffb070', tintAmt: 0.07, vignette: 0.45}};
+const porchJoy = {...porch, grade: {...porch.grade, sat: 1.08, tintAmt: 0.1, vignette: 0.38}};
 
 export const LOOK = {
-  planet: {keys: [{at: 0, ...space}, {at: 'cut11', ...space}, {at: 'seram', ...space, ...MOODS.joyful, grade: {...MOODS.joyful.grade, vignette: 0.4}}]},
-  town: {keys: [{at: 0, ...townDay}, {at: 'cut4', ...townDay}, {at: 'mendadak', ...townDay, ...MOODS.danger}, {at: 'cut5', ...townStorm},
-    {at: 'badai', ...townStorm, ...MOODS.tense}]},
-  beach: {keys: [{at: 0, ...LOOK_PRESETS.noon, keyPos: [-5, 12, 5]}, {at: 'mengalir', ...LOOK_PRESETS.noon, keyPos: [-5, 12, 5]},
-    {at: 'kutub', ...LOOK_PRESETS.noon, keyPos: [-5, 12, 5], ...MOODS.tense}]},
-  room: {...LOOK_PRESETS.interiorWarm, keyPos: [-4, 8, 8]},
-  desert: desertHot,
-  frozen: frozenNight,
-  lab: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool, keyPos: [-4, 8, 8]}, {at: 'tenang', ...LOOK_PRESETS.interiorCool, keyPos: [-4, 8, 8], ...MOODS.joyful}]},
+  kebun: {keys: [{at: 0, ...sad}, {at: 'kecewa', ...sad}, {at: 'cut12', ...fresh}, {at: 'minggu', ...fresh}, {at: 'menghijau', ...freshJoy},
+    {at: 86.95, ...freshJoy}, {at: 'cut15', ...golden}]},
+  tepi: {keys: [{at: 0, ...sunsetSad}, {at: 'padahal', ...sunsetSad}, {at: 'emas', ...sunsetWarm}]},
+  teras: {keys: [{at: 0, ...porch}, {at: 'tape', ...porch}, {at: 'jadi', ...porchJoy}]},
+  pagi: {keys: [{at: 0, ...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]}, {at: 'membuka', ...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]},
+    {at: 'asam', ...LOOK_PRESETS.day, ...MOODS.joyful, keyPos: [-7, 8, 6]}]},
 };
 
 function ground(w, d, color, paint) {
@@ -48,354 +46,469 @@ function ground(w, d, color, paint) {
   m.rotation.x = -Math.PI / 2; m.receiveShadow = true;
   return m;
 }
-const under = (g, color) => { const gr = ground(40, 40, color); gr.position.y = -0.05; g.add(gr); };
-const strip = (g, w, d, z, color, y, paint) => { const s = ground(w, d, color, paint); s.position.set(0, y, z); g.add(s); return s; };
+const strip = (g, w, d, x, z, color, y, paint) => { const s = ground(w, d, color, paint); s.position.set(x, y, z); g.add(s); return s; };
 
 // Screen-level effects: flashes (overlay) and camera shakes, timed to words.
 export function storyFx(T, EVt) {
   return {
     flashes: [
-      {t: EVt.berhenti + 0.1, dur: 0.3, color: '#fff4d6', strength: 0.45},
-      {t: EVt.mendadak + 0.05, dur: 0.4, color: '#ffffff', strength: 0.6},
-      {t: EVt.badai + 0.05, dur: 0.35, color: '#e8f0ff', strength: 0.6},
-      {t: EVt.siang + 0.05, dur: 0.35, color: '#ffd890', strength: 0.4},
-      {t: EVt.membeku + 0.05, dur: 0.35, color: '#cfe8ff', strength: 0.5},
-      {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4},
+      {t: EVt.emas + 0.05, dur: 0.4, color: '#ffd36a', strength: 0.45},
+      {t: EVt.menjual2 + 0.55, dur: 0.25, color: '#fff4d6', strength: 0.25},
+      {t: EVt.menghijau + 0.1, dur: 0.35, color: '#e8ffd0', strength: 0.3},
+      {t: EVt.penyelamat + 0.05, dur: 0.4, color: '#ffe9b0', strength: 0.4},
+      {t: EVt.bagikan, dur: 0.35, color: '#fff4d6', strength: 0.3},
     ],
-    shakes: [{t: EVt.berhenti + 0.1, dur: 0.4, amp: 0.03}, {t: EVt.mendadak + 0.05, dur: 0.7, amp: 0.05}, {t: EVt.rumah + 0.1, dur: 0.35, amp: 0.025},
-      {t: EVt.badai + 0.05, dur: 0.45, amp: 0.035}, {t: EVt.membeku + 0.05, dur: 0.3, amp: 0.02}],
+    shakes: [{t: EVt.emas + 0.6, dur: 0.3, amp: 0.02}, {t: EVt.cacah + 0.3, dur: 0.25, amp: 0.012}, {t: EVt.membuka + 0.2, dur: 0.3, amp: 0.015},
+      {t: EVt.menjual2 + 0.55, dur: 0.35, amp: 0.03}],
   };
 }
 
 export function buildWorld(lang, T, EVt, L) {
-  // Character design for this story (each video has its own): egg heads, side-swept hair, painted shading, cast shadows.
   setCharDesign(CHAR_DESIGN);
   const world = new THREE.Group();
   const chars = [];
   const updaters = [];
+  const post = []; // run after the characters are posed (things that follow a hand)
   const locGroups = {};
   const addLoc = (name) => { const g = new THREE.Group(); g.position.x = LOC[name]; world.add(g); locGroups[name] = g; return g; };
-  const ch = (name, o, parent, x, z, yaw = 0, y = 0) => { const c = makeChar(name, {yaw, ...(CAST[name] || {}), ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); return c; };
-  const E = (k) => EVt[k];
+  const ch = (name, o, parent, x, z, yaw = 0, y = 0) => {
+    const base = name === 'kakekNight' ? 'kakek' : name;
+    const c = makeChar(base, {yaw, ...(CAST[name] || {}), ...o}); at(c.group, x, y, z); parent.add(c.group); chars.push(c); return c;
+  };
+  const E = (k) => { if (EVt[k] === undefined) throw new Error('no EV ' + k); return EVt[k]; };
   const cut = (k) => T.CUTS[k - 1];
   const inShots = (t, a, b = a) => t >= cut(a) && t < cut(b + 1);
   const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
-  const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, 0, 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
-  // Horizontal motion streaks (speed lines / wind): instanced thin bars moving along x.
-  const streaks = (g, o) => {
-    const {n = 60, x0 = -6, x1 = 6, y0 = 0.3, y1 = 3, z0 = -3, z1 = 1, dir = -1, speed = 14, len = 1.2, color = '#ffffff', opacity = 0.55, vis, seed = 5} = o;
-    const r = rng(seed);
-    const mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(len, 0.025, 0.025), new THREE.MeshBasicMaterial({color, transparent: true, opacity, depthWrite: false}), n);
-    mesh.frustumCulled = false; g.add(mesh);
-    const Pp = []; for (let i = 0; i < n; i++) Pp.push([r(), y0 + r() * (y1 - y0), z0 + r() * (z1 - z0), 0.6 + r() * 0.8]);
-    const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), v = new THREE.Vector3(), sc = new THREE.Vector3();
-    updaters.push((t) => {
-      mesh.visible = vis(t); if (!mesh.visible) return;
-      const W = x1 - x0;
-      for (let i = 0; i < n; i++) {
-        const [u, y, z, k] = Pp[i];
-        const x = x0 + ((((u * W + dir * speed * k * t) % W) + W) % W);
-        v.set(x, y, z); sc.set(k, 1, 1); m4.compose(v, q, sc); mesh.setMatrixAt(i, m4);
-      }
-      mesh.instanceMatrix.needsUpdate = true;
-    });
-    return mesh;
-  };
-  // Something thrown sideways at time t0 (keeps moving east = screen right, tumbling, rising a little).
-  const flyer = (obj, t0, o = {}) => {
-    const {vx = 6, vy = 1.5, vz = 0, spin = [0, 0, -3], acc = 4, ay = 0.8} = o;
-    const p0 = obj.position.clone(), r0 = obj.rotation.clone();
-    return (t) => {
-      const dt = Math.max(0, t - t0);
-      obj.position.set(p0.x + vx * dt + acc * dt * dt, p0.y + vy * dt + ay * dt * dt, p0.z + vz * dt);
-      obj.rotation.set(r0.x + spin[0] * dt, r0.y + spin[1] * dt, r0.z + spin[2] * dt);
-    };
-  };
-
-  // ---------- planet: the globe in space (shots 1, 3, 7, 11) ----------
-  {
-    const g = addLoc('planet');
-    const R = 3, GZ = -6;
-    const st = P.stars(700, 80); st.position.set(0, 0, GZ); g.add(st);
-    const sun = P.sunBall(4); sun.position.set(-34, 12, -60); g.add(sun);
-    const gl = P.globe(R); at(gl.group, 0, 0, GZ); g.add(gl.group);
-    // equator ring + labels (shot 3)
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(R + 0.04, 0.035, 8, 96), new THREE.MeshBasicMaterial({color: '#e0503a'}));
-    ring.rotation.x = Math.PI / 2; ring.position.set(0, 0, GZ); g.add(ring);
-    const eq = sign(L.equator, 1.6, 0.42, {bg: '#e0503a', fg: '#fff3df', frame: '#8a2f2a'}); at(eq, 0, 0.55, GZ + R + 0.45); g.add(eq);
-    const spd = sign(L.speed, 1.8, 0.6, {bg: '#f2d24a', frame: '#8a6a2a'}); at(spd, 0, -0.1, GZ + R + 0.55); g.add(spd);
-    // speed arcs whirling around the globe
-    const arcs = [];
-    for (let i = 0; i < 4; i++) {
-      const a = new THREE.Mesh(new THREE.TorusGeometry(R + 0.35 + i * 0.12, 0.025, 6, 40, 1.1), new THREE.MeshBasicMaterial({color: '#ffffff', transparent: true, opacity: 0.6, depthWrite: false}));
-      a.rotation.x = Math.PI / 2; a.position.set(0, -1.2 + i * 0.8, GZ); g.add(a); arcs.push(a);
+  const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, o.ry ?? 0, o.rx ?? 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ramp = (t, t0, t1) => smooth((t - t0) / (t1 - t0));
+  const bananaRow = (g, list) => list.forEach(([x, z, h, b], i) => { const tr = P.bananaTree({seed: 11 + i, h: h || 2.6, bunch: !!b}); at(tr, x, 0, z, i * 1.3); g.add(tr); });
+  // A small standing tag (price-tag style board on a short stick) for in-world labels on tables.
+  const tag = (text, w, h, o = {}) => { const g = new THREE.Group(); const s = sign(text, w, h, {bg: o.bg || '#f3e7d3', frame: o.frame || '#8a5a2a', depth: 0.02}); at(s, 0, h / 2 + 0.08, 0); g.add(s); g.add(cyl(0.008, 0.008, 0.1, '#7a5236', {hull: 0.003})); return g; };
+  // Smell / gas lines: wavy translucent tubes that rise and fade, looping, between t0 and t1.
+  const smell = (g, p, t0, t1, color = '#f2c86a') => {
+    const grp = new THREE.Group(); at(grp, ...p); g.add(grp);
+    const items = [];
+    for (let i = 0; i < 3; i++) {
+      const pts = []; for (let k = 0; k <= 16; k++) pts.push(new THREE.Vector3(Math.sin(k / 16 * Math.PI * 3) * 0.04, k / 16 * 0.32, 0));
+      const mat = new THREE.MeshBasicMaterial({color, transparent: true, opacity: 0.8, depthWrite: false});
+      const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.012, 5), mat);
+      m.position.x = (i - 1) * 0.08; grp.add(m); items.push({m, mat, ph: i * 0.33});
     }
-    // pole flags (shot 7)
-    const mkFlag = (text, up) => {
-      const f = new THREE.Group(); at(f, 0, up ? R - 0.05 : -R + 0.05, GZ); g.add(f);
-      const pole = cyl(0.04, 0.05, 1.3, '#7a5236'); if (!up) pole.rotation.x = Math.PI; f.add(pole);
-      const s = sign(text, 1.3, 0.42, {bg: '#4f8fc8', fg: '#fff3df', frame: '#2a4f7a'}); at(s, 0.7, up ? 1.05 : -1.05, 0); f.add(s);
-      return f;
-    };
-    const fN = mkFlag(L.north, true), fS = mkFlag(L.south, false);
-    // hero standing on the top of the world
-    const hero = ch('hero', {}, g, 0, GZ, 0, R - 0.02);
-    hero.act([
+    updaters.push((t) => {
+      grp.visible = t > t0 && t < t1;
+      for (const q of items) { const u = ((t - t0) * 0.9 + q.ph) % 1; q.m.position.y = u * 0.25; q.mat.opacity = Math.sin(u * Math.PI) * 0.85; q.m.scale.setScalar(0.8 + u * 0.4); }
+    });
+    return grp;
+  };
+
+  // =====================================================================================================
+  // ---------- kebun: Pak Darto's vegetable garden (shots 1, 2, 12, 13, 14, 15) ----------
+  {
+    const g = addLoc('kebun');
+    g.add(ground(140, 140, '#8fb36a'));
+    strip(g, 8, 6.4, 0, -3.4, '#7a5a3a', 0.008, {stains: 30});
+    strip(g, 3, 40, 0, 2, '#b89a6a', 0.006, {stains: 30});
+    const hills = P.hills('#7fa35a'); g.add(hills);
+    // raised beds with seedlings in polybags; one shared leaf material turns yellow / green
+    const leafMat = new THREE.MeshToonMaterial({color: '#b5b84a', gradientMap: gradientMap()});
+    const plants = [];
+    const bedZ = [-1.4, -2.8, -4.2, -5.6];
+    const rr = rng(4);
+    bedZ.forEach((z, bi) => {
+      const bed = box(6.4, 0.22, 0.9, toon('#6a4a32', {paint: {seed: 61 + bi, grain: 200, stains: 24, chips: 0, scratches: 0}})); at(bed, 0, 0, z); g.add(bed);
+      for (let i = 0; i < 7; i++) {
+        const s = P.seedling(leafMat, {seed: bi * 10 + i}); at(s.group, -2.7 + i * 0.9 + (rr() - 0.5) * 0.12, 0.22, z + (rr() - 0.5) * 0.18, rr() * 6); g.add(s.group); plants.push(s);
+      }
+    });
+    const heroPlant = P.seedling(leafMat, {seed: 99, leaves: 6}); at(heroPlant.group, 0.85, 0, 0.55, 0.4); heroPlant.group.scale.setScalar(1.6); g.add(heroPlant.group); plants.push(heroPlant);
+    // the plant under the watering can (shot 12) is moved under the stream each frame
+    const wetPlant = P.seedling(leafMat, {seed: 98}); g.add(wetPlant.group); plants.push(wetPlant);
+    // background: banana trees, a hut, a few trees
+    bananaRow(g, [[-5.2, -8.2, 2.8, 1], [-3.1, -9.6, 2.5], [-1.0, -8.6, 2.9, 1], [1.4, -9.3, 2.6], [3.4, -8.3, 2.8, 1], [5.6, -9.6, 2.6], [-6.6, -5.8, 2.6], [6.7, -6.2, 2.7, 1]]);
+    const hut = P.house(2.6, 2.1, 2.2, {color: '#c9a06a', roof: '#9a7a4a', windows: 1, doorColor: '#7a4a32', seed: 7}); at(hut, -4.9, 0, -3.6, 0.55); g.add(hut);
+    for (const [x, z, s] of [[7.5, -11, 7], [-8.5, -12, 9], [9, -4, 3]]) { const tr = P.tree({seed: s, h: 2.6}); at(tr, x, 0, z); g.add(tr); }
+    // "DIJUAL - KEBUN INI" sign on a post; it falls over on "menjual" (shot 14)
+    const sale = new THREE.Group(); at(sale, 0.5, 0, -0.6); g.add(sale);
+    sale.add(cyl(0.05, 0.06, 1.65, '#7a5236'));
+    const saleB = sign(L.sale, 1.05, 0.62, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', sub: L.saleSub}); at(saleB, 0, 1.45, 0.06); sale.add(saleB);
+    // fertiliser sacks (pop on "pupuk")
+    const sacks = [[1.55, -0.55, 0.2], [2.0, -0.35, -0.3], [1.8, -0.95, 0.1]].map(([x, z, ry], i) => { const s = P.sack(L.pupuk, {color: '#ece4cc'}); at(s, x, 0, z, ry); g.add(s); return s; });
+    // shot 12: bucket of diluted MOL (1 : 10) + a jerrycan; watering can in Darto's hand
+    const bk = P.bucket('#4f7fa6', '#d8c89a', L.ratio); at(bk.group, -0.42, 0, -2.08, 0.25); g.add(bk.group);
+    const jcan12 = P.jerrycan('#3f7fc8', L.mol); at(jcan12.group, -0.95, 0, -2.15, 0.3); g.add(jcan12.group);
+    // root jar on a crate (shot 13)
+    const crate = P.crate(0.5, 0.45, 0.45, null, '#a8784a'); at(crate, -1.45, 0, 0.35, 0.2); g.add(crate);
+    const jar = P.rootJar(); at(jar.group, -1.45, 0.45, 0.35); g.add(jar.group);
+    const jarPlant = P.seedling(leafMat, {seed: 97}); at(jarPlant.group, -1.45, 0.45 + 0.09, 0.35); g.add(jarPlant.group); plants.push(jarPlant);
+    // shot 14: a row of MOL jerrycans + a basket of bonggol kept for the next batch
+    const mols = [1.55, 1.95, 2.35].map((x, i) => { const j = P.jerrycan(['#3f7fc8', '#e8a83a', '#5a9a8a'][i], L.mol); at(j.group, x, 0, -0.55 - (i % 2) * 0.1, -0.2); g.add(j.group); return j; });
+    const basket = new THREE.Group(); at(basket, 1.15, 0, -0.05); g.add(basket);
+    basket.add(cyl(0.3, 0.24, 0.3, toon('#b8925a', {paint: {stripes: {n: 14, color: '#9a7a4a'}, seed: 21}})));
+    for (const [x, z, s] of [[-0.1, 0.02, 0.6], [0.11, -0.06, 0.55], [0.0, 0.12, 0.5]]) { const b = P.bonggol(s, {seed: x * 100}); at(b, x, 0.2, z); basket.add(b); }
+    // closing banner (shot 15)
+    const save = P.banner(L.save, 2.4, 0.55, {poleH: 2.55, bg: '#5a9a5a', frame: '#2f5a2f'}); at(save, 0.05, 0, -0.85); g.add(save);
+
+    const darto = ch('darto', {seed: 61}, g, -0.5, -0.3, 0);
+    const can = P.wateringCan('#5a9a8a'); held(darto, can.group, {x: 0.04, y: -0.08, z: 0.06, rz: 0});
+    const kakek = ch('kakek', {seed: 62}, g, 0.6, -0.3, 0);
+    darto.act([
+      {t: 0, pose: 'idle', expr: 'sad', action: 'slump', dur: 1.6},
+      {t: E('menjual') + 0.1, pose: 'point', expr: 'worried'},
+      {t: cut(2), pose: 'idle', expr: 'worried'},
+      {t: E('uang') + 0.1, pose: 'shrug', expr: 'sad', action: 'shake', dur: 0.7},
+      {t: E('pupuk') + 0.1, pose: 'present', expr: 'nervous'},
+      {t: E('kecewa') + 0.1, pose: 'facepalm', expr: 'cry', action: 'slump', dur: 1.3},
+      {t: cut(12), pose: 'hold', expr: 'determined'},
+      {t: E('sepuluh') + 0.1, expr: 'happy', action: 'nod', dur: 0.6},
+      {t: E('menyiram') - 0.1, pose: 'give', expr: 'cheesy'},
+      {t: cut(13), pose: 'idle', expr: 'surprised'},
+      {t: E('menghijau') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
+      {t: cut(14), pose: 'hips', expr: 'determined'},
+      {t: E('tidakjadi') + 0.1, pose: 'stop', expr: 'smug', action: 'shake', dur: 0.7},
+      {t: E('menjual2') + 0.1, pose: 'point', expr: 'toothy'},
+      {t: E('sejak') - 0.1, pose: 'present', expr: 'proud'},
+      {t: E('membuang') + 0.05, pose: 'hips', expr: 'smug', action: 'shake', dur: 0.7},
+      {t: E('bonggol2') + 0.1, pose: 'presentBoth', expr: 'cheesy'},
+      {t: cut(15), pose: 'wave', expr: 'happy'},
+      {t: E('sampah') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: E('penyelamat') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
+      {t: E('simpan') + 0.1, pose: 'point', expr: 'cheesy'},
+      {t: E('bagikan') + 0.05, pose: 'armsUp', expr: 'laugh', action: 'jump', dur: 0.6},
+    ]);
+    kakek.act([
       {t: 0, pose: 'wave', expr: 'happy'},
-      {t: E('bumi') + 0.1, pose: 'idle', expr: 'neutral'},
-      {t: E('berhenti') + 0.12, expr: 'shocked', pose: 'armsUp', action: 'jump', dur: 0.6},
-      {t: E('berhenti') + 0.9, expr: 'grimace', pose: 'headHold', action: 'tremble', dur: 1.0},
-      {t: cut(3), pose: 'wave', expr: 'happy'},
-      {t: E('seribu') + 0.1, pose: 'cheer', expr: 'excited', action: 'hop', dur: 0.5},
-      {t: cut(11), pose: 'idle', expr: 'thinking'},
-      {t: E('seram') + 0.1, pose: 'shrug', expr: 'confused'},
-      {t: E('komentar') - 0.05, pose: 'point', expr: 'cheesy', action: 'jump', dur: 0.6},
+      {t: E('sampah') + 0.2, pose: 'present', expr: 'proud', action: 'nod', dur: 0.6},
+      {t: E('penyelamat') + 0.2, pose: 'pointUp', expr: 'cheesy'},
+      {t: E('bagikan') + 0.15, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.8},
     ]);
-    const cmt = P.banner(L.comment, 1.7, 0.5, {poleH: 2.85, bg: '#c75b5b'}); at(cmt, 0, R - 0.08, GZ - 0.55); g.add(cmt);
-    fx(g, FX.glints([0, R + 2.0, GZ - 0.4], E('komentar'), {n: 28}), (t) => inShots(t, 11));
-    fx(g, FX.confetti([0, R + 2.4, GZ], E('komentar') + 0.05), (t) => inShots(t, 11));
-    fx(g, FX.glints([0, -0.1, GZ + R + 0.6], E('seribu'), {n: 22}), (t) => inShots(t, 3));
-    fx(g, FX.glints([0, 0, GZ + R], E('daratan') + 0.1, {n: 30, spread: 2.5}), (t) => inShots(t, 7));
-    const w = 0.9;
-    const stopT = E('berhenti') + 0.1;
+    // effects
+    fx(g, FX.dust([0.5, 0.05, -1.9], E('menjual2') + 0.55, {n: 10, size: 0.5}), (t) => inShots(t, 14));
+    fx(g, FX.glints([0, 0.7, -2.5], E('menghijau'), {n: 40, spread: 3, color: '#eaffb0'}), (t) => inShots(t, 13));
+    fx(g, FX.glints([-1.45, 0.75, 0.35], E('kuat') - 0.2, {n: 16, spread: 0.4}), (t) => inShots(t, 13));
+    fx(g, FX.glints([1.15, 0.6, -0.05], E('penyelamat'), {n: 22, spread: 0.6}), (t) => inShots(t, 15));
+    fx(g, FX.glints([1.15, 0.6, -0.05], E('bonggol2'), {n: 16, spread: 0.5}), (t) => inShots(t, 14));
+    fx(g, FX.confetti([0, 2.6, -0.4], E('bagikan') + 0.05, {colors: ['#e8a83a', '#7fb35a', '#f2d24a', '#c75b5b', '#f3e7d3']}), (t) => inShots(t, 15));
+    // water stream from the can (shot 12)
+    const NDROP = 40;
+    const dropGeo = new THREE.BufferGeometry(); const dropPos = new Float32Array(NDROP * 3); dropGeo.setAttribute('position', new THREE.BufferAttribute(dropPos, 3));
+    const drops = new THREE.Points(dropGeo, new THREE.PointsMaterial({color: '#cfeaff', size: 0.035, transparent: true, opacity: 0.9, depthWrite: false})); drops.frustumCulled = false; g.add(drops);
+    const splashF = fx(g, FX.splash([0, 0, 0], E('menyiram') + 0.25, {n: 50, speed: 1.0, size: 0.05, repeat: 0}), (t) => inShots(t, 12));
+    const tipW = new THREE.Vector3(), tmpV = new THREE.Vector3();
+    const darkGreen = new THREE.Color('#5fae3a'), sick0 = new THREE.Color('#b5b84a'), sick1 = new THREE.Color('#d9bf45'), tmpC = new THREE.Color();
+
     updaters.push((t) => {
-      const s1 = inShots(t, 1), s3 = inShots(t, 3), s7 = inShots(t, 7), s11 = inShots(t, 11);
-      let ang;
-      if (s1) { ang = t < stopT ? w * t : w * stopT + w * 0.15 * (1 - Math.exp(-(t - stopT) * 6)); }
-      else if (s3) ang = 1.7 * t;
-      else if (s7) ang = 2.2;
-      else ang = 0.35 * t;
-      gl.spin.rotation.y = ang;
-      gl.setStop(s7 ? smooth((t - cut(7) - 0.3) / (E('daratan') + 0.3 - cut(7) - 0.3)) : 0);
-      gl.clouds.visible = !s7;
-      hero.group.visible = !s7;
-      // lurch forward when the planet halts
-      hero.group.rotation.z = s1 && t > stopT ? -0.35 * Math.exp(-(t - stopT) * 3) * Math.sin((t - stopT) * 9) : 0;
-      ring.visible = eq.visible = s3; spd.visible = s3;
-      eq.scale.setScalar(pop(t, E('khatulistiwa') - 0.05, 0.4)); spd.scale.setScalar(pop(t, E('seribu') - 0.1, 0.4));
-      arcs.forEach((a, i) => { a.visible = s3 || (s1 && t < stopT); a.rotation.z = (s3 ? 3.4 : 1.8) * t + i * 1.7; });
-      fN.visible = fS.visible = s7;
-      fN.scale.setScalar(pop(t, E('utara') - 0.05, 0.4)); fS.scale.setScalar(pop(t, E('selatan') - 0.05, 0.4));
-      cmt.visible = s11; cmt.scale.setScalar(pop(t, E('komentar') - 0.1, 0.4));
+      const s1 = inShots(t, 1, 2), s12 = inShots(t, 12), s13 = inShots(t, 13), s14 = inShots(t, 14), s15 = inShots(t, 15);
+      // --- plant health: kerdil + menguning, then menghijau and growing ---
+      let col, droop, grow;
+      if (t < cut(13)) {
+        const y = t < cut(3) ? ramp(t, E('menguning') - 0.1, E('menguning') + 0.8) : 1;
+        col = tmpC.copy(sick0).lerp(sick1, y); droop = -0.35 - 0.25 * y; grow = 0.75;
+      } else {
+        const gk = ramp(t, E('minggu'), E('akar') + 0.4), ck = ramp(t, E('menghijau') - 0.9, E('menghijau') + 0.6);
+        col = tmpC.copy(sick1).lerp(darkGreen, ck); droop = lerp(-0.6, 0.18, ck); grow = lerp(0.75, 1.7, gk);
+        if (t >= cut(14)) { col = darkGreen; droop = 0.18; grow = 1.75; }
+      }
+      leafMat.color.copy(col);
+      for (const p of plants) { p.top.scale.setScalar(grow); p.leaves.forEach((l, i) => { l.rotation.z = droop + Math.sin(t * 1.7 + i) * 0.04; }); }
+      heroPlant.group.visible = (s1 && t < E('uang') - 0.2) || s13;
+      // --- props by shot ---
+      sale.visible = !s13 && !s15;
+      const fall = t < E('menjual2') + 0.15 ? 0 : clamp01((t - E('menjual2') - 0.15) / 0.42);
+      sale.rotation.x = t >= cut(14) ? -1.5 * fall * fall : 0;
+      sacks.forEach((s, i) => { s.visible = s1 || s12; s.scale.setScalar(t < cut(3) ? pop(t, E('pupuk') - 0.1 + i * 0.1, 0.35) : 1); });
+      bk.group.visible = jcan12.group.visible = s12;
+      crate.visible = jar.group.visible = jarPlant.group.visible = s13;
+      jar.roots.scale.set(lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)), lerp(0.25, 1.05, ramp(t, E('akar') - 0.1, E('kuat') + 0.3)), lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)));
+      mols.forEach((j, i) => { j.group.visible = s14 || s15; j.group.scale.setScalar(s14 ? pop(t, E('sejak') + 0.15 + i * 0.2, 0.35) : 1); });
+      basket.visible = s14 || s15; basket.scale.setScalar(s14 ? pop(t, E('bonggol2') - 0.15, 0.35) : 1);
+      save.visible = s15; save.scale.setScalar(pop(t, E('simpan') - 0.1, 0.4));
+      // --- characters ---
+      darto.group.visible = s1 || s12 || s13 || s14 || s15;
+      kakek.group.visible = s15;
+      can.group.visible = s12;
+      if (s1) darto.group.position.set(-0.5, 0, -0.3);
+      else if (s12) darto.group.position.set(0.15, 0, -2.12);
+      else if (s13) darto.group.position.set(-2.25, 0, -2.12);
+      else if (s14) darto.group.position.set(t < E('sejak') - 0.15 ? -0.35 : 0.65, 0, -0.3);
+      else darto.group.position.set(-0.5, 0, -0.3);
+      // pouring: tilt the can, droplets fall from the spout, the wet plant sits under the stream
+      const pour = s12 ? ramp(t, E('menyiram') - 0.1, E('menyiram') + 0.25) : 0;
+      can.group.rotation.z = -0.75 * pour;
+      drops.visible = pour > 0.5;
+      wetPlant.group.visible = s12;
+    });
+    post.push((t) => {
+      const s12 = inShots(t, 12);
+      if (s12) {
+        g.updateMatrixWorld(true);
+        tipW.copy(can.tip); can.group.localToWorld(tipW); g.worldToLocal(tipW);
+        wetPlant.group.position.set(tipW.x + 0.08, 0.22, Math.max(-1.75, Math.min(-1.05, tipW.z)));
+        splashF.obj.position.set(wetPlant.group.position.x, 0.42, wetPlant.group.position.z);
+        for (let i = 0; i < NDROP; i++) {
+          const u = ((t * 1.6 + i / NDROP) % 1);
+          tmpV.set(lerp(tipW.x, wetPlant.group.position.x, u) + Math.sin(i * 7.1) * 0.02, lerp(tipW.y, 0.42, u * u), lerp(tipW.z, wetPlant.group.position.z, u) + Math.cos(i * 5.3) * 0.02);
+          dropPos[i * 3] = tmpV.x; dropPos[i * 3 + 1] = tmpV.y; dropPos[i * 3 + 2] = tmpV.z;
+        }
+        dropGeo.attributes.position.needsUpdate = true;
+      }
     });
   }
 
-  // ---------- town street (shots 2, 4, 5) ----------
+  // =====================================================================================================
+  // ---------- tepi: the edge of the garden at sunset, a pile of cut banana trunks (shots 3, 4, 5) ----------
   {
-    const g = addLoc('town');
-    g.add(ground(120, 120, '#8fb36a'));
-    strip(g, 60, 3.6, -3.7, '#5a5f66', 0.01, {stains: 30});
-    for (let i = 0; i < 14; i++) { const d = box(0.9, 0.012, 0.12, '#f3e7d3', {edges: false, hull: 0}); at(d, -13 + i * 2, 0.012, -3.7); g.add(d); }
-    strip(g, 60, 1.6, -1.1, '#cfc4b0', 0.02, {bricks: true});
-    strip(g, 60, 1.6, -6.3, '#cfc4b0', 0.02, {bricks: true});
-    const houses = [];
-    [[-5.2, '#e6c99a', '#b5543c'], [-1.6, '#c9d4e8', '#4f7fa6'], [2.0, '#f0d8b0', '#c75b5b'], [5.6, '#d8e4c0', '#7a5236']].forEach(([x, c, rf], i) => {
-      const h = P.house(3.0, 2.8, 3.0, {color: c, roof: rf, seed: 30 + i}); at(h, x, 0, -7.2); g.add(h); houses.push(h);
-    });
-    const shop = sign(L.shop, 1.8, 0.45, {bg: '#e8a83a', frame: '#8a5a2a'}); at(shop, 0, 2.55, 0.05); houses[2].add(shop);
-    const trees = [[-3.4, -6.4], [3.8, -6.3], [-7.4, -6.2], [7.6, -6.5]].map(([x, z], i) => { const tr = P.tree({seed: 7 + i, h: 2.2}); at(tr, x, 0, z); g.add(tr); return tr; });
-    const lamp = P.streetLamp(); at(lamp, 2.3, 0, -0.75, Math.PI); g.add(lamp);
-    const car = P.car('#4f7fa6'); at(car, -1.2, 0, -3.9, Math.PI / 2); g.add(car);
-    const car2 = P.car('#e8a83a'); at(car2, -7.5, 0, -3.3, -Math.PI / 2); g.add(car2);
-    // shot 2: hero calm with a drink; shot 4: hero + neighbours get thrown
-    const hero = ch('hero', {seed: 63}, g, 0, -1.2, 0);
-    held(hero, P.mug('#c75b5b'), {y: -0.02});
-    const n1 = ch('pal1', {seed: 64}, g, -1.7, -1.5, 0.3);
-    const n2 = ch('pal2', {seed: 65}, g, 2.5, -1.6, -0.3);
-    hero.act([
-      {t: 0, pose: 'hold', expr: 'happy'},
-      {t: E('sadari') + 0.1, pose: 'hold', expr: 'scheming', action: 'nod', dur: 0.6},
-      {t: E('cepat') + 0.1, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
-      {t: cut(4), pose: 'hold', expr: 'neutral'},
-      {t: E('mendadak') + 0.12, pose: 'armsUp', expr: 'shocked', action: 'tremble', dur: 0.8},
-      {t: E('manusia') + 0.1, pose: 'headHold', expr: 'grimace'},
-      {t: E('terlempar') + 0.05, pose: 'armsUp', expr: 'scream'},
+    const g = addLoc('tepi');
+    g.add(ground(140, 140, '#8fae62'));
+    strip(g, 40, 1.1, 0, -0.55, '#b89a6a', 0.006, {stains: 30});
+    g.add(P.hills('#7a9a5a'));
+    const sun = P.sunBall(2.6, '#ffb060'); sun.position.set(-16, 4.5, -45); g.add(sun);
+    bananaRow(g, [[-3.6, -4.6, 2.7, 1], [-1.4, -5.6, 2.5], [2.2, -4.8, 2.8, 1], [4.4, -6.0, 2.6], [-6.0, -7.0, 2.6], [6.6, -3.8, 2.7, 1], [0.6, -8.4, 2.6, 1]]);
+    // fresh stumps where the trees were cut
+    for (const [x, z] of [[0.9, -2.6], [-1.6, -3.0], [3.4, -2.4]]) { const s = P.bananaLog(0.28, 0.17); s.rotation.z = Math.PI / 2; at(s, x, 0.14, z, 0, 0, Math.PI / 2); g.add(s); }
+    // bamboo fence along the back
+    for (let i = 0; i < 16; i++) { const p = cyl(0.04, 0.045, 1.0, '#c9a45a', {hull: 0.008}); at(p, -6 + i * 0.8, 0, -2.0); g.add(p); }
+    for (const y of [0.45, 0.85]) { const r = cyl(0.03, 0.03, 12.4, '#b8924a', {hull: 0.006, center: true}); at(r, 0, y, -2.0, 0, 0, Math.PI / 2); g.add(r); }
+    const bench = P.bale(1.6, 0.55, 0.42); at(bench, 0, 0, -1.25); g.add(bench);
+    // the pile of cut banana trunks right in front of Darto (hides his legs while he sits)
+    const pile = new THREE.Group(); at(pile, 0, 0, -0.02); g.add(pile);
+    const logs = [[0, -0.62, 1.9], [0.06, -0.3, 1.8], [-0.05, 0.02, 1.95], [0.03, -0.46, 1.7, 1], [-0.04, -0.14, 1.75, 1], [0.02, -0.3, 1.55, 2]];
+    for (const [x, z, len, layer = 0] of logs) { const l = P.bananaLog(len, 0.16); at(l, x, layer * 0.27, z, (x - 0.01) * 2); pile.add(l); }
+    // bonggol pile (the "gold") on the right
+    const goldMat = toon('#a8865a', {noCache: true, paint: {seed: 33, stains: 30, chips: 20, scratches: 14}});
+    goldMat.emissive = new THREE.Color('#ffb020'); goldMat.emissiveIntensity = 0;
+    const corms = [[1.55, 0.25, 1.0], [2.05, 0.05, 0.9], [1.8, -0.35, 1.05], [2.35, -0.25, 0.85], [1.35, -0.2, 0.8]].map(([x, z, s], i) => { const b = P.bonggol(s, {seed: i + 3, mat: goldMat}); at(b, x, 0, z, i * 1.1); g.add(b); return b; });
+    fx(g, FX.glints([1.85, 0.45, -0.05], E('emas') + 0.05, {n: 36, spread: 0.9, color: '#ffe07a'}), (t) => inShots(t, 5));
+    fx(g, FX.glints([1.85, 0.45, -0.05], E('bonggol') + 0.05, {n: 24, spread: 0.7, color: '#ffe07a'}), (t) => inShots(t, 5));
+    const darto = ch('darto', {seed: 63}, g, 0, -1.05, 0);
+    darto.setSit(1);
+    const kakek = ch('kakek', {seed: 64}, g, -4.6, -0.55, 0);
+    const walkEnd = E('lewat') + 0.9;
+    darto.act([
+      {t: 0, pose: 'limp', expr: 'sad'},
+      {t: E('duduk') + 0.1, action: 'slump', dur: 4.5},
+      {t: E('menatap') + 0.1, expr: 'tired'},
+      {t: E('ditebang') + 0.1, expr: 'sad'},
+      {t: E('kakek') + 0.15, pose: 'idle', expr: 'surprised'},
+      {t: E('empat') + 0.1, expr: 'neutral'},
+      {t: E('tertawa') + 0.2, pose: 'shrug', expr: 'confused'},
+      {t: E('mahal') + 0.1, pose: 'idle', expr: 'nervous', action: 'tremble', dur: 0.7},
+      {t: E('padahal') + 0.25, pose: 'idle', expr: 'surprised'},
+      {t: E('emas') + 0.1, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
+      {t: E('menunjuk') + 0.25, pose: 'idle', expr: 'surprised'},
+      {t: E('bonggol') + 0.2, pose: 'chin', expr: 'thinking'},
     ]);
-    [n1, n2].forEach((n, i) => n.act([
-      {t: 0, pose: i ? 'hips' : 'wave', expr: 'happy'},
-      {t: E('mendadak') + 0.15 + i * 0.08, pose: 'armsUp', expr: i ? 'scream' : 'shocked', action: 'jump', dur: 0.5},
-    ]));
-    // hero clinging to the lamp post in the wind (shot 5): pivot at the post, body streaming downwind (screen right)
-    const pivot = new THREE.Group(); at(pivot, 2.3, 1.75, -0.7); g.add(pivot);
-    const hero2 = ch('hero', {seed: 66}, pivot, 0, 0, 0);
-    hero2.group.position.set(2.05, 0, 0); hero2.group.rotation.z = Math.PI / 2;
-    hero2.act([{t: 0, pose: 'armsUp', expr: 'shocked'}, {t: E('angin') + 0.1, expr: 'gritted', action: 'tremble', dur: 1.6},
-      {t: E('badai') + 0.1, expr: 'scream'}]);
-    const spd = streaks(g, {n: 70, x0: -7, x1: 7, y0: 0.4, y1: 3.2, z0: -2.6, z1: 0.6, dir: -1, speed: 16, vis: (t) => inShots(t, 2) && t > E('cepat') - 0.1});
-    const wind = streaks(g, {n: 120, x0: -8, x1: 9, y0: 0.2, y1: 4.5, z0: -6, z1: 1.5, dir: 1, speed: 18, len: 1.6, color: '#dfe8f0', opacity: 0.5, seed: 9, vis: (t) => inShots(t, 5)});
-    fx(g, FX.rain([0, -2, 18, 10], {n: 700, slant: 1.1, speed: 14, opacity: 0.45}), (t) => inShots(t, 5));
-    fx(g, FX.lightning([-3, 9, -9], [-1.5, 2.5, -9], E('badai'), {dur: 0.4}), (t) => inShots(t, 5));
-    // flying litter in the wind
-    const litter = [];
-    for (let i = 0; i < 16; i++) { const m = box(0.25, 0.02, 0.18, ['#f3e7d3', '#c75b5b', '#e8c35a', '#7fa35a'][i % 4], {center: true, hull: 0.006}); g.add(m); litter.push(m); }
-    // lift-off dust and debris
-    fx(g, FX.dust([2.0, 0.1, -6.0], E('rumah') + 0.05, {n: 10, size: 0.6}), (t) => inShots(t, 4));
-    fx(g, FX.debris([2.0, 0.4, -6.0], E('rumah') + 0.05, {n: 14, color: '#c75b5b', speed: 2.5}), (t) => inShots(t, 4));
-    fx(g, FX.dust([-1.2, 0.1, -3.9], E('mobil') + 0.05, {n: 8}), (t) => inShots(t, 4));
-    fx(g, FX.dust([0, 0.1, -1.2], E('terlempar') + 0.05, {n: 8}), (t) => inShots(t, 4));
-    const flyN1 = flyer(n1.group, E('manusia') + 0.05, {vx: 2.6, vy: 1.6, spin: [0, 0, -3], acc: 2});
-    const flyN2 = flyer(n2.group, E('manusia') + 0.15, {vx: 2.8, vy: 1.4, spin: [0, 0, -3.5], acc: 2});
-    const flyCar = flyer(car, E('mobil') + 0.05, {vx: 6, vy: 1.8, spin: [0.8, 0, -2.5]});
-    const flyHouse = flyer(houses[2], E('rumah') + 0.1, {vx: 4, vy: 2.2, spin: [0, 0, -1.4], acc: 3});
-    const flyHero = flyer(hero.group, E('terlempar') + 0.1, {vx: 1.2, vy: 1.8, spin: [0, 0, -1.6], acc: 0.6, ay: 0.1});
-    const litR = rng(12);
-    const LP = litter.map(() => [litR() * 17, 0.3 + litR() * 3.5, -5 + litR() * 6, litR() * 6]);
+    kakek.act([
+      {t: 0, pose: 'idle', expr: 'happy', action: 'walk', dur: 0},
+      {t: cut(4), pose: 'idle', expr: 'happy', action: 'walk', dur: walkEnd - cut(4)},
+      {t: E('empat') + 0.1, pose: 'hips', expr: 'proud', action: 'nod', dur: 0.6},
+      {t: E('tertawa') + 0.05, pose: 'hips', expr: 'laugh', action: 'hop', dur: 0.8},
+      {t: cut(5), pose: 'hips', expr: 'smug', action: 'talk', dur: E('situ') + 0.4 - cut(5)},
+      {t: E('mahal') + 0.1, pose: 'shrug', expr: 'scheming'},
+      {t: E('emas') + 0.1, pose: 'pointUp', expr: 'cheesy'},
+      {t: E('menunjuk') + 0.05, pose: 'point', expr: 'smug'},
+    ]);
+    fx(g, FX.dust([0, 0.05, -0.9], E('emas') + 0.6, {n: 8, size: 0.5}), (t) => inShots(t, 5));
     updaters.push((t) => {
-      const s2 = inShots(t, 2), s4 = inShots(t, 4), s5 = inShots(t, 5);
-      if (s4) { flyN1(t); flyN2(t); flyCar(t); flyHouse(t); flyHero(t); }
-      else { flyN1(0); flyN2(0); flyCar(0); flyHouse(0); flyHero(0); }
-      hero.group.visible = s2 || s4;
-      n1.group.visible = n2.group.visible = s4;
-      car.visible = !s5; houses[2].visible = !s5;
-      pivot.visible = s5;
-      hero2.group.rotation.z = Math.PI / 2 + Math.sin(t * 11) * 0.07;
-      hero2.group.position.y = Math.sin(t * 13) * 0.06;
-      trees.forEach((tr, i) => { tr.rotation.z = s5 ? -0.22 + Math.sin(t * 7 + i) * 0.07 : 0; });
-      lamp.rotation.z = s5 ? Math.sin(t * 9) * 0.015 : 0;
-      litter.forEach((m, i) => {
-        m.visible = s5; const [u, y, z, ph] = LP[i];
-        m.position.set(-8 + ((u + t * 9) % 17), y + Math.sin(t * 5 + ph) * 0.3, z); m.rotation.set(t * 7 + ph, t * 5, t * 9 + ph);
+      darto.setSit(t < E('padahal') + 0.25 ? 1 : 0);
+      const u = ramp(t, cut(4), walkEnd);
+      kakek.group.position.x = lerp(-4.6, -1.35, u);
+      kakek.group.visible = t >= cut(4);
+      goldMat.emissiveIntensity = t < E('emas') ? 0 : 0.25 + 0.55 * Math.exp(-(t - E('emas')) * 2.5) + 0.12 * Math.sin(t * 6);
+      corms.forEach((c, i) => { c.position.y = t > E('emas') ? Math.max(0, Math.sin((t - E('emas')) * 9 - i) * 0.04 * Math.exp(-(t - E('emas')) * 2)) : 0; });
+    });
+  }
+
+  // =====================================================================================================
+  // ---------- teras: Kakek Rahmat's porch at night, the old recipe (shots 6-10) ----------
+  {
+    const g = addLoc('teras');
+    g.add(ground(140, 140, '#5a7a4a'));
+    const floor = box(7, 0.1, 3.4, toon('#8a6a4a', {paint: {planks: 14, seed: 77}}), {edges: false}); at(floor, 0, -0.1, -1.5); g.add(floor);
+    const house = P.house(7, 2.9, 3, {color: '#b08454', roof: '#6a3a2a', windows: 2, doorX: -3.0, shutter: '#4f6a4f', doorColor: '#6a3a26', seed: 12}); at(house, 0, 0, -3.0); g.add(house);
+    for (const x of [-3.3, 3.3]) { const p = cyl(0.07, 0.08, 2.9, '#6a4a32'); at(p, x, 0, -0.2); g.add(p); }
+    const beam = box(7.2, 0.14, 0.16, '#6a4a32'); at(beam, 0, 2.9, -0.2); g.add(beam);
+    bananaRow(g, [[-5.5, -1.0, 2.6, 1], [5.6, -0.6, 2.7], [-6.5, 2.5, 2.5]]);
+    // table
+    const table = box(2.5, 0.8, 0.75, toon('#7a5236', {paint: {planks: 6, seed: 18}})); at(table, 0, 0, -1.3); g.add(table);
+    const TT = 0.8;
+    // oil lamp on the table + a wall lamp: the practical lights that light the faces
+    const lampB = new THREE.Group(); at(lampB, -1.0, TT, -1.5); g.add(lampB);
+    lampB.add(cyl(0.07, 0.09, 0.1, '#8a6a3a', {hull: 0.006}));
+    const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.2, 14, 1, true), new THREE.MeshBasicMaterial({color: '#ffe0a0', transparent: true, opacity: 0.35, depthWrite: false})); glass.position.y = 0.2; lampB.add(glass);
+    fx(g, FX.flame([-1.0, TT + 0.18, -1.5], {size: 0.16}));
+    fx(g, FX.fireLight([-0.8, TT + 0.45, -1.1], {intensity: 5, dist: 6, color: '#ffb060'}));
+    const wl = new THREE.Group(); at(wl, 2.75, 1.95, -2.9); g.add(wl);
+    wl.add(box(0.12, 0.05, 0.14, '#4a3a30')); const wlg = cyl(0.04, 0.05, 0.12, new THREE.MeshBasicMaterial({color: '#ffd98a'}), {hull: 0.006}); at(wlg, 0, 0.05, 0.03); wl.add(wlg);
+    fx(g, FX.flame([2.75, 2.12, -2.85], {size: 0.12, seed: 9}));
+    fx(g, FX.fireLight([2.3, 2.1, -2.2], {intensity: 3.5, dist: 5.5, color: '#ffb060', seed: 5}));
+    // recipe chalkboard on the wall: lines appear step by step
+    const boards = [0, 1, 2, 3, 4].map((n) => {
+      const b = P.chalkboard(1.45, 1.15, {text: L.resep, textY: 0.16, draw: (x, W, H) => {
+        x.fillStyle = '#f4efe2'; x.textAlign = 'left'; x.textBaseline = 'middle';
+        x.font = `800 ${H * 0.085}px "Inter Display"`;
+        for (let i = 0; i < n; i++) { let fs = H * 0.085; while (x.measureText(L.steps[i]).width > W * 0.9 && fs > 10) { fs -= 2; x.font = `800 ${fs}px "Inter Display"`; } x.fillText(L.steps[i], W * 0.05, H * (0.38 + i * 0.16)); x.font = `800 ${H * 0.085}px "Inter Display"`; }
+        x.strokeStyle = '#f4efe2'; x.lineWidth = 6; x.beginPath(); x.moveTo(W * 0.2, H * 0.27); x.lineTo(W * 0.8, H * 0.27); x.stroke();
+      }});
+      at(b, -1.85, 1.75, -2.9); g.add(b); return b;
+    });
+    // calendar on the wall: "HARI KE" + day number
+    const cal = new THREE.Group(); at(cal, 1.95, 1.72, -2.92); g.add(cal);
+    const calB = box(0.62, 0.72, 0.03, '#f3e7d3', {center: true, hull: 0.012}); cal.add(calB);
+    const calHead = sign(L.day, 0.62, 0.2, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(calHead, 0, 0.27, 0.01); cal.add(calHead);
+    const dayTex = []; for (let n = 1; n <= 14; n++) dayTex.push(signTex(String(n), {w: 512, h: 420, bg: '#f3e7d3', border: false, sub: n === 14 ? L.weeks2 : null}));
+    const dayD = decal(dayTex[0], 0.56, 0.46); dayD.position.set(0, -0.07, 0.02); cal.add(dayD);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.018, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); ring.position.set(0, -0.02, 0.04); ring.scale.set(1.25, 1, 1); cal.add(ring);
+    // chopping board + the bonggol + chopped pieces + machete
+    const board = box(0.52, 0.04, 0.34, toon('#c9a06a', {paint: {planks: 3, seed: 29}})); at(board, -0.55, TT, -1.18); g.add(board);
+    const corm = P.bonggol(0.75, {seed: 5}); at(corm, -0.55, TT + 0.04, -1.2, 0.4); g.add(corm);
+    const pr = rng(31);
+    const pieces = []; for (let i = 0; i < 16; i++) { const p = box(0.055, 0.04, 0.05, i % 3 ? '#efe4c0' : '#c9a87a', {hull: 0.004}); at(p, -0.55 + (pr() - 0.5) * 0.36, TT + 0.04, -1.18 + (pr() - 0.5) * 0.22, pr() * 3); g.add(p); pieces.push(p); }
+    const kg1 = tag(L.kg1, 0.3, 0.15); at(kg1, -0.92, TT, -1.05, 0.2); g.add(kg1);
+    // palm sugar + tag, bucket of rice-washing water + tag
+    const sugars = [[0.25, -1.02], [0.36, -1.1]].map(([x, z]) => { const s = P.palmSugar(); at(s, x, TT, z); g.add(s); return s; });
+    const kg14 = tag(L.kg14, 0.34, 0.15); at(kg14, 0.2, TT, -0.98, -0.1); g.add(kg14);
+    const bk = P.bucket('#4f9a8a', '#ece8dc', L.airBeras); at(bk.group, 0.82, TT, -1.2, -0.2); g.add(bk.group);
+    const l5 = tag(L.liter5, 0.36, 0.15, {bg: '#f2d24a'}); at(l5, 1.15, TT, -0.98, -0.25); g.add(l5);
+    // jerrycan in the middle
+    const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.2, TT, -1.38, 0.15); g.add(jc.group);
+    const tape = P.tapePlate(); at(tape, 0.7, TT, -1.1); g.add(tape);
+    const kakek = ch('kakekNight', {seed: 65}, g, -0.05, -1.85, 0);
+    const darto = ch('darto', {seed: 66}, g, 0.98, -1.85, 0);
+    const knife = P.golok(); held(kakek, knife, {hand: 0, x: -0.01, y: -0.02, z: 0.06, rz: 0.4});
+    // chop rhythm on "cacah"
+    const chop0 = E('cacah') - 0.1, chop1 = cut(8) - 0.15;
+    const chops = []; for (let tt = chop0; tt < chop1; tt += 0.3) chops.push(tt);
+    const kCues = [
+      {t: 0, pose: 'present', expr: 'smug'},
+      {t: E('malam') + 0.2, action: 'talk', dur: 2.6},
+      {t: E('resep') + 0.1, pose: 'pointUp', expr: 'proud'},
+      {t: cut(7), pose: 'hammerDown', expr: 'happy', action: 'talk', dur: 2.2},
+      {t: E('satukilo') + 0.1, expr: 'proud', action: 'nod', dur: 0.6},
+    ];
+    chops.forEach((tt, i) => kCues.push({t: tt, pose: i % 2 ? 'hammerDown' : 'hammerUp', expr: 'excited'}));
+    kCues.push(
+      {t: cut(8), pose: 'present', expr: 'happy', action: 'talk', dur: 2.0},
+      {t: E('gula') + 0.1, pose: 'give', expr: 'smug'},
+      {t: E('air') + 0.1, pose: 'presentBoth', expr: 'proud'},
+      {t: cut(9), pose: 'present', expr: 'happy', action: 'talk', dur: 2.0},
+      {t: E('jeriken') + 0.1, pose: 'presentBoth', expr: 'proud'},
+      {t: E('tutup') + 0.1, pose: 'hips', expr: 'smug', action: 'nod', dur: 0.6},
+      {t: E('keempat') + 0.05, pose: 'pointUp', expr: 'thinking'},
+      {t: E('buka') + 0.1, pose: 'tap', expr: 'happy'},
+      {t: E('gas') + 0.05, pose: 'idle', expr: 'grimace'},
+      {t: cut(10), pose: 'stop', expr: 'smug', action: 'talk', dur: 1.8},
+      {t: E('duaminggu') + 0.05, pose: 'pointUp', expr: 'proud'},
+      {t: E('bau') - 0.3, pose: 'chin', expr: 'thinking', action: 'talk', dur: 1.3},
+      {t: E('tape') + 0.1, pose: 'present', expr: 'cheesy'},
+      {t: E('jadi') + 0.05, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
+    );
+    kakek.act(kCues);
+    darto.act([
+      {t: 0, pose: 'idle', expr: 'surprised'},
+      {t: E('resep') + 0.25, pose: 'chin', expr: 'thinking'},
+      {t: cut(7), pose: 'idle', expr: 'happy'},
+      {t: E('cacah') + 0.25, pose: 'idle', expr: 'surprised', action: 'hop', dur: 0.5},
+      {t: cut(8), pose: 'think', expr: 'thinking'},
+      {t: E('air') + 0.2, pose: 'idle', expr: 'happy', action: 'nod', dur: 0.6},
+      {t: cut(9), pose: 'carryBoth', expr: 'determined'},
+      {t: E('jeriken') + 0.15, pose: 'idle', expr: 'excited'},
+      {t: E('tutup') + 0.15, action: 'nod', dur: 0.5},
+      {t: E('keempat') + 0.1, pose: 'idle', expr: 'confused'},
+      {t: E('gas') + 0.05, pose: 'headHold', expr: 'disgusted', action: 'tremble', dur: 0.6},
+      {t: cut(10), pose: 'idle', expr: 'worried'},
+      {t: E('duaminggu') + 0.15, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
+      {t: E('bau') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: E('tape') + 0.2, pose: 'idle', expr: 'cheesy'},
+      {t: E('jadi') + 0.1, pose: 'cheer', expr: 'excited', action: 'jump', dur: 0.6},
+    ]);
+    // effects: chips fly on every chop, a splash when the sugar drops in, gas puffs when the cap opens
+    chops.filter((_, i) => i % 2).forEach((tt, i) => fx(g, FX.debris([-0.55, TT + 0.1, -1.15], tt + 0.08, {n: 8, color: '#efe4c0', speed: 1.2, seed: 40 + i}), (t) => inShots(t, 7)));
+    fx(g, FX.splash([0.82, TT + 0.28, -1.2], E('air') + 0.35, {n: 40, speed: 0.9, size: 0.05}), (t) => inShots(t, 8));
+    fx(g, FX.splash([0.2, TT + 0.5, -1.38], E('jeriken') - 0.3, {n: 30, speed: 0.7, size: 0.04, color: '#e8dcb0'}), (t) => inShots(t, 9));
+    const opens = [E('buka') + 0.1, E('buka') + 1.0, E('buka') + 1.9];
+    opens.forEach((tt, i) => fx(g, FX.smoke([0.11, TT + 0.55, -1.38], tt + 0.15, {n: 5, size: 0.18, grow: 2.2, rise: 0.5, life: 0.9, color: '#e8f0d8', opacity: 0.6, seed: 60 + i}), (t) => inShots(t, 9)));
+    fx(g, FX.glints([0.7, TT + 0.15, -1.1], E('tape') + 0.05, {n: 18, spread: 0.3}), (t) => inShots(t, 10));
+    smell(g, [0.7, TT + 0.1, -1.1], E('tape') + 0.1, cut(11), '#f2c86a');
+    const sugarP = sugars.map((s) => s.position.clone());
+    updaters.push((t) => {
+      const s7 = inShots(t, 7), s8 = inShots(t, 8), s9 = inShots(t, 9), s10 = inShots(t, 10);
+      // chalkboard: step lines appear with the narration
+      const step = t < E('pertama') ? 0 : t < E('kedua') ? 1 : t < E('ketiga') ? 2 : t < E('keempat') ? 3 : 4;
+      boards.forEach((b, i) => { b.visible = i === step; b.scale.setScalar(pop(t, E('resep') - 0.1, 0.4)); });
+      // bonggol: pops on "pertama", chopped into pieces on "cacah"
+      const chopU = ramp(t, chop0, chop1);
+      corm.visible = t < chop1 + 0.05; corm.scale.setScalar(t < cut(7) ? 0.0001 : 0.75 * pop(t, E('pertama'), 0.35) * (1 - 0.85 * chopU));
+      pieces.forEach((p, i) => { p.visible = t >= chop0 + (i / pieces.length) * (chop1 - chop0) && t < E('jeriken'); p.scale.setScalar(1 - ramp(t, E('ketiga') + 0.2, E('jeriken') - 0.1)); });
+      board.visible = t < cut(10);
+      kg1.visible = s7; kg1.scale.setScalar(pop(t, E('satukilo') - 0.1, 0.35));
+      knife.visible = s7;
+      // sugar pops on "gula", drops into the bucket on "air"
+      const drop = ramp(t, E('air') + 0.05, E('air') + 0.35);
+      sugars.forEach((s, i) => {
+        s.visible = t >= cut(8) && t < E('air') + 0.4; s.scale.setScalar(pop(t, E('gula') - 0.05 + i * 0.08, 0.35));
+        s.position.set(lerp(sugarP[i].x, 0.82, drop), TT + Math.sin(drop * Math.PI) * 0.25 + drop * 0.15, lerp(sugarP[i].z, -1.2, drop));
       });
+      kg14.visible = s8; kg14.scale.setScalar(pop(t, E('gula') + 0.05, 0.35));
+      bk.group.visible = t >= cut(8) && t < cut(10); bk.group.scale.setScalar(pop(t, E('lima') - 0.15, 0.35));
+      bk.liquid.material.color.set(t > E('air') + 0.4 ? '#d8c08a' : '#ece8dc');
+      l5.visible = s8; l5.scale.setScalar(pop(t, E('lima') - 0.05, 0.35));
+      // pour the bucket toward the jerrycan
+      const tilt = s9 ? Math.sin(Math.PI * ramp(t, E('ketiga') + 0.2, E('tutup') - 0.2)) : 0;
+      bk.group.rotation.z = 1.0 * tilt; bk.group.position.set(0.82 - 0.25 * tilt, TT + 0.12 * tilt, -1.2);
+      // jerrycan + cap
+      jc.group.visible = t >= cut(9); jc.group.scale.setScalar(pop(t, E('jeriken') - 0.4, 0.35));
+      let capUp = t < E('tutup') ? 0.16 : 0.16 * (1 - ramp(t, E('tutup'), E('tutup') + 0.2));
+      for (const o of opens) if (t > o && t < o + 0.55) capUp = Math.max(capUp, 0.12 * Math.sin(Math.PI * (t - o) / 0.55));
+      jc.cap.position.y = 0.48 + capUp; jc.cap.rotation.y = t * (capUp > 0.01 ? 6 : 0);
+      // calendar days flip "setiap hari", circle 14 on "dua minggu"
+      const day = t < E('setiap') ? 1 : 1 + Math.floor(13 * clamp01((t - E('setiap')) / (E('duaminggu') + 0.25 - E('setiap'))));
+      dayD.material.map = dayTex[day - 1];
+      ring.visible = t > E('duaminggu') + 0.25; ring.scale.set(1.25 * pop(t, E('duaminggu') + 0.25, 0.35), pop(t, E('duaminggu') + 0.25, 0.35), 1);
+      cal.rotation.z = t > E('setiap') && t < E('duaminggu') + 0.3 ? Math.sin(t * 20) * 0.02 : 0;
+      tape.visible = s10; tape.scale.setScalar(pop(t, E('tape') - 0.1, 0.35));
     });
   }
 
-  // ---------- beach: the sea drains away (shot 6) ----------
+  // =====================================================================================================
+  // ---------- pagi: Darto's yard at dawn, two weeks later (shot 11) ----------
   {
-    const g = addLoc('beach');
-    g.add(ground(140, 140, '#e8d4a0'));
-    strip(g, 140, 80, -44, '#c9b07a', 0.01, {stains: 40});
-    const water = new THREE.Mesh(new THREE.PlaneGeometry(140, 80), toon(P.waterTex()));
-    water.rotation.x = -Math.PI / 2; water.receiveShadow = true; g.add(water);
-    const foam = box(140, 0.04, 0.35, '#f4f8fb', {edges: false, hull: 0}); g.add(foam);
-    const boat = P.boat(); at(boat, -1.6, 0.18, -7.5, 0.4); g.add(boat);
-    const fishes = [[-0.4, -4.6], [1.2, -5.6], [-2.6, -5.2], [0.6, -8.0]].map(([x, z], i) => { const f = P.fish(['#7aa3b8', '#e8a83a', '#c75b5b', '#7aa3b8'][i]); at(f, x, 0.1, z); g.add(f); return f; });
-    const post = P.signpost([{text: L.poles, dir: 1, angle: -0.25}]); at(post, 0.55, 0, -2.6); g.add(post);
-    const hero = ch('hero', {seed: 67}, g, -0.2, -1.4, 0);
-    hero.act([
-      {t: 0, pose: 'hips', expr: 'happy'},
-      {t: E('laut') + 0.1, pose: 'idle', expr: 'surprised'},
-      {t: E('mengalir') + 0.15, pose: 'headHold', expr: 'shocked', action: 'jump', dur: 0.6},
-      {t: E('kutub') + 0.1, pose: 'point', expr: 'nervous', action: 'tremble', dur: 0.6},
-    ]);
-    const edge0 = -3.2;
-    updaters.push((t) => {
-      const u = smooth((t - E('mengalir') + 0.2) / (cut(7) - E('mengalir') + 0.4));
-      const ez = edge0 - u * 30;
-      water.position.set(0, 0.02 - u * 0.15, ez - 40);
-      foam.position.set(0, 0.02 - u * 0.15, ez);
-      boat.position.y = u < 0.12 ? 0.18 + Math.sin(t * 2.4) * 0.05 : 0.12 + (1 - smooth((u - 0.12) * 4)) * 0.06;
-      boat.rotation.z = u > 0.12 ? 0.18 * smooth((u - 0.12) * 4) : Math.sin(t * 2) * 0.03;
-      fishes.forEach((f, i) => { const bare = -f.position.z < -ez - 0.5; f.visible = bare; f.position.y = 0.1 + Math.abs(Math.sin(t * 7 + i * 2)) * 0.18; f.rotation.z = Math.sin(t * 9 + i) * 0.6; });
-    });
-  }
-
-  // ---------- room: a day is no longer 24 hours (shot 8) ----------
-  {
-    const g = addLoc('room');
-    under(g, '#3a3036');
-    g.add(P.room(6.5, 3.4, 6, {wall: '#e8d8b8', floor: '#a7845e', wain: '#7a9a6a'}));
-    const clk = P.wallClock(0.62, {rim: '#4f7fa6'}); at(clk.group, 0.55, 2.05, -4.86); g.add(clk.group);
-    const hrs = sign(L.hours, 1.3, 0.55, {bg: '#f2d24a', frame: '#8a6a2a'}); at(hrs, -1.55, 2.05, -4.84); g.add(hrs);
-    const xm = new THREE.Group(); at(xm, -1.55, 2.05, -4.74); g.add(xm);
-    for (const s of [-1, 1]) { const b = box(1.45, 0.12, 0.04, '#d8413a', {center: true, hull: 0.012}); b.rotation.z = s * 0.38; xm.add(b); }
-    const lampT = box(0.5, 0.6, 0.45, toon('#8a5a3a', {paint: {planks: 2, seed: 95}})); at(lampT, 2.3, 0, -4.2); g.add(lampT);
-    const plant = new THREE.Group(); at(plant, -2.6, 0, -4.3); g.add(plant);
-    plant.add(cyl(0.22, 0.17, 0.4, '#c75b5b')); const lf = ball(0.4, '#5f9a5a', {sy: 1.3}); at(lf, 0, 0.85, 0); plant.add(lf);
-    const hero = ch('hero', {seed: 68}, g, 0.1, -2.5, 0);
-    hero.act([
+    const g = addLoc('pagi');
+    g.add(ground(140, 140, '#8fb36a'));
+    strip(g, 12, 4, 0, -1.2, '#b89a6a', 0.006, {stains: 30});
+    g.add(P.hills('#86a862'));
+    const sun = P.sunBall(2.4, '#ffd08a'); sun.position.set(-14, 3, -42); g.add(sun);
+    const shed = P.house(3.4, 2.4, 2.4, {color: '#c9a06a', roof: '#8a6a3a', windows: 0, doorX: -0.9, doorColor: '#7a4a32', seed: 21}); at(shed, 0, 0, -2.85); g.add(shed);
+    bananaRow(g, [[-3.6, -3.4, 2.7, 1], [3.8, -3.8, 2.6], [-5.8, -6.0, 2.8], [5.9, -6.4, 2.6, 1]]);
+    const cal = new THREE.Group(); at(cal, 1.0, 1.55, -2.78); g.add(cal);
+    cal.add(box(0.5, 0.58, 0.03, '#f3e7d3', {center: true, hull: 0.012}));
+    const ch1 = sign(L.day, 0.5, 0.16, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(ch1, 0, 0.22, 0.01); cal.add(ch1);
+    const d14 = decal(signTex('14', {w: 512, h: 420, bg: '#f3e7d3', border: false, sub: L.weeks2}), 0.46, 0.38); d14.position.set(0, -0.06, 0.02); cal.add(d14);
+    const r14 = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.014, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); r14.position.set(0, -0.02, 0.04); r14.scale.set(1.25, 1, 1); cal.add(r14);
+    const bench = P.bale(1.3, 0.5, 0.45); at(bench, 0.25, 0, -0.85); g.add(bench);
+    const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.45, 0.45, -0.85, 0.15); g.add(jc.group);
+    const tape = P.tapePlate(); at(tape, -0.05, 0.45, -0.78); g.add(tape);
+    const hens = [[-1.9, -0.4, 0.6], [2.1, -1.4, 2.5], [-2.5, -1.6, -0.4]].map(([x, z, ry]) => { const c = P.chicken(); at(c, x, 0, z, ry); g.add(c); return c; });
+    const darto = ch('darto', {seed: 67}, g, -0.15, -1.35, 0);
+    darto.act([
       {t: 0, pose: 'chin', expr: 'thinking'},
-      {t: E('hari') + 0.1, pose: 'hips', expr: 'annoyed'},
-      {t: E('jam24') + 0.2, pose: 'point', expr: 'furious', action: 'shake', dur: 0.7},
+      {t: E('kemudian') + 0.1, pose: 'chin', expr: 'nervous', action: 'nod', dur: 0.5},
+      {t: E('membuka') - 0.05, pose: 'give', expr: 'determined'},
+      {t: E('membuka') + 0.35, pose: 'armsUp', expr: 'surprised', action: 'jump', dur: 0.6},
+      {t: E('asam') + 0.1, pose: 'presentBoth', expr: 'cheesy'},
+      {t: E('tape2') + 0.1, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
     ]);
+    fx(g, FX.smoke([0.36, 1.0, -0.85], E('membuka') + 0.2, {n: 6, size: 0.22, grow: 2.2, rise: 0.6, life: 1.0, color: '#f2e6c0', opacity: 0.6}), (t) => inShots(t, 11));
+    fx(g, FX.glints([-0.05, 0.6, -0.75], E('tape2') - 0.05, {n: 16, spread: 0.3}), (t) => inShots(t, 11));
+    smell(g, [0.36, 0.97, -0.85], E('membuka') + 0.35, cut(12), '#f2c86a');
     updaters.push((t) => {
-      // hands race, then slow and stop dead on "hari"
-      const t0 = cut(8), ts = E('hari') + 0.3;
-      const m = t < ts ? (t - t0) * 900 : (ts - t0) * 900 + 60 * (1 - Math.exp(-(t - ts) * 5));
-      clk.set(m / 60, m % 60);
-      xm.scale.setScalar(pop(t, E('jam24') + 0.25, 0.35));
+      const u = ramp(t, E('membuka') + 0.15, E('membuka') + 0.7);
+      jc.cap.position.set(-0.09 + 0.35 * u, 0.48 + Math.sin(u * Math.PI) * 0.35 - 0.48 * u * 0.0, 0.02 * u);
+      jc.cap.rotation.z = u * 4;
+      tape.scale.setScalar(pop(t, E('tape2') - 0.15, 0.35));
+      hens.forEach((h, i) => { h.rotation.z = Math.max(0, Math.sin(t * 5 + i * 2)) * 0.35; h.position.x += 0; });
     });
   }
 
-  // ---------- desert: six months of day (shot 9, first half) ----------
-  {
-    const g = addLoc('desert');
-    g.add(ground(140, 140, '#e3c27f', {stains: 40, chips: 30}));
-    const sun = P.sunBall(3.2, '#ffe070'); sun.position.set(-5, 15, -32); g.add(sun);
-    for (const [x, z, h] of [[-2.4, -3.8, 1.7], [2.9, -6.5, 2.0], [-6, -9, 1.5]]) { const c = P.cactus(h); at(c, x, 0, z); g.add(c); }
-    for (const [x, z, s] of [[1.2, -4.5, 0.4], [-1.0, -7, 0.6], [4.5, -3.5, 0.3]]) { const r = ball(s, '#c79a5a', {sy: 0.6, seg: 8}); at(r, x, s * 0.2, z); g.add(r); }
-    for (let i = 0; i < 6; i++) { const d = box(4 + i, 0.6 + (i % 3) * 0.4, 2, '#d9b06a'); at(d, -14 + i * 6, -0.2, -18 - (i % 2) * 4); g.add(d); }
-    const ban = P.banner(L.day6, 1.6, 0.7, {poleH: 2.4, bg: '#e8a83a', frame: '#8a5a2a'}); at(ban, 1.65, 0, -3.2, -0.25); g.add(ban);
-    const sub = sign(L.day6Sub, 1.5, 0.32, {bg: '#fff3df', frame: '#8a5a2a'}); at(sub, 1.65 - 0.05, 1.32, -3.17, -0.25); g.add(sub);
-    const hero = ch('hero', {seed: 69}, g, -0.1, -1.6, 0);
-    hero.act([
-      {t: 0, pose: 'wave', expr: 'irritated'},
-      {t: E('siang') + 0.1, pose: 'wave', expr: 'grimace', action: 'slump', dur: 1.0},
-    ]);
-    fx(g, FX.glints([-0.1, 1.6, -1.5], E('siang'), {n: 20, color: '#ffd890'}), (t) => inShots(t, 9));
-    updaters.push((t) => {
-      sun.scale.setScalar(1 + Math.sin(t * 3) * 0.04);
-      const k = pop(t, E('siang') - 0.15, 0.4); ban.scale.setScalar(k); sub.scale.setScalar(k);
-    });
-  }
-
-  // ---------- frozen night: six months of dark (shot 9, second half) ----------
-  {
-    const g = addLoc('frozen');
-    g.add(ground(140, 140, '#e8eef4', {stains: 10}));
-    for (const [x, z, s] of [[-2.6, -4, 0.9], [3.0, -6, 1.2], [-5, -9, 1.6], [1.0, -10, 1.3], [6, -11, 1.8]]) { const d = ball(s, '#f4f8fb', {sy: 0.45, seg: 12}); at(d, x, 0, z); g.add(d); }
-    for (const [x, z] of [[-1.9, -3.2], [2.4, -4.4]]) { const b = P.iceBlock(0.7, 0.55, 0.6); at(b, x, 0, z, 0.4); g.add(b); }
-    const tree = new THREE.Group(); at(tree, -3.2, 0, -5.5); g.add(tree);
-    tree.add(cyl(0.1, 0.16, 2.6, '#5a4a4a'));
-    for (const [y, a] of [[1.5, 0.7], [2.0, -0.8], [2.4, 0.5]]) { const br = cyl(0.04, 0.06, 0.9, '#5a4a4a'); at(br, 0, y, 0, 0, 0, a); tree.add(br); }
-    const lantern = new THREE.PointLight('#ffcf8a', 2.5, 6, 1.6); lantern.position.set(-0.9, 1.4, -0.9); g.add(lantern);
-    const lan = new THREE.Group(); at(lan, -0.9, 0, -1.0); g.add(lan);
-    lan.add(cyl(0.03, 0.04, 1.2, '#4a4a50')); const lb = ball(0.12, new THREE.MeshBasicMaterial({color: '#ffd98a'}), {hull: 0.012}); at(lb, 0, 1.25, 0); lan.add(lb);
-    const ban = P.banner(L.night6, 1.6, 0.7, {poleH: 2.4, bg: '#3f5f8a', frame: '#1f2a40'}); at(ban, 1.65, 0, -3.2, -0.25); g.add(ban);
-    const sub = sign(L.night6Sub, 1.5, 0.32, {bg: '#dfe8ff', frame: '#1f2a40'}); at(sub, 1.6, 1.32, -3.17, -0.25); g.add(sub);
-    const hero = ch('hero', {seed: 70}, g, 0.0, -1.6, 0);
-    hero.act([
-      {t: 0, pose: 'cross', expr: 'chatter', action: 'tremble', dur: 3},
-      {t: E('membeku') + 0.1, pose: 'cross', expr: 'shocked'},
-    ]);
-    const ice = P.iceBlock(0.75, 1.75, 0.5); at(ice, 0.0, 0, -1.6); g.add(ice);
-    fx(g, FX.snow([0, -3, 14, 12], {n: 400}), (t) => inShots(t, 9));
-    fx(g, FX.glints([0, 1.3, -1.3], E('membeku') + 0.05, {n: 24, color: '#dff4ff'}), (t) => inShots(t, 9));
-    updaters.push((t) => {
-      const k = pop(t, E('lainnya') - 0.05, 0.4); ban.scale.setScalar(k); sub.scale.setScalar(k);
-      ice.scale.set(1, Math.max(0.0001, smooth((t - E('membeku') - 0.05) / 0.3)), 1);
-      ice.visible = t > E('membeku');
-    });
-  }
-
-  // ---------- lab: scientists say it will not happen (shot 10) ----------
-  {
-    const g = addLoc('lab');
-    under(g, '#4a525a');
-    g.add(P.room(7, 3.5, 6.5, {wall: '#e6e2d6', floor: '#9aa6ae', wain: '#5a7a8a', floorPaint: {bricks: true}}));
-    const board = P.chalkboard(2.6, 1.35, {text: L.safe, textY: 0.78, draw: (x, W, H) => {
-      x.strokeStyle = '#f4efe2'; x.lineWidth = 10; x.beginPath(); x.arc(W * 0.5, H * 0.36, H * 0.22, 0, 7); x.stroke();
-      x.beginPath(); x.ellipse(W * 0.5, H * 0.36, H * 0.22, H * 0.06, 0, 0, 7); x.stroke();
-      x.beginPath(); x.arc(W * 0.5, H * 0.36, H * 0.3, -2.4, -0.7); x.stroke();
-      x.beginPath(); x.moveTo(W * 0.5 + Math.cos(-0.7) * H * 0.3, H * 0.36 + Math.sin(-0.7) * H * 0.3); x.lineTo(W * 0.5 + Math.cos(-0.7) * H * 0.3 - 30, H * 0.36 + Math.sin(-0.7) * H * 0.3 - 6);
-      x.moveTo(W * 0.5 + Math.cos(-0.7) * H * 0.3, H * 0.36 + Math.sin(-0.7) * H * 0.3); x.lineTo(W * 0.5 + Math.cos(-0.7) * H * 0.3 - 4, H * 0.36 + Math.sin(-0.7) * H * 0.3 - 30); x.stroke();
-    }});
-    at(board, 0, 1.95, -5.35); g.add(board);
-    const chk = P.chalkDoodle('check', 0.5, 0.4); chk.position.set(0.95, 2.2, -5.3); g.add(chk);
-    const tel = P.telescope(); at(tel, 2.9, 0, -4.6, -0.6); g.add(tel);
-    const tbl = box(0.7, 0.75, 0.6, toon('#8a5a3a', {paint: {planks: 2, seed: 96}})); at(tbl, -2.5, 0, -3.6); g.add(tbl);
-    const mini = P.globe(0.28, {seed: 7}); at(mini.group, -2.5, 1.08, -3.6); g.add(mini.group);
-    const stand = cyl(0.03, 0.08, 0.2, '#c9a462'); at(stand, -2.5, 0.75, -3.6); g.add(stand);
-    const sA = ch('scientist', {seed: 71}, g, -1.75, -3.7, 0.3);
-    const sB = ch('scientist', {seed: 72, hat: 'none', jacket: '#f3f0e6', hair: '#3a2a26', glasses: false}, g, 2.15, -3.7, -0.3);
-    const hero = ch('hero', {seed: 73}, g, 0.95, -2.0, -0.2);
-    sA.act([{t: 0, pose: 'present', expr: 'smug'}, {t: E('ilmuwan') + 0.1, pose: 'present', expr: 'proud', action: 'nod', dur: 0.7},
-      {t: E('tidak') + 0.1, pose: 'stop', expr: 'cheesy', action: 'shake', dur: 0.7}]);
-    sB.act([{t: 0, pose: 'chin', expr: 'thinking'}, {t: E('ilmuwan') + 0.2, pose: 'point', expr: 'happy'}, {t: E('tidak') + 0.2, pose: 'hips', expr: 'proud', action: 'nod', dur: 0.6}]);
-    hero.act([{t: 0, pose: 'idle', expr: 'worried'}, {t: E('tenang') + 0.1, pose: 'idle', expr: 'surprised'},
-      {t: E('tidak') + 0.3, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6}]);
-    fx(g, FX.glints([0.95, 2.2, -5.2], E('tidak') + 0.2, {n: 20}), (t) => inShots(t, 10));
-    updaters.push((t) => { mini.spin.rotation.y = t * 1.2; chk.scale.setScalar(pop(t, E('tidak') + 0.15, 0.35)); });
-  }
-
-  return {world, chars, locGroups, update(t, camPos) { for (const u of updaters) u(t); for (const c of chars) c.update(t, camPos); }};
+  return {world, chars, locGroups, update(t, camPos) { for (const u of updaters) u(t); for (const c of chars) c.update(t, camPos); for (const u of post) u(t); }};
 }

@@ -1,12 +1,11 @@
 // Sentence timing -> shot cuts and word times, per language.
-import EN from './data/sentence_times_en.json';
 import ID from './data/sentence_times_id.json';
 
 export const FPS = 30;
-export const SHOTS = 11;
+export const SHOTS = 15;
 export const TAIL = 0.7; // hold after the last word
 
-const DATA = {en: EN, id: ID};
+const DATA = {id: ID};
 
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -36,25 +35,82 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events per language: [sentenceIndex, word, occurrence]. Story: "Bumi berhenti berputar" (Indonesian + English).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Pak Darto dan bonggol pisang" (Indonesian).
 export const EV = {
-  bumi: {en: [0, 'earth'], id: [0, 'bumi']}, berhenti: {en: [0, 'stops'], id: [0, 'berhenti']},
-  sadari: {en: [1, 'noticing'], id: [1, 'sadari']}, cepat: {en: [1, 'fast'], id: [1, 'cepat']},
-  khatulistiwa: {en: [2, 'equator'], id: [2, 'khatulistiwa']}, seribu: {en: [2, 'thousand'], id: [2, 'seribu']}, kmjam: {en: [2, 'hour'], id: [2, 'jam']},
-  mendadak: {en: [3, 'suddenly'], id: [3, 'mendadak']}, manusia: {en: [3, 'people'], id: [3, 'manusia']}, mobil: {en: [3, 'cars'], id: [3, 'mobil']},
-  rumah: {en: [3, 'houses'], id: [3, 'rumah']}, terlempar: {en: [3, 'thrown'], id: [3, 'terlempar']},
-  udara: {en: [4, 'air'], id: [4, 'udara']}, angin: {en: [4, 'winds'], id: [4, 'angin']}, badai: {en: [4, 'hurricane'], id: [4, 'badai']},
-  laut: {en: [5, 'oceans'], id: [5, 'laut']}, mengalir: {en: [5, 'flow'], id: [5, 'mengalir']}, kutub: {en: [5, 'poles'], id: [5, 'kutub']},
-  utara: {en: [6, 'north'], id: [6, 'utara']}, selatan: {en: [6, 'south'], id: [6, 'selatan']}, daratan: {en: [6, 'continent'], id: [6, 'daratan']},
-  hari: {en: [7, 'day'], id: [7, 'hari']}, jam24: {en: [7, 'twenty'], id: [7, 'dua']},
-  matahari: {en: [8, 'sun'], id: [8, 'matahari']}, siang: {en: [8, 'daylight'], id: [8, 'siang']}, lainnya: {en: [8, 'other'], id: [8, 'lainnya']}, membeku: {en: [8, 'freeze'], id: [8, 'membeku']},
-  tenang: {en: [9, 'worry'], id: [9, 'tenang']}, ilmuwan: {en: [9, 'scientists'], id: [9, 'ilmuwan']}, tidak: {en: [9, 'won'], id: [9, 'tidak']},
-  seram: {en: [10, 'scares'], id: [10, 'menyeramkan']}, tulis: {en: [11, 'tell'], id: [11, 'tulis']}, komentar: {en: [11, 'comments'], id: [11, 'komentar']},
+  darto: {id: [0, 'darto']},
+  menjual: {id: [0, 'menjual']},
+  kerdil: {id: [1, 'kerdil']},
+  menguning: {id: [2, 'menguning']},
+  uang: {id: [3, 'uangnya']},
+  habis: {id: [3, 'habis']},
+  pupuk: {id: [3, 'pupuk']},
+  tapi: {id: [3, 'tapi']},
+  kecewa: {id: [3, 'mengecewakan']},
+  sore: {id: [4, 'sore']},
+  duduk: {id: [4, 'duduk']},
+  menatap: {id: [4, 'menatap']},
+  tumpukan: {id: [4, 'tumpukan']},
+  ditebang: {id: [4, 'ditebang']},
+  kakek: {id: [5, 'kakek']},
+  lewat: {id: [5, 'lewat']},
+  empat: {id: [6, 'empat']},
+  tahun40: {id: [6, 'tahun']},
+  tertawa: {id: [7, 'tertawa']},
+  mahal: {id: [8, 'mahal']},
+  padahal: {id: [8, 'padahal']},
+  emas: {id: [8, 'emasnya']},
+  situ: {id: [8, 'situ']},
+  menunjuk: {id: [9, 'menunjuk']},
+  bonggol: {id: [9, 'bonggol']},
+  malam: {id: [10, 'malam']},
+  resep: {id: [10, 'resep']},
+  pertama: {id: [11, 'pertama']},
+  satukilo: {id: [11, 'satu']},
+  cacah: {id: [11, 'cacah']},
+  kedua: {id: [12, 'kedua']},
+  gula: {id: [12, 'gula']},
+  lima: {id: [12, 'lima']},
+  air: {id: [12, 'air']},
+  ketiga: {id: [13, 'ketiga']},
+  jeriken: {id: [13, 'jeriken']},
+  tutup: {id: [13, 'tutup']},
+  keempat: {id: [14, 'keempat']},
+  setiap: {id: [14, 'setiap']},
+  buka: {id: [14, 'buka']},
+  gas: {id: [14, 'gas']},
+  tunggu: {id: [15, 'tunggu']},
+  duaminggu: {id: [15, 'dua']},
+  bau: {id: [16, 'baunya']},
+  tape: {id: [16, 'tape']},
+  jadi: {id: [16, 'jadi']},
+  kemudian: {id: [17, 'kemudian']},
+  membuka: {id: [17, 'membuka']},
+  asam: {id: [18, 'asam']},
+  tape2: {id: [18, 'tape']},
+  mencampur: {id: [19, 'mencampur']},
+  sepuluh: {id: [19, 'sepuluh']},
+  menyiram: {id: [19, 'menyiramkannya']},
+  pangkal: {id: [19, 'pangkal']},
+  minggu: {id: [20, 'minggu']},
+  kuning: {id: [20, 'kuning']},
+  menghijau: {id: [20, 'menghijau']},
+  akar: {id: [21, 'akar']},
+  kuat: {id: [21, 'kuat']},
+  tidakjadi: {id: [22, 'tidak']},
+  menjual2: {id: [22, 'menjual']},
+  sejak: {id: [23, 'sejak']},
+  membuang: {id: [23, 'membuang']},
+  bonggol2: {id: [23, 'bonggol']},
+  sampah: {id: [24, 'sampah']},
+  penyelamat: {id: [24, 'penyelamat']},
+  simpan: {id: [25, 'simpan']},
+  bagikan: {id: [25, 'bagikan']},
+  teman: {id: [25, 'teman']},
 };
 
 export const LABELS = {
-  en: {speed: '1,670 KM/H', equator: 'EQUATOR', north: 'NORTH', south: 'SOUTH', poles: 'TO THE POLES', beach: 'BEACH', hours: '24 HOURS',
-    day6: '6 MONTHS', day6Sub: 'OF DAYLIGHT', night6: '6 MONTHS', night6Sub: 'OF DARKNESS', safe: 'EARTH: SAFE', comment: 'COMMENT!', shop: 'BAKERY'},
-  id: {speed: '1.670 KM/JAM', equator: 'KHATULISTIWA', north: 'UTARA', south: 'SELATAN', poles: 'KE KUTUB', beach: 'PANTAI', hours: '24 JAM',
-    day6: '6 BULAN', day6Sub: 'SIANG TERUS', night6: '6 BULAN', night6Sub: 'MALAM GELAP', safe: 'BUMI: AMAN', comment: 'KOMENTAR!', shop: 'TOKO ROTI'},
+  id: {sale: 'DIJUAL', saleSub: 'KEBUN INI', pupuk: 'PUPUK', resep: 'RESEP LAMA', kg1: '1 KG', kg14: '1/4 KG', liter5: '5 LITER',
+    airBeras: 'AIR CUCIAN BERAS', gulaMerah: 'GULA MERAH', day: 'HARI KE', ratio: '1 : 10', mol: 'MOL', save: 'SIMPAN & BAGIKAN',
+    steps: ['1. BONGGOL PISANG 1 KG, CACAH', '2. GULA MERAH 1/4 KG + AIR BERAS 5 L', '3. MASUK JERIKEN, TUTUP RAPAT', '4. BUKA TIAP HARI, BUANG GAS'],
+    weeks2: '2 MINGGU'},
 };
