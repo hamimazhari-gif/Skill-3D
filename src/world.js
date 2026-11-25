@@ -28,12 +28,12 @@ const freshJoy = {...fresh, ...MOODS.joyful};
 const golden = {...LOOK_PRESETS.goldenHour, keyPos: [-9, 5, 6], grade: {...LOOK_PRESETS.goldenHour.grade, sat: 1.14, vignette: 0.26}};
 const sunsetSad = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 0.85, vignette: 0.45}};
 const sunsetWarm = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 1.12, vignette: 0.3}};
-const porch = {...LOOK_PRESETS.night, keyI: 1.5, hemiI: 1.0, keyPos: [-6, 10, 5], hemiSky: '#8a9ac8', hemiGround: '#4a3a3a',
-  grade: {sat: 0.98, contrast: 1.06, tint: '#ffb070', tintAmt: 0.07, vignette: 0.45}};
+const porch = {...LOOK_PRESETS.night, keyI: 1.0, hemiI: 0.62, keyPos: [-6, 10, 5], hemiSky: '#7a8ac0', hemiGround: '#3a3038',
+  grade: {sat: 0.95, contrast: 1.08, tint: '#8aa0e0', tintAmt: 0.06, vignette: 0.5}};
 const porchJoy = {...porch, grade: {...porch.grade, sat: 1.08, tintAmt: 0.1, vignette: 0.38}};
 
 export const LOOK = {
-  kebun: {keys: [{at: 0, ...sad}, {at: 'kecewa', ...sad}, {at: 'cut12', ...fresh}, {at: 'minggu', ...fresh}, {at: 'menghijau', ...freshJoy},
+  kebun: {keys: [{at: 0, ...sad}, {at: 'kecewa', ...sad}, {at: 'cut12', ...fresh, grade: {...fresh.grade, sat: 0.8, vignette: 0.38}}, {at: 'minggu', ...fresh, grade: {...fresh.grade, sat: 0.8, vignette: 0.38}}, {at: 'akar', ...freshJoy},
     {at: 86.95, ...freshJoy}, {at: 'cut15', ...golden}]},
   tepi: {keys: [{at: 0, ...sunsetSad}, {at: 'padahal', ...sunsetSad}, {at: 'emas', ...sunsetWarm}]},
   teras: {keys: [{at: 0, ...porch}, {at: 'tape', ...porch}, {at: 'jadi', ...porchJoy}]},
@@ -81,6 +81,7 @@ export function buildWorld(lang, T, EVt, L) {
   const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
   const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, o.ry ?? 0, o.rx ?? 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
   const lerp = (a, b, u) => a + (b - a) * u;
+  const dayTex = []; for (let n = 1; n <= 14; n++) dayTex.push(signTex(String(n), {w: 512, h: 420, bg: '#f3e7d3', border: false}));
   const ramp = (t, t0, t1) => smooth((t - t0) / (t1 - t0));
   const bananaRow = (g, list) => list.forEach(([x, z, h, b], i) => { const tr = P.bananaTree({seed: 11 + i, h: h || 2.6, bunch: !!b}); at(tr, x, 0, z, i * 1.3); g.add(tr); });
   // A small standing tag (price-tag style board on a short stick) for in-world labels on tables.
@@ -128,15 +129,17 @@ export function buildWorld(lang, T, EVt, L) {
     bananaRow(g, [[-5.2, -8.2, 2.8, 1], [-3.1, -9.6, 2.5], [-1.0, -8.6, 2.9, 1], [1.4, -9.3, 2.6], [3.4, -8.3, 2.8, 1], [5.6, -9.6, 2.6], [-6.6, -5.8, 2.6], [6.7, -6.2, 2.7, 1]]);
     const hut = P.house(2.6, 2.1, 2.2, {color: '#c9a06a', roof: '#9a7a4a', windows: 1, doorColor: '#7a4a32', seed: 7}); at(hut, -4.9, 0, -3.6, 0.55); g.add(hut);
     for (const [x, z, s] of [[7.5, -11, 7], [-8.5, -12, 9], [9, -4, 3]]) { const tr = P.tree({seed: s, h: 2.6}); at(tr, x, 0, z); g.add(tr); }
-    // "DIJUAL - KEBUN INI" sign on a post; it falls over on "menjual" (shot 14)
-    const sale = new THREE.Group(); at(sale, 0.5, 0, -0.6); g.add(sale);
-    sale.add(cyl(0.05, 0.06, 1.65, '#7a5236'));
-    const saleB = sign(L.sale, 1.05, 0.62, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', sub: L.saleSub}); at(saleB, 0, 1.45, 0.06); sale.add(saleB);
-    // fertiliser sacks (pop on "pupuk")
-    const sacks = [[1.55, -0.55, 0.2], [2.0, -0.35, -0.3], [1.8, -0.95, 0.1]].map(([x, z, ry], i) => { const s = P.sack(L.pupuk, {color: '#ece4cc'}); at(s, x, 0, z, ry); g.add(s); return s; });
-    // shot 12: bucket of diluted MOL (1 : 10) + a jerrycan; watering can in Darto's hand
-    const bk = P.bucket('#4f7fa6', '#d8c89a', L.ratio); at(bk.group, -0.42, 0, -2.08, 0.25); g.add(bk.group);
-    const jcan12 = P.jerrycan('#3f7fc8', L.mol); at(jcan12.group, -0.95, 0, -2.15, 0.3); g.add(jcan12.group);
+    // bamboo garden fence on the left, with the "DIJUAL - KEBUN INI" sign tied to it; Darto pulls it out in shot 14
+    for (let i = 0; i < 8; i++) { const p = cyl(0.04, 0.045, 1.1, '#c9a45a', {hull: 0.008}); at(p, -3.6 + i * 0.5, 0, -0.85); g.add(p); }
+    for (const y of [0.45, 0.9]) { const r = cyl(0.03, 0.03, 3.6, '#b8924a', {hull: 0.006, center: true}); at(r, -1.85, y, -0.85, 0, 0, Math.PI / 2); g.add(r); }
+    const sale = new THREE.Group(); at(sale, -0.8, 0, -0.78); g.add(sale);
+    sale.add(cyl(0.05, 0.06, 1.75, '#7a5236'));
+    const saleB = sign(L.sale, 1.0, 0.6, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', sub: L.saleSub}); at(saleB, 0, 1.5, 0.06); sale.add(saleB);
+    // fertiliser sacks next to Darto (pop on "pupuk")
+    const sacks = [[-1.55, -0.35, 0.3], [-2.08, -0.28, -0.2], [-1.82, 0.12, 0.1]].map(([x, z, ry], i) => { const s = P.sack(L.pupuk, {color: '#ece4cc'}); at(s, x, 0, z, ry); g.add(s); return s; });
+    // shot 12: a glass of MOL goes into a bucket of water (1 : 10), then the watering can
+    const bk = P.bucket('#4f7fa6', '#e8eef0', L.ratio); at(bk.group, 0.78, 0, -2.06, -0.2); g.add(bk.group);
+    const jcan12 = P.jerrycan('#3f7fc8', L.mol); at(jcan12.group, 1.25, 0, -2.18, -0.3); g.add(jcan12.group);
     // root jar on a crate (shot 13)
     const crate = P.crate(0.5, 0.45, 0.45, null, '#a8784a'); at(crate, -1.45, 0, 0.35, 0.2); g.add(crate);
     const jar = P.rootJar(); at(jar.group, -1.45, 0.45, 0.35); g.add(jar.group);
@@ -145,33 +148,37 @@ export function buildWorld(lang, T, EVt, L) {
     const mols = [1.55, 1.95, 2.35].map((x, i) => { const j = P.jerrycan(['#3f7fc8', '#e8a83a', '#5a9a8a'][i], L.mol); at(j.group, x, 0, -0.55 - (i % 2) * 0.1, -0.2); g.add(j.group); return j; });
     const basket = new THREE.Group(); at(basket, 1.15, 0, -0.05); g.add(basket);
     basket.add(cyl(0.3, 0.24, 0.3, toon('#b8925a', {paint: {stripes: {n: 14, color: '#9a7a4a'}, seed: 21}})));
-    for (const [x, z, s] of [[-0.1, 0.02, 0.6], [0.11, -0.06, 0.55], [0.0, 0.12, 0.5]]) { const b = P.bonggol(s, {seed: x * 100}); at(b, x, 0.2, z); basket.add(b); }
-    // closing banner (shot 15)
-    const save = P.banner(L.save, 2.4, 0.55, {poleH: 2.55, bg: '#5a9a5a', frame: '#2f5a2f'}); at(save, 0.05, 0, -0.85); g.add(save);
+    const glowMat = toon('#a8865a', {noCache: true, paint: {seed: 34, stains: 30, chips: 20, scratches: 14}});
+    glowMat.emissive = new THREE.Color('#ffb84a'); glowMat.emissiveIntensity = 0;
+    for (const [x, z, s] of [[-0.1, 0.02, 0.6], [0.11, -0.06, 0.55], [0.0, 0.12, 0.5]]) { const b = P.bonggol(s, {seed: x * 100, mat: glowMat}); at(b, x, 0.2, z); basket.add(b); }
+    const glow = new THREE.PointLight('#ffc060', 0, 2.2, 1.5); glow.position.set(1.15, 0.75, 0.25); g.add(glow);
 
     const darto = ch('darto', {seed: 61}, g, -0.5, -0.3, 0);
     const can = P.wateringCan('#5a9a8a'); held(darto, can.group, {x: 0.04, y: -0.08, z: 0.06, rz: 0});
+    const cup = P.glassCup('#b8924a'); held(darto, cup, {x: 0.02, y: -0.06, z: 0.06});
+    const wal = P.wallet(); held(darto, wal.group, {x: 0.0, y: -0.02, z: 0.07}); wal.group.scale.setScalar(1.8);
     const kakek = ch('kakek', {seed: 62}, g, 0.6, -0.3, 0);
     darto.act([
-      {t: 0, pose: 'idle', expr: 'sad', action: 'slump', dur: 1.6},
-      {t: E('menjual') + 0.1, pose: 'point', expr: 'worried'},
+      {t: 0, pose: 'limp', expr: 'sad', action: 'slump', dur: 1.6},
+      {t: E('menjual') + 0.1, expr: 'worried', action: 'shake', dur: 0.8},
       {t: cut(2), pose: 'idle', expr: 'worried'},
-      {t: E('uang') + 0.1, pose: 'shrug', expr: 'sad', action: 'shake', dur: 0.7},
-      {t: E('pupuk') + 0.1, pose: 'present', expr: 'nervous'},
+      {t: E('uang') - 0.05, pose: 'give', expr: 'sad'},
+      {t: E('habis') + 0.1, expr: 'cry', action: 'shake', dur: 0.7},
+      {t: E('pupuk') + 0.1, pose: 'give', expr: 'nervous', action: 'tremble', dur: 0.5},
       {t: E('kecewa') + 0.1, pose: 'facepalm', expr: 'cry', action: 'slump', dur: 1.3},
-      {t: cut(12), pose: 'hold', expr: 'determined'},
+      {t: cut(12), pose: 'give', expr: 'happy'},
       {t: E('sepuluh') + 0.1, expr: 'happy', action: 'nod', dur: 0.6},
       {t: E('menyiram') - 0.1, pose: 'give', expr: 'cheesy'},
       {t: cut(13), pose: 'idle', expr: 'surprised'},
       {t: E('menghijau') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
-      {t: cut(14), pose: 'hips', expr: 'determined'},
-      {t: E('tidakjadi') + 0.1, pose: 'stop', expr: 'smug', action: 'shake', dur: 0.7},
-      {t: E('menjual2') + 0.1, pose: 'point', expr: 'toothy'},
+      {t: cut(14), pose: 'hips', expr: 'smug'},
+      {t: E('tidakjadi'), pose: 'carry', expr: 'cheesy'},
+      {t: E('menjual2') + 0.35, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
       {t: E('sejak') - 0.1, pose: 'present', expr: 'proud'},
       {t: E('membuang') + 0.05, pose: 'hips', expr: 'smug', action: 'shake', dur: 0.7},
       {t: E('bonggol2') + 0.1, pose: 'presentBoth', expr: 'cheesy'},
       {t: cut(15), pose: 'wave', expr: 'happy'},
-      {t: E('sampah') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: E('sampah') + 0.1, pose: 'presentBoth', expr: 'proud'},
       {t: E('penyelamat') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
       {t: E('simpan') + 0.1, pose: 'point', expr: 'cheesy'},
       {t: E('bagikan') + 0.05, pose: 'armsUp', expr: 'laugh', action: 'jump', dur: 0.6},
@@ -183,9 +190,12 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('bagikan') + 0.15, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.8},
     ]);
     // effects
-    fx(g, FX.dust([0.5, 0.05, -1.9], E('menjual2') + 0.55, {n: 10, size: 0.5}), (t) => inShots(t, 14));
+    fx(g, FX.dust([-0.8, 0.05, -0.75], E('tidakjadi') + 0.3, {n: 8, size: 0.4}), (t) => inShots(t, 14));
+    fx(g, FX.dust([0.6, 0.05, -0.75], E('menjual2') + 0.55, {n: 10, size: 0.5}), (t) => inShots(t, 14));
+    fx(g, FX.smoke([-0.12, 1.0, 0.05], E('habis') + 0.15, {n: 5, size: 0.16, grow: 2, rise: 0.4, life: 0.9, color: '#d8c2a0', opacity: 0.6}), (t) => inShots(t, 2));
     fx(g, FX.glints([0, 0.7, -2.5], E('menghijau'), {n: 40, spread: 3, color: '#eaffb0'}), (t) => inShots(t, 13));
     fx(g, FX.glints([-1.45, 0.75, 0.35], E('kuat') - 0.2, {n: 16, spread: 0.4}), (t) => inShots(t, 13));
+    fx(g, FX.glints([1.15, 0.6, -0.05], cut(15) + 0.2, {n: 26, spread: 0.6, color: '#ffe07a'}), (t) => inShots(t, 15));
     fx(g, FX.glints([1.15, 0.6, -0.05], E('penyelamat'), {n: 22, spread: 0.6}), (t) => inShots(t, 15));
     fx(g, FX.glints([1.15, 0.6, -0.05], E('bonggol2'), {n: 16, spread: 0.5}), (t) => inShots(t, 14));
     fx(g, FX.confetti([0, 2.6, -0.4], E('bagikan') + 0.05, {colors: ['#e8a83a', '#7fb35a', '#f2d24a', '#c75b5b', '#f3e7d3']}), (t) => inShots(t, 15));
@@ -195,6 +205,7 @@ export function buildWorld(lang, T, EVt, L) {
     const drops = new THREE.Points(dropGeo, new THREE.PointsMaterial({color: '#cfeaff', size: 0.035, transparent: true, opacity: 0.9, depthWrite: false})); drops.frustumCulled = false; g.add(drops);
     const splashF = fx(g, FX.splash([0, 0, 0], E('menyiram') + 0.25, {n: 50, speed: 1.0, size: 0.05, repeat: 0}), (t) => inShots(t, 12));
     const tipW = new THREE.Vector3(), tmpV = new THREE.Vector3();
+    fx(g, FX.splash([0.78, 0.3, -2.06], E('mencampur') + 0.6, {n: 30, speed: 0.7, size: 0.04, color: '#e8dcb0'}), (t) => inShots(t, 12));
     const darkGreen = new THREE.Color('#5fae3a'), sick0 = new THREE.Color('#b5b84a'), sick1 = new THREE.Color('#d9bf45'), tmpC = new THREE.Color();
 
     updaters.push((t) => {
@@ -214,33 +225,52 @@ export function buildWorld(lang, T, EVt, L) {
       heroPlant.group.visible = (s1 && t < E('uang') - 0.2) || s13;
       // --- props by shot ---
       sale.visible = !s13 && !s15;
-      const fall = t < E('menjual2') + 0.15 ? 0 : clamp01((t - E('menjual2') - 0.15) / 0.42);
-      sale.rotation.x = t >= cut(14) ? -1.5 * fall * fall : 0;
-      sacks.forEach((s, i) => { s.visible = s1 || s12; s.scale.setScalar(t < cut(3) ? pop(t, E('pupuk') - 0.1 + i * 0.1, 0.35) : 1); });
+      // pulled out of the ground (wiggling up), then tossed down to the right
+      const lift = s14 ? ramp(t, E('tidakjadi') + 0.1, E('menjual2') + 0.1) : 0;
+      const fall = s14 ? clamp01((t - E('menjual2') - 0.15) / 0.4) : 0;
+      sale.position.set(-0.8 + 0.25 * fall, 0.45 * lift * (1 - fall) + 0.05 * fall, -0.78);
+      sale.rotation.set(0, 0, (lift > 0 && lift < 1 ? Math.sin(t * 22) * 0.06 : 0) - 1.5 * fall * fall);
+      sacks.forEach((s, i) => { s.visible = s1; s.scale.setScalar(pop(t, E('pupuk') - 0.1 + i * 0.1, 0.35)); });
+      wal.group.visible = inShots(t, 2) && t > E('uang') - 0.1 && t < E('kecewa');
+      wal.flap.rotation.x = 1.9 * ramp(t, E('uang') + 0.1, E('habis'));
+      glowMat.emissiveIntensity = s15 ? 0.35 + 0.15 * Math.sin(t * 3) : 0; glow.intensity = s15 ? 1.6 + 0.4 * Math.sin(t * 3) : 0;
       bk.group.visible = jcan12.group.visible = s12;
       crate.visible = jar.group.visible = jarPlant.group.visible = s13;
       jar.roots.scale.set(lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)), lerp(0.25, 1.05, ramp(t, E('akar') - 0.1, E('kuat') + 0.3)), lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)));
       mols.forEach((j, i) => { j.group.visible = s14 || s15; j.group.scale.setScalar(s14 ? pop(t, E('sejak') + 0.15 + i * 0.2, 0.35) : 1); });
       basket.visible = s14 || s15; basket.scale.setScalar(s14 ? pop(t, E('bonggol2') - 0.15, 0.35) : 1);
-      save.visible = s15; save.scale.setScalar(pop(t, E('simpan') - 0.1, 0.4));
       // --- characters ---
       darto.group.visible = s1 || s12 || s13 || s14 || s15;
-      kakek.group.visible = s15;
-      can.group.visible = s12;
-      if (s1) darto.group.position.set(-0.5, 0, -0.3);
+      kakek.group.visible = s15 && t > E('penyelamat') - 0.15;
+      if (s15 && t < E('penyelamat') - 0.15) darto.group.visible = false;
+      const canOn = s12 && t > E('menyiram') - 0.3;
+      can.group.visible = canOn; cup.visible = s12 && !canOn;
+      cup.rotation.z = -1.7 * (s12 ? ramp(t, E('mencampur') + 0.2, E('mencampur') + 0.6) * (1 - ramp(t, E('sepuluh') + 0.5, E('sepuluh') + 0.8)) : 0);
+      if (s1) darto.group.position.set(-0.15, 0, -0.25);
       else if (s12) darto.group.position.set(0.15, 0, -2.12);
       else if (s13) darto.group.position.set(-2.25, 0, -2.12);
-      else if (s14) darto.group.position.set(t < E('sejak') - 0.15 ? -0.35 : 0.65, 0, -0.3);
+      else if (s14) darto.group.position.set(t < E('sejak') - 0.15 ? -1.35 : 0.65, 0, -0.35);
       else darto.group.position.set(-0.5, 0, -0.3);
       // pouring: tilt the can, droplets fall from the spout, the wet plant sits under the stream
       const pour = s12 ? ramp(t, E('menyiram') - 0.1, E('menyiram') + 0.25) : 0;
       can.group.rotation.z = -0.75 * pour;
-      drops.visible = pour > 0.5;
+      const cupPour = s12 && t > E('mencampur') + 0.45 && t < E('sepuluh') + 0.5;
+      drops.visible = pour > 0.5 || cupPour;
       wetPlant.group.visible = s12;
     });
     post.push((t) => {
       const s12 = inShots(t, 12);
-      if (s12) {
+      if (s12 && t < E('menyiram') - 0.3) {
+        g.updateMatrixWorld(true);
+        tipW.set(0.045, 0.12, 0); cup.localToWorld(tipW); g.worldToLocal(tipW);
+        for (let i = 0; i < NDROP; i++) {
+          const u = ((t * 1.8 + i / NDROP) % 1);
+          dropPos[i * 3] = lerp(tipW.x, 0.78, u) + Math.sin(i * 7.1) * 0.01; dropPos[i * 3 + 1] = lerp(tipW.y, 0.26, u * u); dropPos[i * 3 + 2] = lerp(tipW.z, -2.06, u);
+        }
+        dropGeo.attributes.position.needsUpdate = true;
+        drops.material.color.set('#b8924a');
+      } else if (s12) {
+        drops.material.color.set('#cfeaff');
         g.updateMatrixWorld(true);
         tipW.copy(can.tip); can.group.localToWorld(tipW); g.worldToLocal(tipW);
         wetPlant.group.position.set(tipW.x + 0.08, 0.22, Math.max(-1.75, Math.min(-1.05, tipW.z)));
@@ -330,8 +360,10 @@ export function buildWorld(lang, T, EVt, L) {
     const beam = box(7.2, 0.14, 0.16, '#6a4a32'); at(beam, 0, 2.9, -0.2); g.add(beam);
     bananaRow(g, [[-5.5, -1.0, 2.6, 1], [5.6, -0.6, 2.7], [-6.5, 2.5, 2.5]]);
     // table
-    const table = box(2.5, 0.8, 0.75, toon('#7a5236', {paint: {planks: 6, seed: 18}})); at(table, 0, 0, -1.3); g.add(table);
-    const TT = 0.8;
+    // low table: both of them sit behind it on the porch floor benches (legs hidden by the table)
+    const table = box(2.5, 0.6, 0.75, toon('#7a5236', {paint: {planks: 6, seed: 18}})); at(table, 0, 0, -1.3); g.add(table);
+    const bench = P.bale(2.6, 0.45, 0.4); at(bench, 0.4, 0, -2.15); g.add(bench);
+    const TT = 0.6;
     // oil lamp on the table + a wall lamp: the practical lights that light the faces
     const lampB = new THREE.Group(); at(lampB, -1.0, TT, -1.5); g.add(lampB);
     lampB.add(cyl(0.07, 0.09, 0.1, '#8a6a3a', {hull: 0.006}));
@@ -356,9 +388,9 @@ export function buildWorld(lang, T, EVt, L) {
     const cal = new THREE.Group(); at(cal, 1.95, 1.72, -2.92); g.add(cal);
     const calB = box(0.62, 0.72, 0.03, '#f3e7d3', {center: true, hull: 0.012}); cal.add(calB);
     const calHead = sign(L.day, 0.62, 0.2, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(calHead, 0, 0.27, 0.01); cal.add(calHead);
-    const dayTex = []; for (let n = 1; n <= 14; n++) dayTex.push(signTex(String(n), {w: 512, h: 420, bg: '#f3e7d3', border: false, sub: n === 14 ? L.weeks2 : null}));
     const dayD = decal(dayTex[0], 0.56, 0.46); dayD.position.set(0, -0.07, 0.02); cal.add(dayD);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.018, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); ring.position.set(0, -0.02, 0.04); ring.scale.set(1.25, 1, 1); cal.add(ring);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.016, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); ring.position.set(0, -0.02, 0.04); ring.scale.set(1.45, 1, 1); cal.add(ring);
+    const wk2 = sign(L.weeks2, 0.56, 0.11, {bg: '#f2d24a', frame: '#8a6a2a', depth: 0.02, border: false}); at(wk2, 0, -0.33, 0.03); cal.add(wk2);
     // chopping board + the bonggol + chopped pieces + machete
     const board = box(0.52, 0.04, 0.34, toon('#c9a06a', {paint: {planks: 3, seed: 29}})); at(board, -0.55, TT, -1.18); g.add(board);
     const corm = P.bonggol(0.75, {seed: 5}); at(corm, -0.55, TT + 0.04, -1.2, 0.4); g.add(corm);
@@ -373,8 +405,11 @@ export function buildWorld(lang, T, EVt, L) {
     // jerrycan in the middle
     const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.2, TT, -1.38, 0.15); g.add(jc.group);
     const tape = P.tapePlate(); at(tape, 0.7, TT, -1.1); g.add(tape);
-    const kakek = ch('kakekNight', {seed: 65}, g, -0.05, -1.85, 0);
-    const darto = ch('darto', {seed: 66}, g, 0.98, -1.85, 0);
+    const kakek = ch('kakekNight', {seed: 65}, g, -0.05, -1.9, 0);
+    const darto = ch('darto', {seed: 66}, g, 0.98, -1.9, 0);
+    kakek.setSit(1); darto.setSit(1);
+    const vf = P.vFingers('#f3d9bd'); held(kakek, vf, {hand: 1, x: 0, y: 0, z: 0.03});
+    const stick = cyl(0.012, 0.014, 0.5, '#8a6a3a', {hull: 0.005, center: true}); g.add(stick);
     const knife = P.golok(); held(kakek, knife, {hand: 0, x: -0.01, y: -0.02, z: 0.06, rz: 0.4});
     // chop rhythm on "cacah"
     const chop0 = E('cacah') - 0.1, chop1 = cut(8) - 0.15;
@@ -397,8 +432,8 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('keempat') + 0.05, pose: 'pointUp', expr: 'thinking'},
       {t: E('buka') + 0.1, pose: 'tap', expr: 'happy'},
       {t: E('gas') + 0.05, pose: 'idle', expr: 'grimace'},
-      {t: cut(10), pose: 'stop', expr: 'smug', action: 'talk', dur: 1.8},
-      {t: E('duaminggu') + 0.05, pose: 'pointUp', expr: 'proud'},
+      {t: cut(10) - 0.1, pose: 'vsign', expr: 'cheesy', action: 'talk', dur: 1.8},
+      {t: E('duaminggu') + 0.05, pose: 'vsign', expr: 'happy', action: 'nod', dur: 0.6},
       {t: E('bau') - 0.3, pose: 'chin', expr: 'thinking', action: 'talk', dur: 1.3},
       {t: E('tape') + 0.1, pose: 'present', expr: 'cheesy'},
       {t: E('jadi') + 0.05, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
@@ -411,7 +446,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('cacah') + 0.25, pose: 'idle', expr: 'surprised', action: 'hop', dur: 0.5},
       {t: cut(8), pose: 'think', expr: 'thinking'},
       {t: E('air') + 0.2, pose: 'idle', expr: 'happy', action: 'nod', dur: 0.6},
-      {t: cut(9), pose: 'carryBoth', expr: 'determined'},
+      {t: cut(9), pose: 'present', expr: 'determined'},
       {t: E('jeriken') + 0.15, pose: 'idle', expr: 'excited'},
       {t: E('tutup') + 0.15, action: 'nod', dur: 0.5},
       {t: E('keempat') + 0.1, pose: 'idle', expr: 'confused'},
@@ -423,7 +458,7 @@ export function buildWorld(lang, T, EVt, L) {
       {t: E('jadi') + 0.1, pose: 'cheer', expr: 'excited', action: 'jump', dur: 0.6},
     ]);
     // effects: chips fly on every chop, a splash when the sugar drops in, gas puffs when the cap opens
-    chops.filter((_, i) => i % 2).forEach((tt, i) => fx(g, FX.debris([-0.55, TT + 0.1, -1.15], tt + 0.08, {n: 8, color: '#efe4c0', speed: 1.2, seed: 40 + i}), (t) => inShots(t, 7)));
+    chops.filter((_, i) => i % 2).forEach((tt, i) => fx(g, FX.sparks([-0.55, TT + 0.08, -1.15], tt + 0.08, {n: 14, color: '#f3e8c8', size: 0.045, speed: 0.9, life: 0.5, up: 1.0, seed: 40 + i}), (t) => inShots(t, 7)));
     fx(g, FX.splash([0.82, TT + 0.28, -1.2], E('air') + 0.35, {n: 40, speed: 0.9, size: 0.05}), (t) => inShots(t, 8));
     fx(g, FX.splash([0.2, TT + 0.5, -1.38], E('jeriken') - 0.3, {n: 30, speed: 0.7, size: 0.04, color: '#e8dcb0'}), (t) => inShots(t, 9));
     const opens = [E('buka') + 0.1, E('buka') + 1.0, E('buka') + 1.9];
@@ -458,6 +493,8 @@ export function buildWorld(lang, T, EVt, L) {
       bk.group.rotation.z = 1.0 * tilt; bk.group.position.set(0.82 - 0.25 * tilt, TT + 0.12 * tilt, -1.2);
       // jerrycan + cap
       jc.group.visible = t >= cut(9); jc.group.scale.setScalar(pop(t, E('jeriken') - 0.4, 0.35));
+      jc.group.position.x = t >= cut(10) ? 0.42 : 0.2;
+      if (s10 && t < E('bau') - 0.3) jc.group.visible = false;
       let capUp = t < E('tutup') ? 0.16 : 0.16 * (1 - ramp(t, E('tutup'), E('tutup') + 0.2));
       for (const o of opens) if (t > o && t < o + 0.55) capUp = Math.max(capUp, 0.12 * Math.sin(Math.PI * (t - o) / 0.55));
       jc.cap.position.y = 0.48 + capUp; jc.cap.rotation.y = t * (capUp > 0.01 ? 6 : 0);
@@ -467,6 +504,12 @@ export function buildWorld(lang, T, EVt, L) {
       ring.visible = t > E('duaminggu') + 0.25; ring.scale.set(1.25 * pop(t, E('duaminggu') + 0.25, 0.35), pop(t, E('duaminggu') + 0.25, 0.35), 1);
       cal.rotation.z = t > E('setiap') && t < E('duaminggu') + 0.3 ? Math.sin(t * 20) * 0.02 : 0;
       tape.visible = s10; tape.scale.setScalar(pop(t, E('tape') - 0.1, 0.35));
+      wk2.visible = ring.visible; wk2.scale.setScalar(pop(t, E('duaminggu') + 0.35, 0.35));
+      vf.visible = s10 && t < E('bau') - 0.3;
+      // stirring stick in the bucket once the sugar is in
+      stick.visible = s8 && t > E('air') + 0.35;
+      const sa = (t - E('air')) * 7;
+      stick.position.set(0.82 + Math.cos(sa) * 0.07, TT + 0.32, -1.2 + Math.sin(sa) * 0.07); stick.rotation.set(Math.sin(sa) * 0.3, 0, -Math.cos(sa) * 0.3);
     });
   }
 
@@ -483,8 +526,8 @@ export function buildWorld(lang, T, EVt, L) {
     const cal = new THREE.Group(); at(cal, 1.0, 1.55, -2.78); g.add(cal);
     cal.add(box(0.5, 0.58, 0.03, '#f3e7d3', {center: true, hull: 0.012}));
     const ch1 = sign(L.day, 0.5, 0.16, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(ch1, 0, 0.22, 0.01); cal.add(ch1);
-    const d14 = decal(signTex('14', {w: 512, h: 420, bg: '#f3e7d3', border: false, sub: L.weeks2}), 0.46, 0.38); d14.position.set(0, -0.06, 0.02); cal.add(d14);
-    const r14 = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.014, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); r14.position.set(0, -0.02, 0.04); r14.scale.set(1.25, 1, 1); cal.add(r14);
+    const d14 = decal(dayTex[0], 0.46, 0.38); d14.position.set(0, -0.06, 0.02); cal.add(d14);
+    const r14 = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.014, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); r14.position.set(0, -0.03, 0.04); r14.scale.set(1.45, 1, 1); cal.add(r14);
     const bench = P.bale(1.3, 0.5, 0.45); at(bench, 0.25, 0, -0.85); g.add(bench);
     const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.45, 0.45, -0.85, 0.15); g.add(jc.group);
     const tape = P.tapePlate(); at(tape, -0.05, 0.45, -0.78); g.add(tape);
@@ -506,6 +549,10 @@ export function buildWorld(lang, T, EVt, L) {
       jc.cap.position.set(-0.09 + 0.35 * u, 0.48 + Math.sin(u * Math.PI) * 0.35 - 0.48 * u * 0.0, 0.02 * u);
       jc.cap.rotation.z = u * 4;
       tape.scale.setScalar(pop(t, E('tape2') - 0.15, 0.35));
+      const ff = clamp01((t - cut(11) - 0.2) / (E('membuka') - 0.5 - cut(11) - 0.2));
+      d14.material.map = dayTex[Math.min(13, Math.floor(ff * 13.999))];
+      cal.rotation.z = ff > 0 && ff < 1 ? Math.sin(t * 24) * 0.03 : 0;
+      r14.visible = ff >= 1; r14.scale.set(1.45 * pop(t, E('membuka') - 0.45, 0.3), pop(t, E('membuka') - 0.45, 0.3), 1);
       hens.forEach((h, i) => { h.rotation.z = Math.max(0, Math.sin(t * 5 + i * 2)) * 0.35; h.position.x += 0; });
     });
   }

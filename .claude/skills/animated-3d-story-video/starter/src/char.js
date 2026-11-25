@@ -18,7 +18,7 @@ export const DESIGNS = {
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -113,6 +113,12 @@ function drawHeadBase(o, r) {
   } else if (o.hat === 'bowler') {
     inkShape(x, ellipse(cx, top + R * 0.25, R * 0.82, R * 0.75, 40, Math.PI, Math.PI * 2), o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.25, R * 0.13, 40), o.hatColor, r, 9);
+  } else if (o.hat === 'caping') { // wide conical straw farmer's hat
+    const brimY = top + R * 0.42;
+    inkShape(x, [[cx - R * 1.4, brimY], [cx - R * 0.1, top - R * 0.62], [cx + R * 0.1, top - R * 0.62], [cx + R * 1.4, brimY], [cx + R * 1.2, brimY + R * 0.12], [cx - R * 1.2, brimY + R * 0.12]], o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.4, 0.32));
+    x.save(); x.strokeStyle = 'rgba(120,80,30,0.45)'; x.lineWidth = 4;
+    for (let k = 1; k < 5; k++) { const yy = top - R * 0.62 + (brimY - top + R * 0.62) * k / 5, hw = R * 1.4 * k / 5; x.beginPath(); x.moveTo(cx - hw, yy); x.lineTo(cx + hw, yy); x.stroke(); }
+    x.restore();
   } else if (o.hat === 'top') {
     inkShape(x, [[cx - R * 0.62, top - R * 0.85], [cx + R * 0.62, top - R * 0.85], [cx + R * 0.68, top + R * 0.25], [cx - R * 0.68, top + R * 0.25]], o.hatColor, r, 10, (pts) => paintShade(x, pts, cx, top, R * 1.3, 0.3));
     inkShape(x, ellipse(cx, top + R * 0.27, R * 1.15, R * 0.13, 40), o.hatColor, r, 9);
@@ -245,6 +251,12 @@ function drawFace(o, f, r) {
     case 'smirk': x.beginPath(); x.moveTo(mx - R * 0.1, my + R * 0.01); x.quadraticCurveTo(mx + R * 0.04, my + R * 0.06, mx + R * 0.14, my - R * 0.05); x.stroke(); break;
     default: x.beginPath(); x.arc(mx, my - R * 0.02, R * 0.12, 0.25 * Math.PI, 0.75 * Math.PI); x.stroke();
   }
+  if (o.mustache) { // bushy moustache just above the mouth
+    const yy = my - R * 0.1;
+    const pts = []; for (let i = 0; i <= 24; i++) { const u = i / 24, a = Math.PI * u; pts.push([mx - R * 0.3 * Math.cos(a), yy - R * 0.07 * Math.sin(a)]); }
+    for (let i = 0; i <= 24; i++) { const u = i / 24, xx = mx + R * 0.3 - R * 0.6 * u; pts.push([xx, yy + R * 0.06 + R * 0.05 * Math.abs(Math.sin(u * Math.PI * 2)) - (Math.abs(u - 0.5) > 0.42 ? R * 0.04 : 0)]); }
+    x.save(); x.fillStyle = o.mustache; x.lineWidth = 6; x.strokeStyle = INK; x.beginPath(); pts.forEach((q, i) => (i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]))); x.closePath(); x.fill(); x.stroke(); x.restore();
+  }
   if (o.glasses) {
     x.lineWidth = 7;
     for (const s of [-1, 1]) { x.beginPath(); x.arc(cx + s * R * 0.36, cy + R * 0.04, R * 0.2, 0, 7); x.stroke(); }
@@ -367,6 +379,8 @@ export const PALETTES = {
   pal2: {jacket: '#7fa35a', lower: '#6b4a3a', tie: '#e8c35a', hair: '#4a3026', hat: 'none', glasses: true},
   player: {jacket: '#2f5fa8', lower: '#f3e7d3', tie: '#f2d24a', hair: '#8a5a3a', hat: 'cap', hatColor: '#2f5fa8', hatColor2: '#f2d24a'},
   fanA: {jacket: '#e0b84f', lower: '#55606e', tie: '#2f5fa8', hair: '#2b2326', hat: 'none'},
+  darto: {jacket: '#5f8f4e', lower: '#6b4a3a', tie: '#e8c35a', hair: '#2b2326', hat: 'none', hairStyle: 'tuft', pocket: '#4f7a40'},
+  kakek: {jacket: '#b0694a', lower: '#4a3a36', tie: '#f3e7d3', hair: '#e8e4dc', hat: 'caping', hatColor: '#dcb867', glasses: true, mustache: '#f4f1ea', hairStyle: 'side'},
   fanB: {jacket: '#2f5fa8', lower: '#3a3a40', tie: '#f2d24a', hair: '#6a4a2a', hat: 'cap', hatColor: '#f2d24a', hatColor2: '#2f5fa8'},
 };
 
@@ -400,6 +414,7 @@ export const POSES = {
   beg: {L: [0.9, -0.9], R: [0.9, -0.9]},
   flex: {L: [1.45, 1.75], R: [1.45, 1.75]},
   eat: {L: [0.12, 0], R: [0.35, -2.2]},
+  vsign: {L: [0.12, 0], R: [1.9, 1.3]},
 };
 
 const easeOutBack = (x) => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
@@ -510,7 +525,7 @@ export function makeChar(name, o = {}) {
 
     const walkF = walk > 1 ? 11 : 7;
     const bob = Math.sin(t * 2.2 + phase) * 0.012;
-    body.position.y = bob + Math.abs(Math.sin(t * walkF)) * 0.04 * Math.min(1, walk) + lift;
+    body.position.y = bob + Math.abs(Math.sin(t * walkF)) * 0.04 * Math.min(1, walk) + lift - 0.24 * (state.sit || 0);
     body.position.x = tremble ? Math.sin(t * 60) * 0.012 : 0;
     body.scale.set(sx, sy * (1 - 0.06 * slump), 1);
     body.rotation.z = lean + (walk > 1 ? 0 : 0);
@@ -542,6 +557,8 @@ export function makeChar(name, o = {}) {
       body.rotation.y = state.yaw0 - g.rotation.y + Math.max(-0.7, Math.min(0.7, a)) + spin;
     }
   }
-  const api = {group: g, state, act, update, arms, hand: (i) => arms[i].hand, headPiv};
+  // Seated (sit = 0..1): lowers the body onto a seat of height ~0.45 m and hides the legs (keep them behind something).
+  function setSit(k) { state.sit = k; for (const l of legs) l.visible = k < 0.5; }
+  const api = {group: g, state, act, update, arms, hand: (i) => arms[i].hand, headPiv, legs, setSit};
   return api;
 }

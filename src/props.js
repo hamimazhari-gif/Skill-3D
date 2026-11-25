@@ -976,14 +976,14 @@ export function golok() {
 export function rootJar(o = {}) {
   const r = rng(o.seed || 21); const g = new THREE.Group();
   const soil = cyl(0.13, 0.13, 0.26, toon('#6a4a32', {paint: {seed: 81, grain: 200, stains: 20}}), {hull: 0}); g.add(soil);
-  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.145, 0.145, 0.34, 24, 1, true), new THREE.MeshBasicMaterial({color: '#dff4ff', transparent: true, opacity: 0.22, depthWrite: false, side: THREE.DoubleSide}));
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.145, 0.145, 0.34, 24, 1, true), new THREE.MeshBasicMaterial({color: '#dff4ff', transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide}));
   glass.position.y = 0.17; g.add(glass);
   const rimG = ink(new THREE.TorusGeometry(0.145, 0.008, 5, 28), toon('#cfe8f0', {wear: false}), {hull: 0.004, edges: false}); rimG.rotation.x = Math.PI / 2; rimG.position.y = 0.34; g.add(rimG);
-  const roots = new THREE.Group(); roots.position.y = 0.25; g.add(roots);
+  const roots = new THREE.Group(); roots.position.set(0, 0.25, 0.128); g.add(roots); // roots run down the glass, in front of the soil (cutaway)
   const rmat = new THREE.MeshBasicMaterial({color: '#f4ecd0'});
   for (let i = 0; i < 16; i++) {
     const pts = []; let x = 0, y = 0, z = 0; const a = r() * Math.PI * 2;
-    for (let k = 0; k < 6; k++) { pts.push(new THREE.Vector3(x, y, z)); x += Math.cos(a) * 0.022 + (r() - 0.5) * 0.02; z += Math.sin(a) * 0.022 + (r() - 0.5) * 0.02; y -= 0.035 + r() * 0.012; }
+    for (let k = 0; k < 6; k++) { pts.push(new THREE.Vector3(x, y, z)); x += Math.cos(a) * 0.03 + (r() - 0.5) * 0.02; z = 0.004 * Math.sin(k + i); y -= 0.035 + r() * 0.012; }
     const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 12, 0.006 + (i % 3) * 0.002, 4), rmat); roots.add(tube);
   }
   return {group: g, roots};
@@ -1007,5 +1007,32 @@ export function bale(w = 1.6, d = 0.6, h = 0.42) {
   const g = new THREE.Group();
   const seat = box(w, 0.05, d, toon('#d9b56a', {paint: {planks: 9, seed: 23}})); at(seat, 0, h - 0.05, 0); g.add(seat);
   for (const x of [-w / 2 + 0.06, w / 2 - 0.06]) for (const z of [-d / 2 + 0.05, d / 2 - 0.05]) { const l = cyl(0.035, 0.035, h - 0.05, '#b8924a', {hull: 0.006}); at(l, x, 0, z); g.add(l); }
+  return g;
+}
+
+// Wallet (dompet) held open: two leather halves hinged at the bottom. Returns {group, flap}.
+export function wallet(color = '#7a4a2a') {
+  const g = new THREE.Group();
+  const back = box(0.16, 0.11, 0.015, toon(color, {paint: {seed: 64, stains: 10, scratches: 8}}), {hull: 0.006}); at(back, 0, -0.055, 0); g.add(back);
+  const flap = new THREE.Group(); at(flap, 0, -0.055, 0.012); g.add(flap);
+  const f = box(0.16, 0.11, 0.015, toon(shade(color, -0.12), {paint: {seed: 65, stains: 10}}), {hull: 0.006}); flap.add(f);
+  const inside = box(0.14, 0.09, 0.004, '#c9a87a', {hull: 0}); at(inside, 0, -0.045, 0.01); g.add(inside);
+  return {group: g, flap};
+}
+
+// Drinking glass with a liquid (MOL) inside. Rim centre at local (0, 0.12, 0).
+export function glassCup(liquid = '#b8924a') {
+  const g = new THREE.Group();
+  const liq = cyl(0.04, 0.035, 0.08, toon(liquid, {wear: false}), {hull: 0}); g.add(liq);
+  const gl = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.04, 0.12, 18, 1, true), new THREE.MeshBasicMaterial({color: '#e6f6ff', transparent: true, opacity: 0.35, depthWrite: false, side: THREE.DoubleSide}));
+  gl.position.y = 0.06; g.add(gl);
+  const rim = ink(new THREE.TorusGeometry(0.048, 0.005, 5, 22), toon('#e6f6ff', {wear: false}), {hull: 0.003, edges: false}); rim.rotation.x = Math.PI / 2; rim.position.y = 0.12; g.add(rim);
+  return g;
+}
+
+// Two raised fingers (V sign) to hang from a character's hand (fingers point along -y, the forearm's direction).
+export function vFingers(skin = '#f3d9bd') {
+  const g = new THREE.Group();
+  for (const s of [-1, 1]) { const f = cyl(0.02, 0.022, 0.12, toon(skin, {wear: false}), {hull: 0.008, center: true}); at(f, s * 0.025, -0.07, 0.02, 0, 0, s * 0.22); g.add(f); }
   return g;
 }

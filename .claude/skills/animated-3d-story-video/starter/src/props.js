@@ -857,3 +857,182 @@ export function telescope() {
   const lens = cyl(0.14, 0.14, 0.08, '#3a3a40', {center: true}); lens.position.set(0.47, 1.55, 0); lens.rotation.z = -1.0; g.add(lens);
   return g;
 }
+
+// ---------- story props: "Pak Darto dan bonggol pisang" ----------
+// Seedling in a black polybag. leafMat is shared so a whole garden can turn yellow -> green at once.
+// Returns {group, top, leaves}; scale `top` to grow the plant, rotate leaves to droop.
+export function seedling(leafMat, o = {}) {
+  const r = rng(o.seed || 5); const g = new THREE.Group();
+  g.add(cyl(0.1, 0.085, 0.17, toon('#2a2a2e', {paint: {seed: 71, stains: 6, chips: 0, scratches: 4}}), {hull: 0.008}));
+  const soil = cyl(0.095, 0.095, 0.015, '#5a3f2e', {hull: 0}); at(soil, 0, 0.165, 0); g.add(soil);
+  const top = new THREE.Group(); top.position.y = 0.17; g.add(top);
+  const h = o.h || 0.2;
+  top.add(cyl(0.011, 0.016, h, '#7a9a4a', {hull: 0.005}));
+  const leaves = [];
+  const n = o.leaves || 5;
+  for (let i = 0; i < n; i++) {
+    const piv = new THREE.Group(); piv.position.y = h * (0.55 + 0.45 * i / n); piv.rotation.y = i * 2.4 + r() * 0.4; top.add(piv);
+    const tilt = new THREE.Group(); piv.add(tilt);
+    const lf = ink(new THREE.SphereGeometry(0.06, 10, 6).scale(1.9, 0.22, 0.9).translate(0.1, 0, 0), leafMat, {hull: 0.006, edges: false});
+    tilt.add(lf); leaves.push(tilt);
+  }
+  const tip = ink(new THREE.SphereGeometry(0.04, 10, 6).scale(1, 1.6, 0.6), leafMat, {hull: 0.006, edges: false}); tip.position.y = h + 0.03; top.add(tip);
+  return {group: g, top, leaves};
+}
+
+// Ring texture for a cut banana trunk (concentric leaf sheaths).
+let _ringTex;
+function ringTex() {
+  if (_ringTex) return _ringTex;
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.fillStyle = '#e9e0b8'; x.fillRect(0, 0, 256, 256);
+  for (let k = 0; k < 9; k++) { x.strokeStyle = k % 2 ? 'rgba(120,140,70,0.55)' : 'rgba(150,120,70,0.35)'; x.lineWidth = 5; x.beginPath(); x.arc(128, 128, 18 + k * 13, 0, 7); x.stroke(); }
+  x.fillStyle = '#f6f0d6'; x.beginPath(); x.arc(128, 128, 16, 0, 7); x.fill();
+  _ringTex = texFrom(c); return _ringTex;
+}
+// Cut banana trunk lying along x (centre at origin, resting on y=0).
+export function bananaLog(len = 1.6, rad = 0.16) {
+  const geo = new THREE.CylinderGeometry(rad, rad * 1.08, len, 18); geo.rotateZ(Math.PI / 2); geo.translate(0, rad, 0);
+  const side = toon('#8a9a52', {paint: {stripes: {n: 10, color: '#6f8240'}, seed: 15, stains: 10}});
+  const end = toon(ringTex());
+  const m = new THREE.Mesh(geo, [side, end, end]); m.castShadow = true; m.receiveShadow = true;
+  const g = new THREE.Group(); g.add(m);
+  const hull = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide})); hull.scale.set(1.01, 1.1, 1.1); hull.position.y = -rad * 0.1; g.add(hull);
+  return g;
+}
+
+// Banana corm (bonggol): a knobbly brown bulb with root stubs and a pale cut top.
+export function bonggol(s = 1, o = {}) {
+  const r = rng(o.seed || 9); const g = new THREE.Group();
+  const geo = new THREE.SphereGeometry(0.2, 18, 12);
+  const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const y = p.getY(i), k = 1 + 0.08 * Math.sin(p.getX(i) * 30) * Math.cos(p.getZ(i) * 27);
+    p.setX(i, p.getX(i) * k); p.setZ(i, p.getZ(i) * k); p.setY(i, y > 0.1 ? 0.1 + (y - 0.1) * 0.25 : y * 0.85);
+  }
+  geo.computeVertexNormals(); geo.translate(0, 0.17, 0);
+  const mat = o.mat || toon('#a8865a', {paint: {seed: 33, stains: 30, chips: 20, scratches: 14}});
+  g.add(ink(geo, mat, {hull: 0.012, edges: false}));
+  const cut = cyl(0.13, 0.15, 0.04, '#efe4c0', {hull: 0.008}); at(cut, 0, 0.26, 0); g.add(cut);
+  for (let i = 0; i < 7; i++) {
+    const a = i / 7 * Math.PI * 2 + r() * 0.4;
+    const rt = cyl(0.012, 0.018, 0.16 + r() * 0.08, '#6a5038', {hull: 0.004}); at(rt, Math.cos(a) * 0.14, 0.06, Math.sin(a) * 0.14, 0, Math.sin(a) * 1.9, -Math.cos(a) * 1.9); g.add(rt);
+  }
+  g.scale.setScalar(s);
+  return g;
+}
+
+// Plastic jerrycan (jeriken) with a screw cap. Returns {group, cap}.
+export function jerrycan(color = '#3f7fc8', label) {
+  const g = new THREE.Group();
+  const shape = new THREE.Shape(); const w = 0.3, h = 0.42, rr = 0.05;
+  shape.moveTo(-w / 2 + rr, 0); shape.lineTo(w / 2 - rr, 0); shape.quadraticCurveTo(w / 2, 0, w / 2, rr); shape.lineTo(w / 2, h - rr);
+  shape.quadraticCurveTo(w / 2, h, w / 2 - rr, h); shape.lineTo(-w / 2 + rr, h); shape.quadraticCurveTo(-w / 2, h, -w / 2, h - rr); shape.lineTo(-w / 2, rr); shape.quadraticCurveTo(-w / 2, 0, -w / 2 + rr, 0);
+  const geo = new THREE.ExtrudeGeometry(shape, {depth: 0.18, bevelEnabled: true, bevelSize: 0.02, bevelThickness: 0.02, bevelSegments: 2}); geo.translate(0, 0, -0.09);
+  g.add(ink(geo, toon(color, {paint: {seed: 44, stains: 8, chips: 4, scratches: 6}}), {hull: 0.012, edgeAngle: 50}));
+  const handle = ink(new THREE.TorusGeometry(0.06, 0.018, 6, 14, Math.PI), toon(color), {hull: 0.008, edges: false}); at(handle, 0.03, h + 0.02, 0); g.add(handle);
+  const neck = cyl(0.04, 0.045, 0.05, color, {hull: 0.006}); at(neck, -0.09, h + 0.01, 0); g.add(neck);
+  const cap = new THREE.Group(); at(cap, -0.09, h + 0.06, 0); g.add(cap);
+  cap.add(cyl(0.05, 0.05, 0.045, '#e8c35a', {hull: 0.006}));
+  if (label) { const t = signTex(label, {w: 512, h: 256, bg: '#f3e7d3', border: true}); const d = decal(t, 0.24, 0.12); d.position.set(0, 0.2, 0.111); g.add(d); }
+  return {group: g, cap};
+}
+
+// Bucket (ember) with a coloured liquid surface. Returns {group, liquid}.
+export function bucket(color = '#4f9a8a', liquid = '#f1eee2', label) {
+  const g = new THREE.Group();
+  const geo = new THREE.CylinderGeometry(0.2, 0.15, 0.3, 20, 1, true); geo.translate(0, 0.15, 0);
+  g.add(ink(geo, toon(color, {side: THREE.DoubleSide, paint: {seed: 52, stains: 6, chips: 3}}), {hull: 0.01, edges: false}));
+  const bottom = cyl(0.15, 0.15, 0.01, color, {hull: 0}); g.add(bottom);
+  const liq = new THREE.Mesh(new THREE.CircleGeometry(0.19, 24), toon(liquid, {wear: false})); liq.rotation.x = -Math.PI / 2; liq.position.y = 0.25; g.add(liq);
+  const rim = ink(new THREE.TorusGeometry(0.2, 0.012, 6, 28), toon(shade(color, -0.15)), {hull: 0.004, edges: false}); rim.rotation.x = Math.PI / 2; rim.position.y = 0.3; g.add(rim);
+  const hd = ink(new THREE.TorusGeometry(0.2, 0.008, 5, 20, Math.PI), toon('#8a8a90'), {hull: 0.004, edges: false}); hd.position.y = 0.3; hd.rotation.y = 0.3; g.add(hd);
+  if (label) { const t = signTex(label, {w: 512, h: 220, bg: '#f3e7d3'}); const d = decal(t, 0.3, 0.13); d.position.set(0, 0.15, 0.185); d.rotation.x = -0.15; g.add(d); }
+  return {group: g, liquid: liq};
+}
+
+// Watering can (gembor). Spout points along +x. Returns {group, tip} (tip = spout end, local).
+export function wateringCan(color = '#5a9a8a') {
+  const g = new THREE.Group();
+  const body = cyl(0.13, 0.14, 0.26, color, {hull: 0.01}); at(body, 0, -0.13, 0); g.add(body);
+  const top = cyl(0.135, 0.13, 0.015, shade(color, -0.15), {hull: 0.005}); at(top, 0, 0.13, 0); g.add(top);
+  const spout = cyl(0.018, 0.03, 0.42, color, {hull: 0.006, center: true}); at(spout, 0.24, 0.02, 0, 0, 0, -1.0); g.add(spout);
+  const rose = cyl(0.045, 0.02, 0.05, shade(color, -0.2), {hull: 0.006, center: true}); at(rose, 0.42, 0.14, 0, 0, 0, -1.0); g.add(rose);
+  const hd = ink(new THREE.TorusGeometry(0.11, 0.016, 6, 16, Math.PI), toon(color), {hull: 0.006, edges: false}); at(hd, -0.02, 0.13, 0); g.add(hd);
+  return {group: g, tip: new THREE.Vector3(0.45, 0.13, 0)};
+}
+
+// Machete (golok): blade along -y from the grip (so it hangs from a hand).
+export function golok() {
+  const g = new THREE.Group();
+  const grip = cyl(0.022, 0.025, 0.13, '#6b3f2a', {hull: 0.005, center: true}); g.add(grip);
+  const s = new THREE.Shape(); s.moveTo(-0.02, 0); s.lineTo(0.03, 0); s.lineTo(0.06, -0.32); s.quadraticCurveTo(0.03, -0.38, -0.03, -0.36); s.lineTo(-0.02, 0);
+  const geo = new THREE.ExtrudeGeometry(s, {depth: 0.008, bevelEnabled: false}); geo.translate(0, -0.06, -0.004);
+  g.add(ink(geo, toon('#c8ccd0', {wear: false}), {hull: 0.006}));
+  return g;
+}
+
+// Clear glass jar with soil and roots that grow (set root scale 0..1). Returns {group, roots}.
+export function rootJar(o = {}) {
+  const r = rng(o.seed || 21); const g = new THREE.Group();
+  const soil = cyl(0.13, 0.13, 0.26, toon('#6a4a32', {paint: {seed: 81, grain: 200, stains: 20}}), {hull: 0}); g.add(soil);
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.145, 0.145, 0.34, 24, 1, true), new THREE.MeshBasicMaterial({color: '#dff4ff', transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide}));
+  glass.position.y = 0.17; g.add(glass);
+  const rimG = ink(new THREE.TorusGeometry(0.145, 0.008, 5, 28), toon('#cfe8f0', {wear: false}), {hull: 0.004, edges: false}); rimG.rotation.x = Math.PI / 2; rimG.position.y = 0.34; g.add(rimG);
+  const roots = new THREE.Group(); roots.position.set(0, 0.25, 0.128); g.add(roots); // roots run down the glass, in front of the soil (cutaway)
+  const rmat = new THREE.MeshBasicMaterial({color: '#f4ecd0'});
+  for (let i = 0; i < 16; i++) {
+    const pts = []; let x = 0, y = 0, z = 0; const a = r() * Math.PI * 2;
+    for (let k = 0; k < 6; k++) { pts.push(new THREE.Vector3(x, y, z)); x += Math.cos(a) * 0.03 + (r() - 0.5) * 0.02; z = 0.004 * Math.sin(k + i); y -= 0.035 + r() * 0.012; }
+    const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 12, 0.006 + (i % 3) * 0.002, 4), rmat); roots.add(tube);
+  }
+  return {group: g, roots};
+}
+
+// Palm sugar (gula merah) disc.
+export function palmSugar() { return cyl(0.07, 0.075, 0.06, toon('#6a3a22', {paint: {seed: 91, stains: 20, chips: 10}}), {hull: 0.006}); }
+
+// Fermented cassava (tape) on a banana-leaf plate.
+export function tapePlate() {
+  const g = new THREE.Group();
+  const leaf = cyl(0.2, 0.18, 0.02, '#5f9e42', {hull: 0.006}); g.add(leaf);
+  for (const [x, z, a] of [[-0.06, 0.02, 0.4], [0.06, -0.03, -0.3], [0.0, 0.07, 1.2], [0.03, -0.09, 2.0]]) {
+    const piece = cyl(0.03, 0.035, 0.11, '#f2dc8a', {hull: 0.006, center: true}); at(piece, x, 0.05, z, a, 0, Math.PI / 2); g.add(piece);
+  }
+  return g;
+}
+
+// Bamboo bench (bale-bale).
+export function bale(w = 1.6, d = 0.6, h = 0.42) {
+  const g = new THREE.Group();
+  const seat = box(w, 0.05, d, toon('#d9b56a', {paint: {planks: 9, seed: 23}})); at(seat, 0, h - 0.05, 0); g.add(seat);
+  for (const x of [-w / 2 + 0.06, w / 2 - 0.06]) for (const z of [-d / 2 + 0.05, d / 2 - 0.05]) { const l = cyl(0.035, 0.035, h - 0.05, '#b8924a', {hull: 0.006}); at(l, x, 0, z); g.add(l); }
+  return g;
+}
+
+// Wallet (dompet) held open: two leather halves hinged at the bottom. Returns {group, flap}.
+export function wallet(color = '#7a4a2a') {
+  const g = new THREE.Group();
+  const back = box(0.16, 0.11, 0.015, toon(color, {paint: {seed: 64, stains: 10, scratches: 8}}), {hull: 0.006}); at(back, 0, -0.055, 0); g.add(back);
+  const flap = new THREE.Group(); at(flap, 0, -0.055, 0.012); g.add(flap);
+  const f = box(0.16, 0.11, 0.015, toon(shade(color, -0.12), {paint: {seed: 65, stains: 10}}), {hull: 0.006}); flap.add(f);
+  const inside = box(0.14, 0.09, 0.004, '#c9a87a', {hull: 0}); at(inside, 0, -0.045, 0.01); g.add(inside);
+  return {group: g, flap};
+}
+
+// Drinking glass with a liquid (MOL) inside. Rim centre at local (0, 0.12, 0).
+export function glassCup(liquid = '#b8924a') {
+  const g = new THREE.Group();
+  const liq = cyl(0.04, 0.035, 0.08, toon(liquid, {wear: false}), {hull: 0}); g.add(liq);
+  const gl = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.04, 0.12, 18, 1, true), new THREE.MeshBasicMaterial({color: '#e6f6ff', transparent: true, opacity: 0.35, depthWrite: false, side: THREE.DoubleSide}));
+  gl.position.y = 0.06; g.add(gl);
+  const rim = ink(new THREE.TorusGeometry(0.048, 0.005, 5, 22), toon('#e6f6ff', {wear: false}), {hull: 0.003, edges: false}); rim.rotation.x = Math.PI / 2; rim.position.y = 0.12; g.add(rim);
+  return g;
+}
+
+// Two raised fingers (V sign) to hang from a character's hand (fingers point along -y, the forearm's direction).
+export function vFingers(skin = '#f3d9bd') {
+  const g = new THREE.Group();
+  for (const s of [-1, 1]) { const f = cyl(0.02, 0.022, 0.12, toon(skin, {wear: false}), {hull: 0.008, center: true}); at(f, s * 0.025, -0.07, 0.02, 0, 0, s * 0.22); g.add(f); }
+  return g;
+}

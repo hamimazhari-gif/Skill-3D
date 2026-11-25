@@ -196,6 +196,56 @@ const Captions = ({T, t}) => {
   );
 };
 
+// Screen text cards requested by the user's scene plan (top of frame), timed to the narration.
+function cards(T, EVt) {
+  const c = (k) => T.CUTS[k - 1];
+  return [
+    {t0: EVt.menjual - 0.1, t1: c(2), text: 'Hampir menyerah…'},
+    {t0: EVt.padahal, t1: c(6), text: '“Emasnya kau buang di situ.”'},
+    {t0: c(7) + 0.1, t1: c(8), label: 'LANGKAH 1', text: 'Bonggol pisang 1 kg, dicacah halus'},
+    {t0: c(8) + 0.1, t1: c(9), label: 'LANGKAH 2', text: 'Gula merah ¼ kg + air cucian beras 5 liter'},
+    {t0: c(9) + 0.1, t1: EVt.keempat - 0.1, label: 'LANGKAH 3', text: 'Masukkan ke jeriken, tutup rapat'},
+    {t0: EVt.keempat, t1: c(10), label: 'LANGKAH 4', text: 'Buka tutup setiap hari'},
+    {t0: c(10) + 0.1, t1: c(11), label: 'TANDA JADI', text: 'Fermentasi ±2 minggu, sudah jadi kalau bau seperti tape'},
+    {t0: c(12) + 0.1, t1: c(13), label: 'CARA PAKAI', text: '1 bagian MOL : 10 bagian air'},
+    {t0: EVt.sampah - 0.2, t1: T.total + 1, text: 'Yang kita anggap sampah justru jadi penyelamat 🍌🌱'},
+  ];
+}
+const easeBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const ScreenCard = ({T, EVt, t}) => {
+  const list = useMemo(() => cards(T, EVt), [T, EVt]);
+  const cur = list.find((k) => t >= k.t0 && t < k.t1);
+  if (!cur) return null;
+  const a = Math.min(1, (t - cur.t0) / 0.28), out = Math.min(1, Math.max(0, (cur.t1 - t) / 0.18));
+  const sc = 0.8 + 0.2 * easeBack(a);
+  return (
+    <AbsoluteFill style={{alignItems: 'center', top: 150, height: 'auto', bottom: 'auto', opacity: Math.min(a * 2, out)}}>
+      <div style={{transform: `scale(${sc})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0}}>
+        {cur.label ? <div style={{background: '#5a9a5a', color: '#fffaf0', fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 50, letterSpacing: 2,
+          padding: '8px 28px 10px', border: `7px solid ${INK}`, borderRadius: 20, marginBottom: -14, zIndex: 2, boxShadow: `6px 7px 0 ${INK}`}}>{cur.label}</div> : null}
+        <div style={{maxWidth: 960, background: '#fff6e4', color: INK, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 70, lineHeight: 1.12, textAlign: 'center',
+          padding: '30px 40px 32px', border: `9px solid ${INK}`, borderRadius: 30, boxShadow: `10px 12px 0 ${INK}`, letterSpacing: -0.5}}>{cur.text}</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+// Save + share icons for the call to action.
+const Icon = ({kind, t, t0}) => {
+  if (t < t0) return null;
+  const a = Math.min(1, (t - t0) / 0.3), sc = 0.3 + 0.7 * easeBack(a);
+  const path = kind === 'save'
+    ? <path d="M30 18 h40 a6 6 0 0 1 6 6 v58 l-26 -17 l-26 17 v-58 a6 6 0 0 1 6 -6 z" fill="#fffaf0" stroke={INK} strokeWidth="7" strokeLinejoin="round" />
+    : <g fill="#fffaf0" stroke={INK} strokeWidth="7" strokeLinejoin="round"><path d="M50 16 l28 26 h-16 v22 h-24 v-22 h-16 z" /><path d="M22 60 v18 h56 v-18" fill="none" strokeLinecap="round" /></g>;
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', transform: `scale(${sc}) rotate(${(1 - a) * -12}deg)`}}>
+      <div style={{width: 170, height: 170, borderRadius: 90, background: kind === 'save' ? '#e8a83a' : '#5a9a5a', border: `9px solid ${INK}`, boxShadow: `8px 10px 0 ${INK}`, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <svg width="110" height="110" viewBox="0 0 100 100">{path}</svg>
+      </div>
+      <div style={{marginTop: 14, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 46, color: '#fffaf0', WebkitTextStroke: `12px ${INK}`, paintOrder: 'stroke fill'}}>{kind === 'save' ? 'SIMPAN' : 'BAGIKAN'}</div>
+    </div>
+  );
+};
+
 export const Story = ({lang, captions = true}) => {
   const {width, height} = useVideoConfig();
   const frame = useCurrentFrame();
@@ -215,7 +265,13 @@ export const Story = ({lang, captions = true}) => {
       <AbsoluteFill style={{backgroundColor: CREAM, opacity: Math.max(0, dip)}} />
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       {captions ? <Captions T={T} t={t} /> : null}
+      <ScreenCard T={T} EVt={EVt} t={t} />
+      <AbsoluteFill style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', top: 1440, gap: 90}}>
+        <Icon kind="save" t={t} t0={EVt.simpan - 0.05} />
+        <Icon kind="share" t={t} t0={EVt.bagikan - 0.05} />
+      </AbsoluteFill>
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
+      <Audio src={staticFile('music/bgm_bonggol.wav')} volume={0.16} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
         <Sequence key={i} from={Math.max(0, Math.round(at * FPS))} durationInFrames={trim ? Math.round(trim * FPS) : undefined}>
           <Audio src={staticFile(`sfx/${f}`)} volume={v} />
@@ -245,8 +301,8 @@ export const Thumb = ({lang}) => {
         <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
-        {word(tx.top, 104, '#fff3df', ink, -3)}
-        {word(tx.mid, 104, '#e8a83a', ink, 2)}
+        {word(tx.top, 96, '#fff3df', ink, -3)}
+        {word(tx.mid, 90, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 230}}>
         {word(tx.tag, 64, '#5a9a5a', '#fff3df', -2)}
