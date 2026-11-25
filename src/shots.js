@@ -11,9 +11,9 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: medium shots per memory, close-ups for the punchlines.
-  {shot: 1, loc: 'studio', lift: false, move: 'the age test', keys: [
-    {at: 'start', pos: [0.35, 1.65, -0.2], look: [0.35, 1.6, -3.4]},
-    {at: 'end', pos: [0.35, 1.65, -0.45], look: [0.35, 1.6, -3.4]}]},
+  {shot: 1, loc: 'gudang', lift: false, move: 'an SD boy finds a dusty box', keys: [
+    {at: 'start', pos: [-0.9, 1.5, -0.4], look: [-0.6, 1.15, -3.2]},
+    {at: 'end', pos: [-0.7, 1.5, -0.7], look: [-0.3, 1.1, -3.2]}]},
   {shot: 2, loc: 'gudang', lift: false, move: 'a dusty box in the storeroom', keys: [
     {at: 'start', pos: [-0.6, 1.5, -0.6], look: [-0.4, 1.15, -3.2]},
     {at: 'end', pos: [-0.2, 1.45, -1.0], look: [0.2, 0.9, -3.2]}]},
@@ -62,9 +62,9 @@ export const SHOT_PLAN = [
   {shot: 11, loc: 'kampung', lift: false, move: 'we had nothing, and everything', keys: [
     {at: 'start', pos: [10, 1.3, -0.4], look: [10, 1.6, -3.0]},
     {at: 'end', pos: [10, 1.3, -0.6], look: [10, 1.7, -3.0]}]},
-  {shot: 12, loc: 'studio', lift: false, move: 'your score?', keys: [
-    {at: 'start', pos: [0.2, 1.6, 0.3], look: [0.2, 1.6, -3.4]},
-    {at: 'end', pos: [0.2, 1.6, 0.05], look: [0.2, 1.6, -3.4]}]},
+  {shot: 12, loc: 'kampung', lift: false, move: 'your score?', keys: [
+    {at: 'start', pos: [10, 1.5, 0.2], look: [10, 1.7, -3.0]},
+    {at: 'end', pos: [10, 1.5, 0.0], look: [10, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {
