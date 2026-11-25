@@ -64,28 +64,34 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Pizza Bitcoin" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Tidak bisa bohong 24 jam" (Indonesian only; en mirrors id).
 const EV_ID = {
-  termahal: [0, 'termahal'], harganya1: [1, 'harganya'], triliun0: [1, 'triliun'], bukan: [2, 'bukan'], emas: [2, 'emas'], keju: [2, 'keju'], sosis: [2, 'sosis'],
-  tahun: [3, 'tahun'], laszlo0: [3, 'laszlo'], lapar: [3, 'kelaparan'], bitcoin0: [4, 'bitcoin'], digital: [4, 'digital'], harganya: [4, 'harganya'],
-  forum: [5, 'forum'], siapa: [6, 'siapa'], duaPizza: [6, 'pizza'], bayar: [7, 'bayar'], sepuluhRibu: [7, 'sepuluh'],
-  pemuda: [8, 'pemuda'], menerima: [8, 'menerima'], datang: [9, 'datang'], makan: [9, 'makan'], bahagia: [9, 'bahagia'], empat: [10, 'empat'], dolar: [10, 'dolar'],
-  enak: [11, 'enak'], worth: [12, 'worth'],
-  tahunDemi: [13, 'tahun'], meroket: [13, 'meroket'], sekarang: [14, 'sekarang'], triliun: [14, 'triliun'],
-  rumah: [15, 'rumah'], jet: [15, 'jet'], gorengan: [15, 'gorengan'], awan: [15, 'awan'],
-  tunggu: [16, 'tunggu'], twist: [17, 'twist'], ternyata: [18, 'ternyata'], sekali: [18, 'sekali'], seratus: [19, 'seratus'], berkali: [19, 'berkali'],
-  pak: [20, 'pak'], cicilan: [20, 'cicilan'],
-  geleng: [21, 'geleng'], menyesal: [21, 'menyesal'], dunia: [22, 'dunia'], bayar2: [22, 'bayar'],
-  sejak: [23, 'sejak'], mei: [23, 'mei'], pizzaDay: [23, 'pizza'], ingat: [24, 'ingat'], naik: [24, 'naik'], anjlok: [24, 'anjlok'], jangan: [25, 'jangan'], risiko: [25, 'risikonya'],
-  nangis: [26, 'nangis'], santai: [26, 'santai'], komentar: [27, 'komentar'],
+  bagaimana: [0, 'bagaimana'], semua0: [0, 'semua'], dunia0: [0, 'dunia'], bohong0: [0, 'berbohong'], duaPuluh0: [0, 'dua'], jam0: [0, 'jam'],
+  pagi: [1, 'tujuh'], istri: [2, 'istri'], baju: [2, 'baju'], bertanya: [2, 'bertanya'], bahaya: [2, 'berbahaya'],
+  pa: [3, 'pa'], cantik: [3, 'cantik'], bajuIni: [3, 'baju'],
+  suami: [4, 'suami'], diam: [4, 'diam'], tapi1: [4, 'tapi'], mulut: [4, 'mulutnya'], sendiri: [4, 'sendiri'],
+  bagus: [5, 'bagus'], tapi2: [5, 'tapi'], taplak: [5, 'taplak'], nenek: [5, 'nenek'],
+  hariPertama: [6, 'hari'], langsung: [6, 'langsung'], sofa: [6, 'sofa'],
+  sembilan: [7, 'sembilan'], rapat: [7, 'rapat'], bos: [8, 'bos'], adaQ: [8, 'ada'],
+  adaPak: [9, 'ada'], rapatIni: [9, 'rapat'], diganti: [9, 'diganti'], whatsapp: [9, 'whatsapp'],
+  seisi: [10, 'seisi'], menahan: [10, 'menahan'],
+  duaBelas: [11, 'dua'], pasar: [11, 'pasar'], bang: [12, 'bang'], semangka: [12, 'semangkanya'], manisQ: [12, 'manis'],
+  jujur: [13, 'jujur'], mbak: [13, 'mbak'], manis: [13, 'manis'], saya: [13, 'saya'],
+  tigaSore: [14, 'tiga'], teman: [14, 'teman'], utang: [14, 'utang'], kapan: [15, 'kapan'],
+  sebenarnya: [16, 'sebenarnya'], tapi3: [16, 'tapi'], sayang: [16, 'sayang'], kamu: [16, 'kamu'],
+  enam: [17, 'enam'], arisan: [17, 'arisan'], ramai: [17, 'ramai'], maaf: [18, 'maaf'], baca: [18, 'baca'], malas: [18, 'malas'],
+  malam: [19, 'tujuh'], kondangan: [19, 'kondangan'], gimana: [20, 'gimana'],
+  rendang: [21, 'rendangnya'], enak: [21, 'enak'], tapi4: [21, 'tapi'], makan: [21, 'makan'], nggakKenal: [21, 'nggak'], pengantin: [21, 'pengantinnya'],
+  akhirnya: [22, 'akhirnya'], berlalu: [22, 'berlalu'], semua: [23, 'semua'], lega: [23, 'lega'], kembali: [23, 'kembali'], berbohong: [23, 'berbohong'],
+  pa2: [24, 'pa'], cantik2: [24, 'cantik'], banget: [25, 'banget'], sedunia: [25, 'sedunia'],
+  kalau: [26, 'kalau'], siapa: [26, 'siapa'], bahaya2: [26, 'bahaya'], tulis: [27, 'tulis'], komentar: [27, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {price: 'Rp10 TRILIUN+', notGold: 'BUKAN EMAS', cheese: 'KEJU', sausage: 'SOSIS', year: '2010', hungry: 'KRUUUK...', cheap: '1 BTC = Rp40',
-  post: ['Siapa yang mau', 'kirimin saya 2 pizza?', 'Saya bayar', '10.000 BTC!'], deal: '±$41', yum: 'WORTH IT!', years: '2010 → 2026',
-  houses: 'RIBUAN RUMAH', jets: 'PESAWAT JET', gor: 'GORENGAN', wait: 'TUNGGU DULU...', total: '±100.000 BTC', noRegret: 'NGGAK MENYESAL',
-  world: 'BITCOIN BISA BUAT BAYAR!', day: 'BITCOIN PIZZA DAY', may: '22 MEI', up: 'NAIK', down: 'ANJLOK', risk: 'PAHAMI RISIKONYA!',
-  question: 'NANGIS ATAU SANTAI?', comment: 'TULIS DI KOMENTAR!', museum: 'MUSEUM PIZZA'};
+const L_ID = {t7: '07.00', t9: '09.00', t12: '12.00', t15: '15.00', t18: '18.00', t19: '19.00', start: '24:00:00', end: '00:00:00',
+  noLie: '24 JAM TANPA BOHONG', danger: 'PERTANYAAN BERBAHAYA', nenek: 'TAPLAK MEJA NENEK', day1: 'HARI PERTAMA', meeting: 'RAPAT MINGGUAN',
+  slide: ['RAPAT', 'MINGGUAN', '(2 JAM)'], wa: '1 PESAN WHATSAPP', melon: 'SEMANGKA', sweet: 'MANIS?', debt: 'UTANG: Rp500.000',
+  group: 'ARISAN RT 05', chat: [['Bu, sudah dibaca?', false], ['Kok nggak dibalas?', false], ['Halo??', false], ['Maaf ya, Bu...', true], ['cuma malas balas', true]],
+  wedding: 'SELAMAT MENEMPUH HIDUP BARU', rendang: 'RENDANG', who: 'SIAPA?', relief: 'FIUUUH...', back: 'BOHONG LAGI!',
+  question: 'SIAPA PALING BAHAYA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};
-
-export const RECEIPT = 'Rp10.000.000.000.000';

@@ -1970,3 +1970,79 @@ export function cloud(s = 1, seed = 3) {
   for (let i = 0; i < 6; i++) { const b = ball((0.6 + r() * 0.5) * s, '#fbfbf8', {seg: 12, hull: 0.03 * s}); at(b, (i - 2.5) * 0.55 * s, (r() - 0.3) * 0.4 * s, (r() - 0.5) * 0.4 * s); g.add(b); }
   return g;
 }
+
+// ---------- "Tidak bisa bohong 24 jam" ----------
+// Gingham (taplak meja) texture: white with crossed colour stripes.
+export function ginghamTex(color = '#d8413a', o = {}) {
+  const c = canvas(256, 256), x = c.getContext('2d'); const n = o.n || 8, s = 256 / n;
+  x.fillStyle = o.bg || '#fbf6ea'; x.fillRect(0, 0, 256, 256);
+  x.globalAlpha = 0.55; x.fillStyle = color;
+  for (let i = 0; i < n; i += 2) { x.fillRect(i * s, 0, s, 256); x.fillRect(0, i * s, 256, s); }
+  x.globalAlpha = 1; const t = texFrom(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; if (o.repeat) t.repeat.set(o.repeat, o.repeat); return t;
+}
+// Table with a gingham tablecloth hanging down the sides.
+export function clothTable(o = {}) {
+  const g = new THREE.Group(); const w = o.w || 1.2, d = o.d || 0.8, h = o.h || 0.74;
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const l = box(0.05, h, 0.05, '#7a4a32'); at(l, sx * (w / 2 - 0.08), 0, sz * (d / 2 - 0.08)); g.add(l); }
+  const cl = box(w + 0.1, 0.3, d + 0.1, toon(ginghamTex(o.color || '#d8413a', {repeat: 3}), {wear: false}), {hull: 0.01}); at(cl, 0, h - 0.28, 0); g.add(cl);
+  return g;
+}
+// Watermelon: whole (striped) or a cut half showing red flesh and seeds.
+let _melon;
+export function watermelon(r = 0.22, o = {}) {
+  if (!_melon) { const c = canvas(256, 128), x = c.getContext('2d'); x.fillStyle = '#4f9a3a'; x.fillRect(0, 0, 256, 128); x.fillStyle = '#2f6a2a';
+    for (let i = 0; i < 12; i++) { x.beginPath(); for (let y = 0; y <= 128; y += 8) x.lineTo(i * 21.3 + Math.sin(y * 0.2 + i) * 4, y); for (let y = 128; y >= 0; y -= 8) x.lineTo(i * 21.3 + 9 + Math.sin(y * 0.2 + i) * 4, y); x.fill(); }
+    _melon = texFrom(c); }
+  const g = new THREE.Group();
+  if (!o.cut) { const b = ball(r, toon(_melon, {wear: false}), {sy: 0.85, hull: 0.01}); b.position.y = r * 0.85; g.add(b); return g; }
+  const geo = new THREE.SphereGeometry(r, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2); const sh = ink(geo, toon(_melon, {wear: false}), {hull: 0.01, edges: false}); sh.rotation.x = Math.PI; sh.position.y = r; sh.scale.y = 0.85; g.add(sh);
+  const face = cyl(r * 0.98, r * 0.98, 0.012, '#e8433a', {seg: 24, hull: 0.006}); at(face, 0, r - 0.006, 0); g.add(face);
+  const rind = new THREE.Mesh(new THREE.RingGeometry(r * 0.86, r * 0.98, 32), new THREE.MeshBasicMaterial({color: '#f3f0d0'})); rind.rotation.x = -Math.PI / 2; rind.position.y = r + 0.008; g.add(rind);
+  const rr = rng(o.seed || 4); for (let i = 0; i < 12; i++) { const a = rr() * 6.28, d = r * (0.2 + rr() * 0.5); const s = ball(0.012, INK, {sy: 0.5, hull: 0}); at(s, Math.cos(a) * d, r + 0.01, Math.sin(a) * d); g.add(s); }
+  return g;
+}
+// Plain chair (seat, back, four legs).
+export function chair(color = '#4f6a7a') {
+  const g = new THREE.Group();
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const l = box(0.04, 0.45, 0.04, '#3a3a40', {hull: 0.005}); at(l, sx * 0.19, 0, sz * 0.19); g.add(l); }
+  const seat = box(0.46, 0.06, 0.46, color, {hull: 0.008}); at(seat, 0, 0.45, 0); g.add(seat);
+  const back = box(0.46, 0.5, 0.05, color, {hull: 0.008}); at(back, 0, 0.5, -0.21); g.add(back);
+  return g;
+}
+// Smartphone held big: a group chat with bubbles (lines: [[text, mine], ...]) and a title bar.
+export function chatPhone(title, lines, o = {}) {
+  const g = new THREE.Group(); const w = o.w || 0.5, h = w * 1.9;
+  g.add(box(w, h, 0.04, '#2b2b33', {center: true, hull: 0.01}));
+  const c = canvas(500, 950), x = c.getContext('2d');
+  x.fillStyle = '#efe6d8'; x.fillRect(0, 0, 500, 950); x.fillStyle = '#2f8a5a'; x.fillRect(0, 0, 500, 110);
+  x.fillStyle = '#fff'; x.font = '800 38px "Inter Display"'; x.fillText(title, 28, 72);
+  if (o.badge) { x.fillStyle = '#d8312a'; x.beginPath(); x.arc(440, 56, 34, 0, 7); x.fill(); x.fillStyle = '#fff'; x.font = '900 30px "Inter Display"'; x.textAlign = 'center'; x.fillText(o.badge, 440, 67); x.textAlign = 'left'; }
+  let y = 150; for (const [t, mine] of lines) { x.font = '700 30px "Inter Display"'; const tw = Math.min(400, x.measureText(t).width + 40); const bx = mine ? 470 - tw : 30;
+    x.fillStyle = mine ? '#c8f0b0' : '#ffffff'; x.beginPath(); x.roundRect(bx, y, tw, 64, 18); x.fill(); x.strokeStyle = 'rgba(53,31,34,0.25)'; x.lineWidth = 2; x.stroke();
+    x.fillStyle = INK; x.fillText(t, bx + 20, y + 42); y += 82; }
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.9, h * 0.92), new THREE.MeshBasicMaterial({map: texFrom(c)})); scr.position.z = 0.022; g.add(scr);
+  return g;
+}
+// Wedding backdrop (pelaminan): a panel with a carved gold frame, flower bunches and a low stage.
+export function pelaminan(o = {}) {
+  const g = new THREE.Group(); const w = o.w || 4.2;
+  const st = box(w, 0.3, 2.0, toon('#8a2a36', {paint: {seed: 251}})); g.add(st);
+  const back = box(w, 2.8, 0.12, toon(o.color || '#f3e3c8', {paint: {seed: 252}})); at(back, 0, 0.3, -0.95); g.add(back);
+  const arch = new THREE.Mesh(new THREE.TorusGeometry(1.25, 0.06, 8, 40, Math.PI), toon('#d8a83a')); arch.position.set(0, 1.55, -0.86); g.add(arch);
+  for (const s of [-1, 1]) { const col = cyl(0.08, 0.08, 1.25, '#d8a83a', {hull: 0.01}); at(col, s * 1.25, 0.3, -0.86); g.add(col); }
+  const rr = rng(9); for (let i = 0; i < 26; i++) { const a = rr() * Math.PI, side = i % 2 ? 1 : -1;
+    const f = ball(0.09 + rr() * 0.05, ['#e8737a', '#fbf6ea', '#f2d24a', '#e8a0b8'][i % 4], {seg: 10, hull: 0.008}); const big = i < 14;
+    if (big) at(f, Math.cos(a) * 1.25, 1.55 + Math.sin(a) * 1.25, -0.8); else at(f, side * (w / 2 - 0.25 - rr() * 0.3), 0.4 + rr() * 2.2, -0.82); g.add(f); }
+  const bench = box(1.6, 0.45, 0.55, toon('#d8a83a', {paint: {seed: 253}})); at(bench, 0, 0.3, -0.5); g.add(bench);
+  const cush = box(1.5, 0.12, 0.5, '#8a2a36'); at(cush, 0, 0.75, -0.48); g.add(cush);
+  return g;
+}
+// Big digital countdown board: dark panel with glowing digits.
+export function digitalBoard(text, w = 2.4, h = 0.8, o = {}) {
+  const g = new THREE.Group(); g.add(box(w + 0.16, h + 0.16, 0.12, '#2b2b33', {center: true, hull: 0.012}));
+  const c = canvas(1024, Math.round(1024 * h / w)), x = c.getContext('2d'); x.fillStyle = '#111318'; x.fillRect(0, 0, c.width, c.height);
+  x.fillStyle = o.color || '#ff5a4a'; x.shadowColor = o.color || '#ff5a4a'; x.shadowBlur = 30; x.font = `800 ${Math.round(c.height * 0.72)}px "JetBrains Mono", monospace`; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(text, 512, c.height * 0.55);
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({map: texFrom(c)})); scr.position.z = 0.065; g.add(scr);
+  return g;
+}

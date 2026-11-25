@@ -10,68 +10,74 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: one or two framings per shot, slow short pushes; one crane up the gorengan tower.
-  {shot: 1, loc: 'street', lift: false, move: 'a courier knocks on the door', keys: [
-    {at: 'start', pos: [-0.9, 1.6, 0.6], look: [-2.0, 1.4, -3]},
-    {at: 'end', pos: [-0.95, 1.6, 0.4], look: [-2.0, 1.4, -3]}]},
-  {shot: 1, from: 'harganya1', loc: 'street', lift: false, move: 'the receipt unrolls down the highway', keys: [
-    {at: 'start', pos: [1.6, 2.4, 2.6], look: [3.4, 1.0, -14]},
-    {at: 'end', pos: [1.8, 3.0, 2.8], look: [3.6, 0.8, -20]}]},
-  {shot: 1, from: 'bukan', loc: 'vault', lift: false, move: 'just an ordinary pizza', keys: [
-    {at: 'start', pos: [0, 1.5, 0.5], look: [0, 1.25, -3]},
-    {at: 'end', pos: [0, 1.5, 0.15], look: [0, 1.25, -3]}]},
-  {shot: 1, from: 'keju', loc: 'vault', lift: false, move: 'macro: just cheese and sausage', keys: [
-    {at: 'start', pos: [0, 1.75, -2.15], look: [0, 1.08, -3.0]},
-    {at: 'end', pos: [0, 1.72, -2.25], look: [0, 1.08, -3.0]}]},
-  {shot: 2, loc: 'room', lift: false, move: '2010: hungry Laszlo and his bitcoins', keys: [
-    {at: 'start', pos: [-0.3, 1.55, -0.1], look: [-0.5, 1.3, -3.3]},
-    {at: 'end', pos: [-0.3, 1.55, -0.3], look: [-0.5, 1.3, -3.3]}]},
-  {shot: 3, loc: 'room', lift: false, move: 'he types on the forum', keys: [
-    {at: 'start', pos: [-0.75, 1.55, -1.1], look: [-0.95, 1.2, -3.5]},
-    {at: 'end', pos: [-0.8, 1.55, -1.25], look: [-0.95, 1.2, -3.5]}]},
-  {shot: 3, from: 'siapa', loc: 'room', lift: false, move: 'macro: the forum post', keys: [
-    {at: 'start', pos: [-1.55, 1.17, -2.8], look: [-1.55, 1.08, -3.5]},
-    {at: 'end', pos: [-1.55, 1.16, -2.88], look: [-1.55, 1.08, -3.5]}]},
-  {shot: 4, loc: 'room', lift: false, move: 'the delivery arrives', keys: [
-    {at: 'start', pos: [0.4, 1.6, 1.0], look: [0.4, 1.3, -3.2]},
-    {at: 'end', pos: [0.4, 1.6, 0.8], look: [0.4, 1.3, -3.2]}]},
-  {shot: 4, from: 'makan', loc: 'room', lift: false, move: 'Laszlo eats happily', keys: [
-    {at: 'start', pos: [0, 1.5, -0.8], look: [0, 1.2, -3.0]},
-    {at: 'end', pos: [0, 1.5, -0.95], look: [0, 1.2, -3.0]}]},
-  {shot: 5, loc: 'room', lift: false, move: 'close: worth it!', keys: [
-    {at: 'start', pos: [-0.45, 1.68, -1.7], look: [-0.5, 1.62, -3.1]},
-    {at: 'end', pos: [-0.45, 1.68, -1.82], look: [-0.5, 1.62, -3.1]}]},
-  {shot: 6, loc: 'stage', lift: false, move: 'the price rockets', keys: [
-    {at: 'start', pos: [-0.1, 1.75, 1.2], look: [0.1, 1.9, -4.4]},
-    {at: 'end', pos: [-0.1, 1.75, 0.9], look: [0.1, 1.9, -4.4]}]},
-  {shot: 7, loc: 'field', lift: false, move: 'houses, jets, then gorengan up to the clouds', keys: [
-    {at: 'start', pos: [0, 3.2, 7], look: [0, 1.8, -8]},
-    {at: 'gorengan', pos: [0, 1.9, 1.8], look: [0, 2.6, -4.8]},
-    {at: 'end', pos: [0, 11.5, 4.5], look: [0, 12.3, -5]}]},
-  {shot: 8, loc: 'room', lift: false, move: 'plot twist: a tower of pizza boxes', keys: [
-    {at: 'start', pos: [0.1, 1.55, -0.3], look: [0.1, 1.4, -3.3]},
-    {at: 'end', pos: [0.1, 1.55, -0.5], look: [0.1, 1.4, -3.3]}]},
-  {shot: 8, from: 'seratus', loc: 'room', lift: false, move: 'wide: pizza boxes fill the room', keys: [
-    {at: 'start', pos: [0, 1.95, 1.4], look: [0, 1.0, -3.0]},
-    {at: 'end', pos: [0, 1.95, 1.2], look: [0, 1.0, -3.0]}]},
-  {shot: 9, loc: 'room', lift: false, move: 'close: the delivery guy asks', keys: [
-    {at: 'start', pos: [1.0, 1.68, -1.6], look: [1.3, 1.62, -3.2]},
-    {at: 'end', pos: [1.0, 1.68, -1.72], look: [1.3, 1.62, -3.2]}]},
-  {shot: 10, loc: 'room', lift: false, move: 'close: no regrets', keys: [
-    {at: 'start', pos: [-0.45, 1.68, -1.6], look: [-0.5, 1.62, -3.1]},
-    {at: 'end', pos: [-0.45, 1.68, -1.72], look: [-0.5, 1.62, -3.1]}]},
-  {shot: 10, from: 'dunia', loc: 'stage', lift: false, move: 'the world learns bitcoin can pay', keys: [
-    {at: 'start', pos: [-9, 2.1, -0.2], look: [-9, 2.3, -4.3]},
-    {at: 'end', pos: [-9, 2.1, -0.4], look: [-9, 2.3, -4.3]}]},
-  {shot: 11, loc: 'room', lift: false, move: 'Bitcoin Pizza Day party', keys: [
-    {at: 'start', pos: [0, 1.6, 1.0], look: [0, 1.6, -3.5]},
-    {at: 'end', pos: [0, 1.6, 0.8], look: [0, 1.6, -3.5]}]},
-  {shot: 11, from: 'ingat', loc: 'stage', lift: false, move: 'up... and down', keys: [
-    {at: 'start', pos: [8.9, 1.75, 1.0], look: [9.1, 1.75, -4.4]},
-    {at: 'end', pos: [8.9, 1.75, 0.8], look: [9.1, 1.75, -4.4]}]},
-  {shot: 12, loc: 'room', lift: false, move: 'cry or chill?', keys: [
-    {at: 'start', pos: [-0.5, 1.7, -0.4], look: [-0.5, 1.8, -3.0]},
-    {at: 'end', pos: [-0.5, 1.7, -0.6], look: [-0.5, 1.8, -3.0]}]},
+  // Calm camera: slow short pushes, hard cuts inside a location on the punchlines.
+  {shot: 1, loc: 'stage', lift: false, move: 'the whole world: 24 hours without lying', keys: [
+    {at: 'start', pos: [0, 2.4, 1.9], look: [0, 2.5, -5]},
+    {at: 'end', pos: [0, 2.3, 1.4], look: [0, 2.4, -5]}]},
+  {shot: 1, from: 'bohong0', loc: 'stage', lift: false, move: 'everyone covers their mouth', keys: [
+    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.6, -2.8]},
+    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.6, -2.8]}]},
+  {shot: 2, loc: 'home', lift: false, move: '7 am: the wife comes home with a new dress', keys: [
+    {at: 'start', pos: [0, 1.7, 1.2], look: [0, 1.35, -3.6]},
+    {at: 'end', pos: [0, 1.7, 0.9], look: [0, 1.35, -3.6]}]},
+  {shot: 2, from: 'pa', loc: 'home', move: 'close: "do I look pretty?"', keys: [
+    {at: 'start', pos: [-0.45, 1.6, -1.35], look: [-0.55, 1.5, -3.0]},
+    {at: 'end', pos: [-0.45, 1.6, -1.5], look: [-0.55, 1.5, -3.0]}]},
+  {shot: 3, loc: 'home', move: 'close: the husband tries to keep quiet', keys: [
+    {at: 'start', pos: [0.5, 1.6, -1.35], look: [0.55, 1.5, -3.0]},
+    {at: 'end', pos: [0.5, 1.6, -1.5], look: [0.55, 1.5, -3.0]}]},
+  {shot: 3, from: 'taplak', loc: 'home', lift: false, move: 'the dress matches grandma\'s tablecloth', keys: [
+    {at: 'start', pos: [-1.0, 1.7, 0.1], look: [-1.4, 1.45, -3.4]},
+    {at: 'end', pos: [-1.0, 1.7, -0.1], look: [-1.4, 1.45, -3.4]}]},
+  {shot: 4, loc: 'home', lift: false, move: 'night: sleeping on the sofa', keys: [
+    {at: 'start', pos: [1.55, 1.3, -1.7], look: [1.6, 0.95, -4.3]},
+    {at: 'end', pos: [1.55, 1.25, -1.95], look: [1.6, 0.95, -4.3]}]},
+  {shot: 5, loc: 'office', lift: false, move: '9 am: the weekly meeting', keys: [
+    {at: 'start', pos: [-0.35, 1.75, 1.3], look: [-0.35, 1.3, -3.2]},
+    {at: 'end', pos: [-0.35, 1.7, 1.0], look: [-0.35, 1.3, -3.2]}]},
+  {shot: 5, from: 'adaPak', loc: 'office', lift: false, move: 'close: "this could be one WhatsApp message"', keys: [
+    {at: 'start', pos: [0.4, 1.38, -1.85], look: [0.4, 1.3, -3.2]},
+    {at: 'end', pos: [0.4, 1.38, -1.95], look: [0.4, 1.3, -3.2]}]},
+
+  {shot: 5, from: 'seisi', loc: 'office', lift: false, move: 'the room holds its breath', keys: [
+    {at: 'start', pos: [0.2, 1.9, 0.9], look: [-0.35, 1.2, -3.0]},
+    {at: 'end', pos: [0.15, 1.9, 0.7], look: [-0.35, 1.2, -3.0]}]},
+  {shot: 6, loc: 'market', lift: false, move: 'noon: the watermelon stall', keys: [
+    {at: 'start', pos: [-0.2, 1.8, 1.6], look: [-0.2, 1.3, -3.2]},
+    {at: 'end', pos: [-0.2, 1.75, 1.2], look: [-0.2, 1.3, -3.2]}]},
+  {shot: 6, from: 'jujur', loc: 'market', move: 'close: "the only sweet thing is me"', keys: [
+    {at: 'start', pos: [0.35, 1.62, -2.48], look: [0.35, 1.62, -3.75]},
+    {at: 'end', pos: [0.35, 1.62, -2.56], look: [0.35, 1.62, -3.75]}]},
+  {shot: 7, loc: 'porch', lift: false, move: '3 pm: a friend comes to collect a debt', keys: [
+    {at: 'start', pos: [0.6, 1.75, 1.6], look: [0.4, 1.3, -3.2]},
+    {at: 'end', pos: [0.5, 1.7, 1.2], look: [0.3, 1.3, -3.2]}]},
+  {shot: 7, from: 'sebenarnya', loc: 'porch', move: 'two-shot: "I love the money more than you"', keys: [
+    {at: 'start', pos: [0.15, 1.65, -0.9], look: [0.15, 1.5, -3.2]},
+    {at: 'end', pos: [0.15, 1.65, -1.05], look: [0.15, 1.5, -3.2]}]},
+  {shot: 8, loc: 'arisan', lift: false, move: '6 pm: the arisan group chat explodes', keys: [
+    {at: 'start', pos: [-0.1, 1.6, 0.2], look: [-0.1, 1.45, -3.2]},
+    {at: 'end', pos: [-0.1, 1.6, -0.1], look: [-0.1, 1.45, -3.2]}]},
+  {shot: 9, loc: 'wedding', lift: false, move: '7 pm: the wedding', keys: [
+    {at: 'start', pos: [0, 1.95, 2.0], look: [0, 1.5, -4.5]},
+    {at: 'end', pos: [0, 1.9, 1.6], look: [0, 1.5, -4.5]}]},
+  {shot: 9, from: 'gimana', loc: 'wedding', move: 'two-shot: "how is the food?"', keys: [
+    {at: 'start', pos: [0.15, 1.6, -0.5], look: [0.15, 1.5, -2.5]},
+    {at: 'end', pos: [0.15, 1.6, -0.65], look: [0.15, 1.5, -2.5]}]},
+  {shot: 9, from: 'nggakKenal', loc: 'wedding', move: 'the bride and groom: who is he?', keys: [
+    {at: 'start', pos: [0, 1.95, -3.0], look: [0, 1.85, -5.5]},
+    {at: 'end', pos: [0, 1.95, -3.15], look: [0, 1.85, -5.5]}]},
+  {shot: 10, loc: 'stage', lift: false, move: 'the clock hits zero', keys: [
+    {at: 'start', pos: [0, 2.9, 1.6], look: [0, 3.0, -5]},
+    {at: 'end', pos: [0, 2.8, 1.3], look: [0, 2.9, -5]}]},
+  {shot: 10, from: 'semua', loc: 'stage', lift: false, move: 'relief... and back to lying', keys: [
+    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.6, -2.8]},
+    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.6, -2.8]}]},
+  {shot: 11, loc: 'home', lift: false, move: 'the next morning: "pretty?"', keys: [
+    {at: 'start', pos: [0, 1.65, -0.4], look: [0, 1.4, -3.2]},
+    {at: 'end', pos: [0, 1.65, -0.6], look: [0, 1.4, -3.2]}]},
+  {shot: 12, loc: 'home', move: 'the question to the viewer', keys: [
+    {at: 'start', pos: [0.55, 1.75, -0.6], look: [0.55, 1.65, -3.0]},
+    {at: 'end', pos: [0.55, 1.75, -0.8], look: [0.55, 1.65, -3.0]}]},
 ];
 
 export function warpU(T, t) {

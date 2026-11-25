@@ -23,10 +23,11 @@ export const DESIGNS = {
   spry: {head: 'round', hair: 'tuft', skin: '#f6dfc8', brows: 'thin', limb: [8, 5], legExtra: 0.05, torsoExtra: 0.1, cheeks: false, shading: true, shadows: true},
   cozy: {head: 'round', hair: 'fringe', skin: '#f5dcc4', brows: 'thick', limb: [10, 6], legExtra: 0.0, torsoExtra: 0.17, cheeks: false, shading: true, shadows: true},
   dapper: {head: 'round', hair: 'side', skin: '#f4dcc8', brows: 'thin', limb: [8, 5], legExtra: 0.09, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  breezy: {head: 'round', hair: 'fringe', skin: '#f3d6bc', brows: 'thick', limb: [9, 5], legExtra: 0.07, torsoExtra: 0.13, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -386,6 +387,12 @@ function drawTorso(o, r) {
   }
   if (out === 'boss') { x.fillStyle = 'rgba(255,255,255,0.18)'; for (let yy = top; yy < waist; yy += 22) x.fillRect(0, yy, W * PX, 6); }
   x.fillStyle = o.lower; x.fillRect(0, waist, W * PX, H * PX);
+  if (o.check) { // gingham (tablecloth) print over the whole torso and skirt
+    const n = 26; x.globalAlpha = 0.55; x.fillStyle = o.check;
+    for (let k = 0; k * n < W * PX; k += 2) x.fillRect(k * n, 0, n, H * PX);
+    for (let k = 0; k * n < H * PX; k += 2) x.fillRect(0, k * n, W * PX, n);
+    x.globalAlpha = 1;
+  }
   x.strokeStyle = INK; x.lineWidth = 6; x.beginPath(); x.moveTo(0, waist); x.lineTo(W * PX, waist); x.stroke();
   x.restore();
   const py = top + (bot - top) * 0.42, px = cx - bw * 0.58;

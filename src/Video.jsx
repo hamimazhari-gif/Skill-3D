@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 6, 7, 8, 11, 12];
+const DIPS = [2, 5, 6, 7, 8, 9, 10, 11];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'PIZZA TERMAHAL | DI DUNIA 🍕💸'], ['bukan', 'BUKAN PAKAI EMAS… | CUMA KEJU 🧀'], ['cut2', '"BAYAR 10.000 BITCOIN | UNTUK 2 PIZZA!" 💻'],
-  ['cut4', 'SAAT ITU CUMA ±$41 😋'], ['cut6', 'SEKARANG: LEBIH DARI | Rp10 TRILIUN 📈'], ['cut8', 'TERNYATA DIA NGGAK | CUMA BELI SEKALI 😭🍕🍕🍕'], ['cut10', '22 MEI = | BITCOIN PIZZA DAY 🎉']];
+const TITLES = []; // no storyboard for this video: no screen titles, only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -145,60 +144,62 @@ const Rewind = ({T, E, t}) => {
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
+  const tick = (w) => [sy('clock_tick'), E[w] - 0.15, 0.2, 0.8];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    // 1 the museum
-    ...[0.55, 0.8, 1.05, 1.9, 2.15].map((t) => [sy('thud'), t + 0.06, 0.2]),
-    [sy('paper_flutter'), E.harganya1, 0.2, 1.6],
-    [sy('sparkle'), E.bukan, 0.16],
-    ['06-deep-cinematic-boom.wav', E.triliun0, 0.18],
-    ['04-soft-ui-pop.mp3', E.keju - 0.05, 0.2], ['04-soft-ui-pop.mp3', E.sosis - 0.05, 0.2],
-    // 2-3 2010, hungry, the forum post
-    [sy('rumble'), E.lapar, 0.14, 1.0],
-    [sy('coin_drop'), E.bitcoin0, 0.16],
-    [sy('uh_oh'), E.harganya, 0.1],
-    ['03-typing-keyboard-burst.wav', C[2] + 0.2, 0.2],
-    ['03-typing-keyboard-burst.wav', E.siapa, 0.18],
-    ['09-notification-ding.wav', E.bayar + 0.2, 0.2],
-    // 4-5 the delivery
-    [sy('creak'), E.pemuda - 0.2, 0.18],
-    [sy('footsteps_walk'), E.pemuda - 0.2, 0.12, 1.4],
-    ['04-soft-ui-pop.mp3', E.datang, 0.2],
-    [sy('tada'), E.bahagia, 0.12],
-    [sy('ka_ching'), E.dolar, 0.16],
-    [sy('sparkle'), E.worth, 0.18],
-    // 6 to the moon
-    ['07-riser-build-up.wav', E.tahunDemi, 0.12, 2.0],
-    [sy('slide_whistle_up'), E.meroket, 0.16],
-    ['06-deep-cinematic-boom.wav', E.triliun, 0.2],
-    [sy('crowd_cheer'), E.triliun + 0.1, 0.1, 1.4],
-    // 7 houses, jets, gorengan
-    ...[0, 1, 2].map((i) => ['04-soft-ui-pop.mp3', E.rumah - 0.3 + i * 0.25, 0.16]),
-    ['05-airy-whoosh.mp3', E.jet - 0.1, 0.2],
-    [sy('frying'), E.gorengan, 0.08, E.awan + 1.0 - E.gorengan],
-    [sy('slide_whistle_up'), E.awan - 0.3, 0.14],
-    // 8-9 plot twist
-    [sy('slide_whistle_down'), E.tunggu, 0.14],
-    ['06-deep-cinematic-boom.wav', E.twist, 0.14],
-    ...Array.from({length: 7}, (_, i) => ['pop-bubble-sound-effect.mp3', E.ternyata + i * (E.berkali - E.ternyata) / 7, 0.12]),
-    [sy('ka_ching'), E.seratus, 0.18],
-    [sy('creak'), C[8] - 0.2, 0.15],
-    [sy('boing'), E.cicilan, 0.14],
-    // 10 no regrets, the world
-    [sy('sparkle'), E.menyesal, 0.16],
-    ['08-soft-success-chime.mp3', E.dunia, 0.22],
-    // 11 pizza day, up and down
-    [sy('party_horn'), E.pizzaDay, 0.16],
-    [sy('crowd_cheer'), E.sejak, 0.08, E.ingat - E.sejak],
-    [sy('slide_whistle_up'), E.naik, 0.14],
-    [sy('slide_whistle_down'), E.anjlok, 0.16],
-    ['02-error-denied-buzz.wav', E.anjlok + 0.1, 0.12],
-    [sy('alarm_bell'), E.jangan, 0.08, 0.8],
-    // 12 the question
-    ['pop-bubble-sound-effect.mp3', E.nangis - 0.2, 0.2],
+    // 1 the world, 24 hours
+    [sy('tense_drone'), 0.1, 0.1, 5.0],
+    [sy('clock_tick'), E.duaPuluh0 - 0.1, 0.18, 1.2],
+    ['06-deep-cinematic-boom.wav', E.bohong0, 0.16],
+    // 2-4 home
+    tick('pagi'),
+    [sy('creak'), E.istri - 0.5, 0.16],
+    ['04-soft-ui-pop.mp3', E.bahaya - 0.05, 0.2],
+    [sy('sparkle'), E.cantik, 0.16],
+    [sy('uh_oh'), E.mulut, 0.12],
+    [sy('boing'), E.taplak, 0.16],
+    ['02-error-denied-buzz.wav', E.nenek + 0.2, 0.1],
+    [sy('thud'), E.hariPertama - 0.3, 0.22],
+    [sy('snore'), E.sofa - 0.2, 0.12, 1.4],
+    // 5 office
+    tick('sembilan'),
+    [sy('crowd_murmur'), C[4] + 0.1, 0.06, E.adaQ - C[4]],
+    ['09-notification-ding.wav', E.whatsapp, 0.2],
+    [sy('tense_drone'), E.seisi - 0.1, 0.12, 2.0],
+    // 6 market
+    tick('duaBelas'),
+    [sy('crowd_murmur'), C[5] + 0.1, 0.06, 2.0],
+    [sy('sparkle'), E.manis, 0.2],
+    [sy('kiss'), E.saya, 0.12],
+    // 7 porch
+    tick('tigaSore'),
+    [sy('footsteps_walk'), E.teman - 0.3, 0.12, 1.5],
+    ['04-soft-ui-pop.mp3', E.utang - 0.05, 0.18],
+    [sy('heart_pop'), E.sayang, 0.16],
+    [sy('slide_whistle_down'), E.kamu, 0.14],
+    // 8 arisan chat
+    tick('enam'),
+    ...[0, 0.4, 0.75, 1.05, 1.35].map((d) => ['09-notification-ding.wav', E.arisan - 0.1 + d, 0.12]),
+    ['03-typing-keyboard-burst.wav', E.maaf, 0.12, 1.2],
+    ['04-soft-ui-pop.mp3', E.malas - 0.05, 0.18],
+    // 9 wedding
+    tick('malam'),
+    [sy('crowd_murmur'), C[8] + 0.1, 0.06, E.nggakKenal - C[8]],
+    [sy('glass_tap'), E.gimana - 0.2, 0.12],
+    ['06-digital-glitch-tech-blip.mp3', E.nggakKenal, 0.16],
+    [sy('uh_oh'), E.pengantin, 0.12],
+    // 10 the clock hits zero
+    [sy('clock_tick'), C[9] + 0.1, 0.18, E.berlalu - C[9] - 0.1],
+    [sy('tada'), E.berlalu, 0.14],
+    [sy('crowd_cheer'), E.berlalu + 0.1, 0.08, 1.4],
+    [sy('puff'), E.lega, 0.2],
+    [sy('boing'), E.kembali, 0.14],
+    // 11-12 the lie is back, the question
+    [sy('sparkle'), E.banget, 0.14],
+    [sy('heart_pop'), E.sedunia - 0.1, 0.16],
+    ['pop-bubble-sound-effect.mp3', E.siapa - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
-    ['mouse-click-sound-effect.mp3', E.komentar + 0.4, 0.4, 0.45],
   ];
 }
 
@@ -264,10 +265,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕💸', mid: 'CUMA KEJU & SOSIS!', bot: ''},
-  en: {top: 'PIZZA TERMAHAL\nDI DUNIA 🍕💸', mid: 'CUMA KEJU & SOSIS!', bot: ''},
+  id: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
+  en: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.termahal + 0.3, loc: 'vault', pos: [0, 1.62, -1.35], look: [0, 1.05, -3]});
+const THUMB = (EVt) => ({t: EVt.taplak + 0.5, loc: 'home', pos: [-0.35, 1.55, -0.3], look: [-0.9, 1.35, -3.3]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

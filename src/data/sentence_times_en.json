@@ -1,563 +1,483 @@
 {
- "duration": 102.76,
+ "duration": 84.88,
  "sentences": [
   {
    "shot": 1,
-   "text": "Ini mungkin pizza termahal di dunia.",
+   "text": "Bagaimana jika... semua orang di dunia tidak bisa berbohong selama dua puluh empat jam?",
    "start": 0.0,
-   "end": 2.7,
-   "pred": 2.29,
+   "end": 5.3,
+   "pred": 5.43,
    "voiced": [
     [
-     0.1,
-     0.58
+     0.08,
+     1.06
     ],
     [
-     0.78,
-     1.16
+     1.44,
+     2.8
     ],
     [
-     1.26,
-     2.68
+     3.04,
+     5.3
     ]
    ]
   },
   {
-   "shot": 1,
-   "text": "Harganya lebih dari sepuluh triliun rupiah.",
-   "start": 3.1,
-   "end": 5.42,
-   "pred": 2.83,
+   "shot": 2,
+   "text": "Jam tujuh pagi.",
+   "start": 6.12,
+   "end": 6.9,
+   "pred": 0.93,
    "voiced": [
     [
-     3.12,
-     5.42
+     6.12,
+     6.9
     ]
    ]
   },
   {
-   "shot": 1,
-   "text": "Dan bukan karena pakai emas... toppingnya cuma keju dan sosis.",
-   "start": 5.94,
-   "end": 10.26,
-   "pred": 3.75,
+   "shot": 2,
+   "text": "Istri baru beli baju, lalu bertanya pertanyaan paling berbahaya di dunia.",
+   "start": 7.36,
+   "end": 11.76,
+   "pred": 5.2,
    "voiced": [
     [
-     5.96,
-     7.58
-    ],
-    [
-     7.88,
-     8.44
+     7.36,
+     8.36
     ],
     [
      8.76,
-     9.02
+     9.44
     ],
     [
-     9.1,
-     10.24
+     9.54,
+     9.66
+    ],
+    [
+     9.76,
+     10.28
+    ],
+    [
+     10.58,
+     11.76
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Tahun dua ribu sepuluh, seorang programmer bernama Laszlo Hanyecz sedang kelaparan.",
-   "start": 11.72,
-   "end": 16.04,
-   "pred": 5.89,
+   "text": "\"Pa, Mama cantik nggak pakai baju ini?\"",
+   "start": 12.64,
+   "end": 14.86,
+   "pred": 2.71,
    "voiced": [
     [
-     11.72,
-     12.38
+     12.64,
+     13.08
     ],
     [
-     12.46,
-     15.06
-    ],
-    [
-     15.14,
-     16.04
-    ]
-   ]
-  },
-  {
-   "shot": 2,
-   "text": "Ia punya banyak Bitcoin, uang digital yang waktu itu masih baru dan hampir nggak ada harganya.",
-   "start": 16.6,
-   "end": 21.44,
-   "pred": 6.35,
-   "voiced": [
-    [
-     16.6,
-     17.42
-    ],
-    [
-     17.5,
-     17.86
-    ],
-    [
-     18.1,
-     21.36
+     13.7,
+     14.86
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Lalu dia menulis di forum internet.",
-   "start": 21.86,
-   "end": 23.24,
-   "pred": 2.22,
+   "text": "Suami berusaha diam... tapi mulutnya bicara sendiri.",
+   "start": 15.58,
+   "end": 18.88,
+   "pred": 3.26,
    "voiced": [
     [
-     21.88,
-     23.24
+     15.58,
+     16.56
+    ],
+    [
+     17.24,
+     18.42
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "\"Siapa yang mau kirimin saya dua pizza?",
-   "start": 23.84,
-   "end": 25.36,
-   "pred": 2.37,
+   "text": "\"Bajunya bagus... tapi kayak taplak meja di rumah Nenek.\"",
+   "start": 19.28,
+   "end": 22.4,
+   "pred": 3.34,
    "voiced": [
     [
-     23.86,
-     25.36
-    ]
-   ]
-  },
-  {
-   "shot": 3,
-   "text": "Saya bayar sepuluh ribu Bitcoin!\"",
-   "start": 25.82,
-   "end": 27.32,
-   "pred": 2.06,
-   "voiced": [
-    [
-     25.82,
-     26.38
+     19.3,
+     20.74
     ],
     [
-     26.46,
-     27.3
+     20.86,
+     22.4
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Seorang pemuda menerima tawaran itu.",
-   "start": 28.26,
-   "end": 31.2,
-   "pred": 2.37,
+   "text": "Hari pertama, langsung tidur di sofa.",
+   "start": 22.98,
+   "end": 24.42,
+   "pred": 2.79,
    "voiced": [
     [
-     28.26,
-     29.84
-    ],
-    [
-     29.96,
-     30.02
-    ],
-    [
-     30.12,
-     31.2
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "Dua pizza datang, Laszlo makan dengan bahagia.",
-   "start": 31.46,
-   "end": 33.4,
-   "pred": 3.36,
-   "voiced": [
-    [
-     31.46,
-     32.28
-    ],
-    [
-     32.4,
-     33.4
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "Saat itu, sepuluh ribu Bitcoin cuma bernilai sekitar empat puluh satu dolar.",
-   "start": 33.86,
-   "end": 37.48,
-   "pred": 5.28,
-   "voiced": [
-    [
-     33.88,
-     36.6
-    ],
-    [
-     36.72,
-     37.48
+     22.98,
+     24.42
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "\"Enak banget pizzanya.",
-   "start": 38.08,
-   "end": 39.68,
-   "pred": 1.38,
+   "text": "Jam sembilan, rapat kantor.",
+   "start": 25.32,
+   "end": 27.02,
+   "pred": 2.17,
    "voiced": [
     [
-     38.08,
-     38.28
+     25.32,
+     26.14
     ],
     [
-     38.54,
-     39.12
-    ],
-    [
-     39.2,
-     39.68
+     26.34,
+     27.02
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Worth it!\"",
-   "start": 40.0,
-   "end": 40.52,
-   "pred": 0.54,
+   "text": "Bos bertanya, \"Ada pertanyaan?\"",
+   "start": 27.52,
+   "end": 29.34,
+   "pred": 2.33,
    "voiced": [
     [
-     40.02,
-     40.5
+     27.52,
+     28.06
+    ],
+    [
+     28.64,
+     29.34
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Ada, Pak. Rapat ini sebenarnya bisa diganti satu pesan WhatsApp.\"",
+   "start": 30.08,
+   "end": 33.12,
+   "pred": 4.5,
+   "voiced": [
+    [
+     30.08,
+     30.48
+    ],
+    [
+     30.82,
+     33.12
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Seisi ruangan menahan napas.",
+   "start": 33.72,
+   "end": 35.52,
+   "pred": 1.86,
+   "voiced": [
+    [
+     33.72,
+     35.52
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Tapi tahun demi tahun berlalu, dan harga Bitcoin meroket.",
-   "start": 41.34,
-   "end": 44.62,
-   "pred": 4.05,
+   "text": "Jam dua belas, di pasar.",
+   "start": 36.34,
+   "end": 37.74,
+   "pred": 1.86,
    "voiced": [
     [
-     41.34,
-     42.96
+     36.34,
+     37.12
     ],
     [
-     43.1,
-     44.4
-    ],
-    [
-     44.52,
-     44.62
+     37.28,
+     37.72
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Sekarang, sepuluh ribu Bitcoin itu nilainya lebih dari sepuluh triliun rupiah!",
-   "start": 44.86,
-   "end": 50.72,
-   "pred": 5.5,
+   "text": "\"Bang, semangkanya manis nggak?\"",
+   "start": 38.44,
+   "end": 39.7,
+   "pred": 2.4,
    "voiced": [
     [
-     45.12,
-     46.0
+     38.44,
+     38.7
     ],
     [
-     46.14,
-     47.5
-    ],
+     38.88,
+     39.7
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Jujur, Mbak... yang manis cuma saya.\"",
+   "start": 40.46,
+   "end": 42.3,
+   "pred": 2.48,
+   "voiced": [
     [
-     47.62,
-     48.68
-    ],
-    [
-     48.8,
-     49.0
-    ],
-    [
-     49.22,
-     50.28
-    ],
-    [
-     50.36,
-     50.7
+     40.46,
+     42.28
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Dengan uang segitu, kamu bisa beli ribuan rumah, beberapa pesawat jet, atau gorengan... sampai tumpukannya nembus awan.",
-   "start": 51.62,
-   "end": 58.3,
-   "pred": 8.72,
+   "text": "Jam tiga sore, teman datang menagih utang.",
+   "start": 43.18,
+   "end": 45.7,
+   "pred": 3.1,
    "voiced": [
     [
-     51.62,
-     52.64
+     43.18,
+     43.92
     ],
     [
-     52.74,
-     54.1
+     44.36,
+     45.68
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Kapan bayar?\"",
+   "start": 46.36,
+   "end": 46.9,
+   "pred": 0.78,
+   "voiced": [
+    [
+     46.38,
+     46.9
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Sebenarnya uangnya ada... tapi aku lebih sayang uangnya daripada kamu.\"",
+   "start": 47.64,
+   "end": 50.84,
+   "pred": 4.42,
+   "voiced": [
+    [
+     47.64,
+     48.88
     ],
     [
-     54.44,
-     55.3
-    ],
-    [
-     55.54,
-     55.66
-    ],
-    [
-     55.78,
-     58.3
+     49.02,
+     50.84
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Tapi tunggu dulu.",
-   "start": 59.26,
-   "end": 60.36,
-   "pred": 1.07,
+   "text": "Jam enam, grup arisan tiba-tiba ramai.",
+   "start": 51.76,
+   "end": 53.92,
+   "pred": 2.79,
    "voiced": [
     [
-     59.26,
-     59.4
+     51.76,
+     52.38
     ],
     [
-     59.52,
-     59.68
-    ],
-    [
-     59.92,
-     60.32
+     52.7,
+     53.92
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Ini belum plot twist-nya.",
-   "start": 60.74,
-   "end": 62.0,
-   "pred": 1.53,
+   "text": "\"Maaf ya, Bu. Pesannya saya baca semua... cuma malas balas.\"",
+   "start": 54.62,
+   "end": 57.7,
+   "pred": 3.8,
    "voiced": [
     [
-     60.74,
-     61.74
-    ]
-   ]
-  },
-  {
-   "shot": 8,
-   "text": "Ternyata Laszlo nggak cuma beli pizza sekali.",
-   "start": 62.26,
-   "end": 64.48,
-   "pred": 2.91,
-   "voiced": [
-    [
-     62.26,
-     62.82
+     54.62,
+     55.12
     ],
     [
-     63.02,
-     64.46
-    ]
-   ]
-  },
-  {
-   "shot": 8,
-   "text": "Di tahun itu, dia dilaporkan menghabiskan sekitar seratus ribu Bitcoin... untuk beli pizza berkali-kali!",
-   "start": 64.92,
-   "end": 72.48,
-   "pred": 6.96,
-   "voiced": [
-    [
-     64.94,
-     65.62
+     55.48,
+     56.62
     ],
     [
-     65.86,
-     67.48
-    ],
-    [
-     67.68,
-     68.2
-    ],
-    [
-     68.3,
-     69.66
-    ],
-    [
-     69.96,
-     70.82
-    ],
-    [
-     70.98,
-     71.58
-    ],
-    [
-     72.0,
-     72.08
-    ],
-    [
-     72.36,
-     72.48
+     56.8,
+     57.68
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "\"Pak... itu pizza apa cicilan negara?\"",
-   "start": 73.16,
-   "end": 74.66,
-   "pred": 2.06,
+   "text": "Dan jam tujuh malam, di kondangan.",
+   "start": 58.58,
+   "end": 60.7,
+   "pred": 2.56,
    "voiced": [
     [
-     73.16,
-     74.62
+     58.58,
+     59.84
+    ],
+    [
+     60.02,
+     60.68
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Gimana makanannya, Mas?\"",
+   "start": 61.34,
+   "end": 62.32,
+   "pred": 1.94,
+   "voiced": [
+    [
+     61.34,
+     62.3
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Rendangnya enak. Tapi saya ke sini cuma buat makan, sebenarnya nggak kenal pengantinnya.\"",
+   "start": 63.06,
+   "end": 67.36,
+   "pred": 6.13,
+   "voiced": [
+    [
+     63.06,
+     63.94
+    ],
+    [
+     64.42,
+     65.5
+    ],
+    [
+     65.62,
+     65.92
+    ],
+    [
+     66.1,
+     67.36
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Dan yang paling bikin geleng-geleng kepala, Laszlo bilang dia nggak menyesal.",
-   "start": 75.72,
-   "end": 80.38,
-   "pred": 5.35,
+   "text": "Akhirnya, dua puluh empat jam berlalu.",
+   "start": 68.2,
+   "end": 70.14,
+   "pred": 2.87,
    "voiced": [
     [
-     75.72,
-     76.4
-    ],
-    [
-     76.48,
-     77.96
-    ],
-    [
-     78.12,
-     78.22
-    ],
-    [
-     78.38,
-     79.26
-    ],
-    [
-     79.44,
-     80.36
+     68.2,
+     70.14
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Katanya, berkat pizza itu, dunia tahu Bitcoin bisa dipakai buat bayar sesuatu.",
-   "start": 80.84,
-   "end": 85.34,
-   "pred": 5.81,
+   "text": "Semua orang menghela napas lega... dan langsung kembali berbohong.",
+   "start": 70.56,
+   "end": 74.0,
+   "pred": 4.19,
    "voiced": [
     [
-     80.84,
-     82.28
+     70.58,
+     72.1
     ],
     [
-     82.48,
-     83.2
-    ],
-    [
-     83.38,
-     85.32
+     72.56,
+     74.0
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Sejak itu, setiap tanggal dua puluh dua Mei dirayakan sebagai \"Bitcoin Pizza Day.\"",
-   "start": 86.6,
-   "end": 91.62,
-   "pred": 5.5,
+   "text": "\"Pa, Mama cantik?\"",
+   "start": 74.78,
+   "end": 75.84,
+   "pred": 1.4,
    "voiced": [
     [
-     86.6,
-     87.2
+     74.78,
+     74.94
     ],
     [
-     87.3,
-     90.7
-    ],
-    [
-     91.24,
-     91.62
+     75.3,
+     75.84
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Tapi ingat, harga kripto bisa naik... dan bisa juga anjlok.",
-   "start": 91.94,
-   "end": 94.6,
-   "pred": 3.9,
+   "text": "\"Cantik banget, Ma! Paling cantik sedunia!\"",
+   "start": 76.44,
+   "end": 78.9,
+   "pred": 3.02,
    "voiced": [
     [
-     91.94,
-     92.2
+     76.44,
+     76.78
     ],
     [
-     92.28,
-     92.42
+     76.88,
+     77.42
     ],
     [
-     92.5,
-     93.06
-    ],
-    [
-     93.44,
-     93.7
-    ],
-    [
-     93.84,
-     94.48
-    ]
-   ]
-  },
-  {
-   "shot": 11,
-   "text": "Jangan ikut-ikutan tanpa paham risikonya.",
-   "start": 94.96,
-   "end": 97.04,
-   "pred": 2.68,
-   "voiced": [
-    [
-     94.96,
-     97.02
+     77.94,
+     78.9
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Kalau kamu jadi Laszlo, bakal nangis atau tetap santai makan pizza?",
-   "start": 98.02,
-   "end": 101.18,
-   "pred": 4.66,
+   "text": "Kalau kamu nggak bisa bohong seharian, siapa yang paling bahaya buat kamu?",
+   "start": 79.64,
+   "end": 83.32,
+   "pred": 5.2,
    "voiced": [
     [
-     98.02,
-     101.18
+     79.64,
+     79.84
+    ],
+    [
+     79.92,
+     81.42
+    ],
+    [
+     81.76,
+     83.32
     ]
    ]
   },
   {
    "shot": 12,
    "text": "Tulis di komentar!",
-   "start": 101.86,
-   "end": 102.52,
-   "pred": 1.15,
+   "start": 83.96,
+   "end": 84.62,
+   "pred": 1.16,
    "voiced": [
     [
-     101.86,
-     102.48
+     83.96,
+     84.6
     ]
    ]
   }

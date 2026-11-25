@@ -1,0 +1,485 @@
+{
+ "duration": 84.88,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Bagaimana jika... semua orang di dunia tidak bisa berbohong selama dua puluh empat jam?",
+   "start": 0.0,
+   "end": 5.3,
+   "pred": 5.43,
+   "voiced": [
+    [
+     0.08,
+     1.06
+    ],
+    [
+     1.44,
+     2.8
+    ],
+    [
+     3.04,
+     5.3
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Jam tujuh pagi.",
+   "start": 6.12,
+   "end": 6.9,
+   "pred": 0.93,
+   "voiced": [
+    [
+     6.12,
+     6.9
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Istri baru beli baju, lalu bertanya pertanyaan paling berbahaya di dunia.",
+   "start": 7.36,
+   "end": 11.76,
+   "pred": 5.2,
+   "voiced": [
+    [
+     7.36,
+     8.36
+    ],
+    [
+     8.76,
+     9.44
+    ],
+    [
+     9.54,
+     9.66
+    ],
+    [
+     9.76,
+     10.28
+    ],
+    [
+     10.58,
+     11.76
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Pa, Mama cantik nggak pakai baju ini?\"",
+   "start": 12.64,
+   "end": 14.86,
+   "pred": 2.71,
+   "voiced": [
+    [
+     12.64,
+     13.08
+    ],
+    [
+     13.7,
+     14.86
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Suami berusaha diam... tapi mulutnya bicara sendiri.",
+   "start": 15.58,
+   "end": 18.88,
+   "pred": 3.26,
+   "voiced": [
+    [
+     15.58,
+     16.56
+    ],
+    [
+     17.24,
+     18.42
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "\"Bajunya bagus... tapi kayak taplak meja di rumah Nenek.\"",
+   "start": 19.28,
+   "end": 22.4,
+   "pred": 3.34,
+   "voiced": [
+    [
+     19.3,
+     20.74
+    ],
+    [
+     20.86,
+     22.4
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Hari pertama, langsung tidur di sofa.",
+   "start": 22.98,
+   "end": 24.42,
+   "pred": 2.79,
+   "voiced": [
+    [
+     22.98,
+     24.42
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Jam sembilan, rapat kantor.",
+   "start": 25.32,
+   "end": 27.02,
+   "pred": 2.17,
+   "voiced": [
+    [
+     25.32,
+     26.14
+    ],
+    [
+     26.34,
+     27.02
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Bos bertanya, \"Ada pertanyaan?\"",
+   "start": 27.52,
+   "end": 29.34,
+   "pred": 2.33,
+   "voiced": [
+    [
+     27.52,
+     28.06
+    ],
+    [
+     28.64,
+     29.34
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Ada, Pak. Rapat ini sebenarnya bisa diganti satu pesan WhatsApp.\"",
+   "start": 30.08,
+   "end": 33.12,
+   "pred": 4.5,
+   "voiced": [
+    [
+     30.08,
+     30.48
+    ],
+    [
+     30.82,
+     33.12
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Seisi ruangan menahan napas.",
+   "start": 33.72,
+   "end": 35.52,
+   "pred": 1.86,
+   "voiced": [
+    [
+     33.72,
+     35.52
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Jam dua belas, di pasar.",
+   "start": 36.34,
+   "end": 37.74,
+   "pred": 1.86,
+   "voiced": [
+    [
+     36.34,
+     37.12
+    ],
+    [
+     37.28,
+     37.72
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Bang, semangkanya manis nggak?\"",
+   "start": 38.44,
+   "end": 39.7,
+   "pred": 2.4,
+   "voiced": [
+    [
+     38.44,
+     38.7
+    ],
+    [
+     38.88,
+     39.7
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Jujur, Mbak... yang manis cuma saya.\"",
+   "start": 40.46,
+   "end": 42.3,
+   "pred": 2.48,
+   "voiced": [
+    [
+     40.46,
+     42.28
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Jam tiga sore, teman datang menagih utang.",
+   "start": 43.18,
+   "end": 45.7,
+   "pred": 3.1,
+   "voiced": [
+    [
+     43.18,
+     43.92
+    ],
+    [
+     44.36,
+     45.68
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Kapan bayar?\"",
+   "start": 46.36,
+   "end": 46.9,
+   "pred": 0.78,
+   "voiced": [
+    [
+     46.38,
+     46.9
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Sebenarnya uangnya ada... tapi aku lebih sayang uangnya daripada kamu.\"",
+   "start": 47.64,
+   "end": 50.84,
+   "pred": 4.42,
+   "voiced": [
+    [
+     47.64,
+     48.88
+    ],
+    [
+     49.02,
+     50.84
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Jam enam, grup arisan tiba-tiba ramai.",
+   "start": 51.76,
+   "end": 53.92,
+   "pred": 2.79,
+   "voiced": [
+    [
+     51.76,
+     52.38
+    ],
+    [
+     52.7,
+     53.92
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "\"Maaf ya, Bu. Pesannya saya baca semua... cuma malas balas.\"",
+   "start": 54.62,
+   "end": 57.7,
+   "pred": 3.8,
+   "voiced": [
+    [
+     54.62,
+     55.12
+    ],
+    [
+     55.48,
+     56.62
+    ],
+    [
+     56.8,
+     57.68
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Dan jam tujuh malam, di kondangan.",
+   "start": 58.58,
+   "end": 60.7,
+   "pred": 2.56,
+   "voiced": [
+    [
+     58.58,
+     59.84
+    ],
+    [
+     60.02,
+     60.68
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Gimana makanannya, Mas?\"",
+   "start": 61.34,
+   "end": 62.32,
+   "pred": 1.94,
+   "voiced": [
+    [
+     61.34,
+     62.3
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Rendangnya enak. Tapi saya ke sini cuma buat makan, sebenarnya nggak kenal pengantinnya.\"",
+   "start": 63.06,
+   "end": 67.36,
+   "pred": 6.13,
+   "voiced": [
+    [
+     63.06,
+     63.94
+    ],
+    [
+     64.42,
+     65.5
+    ],
+    [
+     65.62,
+     65.92
+    ],
+    [
+     66.1,
+     67.36
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Akhirnya, dua puluh empat jam berlalu.",
+   "start": 68.2,
+   "end": 70.14,
+   "pred": 2.87,
+   "voiced": [
+    [
+     68.2,
+     70.14
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Semua orang menghela napas lega... dan langsung kembali berbohong.",
+   "start": 70.56,
+   "end": 74.0,
+   "pred": 4.19,
+   "voiced": [
+    [
+     70.58,
+     72.1
+    ],
+    [
+     72.56,
+     74.0
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Pa, Mama cantik?\"",
+   "start": 74.78,
+   "end": 75.84,
+   "pred": 1.4,
+   "voiced": [
+    [
+     74.78,
+     74.94
+    ],
+    [
+     75.3,
+     75.84
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Cantik banget, Ma! Paling cantik sedunia!\"",
+   "start": 76.44,
+   "end": 78.9,
+   "pred": 3.02,
+   "voiced": [
+    [
+     76.44,
+     76.78
+    ],
+    [
+     76.88,
+     77.42
+    ],
+    [
+     77.94,
+     78.9
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau kamu nggak bisa bohong seharian, siapa yang paling bahaya buat kamu?",
+   "start": 79.64,
+   "end": 83.32,
+   "pred": 5.2,
+   "voiced": [
+    [
+     79.64,
+     79.84
+    ],
+    [
+     79.92,
+     81.42
+    ],
+    [
+     81.76,
+     83.32
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 83.96,
+   "end": 84.62,
+   "pred": 1.16,
+   "voiced": [
+    [
+     83.96,
+     84.6
+    ]
+   ]
+  }
+ ]
+}

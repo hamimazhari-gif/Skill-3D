@@ -251,3 +251,11 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **A crane shot:** a third key in the middle (`{at: <word>, ...}`) then the end key high up; the tower grows by showing more pieces over time.
 - **Signs cast shadows on the back wall:** put wall signs close to the wall, or the shadow reads as a stray black box.
 - **Money claims tied to a live price** ("lebih dari sepuluh triliun"): note in `script.md` the price at which the claim holds.
+
+## Notes from "Tidak bisa bohong 24 jam" (comedy sketch chain, 85 s)
+- **A day in time slots:** one location per "jam ..." line; a small digital board with the hour (`P.digitalBoard(text, w, h, {color})`) pops in on the hour word in every location (`clock(g, txt, x, y, z, word)` helper in `world.js`). A big board in a studio counts from 24:00:00 to 00:00:00 for the open and close.
+- **Props:** `ginghamTex`, `clothTable` (tablecloth), `watermelon(r, {cut})`, `chair`, `chatPhone(title, [[text, mine], ...], {w, badge})` (a big readable group chat; build several versions with more lines and switch them on words), `pelaminan` (wedding stage with flower arch and bench), `digitalBoard`.
+- **Outfit option `check`:** a gingham print over the whole torso and skirt (the wife's dress matches the tablecloth for the joke).
+- **Lying down:** set `c.group.rotation.z = Math.PI / 2` and the body height on a sofa each frame (the character update never writes the group rotation); frame it from the front.
+- **Lip-sync from a word:** `speak(c, sentence, exprs, fromTime)` clips the talk segments to start at a word (for "Bos bertanya, \"Ada pertanyaan?\"").
+- **Prop return shapes:** `wallClock` → `{group, set(h, m)}`, `wallet` → `{group, open(u)}`, `tv` → `{group, update(t)}`.
