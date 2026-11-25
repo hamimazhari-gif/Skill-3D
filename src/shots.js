@@ -20,9 +20,12 @@ export const SHOT_PLAN = [
   {shot: 3, loc: 'home', lift: false, move: 'a childhood fear', keys: [
     {at: 'start', pos: [0.1, 1.6, 0.0], look: [0.1, 1.4, -3.2]},
     {at: 'end', pos: [0.1, 1.6, -0.3], look: [0.1, 1.4, -3.2]}]},
-  {shot: 3, from: 'bayangkan', loc: 'home', lift: false, move: 'from first grade to junior high', keys: [
-    {at: 'start', pos: [-0.9, 1.55, -0.9], look: [-0.9, 1.5, -3.2]},
-    {at: 'end', pos: [-0.9, 1.55, -1.1], look: [-0.9, 1.5, -3.2]}]},
+  {shot: 3, from: 'bayangkan', loc: 'gut', lift: false, move: 'imagined: gum stuck everywhere in the stomach', keys: [
+    {at: 'start', pos: [0, 1.5, -0.5], look: [0, 1.5, -3.6]},
+    {at: 'end', pos: [0, 1.5, -0.8], look: [0, 1.5, -3.6]}]},
+  {shot: 3, from: 'smp', loc: 'home', lift: false, move: 'grown up, the gum still on his belly', keys: [
+    {at: 'start', pos: [-0.6, 1.4, -1.1], look: [-0.6, 1.25, -3.0]},
+    {at: 'end', pos: [-0.6, 1.4, -1.25], look: [-0.6, 1.25, -3.0]}]},
   {shot: 4, loc: 'studio', lift: false, move: 'myth or fact', keys: [
     {at: 'start', pos: [0, 1.35, 0.7], look: [0, 1.35, -3.4]},
     {at: 'end', pos: [0, 1.35, 0.45], look: [0, 1.35, -3.4]}]},
@@ -38,7 +41,10 @@ export const SHOT_PLAN = [
   {shot: 8, loc: 'gut', lift: false, move: 'the tourist waves goodbye', keys: [
     {at: 'start', pos: [13.2, 1.05, -0.5], look: [13.4, 0.6, -3.3]},
     {at: 'end', pos: [17.6, 1.05, -0.6], look: [18.2, 0.6, -3.3]}]},
-  {shot: 9, loc: 'gut', lift: false, move: 'too much: a blockage', keys: [
+  {shot: 9, loc: 'home', lift: false, move: 'swallowing gum every day', keys: [
+    {at: 'start', pos: [-0.3, 1.5, -0.8], look: [-0.4, 1.4, -3.0]},
+    {at: 'end', pos: [-0.3, 1.5, -1.0], look: [-0.4, 1.4, -3.0]}]},
+  {shot: 9, from: 'sumbatan', loc: 'gut', lift: false, move: 'too much: a blockage', keys: [
     {at: 'start', pos: [30, 1.4, 1.2], look: [30, 1.0, -3.4]},
     {at: 'end', pos: [30, 1.4, 0.8], look: [30, 1.0, -3.4]}]},
   {shot: 9, from: 'dikunyah', loc: 'home', lift: false, move: 'chew it, do not swallow it', keys: [

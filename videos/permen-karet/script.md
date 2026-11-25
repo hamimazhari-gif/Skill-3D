@@ -1,6 +1,6 @@
 # Permen karet tertelan — script
 
-Narasi dan voice-over dari pengguna (76,5 s), tidak diubah. Belum ada storyboard: hanya caption kata-per-kata dan label di dunia.
+Narasi dan voice-over dari pengguna (76,5 s), tidak diubah. Mengikuti storyboard pengguna (7 adegan dengan teks layar): 'GLEK!' dan wajah kaget, emak berkacak pinggang dengan petir di belakangnya, imajinasi lambung penuh permen karet menempel dan anak SMP yang masih membawa permen karet 'DARI SD', makanan lain hancur sedangkan permen karet tetap utuh, turis yang melambai, anak menelan permen karet tiap hari (SENIN-KAMIS) + 'AWAS!' + sumbatan, penutup ancaman biji semangka. Papan di dunia yang sama dengan teks layar dihapus.
 
 | Shot | Lokasi | Isi |
 |---|---|---|

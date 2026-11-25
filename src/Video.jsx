@@ -103,15 +103,16 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [4, 5, 7, 9, 10];
+const DIPS = [4, 5, 7, 10];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard yet: only captions
+const TITLES = [['cut1', '"PERMEN KARETNYA | KETELAN!" 😱'], ['cut2', '"NANTI NEMPEL DI | PERUT 7 TAHUN!" 😨'], ['cut3', 'MITOS ATAU FAKTA? 🤔'], ['cut5', '✅ BENAR: PERMEN KARET | SULIT DICERNA'],
+  ['cut6', '❌ MITOS: TINGGAL 7 TAHUN | ✅ KELUAR DALAM BEBERAPA HARI'], ['cut9', '⚠️ JANGAN DIJADIKAN | KEBIASAAN'], ['cut10', 'ANCAMAN EMAK | BERIKUTNYA… 😂🍉']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
   if (!cur || !cur.txt) return null;
-  const longest = Math.max(...cur.txt.split(' | ').map((l) => [...l].length)), fs = longest > 19 ? 54 : 66;
+  const longest = Math.max(...cur.txt.split(' | ').map((l) => [...l].length)), fs = longest > 25 ? 46 : longest > 19 ? 54 : 66;
   const u = Math.min(1, (t - cur.t0) / 0.3), s = 0.7 + 0.3 * (1 + 2.2 * Math.pow(u - 1, 3) + 1.2 * Math.pow(u - 1, 2));
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: 120}}>
@@ -146,15 +147,16 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('puff'), E.ketelan - 0.2, 0.2], [sy('uh_oh'), E.ketelan + 0.1, 0.12],
-    ['06-deep-cinematic-boom.wav', E.hah, 0.14], [sy('tense_drone'), E.kalimat, 0.1, 3.0],
-    [sy('page_flips'), E.bayangkan, 0.12, 1.5], [sy('clock_tick'), E.sd, 0.14, 1.4], [sy('boing'), E.keluar, 0.16], [sy('tada'), E.smp, 0.12],
+    [sy('puff'), E.ketelan - 0.35, 0.22], [sy('boing'), E.ketelan - 0.3, 0.12], [sy('uh_oh'), E.ketelan + 0.1, 0.12],
+    ['06-deep-cinematic-boom.wav', E.hah, 0.16], [sy('thud'), E.nempel, 0.12], [sy('rumble'), E.hah, 0.1, 2.0], [sy('tense_drone'), E.kalimat, 0.1, 3.0],
+    [sy('page_flips'), E.bayangkan, 0.12, 1.5], ...Array.from({length: 6}, (_, i) => ['pop-bubble-sound-effect.mp3', E.bayangkan + i * 0.1, 0.08]), [sy('clock_tick'), E.sd, 0.14, 1.0], [sy('uh_oh'), E.keluar, 0.12],
     ['04-soft-ui-pop.mp3', E.mitos - 0.05, 0.18], ['04-soft-ui-pop.mp3', E.fakta - 0.05, 0.18],
     [sy('frying'), C[4] + 0.2, 0.06, C[5] - C[4] - 0.4], [sy('boing'), E.kenyal, 0.14], [sy('boing'), E.kenyal + 0.4, 0.12],
     [sy('slide_whistle_down'), E.menempel, 0.12],
     [sy('rumble'), E.bergerak, 0.08, 2.0], ['05-airy-whoosh.mp3', E.terdorong, 0.14],
     [sy('steam_whistle'), E.turis, 0.08], [sy('kiss'), E.dadah, 0.14], ['08-soft-success-chime.mp3', E.dadah + 0.1, 0.18],
-    ...Array.from({length: 6}, (_, i) => ['pop-bubble-sound-effect.mp3', E.banyak + i * 0.3, 0.1]),
+    ...Array.from({length: 7}, (_, i) => ['04-soft-ui-pop.mp3', C[8] + 0.3 + i * ((E.sumbatan - C[8] - 0.8) / 7), 0.1]), [sy('alarm_bell'), E.kebiasaan, 0.06, 0.8],
+    [sy('frying'), E.sulit, 0.06, 2.5],
     ['02-error-denied-buzz.wav', E.sumbatan, 0.12], [sy('alarm_bell'), E.sumbatan + 0.1, 0.06, 0.8],
     [sy('sparkle'), E.dikunyah, 0.16], [sy('tada'), E.lega, 0.12], [sy('uh_oh'), E.sampai, 0.12],
     [sy('thud'), E.jangan, 0.18], [sy('boing'), E.pohon, 0.16],
