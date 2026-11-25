@@ -1965,9 +1965,9 @@ export function gorengan(kind = 0) {
   return ink(geo, toon('#e0a84a', {paint: {seed: 213}}), {hull: 0.008, edges: false});
 }
 // Puffy cartoon cloud.
-export function cloud(s = 1, seed = 3) {
+export function cloud(s = 1, seed = 3, color = '#fbfbf8') {
   const g = new THREE.Group(); const r = rng(seed);
-  for (let i = 0; i < 6; i++) { const b = ball((0.6 + r() * 0.5) * s, '#fbfbf8', {seg: 12, hull: 0.03 * s}); at(b, (i - 2.5) * 0.55 * s, (r() - 0.3) * 0.4 * s, (r() - 0.5) * 0.4 * s); g.add(b); }
+  for (let i = 0; i < 6; i++) { const b = ball((0.6 + r() * 0.5) * s, color, {seg: 12, hull: 0.03 * s}); at(b, (i - 2.5) * 0.55 * s, (r() - 0.3) * 0.4 * s, (r() - 0.5) * 0.4 * s); g.add(b); }
   return g;
 }
 
@@ -2044,5 +2044,56 @@ export function digitalBoard(text, w = 2.4, h = 0.8, o = {}) {
   x.fillStyle = o.color || '#ff5a4a'; x.shadowColor = o.color || '#ff5a4a'; x.shadowBlur = 30; x.font = `800 ${Math.round(c.height * 0.72)}px "JetBrains Mono", monospace`; x.textAlign = 'center'; x.textBaseline = 'middle';
   x.fillText(text, 512, c.height * 0.55);
   const scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({map: texFrom(c)})); scr.position.z = 0.065; g.add(scr);
+  return g;
+}
+
+// ---------- "Roy Sullivan, disambar petir 7 kali" ----------
+// Fire lookout tower: four legs with cross braces, a cabin with windows and a pyramid roof, stairs.
+export function lookoutTower(h = 4.2) {
+  const g = new THREE.Group();
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const l = box(0.14, h, 0.14, toon('#7a5236', {paint: {seed: 261}})); at(l, sx * 0.9, 0, sz * 0.9); g.add(l); }
+  for (let k = 0; k < 3; k++) for (const [rx, rz, ry] of [[0, -0.9, 0], [0, 0.9, 0], [-0.9, 0, Math.PI / 2], [0.9, 0, Math.PI / 2]]) {
+    const b = box(2.4, 0.07, 0.07, '#8a6242', {hull: 0.006}); const y = 0.5 + k * h / 3; at(b, rx, y, rz, ry, 0, k % 2 ? 0.6 : -0.6); g.add(b); }
+  const floor = box(2.4, 0.15, 2.4, toon('#8a6242', {paint: {planks: 6, seed: 262}})); at(floor, 0, h, 0); g.add(floor);
+  const cab = box(2.0, 1.4, 2.0, toon('#e8dcc0', {paint: {seed: 263}})); at(cab, 0, h + 0.15, -0.0); g.add(cab);
+  for (const [x, z, ry] of [[0, 1.01, 0], [1.01, 0, Math.PI / 2], [-1.01, 0, Math.PI / 2]]) { const w = box(1.3, 0.6, 0.03, '#9cc6e6', {hull: 0.006}); at(w, x, h + 0.75, z, ry); g.add(w); }
+  const roof = cone(1.7, 0.9, toon('#5a6a4a', {paint: {seed: 264}}), {seg: 4}); roof.rotation.y = Math.PI / 4; roof.position.set(0, h + 1.55, 0); g.add(roof);
+  const rod = cyl(0.02, 0.02, 0.8, '#3a3a40', {hull: 0.004}); at(rod, 0, h + 2.35, 0); g.add(rod);
+  return g;
+}
+// Metal bucket full of water.
+export function bucket(o = {}) {
+  const g = new THREE.Group(); const c = o.color || '#9aa8b4';
+  g.add(cyl(0.16, 0.12, 0.3, toon(c, {paint: {seed: 265}}), {seg: 20, hull: 0.008}));
+  const w = cyl(0.15, 0.15, 0.01, new THREE.MeshBasicMaterial({color: '#7fc4e8'}), {seg: 20, hull: 0}); at(w, 0, 0.26, 0); g.add(w);
+  const h = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.008, 5, 20, Math.PI), new THREE.MeshBasicMaterial({color: INK})); h.position.y = 0.3; g.add(h);
+  return g;
+}
+// Cartoon brown bear on four legs (or standing up with o.stand).
+export function bear(o = {}) {
+  const g = new THREE.Group(); const c = o.color || '#6a4a32', m = toon(c, {paint: {seed: 266}});
+  const body = ball(0.55, m, {sx: 1.4, sy: 0.95, sz: 0.9, hull: 0.02}); at(body, 0, 0.75, 0); g.add(body);
+  const head = ball(0.32, m, {hull: 0.015}); at(head, 0.75, 1.05, 0); g.add(head);
+  const snout = ball(0.14, '#c9a27a', {sx: 1.3, sy: 0.9, hull: 0.008}); at(snout, 1.02, 1.0, 0); g.add(snout);
+  const nose = ball(0.05, INK, {hull: 0}); at(nose, 1.17, 1.04, 0); g.add(nose);
+  for (const sz of [-1, 1]) { const ear = ball(0.09, m, {hull: 0.006}); at(ear, 0.68, 1.33, sz * 0.2); g.add(ear); const eye = ball(0.035, INK, {hull: 0}); at(eye, 0.98, 1.15, sz * 0.12); g.add(eye); }
+  const legs = []; for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const l = cyl(0.13, 0.12, 0.55, m, {hull: 0.01}); at(l, sx * 0.45, 0, sz * 0.28); g.add(l); legs.push(l); }
+  return {group: g, legs};
+}
+// Fishing rod with a line hanging from the tip (rod along +y, tip at the top).
+export function fishingRod(len = 1.8) {
+  const g = new THREE.Group();
+  const rod = cyl(0.012, 0.02, len, '#3a3a40', {hull: 0.004}); g.add(rod);
+  const reel = cyl(0.04, 0.04, 0.04, '#c9a25a', {hull: 0.004, center: true}); reel.rotation.z = Math.PI / 2; reel.position.set(0.03, 0.3, 0); g.add(reel);
+  const line = new THREE.Mesh(new THREE.CylinderGeometry(0.003, 0.003, 1.2, 4), new THREE.MeshBasicMaterial({color: '#fbf6ea'})); line.position.set(0, len - 0.6, 0); g.add(line);
+  return g;
+}
+// 3D park-ranger campaign hat (for the museum case); o.burnt adds soot and holes.
+export function rangerHat(o = {}) {
+  const g = new THREE.Group(); const c = o.burnt ? '#8a7050' : '#c9a26a';
+  const brim = cyl(0.3, 0.3, 0.02, toon(c, {paint: {seed: 267, stains: o.burnt ? 30 : 4}}), {seg: 28, hull: 0.008}); g.add(brim);
+  const crown = cone(0.17, 0.2, toon(c, {paint: {seed: 268, stains: o.burnt ? 30 : 4}}), {seg: 4}); crown.rotation.y = Math.PI / 4; crown.position.y = 0.12; g.add(crown);
+  const band = cyl(0.165, 0.165, 0.04, '#5a3a26', {seg: 4, hull: 0.004}); band.rotation.y = Math.PI / 4; band.position.y = 0.02; g.add(band);
+  if (o.burnt) for (let i = 0; i < 4; i++) { const h = cyl(0.035, 0.035, 0.025, '#2b2326', {hull: 0}); at(h, Math.cos(i * 1.7) * 0.22, 0.004, Math.sin(i * 1.7) * 0.22); g.add(h); }
   return g;
 }

@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 5, 6, 7, 8, 9, 10, 11];
+const DIPS = [4, 5, 6, 7, 8, 9, 10, 12];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', '24 JAM TANPA BOHONG 🤐'], ['cut2', '07.00 – | PERTANYAAN JEBAKAN 👗'], ['cut5', '09.00 – | RAPAT KANTOR 😬'], ['cut6', '12.00 – | "MANIS NGGAK, BANG?" 🍉'],
-  ['cut7', '15.00 – | DITAGIH UTANG 💸'], ['cut8', '18.00 – | GRUP WA ARISAN 📱'], ['cut9', '19.00 – | KONDANGAN 🍛'], ['cut10', ''], ['lega', '…SEMUA LEGA | BISA BOHONG LAGI 😅']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -145,65 +144,27 @@ const Rewind = ({T, E, t}) => {
 function cues(T, EVt) {
   const C = T.CUTS, E = EVt, sy = (f) => `synth/${f}.wav`;
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
-  const tick = (w) => [sy('clock_tick'), E[w] - 0.15, 0.2, 0.8];
+  const boom = (k, v = 0.2) => [['06-deep-cinematic-boom.wav', E[k] + 0.1, v], [sy('rumble'), E[k] + 0.15, 0.12, 1.2], ['06-digital-glitch-tech-blip.mp3', E[k] + 0.08, 0.1]];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    // 1 the world, 24 hours
-    [sy('alarm_bell'), 0.05, 0.08, 1.0],
-    ['06-digital-glitch-tech-blip.mp3', 0.1, 0.14],
-    [sy('tense_drone'), 0.1, 0.1, 5.0],
-    [sy('clock_tick'), E.duaPuluh0 - 0.1, 0.18, 1.2],
-    ['06-deep-cinematic-boom.wav', E.bohong0, 0.16],
-    // 2-4 home
-    tick('pagi'),
-    [sy('creak'), E.istri - 0.5, 0.16],
-    ['04-soft-ui-pop.mp3', E.bahaya - 0.05, 0.2],
-    [sy('sparkle'), E.cantik, 0.16],
-    [sy('uh_oh'), E.mulut, 0.12],
-    [sy('boing'), E.taplak, 0.16],
-    ['02-error-denied-buzz.wav', E.nenek + 0.2, 0.1],
-    [sy('thud'), E.hariPertama - 0.3, 0.22],
-    [sy('snore'), E.sofa - 0.2, 0.12, 1.4],
-    // 5 office
-    tick('sembilan'),
-    [sy('crowd_murmur'), C[4] + 0.1, 0.06, E.adaQ - C[4]],
-    ['09-notification-ding.wav', E.whatsapp, 0.2],
-    [sy('tense_drone'), E.seisi - 0.1, 0.12, 2.0],
-    // 6 market
-    tick('duaBelas'),
-    [sy('crowd_murmur'), C[5] + 0.1, 0.06, 2.0],
-    [sy('sparkle'), E.manis, 0.2],
-    [sy('kiss'), E.saya, 0.12],
-    [sy('footsteps_run'), E.saya + 0.05, 0.16, 0.9],
-    [sy('crowd_angry'), E.saya + 0.1, 0.06, 0.8],
-    // 7 porch
-    tick('tigaSore'),
-    [sy('footsteps_walk'), E.teman - 0.3, 0.12, 1.5],
-    ['04-soft-ui-pop.mp3', E.utang - 0.05, 0.18],
-    [sy('heart_pop'), E.sayang, 0.16],
-    [sy('slide_whistle_down'), E.kamu, 0.14],
-    // 8 arisan chat
-    tick('enam'),
-    ...[0, 0.4, 0.75, 1.05, 1.35].map((d) => ['09-notification-ding.wav', E.arisan - 0.1 + d, 0.12]),
-    ['09-notification-ding.wav', E.malas + 0.3, 0.12], ['09-notification-ding.wav', E.malas + 0.55, 0.12],
-    ['03-typing-keyboard-burst.wav', E.maaf, 0.12, 1.2],
-    ['04-soft-ui-pop.mp3', E.malas - 0.05, 0.18],
-    // 9 wedding
-    tick('malam'),
-    [sy('crowd_murmur'), C[8] + 0.1, 0.06, E.nggakKenal - C[8]],
-    [sy('glass_tap'), E.gimana - 0.2, 0.12],
-    ['06-digital-glitch-tech-blip.mp3', E.nggakKenal, 0.16],
-    [sy('uh_oh'), E.pengantin, 0.12],
-    // 10 the clock hits zero
-    [sy('clock_tick'), C[9] + 0.1, 0.18, E.berlalu - C[9] - 0.1],
-    [sy('tada'), E.berlalu, 0.14],
-    [sy('crowd_cheer'), E.berlalu + 0.1, 0.08, 1.4],
-    [sy('puff'), E.lega, 0.2],
-    [sy('boing'), E.kembali, 0.14],
-    // 11-12 the lie is back, the question
-    [sy('sparkle'), E.banget, 0.14],
-    [sy('heart_pop'), E.sedunia - 0.1, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.siapa - 0.15, 0.2],
+    ...['petir0', 's1', 's2', 's3', 's4', 's5', 's6', 's7'].flatMap((k) => boom(k)),
+    [sy('rumble'), 0, 0.1, 1.0],
+    [sy('tada'), E.selamat, 0.14],
+    [sy('birds'), C[1] + 0.1, 0.1, E.sepertinya - C[1]],
+    [sy('heart_pop'), E.menyukai, 0.16],
+    ['04-soft-ui-pop.mp3', E.kuku - 0.05, 0.18], [sy('boing'), E.copot, 0.14],
+    [sy('uh_oh'), E.hangus, 0.12],
+    [sy('frying'), E.s3 + 0.3, 0.08, 1.2], [sy('alarm_bell'), E.rambut4, 0.08, 0.8],
+    [sy('footsteps_walk'), C[5] + 0.2, 0.1, 2.0], [sy('puff'), E.lagi + 0.15, 0.18],
+    ['07-riser-build-up.wav', E.menyetir - 0.2, 0.1, 2.5], [sy('scooter'), E.menyetir, 0.1, 2.4],
+    ['02-error-denied-buzz.wav', E.pergi, 0.08],
+    [sy('crowd_murmur'), C[7] + 0.1, 0.06, E.mendung - C[7]], [sy('footsteps_run'), E.menjauh, 0.14, 1.2],
+    ['09-notification-ding.wav', E.maaf - 0.3, 0.16],
+    [sy('puff'), E.memancing, 0.1],
+    [sy('crowd_angry'), E.beruang, 0.06, 0.8], [sy('thud'), E.ranting, 0.2], [sy('footsteps_run'), E.mengusir, 0.12, 1.2],
+    [sy('slide_whistle_down'), E.sial, 0.14],
+    ['08-soft-success-chime.mp3', E.guinness, 0.22], [sy('applause'), E.guinness + 0.1, 0.08, 1.6], [sy('sparkle'), E.topi, 0.16],
+    ['pop-bubble-sound-effect.mp3', E.berani - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -271,10 +232,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
-  en: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
+  id: {top: 'DISAMBAR PETIR\n7 KALI ⚡', mid: 'DAN TETAP SELAMAT!', bot: ''},
+  en: {top: 'DISAMBAR PETIR\n7 KALI ⚡', mid: 'DAN TETAP SELAMAT!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.taplak + 0.5, loc: 'home', pos: [-0.75, 1.55, -0.1], look: [-1.3, 1.3, -3.3]});
+const THUMB = (EVt) => ({t: EVt.petir0 + 0.2, loc: 'park', pos: [0, 1.75, 0.2], look: [0, 1.9, -2.6]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

@@ -10,77 +10,61 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: slow short pushes, hard cuts inside a location on the punchlines.
-  {shot: 1, loc: 'stage', lift: false, move: 'emergency news on TV', keys: [
-    {at: 'start', pos: [-12, 1.55, 0.3], look: [-12, 1.5, -3.4]},
-    {at: 'end', pos: [-12, 1.55, 0.0], look: [-12, 1.5, -3.4]}]},
-  {shot: 1, from: 'bohong0', loc: 'home', lift: false, move: 'a man in front of the TV covers his mouth in panic', keys: [
-    {at: 'start', pos: [-1.55, 1.75, -0.6], look: [-1.75, 1.6, -4.2]},
-    {at: 'end', pos: [-1.55, 1.75, -0.8], look: [-1.75, 1.6, -4.2]}]},
-  {shot: 2, loc: 'home', lift: false, move: '7 am: the wife comes home with a new dress', keys: [
-    {at: 'start', pos: [0, 1.7, 1.2], look: [0, 1.35, -3.6]},
-    {at: 'end', pos: [0, 1.7, 0.9], look: [0, 1.35, -3.6]}]},
-  {shot: 2, from: 'pa', loc: 'home', move: 'close: "do I look pretty?"', keys: [
-    {at: 'start', pos: [-0.45, 1.6, -1.35], look: [-0.55, 1.5, -3.0]},
-    {at: 'end', pos: [-0.45, 1.6, -1.5], look: [-0.55, 1.5, -3.0]}]},
-  {shot: 3, loc: 'home', move: 'close: the husband tries to keep quiet', keys: [
-    {at: 'start', pos: [0.5, 1.6, -1.35], look: [0.55, 1.5, -3.0]},
-    {at: 'end', pos: [0.5, 1.6, -1.5], look: [0.55, 1.5, -3.0]}]},
-  {shot: 3, from: 'taplak', loc: 'home', lift: false, move: 'the dress matches grandma\'s tablecloth', keys: [
-    {at: 'start', pos: [-1.0, 1.7, 0.1], look: [-1.4, 1.45, -3.4]},
-    {at: 'end', pos: [-1.0, 1.7, -0.1], look: [-1.4, 1.45, -3.4]}]},
-  {shot: 4, loc: 'home', lift: false, move: 'night: sleeping on the sofa', keys: [
-    {at: 'start', pos: [1.55, 1.3, -1.7], look: [1.6, 0.95, -4.3]},
-    {at: 'end', pos: [1.55, 1.25, -1.95], look: [1.6, 0.95, -4.3]}]},
-  {shot: 5, loc: 'office', lift: false, move: '9 am: the weekly meeting', keys: [
-    {at: 'start', pos: [-0.35, 1.75, 1.3], look: [-0.35, 1.3, -3.2]},
-    {at: 'end', pos: [-0.35, 1.7, 1.0], look: [-0.35, 1.3, -3.2]}]},
-  {shot: 5, from: 'adaPak', loc: 'office', lift: false, move: 'close: "this could be one WhatsApp message"', keys: [
-    {at: 'start', pos: [0.4, 1.38, -1.85], look: [0.4, 1.3, -3.2]},
-    {at: 'end', pos: [0.4, 1.38, -1.95], look: [0.4, 1.3, -3.2]}]},
-
-  {shot: 5, from: 'seisi', loc: 'office', lift: false, move: 'the room holds its breath', keys: [
-    {at: 'start', pos: [0.2, 1.9, 0.9], look: [-0.35, 1.2, -3.0]},
-    {at: 'end', pos: [0.15, 1.9, 0.7], look: [-0.35, 1.2, -3.0]}]},
-  {shot: 6, loc: 'market', lift: false, move: 'noon: the watermelon stall', keys: [
-    {at: 'start', pos: [-0.2, 1.8, 1.6], look: [-0.2, 1.3, -3.2]},
-    {at: 'end', pos: [-0.2, 1.75, 1.2], look: [-0.2, 1.3, -3.2]}]},
-  {shot: 6, from: 'jujur', loc: 'market', move: 'close: "the only sweet thing is me"', keys: [
-    {at: 'start', pos: [0.35, 1.62, -2.48], look: [0.35, 1.62, -3.75]},
-    {at: 'end', pos: [0.35, 1.62, -2.56], look: [0.35, 1.62, -3.75]}]},
-  {shot: 6, from: 'saya', loc: 'market', lift: false, move: 'wide: every buyer runs away', keys: [
-    {at: 'start', pos: [-0.2, 2.1, 2.6], look: [-0.2, 1.2, -3.0]},
-    {at: 'end', pos: [-0.2, 2.15, 2.8], look: [-0.2, 1.2, -3.0]}]},
-  {shot: 7, loc: 'porch', lift: false, move: '3 pm: a friend comes to collect a debt', keys: [
-    {at: 'start', pos: [0.6, 1.75, 1.6], look: [0.4, 1.3, -3.2]},
-    {at: 'end', pos: [0.5, 1.7, 1.2], look: [0.3, 1.3, -3.2]}]},
-  {shot: 7, from: 'sebenarnya', loc: 'porch', move: 'two-shot: "I love the money more than you"', keys: [
-    {at: 'start', pos: [0.15, 1.65, -0.9], look: [0.15, 1.5, -3.2]},
-    {at: 'end', pos: [0.15, 1.65, -1.05], look: [0.15, 1.5, -3.2]}]},
-  {shot: 8, loc: 'arisan', lift: false, move: '6 pm: the arisan group chat explodes', keys: [
-    {at: 'start', pos: [-0.1, 1.6, 0.2], look: [-0.1, 1.45, -3.2]},
-    {at: 'end', pos: [-0.1, 1.6, -0.1], look: [-0.1, 1.45, -3.2]}]},
-  {shot: 9, loc: 'wedding', lift: false, move: '7 pm: the wedding', keys: [
-    {at: 'start', pos: [0, 1.95, 2.0], look: [0, 1.5, -4.5]},
-    {at: 'end', pos: [0, 1.9, 1.6], look: [0, 1.5, -4.5]}]},
-  {shot: 9, from: 'gimana', loc: 'wedding', move: 'two-shot: "how is the food?"', keys: [
-    {at: 'start', pos: [0.15, 1.6, -0.5], look: [0.15, 1.5, -2.5]},
-    {at: 'end', pos: [0.15, 1.6, -0.65], look: [0.15, 1.5, -2.5]}]},
-  {shot: 9, from: 'nggakKenal', loc: 'wedding', move: 'the bride and groom: who is he?', keys: [
-    {at: 'start', pos: [0, 1.95, -3.0], look: [0, 1.85, -5.5]},
-    {at: 'end', pos: [0, 1.95, -3.15], look: [0, 1.85, -5.5]}]},
-  {shot: 10, loc: 'stage', lift: false, move: 'the clock hits zero', keys: [
-    {at: 'start', pos: [0, 2.9, 1.6], look: [0, 3.0, -5]},
-    {at: 'end', pos: [0, 2.8, 1.3], look: [0, 2.9, -5]}]},
-  {shot: 10, from: 'semua', loc: 'stage', lift: false, move: 'relief... and back to lying', keys: [
-    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.6, -2.8]},
-    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.6, -2.8]}]},
-  {shot: 11, loc: 'home', lift: false, move: 'the next morning: "pretty?"', keys: [
-    {at: 'start', pos: [0, 1.65, -0.4], look: [0, 1.4, -3.2]},
-    {at: 'end', pos: [0, 1.65, -0.6], look: [0, 1.4, -3.2]}]},
-  {shot: 12, loc: 'home', move: 'the question to the viewer', keys: [
-    {at: 'start', pos: [0.55, 1.75, -0.6], look: [0.55, 1.65, -3.0]},
-    {at: 'end', pos: [0.55, 1.75, -0.8], look: [0.55, 1.65, -3.0]}]},
+  // Calm camera: slow pushes; a cut to a close-up after most strikes.
+  {shot: 1, loc: 'park', lift: false, move: 'a man in a storm is struck', keys: [
+    {at: 'start', pos: [0, 1.8, 0.4], look: [0, 1.85, -2.6]},
+    {at: 'end', pos: [0, 1.75, 0.1], look: [0, 1.8, -2.6]}]},
+  {shot: 2, loc: 'park', lift: false, move: 'Roy Sullivan, park ranger', keys: [
+    {at: 'start', pos: [0, 1.7, 0.5], look: [0, 1.65, -2.6]},
+    {at: 'end', pos: [0, 1.72, 0.2], look: [0, 1.7, -2.6]}]},
+  {shot: 2, from: 'sepertinya', loc: 'park', lift: false, move: 'lightning loves him', keys: [
+    {at: 'start', pos: [0.1, 2.0, 0.6], look: [0.1, 2.6, -3.4]},
+    {at: 'end', pos: [0.1, 2.0, 0.35], look: [0.1, 2.6, -3.4]}]},
+  {shot: 3, loc: 'park', lift: false, move: 'strike 1 at the lookout tower', keys: [
+    {at: 'start', pos: [1.2, 2.3, -0.2], look: [1.6, 2.8, -5.5]},
+    {at: 'end', pos: [1.3, 1.75, -1.9], look: [1.4, 1.55, -4.9]}]},
+  {shot: 4, loc: 'road', lift: false, move: 'strike 2: the truck', keys: [
+    {at: 'start', pos: [0.2, 1.95, 0.2], look: [0, 1.45, -4.2]},
+    {at: 'end', pos: [0.2, 1.95, -0.1], look: [0, 1.45, -4.2]}]},
+  {shot: 4, from: 'alis', loc: 'road', move: 'close: no eyebrows', keys: [
+    {at: 'start', pos: [1.25, 1.62, -1.6], look: [1.3, 1.55, -2.9]},
+    {at: 'end', pos: [1.25, 1.62, -1.7], look: [1.3, 1.55, -2.9]}]},
+  {shot: 5, loc: 'park', lift: false, move: 'strikes 3 and 4 by the ranger hut', keys: [
+    {at: 'start', pos: [-1.9, 1.75, -0.4], look: [-1.9, 1.6, -3.4]},
+    {at: 'end', pos: [-1.9, 1.75, -0.65], look: [-1.9, 1.6, -3.4]}]},
+  {shot: 6, loc: 'town', lift: false, move: 'the bucket goes everywhere', keys: [
+    {at: 'start', pos: [-2.3, 1.7, -0.3], look: [-2.4, 1.55, -3.1]},
+    {at: 'end', pos: [0.3, 1.75, -0.6], look: [0.4, 1.65, -3.0]}]},
+  {shot: 7, loc: 'road', lift: false, move: 'strike 5 and the cloud that follows', keys: [
+    {at: 'start', pos: [-4, 2.4, 3.0], look: [-4, 2.4, -4.4]},
+    {at: 'menyetir', pos: [-3.6, 2.4, 3.2], look: [-3.6, 2.4, -4.4]},
+    {at: 'end', pos: [6.5, 2.4, 3.4], look: [7.0, 2.4, -4.4]}]},
+  {shot: 7, from: 'pergi', loc: 'road', move: 'close: "go away!"', keys: [
+    {at: 'start', pos: [8.3, 1.75, -0.6], look: [8.5, 2.0, -2.8]},
+    {at: 'end', pos: [8.3, 1.75, -0.75], look: [8.5, 2.0, -2.8]}]},
+  {shot: 8, loc: 'town', lift: false, move: 'friends get scared and run', keys: [
+    {at: 'start', pos: [0, 1.8, 0.5], look: [0, 1.7, -3.0]},
+    {at: 'end', pos: [0, 1.95, 1.2], look: [0, 2.0, -3.0]}]},
+  {shot: 8, from: 'maaf', loc: 'town', lift: false, move: 'far apart: a phone call', keys: [
+    {at: 'start', pos: [1.5, 1.85, 1.3], look: [1.5, 1.7, -3.0]},
+    {at: 'end', pos: [1.5, 1.85, 1.1], look: [1.5, 1.7, -3.0]}]},
+  {shot: 9, loc: 'park', lift: false, move: 'strike 6: the legs', keys: [
+    {at: 'start', pos: [0.6, 1.7, -0.2], look: [0.6, 1.55, -3.0]},
+    {at: 'end', pos: [0.6, 1.7, -0.45], look: [0.6, 1.55, -3.0]}]},
+  {shot: 10, loc: 'lake', lift: false, move: 'strike 7 while fishing, then the bear', keys: [
+    {at: 'start', pos: [0.5, 1.75, -0.6], look: [0.5, 1.65, -3.8]},
+    {at: 'beruang', pos: [-0.6, 1.8, 0.6], look: [-0.9, 1.4, -3.5]},
+    {at: 'end', pos: [-1.2, 1.8, 0.9], look: [-1.8, 1.4, -3.4]}]},
+  {shot: 11, loc: 'lake', move: 'close: a truly unlucky day', keys: [
+    {at: 'start', pos: [0.6, 1.62, -2.0], look: [0.6, 1.55, -3.6]},
+    {at: 'end', pos: [0.6, 1.62, -2.1], look: [0.6, 1.55, -3.6]}]},
+  {shot: 11, from: 'tercatat', loc: 'museum', lift: false, move: 'Guinness World Records, two burnt hats', keys: [
+    {at: 'start', pos: [0, 1.9, 0.4], look: [0, 1.9, -5.0]},
+    {at: 'topi', pos: [0, 1.75, -1.4], look: [0, 1.45, -4.5]},
+    {at: 'end', pos: [0, 1.7, -1.8], look: [0, 1.4, -4.5]}]},
+  {shot: 12, loc: 'town', lift: false, move: 'would you stand next to him?', keys: [
+    {at: 'start', pos: [0, 1.9, 0.7], look: [0, 2.05, -3.0]},
+    {at: 'end', pos: [0, 1.9, 0.45], look: [0, 2.05, -3.0]}]},
 ];
 
 export function warpU(T, t) {

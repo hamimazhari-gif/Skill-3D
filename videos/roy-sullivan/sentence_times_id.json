@@ -1,0 +1,503 @@
+{
+ "duration": 90.6,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Pria ini disambar petir... tujuh kali.",
+   "start": 0.12,
+   "end": 1.8,
+   "pred": 2.19,
+   "voiced": [
+    [
+     0.12,
+     1.8
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Dan dia selamat dari semuanya!",
+   "start": 2.24,
+   "end": 4.02,
+   "pred": 1.89,
+   "voiced": [
+    [
+     2.24,
+     3.12
+    ],
+    [
+     3.32,
+     4.0
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Namanya Roy Sullivan, penjaga taman nasional di Amerika.",
+   "start": 4.58,
+   "end": 8.6,
+   "pred": 4.0,
+   "voiced": [
+    [
+     4.58,
+     6.66
+    ],
+    [
+     7.3,
+     8.6
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Pekerjaannya membuatnya sering berada di alam terbuka... dan sepertinya, petir sangat menyukainya.",
+   "start": 8.92,
+   "end": 16.58,
+   "pred": 6.64,
+   "voiced": [
+    [
+     8.92,
+     10.52
+    ],
+    [
+     11.04,
+     13.26
+    ],
+    [
+     13.68,
+     14.38
+    ],
+    [
+     14.76,
+     14.86
+    ],
+    [
+     15.1,
+     16.56
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Sambaran pertama, kuku jempol kakinya copot.",
+   "start": 17.4,
+   "end": 20.2,
+   "pred": 3.24,
+   "voiced": [
+    [
+     17.4,
+     18.12
+    ],
+    [
+     18.72,
+     18.86
+    ],
+    [
+     18.94,
+     20.2
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Sambaran kedua, waktu dia di dalam mobil.",
+   "start": 20.94,
+   "end": 23.24,
+   "pred": 2.94,
+   "voiced": [
+    [
+     20.96,
+     21.7
+    ],
+    [
+     22.06,
+     23.24
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Alisnya hangus terbakar.",
+   "start": 23.62,
+   "end": 25.7,
+   "pred": 1.58,
+   "voiced": [
+    [
+     23.62,
+     24.32
+    ],
+    [
+     24.42,
+     24.96
+    ],
+    [
+     25.04,
+     25.36
+    ],
+    [
+     25.48,
+     25.7
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Sambaran ketiga, bahunya terbakar.",
+   "start": 26.36,
+   "end": 29.36,
+   "pred": 2.64,
+   "voiced": [
+    [
+     26.36,
+     27.1
+    ],
+    [
+     27.5,
+     28.3
+    ],
+    [
+     28.66,
+     29.36
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Lalu yang keempat... rambutnya terbakar!",
+   "start": 29.76,
+   "end": 31.82,
+   "pred": 2.41,
+   "voiced": [
+    [
+     29.76,
+     30.28
+    ],
+    [
+     30.4,
+     30.56
+    ],
+    [
+     30.78,
+     31.4
+    ],
+    [
+     31.56,
+     31.82
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Sejak itu, Roy selalu membawa ember berisi air ke mana-mana.",
+   "start": 32.54,
+   "end": 35.54,
+   "pred": 4.07,
+   "voiced": [
+    [
+     32.54,
+     33.18
+    ],
+    [
+     33.28,
+     35.54
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Jaga-jaga, kalau kepalanya tiba-tiba terbakar lagi.",
+   "start": 36.08,
+   "end": 38.82,
+   "pred": 3.62,
+   "voiced": [
+    [
+     36.08,
+     36.76
+    ],
+    [
+     36.94,
+     37.64
+    ],
+    [
+     37.74,
+     38.82
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Sambaran kelima, Roy bersumpah, awan gelap itu mengikutinya.",
+   "start": 39.52,
+   "end": 43.98,
+   "pred": 4.68,
+   "voiced": [
+    [
+     39.52,
+     40.28
+    ],
+    [
+     40.7,
+     41.48
+    ],
+    [
+     42.02,
+     42.92
+    ],
+    [
+     43.04,
+     43.98
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Dia menyetir kencang untuk kabur... tapi awannya tetap mengejar.",
+   "start": 44.5,
+   "end": 47.7,
+   "pred": 3.92,
+   "voiced": [
+    [
+     44.5,
+     45.8
+    ],
+    [
+     46.24,
+     47.06
+    ],
+    [
+     47.14,
+     47.7
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Pergi! Cari orang lain sana!\"",
+   "start": 48.26,
+   "end": 50.26,
+   "pred": 1.66,
+   "voiced": [
+    [
+     48.26,
+     48.82
+    ],
+    [
+     49.16,
+     50.26
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Lama-lama, teman-temannya mulai takut.",
+   "start": 51.14,
+   "end": 52.92,
+   "pred": 2.79,
+   "voiced": [
+    [
+     51.16,
+     51.68
+    ],
+    [
+     51.96,
+     52.92
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Setiap langit mendung, mereka langsung menjauh dari Roy.",
+   "start": 53.44,
+   "end": 56.06,
+   "pred": 4.0,
+   "voiced": [
+    [
+     53.44,
+     53.58
+    ],
+    [
+     53.66,
+     54.44
+    ],
+    [
+     54.7,
+     56.06
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "\"Maaf, Roy... kita ngobrolnya lewat telepon aja ya.\"",
+   "start": 56.84,
+   "end": 59.1,
+   "pred": 3.32,
+   "voiced": [
+    [
+     56.84,
+     57.3
+    ],
+    [
+     57.52,
+     58.32
+    ],
+    [
+     58.44,
+     59.1
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Sambaran keenam, kakinya terluka.",
+   "start": 59.9,
+   "end": 61.74,
+   "pred": 2.56,
+   "voiced": [
+    [
+     59.92,
+     60.64
+    ],
+    [
+     61.02,
+     61.74
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Dan sambaran ketujuh, waktu dia sedang memancing.",
+   "start": 62.5,
+   "end": 65.1,
+   "pred": 3.55,
+   "voiced": [
+    [
+     62.5,
+     63.4
+    ],
+    [
+     63.74,
+     65.1
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Petir menyambar, rambutnya terbakar lagi... dan seolah belum cukup, seekor beruang datang mencoba mencuri ikannya!",
+   "start": 65.72,
+   "end": 72.2,
+   "pred": 8.0,
+   "voiced": [
+    [
+     65.72,
+     66.54
+    ],
+    [
+     66.78,
+     67.96
+    ],
+    [
+     68.34,
+     68.52
+    ],
+    [
+     68.66,
+     69.42
+    ],
+    [
+     69.72,
+     70.78
+    ],
+    [
+     70.86,
+     72.2
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Roy mengusirnya pakai ranting.",
+   "start": 72.7,
+   "end": 73.88,
+   "pred": 1.96,
+   "voiced": [
+    [
+     72.7,
+     73.88
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Hari yang benar-benar sial.",
+   "start": 74.48,
+   "end": 76.2,
+   "pred": 1.66,
+   "voiced": [
+    [
+     74.48,
+     76.2
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Roy Sullivan tercatat di Guinness World Records sebagai orang yang paling sering disambar petir dan selamat.",
+   "start": 76.64,
+   "end": 81.9,
+   "pred": 6.94,
+   "voiced": [
+    [
+     77.06,
+     80.02
+    ],
+    [
+     80.14,
+     81.9
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Dua topinya yang hangus bahkan pernah dipajang di museum Guinness.",
+   "start": 82.46,
+   "end": 85.04,
+   "pred": 4.22,
+   "voiced": [
+    [
+     82.46,
+     85.02
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau kamu jadi teman Roy, berani berdiri di dekatnya waktu mendung?",
+   "start": 85.66,
+   "end": 89.12,
+   "pred": 4.68,
+   "voiced": [
+    [
+     85.66,
+     86.76
+    ],
+    [
+     87.18,
+     89.12
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 89.78,
+   "end": 90.42,
+   "pred": 1.13,
+   "voiced": [
+    [
+     89.78,
+     90.42
+    ]
+   ]
+  }
+ ]
+}
