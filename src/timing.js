@@ -64,26 +64,22 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau suhu Bumi turun 30 derajat" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Permen karet tertelan" (Indonesian only; en mirrors id).
 const EV_ID = {
-  bagaimana: [0, 'bagaimana'], suhu0: [0, 'suhu'], bumi0: [0, 'bumi'], turun0: [0, 'turun'], tigaPuluh0: [0, 'tiga'],
-  indonesia: [1, 'indonesia'], panasnya: [1, 'panasnya'], anjlok: [1, 'anjlok'], nol: [1, 'nol'],
-  pertama: [2, 'pertama'], salju: [2, 'salju'], monas: [2, 'monas'], wah: [3, 'wah'], luarNegeri: [3, 'luar'],
-  tapi: [4, 'tapi'], sebentar: [4, 'sebentar'], masalah1: [5, 'masalah'], siap: [5, 'siap'], sejuk: [6, 'sejuk'], hangat: [6, 'hangat'],
-  pemanas: [7, 'pemanas'], jaket: [7, 'jaket'], keluarga: [8, 'keluarga'], berebut: [8, 'berebut'], magicCom: [8, 'magic'],
-  minggir: [9, 'minggir'], giliran: [9, 'giliran'], meluk: [9, 'meluk'],
-  masalah2: [10, 'masalah'], padi: [10, 'padi'], gagal: [10, 'gagal'], butuh: [11, 'butuh'], sawah: [12, 'sawah'], membeku: [12, 'membeku'], beras: [12, 'beras'], langka: [12, 'langka'], uduk: [12, 'uduk'], melambung: [12, 'melambung'],
-  masalah3: [13, 'masalah'], berbahaya: [13, 'berbahaya'], putih: [14, 'putih'], memantulkan: [14, 'memantulkan'], angkasa: [14, 'angkasa'],
-  banyakEs: [15, 'banyak'], diserap: [15, 'diserap'], dingin: [16, 'dingin'], luas: [16, 'luas'], siklus: [17, 'siklus'], berulang: [17, 'berulang'],
-  khayalan: [18, 'khayalan'], ilmuwan: [19, 'ilmuwan'], tujuhRatus: [19, 'tujuh'], tertutup: [19, 'tertutup'], bolaSalju: [20, 'bola'],
-  perbandingan: [21, 'perbandingan'], zamanEs: [21, 'zaman'], enam: [21, 'enam'], tigaPuluh2: [22, 'tiga'], bencana: [22, 'bencana'],
-  lainKali: [23, 'lain'], panas: [23, 'panas'], ingat: [23, 'ingat'], magic2: [23, 'magic'], kalau: [24, 'kalau'], lakukan: [24, 'lakukan'], komentar: [25, 'komentar'],
+  ma: [0, 'ma'], ketelan: [0, 'ketelan'], hah: [1, 'hah'], nempel: [1, 'nempel'], tujuhTahun: [1, 'tujuh'],
+  kalimat: [2, 'kalimat'], ketakutan: [2, 'ketakutan'], bayangkan: [3, 'bayangkan'], menelan: [3, 'menelan'], sd: [3, 'sd'], keluar: [3, 'keluar'], smp: [3, 'smp'],
+  tapi1: [4, 'tapi'], mitos: [4, 'mitos'], fakta: [4, 'fakta'],
+  benar: [5, 'benar'], sulit: [5, 'sulit'], kenyal: [6, 'kenyal'], hancur: [6, 'hancur'], cairan: [6, 'cairan'], menguraikan: [6, 'menguraikannya'], biasa: [6, 'biasa'],
+  tapi2: [7, 'tapi'], bukan: [7, 'bukan'], menempel: [7, 'menempel'],
+  faktanya: [8, 'faktanya'], bergerak: [8, 'bergerak'], mendorong: [8, 'mendorong'], terdorong: [9, 'terdorong'], keluar2: [9, 'keluar'], hari: [9, 'hari'],
+  numpang: [10, 'numpang'], turis: [10, 'turis'], pamit: [10, 'pamit'], dadah: [11, 'dadah'],
+  hatiHati: [12, 'hati'], banyak: [13, 'banyak'], kebiasaan: [13, 'kebiasaan'], sumbatan: [13, 'sumbatan'], anak: [13, 'anak'], dikunyah: [14, 'dikunyah'], ditelan: [14, 'ditelan'],
+  lega: [15, 'lega'], sampai: [15, 'sampai'], ancaman: [15, 'ancaman'], jangan: [16, 'jangan'], biji: [16, 'biji'], pohon: [16, 'pohon'],
+  ancaman2: [17, 'ancaman'], percaya: [17, 'percaya'], komentar: [18, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {minus30: '−30°C', temp30: '30°C', temp0: '0°C', m1: 'MASALAH 1', m2: 'MASALAH 2', m3: 'MASALAH 3', notReady: 'RUMAH NGGAK SIAP', noHeater: 'NGGAK ADA PEMANAS',
-  noJacket: 'NGGAK ADA JAKET TEBAL', price1: 'NASI UDUK Rp10.000', price2: 'NASI UDUK Rp100.000!', frozen: 'SAWAH MEMBEKU', scarce: 'BERAS LANGKA',
-  reflect: 'MEMANTUL', moreIce: 'ES BERTAMBAH', colder: 'MAKIN DINGIN', cycle: 'SIKLUS BERULANG', ago: '±700 JUTA TAHUN LALU', snowball: 'BUMI BOLA SALJU',
-  iceAge: 'ZAMAN ES TERAKHIR', now: 'SEKARANG', d6: '−6°C', d30: '−30°C', disaster: 'BENCANA BESAR!', abroad: 'KAYAK DI LUAR NEGERI!',
-  question: 'HAL PERTAMA YANG KAMU LAKUKAN?', comment: 'TULIS DI KOMENTAR!', warung: 'WARUNG NASI UDUK'};
+const L_ID = {seven: '7 TAHUN?!', sd: 'KELAS 1 SD', smp: 'SMP', myth: 'MITOS', fact: 'FAKTA', hard: 'SULIT DICERNA', chewy: 'KENYAL', acid: 'CAIRAN LAMBUNG',
+  noStick: 'NGGAK MENEMPEL', push: 'TERUS MENDORONG', days: 'BEBERAPA HARI', exit: 'PINTU KELUAR', tour: 'NUMPANG LEWAT', careful: 'HATI-HATI!', block: 'SUMBATAN!',
+  chew: 'DIKUNYAH, BUKAN DITELAN', question: 'ANCAMAN EMAK PALING DIPERCAYA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

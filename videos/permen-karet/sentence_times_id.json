@@ -1,0 +1,368 @@
+{
+ "duration": 76.52,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "\"Ma... permen karetnya ketelan!\"",
+   "start": 0.28,
+   "end": 2.54,
+   "pred": 1.6,
+   "voiced": [
+    [
+     0.28,
+     0.76
+    ],
+    [
+     1.18,
+     2.54
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Hah?! Nanti nempel di perut tujuh tahun!\"",
+   "start": 3.26,
+   "end": 5.54,
+   "pred": 2.16,
+   "voiced": [
+    [
+     3.26,
+     3.6
+    ],
+    [
+     4.0,
+     5.52
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Kalimat ini... mungkin pernah bikin masa kecilmu penuh ketakutan.",
+   "start": 6.5,
+   "end": 9.76,
+   "pred": 3.7,
+   "voiced": [
+    [
+     6.5,
+     7.14
+    ],
+    [
+     7.3,
+     8.06
+    ],
+    [
+     8.14,
+     8.88
+    ],
+    [
+     8.96,
+     9.76
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Bayangkan, kamu menelan permen karet waktu kelas satu SD... dan baru keluar waktu kamu sudah SMP.",
+   "start": 10.44,
+   "end": 15.78,
+   "pred": 5.79,
+   "voiced": [
+    [
+     10.44,
+     11.08
+    ],
+    [
+     11.48,
+     13.74
+    ],
+    [
+     14.14,
+     15.78
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Tapi sebenarnya, ini mitos atau fakta?",
+   "start": 16.42,
+   "end": 19.04,
+   "pred": 2.58,
+   "voiced": [
+    [
+     16.42,
+     16.76
+    ],
+    [
+     16.98,
+     17.56
+    ],
+    [
+     17.82,
+     18.2
+    ],
+    [
+     18.28,
+     18.76
+    ],
+    [
+     18.86,
+     19.04
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Yang benar, permen karet memang sulit dicerna.",
+   "start": 20.24,
+   "end": 22.68,
+   "pred": 3.07,
+   "voiced": [
+    [
+     20.24,
+     20.96
+    ],
+    [
+     21.34,
+     22.68
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Bahan karetnya dibuat supaya kenyal dan nggak hancur, jadi cairan lambung nggak bisa menguraikannya seperti makanan biasa.",
+   "start": 23.22,
+   "end": 28.74,
+   "pred": 7.67,
+   "voiced": [
+    [
+     23.22,
+     25.54
+    ],
+    [
+     25.9,
+     28.74
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Tapi... itu bukan berarti permen karet akan menempel di perutmu.",
+   "start": 29.48,
+   "end": 32.42,
+   "pred": 3.56,
+   "voiced": [
+    [
+     29.48,
+     29.78
+    ],
+    [
+     30.06,
+     32.42
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Faktanya, saluran pencernaan kita terus bergerak dan mendorong apa pun yang masuk.",
+   "start": 33.12,
+   "end": 37.46,
+   "pred": 5.23,
+   "voiced": [
+    [
+     33.12,
+     33.22
+    ],
+    [
+     33.34,
+     33.88
+    ],
+    [
+     34.24,
+     36.16
+    ],
+    [
+     36.34,
+     37.44
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Permen karet yang tertelan akan ikut terdorong, dan biasanya keluar dengan sendirinya dalam beberapa hari.",
+   "start": 38.18,
+   "end": 42.62,
+   "pred": 6.69,
+   "voiced": [
+    [
+     38.18,
+     40.0
+    ],
+    [
+     40.28,
+     42.6
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Jadi, permen karet itu cuma \"numpang lewat,\" seperti turis yang jalan-jalan... lalu pamit pulang.",
+   "start": 43.42,
+   "end": 47.44,
+   "pred": 6.07,
+   "voiced": [
+    [
+     43.42,
+     43.9
+    ],
+    [
+     43.98,
+     44.86
+    ],
+    [
+     44.94,
+     45.6
+    ],
+    [
+     46.16,
+     47.44
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "\"Dadah, semuanya!\"",
+   "start": 47.88,
+   "end": 48.68,
+   "pred": 1.32,
+   "voiced": [
+    [
+     47.88,
+     48.68
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Tapi tetap hati-hati.",
+   "start": 49.26,
+   "end": 50.22,
+   "pred": 1.19,
+   "voiced": [
+    [
+     49.26,
+     50.22
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Kalau menelan banyak permen karet sekaligus, apalagi dijadikan kebiasaan, bisa menyebabkan sumbatan di saluran pencernaan, terutama pada anak-anak.",
+   "start": 51.2,
+   "end": 59.62,
+   "pred": 9.97,
+   "voiced": [
+    [
+     51.2,
+     52.34
+    ],
+    [
+     52.7,
+     54.52
+    ],
+    [
+     54.6,
+     56.16
+    ],
+    [
+     56.42,
+     58.46
+    ],
+    [
+     58.78,
+     59.62
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Jadi permen karet tetap untuk dikunyah, bukan ditelan.",
+   "start": 60.18,
+   "end": 62.96,
+   "pred": 3.56,
+   "voiced": [
+    [
+     60.18,
+     61.98
+    ],
+    [
+     62.38,
+     62.96
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Dan anak kecil pun akhirnya lega... sampai emak mengeluarkan ancaman berikutnya.",
+   "start": 64.02,
+   "end": 68.06,
+   "pred": 4.6,
+   "voiced": [
+    [
+     64.02,
+     65.32
+    ],
+    [
+     66.0,
+     68.04
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Jangan telan biji semangka! Nanti tumbuh pohon di perutmu!\"",
+   "start": 68.86,
+   "end": 72.08,
+   "pred": 3.35,
+   "voiced": [
+    [
+     68.86,
+     69.94
+    ],
+    [
+     70.46,
+     72.06
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Ancaman emak apa yang dulu paling kamu percaya?",
+   "start": 72.84,
+   "end": 74.94,
+   "pred": 2.72,
+   "voiced": [
+    [
+     72.84,
+     73.72
+    ],
+    [
+     73.8,
+     74.94
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 75.5,
+   "end": 76.14,
+   "pred": 1.05,
+   "voiced": [
+    [
+     75.5,
+     76.14
+    ]
+   ]
+  }
+ ]
+}

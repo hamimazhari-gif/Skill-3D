@@ -2271,3 +2271,32 @@ export function arrow(L = 1, color = '#f2c23a', w = 0.06) {
   const g = new THREE.Group(); const sh = cyl(w, w, L * 0.75, color, {hull: 0.006}); g.add(sh);
   const hd = cone(w * 2.6, L * 0.25, color, {hull: 0.006}); hd.position.y = L * 0.75; g.add(hd); return g;
 }
+
+// ---------- "Permen karet tertelan" ----------
+// A piece of chewing gum with a cartoon face: pink lumpy blob, eyes, a mouth that can open (mouth.scale.y).
+export function gum(o = {}) {
+  const g = new THREE.Group(); const c = o.color || '#f28ab0';
+  const b = ball(0.3, toon(c, {wear: false}), {sx: 1.25, sy: 0.9, sz: 0.85, hull: 0.02}); at(b, 0, 0.27, 0); g.add(b);
+  for (const [x, y, r] of [[-0.25, 0.42, 0.12], [0.22, 0.45, 0.1], [0.05, 0.5, 0.11]]) { const k = ball(r, toon(c, {wear: false}), {hull: 0.012}); at(k, x, y, 0.05); g.add(k); }
+  const eyes = [-1, 1].map((s) => { const w = ball(0.075, '#fbfbf8', {hull: 0.006}); at(w, s * 0.11, 0.36, 0.25); g.add(w); const p = ball(0.035, INK, {hull: 0}); at(p, s * 0.11, 0.36, 0.32); g.add(p); return p; });
+  const mouth = ball(0.06, '#8a2a3a', {sx: 1.4, sy: 1, sz: 0.4, hull: 0.004}); at(mouth, 0, 0.2, 0.26); g.add(mouth);
+  return {group: g, mouth, eyes, body: b};
+}
+// A stomach set: a big curved pink wall (half a sphere seen from inside), a pool of green acid with bubbles.
+export function stomachSet(r = 4) {
+  const g = new THREE.Group();
+  const wall = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.62), toon(paintTex('#e8808a', {seed: 701, stains: 30}), {}));
+  wall.material.side = THREE.BackSide; wall.position.y = -0.3; g.add(wall);
+  for (let i = 0; i < 14; i++) { const fold = new THREE.Mesh(new THREE.TorusGeometry(r * 0.98, 0.06, 6, 48, Math.PI * 0.5), toon('#d8606e', {wear: false})); fold.rotation.set(Math.PI / 2 - 0.25 - (i % 3) * 0.2, 0, i * 0.45); fold.position.y = 0.6 + (i % 4) * 0.5; g.add(fold); }
+  const acid = cyl(r * 0.8, r * 0.8, 0.06, toon('#9ad04a', {wear: false, emissive: '#4a7a1a', emissiveIntensity: 0.25}), {seg: 32, hull: 0.02}); acid.position.y = 0; g.add(acid);
+  return g;
+}
+// A straight stretch of intestine: a pink tube cut open on the near side, with travelling squeeze rings (update(t)).
+export function gutTube(len = 14, r = 1.3) {
+  const g = new THREE.Group();
+  const tube = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 28, 1, true, Math.PI * 0.25, Math.PI * 1.5), toon(paintTex('#e8808a', {seed: 702, stains: 30}), {}));
+  tube.material.side = THREE.DoubleSide; tube.rotation.z = Math.PI / 2; tube.position.y = r; g.add(tube);
+  const floor = box(len, 0.04, r * 1.6, toon('#d8707e', {wear: false}), {edges: false}); at(floor, 0, 0.05, 0); g.add(floor);
+  const rings = []; for (let i = 0; i < 6; i++) { const ring = new THREE.Mesh(new THREE.TorusGeometry(r * 0.97, 0.12, 8, 32, Math.PI * 1.5), toon('#c95a6a', {wear: false})); ring.rotation.set(0, Math.PI / 2, Math.PI * 1.25); g.add(ring); rings.push(ring); }
+  return {group: g, update(t) { rings.forEach((rg, i) => { const x = ((t * 1.6 + i * len / 6) % len) - len / 2; rg.position.set(x, r, 0); rg.scale.setScalar(0.85 + 0.15 * Math.sin(t * 6 + i)); }); }};
+}

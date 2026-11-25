@@ -10,55 +10,49 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: slow pushes; a crane up to Monas in the snow.
-  {shot: 1, loc: 'jakarta', lift: false, move: 'Jakarta at noon, the thermometer drops, snow on Monas', keys: [
-    {at: 'start', pos: [0.6, 1.5, 0.6], look: [0.6, 2.6, -8]},
-    {at: 'end', pos: [0.6, 1.5, 0.3], look: [0.6, 3.2, -8]}]},
-  {shot: 2, loc: 'jakarta', lift: false, move: 'Bapak in a sarung steps out and freezes', keys: [
-    {at: 'start', pos: [-6.8, 1.7, 0.2], look: [-6.9, 1.4, -3.4]},
-    {at: 'end', pos: [-6.8, 1.7, -0.1], look: [-6.9, 1.4, -3.4]}]},
-  {shot: 2, from: 'pertama', loc: 'jakarta', lift: false, move: 'snow falls on Monas', keys: [
-    {at: 'start', pos: [0, 1.4, 0.6], look: [0, 7.5, -18]},
-    {at: 'end', pos: [0, 1.4, 0.2], look: [0, 8.5, -18]}]},
-  {shot: 3, loc: 'jakarta', lift: false, move: 'close: "like abroad!"', keys: [
-    {at: 'start', pos: [-0.25, 1.25, -1.2], look: [-0.25, 1.35, -2.5]},
-    {at: 'end', pos: [-0.25, 1.25, -1.3], look: [-0.25, 1.35, -2.5]}]},
-  {shot: 4, loc: 'jakarta', lift: false, move: 'but the fun is short', keys: [
-    {at: 'start', pos: [-0.3, 1.75, 0.3], look: [-0.3, 1.5, -3.0]},
-    {at: 'end', pos: [-0.3, 1.75, 0.0], look: [-0.3, 1.5, -3.0]}]},
-  {shot: 5, loc: 'house', lift: false, move: 'a house built to stay cool', keys: [
-    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.4, -3.6]},
-    {at: 'end', pos: [0, 1.8, 0.3], look: [0, 1.4, -3.6]}]},
-  {shot: 5, from: 'keluarga', loc: 'house', lift: false, move: 'everyone hugs the rice cooker', keys: [
-    {at: 'start', pos: [0, 1.55, -0.8], look: [0, 1.15, -3.2]},
-    {at: 'end', pos: [0, 1.55, -1.0], look: [0, 1.15, -3.2]}]},
-  {shot: 6, loc: 'house', lift: false, move: 'close: "move over, my turn!"', keys: [
-    {at: 'start', pos: [-0.1, 1.5, -1.3], look: [-0.1, 1.3, -3.3]},
-    {at: 'end', pos: [-0.1, 1.5, -1.45], look: [-0.1, 1.3, -3.3]}]},
-  {shot: 7, loc: 'field', lift: false, move: 'the rice field freezes', keys: [
-    {at: 'start', pos: [0.4, 1.5, 0.2], look: [0.3, 0.9, -3.6]},
-    {at: 'end', pos: [0.4, 1.45, -0.05], look: [0.3, 0.9, -3.6]}]},
-  {shot: 7, from: 'uduk', loc: 'field', lift: false, move: 'nasi uduk costs a fortune', keys: [
-    {at: 'start', pos: [6.7, 1.7, 0.0], look: [6.7, 1.4, -3.0]},
-    {at: 'end', pos: [6.7, 1.7, -0.3], look: [6.7, 1.4, -3.0]}]},
-  {shot: 8, loc: 'space', lift: false, move: 'ice reflects sunlight, the loop', keys: [
-    {at: 'start', pos: [11.8, 2.1, 2.6], look: [11.8, 2.2, -3.8]},
-    {at: 'end', pos: [11.8, 2.1, 2.1], look: [11.8, 2.2, -3.8]}]},
-  {shot: 9, loc: 'lab', lift: false, move: 'scientists: Snowball Earth', keys: [
-    {at: 'start', pos: [-0.2, 1.75, 0.4], look: [-0.2, 1.6, -3.4]},
-    {at: 'end', pos: [-0.2, 1.75, 0.1], look: [-0.2, 1.6, -3.4]}]},
-  {shot: 9, from: 'bolaSalju', loc: 'lab', lift: false, move: 'close: the white Earth', keys: [
-    {at: 'start', pos: [0.6, 1.7, -2.0], look: [0.6, 1.65, -3.6]},
-    {at: 'end', pos: [0.6, 1.7, -2.15], look: [0.6, 1.65, -3.6]}]},
-  {shot: 10, loc: 'lab', lift: false, move: 'last ice age −6 vs −30', keys: [
-    {at: 'start', pos: [5.6, 1.75, 0.5], look: [5.6, 1.5, -3.3]},
-    {at: 'end', pos: [5.6, 1.75, 0.2], look: [5.6, 1.5, -3.3]}]},
-  {shot: 11, loc: 'jakarta', lift: false, move: 'back in the heat', keys: [
-    {at: 'start', pos: [-0.4, 1.7, -0.2], look: [-0.4, 1.5, -3.0]},
-    {at: 'end', pos: [-0.4, 1.7, -0.45], look: [-0.4, 1.5, -3.0]}]},
-  {shot: 12, loc: 'jakarta', lift: false, move: 'what would you do first?', keys: [
-    {at: 'start', pos: [-0.25, 1.85, 0.5], look: [-0.25, 1.75, -3.0]},
-    {at: 'end', pos: [-0.25, 1.85, 0.25], look: [-0.25, 1.75, -3.0]}]},
+  // Calm camera: close-ups for the dialogue, slow tracks through the gut.
+  {shot: 1, loc: 'home', lift: false, move: 'close: the gum went down', keys: [
+    {at: 'start', pos: [-0.55, 1.35, -1.6], look: [-0.6, 1.3, -3.0]},
+    {at: 'end', pos: [-0.55, 1.35, -1.7], look: [-0.6, 1.3, -3.0]}]},
+  {shot: 2, loc: 'home', lift: false, move: 'close: mum says seven years', keys: [
+    {at: 'start', pos: [0.65, 1.7, -1.6], look: [0.75, 1.65, -3.2]},
+    {at: 'end', pos: [0.65, 1.7, -1.7], look: [0.75, 1.65, -3.2]}]},
+  {shot: 3, loc: 'home', lift: false, move: 'a childhood fear', keys: [
+    {at: 'start', pos: [0.1, 1.6, 0.0], look: [0.1, 1.4, -3.2]},
+    {at: 'end', pos: [0.1, 1.6, -0.3], look: [0.1, 1.4, -3.2]}]},
+  {shot: 3, from: 'bayangkan', loc: 'home', lift: false, move: 'from first grade to junior high', keys: [
+    {at: 'start', pos: [-0.9, 1.55, -0.9], look: [-0.9, 1.5, -3.2]},
+    {at: 'end', pos: [-0.9, 1.55, -1.1], look: [-0.9, 1.5, -3.2]}]},
+  {shot: 4, loc: 'studio', lift: false, move: 'myth or fact', keys: [
+    {at: 'start', pos: [0, 1.35, 0.7], look: [0, 1.35, -3.4]},
+    {at: 'end', pos: [0, 1.35, 0.45], look: [0, 1.35, -3.4]}]},
+  {shot: 5, loc: 'gut', lift: false, move: 'in the stomach: hard to digest', keys: [
+    {at: 'start', pos: [0, 0.8, -1.2], look: [0, 0.6, -3.1]},
+    {at: 'end', pos: [0, 0.8, -1.4], look: [0, 0.6, -3.1]}]},
+  {shot: 6, loc: 'gut', lift: false, move: 'it does not stick', keys: [
+    {at: 'start', pos: [0.8, 1.4, 0.2], look: [1.2, 1.0, -3.6]},
+    {at: 'end', pos: [0.8, 1.4, 0.0], look: [1.2, 1.0, -3.6]}]},
+  {shot: 7, loc: 'gut', lift: false, move: 'the gut keeps pushing', keys: [
+    {at: 'start', pos: [9.4, 1.05, -0.5], look: [9.4, 0.6, -3.3]},
+    {at: 'end', pos: [12.4, 1.05, -0.6], look: [12.6, 0.6, -3.3]}]},
+  {shot: 8, loc: 'gut', lift: false, move: 'the tourist waves goodbye', keys: [
+    {at: 'start', pos: [13.2, 1.05, -0.5], look: [13.4, 0.6, -3.3]},
+    {at: 'end', pos: [17.6, 1.05, -0.6], look: [18.2, 0.6, -3.3]}]},
+  {shot: 9, loc: 'gut', lift: false, move: 'too much: a blockage', keys: [
+    {at: 'start', pos: [30, 1.4, 1.2], look: [30, 1.0, -3.4]},
+    {at: 'end', pos: [30, 1.4, 0.8], look: [30, 1.0, -3.4]}]},
+  {shot: 9, from: 'dikunyah', loc: 'home', lift: false, move: 'chew it, do not swallow it', keys: [
+    {at: 'start', pos: [-0.55, 1.45, -1.3], look: [-0.6, 1.4, -3.0]},
+    {at: 'end', pos: [-0.55, 1.45, -1.45], look: [-0.6, 1.4, -3.0]}]},
+  {shot: 10, loc: 'home', lift: false, move: 'relief until mum comes back', keys: [
+    {at: 'start', pos: [0.3, 1.6, 0.0], look: [0.3, 1.4, -3.2]},
+    {at: 'end', pos: [0.3, 1.6, -0.3], look: [0.3, 1.4, -3.2]}]},
+  {shot: 11, loc: 'home', lift: false, move: 'no watermelon seeds', keys: [
+    {at: 'start', pos: [0.1, 1.65, -0.6], look: [0.1, 1.55, -3.1]},
+    {at: 'end', pos: [0.1, 1.65, -0.8], look: [0.1, 1.55, -3.1]}]},
+  {shot: 12, loc: 'home', lift: false, move: 'which threat did you believe', keys: [
+    {at: 'start', pos: [0.1, 1.7, -0.2], look: [0.1, 1.6, -3.0]},
+    {at: 'end', pos: [0.1, 1.7, -0.45], look: [0.1, 1.6, -3.0]}]},
 ];
 
 export function warpU(T, t) {
