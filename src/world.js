@@ -27,6 +27,10 @@ const CAST = {
   tamu: {outfit: 'batik', jacket: '#4f7fa6', print: '#f2d24a', print2: '#2a3448', lower: '#2a2a33', tie: '#4f7fa6', hair: '#2b2326', hairStyle: 'fringe', hat: 'none'},
   host: {outfit: 'batik', jacket: '#8a4a2a', print: '#e8c35a', print2: '#3a2420', lower: '#2a2a33', tie: '#8a4a2a', hair: '#2b2326', hat: 'peci', hatColor: '#1f1d24', mustache: 'thick'},
   groom: {outfit: 'suit', jacket: '#fbf6ea', lapel: '#d8a83a', tie: '#d8a83a', lower: '#fbf6ea', hair: '#2b2326', hat: 'peci', hatColor: '#1f1d24', pocketSquare: '#d8a83a'},
+  p1: {outfit: 'tshirt', jacket: '#7fc4e8', print: '#fff3df', print2: '#4f7fa6', lower: '#4a4a52', tie: '#7fc4e8', hair: '#2b2326', hairStyle: 'side', hat: 'none'},
+  p2: {hairStyle: 'hijab', hijab: '#e8a83a', brooch: '#d8413a', hat: 'none', hair: '#3a2a26', outfit: 'batik', jacket: '#6a9a7a', print: '#f2d24a', print2: '#2a4a3a', lower: '#3a3a48', tie: '#6a9a7a', round: true},
+  p3: {outfit: 'farmer', jacket: '#c95a7a', lower: '#3a4050', pocket: '#b04a6a', tie: '#c95a7a', hair: '#9a9a9a', hairStyle: 'bald', hat: 'none', mustache: 'thin'},
+  anchor: {hairStyle: 'hijab', hijab: '#2f4f8a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'suit', jacket: '#d8413a', lapel: '#a82a2a', tie: '#fbf6ea', lower: '#2a2a33', pocketSquare: false},
   bride: {outfit: 'batik', jacket: '#fbf6ea', print: '#e8c35a', print2: '#c9a25a', lower: '#d8a83a', tie: '#fbf6ea', round: true, hairStyle: 'hijab', hijab: '#fbf6ea', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26'},
 };
 
@@ -115,9 +119,24 @@ export function buildWorld(lang, T, EVt, L) {
     const gfl = FX.fireLight([0, 2.6, -3.2], {intensity: 2.0, dist: 6}); g.add(gfl.obj); updaters.push((t) => gfl.update(t));
     const boards = [[L.start, 0, (t) => t < cut(10) || (t < E('berlalu'))], ['00:00:01', 0, () => false], [L.end, 0, (t) => t >= E('berlalu')]].map(([txt, , vis]) => {
       const b = P.digitalBoard(txt, 2.2, 0.62, {color: txt === L.end ? '#5aff8a' : '#ff5a4a'}); at(b, 0, 4.25, -5.6); g.add(b); showWhen(b, vis); return b; });
-    popSign(g, sign(L.noLie, 2.6, 0.42, {bg: '#f2d24a', fg: '#351f22', frame: '#351f22'}), 0, 3.55, -4.6, E('duaPuluh0') - 0.1, cut(2));
     popSign(g, sign(L.relief, 1.6, 0.4, {bg: '#fff3df', fg: '#2f6a8a', frame: '#351f22'}), -0.7, 2.55, -2.5, E('lega') - 0.05, E('kembali'), (t) => inShots(t, 10));
-    popSign(g, sign(L.back, 1.7, 0.42, {bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'}), 0.2, 2.55, -2.5, E('kembali') - 0.05, 1e9, (t) => inShots(t, 10));
+    // the newsroom (1): an emergency news broadcast, framed like a TV
+    {
+      const NX = -12;
+      const back = box(5, 3.6, 0.15, toon('#1f3a6a', {paint: {seed: 223}})); at(back, NX, 0, -4.2); g.add(back);
+      for (let i = 0; i < 6; i++) { const st = box(0.06, 3.6, 0.02, '#3a5a9a', {hull: 0}); at(st, NX - 2.2 + i * 0.88, 0, -4.1); g.add(st); }
+      const head = sign(L.news, 2.6, 0.5, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a', wear: false}); at(head, NX, 2.55, -4.05); g.add(head);
+      updaters.push((t) => { head.visible = Math.floor(t * 3) % 2 === 0 || t > 1.2; });
+      const live = sign(L.live, 0.6, 0.26, {bg: '#d8312a', fg: '#fff3df', frame: '#fff3df', wear: false}); at(live, NX - 1.6, 1.95, -4.05); g.add(live);
+      const brd = P.digitalBoard(L.start, 1.3, 0.38); at(brd, NX + 1.25, 1.95, -4.05); g.add(brd);
+      const dsk = box(1.8, 0.85, 0.7, toon('#e8e0d0', {paint: {seed: 224}})); at(dsk, NX, 0, -2.6); g.add(dsk);
+      const stripe = box(1.82, 0.12, 0.02, '#d8312a', {hull: 0}); at(stripe, NX, 0.72, -2.24); g.add(stripe);
+      const anchor = ch('anchor', {seed: 60}, g, NX, -3.05, 0); seat(anchor, -0.12);
+      anchor.act([{t: 0, pose: 'present', expr: 'surprised'}, {t: 1.5, pose: 'stop', expr: 'shocked'}]);
+      anchor.act([{t: 0.15, action: 'talk', dur: 2.2}]);
+      const paper = box(0.25, 0.01, 0.18, '#fbf6ea', {hull: 0.004}); at(paper, NX + 0.3, 0.86, -2.5); g.add(paper);
+      const tick = sign(L.ticker, 3.0, 0.26, {bg: '#f2d24a', fg: '#351f22', frame: '#351f22', wear: false}); at(tick, NX, 0.45, -2.2); g.add(tick);
+    }
     // the lineup: people from the day's stories, all over the world
     const line = [['suami', -1.6, 0.25], ['istri', -0.8, 0.12], ['bos', 0, 0], ['abang', 0.8, -0.12], ['mbak', 1.6, -0.25]].map(([k, x, y], i) => {
       const c = ch(k, {seed: 40 + i}, g, x, -2.8, y); showWhen(c.group, (t) => inShots(t, 1) || inShots(t, 10));
@@ -143,16 +162,23 @@ export function buildWorld(lang, T, EVt, L) {
     const fl = ball(0.1, '#f2d24a', {hull: 0.008}); at(fl, -2.2, 1.1, -3.7); g.add(fl);
     const sofa = P.sofa('#6a8a7a'); at(sofa, 1.9, 0, -4.3); g.add(sofa);
     const wc = P.wallClock(0.28); wc.set(7, 0); at(wc.group, 1.9, 2.3, -4.86); g.add(wc.group);
-    const frame = sign('', 0.7, 0.5, {bg: '#9cc6e6', frame: '#7a5236', wear: false}); at(frame, -2.2, 1.9, -4.86); g.add(frame);
-    clock(g, L.t7, 0.9, 2.45, -4.8, 'pagi', (t) => inShots(t, 2, 3));
+    const ntv = new THREE.Group(); ntv.add(box(1.25, 0.75, 0.06, '#2b2b33', {center: true, hull: 0.01}));
+    { const c = canvas(640, 380), x = c.getContext('2d'); x.fillStyle = '#1f3a6a'; x.fillRect(0, 0, 640, 380); x.fillStyle = '#d8312a'; x.fillRect(0, 30, 640, 70);
+      x.fillStyle = '#fff'; x.font = '900 44px "Inter Display"'; x.textAlign = 'center'; x.fillText(L.news, 320, 80);
+      x.fillStyle = '#f2d24a'; x.fillRect(0, 250, 640, 100); x.fillStyle = '#351f22'; x.font = '900 30px "Inter Display"'; x.fillText(L.tv1, 320, 290); x.fillText(L.tv2, 320, 330);
+      x.fillStyle = '#e8c4a8'; x.beginPath(); x.arc(320, 175, 50, 0, 7); x.fill(); x.fillStyle = '#2f4f8a'; x.beginPath(); x.arc(320, 165, 56, Math.PI, 0); x.fill(); x.fillStyle = '#d8413a'; x.fillRect(262, 220, 116, 30);
+      const scrn = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 0.68), new THREE.MeshBasicMaterial({map: texFrom(c)})); scrn.position.z = 0.035; ntv.add(scrn); }
+    at(ntv, -2.2, 1.85, -4.85); g.add(ntv);
+    const panic = ch('suami', {seed: 5}, g, -1.35, -3.3, 0.35); showWhen(panic.group, (t) => inShots(t, 1));
+    panic.act([{t: 0, pose: 'idle', expr: 'surprised'}, {t: E('bohong0') - 0.05, pose: 'shh', expr: 'scream'}, {t: E('duaPuluh0'), pose: 'headHold', expr: 'grimace'}]);
+    panic.act([{t: E('bohong0') - 0.05, action: 'jump', dur: 0.5}, {t: E('duaPuluh0'), action: 'tremble', dur: 1.5}]);
     const suami = ch('suami', {seed: 1}, g, 0.55, -3.0, -0.15);
     const istri = ch('istri', {seed: 2}, g, -0.2, -4.7, 0.1);
-    showWhen(suami.group, (t) => !inShots(t, 4));
+    showWhen(suami.group, (t) => !inShots(t, 4) && !inShots(t, 1));
     showWhen(istri.group, (t) => (t > E('istri') - 0.6 && t < cut(4)) || t >= cut(11));
     walkPath(istri, [[E('istri') - 0.4, -0.2, -4.7], [E('bertanya') - 0.1, -0.65, -3.0], [cut(4), -0.65, -3.0], [cut(11), -0.65, -3.0], [cut(12), -0.65, -3.2], [cut(12) + 0.02, -1.6, -3.9]]);
     const bag = P.shopBag('#e0626e'); held(istri, bag, {hand: 1, y: -0.02, z: 0.08}); showWhen(bag, (t) => t < E('bertanya') + 0.1);
     const bag2 = P.shopBag('#e0626e'); at(bag2, -1.2, 0, -3.3, 0.4); g.add(bag2); showWhen(bag2, (t) => t > E('bertanya') + 0.1 && t < cut(4));
-    popSign(g, sign(L.danger, 1.9, 0.36, {bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'}), -0.1, 2.35, -3.4, E('bahaya') - 0.05, E('pa'), (t) => inShots(t, 2));
     popSign(g, sign(L.nenek, 1.6, 0.34, {bg: '#fff3df', fg: '#d8413a', frame: '#351f22'}), -2.2, 1.6, -3.3, E('taplak') - 0.05, cut(4), (t) => inShots(t, 3));
     istri.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('baju') + 0.05, pose: 'idle', expr: 'cheesy'}, {t: E('bertanya') + 0.05, pose: 'presentBoth', expr: 'proud'},
       {t: E('pa') - 0.05, pose: 'hips', expr: 'cheesy'}, {t: E('cantik') + 0.05, pose: 'presentBoth', expr: 'excited'},
@@ -192,7 +218,6 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(7, 3, 6, {wall: '#dfe6ea', floor: '#9aa4ac', wain: '#5a7a8a', tiles: true}));
     const scr = sign('', 1.9, 1.15, {bg: '#fbfbf6', frame: '#2b2b33', wear: false}); at(scr, -1.5, 1.05, -4.85); g.add(scr);
     const slide = sign(L.slide.join(' '), 1.6, 0.5, {bg: '#4f7fa6', fg: '#fff3df', frame: '#4f7fa6', wear: false, depth: 0.01}); at(slide, -1.5, 1.6, -4.8); g.add(slide);
-    clock(g, L.t9, 1.6, 2.4, -4.8, 'sembilan');
     const plant = cyl(0.18, 0.14, 0.4, '#c8822a'); at(plant, 3.0, 0, -4.4); g.add(plant); const lv = ball(0.35, '#5a9a5a', {sy: 1.3}); at(lv, 3.0, 0.75, -4.4); g.add(lv);
     const table = box(3.2, 0.12, 1.0, toon('#8a6a4a', {paint: {planks: 4, seed: 121}})); at(table, 0.4, 0.64, -2.5); g.add(table);
     const front = box(3.0, 0.55, 0.05, toon('#6a4a32', {paint: {seed: 122}})); at(front, 0.4, 0.1, -2.05); g.add(front);
@@ -225,12 +250,20 @@ export function buildWorld(lang, T, EVt, L) {
     [[-0.5, -3.1], [-0.1, -2.85], [0.3, -3.2], [0.7, -2.9], [1.0, -3.2], [-0.3, -3.35]].forEach(([x, z], i) => { const m = P.watermelon(0.2); at(m, x, 0.85, z, i); g.add(m); });
     const cutm = P.watermelon(0.2, {cut: true}); at(cutm, 0.25, 0.85, -2.65); g.add(cutm);
     const post = cyl(0.04, 0.05, 2.2, '#7a5236'); at(post, -1.75, 0, -3.4); g.add(post);
-    clock(g, L.t12, -1.75, 2.35, -3.35, 'duaBelas');
     const abang = ch('abang', {seed: 20}, g, 0.35, -3.75, -0.05);
     const mbak = ch('mbak', {seed: 21}, g, -1.1, -2.3, 0.55);
+    const flee = E('saya') - 0.15;
+    const buyers = [['p1', 1.6, -2.1, -0.5], ['p2', -2.2, -2.6, 0.5], ['p3', 1.15, -1.5, -0.4]].map(([k, x, z, y], i) => {
+      const c = ch(k, {seed: 24 + i}, g, x, z, y);
+      c.act([{t: 0, pose: ['idle', 'hold', 'idle'][i], expr: ['happy', 'neutral', 'thinking'][i]}, {t: E('manis') + 0.1, pose: 'idle', expr: ['disgusted', 'grimace', 'shocked'][i]},
+        {t: flee, pose: 'armsUp', expr: ['scream', 'grimace', 'scream'][i]}]);
+      walkPath(c, [[flee + i * 0.05, x, z], [flee + 1.1 + i * 0.05, x + (x > 0 ? 2.0 : -2.0), z + 0.9]], 'run');
+      return c; });
+    walkPath(mbak, [[flee, -1.1, -2.3], [flee + 1.1, -3.1, -1.5]], 'run');
+    fx(g, FX.dust([0, 0.1, -2.2], flee + 0.1, {n: 10}));
     popSign(g, sign(L.sweet, 0.9, 0.3, {bg: '#fff3df', fg: '#d8413a', frame: '#351f22'}), -1.1, 2.3, -2.3, E('manisQ') - 0.05, E('jujur'));
     mbak.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('bang') - 0.05, pose: 'point', expr: 'thinking'}, {t: E('manisQ') + 0.05, pose: 'tap', expr: 'confused'},
-      {t: E('manis') + 0.2, pose: 'cross', expr: 'disgusted'}, {t: E('saya') + 0.1, pose: 'facepalm', expr: 'annoyed'}]);
+      {t: E('manis') + 0.2, pose: 'cross', expr: 'disgusted'}, {t: E('saya') + 0.05, pose: 'armsUp', expr: 'scream'}]);
     speak(mbak, 12, [[0, 'thinking', 'point'], [0.5, 'confused', 'tap']]);
     abang.act([{t: 0, pose: 'presentBoth', expr: 'happy'}, {t: E('jujur') - 0.05, pose: 'hips', expr: 'smug'}, {t: E('manis') - 0.05, pose: 'chin', expr: 'scheming'}, {t: E('saya'), pose: 'chin', expr: 'proud'}]);
     speak(abang, 13, [[0, 'smug', 'hips'], [0.55, 'scheming', 'chin']]);
@@ -246,7 +279,6 @@ export function buildWorld(lang, T, EVt, L) {
     const terrace = box(5.8, 0.12, 1.6, toon('#c9a27a', {paint: {seed: 142}})); at(terrace, 0, 0, -3.6); g.add(terrace);
     for (let i = 0; i < 3; i++) { const tr = P.tree({seed: 60 + i, h: 2.6}); at(tr, -4.6 + i * 9.5 * (i % 2 ? 1 : 0.4), 0, -5.5 - i); g.add(tr); }
     const wc = P.wallClock(0.24, {rim: '#4f7fa6'}); wc.set(3, 0); at(wc.group, 1.4, 2.4, -4.15); g.add(wc.group);
-    clock(g, L.t15, 1.4, 1.85, -4.1, 'tigaSore');
     const debtor = ch('debtor', {seed: 30}, g, -0.45, -3.55, 0.05); seat(debtor, 0.12);
     const teman = ch('teman', {seed: 31}, g, 1.5, -1.5, -0.5);
     walkPath(teman, [[E('teman') - 0.3, 1.5, -1.5], [E('utang') + 0.1, 0.75, -2.55]]);
@@ -271,12 +303,11 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(7, 3, 6, {wall: '#f0d0c8', floor: '#b08454', wain: '#a86a7a'}));
     const sofa = P.sofa('#a86a7a'); at(sofa, -1.0, 0, -4.3); g.add(sofa);
     const tvs = P.tv(); at(tvs.group, 2.2, 0, -4.5); g.add(tvs.group); updaters.push((t) => tvs.update(t));
-    clock(g, L.t18, -0.2, 2.45, -4.8, 'enam');
     const ibu = ch('ibu', {seed: 40}, g, -0.95, -3.1, 0.25);
     const small = P.phone(); held(ibu, small, {y: 0.02, z: 0.06}); updaters.push((t) => { const buzz = t > E('arisan') - 0.2 && t < E('maaf'); small.rotation.z = buzz ? Math.sin(t * 70) * 0.12 : 0; });
-    const steps = [[1, E('arisan') - 0.1], [2, E('arisan') + 0.4], [3, E('ramai') - 0.05], [4, E('maaf')], [5, E('malas') - 0.05]];
+    const steps = [[0, cut(8)], [1, E('arisan') + 0.05], [2, E('arisan') + 0.4], [3, E('ramai') - 0.05], [4, E('maaf')], [5, E('malas') - 0.05], [6, E('malas') + 0.3], [7, E('malas') + 0.55]];
     steps.forEach(([n, t0], i) => { const pp = P.chatPhone(L.group, L.chat.slice(0, n), {w: 0.82, badge: '99+'}); at(pp, 0.3, 1.45, -2.3, -0.25); g.add(pp);
-      const t1 = i + 1 < steps.length ? steps[i + 1][1] : 1e9; updaters.push((t) => { pp.visible = t >= t0 && t < t1 && inShots(t, 8); pp.scale.setScalar(i === 0 ? pop(t, t0, 0.35) : 1); }); });
+      const t1 = i + 1 < steps.length ? steps[i + 1][1] : 1e9; updaters.push((t) => { pp.visible = t >= t0 && t < t1 && inShots(t, 8); pp.scale.setScalar(1); }); });
     fx(g, FX.glints([0.75, 2.2, -3.0], E('ramai'), {n: 16}));
     ibu.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('arisan') + 0.1, pose: 'tap', expr: 'surprised'}, {t: E('ramai') + 0.1, pose: 'tap', expr: 'tired'},
       {t: E('maaf') - 0.05, pose: 'tap', expr: 'nervous'}, {t: E('baca') + 0.05, pose: 'tap', expr: 'smug'}, {t: E('malas'), pose: 'shrug', expr: 'tired'}]);
@@ -290,7 +321,6 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(9, 3.4, 7, {wall: '#f3e3c8', floor: '#c9a27a', wain: '#8a2a36', tiles: true}));
     const pel = P.pelaminan({w: 4.4}); at(pel, 0, 0, -5.0); g.add(pel);
     popSign(g, sign(L.wedding, 3.4, 0.36, {bg: '#8a2a36', fg: '#f2d24a', frame: '#d8a83a'}), 0, 2.95, -5.8, -1);
-    clock(g, L.t19, -3.4, 2.6, -5.85, 'malam');
     for (let i = 0; i < 7; i++) { const l = P.glowSprite('#ffe2a0', 0.5); at(l, -3.6 + i * 1.2, 3.2, -5.6 + (i % 2) * 0.3); g.add(l); }
     const groom = ch('groom', {seed: 50}, g, 0.42, -5.45, -0.05, 0.3);
     const bride = ch('bride', {seed: 51}, g, -0.42, -5.45, 0.05, 0.3);

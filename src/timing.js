@@ -88,10 +88,11 @@ const EV_ID = {
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {t7: '07.00', t9: '09.00', t12: '12.00', t15: '15.00', t18: '18.00', t19: '19.00', start: '24:00:00', end: '00:00:00',
+const L_ID = {news: 'BERITA DARURAT', live: 'LIVE', ticker: 'MULAI HARI INI, SEMUA ORANG TIDAK BISA BERBOHONG SELAMA 24 JAM!', tv1: 'MULAI HARI INI: SEMUA ORANG', tv2: 'TIDAK BISA BERBOHONG 24 JAM!',
+  t7: '07.00', t9: '09.00', t12: '12.00', t15: '15.00', t18: '18.00', t19: '19.00', start: '24:00:00', end: '00:00:00',
   noLie: '24 JAM TANPA BOHONG', danger: 'PERTANYAAN BERBAHAYA', nenek: 'TAPLAK MEJA NENEK', day1: 'HARI PERTAMA', meeting: 'RAPAT MINGGUAN',
   slide: ['RAPAT', 'MINGGUAN', '(2 JAM)'], wa: '1 PESAN WHATSAPP', melon: 'SEMANGKA', sweet: 'MANIS?', debt: 'UTANG: Rp500.000',
-  group: 'ARISAN RT 05', chat: [['Bu, sudah dibaca?', false], ['Kok nggak dibalas?', false], ['Halo??', false], ['Maaf ya, Bu...', true], ['cuma malas balas', true]],
+  group: 'ARISAN RT 05', chat: [['Bu, sudah dibaca?', false], ['Kok nggak dibalas?', false], ['Halo??', false], ['Maaf ya, Bu...', true], ['cuma malas balas', true], ['Saya juga baca kok, Bu', false], ['Sama, malas balas juga', false]],
   wedding: 'SELAMAT MENEMPUH HIDUP BARU', rendang: 'RENDANG', who: 'SIAPA?', relief: 'FIUUUH...', back: 'BOHONG LAGI!',
   question: 'SIAPA PALING BAHAYA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

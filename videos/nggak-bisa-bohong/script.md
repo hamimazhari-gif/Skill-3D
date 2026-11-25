@@ -1,10 +1,10 @@
 # Tidak bisa bohong 24 jam — script
 
-Narasi dan voice-over dari pengguna (84,9 s), tidak diubah. Tidak ada storyboard, jadi tidak ada teks judul di layar; yang tampil hanya teks kata-per-kata (caption) dan papan jam di setiap lokasi.
+Narasi dan voice-over dari pengguna (84,9 s), tidak diubah. Mengikuti storyboard pengguna (8 adegan dengan teks layar): hook berita TV darurat + pria panik menutup mulut, teks layar jam + judul adegan di atas, pembeli semangka kabur, grup arisan sepi lalu semua mengaku 'baca tapi malas balas', penutup '…SEMUA LEGA BISA BOHONG LAGI 😅'. Papan jam di dalam adegan dihapus karena jamnya sudah ada di teks layar.
 
 | Shot | Lokasi | Kalimat |
 |---|---|---|
-| 1 | Studio (globe, papan 24:00:00) | Bagaimana jika... |
+| 1 | Studio berita (BERITA DARURAT) → rumah, TV + pria panik | Bagaimana jika... |
 | 2 | Rumah, 07.00 | Jam tujuh pagi... "Pa, Mama cantik nggak pakai baju ini?" |
 | 3 | Rumah | Suami berusaha diam... "taplak meja di rumah Nenek." |
 | 4 | Rumah, malam (sofa) | Hari pertama, langsung tidur di sofa. |

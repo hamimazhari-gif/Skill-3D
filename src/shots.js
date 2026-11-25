@@ -11,12 +11,12 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: slow short pushes, hard cuts inside a location on the punchlines.
-  {shot: 1, loc: 'stage', lift: false, move: 'the whole world: 24 hours without lying', keys: [
-    {at: 'start', pos: [0, 2.4, 1.9], look: [0, 2.5, -5]},
-    {at: 'end', pos: [0, 2.3, 1.4], look: [0, 2.4, -5]}]},
-  {shot: 1, from: 'bohong0', loc: 'stage', lift: false, move: 'everyone covers their mouth', keys: [
-    {at: 'start', pos: [0, 1.75, 0.9], look: [0, 1.6, -2.8]},
-    {at: 'end', pos: [0, 1.75, 0.7], look: [0, 1.6, -2.8]}]},
+  {shot: 1, loc: 'stage', lift: false, move: 'emergency news on TV', keys: [
+    {at: 'start', pos: [-12, 1.55, 0.3], look: [-12, 1.5, -3.4]},
+    {at: 'end', pos: [-12, 1.55, 0.0], look: [-12, 1.5, -3.4]}]},
+  {shot: 1, from: 'bohong0', loc: 'home', lift: false, move: 'a man in front of the TV covers his mouth in panic', keys: [
+    {at: 'start', pos: [-1.55, 1.75, -0.6], look: [-1.75, 1.6, -4.2]},
+    {at: 'end', pos: [-1.55, 1.75, -0.8], look: [-1.75, 1.6, -4.2]}]},
   {shot: 2, loc: 'home', lift: false, move: '7 am: the wife comes home with a new dress', keys: [
     {at: 'start', pos: [0, 1.7, 1.2], look: [0, 1.35, -3.6]},
     {at: 'end', pos: [0, 1.7, 0.9], look: [0, 1.35, -3.6]}]},
@@ -48,6 +48,9 @@ export const SHOT_PLAN = [
   {shot: 6, from: 'jujur', loc: 'market', move: 'close: "the only sweet thing is me"', keys: [
     {at: 'start', pos: [0.35, 1.62, -2.48], look: [0.35, 1.62, -3.75]},
     {at: 'end', pos: [0.35, 1.62, -2.56], look: [0.35, 1.62, -3.75]}]},
+  {shot: 6, from: 'saya', loc: 'market', lift: false, move: 'wide: every buyer runs away', keys: [
+    {at: 'start', pos: [-0.2, 2.1, 2.6], look: [-0.2, 1.2, -3.0]},
+    {at: 'end', pos: [-0.2, 2.15, 2.8], look: [-0.2, 1.2, -3.0]}]},
   {shot: 7, loc: 'porch', lift: false, move: '3 pm: a friend comes to collect a debt', keys: [
     {at: 'start', pos: [0.6, 1.75, 1.6], look: [0.4, 1.3, -3.2]},
     {at: 'end', pos: [0.5, 1.7, 1.2], look: [0.3, 1.3, -3.2]}]},

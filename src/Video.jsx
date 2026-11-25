@@ -106,7 +106,8 @@ function Scene({lang, thumb}) {
 const DIPS = [2, 5, 6, 7, 8, 9, 10, 11];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard for this video: no screen titles, only captions
+const TITLES = [['cut1', '24 JAM TANPA BOHONG 🤐'], ['cut2', '07.00 – | PERTANYAAN JEBAKAN 👗'], ['cut5', '09.00 – | RAPAT KANTOR 😬'], ['cut6', '12.00 – | "MANIS NGGAK, BANG?" 🍉'],
+  ['cut7', '15.00 – | DITAGIH UTANG 💸'], ['cut8', '18.00 – | GRUP WA ARISAN 📱'], ['cut9', '19.00 – | KONDANGAN 🍛'], ['cut10', ''], ['lega', '…SEMUA LEGA | BISA BOHONG LAGI 😅']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -148,6 +149,8 @@ function cues(T, EVt) {
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
     // 1 the world, 24 hours
+    [sy('alarm_bell'), 0.05, 0.08, 1.0],
+    ['06-digital-glitch-tech-blip.mp3', 0.1, 0.14],
     [sy('tense_drone'), 0.1, 0.1, 5.0],
     [sy('clock_tick'), E.duaPuluh0 - 0.1, 0.18, 1.2],
     ['06-deep-cinematic-boom.wav', E.bohong0, 0.16],
@@ -171,6 +174,8 @@ function cues(T, EVt) {
     [sy('crowd_murmur'), C[5] + 0.1, 0.06, 2.0],
     [sy('sparkle'), E.manis, 0.2],
     [sy('kiss'), E.saya, 0.12],
+    [sy('footsteps_run'), E.saya + 0.05, 0.16, 0.9],
+    [sy('crowd_angry'), E.saya + 0.1, 0.06, 0.8],
     // 7 porch
     tick('tigaSore'),
     [sy('footsteps_walk'), E.teman - 0.3, 0.12, 1.5],
@@ -180,6 +185,7 @@ function cues(T, EVt) {
     // 8 arisan chat
     tick('enam'),
     ...[0, 0.4, 0.75, 1.05, 1.35].map((d) => ['09-notification-ding.wav', E.arisan - 0.1 + d, 0.12]),
+    ['09-notification-ding.wav', E.malas + 0.3, 0.12], ['09-notification-ding.wav', E.malas + 0.55, 0.12],
     ['03-typing-keyboard-burst.wav', E.maaf, 0.12, 1.2],
     ['04-soft-ui-pop.mp3', E.malas - 0.05, 0.18],
     // 9 wedding
