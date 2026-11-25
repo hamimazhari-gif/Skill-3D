@@ -26,10 +26,11 @@ export const DESIGNS = {
   breezy: {head: 'round', hair: 'fringe', skin: '#f3d6bc', brows: 'thick', limb: [9, 5], legExtra: 0.07, torsoExtra: 0.13, cheeks: false, shading: true, shadows: true},
   sturdy: {head: 'round', hair: 'side', skin: '#f2d4b8', brows: 'thick', limb: [10, 6], legExtra: 0.02, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   nimble: {head: 'round', hair: 'tuft', skin: '#f7dcc8', brows: 'thin', limb: [9, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  cheery: {head: 'round', hair: 'side', skin: '#f5d8c0', brows: 'thick', limb: [8, 5], legExtra: 0.04, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy', 'nimble'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy', 'nimble', 'cheery'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -409,6 +410,10 @@ function drawTorso(o, r) {
   }
   if (out === 'boss') { x.fillStyle = 'rgba(255,255,255,0.18)'; for (let yy = top; yy < waist; yy += 22) x.fillRect(0, yy, W * PX, 6); }
   x.fillStyle = o.lower; x.fillRect(0, waist, W * PX, H * PX);
+  if (o.sarung) { // checked sarung wrapped below the waist
+    const n = 22; x.save(); x.beginPath(); x.rect(0, top + (bot - top) * 0.64, W * PX, H * PX); x.clip(); x.globalAlpha = 0.5; x.fillStyle = o.sarung;
+    for (let k = 0; k * n < W * PX; k += 2) x.fillRect(k * n, 0, n, H * PX); for (let k = 0; k * n < H * PX; k += 2) x.fillRect(0, k * n, W * PX, n); x.restore();
+  }
   if (o.check) { // gingham (tablecloth) print over the whole torso and skirt
     const n = 26; x.globalAlpha = 0.55; x.fillStyle = o.check;
     for (let k = 0; k * n < W * PX; k += 2) x.fillRect(k * n, 0, n, H * PX);
