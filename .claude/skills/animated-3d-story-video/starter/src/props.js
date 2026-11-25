@@ -2403,3 +2403,49 @@ export function broom() { const g = new THREE.Group(); const st = cyl(0.02, 0.02
 // Red blood cell: a red disc with a dimple.
 export function redCell(r = 0.25) { const g = new THREE.Group(); const t = new THREE.Mesh(new THREE.TorusGeometry(r * 0.7, r * 0.35, 12, 24), toon('#d8312a', {wear: false})); g.add(t); const c = cyl(r * 0.7, r * 0.7, r * 0.25, '#b8221a', {center: true, hull: 0}); c.rotation.x = Math.PI / 2; g.add(c); return g; }
 export function partyHat(color = '#7a5aa8') { const g = new THREE.Group(); const c = cone(0.09, 0.24, color, {hull: 0.006}); g.add(c); const p = ball(0.03, '#f2d24a', {hull: 0}); p.position.y = 0.25; g.add(p); return g; }
+
+// ---------- "Kalau HP bisa ngomong jujur" ----------
+// A giant smartphone character: the screen shows a face (mood: 'neutral' | 'angry' | 'sad' | 'dying' | 'soft'), the mouth opens while it talks.
+export function talkPhone(o = {}) {
+  const g = new THREE.Group(); const w = o.w || 0.8, h = w * 1.95;
+  const body = box(w, h, 0.09, '#2b2b33', {center: true, hull: 0.015}); g.add(body);
+  const cam = ball(0.025, '#4a4a52', {hull: 0}); at(cam, 0, h / 2 - 0.06, 0.046); g.add(cam);
+  const faces = {};
+  const draw = (mood, open) => { const c = canvas(300, 580), x = c.getContext('2d');
+    const bg = {neutral: ['#7fc4e8', '#bfe4ff'], angry: ['#e8737a', '#ffb0a0'], sad: ['#7a8ab0', '#b8c4e0'], dying: ['#5a2a2a', '#a84a3a'], soft: ['#e8c89a', '#fff0d0']}[mood];
+    const gr = x.createLinearGradient(0, 0, 0, 580); gr.addColorStop(0, bg[0]); gr.addColorStop(1, bg[1]); x.fillStyle = gr; x.fillRect(0, 0, 300, 580);
+    x.fillStyle = '#fbfbf8'; x.font = '700 22px "Inter Display"'; x.fillText('21:47', 16, 32);
+    const bw = mood === 'dying' ? 4 : 30; x.strokeStyle = '#fbfbf8'; x.lineWidth = 3; x.strokeRect(236, 14, 44, 20); x.fillStyle = mood === 'dying' ? '#ff3a3a' : '#fbfbf8'; x.fillRect(239, 17, bw, 14);
+    x.fillStyle = '#351f22'; x.strokeStyle = '#351f22'; x.lineWidth = 10; x.lineCap = 'round';
+    for (const s of [-1, 1]) { const ex = 150 + s * 60, ey = 250;
+      if (mood === 'dying') { x.beginPath(); x.moveTo(ex - 18, ey - 18); x.lineTo(ex + 18, ey + 18); x.moveTo(ex + 18, ey - 18); x.lineTo(ex - 18, ey + 18); x.stroke(); }
+      else { x.beginPath(); x.arc(ex, ey, mood === 'soft' ? 14 : 20, 0, 7); x.fill(); x.fillStyle = '#fbfbf8'; x.beginPath(); x.arc(ex - 6, ey - 6, 6, 0, 7); x.fill(); x.fillStyle = '#351f22'; }
+      if (mood === 'angry') { x.beginPath(); x.moveTo(ex - s * 30, ey - 28); x.lineTo(ex + s * 22, ey - 52); x.stroke(); }
+      if (mood === 'sad' || mood === 'soft') { x.beginPath(); x.moveTo(ex - s * 26, ey - 46); x.lineTo(ex + s * 24, ey - 32); x.stroke(); } }
+    x.fillStyle = '#5a1a2a';
+    if (open) { x.beginPath(); x.ellipse(150, 350, mood === 'angry' ? 44 : 32, mood === 'angry' ? 36 : 24, 0, 0, 7); x.fill(); x.stroke(); }
+    else if (mood === 'sad' || mood === 'dying') { x.beginPath(); x.arc(150, 375, 34, Math.PI * 1.15, Math.PI * 1.85); x.stroke(); }
+    else if (mood === 'soft') { x.beginPath(); x.moveTo(125, 350); x.lineTo(175, 350); x.stroke(); }
+    else { x.beginPath(); x.moveTo(115, 345); x.lineTo(185, 345); x.stroke(); }
+    return texFrom(c); };
+  const mat = new THREE.MeshBasicMaterial({map: draw('neutral', false)}); const scr = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.9, h * 0.93), mat); scr.position.z = 0.047; g.add(scr);
+  return {group: g, set(mood, open) { const k = mood + (open ? 1 : 0); if (!faces[k]) faces[k] = draw(mood, open); if (mat.map !== faces[k]) { mat.map = faces[k]; mat.needsUpdate = true; } }};
+}
+// A grid of tiny selfie tiles (all the same face, tilted by a few degrees).
+export function selfieGrid(cols = 6, rows = 8) {
+  const c = canvas(600, 800), x = c.getContext('2d'); x.fillStyle = '#fbfbf8'; x.fillRect(0, 0, 600, 800);
+  for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) { const cx = 50 + i * 100, cy = 50 + j * 100; x.save(); x.translate(cx, cy); x.rotate(((i + j) % 3 - 1) * 0.04);
+    x.fillStyle = '#9cc6e6'; x.fillRect(-46, -46, 92, 92); x.fillStyle = '#f2d6bc'; x.beginPath(); x.arc(0, 4, 26, 0, 7); x.fill(); x.fillStyle = '#2b2326'; x.beginPath(); x.arc(0, -6, 27, Math.PI, 0); x.fill();
+    x.fillStyle = '#351f22'; x.beginPath(); x.arc(-9, 6, 3, 0, 7); x.arc(9, 6, 3, 0, 7); x.fill(); x.beginPath(); x.arc(0, 14, 7, 0, Math.PI); x.fill(); x.restore(); }
+  return new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.6), new THREE.MeshBasicMaterial({map: texFrom(c)}));
+}
+// A shopping cart piled with parcels.
+export function cart() {
+  const g = new THREE.Group(); const m = '#9aa8b4';
+  const basket = box(0.8, 0.45, 0.5, new THREE.MeshBasicMaterial({color: m, wireframe: true}), {hull: 0}); at(basket, 0, 0.45, 0); g.add(basket);
+  const base = box(0.8, 0.03, 0.5, m, {hull: 0.004}); at(base, 0, 0.45, 0); g.add(base);
+  for (const x of [-0.32, 0.32]) for (const z of [-0.2, 0.2]) { const wh = cyl(0.05, 0.05, 0.03, '#2b2b33', {center: true, hull: 0}); wh.rotation.x = Math.PI / 2; at(wh, x, 0.05, z); g.add(wh); const lg = box(0.02, 0.4, 0.02, m, {hull: 0}); at(lg, x, 0.05, z); g.add(lg); }
+  const hd = box(0.04, 0.04, 0.5, m, {hull: 0}); at(hd, -0.45, 1.0, 0); g.add(hd);
+  for (let i = 0; i < 9; i++) { const p = box(0.22 + (i % 3) * 0.05, 0.18, 0.2, ['#f2a93a', '#d8413a', '#3f8ad8', '#3fb06a'][i % 4], {hull: 0.005}); at(p, -0.25 + (i % 3) * 0.25, 0.5 + Math.floor(i / 3) * 0.19, (i % 2 - 0.5) * 0.2, i * 0.4); g.add(p); }
+  return g;
+}

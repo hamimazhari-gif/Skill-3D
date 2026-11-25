@@ -297,3 +297,10 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Cells as workers:** `P.cell(color, {tired})` (face, nucleus; grey tired old cells vs pink new ones) + `P.hardHat()` for mini workers; `conveyor(len, w)` (`update(t)` moves the belt) with old cells turning into new ones past a gate; a lining shown as a carpet strip that keeps being rolled out (`scale.x` loop) by a worker.
 - **Other props:** `skinSlab`, `bone`, `trafficCone`, `broom`, `redCell`, `partyHat`; a sunbeam is an open `CylinderGeometry` with low opacity plus slow `FX.fall` dust.
 - **Recolouring a reused prop:** traverse it and set `material.color` (e.g. the pink gut tube tinted red for a blood vessel).
+
+## Notes from "Kalau HP bisa ngomong jujur" (talking object, 89 s)
+- **An object as a talking character:** `P.talkPhone({w})` returns `{group, set(mood, open)}`; the screen face is a canvas per mood ('neutral', 'angry', 'sad', 'dying' with X eyes, 'soft') and `open` shows the mouth. Drive `open` from the voiced segments of the object's lines (`talking(t)`), and pick the mood by story beat.
+- **Brow direction on drawn faces:** angry = the inner end (near the nose) LOW and the outer end high; sad / soft = the inner end HIGH. Check an angry face in a still before the render — a wrong slant reads as pleading.
+- **Two characters + signs:** for a man talking to a big object, use one wide two-shot (camera centred between them, ~4 m back) and put the signs above the object, inside the frame, instead of beside it.
+- **Re-render only what changed:** delete the affected `out/chunks_<Comp>/part_N.mp4*` (and `audio.wav`) and run `tools/render_chunks.sh` again; finished chunks are kept.
+- **Props:** `talkPhone`, `selfieGrid`, `cart`.
