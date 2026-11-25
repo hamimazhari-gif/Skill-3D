@@ -103,12 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [2, 3, 4, 5, 6, 7, 9, 10];
+const DIPS = [];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'KAMU YANG SEKARANG ≠ | KAMU TAHUN LALU 😱'], ['cut2', '±330 MILIAR SEL | DIGANTI SETIAP HARI 🏭'], ['cut3', 'LAPISAN USUS: HANYA | BEBERAPA HARI 🔁'],
-  ['cut4', 'KULIT: DIPERBARUI SEKITAR | SEBULAN SEKALI 🧴'], ['cut6', 'SEL DARAH MERAH: ±4 BULAN | TULANG: ±10 TAHUN 🦴'], ['cut8', 'TAPI SEBAGIAN BESAR SEL OTAK | MENEMANIMU SEUMUR HIDUP 🧠'],
-  ['cut11', '"KAMU UDAH BERUBAH!" | "SECARA ILMIAH, IYA." 😂']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -148,15 +146,15 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('sparkle'), E.sekarang - 0.1, 0.14], [sy('uh_oh'), E.bukan0, 0.12], [sy('sparkle'), E.sekarang, 0.12],
-    [sy('rumble'), C[1] + 0.1, 0.06, 3.0], ['07-riser-build-up.wav', E.tigaRatus - 0.2, 0.1, 1.6], ['06-deep-cinematic-boom.wav', E.miliar, 0.14], [sy('ka_ching'), E.setiapHari, 0.12],
-    [sy('frying'), E.mencerna, 0.05, 2.0], ...Array.from({length: 4}, (_, i) => ['pop-bubble-sound-effect.mp3', E.digantiU + i * 0.25, 0.1]),
-    [sy('paper_flutter'), E.rontok, 0.12, 1.5], [sy('sparkle'), E.debu, 0.14], [sy('swish'), E.disapu - 0.4, 0.14], [sy('swish'), E.disapu, 0.14],
-    [sy('party_horn'), E.pensiun, 0.14], [sy('thud'), E.renovasi, 0.14], [sy('stamp'), E.renovasi + 0.4, 0.12],
-    [sy('tense_drone'), E.tapi, 0.1, 2.0], ['02-error-denied-buzz.wav', E.mitos, 0.12], [sy('stamp'), E.mitos, 0.18],
-    ['08-soft-success-chime.mp3', E.kecil, 0.14], [sy('heart_pop'), E.tetap, 0.14],
-    [sy('boing'), E.berubah, 0.12], [sy('sparkle'), E.ilmiah, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.fakta - 0.15, 0.2],
+    ['09-notification-ding.wav', E.halo - 0.3, 0.18], [sy('boing'), E.protes, 0.12],
+    ...Array.from({length: 6}, (_, i) => ['04-soft-ui-pop.mp3', E.empat + i * 0.12, 0.08]), [sy('clock_tick'), E.sembilan, 0.14, 1.5], [sy('ka_ching'), E.digaji, 0.1],
+    [sy('page_flips'), E.galeri, 0.12, 1.2], ['02-error-denied-buzz.wav', E.penuh, 0.12],
+    ['04-soft-ui-pop.mp3', E.keranjang, 0.18], [sy('coin_drop'), E.ribu, 0.12], [sy('uh_oh'), E.doa, 0.1],
+    [sy('alarm_bell'), E.persen, 0.06, 0.8], [sy('chip_gameover'), E.game, 0.1], [sy('chip_coin'), E.game + 0.4, 0.08],
+    [sy('tense_drone'), E.terdiam, 0.08, 4.0], ['09-notification-ding.wav', E.ibumu, 0.14], ['09-notification-ding.wav', E.ibumu + 0.5, 0.14], ['09-notification-ding.wav', E.ibumu + 1.0, 0.14], [sy('swish'), E.geser + 0.2, 0.16],
+    [sy('thud'), E.meletakkan + 0.3, 0.12], [sy('phone_alarm'), E.menelepon, 0.08, 1.2], [sy('heart_pop'), E.maaf + 0.2, 0.14],
+    ['08-soft-success-chime.mp3', E.orang, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.kalau - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -224,10 +222,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
-  en: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
+  id: {top: 'KALAU HP-MU\nBISA NGOMONG... 📱', mid: '"AKU MAU PROTES!"', bot: ''},
+  en: {top: 'KALAU HP-MU\nBISA NGOMONG... 📱', mid: '"AKU MAU PROTES!"', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.tahunLalu + 0.3, loc: 'home', pos: [0.2, 1.5, -0.9], look: [0.25, 1.35, -3.6]});
+const THUMB = (EVt) => ({t: EVt.sekarat + 0.2, loc: 'kamar', pos: [0.3, 1.55, -0.6], look: [0.4, 1.45, -3.3]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

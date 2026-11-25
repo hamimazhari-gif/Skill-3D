@@ -1,0 +1,554 @@
+{
+ "duration": 88.53,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Bayangkan... kalau HP kita bisa ngomong jujur.",
+   "start": 0.0,
+   "end": 2.68,
+   "pred": 3.37,
+   "voiced": [
+    [
+     0.0,
+     0.52
+    ],
+    [
+     1.08,
+     2.66
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "\"Halo. Aku mau protes.\"",
+   "start": 4.0,
+   "end": 5.5,
+   "pred": 1.5,
+   "voiced": [
+    [
+     4.0,
+     4.26
+    ],
+    [
+     4.8,
+     5.5
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Hari ini, kamu sudah membuka aplikasi yang sama empat puluh tujuh kali.",
+   "start": 6.26,
+   "end": 10.22,
+   "pred": 6.0,
+   "voiced": [
+    [
+     6.26,
+     6.74
+    ],
+    [
+     7.24,
+     8.86
+    ],
+    [
+     8.96,
+     9.14
+    ],
+    [
+     9.28,
+     9.36
+    ],
+    [
+     9.56,
+     10.22
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Dan isinya... masih sama.",
+   "start": 10.8,
+   "end": 12.32,
+   "pred": 1.69,
+   "voiced": [
+    [
+     10.8,
+     11.34
+    ],
+    [
+     11.8,
+     12.3
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Kamu cari apa, sih?\"",
+   "start": 13.0,
+   "end": 14.02,
+   "pred": 1.87,
+   "voiced": [
+    [
+     13.02,
+     13.7
+    ],
+    [
+     13.78,
+     14.0
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "\"Kamu juga main HP sembilan jam sehari.",
+   "start": 15.2,
+   "end": 17.64,
+   "pred": 2.9,
+   "voiced": [
+    [
+     15.2,
+     16.04
+    ],
+    [
+     16.16,
+     17.64
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Itu lebih lama dari jam kerja orang kantoran.",
+   "start": 18.1,
+   "end": 19.84,
+   "pred": 3.47,
+   "voiced": [
+    [
+     18.1,
+     19.84
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Dan kamu nggak digaji.\"",
+   "start": 20.32,
+   "end": 21.28,
+   "pred": 1.69,
+   "voiced": [
+    [
+     20.32,
+     21.28
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Dan tolong ya... galeriku isinya tiga ratus selfie.",
+   "start": 22.06,
+   "end": 25.26,
+   "pred": 3.75,
+   "voiced": [
+    [
+     22.06,
+     22.56
+    ],
+    [
+     23.14,
+     23.62
+    ],
+    [
+     23.7,
+     23.8
+    ],
+    [
+     23.9,
+     24.3
+    ],
+    [
+     24.4,
+     25.26
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Bedanya cuma sudut kepala dua derajat.",
+   "start": 25.86,
+   "end": 27.62,
+   "pred": 3.0,
+   "voiced": [
+    [
+     25.86,
+     27.62
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Aku penuh!",
+   "start": 28.08,
+   "end": 28.88,
+   "pred": 0.75,
+   "voiced": [
+    [
+     28.08,
+     28.3
+    ],
+    [
+     28.4,
+     28.88
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Hapus sebagian, dong!\"",
+   "start": 29.32,
+   "end": 30.84,
+   "pred": 2.15,
+   "voiced": [
+    [
+     29.34,
+     29.5
+    ],
+    [
+     29.6,
+     30.68
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Terus keranjang belanjamu penuh.",
+   "start": 31.78,
+   "end": 33.22,
+   "pred": 2.62,
+   "voiced": [
+    [
+     31.78,
+     32.12
+    ],
+    [
+     32.38,
+     33.2
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Saldo kamu? Dua belas ribu.",
+   "start": 33.86,
+   "end": 35.74,
+   "pred": 1.97,
+   "voiced": [
+    [
+     33.86,
+     34.42
+    ],
+    [
+     35.08,
+     35.74
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Kamu belanja pakai doa?\"",
+   "start": 36.42,
+   "end": 37.38,
+   "pred": 1.78,
+   "voiced": [
+    [
+     36.42,
+     37.38
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Dan yang paling menyakitkan... baterai aku tinggal satu persen.",
+   "start": 38.94,
+   "end": 41.98,
+   "pred": 4.78,
+   "voiced": [
+    [
+     38.94,
+     39.84
+    ],
+    [
+     40.66,
+     41.98
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Aku sekarat!",
+   "start": 42.52,
+   "end": 43.38,
+   "pred": 0.94,
+   "voiced": [
+    [
+     42.52,
+     42.84
+    ],
+    [
+     42.98,
+     43.38
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Tapi kamu masih main game.",
+   "start": 44.02,
+   "end": 45.12,
+   "pred": 1.97,
+   "voiced": [
+    [
+     44.02,
+     45.1
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Kamu nggak sayang aku!\"",
+   "start": 45.62,
+   "end": 46.86,
+   "pred": 1.69,
+   "voiced": [
+    [
+     45.78,
+     46.58
+    ],
+    [
+     46.72,
+     46.86
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Si pemuda cuma bisa terdiam.",
+   "start": 47.94,
+   "end": 49.3,
+   "pred": 2.15,
+   "voiced": [
+    [
+     47.94,
+     49.3
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Lalu HP itu bicara lagi.",
+   "start": 50.54,
+   "end": 51.6,
+   "pred": 1.78,
+   "voiced": [
+    [
+     50.54,
+     51.58
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Kali ini... suaranya pelan.",
+   "start": 52.52,
+   "end": 54.24,
+   "pred": 1.87,
+   "voiced": [
+    [
+     52.62,
+     53.16
+    ],
+    [
+     53.46,
+     54.2
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "\"Satu lagi.",
+   "start": 55.24,
+   "end": 55.78,
+   "pred": 0.75,
+   "voiced": [
+    [
+     55.26,
+     55.76
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Hari ini, ibumu menelepon tiga kali.",
+   "start": 56.68,
+   "end": 58.9,
+   "pred": 3.28,
+   "voiced": [
+    [
+     56.7,
+     57.44
+    ],
+    [
+     57.62,
+     58.9
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Kamu lihat notifikasinya... tapi kamu geser.\"",
+   "start": 59.8,
+   "end": 62.4,
+   "pred": 3.28,
+   "voiced": [
+    [
+     59.8,
+     60.92
+    ],
+    [
+     61.72,
+     62.38
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Kamu punya waktu sembilan jam buat aku... tapi nggak punya tiga menit buat dia?\"",
+   "start": 63.66,
+   "end": 67.3,
+   "pred": 5.81,
+   "voiced": [
+    [
+     63.66,
+     65.1
+    ],
+    [
+     65.18,
+     65.28
+    ],
+    [
+     66.06,
+     67.28
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Si pemuda meletakkan HP-nya.",
+   "start": 68.74,
+   "end": 70.12,
+   "pred": 2.15,
+   "voiced": [
+    [
+     68.76,
+     70.1
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Lalu menelepon kembali.",
+   "start": 71.04,
+   "end": 71.94,
+   "pred": 1.87,
+   "voiced": [
+    [
+     71.04,
+     71.94
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "\"Halo, Bu... maaf ya, tadi nggak angkat.\"",
+   "start": 73.44,
+   "end": 75.74,
+   "pred": 3.65,
+   "voiced": [
+    [
+     73.44,
+     73.82
+    ],
+    [
+     74.68,
+     75.14
+    ],
+    [
+     75.24,
+     75.74
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Kadang, yang paling penting di HP kita... bukan aplikasinya.",
+   "start": 77.22,
+   "end": 80.86,
+   "pred": 4.97,
+   "voiced": [
+    [
+     77.22,
+     77.64
+    ],
+    [
+     78.24,
+     79.62
+    ],
+    [
+     80.06,
+     80.86
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Tapi orang-orang di dalamnya.",
+   "start": 81.66,
+   "end": 82.78,
+   "pred": 2.25,
+   "voiced": [
+    [
+     81.66,
+     82.76
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau HP-mu bisa ngomong, kira-kira dia bakal protes soal apa?",
+   "start": 83.84,
+   "end": 86.68,
+   "pred": 5.15,
+   "voiced": [
+    [
+     83.84,
+     85.04
+    ],
+    [
+     85.24,
+     86.66
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 87.6,
+   "end": 88.26,
+   "pred": 1.41,
+   "voiced": [
+    [
+     87.6,
+     88.22
+    ]
+   ]
+  }
+ ]
+}

@@ -1,459 +1,552 @@
 {
- "duration": 80.39,
+ "duration": 88.53,
  "sentences": [
   {
    "shot": 1,
-   "text": "Tahukah kamu... tubuhmu yang sekarang, bukan tubuh yang sama dengan tahun lalu?",
+   "text": "Bayangkan... kalau HP kita bisa ngomong jujur.",
    "start": 0.0,
-   "end": 4.3,
-   "pred": 4.87,
+   "end": 2.68,
+   "pred": 3.37,
    "voiced": [
     [
      0.0,
-     0.72
+     0.52
     ],
     [
-     0.96,
-     2.02
+     1.08,
+     2.66
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "\"Halo. Aku mau protes.\"",
+   "start": 4.0,
+   "end": 5.5,
+   "pred": 1.5,
+   "voiced": [
+    [
+     4.0,
+     4.26
     ],
     [
-     2.24,
-     4.3
+     4.8,
+     5.5
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Setiap hari, tubuhmu diam-diam bekerja seperti pabrik raksasa.",
-   "start": 5.06,
-   "end": 8.36,
-   "pred": 4.1,
+   "text": "\"Hari ini, kamu sudah membuka aplikasi yang sama empat puluh tujuh kali.",
+   "start": 6.26,
+   "end": 10.22,
+   "pred": 6.0,
    "voiced": [
     [
-     5.08,
-     8.36
+     6.26,
+     6.74
+    ],
+    [
+     7.24,
+     8.86
+    ],
+    [
+     8.96,
+     9.14
+    ],
+    [
+     9.28,
+     9.36
+    ],
+    [
+     9.56,
+     10.22
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Para ilmuwan memperkirakan, sekitar tiga ratus tiga puluh miliar sel tubuh diganti dengan yang baru... setiap hari!",
-   "start": 8.54,
-   "end": 15.7,
-   "pred": 7.06,
+   "text": "Dan isinya... masih sama.",
+   "start": 10.8,
+   "end": 12.32,
+   "pred": 1.69,
    "voiced": [
     [
-     8.6,
-     10.52
+     10.8,
+     11.34
     ],
     [
-     10.62,
-     13.42
+     11.8,
+     12.3
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Kamu cari apa, sih?\"",
+   "start": 13.0,
+   "end": 14.02,
+   "pred": 1.87,
+   "voiced": [
+    [
+     13.02,
+     13.7
     ],
     [
-     13.76,
-     14.24
-    ],
-    [
-     14.36,
-     15.62
+     13.78,
+     14.0
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Yang paling cepat adalah lapisan dalam ususmu.",
-   "start": 16.28,
-   "end": 18.6,
-   "pred": 2.76,
+   "text": "\"Kamu juga main HP sembilan jam sehari.",
+   "start": 15.2,
+   "end": 17.64,
+   "pred": 2.9,
    "voiced": [
     [
-     16.3,
-     16.96
+     15.2,
+     16.04
     ],
     [
-     17.1,
-     18.6
+     16.16,
+     17.64
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Sel-selnya bekerja sangat keras mencerna makanan, jadi cuma bertahan beberapa hari, lalu diganti yang baru.",
-   "start": 18.86,
-   "end": 24.28,
-   "pred": 7.13,
+   "text": "Itu lebih lama dari jam kerja orang kantoran.",
+   "start": 18.1,
+   "end": 19.84,
+   "pred": 3.47,
    "voiced": [
     [
-     19.04,
-     20.28
-    ],
+     18.1,
+     19.84
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Dan kamu nggak digaji.\"",
+   "start": 20.32,
+   "end": 21.28,
+   "pred": 1.69,
+   "voiced": [
     [
-     20.38,
-     23.12
-    ],
-    [
-     23.28,
-     24.26
+     20.32,
+     21.28
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Lalu kulitmu.",
-   "start": 25.0,
-   "end": 25.9,
-   "pred": 0.78,
+   "text": "\"Dan tolong ya... galeriku isinya tiga ratus selfie.",
+   "start": 22.06,
+   "end": 25.26,
+   "pred": 3.75,
    "voiced": [
     [
-     25.02,
-     25.32
+     22.06,
+     22.56
     ],
     [
-     25.5,
-     25.9
+     23.14,
+     23.62
+    ],
+    [
+     23.7,
+     23.8
+    ],
+    [
+     23.9,
+     24.3
+    ],
+    [
+     24.4,
+     25.26
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Lapisan luar kulit diperbarui kira-kira sebulan sekali.",
-   "start": 26.36,
-   "end": 28.64,
-   "pred": 3.32,
+   "text": "Bedanya cuma sudut kepala dua derajat.",
+   "start": 25.86,
+   "end": 27.62,
+   "pred": 3.0,
    "voiced": [
     [
-     26.36,
-     28.6
+     25.86,
+     27.62
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Sel kulit yang lama rontok sedikit demi sedikit.",
-   "start": 28.76,
-   "end": 31.06,
-   "pred": 2.83,
+   "text": "Aku penuh!",
+   "start": 28.08,
+   "end": 28.88,
+   "pred": 0.75,
    "voiced": [
     [
-     28.82,
-     28.9
+     28.08,
+     28.3
     ],
     [
-     29.02,
-     31.06
+     28.4,
+     28.88
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Hapus sebagian, dong!\"",
+   "start": 29.32,
+   "end": 30.84,
+   "pred": 2.15,
+   "voiced": [
+    [
+     29.34,
+     29.5
+    ],
+    [
+     29.6,
+     30.68
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Jadi debu di rumahmu... sebagian adalah kamu.",
-   "start": 31.5,
-   "end": 34.44,
-   "pred": 2.47,
+   "text": "\"Terus keranjang belanjamu penuh.",
+   "start": 31.78,
+   "end": 33.22,
+   "pred": 2.62,
    "voiced": [
     [
-     31.52,
-     32.08
+     31.78,
+     32.12
     ],
     [
-     32.2,
-     33.22
-    ],
-    [
-     33.3,
-     34.44
+     32.38,
+     33.2
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "\"Ma, jangan disapu! Itu bagian dari diriku!\"",
-   "start": 35.34,
-   "end": 38.1,
-   "pred": 2.76,
+   "text": "Saldo kamu? Dua belas ribu.",
+   "start": 33.86,
+   "end": 35.74,
+   "pred": 1.97,
    "voiced": [
     [
-     35.34,
-     35.54
+     33.86,
+     34.42
     ],
     [
-     35.66,
-     38.1
+     35.08,
+     35.74
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Kamu belanja pakai doa?\"",
+   "start": 36.42,
+   "end": 37.38,
+   "pred": 1.78,
+   "voiced": [
+    [
+     36.42,
+     37.38
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Sel darah merahmu bekerja sekitar empat bulan, lalu pensiun.",
-   "start": 38.82,
-   "end": 41.96,
-   "pred": 3.96,
+   "text": "\"Dan yang paling menyakitkan... baterai aku tinggal satu persen.",
+   "start": 38.94,
+   "end": 41.98,
+   "pred": 4.78,
    "voiced": [
     [
-     38.84,
-     41.1
+     38.94,
+     39.84
     ],
     [
-     41.24,
-     41.96
+     40.66,
+     41.98
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Aku sekarat!",
+   "start": 42.52,
+   "end": 43.38,
+   "pred": 0.94,
+   "voiced": [
+    [
+     42.52,
+     42.84
+    ],
+    [
+     42.98,
+     43.38
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Tapi kamu masih main game.",
+   "start": 44.02,
+   "end": 45.12,
+   "pred": 1.97,
+   "voiced": [
+    [
+     44.02,
+     45.1
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Kamu nggak sayang aku!\"",
+   "start": 45.62,
+   "end": 46.86,
+   "pred": 1.69,
+   "voiced": [
+    [
+     45.78,
+     46.58
+    ],
+    [
+     46.72,
+     46.86
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Bahkan tulangmu juga terus direnovasi.",
-   "start": 42.32,
-   "end": 44.1,
-   "pred": 2.33,
+   "text": "Si pemuda cuma bisa terdiam.",
+   "start": 47.94,
+   "end": 49.3,
+   "pred": 2.15,
    "voiced": [
     [
-     42.42,
-     44.08
+     47.94,
+     49.3
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Dalam sekitar sepuluh tahun, hampir seluruh kerangkamu sudah diperbarui.",
-   "start": 44.46,
-   "end": 47.78,
-   "pred": 4.8,
+   "text": "Lalu HP itu bicara lagi.",
+   "start": 50.54,
+   "end": 51.6,
+   "pred": 1.78,
    "voiced": [
     [
-     44.46,
-     45.72
+     50.54,
+     51.58
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Kali ini... suaranya pelan.",
+   "start": 52.52,
+   "end": 54.24,
+   "pred": 1.87,
+   "voiced": [
+    [
+     52.62,
+     53.16
     ],
     [
-     45.84,
-     46.12
-    ],
-    [
-     46.2,
-     47.76
+     53.46,
+     54.2
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Tapi... ada plot twist-nya.",
-   "start": 48.56,
-   "end": 50.06,
-   "pred": 1.34,
+   "text": "\"Satu lagi.",
+   "start": 55.24,
+   "end": 55.78,
+   "pred": 0.75,
    "voiced": [
     [
-     48.56,
-     48.7
-    ],
-    [
-     48.78,
-     49.02
-    ],
-    [
-     49.2,
-     49.56
-    ],
-    [
-     49.64,
-     50.04
+     55.26,
+     55.76
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Banyak orang bilang semua sel tubuh diganti setiap tujuh tahun.",
-   "start": 50.32,
-   "end": 53.3,
-   "pred": 3.74,
+   "text": "Hari ini, ibumu menelepon tiga kali.",
+   "start": 56.68,
+   "end": 58.9,
+   "pred": 3.28,
    "voiced": [
     [
-     50.64,
-     52.72
+     56.7,
+     57.44
     ],
     [
-     52.8,
-     53.28
+     57.62,
+     58.9
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Itu mitos.",
-   "start": 53.98,
-   "end": 54.96,
-   "pred": 0.57,
+   "text": "Kamu lihat notifikasinya... tapi kamu geser.\"",
+   "start": 59.8,
+   "end": 62.4,
+   "pred": 3.28,
    "voiced": [
     [
-     53.98,
-     54.14
+     59.8,
+     60.92
     ],
     [
-     54.22,
-     54.54
-    ],
-    [
-     54.64,
-     54.96
+     61.72,
+     62.38
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Sebagian besar sel otakmu, terutama yang dipakai untuk berpikir, tetap menemanimu sejak kecil sampai tua.",
-   "start": 55.48,
-   "end": 60.72,
-   "pred": 7.06,
+   "text": "\"Kamu punya waktu sembilan jam buat aku... tapi nggak punya tiga menit buat dia?\"",
+   "start": 63.66,
+   "end": 67.3,
+   "pred": 5.81,
    "voiced": [
     [
-     55.48,
-     56.7
+     63.66,
+     65.1
     ],
     [
-     56.86,
-     58.2
+     65.18,
+     65.28
     ],
     [
-     58.48,
-     58.64
-    ],
-    [
-     58.72,
-     59.56
-    ],
-    [
-     59.64,
-     59.7
-    ],
-    [
-     59.86,
-     60.7
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "Begitu juga dengan bagian lensa matamu.",
-   "start": 61.18,
-   "end": 63.06,
-   "pred": 2.33,
-   "voiced": [
-    [
-     61.22,
-     62.98
+     66.06,
+     67.28
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Jadi, tubuhmu terus berganti... tapi kenangan dan dirimu tetap ada.",
-   "start": 63.74,
-   "end": 68.46,
-   "pred": 4.17,
+   "text": "Si pemuda meletakkan HP-nya.",
+   "start": 68.74,
+   "end": 70.12,
+   "pred": 2.15,
    "voiced": [
     [
-     63.74,
-     64.2
+     68.76,
+     70.1
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Lalu menelepon kembali.",
+   "start": 71.04,
+   "end": 71.94,
+   "pred": 1.87,
+   "voiced": [
+    [
+     71.04,
+     71.94
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "\"Halo, Bu... maaf ya, tadi nggak angkat.\"",
+   "start": 73.44,
+   "end": 75.74,
+   "pred": 3.65,
+   "voiced": [
+    [
+     73.44,
+     73.82
     ],
     [
-     64.42,
-     64.78
+     74.68,
+     75.14
     ],
     [
-     64.88,
-     65.8
-    ],
-    [
-     65.98,
-     67.52
-    ],
-    [
-     67.66,
-     67.74
-    ],
-    [
-     67.96,
-     68.46
+     75.24,
+     75.74
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Dan sekarang, kamu punya alasan ilmiah setiap kali ada yang bilang...",
-   "start": 69.22,
-   "end": 72.32,
-   "pred": 4.31,
+   "text": "Kadang, yang paling penting di HP kita... bukan aplikasinya.",
+   "start": 77.22,
+   "end": 80.86,
+   "pred": 4.97,
    "voiced": [
     [
-     69.22,
-     69.74
+     77.22,
+     77.64
     ],
     [
-     70.12,
-     71.6
+     78.24,
+     79.62
     ],
     [
-     71.68,
-     72.32
+     80.06,
+     80.86
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "\"Kamu udah berubah!\"",
-   "start": 72.9,
-   "end": 73.7,
-   "pred": 1.06,
+   "text": "Tapi orang-orang di dalamnya.",
+   "start": 81.66,
+   "end": 82.78,
+   "pred": 2.25,
    "voiced": [
     [
-     72.9,
-     73.7
-    ]
-   ]
-  },
-  {
-   "shot": 11,
-   "text": "\"Iya. Secara ilmiah, memang benar.\"",
-   "start": 74.26,
-   "end": 76.16,
-   "pred": 2.26,
-   "voiced": [
-    [
-     74.26,
-     74.54
-    ],
-    [
-     74.82,
-     75.44
-    ],
-    [
-     75.66,
-     76.16
+     81.66,
+     82.76
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Fakta tubuh manusia apa yang paling bikin kamu kaget?",
-   "start": 77.06,
-   "end": 78.92,
-   "pred": 3.11,
+   "text": "Kalau HP-mu bisa ngomong, kira-kira dia bakal protes soal apa?",
+   "start": 83.84,
+   "end": 86.68,
+   "pred": 5.15,
    "voiced": [
     [
-     77.06,
-     78.9
+     83.84,
+     85.04
+    ],
+    [
+     85.24,
+     86.66
     ]
    ]
   },
   {
    "shot": 12,
    "text": "Tulis di komentar!",
-   "start": 79.46,
-   "end": 80.18,
-   "pred": 1.06,
+   "start": 87.6,
+   "end": 88.26,
+   "pred": 1.41,
    "voiced": [
     [
-     79.46,
-     80.16
+     87.6,
+     88.22
     ]
    ]
   }

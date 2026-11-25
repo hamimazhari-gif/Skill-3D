@@ -64,23 +64,21 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Tubuhmu bukan tubuh yang sama" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau HP bisa ngomong jujur" (Indonesian only; en mirrors id).
 const EV_ID = {
-  tahukah: [0, 'tahukah'], sekarang: [0, 'sekarang'], bukan0: [0, 'bukan'], tahunLalu: [0, 'tahun'],
-  setiap: [1, 'setiap'], pabrik: [1, 'pabrik'], ilmuwan: [2, 'ilmuwan'], tigaRatus: [2, 'tiga'], miliar: [2, 'miliar'], diganti: [2, 'diganti'], setiapHari: [2, 'setiap'],
-  paling: [3, 'paling'], usus: [3, 'ususmu'], keras: [4, 'keras'], mencerna: [4, 'mencerna'], beberapa: [4, 'beberapa'], digantiU: [4, 'diganti'],
-  kulit: [5, 'kulitmu'], sebulan: [6, 'sebulan'], rontok: [7, 'rontok'], debu: [8, 'debu'], kamu8: [8, 'kamu'],
-  ma: [9, 'ma'], disapu: [9, 'disapu'], diriku: [9, 'diriku'],
-  darah: [10, 'darah'], empat: [10, 'empat'], pensiun: [10, 'pensiun'], tulang: [11, 'tulangmu'], renovasi: [11, 'direnovasi'], sepuluh: [12, 'sepuluh'], kerangka: [12, 'kerangkamu'],
-  tapi: [13, 'tapi'], twist: [13, 'twist'], banyak: [14, 'banyak'], tujuh: [14, 'tujuh'], mitos: [15, 'mitos'],
-  otak: [16, 'otakmu'], berpikir: [16, 'berpikir'], kecil: [16, 'kecil'], tua: [16, 'tua'], lensa: [17, 'lensa'],
-  berganti: [18, 'berganti'], kenangan: [18, 'kenangan'], tetap: [18, 'tetap'],
-  alasan: [19, 'alasan'], bilang: [19, 'bilang'], berubah: [20, 'berubah'], iya: [21, 'iya'], ilmiah: [21, 'ilmiah'],
-  fakta: [22, 'fakta'], kaget: [22, 'kaget'], komentar: [23, 'komentar'],
+  bayangkan: [0, 'bayangkan'], jujur: [0, 'jujur'], halo: [1, 'halo'], protes: [1, 'protes'],
+  hariIni: [2, 'hari'], aplikasi: [2, 'aplikasi'], empat: [2, 'empat'], isinya: [3, 'isinya'], cari: [4, 'cari'],
+  sembilan: [5, 'sembilan'], kantoran: [6, 'kantoran'], digaji: [7, 'digaji'],
+  galeri: [8, 'galeriku'], selfie: [8, 'selfie'], derajat: [9, 'derajat'], penuh: [10, 'penuh'], hapus: [11, 'hapus'],
+  keranjang: [12, 'keranjang'], saldo: [13, 'saldo'], ribu: [13, 'ribu'], doa: [14, 'doa'],
+  baterai: [15, 'baterai'], persen: [15, 'persen'], sekarat: [16, 'sekarat'], game: [17, 'game'], sayang: [18, 'sayang'],
+  terdiam: [19, 'terdiam'], lagi: [20, 'lagi'], pelan: [21, 'pelan'], satuLagi: [22, 'satu'], ibumu: [23, 'ibumu'], tigaKali: [23, 'tiga'], geser: [24, 'geser'],
+  waktu: [25, 'waktu'], tigaMenit: [25, 'tiga'], dia: [25, 'dia'], meletakkan: [26, 'meletakkan'], menelepon: [27, 'menelepon'], haloBu: [28, 'halo'], maaf: [28, 'maaf'],
+  kadang: [29, 'kadang'], aplikasinya: [29, 'aplikasinya'], orang: [30, 'orang'], kalau: [31, 'kalau'], protes2: [31, 'protes'], komentar: [32, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {lastYear: '2025', now: '2026', factory: 'PABRIK SEL', count: '330 MILIAR SEL / HARI', gut: 'USUS: BEBERAPA HARI', skin: 'KULIT: ±1 BULAN',
-  dust: 'DEBU = KAMU', blood: 'SEL DARAH MERAH: ±4 BULAN', retire: 'PENSIUN!', bone: 'TULANG: ±10 TAHUN', reno: 'SEDANG DIRENOVASI', seven: 'SEMUA SEL GANTI TIAP 7 TAHUN?', myth: 'MITOS!',
-  brain: 'SEL OTAK: SEUMUR HIDUP', lens: 'LENSA MATA: SEUMUR HIDUP', question: 'FAKTA TUBUH PALING MENGEJUTKAN?', comment: 'TULIS DI KOMENTAR!'};
+const L_ID = {opened: 'DIBUKA 47x', hours: '9 JAM / HARI', office: 'JAM KANTOR: 8 JAM', unpaid: 'GAJI: Rp0', gallery: 'GALERI: 300 SELFIE', full: 'MEMORI PENUH!',
+  cart: 'KERANJANG: 27 BARANG', balance: 'SALDO: Rp12.000', battery: '1%', missed: 'IBU — 3 PANGGILAN TAK TERJAWAB', nine: '9 JAM', three: '3 MENIT',
+  question: 'HP-MU BAKAL PROTES SOAL APA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

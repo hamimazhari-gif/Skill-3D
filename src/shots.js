@@ -10,43 +10,49 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: medium shots, slow pushes.
-  {shot: 1, loc: 'home', lift: false, move: 'the mirror: not the same body', keys: [
-    {at: 'start', pos: [0.2, 1.6, -0.5], look: [0.3, 1.5, -3.6]},
-    {at: 'end', pos: [0.2, 1.6, -0.75], look: [0.3, 1.5, -3.6]}]},
-  {shot: 2, loc: 'factory', lift: false, move: 'the cell factory', keys: [
-    {at: 'start', pos: [0, 1.4, -0.4], look: [0, 1.2, -3.4]},
-    {at: 'end', pos: [0, 1.4, -0.7], look: [0, 1.2, -3.4]}]},
-  {shot: 3, loc: 'body', lift: false, move: 'the gut lining renews in days', keys: [
-    {at: 'start', pos: [0, 1.05, -0.5], look: [0, 0.6, -3.6]},
-    {at: 'end', pos: [0, 1.05, -0.7], look: [0, 0.6, -3.6]}]},
-  {shot: 4, loc: 'factory', lift: false, move: 'skin flakes off', keys: [
-    {at: 'start', pos: [12, 1.35, -1.0], look: [12, 0.95, -3.5]},
-    {at: 'end', pos: [12, 1.35, -1.25], look: [12, 0.95, -3.5]}]},
-  {shot: 5, loc: 'home', lift: false, move: 'dust in the sunbeam is you', keys: [
-    {at: 'start', pos: [0.2, 1.6, -0.3], look: [0.2, 1.5, -3.4]},
-    {at: 'end', pos: [0.2, 1.6, -0.55], look: [0.2, 1.5, -3.4]}]},
-  {shot: 6, loc: 'body', lift: false, move: 'red blood cells retire', keys: [
-    {at: 'start', pos: [14, 1.1, -0.4], look: [14, 0.8, -3.3]},
-    {at: 'end', pos: [14.3, 1.1, -0.6], look: [14.3, 0.8, -3.3]}]},
-  {shot: 7, loc: 'factory', lift: false, move: 'the skeleton is renovated', keys: [
-    {at: 'start', pos: [24, 1.5, -0.5], look: [24, 1.0, -3.6]},
-    {at: 'end', pos: [24, 1.5, -0.75], look: [24, 1.0, -3.6]}]},
-  {shot: 8, loc: 'factory', lift: false, move: 'plot twist: myth', keys: [
-    {at: 'start', pos: [36, 1.9, -0.2], look: [36, 2.0, -3.6]},
-    {at: 'end', pos: [36, 1.9, -0.45], look: [36, 2.0, -3.6]}]},
-  {shot: 9, loc: 'body', lift: false, move: 'the brain and the eye lens stay', keys: [
-    {at: 'start', pos: [27.6, 1.6, 0.2], look: [27.6, 1.55, -3.6]},
-    {at: 'end', pos: [27.8, 1.6, -0.05], look: [27.8, 1.55, -3.6]}]},
-  {shot: 10, loc: 'home', lift: false, move: 'memories stay', keys: [
-    {at: 'start', pos: [-0.4, 1.6, -0.3], look: [-0.4, 1.7, -3.4]},
-    {at: 'end', pos: [-0.4, 1.6, -0.55], look: [-0.4, 1.7, -3.4]}]},
-  {shot: 11, loc: 'home', lift: false, move: '"you have changed!"', keys: [
-    {at: 'start', pos: [0.1, 1.6, -0.5], look: [0.1, 1.5, -3.1]},
-    {at: 'end', pos: [0.1, 1.6, -0.7], look: [0.1, 1.5, -3.1]}]},
-  {shot: 12, loc: 'home', lift: false, move: 'the question', keys: [
-    {at: 'start', pos: [-0.3, 1.7, -0.4], look: [-0.3, 1.7, -3.0]},
-    {at: 'end', pos: [-0.3, 1.7, -0.6], look: [-0.3, 1.7, -3.0]}]},
+  // Calm camera: two-shots of him and the phone, close-ups on the turn.
+  {shot: 1, loc: 'kamar', lift: false, move: 'late night: the phone speaks', keys: [
+    {at: 'start', pos: [0.1, 1.6, 0.2], look: [0.1, 1.4, -3.3]},
+    {at: 'end', pos: [0.1, 1.6, -0.1], look: [0.1, 1.4, -3.3]}]},
+  {shot: 1, from: 'halo', loc: 'kamar', lift: false, move: 'close: "I want to complain"', keys: [
+    {at: 'start', pos: [0.75, 1.3, -1.6], look: [0.75, 1.15, -3.4]},
+    {at: 'end', pos: [0.75, 1.3, -1.75], look: [0.75, 1.15, -3.4]}]},
+  {shot: 2, loc: 'kamar', lift: false, move: '47 times', keys: [
+    {at: 'start', pos: [0.6, 1.55, -0.6], look: [0.6, 1.45, -3.3]},
+    {at: 'end', pos: [0.6, 1.55, -0.85], look: [0.6, 1.45, -3.3]}]},
+  {shot: 3, loc: 'kamar', lift: false, move: '9 hours a day', keys: [
+    {at: 'start', pos: [0.5, 1.55, -0.5], look: [0.6, 1.45, -3.3]},
+    {at: 'end', pos: [0.5, 1.55, -0.75], look: [0.6, 1.45, -3.3]}]},
+  {shot: 4, loc: 'kamar', lift: false, move: '300 selfies', keys: [
+    {at: 'start', pos: [0.8, 1.55, -0.6], look: [0.9, 1.45, -3.3]},
+    {at: 'end', pos: [0.8, 1.55, -0.85], look: [0.9, 1.45, -3.3]}]},
+  {shot: 5, loc: 'kamar', lift: false, move: 'a full cart and Rp12.000', keys: [
+    {at: 'start', pos: [0.6, 1.5, -0.5], look: [0.7, 1.3, -3.2]},
+    {at: 'end', pos: [0.6, 1.5, -0.75], look: [0.7, 1.3, -3.2]}]},
+  {shot: 6, loc: 'kamar', lift: false, move: '1% battery', keys: [
+    {at: 'start', pos: [0.3, 1.55, -0.6], look: [0.4, 1.45, -3.3]},
+    {at: 'end', pos: [0.3, 1.55, -0.85], look: [0.4, 1.45, -3.3]}]},
+  {shot: 7, loc: 'kamar', lift: false, move: 'he goes quiet', keys: [
+    {at: 'start', pos: [-0.6, 1.6, -1.4], look: [-0.6, 1.6, -3.1]},
+    {at: 'end', pos: [-0.6, 1.6, -1.55], look: [-0.6, 1.6, -3.1]}]},
+  {shot: 8, loc: 'kamar', lift: false, move: 'mum called three times', keys: [
+    {at: 'start', pos: [0.5, 1.6, -0.6], look: [0.6, 1.6, -3.3]},
+    {at: 'end', pos: [0.5, 1.6, -0.85], look: [0.6, 1.6, -3.3]}]},
+  {shot: 9, loc: 'kamar', lift: false, move: '9 hours vs 3 minutes', keys: [
+    {at: 'start', pos: [0.4, 1.6, -0.5], look: [0.5, 1.6, -3.3]},
+    {at: 'end', pos: [0.4, 1.6, -0.75], look: [0.5, 1.6, -3.3]}]},
+  {shot: 10, loc: 'kamar', lift: false, move: 'he puts the phone down and calls', keys: [
+    {at: 'start', pos: [-0.5, 1.6, -1.2], look: [-0.6, 1.5, -3.1]},
+    {at: 'end', pos: [-0.5, 1.6, -1.35], look: [-0.6, 1.5, -3.1]}]},
+  {shot: 10, from: 'haloBu', loc: 'dapur', lift: false, move: 'Ibu answers', keys: [
+    {at: 'start', pos: [-0.15, 1.65, -1.4], look: [-0.2, 1.6, -3.2]},
+    {at: 'end', pos: [-0.15, 1.65, -1.55], look: [-0.2, 1.6, -3.2]}]},
+  {shot: 11, loc: 'kamar', lift: false, move: 'the people inside the phone', keys: [
+    {at: 'start', pos: [0.6, 1.7, -0.3], look: [0.6, 1.8, -3.3]},
+    {at: 'end', pos: [0.6, 1.7, -0.55], look: [0.6, 1.8, -3.3]}]},
+  {shot: 12, loc: 'kamar', lift: false, move: 'the question', keys: [
+    {at: 'start', pos: [0.1, 1.7, -0.3], look: [0.1, 1.7, -3.0]},
+    {at: 'end', pos: [0.1, 1.7, -0.5], look: [0.1, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {
