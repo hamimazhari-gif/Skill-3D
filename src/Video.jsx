@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [4, 5, 6, 7, 8, 9, 10];
+const DIPS = [2, 3, 4, 5, 6, 7, 9, 10];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'HITUNG BERAPA YANG | PERNAH KAMU ALAMI! 🔢'], ['cut3', '#1 PENSIL = ALAT REWIND 📼✏️'], ['cut4', '#2 "UDAH JELAS BELUM?!" 📡'], ['cut5', '#3 YANG ANGKAT BAPAKNYA ☎️😨'],
-  ['cut6', '#4 NELEPON SAMBIL | LIRIK ARGO ⏱️'], ['cut7', '#5 DIPANGGIL PAKAI | NAMA LENGKAP 🕌🏃'], ['cut8', '#6 Rp500 = SULTAN 🍬'], ['cut9', 'DULU NGGAK PUNYA APA-APA, | TAPI PUNYA SEGALANYA 🪁🥹']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,16 +146,15 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('creak'), 0.05, 0.16], [sy('footsteps_walk'), 0.1, 0.1, 2.0], [sy('clock_tick'), E.hitung, 0.12, 1.5], ['02-error-denied-buzz.wav', E.tua, 0.1], [sy('boing'), E.tua + 0.1, 0.12], [sy('puff'), E.kardus, 0.16], [sy('sparkle'), E.harta, 0.18],
-    [sy('puff'), E.tersedak, 0.2], [sy('uh_oh'), E.kaset, 0.1], [sy('tape_rewind'), E.pensil + 0.2, 0.12, 1.5],
-    ...['no2', 'no3', 'no4', 'no5', 'no6'].map((k) => ['08-soft-success-chime.mp3', E[k], 0.16]), ['08-soft-success-chime.mp3', E.kaset, 0.14],
-    [sy('chip_error'), E.semut, 0.06, 1.0], [sy('rumble'), C[3] + 0.1, 0.05, 3.0], [sy('creak'), E.antena, 0.14], [sy('tada'), E.kiri + 0.3, 0.1], ['02-error-denied-buzz.wav', E.kebanyakan, 0.1],
-    [sy('phone_alarm'), E.teleponRumah, 0.08, 1.2], [sy('heart_pop'), E.jantung, 0.14], ['06-deep-cinematic-boom.wav', E.halo, 0.14], [sy('thud'), E.ditutup, 0.2],
-    [sy('clock_tick'), E.argo, 0.16, 5.0], [sy('ka_ching'), E.jajan, 0.12],
-    [sy('crowd_cheer'), C[6] + 0.1, 0.06, 1.8], [sy('birds'), E.azan - 0.5, 0.08, 1.5], [sy('whistle_prit'), E.namaLengkap - 0.1, 0.08],
-    [sy('coin_drop'), E.limaRatus, 0.16], [sy('tada'), E.sultan, 0.14], ...Array.from({length: 6}, (_, i) => ['pop-bubble-sound-effect.mp3', E.sultan + i * 0.1, 0.1]),
-    [sy('sparkle'), E.layangan, 0.16], [sy('swish'), C[9] + 0.3, 0.14], [sy('birds'), C[9] + 0.5, 0.08, 4.0],
-    ['pop-bubble-sound-effect.mp3', E.skor - 0.15, 0.2],
+    [sy('uh_oh'), E.bukan0, 0.12], [sy('sparkle'), E.sekarang, 0.12],
+    [sy('rumble'), C[1] + 0.1, 0.06, 3.0], ['07-riser-build-up.wav', E.tigaRatus - 0.2, 0.1, 1.6], ['06-deep-cinematic-boom.wav', E.miliar, 0.14], [sy('ka_ching'), E.setiapHari, 0.12],
+    [sy('frying'), E.mencerna, 0.05, 2.0], ...Array.from({length: 4}, (_, i) => ['pop-bubble-sound-effect.mp3', E.digantiU + i * 0.25, 0.1]),
+    [sy('paper_flutter'), E.rontok, 0.12, 1.5], [sy('sparkle'), E.debu, 0.14], [sy('swish'), E.disapu - 0.4, 0.14], [sy('swish'), E.disapu, 0.14],
+    [sy('party_horn'), E.pensiun, 0.14], [sy('thud'), E.renovasi, 0.14], [sy('stamp'), E.renovasi + 0.4, 0.12],
+    [sy('tense_drone'), E.tapi, 0.1, 2.0], ['02-error-denied-buzz.wav', E.mitos, 0.12], [sy('stamp'), E.mitos, 0.18],
+    ['08-soft-success-chime.mp3', E.kecil, 0.14], [sy('heart_pop'), E.tetap, 0.14],
+    [sy('boing'), E.berubah, 0.12], [sy('sparkle'), E.ilmiah, 0.16],
+    ['pop-bubble-sound-effect.mp3', E.fakta - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -224,10 +222,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'NOSTALGIA\nMASA LALU 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
-  en: {top: 'NOSTALGIA\nMASA LALU 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
+  id: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
+  en: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.kiri + 0.6, loc: 'rumah', pos: [0.0, 1.8, 1.2], look: [0.2, 2.3, -4.5]});
+const THUMB = (EVt) => ({t: EVt.bukan0 + 0.4, loc: 'home', pos: [0.2, 1.55, -1.0], look: [0.3, 1.45, -3.6]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

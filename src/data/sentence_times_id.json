@@ -1,635 +1,459 @@
 {
- "duration": 92.92,
+ "duration": 80.39,
  "sentences": [
   {
    "shot": 1,
-   "text": "Tes umur.",
-   "start": 0.12,
-   "end": 1.08,
-   "pred": 0.58,
+   "text": "Tahukah kamu... tubuhmu yang sekarang, bukan tubuh yang sama dengan tahun lalu?",
+   "start": 0.0,
+   "end": 4.3,
+   "pred": 4.87,
    "voiced": [
     [
-     0.12,
-     1.08
-    ]
-   ]
-  },
-  {
-   "shot": 1,
-   "text": "Hitung berapa banyak yang pernah kamu alami.",
-   "start": 1.46,
-   "end": 3.4,
-   "pred": 3.07,
-   "voiced": [
-    [
-     1.5,
-     2.46
+     0.0,
+     0.72
     ],
     [
-     2.54,
-     3.38
-    ]
-   ]
-  },
-  {
-   "shot": 1,
-   "text": "Kalau lebih dari tiga... maaf, kamu sudah tua.",
-   "start": 3.76,
-   "end": 6.98,
-   "pred": 3.31,
-   "voiced": [
-    [
-     3.76,
-     4.7
+     0.96,
+     2.02
     ],
     [
-     5.04,
-     5.42
-    ],
-    [
-     5.56,
-     5.66
-    ],
-    [
-     5.76,
-     6.44
-    ],
-    [
-     6.56,
-     6.98
+     2.24,
+     4.3
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Suatu hari, seorang anak menemukan kardus berdebu di gudang.",
-   "start": 8.34,
-   "end": 11.18,
-   "pred": 4.64,
+   "text": "Setiap hari, tubuhmu diam-diam bekerja seperti pabrik raksasa.",
+   "start": 5.06,
+   "end": 8.36,
+   "pred": 4.1,
    "voiced": [
     [
-     8.34,
-     9.98
-    ],
-    [
-     10.06,
-     11.18
+     5.08,
+     8.36
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "Tulisannya: \"Harta karun Ayah.\"",
-   "start": 11.62,
-   "end": 13.22,
-   "pred": 1.99,
+   "text": "Para ilmuwan memperkirakan, sekitar tiga ratus tiga puluh miliar sel tubuh diganti dengan yang baru... setiap hari!",
+   "start": 8.54,
+   "end": 15.7,
+   "pred": 7.06,
    "voiced": [
     [
-     11.62,
-     12.16
+     8.6,
+     10.52
     ],
     [
-     12.36,
-     12.52
+     10.62,
+     13.42
     ],
     [
-     12.6,
-     13.2
+     13.76,
+     14.24
+    ],
+    [
+     14.36,
+     15.62
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "\"Yah... ini powerbank jadul, ya?\"",
-   "start": 14.24,
-   "end": 16.74,
-   "pred": 2.32,
+   "text": "Yang paling cepat adalah lapisan dalam ususmu.",
+   "start": 16.28,
+   "end": 18.6,
+   "pred": 2.76,
    "voiced": [
     [
-     14.24,
-     14.46
+     16.3,
+     16.96
     ],
     [
-     14.92,
-     15.26
-    ],
-    [
-     15.4,
-     16.74
+     17.1,
+     18.6
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Ayahnya langsung tersedak kopi.",
-   "start": 17.46,
-   "end": 18.76,
-   "pred": 2.24,
+   "text": "Sel-selnya bekerja sangat keras mencerna makanan, jadi cuma bertahan beberapa hari, lalu diganti yang baru.",
+   "start": 18.86,
+   "end": 24.28,
+   "pred": 7.13,
    "voiced": [
     [
-     17.46,
-     18.76
-    ]
-   ]
-  },
-  {
-   "shot": 3,
-   "text": "Itu kaset, Nak.",
-   "start": 19.3,
-   "end": 20.2,
-   "pred": 1.41,
-   "voiced": [
-    [
-     19.3,
-     19.48
+     19.04,
+     20.28
     ],
     [
-     19.56,
-     20.2
-    ]
-   ]
-  },
-  {
-   "shot": 3,
-   "text": "Dan pensil... adalah alat paling canggih untuk menggulung pitanya yang kusut.",
-   "start": 20.54,
-   "end": 24.04,
-   "pred": 5.22,
-   "voiced": [
-    [
-     20.6,
-     21.52
+     20.38,
+     23.12
     ],
     [
-     21.68,
-     22.14
-    ],
-    [
-     22.22,
-     24.04
+     23.28,
+     24.26
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Nomor dua.",
-   "start": 25.12,
-   "end": 25.74,
-   "pred": 0.66,
+   "text": "Lalu kulitmu.",
+   "start": 25.0,
+   "end": 25.9,
+   "pred": 0.78,
    "voiced": [
     [
-     25.12,
-     25.74
+     25.02,
+     25.32
+    ],
+    [
+     25.5,
+     25.9
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Setiap TV penuh semut, kakek naik ke atap memutar antena.",
-   "start": 26.32,
-   "end": 29.82,
-   "pred": 4.31,
+   "text": "Lapisan luar kulit diperbarui kira-kira sebulan sekali.",
+   "start": 26.36,
+   "end": 28.64,
+   "pred": 3.32,
    "voiced": [
     [
-     26.32,
-     26.46
-    ],
-    [
-     26.54,
-     26.66
-    ],
-    [
-     26.78,
-     27.4
-    ],
-    [
-     27.68,
-     27.84
-    ],
-    [
-     27.92,
-     28.58
-    ],
-    [
-     28.76,
-     29.14
-    ],
-    [
-     29.26,
-     29.8
+     26.36,
+     28.6
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Dan kita yang di bawah jadi operatornya.",
-   "start": 30.48,
-   "end": 32.06,
-   "pred": 2.73,
+   "text": "Sel kulit yang lama rontok sedikit demi sedikit.",
+   "start": 28.76,
+   "end": 31.06,
+   "pred": 2.83,
    "voiced": [
     [
-     30.48,
-     32.06
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "\"Udah jelas belum?!\"",
-   "start": 32.78,
-   "end": 33.7,
-   "pred": 1.16,
-   "voiced": [
-    [
-     32.78,
-     33.7
-    ]
-   ]
-  },
-  {
-   "shot": 4,
-   "text": "\"Kiri dikit, Kek! Eh, kebanyakan!\"",
-   "start": 34.5,
-   "end": 36.24,
-   "pred": 2.98,
-   "voiced": [
-    [
-     34.5,
-     35.18
+     28.82,
+     28.9
     ],
     [
-     35.56,
-     35.66
-    ],
-    [
-     35.78,
-     36.24
+     29.02,
+     31.06
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Nomor tiga.",
-   "start": 37.54,
-   "end": 38.04,
-   "pred": 0.75,
+   "text": "Jadi debu di rumahmu... sebagian adalah kamu.",
+   "start": 31.5,
+   "end": 34.44,
+   "pred": 2.47,
    "voiced": [
     [
-     37.54,
-     38.02
-    ]
-   ]
-  },
-  {
-   "shot": 5,
-   "text": "Nelepon gebetan pakai telepon rumah.",
-   "start": 38.54,
-   "end": 40.16,
-   "pred": 2.57,
-   "voiced": [
-    [
-     38.54,
-     40.14
-    ]
-   ]
-  },
-  {
-   "shot": 5,
-   "text": "Jantung deg-degan... dan yang ngangkat bapaknya.",
-   "start": 40.68,
-   "end": 43.34,
-   "pred": 3.15,
-   "voiced": [
-    [
-     40.68,
-     41.56
+     31.52,
+     32.08
     ],
     [
-     42.1,
-     42.6
+     32.2,
+     33.22
     ],
     [
-     42.74,
-     43.34
+     33.3,
+     34.44
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "\"Halo. Ini siapa?!\"",
-   "start": 44.14,
-   "end": 45.42,
-   "pred": 0.99,
+   "text": "\"Ma, jangan disapu! Itu bagian dari diriku!\"",
+   "start": 35.34,
+   "end": 38.1,
+   "pred": 2.76,
    "voiced": [
     [
-     44.14,
-     44.44
+     35.34,
+     35.54
     ],
     [
-     44.96,
-     45.42
-    ]
-   ]
-  },
-  {
-   "shot": 5,
-   "text": "Telepon langsung ditutup.",
-   "start": 46.12,
-   "end": 46.92,
-   "pred": 1.82,
-   "voiced": [
-    [
-     46.14,
-     46.92
+     35.66,
+     38.1
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Nomor empat.",
-   "start": 48.0,
-   "end": 48.56,
-   "pred": 0.83,
+   "text": "Sel darah merahmu bekerja sekitar empat bulan, lalu pensiun.",
+   "start": 38.82,
+   "end": 41.96,
+   "pred": 3.96,
    "voiced": [
     [
-     48.0,
-     48.56
+     38.84,
+     41.1
+    ],
+    [
+     41.24,
+     41.96
     ]
    ]
   },
   {
-   "shot": 6,
-   "text": "Nelepon di wartel sambil terus melirik argo.",
-   "start": 49.08,
-   "end": 51.28,
-   "pred": 3.07,
+   "shot": 7,
+   "text": "Bahkan tulangmu juga terus direnovasi.",
+   "start": 42.32,
+   "end": 44.1,
+   "pred": 2.33,
    "voiced": [
     [
-     49.08,
-     49.28
-    ],
-    [
-     49.36,
-     51.26
+     42.42,
+     44.08
     ]
    ]
   },
   {
-   "shot": 6,
-   "text": "Ngomongnya harus cepat, karena setiap detik itu uang jajan.",
-   "start": 51.7,
-   "end": 54.46,
-   "pred": 4.56,
+   "shot": 7,
+   "text": "Dalam sekitar sepuluh tahun, hampir seluruh kerangkamu sudah diperbarui.",
+   "start": 44.46,
+   "end": 47.78,
+   "pred": 4.8,
    "voiced": [
     [
-     51.7,
-     52.24
+     44.46,
+     45.72
     ],
     [
-     52.34,
-     52.46
+     45.84,
+     46.12
+    ],
+    [
+     46.2,
+     47.76
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Tapi... ada plot twist-nya.",
+   "start": 48.56,
+   "end": 50.06,
+   "pred": 1.34,
+   "voiced": [
+    [
+     48.56,
+     48.7
+    ],
+    [
+     48.78,
+     49.02
+    ],
+    [
+     49.2,
+     49.56
+    ],
+    [
+     49.64,
+     50.04
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Banyak orang bilang semua sel tubuh diganti setiap tujuh tahun.",
+   "start": 50.32,
+   "end": 53.3,
+   "pred": 3.74,
+   "voiced": [
+    [
+     50.64,
+     52.72
     ],
     [
      52.8,
-     53.52
-    ],
-    [
-     53.7,
-     53.84
-    ],
-    [
-     53.94,
-     54.46
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "Nomor lima.",
-   "start": 55.46,
-   "end": 56.02,
-   "pred": 0.75,
-   "voiced": [
-    [
-     55.46,
-     56.02
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "Main sampai lupa waktu.",
-   "start": 56.62,
-   "end": 57.62,
-   "pred": 1.57,
-   "voiced": [
-    [
-     56.62,
-     57.6
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "Alarm kita cuma satu: azan magrib.",
-   "start": 58.16,
-   "end": 60.38,
-   "pred": 2.24,
-   "voiced": [
-    [
-     58.18,
-     59.18
-    ],
-    [
-     59.56,
-     60.38
-    ]
-   ]
-  },
-  {
-   "shot": 7,
-   "text": "Dan kalau telat pulang... emak memanggil pakai nama lengkap.",
-   "start": 61.02,
-   "end": 63.84,
-   "pred": 3.98,
-   "voiced": [
-    [
-     61.02,
-     61.72
-    ],
-    [
-     61.82,
-     62.18
-    ],
-    [
-     62.5,
-     63.82
+     53.28
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Nomor enam.",
-   "start": 64.78,
-   "end": 65.3,
-   "pred": 0.75,
+   "text": "Itu mitos.",
+   "start": 53.98,
+   "end": 54.96,
+   "pred": 0.57,
    "voiced": [
     [
-     64.78,
-     65.3
-    ]
-   ]
-  },
-  {
-   "shot": 8,
-   "text": "Uang lima ratus rupiah sudah bikin kita merasa jadi sultan.",
-   "start": 65.76,
-   "end": 68.36,
-   "pred": 4.06,
-   "voiced": [
-    [
-     65.76,
-     66.8
+     53.98,
+     54.14
     ],
     [
-     66.94,
-     68.36
+     54.22,
+     54.54
+    ],
+    [
+     54.64,
+     54.96
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Lalu si anak bertanya, \"Ayah dulu nggak punya HP... nggak bosan?\"",
-   "start": 69.3,
-   "end": 73.74,
-   "pred": 4.47,
+   "text": "Sebagian besar sel otakmu, terutama yang dipakai untuk berpikir, tetap menemanimu sejak kecil sampai tua.",
+   "start": 55.48,
+   "end": 60.72,
+   "pred": 7.06,
    "voiced": [
     [
-     69.3,
-     70.38
+     55.48,
+     56.7
     ],
     [
-     71.1,
-     72.34
+     56.86,
+     58.2
     ],
     [
-     72.46,
-     72.66
+     58.48,
+     58.64
     ],
     [
-     73.04,
-     73.74
+     58.72,
+     59.56
+    ],
+    [
+     59.64,
+     59.7
+    ],
+    [
+     59.86,
+     60.7
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Ayahnya tersenyum.",
-   "start": 74.72,
-   "end": 75.62,
-   "pred": 1.33,
+   "text": "Begitu juga dengan bagian lensa matamu.",
+   "start": 61.18,
+   "end": 63.06,
+   "pred": 2.33,
    "voiced": [
     [
-     74.72,
-     75.62
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "Ia mengambil layangan tua dari dalam kardus.",
-   "start": 76.08,
-   "end": 77.88,
-   "pred": 3.07,
-   "voiced": [
-    [
-     76.08,
-     77.86
-    ]
-   ]
-  },
-  {
-   "shot": 9,
-   "text": "\"Mau Ayah tunjukkan kenapa nggak pernah bosan?\"",
-   "start": 78.7,
-   "end": 80.56,
-   "pred": 3.15,
-   "voiced": [
-    [
-     78.7,
-     79.56
-    ],
-    [
-     79.66,
-     80.54
+     61.22,
+     62.98
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Sore itu, mereka bermain layangan bersama.",
-   "start": 81.54,
-   "end": 83.6,
-   "pred": 3.4,
+   "text": "Jadi, tubuhmu terus berganti... tapi kenangan dan dirimu tetap ada.",
+   "start": 63.74,
+   "end": 68.46,
+   "pred": 4.17,
    "voiced": [
     [
-     81.54,
-     83.6
+     63.74,
+     64.2
+    ],
+    [
+     64.42,
+     64.78
+    ],
+    [
+     64.88,
+     65.8
+    ],
+    [
+     65.98,
+     67.52
+    ],
+    [
+     67.66,
+     67.74
+    ],
+    [
+     67.96,
+     68.46
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "Dulu kita nggak punya apa-apa... tapi rasanya punya segalanya.",
-   "start": 84.64,
-   "end": 87.94,
-   "pred": 4.06,
+   "text": "Dan sekarang, kamu punya alasan ilmiah setiap kali ada yang bilang...",
+   "start": 69.22,
+   "end": 72.32,
+   "pred": 4.31,
    "voiced": [
     [
-     84.64,
-     85.76
+     69.22,
+     69.74
     ],
     [
-     85.84,
-     86.0
+     70.12,
+     71.6
     ],
     [
-     86.5,
-     87.92
+     71.68,
+     72.32
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Kamu udah berubah!\"",
+   "start": 72.9,
+   "end": 73.7,
+   "pred": 1.06,
+   "voiced": [
+    [
+     72.9,
+     73.7
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Iya. Secara ilmiah, memang benar.\"",
+   "start": 74.26,
+   "end": 76.16,
+   "pred": 2.26,
+   "voiced": [
+    [
+     74.26,
+     74.54
+    ],
+    [
+     74.82,
+     75.44
+    ],
+    [
+     75.66,
+     76.16
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Skor kamu berapa dari enam?",
-   "start": 88.74,
-   "end": 89.9,
-   "pred": 1.82,
+   "text": "Fakta tubuh manusia apa yang paling bikin kamu kaget?",
+   "start": 77.06,
+   "end": 78.92,
+   "pred": 3.11,
    "voiced": [
     [
-     88.74,
-     89.88
+     77.06,
+     78.9
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Tulis di komentar, dan tag teman masa kecilmu!",
-   "start": 90.24,
-   "end": 92.68,
-   "pred": 3.56,
+   "text": "Tulis di komentar!",
+   "start": 79.46,
+   "end": 80.18,
+   "pred": 1.06,
    "voiced": [
     [
-     90.5,
-     91.24
-    ],
-    [
-     91.48,
-     91.72
-    ],
-    [
-     91.84,
-     92.66
+     79.46,
+     80.16
     ]
    ]
   }

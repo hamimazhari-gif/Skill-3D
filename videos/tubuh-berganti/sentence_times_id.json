@@ -1,0 +1,461 @@
+{
+ "duration": 80.39,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Tahukah kamu... tubuhmu yang sekarang, bukan tubuh yang sama dengan tahun lalu?",
+   "start": 0.0,
+   "end": 4.3,
+   "pred": 4.87,
+   "voiced": [
+    [
+     0.0,
+     0.72
+    ],
+    [
+     0.96,
+     2.02
+    ],
+    [
+     2.24,
+     4.3
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Setiap hari, tubuhmu diam-diam bekerja seperti pabrik raksasa.",
+   "start": 5.06,
+   "end": 8.36,
+   "pred": 4.1,
+   "voiced": [
+    [
+     5.08,
+     8.36
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Para ilmuwan memperkirakan, sekitar tiga ratus tiga puluh miliar sel tubuh diganti dengan yang baru... setiap hari!",
+   "start": 8.54,
+   "end": 15.7,
+   "pred": 7.06,
+   "voiced": [
+    [
+     8.6,
+     10.52
+    ],
+    [
+     10.62,
+     13.42
+    ],
+    [
+     13.76,
+     14.24
+    ],
+    [
+     14.36,
+     15.62
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Yang paling cepat adalah lapisan dalam ususmu.",
+   "start": 16.28,
+   "end": 18.6,
+   "pred": 2.76,
+   "voiced": [
+    [
+     16.3,
+     16.96
+    ],
+    [
+     17.1,
+     18.6
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Sel-selnya bekerja sangat keras mencerna makanan, jadi cuma bertahan beberapa hari, lalu diganti yang baru.",
+   "start": 18.86,
+   "end": 24.28,
+   "pred": 7.13,
+   "voiced": [
+    [
+     19.04,
+     20.28
+    ],
+    [
+     20.38,
+     23.12
+    ],
+    [
+     23.28,
+     24.26
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Lalu kulitmu.",
+   "start": 25.0,
+   "end": 25.9,
+   "pred": 0.78,
+   "voiced": [
+    [
+     25.02,
+     25.32
+    ],
+    [
+     25.5,
+     25.9
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Lapisan luar kulit diperbarui kira-kira sebulan sekali.",
+   "start": 26.36,
+   "end": 28.64,
+   "pred": 3.32,
+   "voiced": [
+    [
+     26.36,
+     28.6
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Sel kulit yang lama rontok sedikit demi sedikit.",
+   "start": 28.76,
+   "end": 31.06,
+   "pred": 2.83,
+   "voiced": [
+    [
+     28.82,
+     28.9
+    ],
+    [
+     29.02,
+     31.06
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Jadi debu di rumahmu... sebagian adalah kamu.",
+   "start": 31.5,
+   "end": 34.44,
+   "pred": 2.47,
+   "voiced": [
+    [
+     31.52,
+     32.08
+    ],
+    [
+     32.2,
+     33.22
+    ],
+    [
+     33.3,
+     34.44
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Ma, jangan disapu! Itu bagian dari diriku!\"",
+   "start": 35.34,
+   "end": 38.1,
+   "pred": 2.76,
+   "voiced": [
+    [
+     35.34,
+     35.54
+    ],
+    [
+     35.66,
+     38.1
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Sel darah merahmu bekerja sekitar empat bulan, lalu pensiun.",
+   "start": 38.82,
+   "end": 41.96,
+   "pred": 3.96,
+   "voiced": [
+    [
+     38.84,
+     41.1
+    ],
+    [
+     41.24,
+     41.96
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Bahkan tulangmu juga terus direnovasi.",
+   "start": 42.32,
+   "end": 44.1,
+   "pred": 2.33,
+   "voiced": [
+    [
+     42.42,
+     44.08
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Dalam sekitar sepuluh tahun, hampir seluruh kerangkamu sudah diperbarui.",
+   "start": 44.46,
+   "end": 47.78,
+   "pred": 4.8,
+   "voiced": [
+    [
+     44.46,
+     45.72
+    ],
+    [
+     45.84,
+     46.12
+    ],
+    [
+     46.2,
+     47.76
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Tapi... ada plot twist-nya.",
+   "start": 48.56,
+   "end": 50.06,
+   "pred": 1.34,
+   "voiced": [
+    [
+     48.56,
+     48.7
+    ],
+    [
+     48.78,
+     49.02
+    ],
+    [
+     49.2,
+     49.56
+    ],
+    [
+     49.64,
+     50.04
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Banyak orang bilang semua sel tubuh diganti setiap tujuh tahun.",
+   "start": 50.32,
+   "end": 53.3,
+   "pred": 3.74,
+   "voiced": [
+    [
+     50.64,
+     52.72
+    ],
+    [
+     52.8,
+     53.28
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Itu mitos.",
+   "start": 53.98,
+   "end": 54.96,
+   "pred": 0.57,
+   "voiced": [
+    [
+     53.98,
+     54.14
+    ],
+    [
+     54.22,
+     54.54
+    ],
+    [
+     54.64,
+     54.96
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Sebagian besar sel otakmu, terutama yang dipakai untuk berpikir, tetap menemanimu sejak kecil sampai tua.",
+   "start": 55.48,
+   "end": 60.72,
+   "pred": 7.06,
+   "voiced": [
+    [
+     55.48,
+     56.7
+    ],
+    [
+     56.86,
+     58.2
+    ],
+    [
+     58.48,
+     58.64
+    ],
+    [
+     58.72,
+     59.56
+    ],
+    [
+     59.64,
+     59.7
+    ],
+    [
+     59.86,
+     60.7
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Begitu juga dengan bagian lensa matamu.",
+   "start": 61.18,
+   "end": 63.06,
+   "pred": 2.33,
+   "voiced": [
+    [
+     61.22,
+     62.98
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Jadi, tubuhmu terus berganti... tapi kenangan dan dirimu tetap ada.",
+   "start": 63.74,
+   "end": 68.46,
+   "pred": 4.17,
+   "voiced": [
+    [
+     63.74,
+     64.2
+    ],
+    [
+     64.42,
+     64.78
+    ],
+    [
+     64.88,
+     65.8
+    ],
+    [
+     65.98,
+     67.52
+    ],
+    [
+     67.66,
+     67.74
+    ],
+    [
+     67.96,
+     68.46
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Dan sekarang, kamu punya alasan ilmiah setiap kali ada yang bilang...",
+   "start": 69.22,
+   "end": 72.32,
+   "pred": 4.31,
+   "voiced": [
+    [
+     69.22,
+     69.74
+    ],
+    [
+     70.12,
+     71.6
+    ],
+    [
+     71.68,
+     72.32
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Kamu udah berubah!\"",
+   "start": 72.9,
+   "end": 73.7,
+   "pred": 1.06,
+   "voiced": [
+    [
+     72.9,
+     73.7
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Iya. Secara ilmiah, memang benar.\"",
+   "start": 74.26,
+   "end": 76.16,
+   "pred": 2.26,
+   "voiced": [
+    [
+     74.26,
+     74.54
+    ],
+    [
+     74.82,
+     75.44
+    ],
+    [
+     75.66,
+     76.16
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Fakta tubuh manusia apa yang paling bikin kamu kaget?",
+   "start": 77.06,
+   "end": 78.92,
+   "pred": 3.11,
+   "voiced": [
+    [
+     77.06,
+     78.9
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 79.46,
+   "end": 80.18,
+   "pred": 1.06,
+   "voiced": [
+    [
+     79.46,
+     80.16
+    ]
+   ]
+  }
+ ]
+}

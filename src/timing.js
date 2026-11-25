@@ -64,24 +64,23 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Tes umur" (Indonesian 90s nostalgia; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Tubuhmu bukan tubuh yang sama" (Indonesian only; en mirrors id).
 const EV_ID = {
-  tes: [0, 'tes'], hitung: [1, 'hitung'], tiga0: [2, 'tiga'], maaf0: [2, 'maaf'], tua: [2, 'tua'],
-  suatu: [3, 'suatu'], kardus: [3, 'kardus'], gudang: [3, 'gudang'], tulisannya: [4, 'tulisannya'], harta: [4, 'harta'],
-  yah: [5, 'yah'], powerbank: [5, 'powerbank'], tersedak: [6, 'tersedak'], kaset: [7, 'kaset'], pensil: [8, 'pensil'], canggih: [8, 'canggih'], kusut: [8, 'kusut'],
-  no2: [9, 'nomor'], semut: [10, 'semut'], kakek: [10, 'kakek'], atap: [10, 'atap'], antena: [10, 'antena'], operator: [11, 'operatornya'],
-  jelas: [12, 'jelas'], kiri: [13, 'kiri'], kebanyakan: [13, 'kebanyakan'],
-  no3: [14, 'nomor'], gebetan: [15, 'gebetan'], teleponRumah: [15, 'telepon'], jantung: [16, 'jantung'], bapaknya: [16, 'bapaknya'],
-  halo: [17, 'halo'], siapa: [17, 'siapa'], ditutup: [18, 'ditutup'],
-  no4: [19, 'nomor'], wartel: [20, 'wartel'], argo: [20, 'argo'], cepat: [21, 'cepat'], detik: [21, 'detik'], jajan: [21, 'jajan'],
-  no5: [22, 'nomor'], main: [23, 'main'], alarm: [24, 'alarm'], azan: [24, 'azan'], telat: [25, 'telat'], emak: [25, 'emak'], namaLengkap: [25, 'lengkap'],
-  no6: [26, 'nomor'], limaRatus: [27, 'lima'], sultan: [27, 'sultan'],
-  bertanya: [28, 'bertanya'], hp: [28, 'hp'], bosan: [28, 'bosan'], tersenyum: [29, 'tersenyum'], layangan: [30, 'layangan'], tunjukkan: [31, 'tunjukkan'],
-  sore: [32, 'sore'], bersama: [32, 'bersama'], dulu: [33, 'dulu'], segalanya: [33, 'segalanya'], skor: [34, 'skor'], komentar: [35, 'komentar'], tag: [35, 'tag'],
+  tahukah: [0, 'tahukah'], sekarang: [0, 'sekarang'], bukan0: [0, 'bukan'], tahunLalu: [0, 'tahun'],
+  setiap: [1, 'setiap'], pabrik: [1, 'pabrik'], ilmuwan: [2, 'ilmuwan'], tigaRatus: [2, 'tiga'], miliar: [2, 'miliar'], diganti: [2, 'diganti'], setiapHari: [2, 'setiap'],
+  paling: [3, 'paling'], usus: [3, 'ususmu'], keras: [4, 'keras'], mencerna: [4, 'mencerna'], beberapa: [4, 'beberapa'], digantiU: [4, 'diganti'],
+  kulit: [5, 'kulitmu'], sebulan: [6, 'sebulan'], rontok: [7, 'rontok'], debu: [8, 'debu'], kamu8: [8, 'kamu'],
+  ma: [9, 'ma'], disapu: [9, 'disapu'], diriku: [9, 'diriku'],
+  darah: [10, 'darah'], empat: [10, 'empat'], pensiun: [10, 'pensiun'], tulang: [11, 'tulangmu'], renovasi: [11, 'direnovasi'], sepuluh: [12, 'sepuluh'], kerangka: [12, 'kerangkamu'],
+  tapi: [13, 'tapi'], twist: [13, 'twist'], banyak: [14, 'banyak'], tujuh: [14, 'tujuh'], mitos: [15, 'mitos'],
+  otak: [16, 'otakmu'], berpikir: [16, 'berpikir'], kecil: [16, 'kecil'], tua: [16, 'tua'], lensa: [17, 'lensa'],
+  berganti: [18, 'berganti'], kenangan: [18, 'kenangan'], tetap: [18, 'tetap'],
+  alasan: [19, 'alasan'], bilang: [19, 'bilang'], berubah: [20, 'berubah'], iya: [21, 'iya'], ilmiah: [21, 'ilmiah'],
+  fakta: [22, 'fakta'], kaget: [22, 'kaget'], komentar: [23, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {test: 'TES UMUR', rule: 'LEBIH DARI 3 = TUA', box: 'HARTA KARUN AYAH', powerbank: 'POWERBANK?', cassette: 'KASET',
-  ch: (n) => `${n}/6`, clear: 'UDAH JELAS?', left: 'KIRI DIKIT!', hello: '"HALO. INI SIAPA?!"', wartel: 'WARTEL', argo: (v) => `Rp${v}`, magrib: 'MAGRIB',
-  fullName: '"MUHAMMAD RIZKY SAPUTRA!"', coin: 'Rp500', sultan: 'SULTAN!', question: 'SKOR KAMU BERAPA DARI 6?', comment: 'TAG TEMAN MASA KECILMU!'};
+const L_ID = {lastYear: '2025', now: '2026', factory: 'PABRIK SEL', count: '330 MILIAR SEL / HARI', gut: 'USUS: BEBERAPA HARI', skin: 'KULIT: ±1 BULAN',
+  dust: 'DEBU = KAMU', blood: 'SEL DARAH MERAH: ±4 BULAN', retire: 'PENSIUN!', bone: 'TULANG: ±10 TAHUN', reno: 'SEDANG DIRENOVASI', seven: 'SEMUA SEL GANTI TIAP 7 TAHUN?', myth: 'MITOS!',
+  brain: 'SEL OTAK: SEUMUR HIDUP', lens: 'LENSA MATA: SEUMUR HIDUP', question: 'FAKTA TUBUH PALING MENGEJUTKAN?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

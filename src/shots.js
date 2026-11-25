@@ -10,61 +10,43 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: medium shots per memory, close-ups for the punchlines.
-  {shot: 1, loc: 'gudang', lift: false, move: 'an SD boy finds a dusty box', keys: [
-    {at: 'start', pos: [-0.9, 1.5, -0.4], look: [-0.6, 1.15, -3.2]},
-    {at: 'end', pos: [-0.7, 1.5, -0.7], look: [-0.3, 1.1, -3.2]}]},
-  {shot: 2, loc: 'gudang', lift: false, move: 'a dusty box in the storeroom', keys: [
-    {at: 'start', pos: [-0.6, 1.5, -0.6], look: [-0.4, 1.15, -3.2]},
-    {at: 'end', pos: [-0.2, 1.45, -1.0], look: [0.2, 0.9, -3.2]}]},
-  {shot: 3, loc: 'gudang', lift: false, move: '"a retro powerbank?"', keys: [
-    {at: 'start', pos: [0.4, 1.55, -0.3], look: [0.4, 1.4, -3.2]},
-    {at: 'end', pos: [0.4, 1.55, -0.5], look: [0.4, 1.4, -3.2]}]},
-  {shot: 3, from: 'pensil', loc: 'gudang', lift: false, move: 'macro: a pencil winds the tape', keys: [
-    {at: 'start', pos: [-0.35, 1.3, -1.9], look: [-0.38, 1.22, -2.7]},
-    {at: 'end', pos: [-0.35, 1.3, -1.97], look: [-0.38, 1.22, -2.7]}]},
-  {shot: 4, loc: 'rumah', lift: false, move: 'grandpa on the roof, the TV full of ants', keys: [
-    {at: 'start', pos: [0.2, 2.4, -0.2], look: [0.4, 3.6, -6.0]},
-    {at: 'end', pos: [0.2, 2.4, -0.5], look: [0.4, 3.6, -6.0]}]},
-  {shot: 4, from: 'operator', loc: 'rumah', lift: false, move: 'close: left a bit, grandpa!', keys: [
-    {at: 'start', pos: [-0.5, 1.4, -0.6], look: [-0.6, 1.2, -2.8]},
-    {at: 'end', pos: [-0.5, 1.4, -0.75], look: [-0.6, 1.2, -2.8]}]},
-  {shot: 4, from: 'jelas', loc: 'rumah', lift: false, move: 'grandpa on the roof: "is it clear?"', keys: [
-    {at: 'start', pos: [0.6, 4.6, -4.2], look: [0.7, 5.2, -7.0]},
-    {at: 'end', pos: [0.6, 4.6, -4.35], look: [0.7, 5.2, -7.0]}]},
-  {shot: 4, from: 'kiri', loc: 'rumah', move: 'close: left a bit, grandpa!', keys: [
-    {at: 'start', pos: [-0.5, 1.4, -0.6], look: [-0.6, 1.2, -2.8]},
-    {at: 'end', pos: [-0.5, 1.4, -0.75], look: [-0.6, 1.2, -2.8]}]},
-  {shot: 5, loc: 'phone', lift: false, move: 'calling the crush', keys: [
-    {at: 'start', pos: [-0.7, 1.45, -1.0], look: [-0.7, 1.3, -3.3]},
-    {at: 'end', pos: [-0.7, 1.45, -1.2], look: [-0.7, 1.3, -3.3]}]},
-  {shot: 5, from: 'halo', loc: 'phone', lift: false, move: 'her father answers', keys: [
-    {at: 'start', pos: [5.9, 1.7, -1.3], look: [5.9, 1.65, -3.2]},
-    {at: 'end', pos: [5.9, 1.7, -1.45], look: [5.9, 1.65, -3.2]}]},
-  {shot: 5, from: 'ditutup', loc: 'phone', lift: false, move: 'he hangs up', keys: [
-    {at: 'start', pos: [-0.7, 1.45, -1.0], look: [-0.7, 1.3, -3.3]},
-    {at: 'end', pos: [-0.7, 1.45, -1.1], look: [-0.7, 1.3, -3.3]}]},
-  {shot: 6, loc: 'wartel', lift: false, move: 'the wartel meter', keys: [
-    {at: 'start', pos: [0.1, 1.6, -0.6], look: [0.1, 1.45, -3.6]},
-    {at: 'end', pos: [0.1, 1.6, -0.9], look: [0.1, 1.45, -3.6]}]},
-  {shot: 7, loc: 'kampung', lift: false, move: 'play until magrib', keys: [
-    {at: 'start', pos: [-0.5, 1.6, -0.2], look: [-0.6, 1.6, -4.0]},
-    {at: 'end', pos: [-0.5, 1.6, -0.45], look: [-0.6, 1.6, -4.0]}]},
-  {shot: 8, loc: 'warung', lift: false, move: 'Rp500: a sultan', keys: [
-    {at: 'start', pos: [-0.2, 1.5, -0.2], look: [-0.2, 1.4, -3.0]},
-    {at: 'end', pos: [-0.2, 1.5, -0.45], look: [-0.2, 1.4, -3.0]}]},
-  {shot: 9, loc: 'gudang', lift: false, move: '"no phone... not bored?"', keys: [
-    {at: 'start', pos: [0.3, 1.55, -0.2], look: [0.3, 1.45, -3.2]},
-    {at: 'end', pos: [0.3, 1.55, -0.45], look: [0.3, 1.45, -3.2]}]},
-  {shot: 10, loc: 'kampung', lift: false, move: 'flying a kite at sunset', keys: [
-    {at: 'start', pos: [10, 1.5, 0.6], look: [10, 2.3, -5.0]},
-    {at: 'end', pos: [10, 1.55, 0.3], look: [10, 3.0, -5.0]}]},
-  {shot: 11, loc: 'kampung', lift: false, move: 'we had nothing, and everything', keys: [
-    {at: 'start', pos: [10, 1.3, -0.4], look: [10, 1.6, -3.0]},
-    {at: 'end', pos: [10, 1.3, -0.6], look: [10, 1.7, -3.0]}]},
-  {shot: 12, loc: 'kampung', lift: false, move: 'your score?', keys: [
-    {at: 'start', pos: [10, 1.5, 0.2], look: [10, 1.7, -3.0]},
-    {at: 'end', pos: [10, 1.5, 0.0], look: [10, 1.7, -3.0]}]},
+  // Calm camera: medium shots, slow pushes.
+  {shot: 1, loc: 'home', lift: false, move: 'the mirror: not the same body', keys: [
+    {at: 'start', pos: [0.2, 1.6, -0.5], look: [0.3, 1.5, -3.6]},
+    {at: 'end', pos: [0.2, 1.6, -0.75], look: [0.3, 1.5, -3.6]}]},
+  {shot: 2, loc: 'factory', lift: false, move: 'the cell factory', keys: [
+    {at: 'start', pos: [0, 1.4, -0.4], look: [0, 1.2, -3.4]},
+    {at: 'end', pos: [0, 1.4, -0.7], look: [0, 1.2, -3.4]}]},
+  {shot: 3, loc: 'body', lift: false, move: 'the gut lining renews in days', keys: [
+    {at: 'start', pos: [0, 1.05, -0.5], look: [0, 0.6, -3.6]},
+    {at: 'end', pos: [0, 1.05, -0.7], look: [0, 0.6, -3.6]}]},
+  {shot: 4, loc: 'factory', lift: false, move: 'skin flakes off', keys: [
+    {at: 'start', pos: [12, 1.35, -1.0], look: [12, 0.95, -3.5]},
+    {at: 'end', pos: [12, 1.35, -1.25], look: [12, 0.95, -3.5]}]},
+  {shot: 5, loc: 'home', lift: false, move: 'dust in the sunbeam is you', keys: [
+    {at: 'start', pos: [0.2, 1.6, -0.3], look: [0.2, 1.5, -3.4]},
+    {at: 'end', pos: [0.2, 1.6, -0.55], look: [0.2, 1.5, -3.4]}]},
+  {shot: 6, loc: 'body', lift: false, move: 'red blood cells retire', keys: [
+    {at: 'start', pos: [14, 1.1, -0.4], look: [14, 0.8, -3.3]},
+    {at: 'end', pos: [14.3, 1.1, -0.6], look: [14.3, 0.8, -3.3]}]},
+  {shot: 7, loc: 'factory', lift: false, move: 'the skeleton is renovated', keys: [
+    {at: 'start', pos: [24, 1.5, -0.5], look: [24, 1.0, -3.6]},
+    {at: 'end', pos: [24, 1.5, -0.75], look: [24, 1.0, -3.6]}]},
+  {shot: 8, loc: 'factory', lift: false, move: 'plot twist: myth', keys: [
+    {at: 'start', pos: [36, 1.9, -0.2], look: [36, 2.0, -3.6]},
+    {at: 'end', pos: [36, 1.9, -0.45], look: [36, 2.0, -3.6]}]},
+  {shot: 9, loc: 'body', lift: false, move: 'the brain and the eye lens stay', keys: [
+    {at: 'start', pos: [28.1, 1.6, 0.2], look: [28.2, 1.55, -3.6]},
+    {at: 'end', pos: [28.1, 1.6, -0.05], look: [28.2, 1.55, -3.6]}]},
+  {shot: 10, loc: 'home', lift: false, move: 'memories stay', keys: [
+    {at: 'start', pos: [-0.4, 1.6, -0.3], look: [-0.4, 1.7, -3.4]},
+    {at: 'end', pos: [-0.4, 1.6, -0.55], look: [-0.4, 1.7, -3.4]}]},
+  {shot: 11, loc: 'home', lift: false, move: '"you have changed!"', keys: [
+    {at: 'start', pos: [0.1, 1.6, -0.5], look: [0.1, 1.5, -3.1]},
+    {at: 'end', pos: [0.1, 1.6, -0.7], look: [0.1, 1.5, -3.1]}]},
+  {shot: 12, loc: 'home', lift: false, move: 'the question', keys: [
+    {at: 'start', pos: [-0.3, 1.7, -0.4], look: [-0.3, 1.7, -3.0]},
+    {at: 'end', pos: [-0.3, 1.7, -0.6], look: [-0.3, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {
