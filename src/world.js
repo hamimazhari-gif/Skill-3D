@@ -16,6 +16,10 @@ const CAST = {
   bapak: {outfit: 'tshirt', jacket: '#d8413a', print: '#fff3df', print2: '#f2d24a', lower: '#3a4050', tie: '#d8413a', hair: '#2b2326', hairStyle: 'side', hat: 'none', mustache: 'thick'},
   ibu: {hairStyle: 'hijab', hijab: '#4f8a6a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'batik', jacket: '#e8c35a', print: '#fff3df', print2: '#8a4a2a', lower: '#5a4a3a', tie: '#e8c35a', round: true},
   dek: {outfit: 'tshirt', jacket: '#4f8fc8', print: '#fff3df', print2: '#f2d24a', lower: '#3a4050', tie: '#4f8fc8', hair: '#2b2326', hairStyle: 'tuft', hat: 'none'},
+  bapakS: {outfit: 'tshirt', jacket: '#fbf6ea', lower: '#3a5a8a', sarung: '#d8413a', tie: '#fbf6ea', hair: '#2b2326', hairStyle: 'side', hat: 'none', mustache: 'thick'},
+  petani: {outfit: 'farmer', jacket: '#6a8a5a', lower: '#5a4a3a', pocket: '#5a7a4a', tie: '#6a8a5a', hair: '#2b2326', hairStyle: 'side', hat: 'caping', hatColor: '#d8b46a', hatColor2: '#b8944a', towel: '#fbf6ea'},
+  pemuda: {outfit: 'hoodie', jacket: '#2f4f8a', hood: '#24407a', lower: '#3a3a48', tie: '#2f4f8a', hair: '#2b2326', hairStyle: 'tuft', hat: 'none'},
+  pemudaT: {outfit: 'tshirt', jacket: '#f2d24a', print: '#d8413a', print2: '#fff3df', lower: '#3a3a48', tie: '#f2d24a', hair: '#2b2326', hairStyle: 'tuft', hat: 'none'},
   ilmuwan: {outfit: 'shirt', jacket: '#fbf6ea', tie: '#2f6a8a', lower: '#3a3a48', pocket: '#e8e0d0', hair: '#9a9a9a', hairStyle: 'side', hat: 'none', glasses: true, mustache: 'thin'},
 };
 
@@ -27,7 +31,7 @@ const hot = {...LOOK_PRESETS.noon, near: 30, far: 120, grade: {sat: 1.1, contras
 const coldRoom = {...LOOK_PRESETS.interiorCool, keyI: 1.8, hemiI: 1.0, grade: {sat: 0.8, contrast: 1.05, tint: '#a8c4e8', tintAmt: 0.14, vignette: 0.5}};
 export const LOOK = {
   space: {...studio},
-  jakarta: {keys: [{at: 0, ...hot}, {at: 'anjlok', ...winter}, {at: 'tapi', ...winter, ...MOODS.sad}, {at: 'cut11', ...hot}, {at: 'cut12', ...winter}]},
+  jakarta: {keys: [{at: 0, ...hot}, {at: 'tigaPuluh0', ...winter}, {at: 'tapi', ...winter, ...MOODS.sad}, {at: 'cut11', ...hot}, {at: 'cut12', ...winter}]},
   house: {keys: [{at: 0, ...coldRoom}, {at: 'magicCom', ...coldRoom, grade: {sat: 0.95, contrast: 1.05, tint: '#ffd0a0', tintAmt: 0.08, vignette: 0.5}}]},
   field: {keys: [{at: 0, ...winter}, {at: 'uduk', ...LOOK_PRESETS.overcast}]},
   lab: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool, keyI: 2.2, hemiI: 1.2}, {at: 'bencana', ...LOOK_PRESETS.interiorCool, keyI: 2.2, hemiI: 1.2, ...MOODS.danger}]},
@@ -129,17 +133,17 @@ export function buildWorld(lang, T, EVt, L) {
     const mon = P.monas(10); at(mon, 0, 0, -18); g.add(mon);
     for (let i = 0; i < 10; i++) { const tr = P.tree({seed: 620 + i, h: 2.8}); at(tr, (i % 2 ? 1 : -1) * (5.5 + (i % 3) * 1.2), 0, -4 - i * 2.2); g.add(tr); }
     [[-12, -26, '#e8dcc0'], [-8, -30, '#bfd8e8'], [9, -28, '#f3efe6'], [13, -24, '#e0c8a8']].forEach(([x, z, c], i) => { const b = box(3.5, 7 + i * 2, 3, toon(c, {paint: {seed: 630 + i, windows: true}})); at(b, x, 0, z); g.add(b); });
-    const snowy = (t) => t > E('salju') && (t < cut(11) || t >= cut(12));
+    const snowy = (t) => t > E('tigaPuluh0') && (t < cut(11) || t >= cut(12));
     const cover = box(60, 0.05, 40, toon('#f3f8ff', {wear: false}), {edges: false}); at(cover, 0, 0.01, -12); g.add(cover);
-    updaters.push((t) => { const u = inShots(t, 12) ? 1 : smooth((t - E('salju') - 0.3) / 2.5); cover.visible = snowy(t) && u > 0.02; cover.position.y = -0.04 + u * 0.06; });
-    fx(g, FX.fall([0, -6, 16, 16], {n: 900, h: 9, speed: 1.2, color: '#ffffff', size: 0.09, drift: 0.4, sway: 0.4, from: E('salju') - 0.2, to: cut(11)}));
+    updaters.push((t) => { const u = inShots(t, 12) ? 1 : smooth((t - E('tigaPuluh0') - 0.2) / 2.0); cover.visible = snowy(t) && u > 0.02; cover.position.y = -0.04 + u * 0.06; });
+    fx(g, FX.fall([0, -6, 16, 16], {n: 900, h: 9, speed: 1.2, color: '#ffffff', size: 0.09, drift: 0.4, sway: 0.4, from: E('tigaPuluh0') - 0.1, to: cut(11)}));
     fx(g, FX.fall([0, -6, 16, 16], {n: 900, h: 9, speed: 1.2, color: '#ffffff', size: 0.09, drift: 0.4, sway: 0.4, seed: 13, from: cut(12), to: 1e9}));
     const th = P.thermometer(1.6); at(th.group, 1.15, 0.0, -3.3); g.add(th.group);
-    updaters.push((t) => { th.group.visible = inShots(t, 2); th.set(lerpT(t, E('panasnya'), E('nol') + 0.5, 30, 0)); });
-    label(g, L.temp30, 1.15, 2.1, -3.3, E('panasnya') - 0.05, E('anjlok'), {w: 0.8, h: 0.34, bg: '#f2a93a'});
-    label(g, L.temp0, 1.15, 2.1, -3.3, E('anjlok') - 0.05, cut(3), {w: 0.8, h: 0.34, bg: '#7fc4e8'});
+    updaters.push((t) => { th.group.visible = inShots(t, 1); th.set(lerpT(t, E('turun0'), E('tigaPuluh0') + 0.8, 32, 2)); });
+    label(g, '32°C', 1.15, 2.1, -3.3, 0.2, E('tigaPuluh0'), {w: 0.8, h: 0.34, bg: '#f2a93a'});
+    label(g, '2°C', 1.15, 2.1, -3.3, E('tigaPuluh0') - 0.05, cut(2), {w: 0.8, h: 0.34, bg: '#7fc4e8'});
     const fam = [['bapak', -0.75, -3.0, 0.2, 1], ['ibu', 0.15, -3.2, 0, 1], ['dek', -0.25, -2.5, 0.1, 0.7]].map(([k, x, z, y, s], i) => {
-      const c = ch(k, {seed: 1 + i, scale: s}, g, x, z, y); showWhen(c.group, (t) => !inShots(t, 11) || k === 'bapak');
+      const c = ch(k, {seed: 1 + i, scale: s}, g, x, z, y); showWhen(c.group, (t) => !inShots(t, 1) && !inShots(t, 11) && !(inShots(t, 2) && t < E('pertama') - 0.12));
       return c; });
     const [bapak, ibu, dek] = fam;
     bapak.act([{t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('anjlok') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('salju') + 0.1, pose: 'pointUp', expr: 'excited'},
@@ -155,11 +159,25 @@ export function buildWorld(lang, T, EVt, L) {
     dek.act([{t: E('wah') - 0.1, action: 'jump', dur: 0.5}, {t: E('tapi') + 0.1, action: 'tremble', dur: 2.2}]);
     speak(dek, 3, [[0, 'excited', 'armsUp'], [0.45, 'cheesy', 'cheer']]);
     label(g, L.abroad, -0.25, 2.1, -2.8, E('luarNegeri') - 0.1, cut(4), {w: 1.9, h: 0.34, bg: '#7fc4e8', vis: (t) => inShots(t, 3)});
-    // back in the heat (11): sweat, a fan of paper, and no rice cooker to hug
+    const HX = -7;
+    const home = P.house(4, 3, 3.5, {color: '#e8c35a', roof: '#b5543c', windows: 2, doorX: 0, seed: 7}); at(home, HX, 0, -4.4); g.add(home);
+    const bs = ch('bapakS', {seed: 40}, g, HX, -4.3, 0); showWhen(bs.group, (t) => inShots(t, 2) && t < E('pertama'));
+    walkPath(bs, [[cut(2), HX, -4.3], [E('panasnya'), HX + 0.2, -3.0]]);
+    bs.act([{t: cut(2), pose: 'wave', expr: 'happy'}, {t: E('anjlok') - 0.2, pose: 'cross', expr: 'chatter'}, {t: E('nol'), pose: 'cross', expr: 'shocked'}]);
+    bs.act([{t: E('anjlok') - 0.2, action: 'tremble', dur: E('nol') - E('anjlok') + 0.2}]);
+    const iceB = box(0.9, 2.3, 0.75, new THREE.MeshBasicMaterial({color: '#bfe4ff', transparent: true, opacity: 0.3, depthWrite: false}), {hull: 0.01}); g.add(iceB);
+    updaters.push((t) => { const u = smooth((t - E('nol') + 0.1) / 0.5); iceB.visible = inShots(t, 2) && u > 0.01; at(iceB, HX + 0.2, 0, -3.0); iceB.scale.set(1, Math.max(0.01, u), 1); });
+    fx(g, FX.glints([HX + 0.2, 1.6, -2.7], E('nol'), {n: 26, color: '#dff0ff'}), (t) => inShots(t, 2));
+    // back in the heat (11): a young man opens his thick jacket, sweats and smiles
     fx(g, FX.glints([-0.75, 2.2, -3.0], E('ingat'), {n: 20}), (t) => inShots(t, 11));
     const sweat = FX.smoke([-0.75, 2.1, -3.0], cut(11), {n: 10, every: 0.25, life: 1.2, size: 0.25, grow: 2, rise: 0.6, color: '#fff2d0', opacity: 0.4}); fx(g, sweat, (t) => inShots(t, 11));
-    const rc = P.riceCooker(1.3); g.add(rc); updaters.push((t) => { rc.visible = inShots(t, 11) && t > E('magic2') - 0.1; rc.scale.setScalar(1.3 * pop(t, E('magic2') - 0.1, 0.35)); at(rc, 0.35, 0.0, -2.9); });
-    label(g, 'NGGAK PERLU!', 0.4, 0.95, -2.85, E('magic2') + 0.2, cut(12), {w: 1.0, h: 0.26, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a', vis: (t) => inShots(t, 11)});
+    const OPEN = E('ingat');
+    const pj = ch('pemuda', {seed: 41}, g, -0.4, -3.0, 0.1), pt = ch('pemudaT', {seed: 42}, g, -0.4, -3.0, 0.1);
+    showWhen(pj.group, (t) => inShots(t, 11) && t < OPEN); showWhen(pt.group, (t) => inShots(t, 11) && t >= OPEN);
+    pj.act([{t: 0, pose: 'cross', expr: 'tired'}, {t: OPEN - 0.6, pose: 'presentBoth', expr: 'worried'}]);
+    pt.act([{t: 0, pose: 'armsUp', expr: 'happy'}, {t: OPEN + 0.6, pose: 'hips', expr: 'cheesy'}]);
+    const jk = box(0.5, 0.6, 0.15, toon('#2f4f8a', {wear: false}), {hull: 0.01}); g.add(jk); updaters.push((t) => { const u = smooth((t - OPEN) / 0.6); jk.visible = inShots(t, 11) && t >= OPEN; at(jk, -0.4 + u * 0.9, 1.4 - u * 1.4 + Math.sin(u * 3) * 0.3, -2.9, 0, 0, u * 2); });
+    label(g, '"Panas nggak apa-apa deh."', -0.4, 2.55, -2.9, OPEN + 0.3, cut(12), {w: 2.2, h: 0.34, vis: (t) => inShots(t, 11)});
     label(g, L.question, -0.25, 2.75, -2.7, E('kalau') - 0.1, 1e9, {w: 2.4, h: 0.4, fg: '#8a2a36', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
     label(g, L.comment, -0.25, 2.32, -2.65, E('komentar') - 0.12, 1e9, {w: 1.7, h: 0.36, bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
     fx(g, FX.confetti([-0.25, 2.9, -2.5], E('komentar') + 0.05, {seed: 21}), (t) => inShots(t, 12));
@@ -182,8 +200,7 @@ export function buildWorld(lang, T, EVt, L) {
     walkPath(ibu, [[E('berebut') - 0.2, 1.5, -3.6], [E('magicCom') + 0.3, 0.6, -3.35]]);
     walkPath(dek, [[E('berebut') - 0.1, -0.6, -3.9], [E('magicCom'), 0.0, -3.4], [E('minggir') - 0.05, 0.0, -3.4], [E('minggir') + 0.4, 1.15, -3.6]], 'run');
     problem(g, 1, 0, 2.75, -3.4, 'masalah1', E('sejuk'));
-    label(g, L.notReady, 0, 2.38, -3.35, E('siap') - 0.1, E('sejuk'), {w: 1.9, fg: '#2f5a8a'});
-    label(g, L.noHeater, 0, 2.6, -3.35, E('pemanas') - 0.1, E('jaket'), {w: 1.9, fg: '#d8413a'});
+        label(g, L.noHeater, 0, 2.6, -3.35, E('pemanas') - 0.1, E('jaket'), {w: 1.9, fg: '#d8413a'});
     label(g, L.noJacket, 0, 2.6, -3.35, E('jaket') - 0.1, E('keluarga'), {w: 2.0, fg: '#d8413a'});
     bapak.act([{t: cut(5), pose: 'cross', expr: 'chatter'}, {t: E('sejuk') + 0.1, pose: 'shrug', expr: 'worried'}, {t: E('pemanas'), pose: 'cross', expr: 'chatter'},
       {t: E('magicCom'), pose: 'read', expr: 'happy'}, {t: E('minggir') - 0.1, pose: 'stop', expr: 'gritted'}, {t: E('giliran') + 0.1, pose: 'read', expr: 'toothy'}]);
@@ -206,8 +223,8 @@ export function buildWorld(lang, T, EVt, L) {
     const ice = box(8, 0.04, 6, new THREE.MeshBasicMaterial({color: '#e8f4ff', transparent: true, opacity: 0.6, depthWrite: false}), {edges: false}); at(ice, -0.5, 0.03, -4.5); g.add(ice); updaters.push((t) => { ice.visible = t > E('membeku'); });
     fx(g, FX.fall([0, -5, 14, 12], {n: 500, h: 8, speed: 1.2, color: '#ffffff', size: 0.08, drift: 0.4, sway: 0.4, seed: 41}));
     problem(g, 2, -0.5, 2.6, -3.4, 'masalah2', E('butuh'));
-    label(g, L.frozen, -0.5, 2.25, -3.35, E('membeku') - 0.1, E('uduk') - 0.15, {w: 1.6, bg: '#bfe4ff'});
-    label(g, L.scarce, -0.5, 1.85, -3.3, E('langka') - 0.1, E('uduk') - 0.15, {w: 1.4, fg: '#d8413a'});
+    label(g, L.frozen, 0.0, 2.25, -3.35, E('membeku') - 0.1, E('uduk') - 0.15, {w: 1.6, bg: '#bfe4ff'});
+    label(g, L.scarce, 0.0, 1.85, -3.3, E('langka') - 0.1, E('uduk') - 0.15, {w: 1.4, fg: '#d8413a'});
     // the nasi uduk stall
     const WX = 7;
     const st = P.stall(L.warung, {w: 2.2}); at(st, WX, 0, -3.4); g.add(st);
@@ -215,6 +232,9 @@ export function buildWorld(lang, T, EVt, L) {
     label(g, L.price1, WX, 1.55, -2.7, E('uduk') - 0.2, E('melambung') - 0.05, {w: 1.6, h: 0.32});
     label(g, L.price2, WX, 1.55, -2.7, E('melambung') - 0.05, cut(8), {w: 1.8, h: 0.36, bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
     const ar = P.arrow(1.0, '#d8312a', 0.07); g.add(ar); updaters.push((t) => { ar.visible = t > E('melambung'); at(ar, WX + 1.1, 1.3 + smooth((t - E('melambung')) / 0.6) * 0.6, -2.7); });
+    const tani = ch('petani', {seed: 21}, g, 0.95, -2.5, -0.4);
+    tani.act([{t: 0, pose: 'idle', expr: 'worried'}, {t: E('gagal') + 0.05, pose: 'chin', expr: 'sad'}, {t: E('membeku') + 0.1, pose: 'facepalm', expr: 'cry'}, {t: E('langka') + 0.05, pose: 'idle', expr: 'cry'}]);
+    tani.act([{t: E('membeku'), action: 'tremble', dur: 1.5}]);
     const bp = ch('bapak', {seed: 20}, g, WX - 0.9, -2.4, 0.4);
     bp.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('melambung') + 0.05, pose: 'headHold', expr: 'scream'}]); bp.act([{t: E('melambung'), action: 'jump', dur: 0.5}]);
   }
@@ -228,9 +248,7 @@ export function buildWorld(lang, T, EVt, L) {
     const sb = P.globe(0.7); at(sb.group, 0.6, 1.65, -3.6); g.add(sb.group); updaters.push((t) => { sb.group.rotation.y = t * 0.3; });
     const sf = frost(sb, 0.7); updaters.push((t) => { sf.material.opacity = lerpT(t, E('tertutup') - 0.3, E('tertutup') + 0.8, 0, 0.92); });
     fx(g, FX.glints([0.6, 1.7, -3.3], E('bolaSalju'), {n: 24}));
-    label(g, L.ago, 0.2, 2.75, -3.5, E('tujuhRatus') - 0.1, cut(10), {w: 2.0, bg: '#fbf6ea'});
-    label(g, L.snowball, 0.6, 0.45, -3.0, E('bolaSalju') - 0.1, cut(10), {w: 1.8, h: 0.36, bg: '#bfe4ff'});
-    const sci = ch('ilmuwan', {seed: 30}, g, -1.0, -3.0, 0.35);
+            const sci = ch('ilmuwan', {seed: 30}, g, -1.0, -3.0, 0.35);
     sci.act([{t: cut(9), pose: 'idle', expr: 'thinking'}, {t: E('khayalan') + 0.05, pose: 'pointUp', expr: 'determined'}, {t: E('ilmuwan') + 0.1, pose: 'present', expr: 'proud'},
       {t: E('bolaSalju') + 0.05, pose: 'presentBoth', expr: 'excited'}, {t: cut(10), pose: 'present', expr: 'thinking'}, {t: E('enam') + 0.1, pose: 'point', expr: 'worried'},
       {t: E('tigaPuluh2') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('bencana'), pose: 'headHold', expr: 'scream'}]);

@@ -11,12 +11,12 @@ const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
   // Calm camera: slow pushes; a crane up to Monas in the snow.
-  {shot: 1, loc: 'space', lift: false, move: 'the Earth cools down', keys: [
-    {at: 'start', pos: [0.75, 1.85, 2.3], look: [0.75, 1.8, -3.5]},
-    {at: 'end', pos: [0.75, 1.85, 1.8], look: [0.75, 1.8, -3.5]}]},
-  {shot: 2, loc: 'jakarta', lift: false, move: 'Jakarta: from 30 degrees to zero', keys: [
-    {at: 'start', pos: [0.2, 1.7, 0.2], look: [0.2, 1.6, -3.2]},
-    {at: 'end', pos: [0.2, 1.7, -0.1], look: [0.2, 1.6, -3.2]}]},
+  {shot: 1, loc: 'jakarta', lift: false, move: 'Jakarta at noon, the thermometer drops, snow on Monas', keys: [
+    {at: 'start', pos: [0.6, 1.5, 0.6], look: [0.6, 2.6, -8]},
+    {at: 'end', pos: [0.6, 1.5, 0.3], look: [0.6, 3.2, -8]}]},
+  {shot: 2, loc: 'jakarta', lift: false, move: 'Bapak in a sarung steps out and freezes', keys: [
+    {at: 'start', pos: [-6.8, 1.7, 0.2], look: [-6.9, 1.4, -3.4]},
+    {at: 'end', pos: [-6.8, 1.7, -0.1], look: [-6.9, 1.4, -3.4]}]},
   {shot: 2, from: 'pertama', loc: 'jakarta', lift: false, move: 'snow falls on Monas', keys: [
     {at: 'start', pos: [0, 1.4, 0.6], look: [0, 7.5, -18]},
     {at: 'end', pos: [0, 1.4, 0.2], look: [0, 8.5, -18]}]},
@@ -36,8 +36,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.1, 1.5, -1.3], look: [-0.1, 1.3, -3.3]},
     {at: 'end', pos: [-0.1, 1.5, -1.45], look: [-0.1, 1.3, -3.3]}]},
   {shot: 7, loc: 'field', lift: false, move: 'the rice field freezes', keys: [
-    {at: 'start', pos: [-0.5, 1.35, -0.6], look: [-0.5, 0.6, -3.8]},
-    {at: 'end', pos: [-0.5, 1.3, -0.85], look: [-0.5, 0.6, -3.8]}]},
+    {at: 'start', pos: [0.4, 1.5, 0.2], look: [0.3, 0.9, -3.6]},
+    {at: 'end', pos: [0.4, 1.45, -0.05], look: [0.3, 0.9, -3.6]}]},
   {shot: 7, from: 'uduk', loc: 'field', lift: false, move: 'nasi uduk costs a fortune', keys: [
     {at: 'start', pos: [6.7, 1.7, 0.0], look: [6.7, 1.4, -3.0]},
     {at: 'end', pos: [6.7, 1.7, -0.3], look: [6.7, 1.4, -3.0]}]},

@@ -410,6 +410,10 @@ function drawTorso(o, r) {
   }
   if (out === 'boss') { x.fillStyle = 'rgba(255,255,255,0.18)'; for (let yy = top; yy < waist; yy += 22) x.fillRect(0, yy, W * PX, 6); }
   x.fillStyle = o.lower; x.fillRect(0, waist, W * PX, H * PX);
+  if (o.sarung) { // checked sarung wrapped below the waist
+    const n = 22; x.save(); x.beginPath(); x.rect(0, top + (bot - top) * 0.64, W * PX, H * PX); x.clip(); x.globalAlpha = 0.5; x.fillStyle = o.sarung;
+    for (let k = 0; k * n < W * PX; k += 2) x.fillRect(k * n, 0, n, H * PX); for (let k = 0; k * n < H * PX; k += 2) x.fillRect(0, k * n, W * PX, n); x.restore();
+  }
   if (o.check) { // gingham (tablecloth) print over the whole torso and skirt
     const n = 26; x.globalAlpha = 0.55; x.fillStyle = o.check;
     for (let k = 0; k * n < W * PX; k += 2) x.fillRect(k * n, 0, n, H * PX);
