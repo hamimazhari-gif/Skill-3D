@@ -2300,3 +2300,68 @@ export function gutTube(len = 14, r = 1.3) {
   const rings = []; for (let i = 0; i < 6; i++) { const ring = new THREE.Mesh(new THREE.TorusGeometry(r * 0.97, 0.12, 8, 32, Math.PI * 1.5), toon('#c95a6a', {wear: false})); ring.rotation.set(0, Math.PI / 2, Math.PI * 1.25); g.add(ring); rings.push(ring); }
   return {group: g, update(t) { rings.forEach((rg, i) => { const x = ((t * 1.6 + i * len / 6) % len) - len / 2; rg.position.set(x, r, 0); rg.scale.setScalar(0.85 + 0.15 * Math.sin(t * 6 + i)); }); }};
 }
+
+// ---------- "Tes umur" (90s nostalgia) ----------
+// Dusty cardboard box with open flaps and a marker label.
+export function cardboardBox(label = '', o = {}) {
+  const g = new THREE.Group(); const w = o.w || 0.8, h = o.h || 0.5, d = o.d || 0.55, c = '#c9a06a';
+  g.add(box(w, h, d, toon(c, {paint: {seed: 801, stains: 20}})));
+  for (const [x, z, rz, rx] of [[-w / 2, 0, 0.5, 0], [w / 2, 0, -0.5, 0], [0, -d / 2, 0, -0.5], [0, d / 2, 0, 0.5]]) { const f = box(x ? 0.02 : w, 0.02, x ? d : 0.02, c, {hull: 0.004}); const fl = box(x ? 0.3 : w * 0.96, 0.01, x ? d * 0.96 : 0.3, toon('#d8b07a', {wear: false}), {hull: 0.004}); fl.position.set(x * 1.0 + (x ? Math.sign(x) * 0.13 : 0), h + 0.08, z + (z ? Math.sign(z) * 0.13 : 0)); fl.rotation.set(rx, 0, rz); g.add(fl); }
+  if (label) { const s = sign(label, w * 0.9, 0.16, {bg: '#d8b07a', fg: '#351f22', frame: '#c9a06a', depth: 0.005, wear: false}); at(s, 0, h * 0.5, d / 2 + 0.01); g.add(s); }
+  return g;
+}
+// Audio cassette: dark shell, label, two reels, a loop of loose tape.
+export function cassette(s = 1) {
+  const g = new THREE.Group(); g.add(box(0.4, 0.25, 0.04, '#2b2b33', {center: true, hull: 0.006}));
+  const lb = box(0.34, 0.12, 0.005, '#f2d24a', {center: true, hull: 0}); lb.position.set(0, 0.04, 0.022); g.add(lb);
+  for (const x of [-0.08, 0.08]) { const r = cyl(0.035, 0.035, 0.01, '#fbf6ea', {center: true, hull: 0}); r.rotation.x = Math.PI / 2; r.position.set(x, -0.03, 0.024); g.add(r); }
+  const tape = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.006, 4, 20), new THREE.MeshBasicMaterial({color: '#4a2a1a'})); tape.position.set(0.05, -0.16, 0.0); tape.scale.y = 1.6; g.add(tape);
+  g.scale.setScalar(s); return g;
+}
+export function pencil() { const g = new THREE.Group(); const b = cyl(0.012, 0.012, 0.28, '#f2c23a', {hull: 0.003, seg: 6}); g.add(b); const t = cone(0.012, 0.04, '#e8d0a8', {hull: 0.002, seg: 6}); t.position.y = 0.28; g.add(t); const e = cyl(0.013, 0.013, 0.03, '#e8737a', {hull: 0.002}); e.position.y = -0.03; g.add(e); return g; }
+// Old CRT TV on a stand; the screen shows static ("semut") that can clear: setClear(u).
+export function crtTV() {
+  const g = new THREE.Group(); const stand = box(0.8, 0.5, 0.5, toon('#7a5236', {paint: {planks: 3, seed: 802}})); g.add(stand);
+  const body = box(0.75, 0.6, 0.6, toon('#4a4a52', {paint: {seed: 803}})); at(body, 0, 0.5, 0); g.add(body);
+  const texs = [0, 1, 2].map((k) => { const c = canvas(128, 96), x = c.getContext('2d'); const r = rng(k + 3); for (let i = 0; i < 128 * 96 / 4; i++) { const v = Math.floor(r() * 255); x.fillStyle = `rgb(${v},${v},${v})`; x.fillRect((i % 64) * 2, Math.floor(i / 64) * 2, 2, 2); } return texFrom(c); });
+  const clean = (() => { const c = canvas(128, 96), x = c.getContext('2d'); x.fillStyle = '#7fc4e8'; x.fillRect(0, 0, 128, 96); x.fillStyle = '#3fb06a'; x.fillRect(0, 60, 128, 36); x.fillStyle = '#f2d24a'; x.beginPath(); x.arc(96, 28, 14, 0, 7); x.fill(); return texFrom(c); })();
+  const mat = new THREE.MeshBasicMaterial({map: texs[0]}); const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.58, 0.44), mat); scr.position.set(0, 0.8, 0.305); g.add(scr);
+  for (const s of [-1, 1]) { const a = cyl(0.008, 0.008, 0.5, '#9aa8b4', {hull: 0}); at(a, s * 0.08, 1.1, 0, 0, 0, s * 0.5); g.add(a); }
+  let clear = 0; return {group: g, update(t) { mat.map = clear > 0.5 ? clean : texs[Math.floor(t * 15) % 3]; }, setClear(u) { clear = u; }};
+}
+// Roof antenna: a pole with crossbars.
+export function antenna() { const g = new THREE.Group(); g.add(cyl(0.025, 0.025, 2.0, '#9aa8b4', {hull: 0.005})); for (let i = 0; i < 4; i++) { const b = cyl(0.012, 0.012, 1.0 - i * 0.18, '#9aa8b4', {hull: 0.004}); at(b, 0, 1.4 + i * 0.15, 0, 0, Math.PI / 2, 0); b.rotation.set(Math.PI / 2, 0, 0); b.position.set(0, 1.4 + i * 0.15, -(1.0 - i * 0.18) / 2); g.add(b); } return g; }
+// Rotary home phone on a small table.
+export function homePhone(color = '#c9353a') {
+  const g = new THREE.Group(); const t = box(0.5, 0.75, 0.4, toon('#8a5a3a', {paint: {planks: 3, seed: 804}})); g.add(t);
+  const b = box(0.26, 0.1, 0.22, color, {hull: 0.006}); at(b, 0, 0.75, 0); g.add(b);
+  const dial = cyl(0.07, 0.07, 0.015, '#fbf6ea', {hull: 0.004}); at(dial, 0, 0.86, 0.03, 0, -0.5); g.add(dial);
+  const hs = box(0.3, 0.05, 0.07, color, {hull: 0.006}); at(hs, 0, 0.87, -0.05); g.add(hs); g.userData.handset = hs; return g;
+}
+// Wartel booth: a wooden booth with a glass door and a WARTEL sign.
+export function wartelBooth() {
+  const g = new THREE.Group(); const c = toon('#e8dcc0', {paint: {seed: 805}});
+  const back = box(1.2, 2.3, 0.08, c); at(back, 0, 0, -0.55); g.add(back);
+  for (const s of [-1, 1]) { const side = box(0.08, 2.3, 1.1, c); at(side, s * 0.6, 0, 0); g.add(side); }
+  const roof = box(1.3, 0.1, 1.2, '#4f6a7a'); at(roof, 0, 2.3, 0); g.add(roof);
+  const ph = box(0.22, 0.32, 0.12, '#2b2b33', {hull: 0.006}); at(ph, 0.3, 1.25, -0.48); g.add(ph);
+  return g;
+}
+// Mosque: square hall, green dome, a minaret with a speaker.
+export function mosque() {
+  const g = new THREE.Group(); const hall = box(4, 2.6, 4, toon('#f3efe6', {paint: {seed: 806}})); g.add(hall);
+  const dome = ball(1.6, toon('#3f8a5a', {wear: false}), {sy: 0.9, hull: 0.03}); at(dome, 0, 2.6, 0); g.add(dome);
+  const tip = cone(0.12, 0.6, '#e8c35a'); at(tip, 0, 4.0, 0); g.add(tip);
+  const mn = cyl(0.3, 0.35, 6, toon('#f3efe6', {paint: {seed: 807}})); at(mn, 2.6, 0, 1.4); g.add(mn);
+  const mt = cone(0.4, 0.9, '#3f8a5a'); at(mt, 2.6, 6, 1.4); g.add(mt);
+  const sp = cone(0.15, 0.25, '#9aa8b4'); sp.rotation.z = Math.PI / 2; at(sp, 2.9, 5.2, 1.4, 0, 0, -Math.PI / 2); g.add(sp);
+  return g;
+}
+// Diamond kite with a bow tail.
+export function kite(color = '#d8413a') {
+  const g = new THREE.Group(); const s = new THREE.Shape(); s.moveTo(0, 0.45); s.lineTo(0.32, 0.05); s.lineTo(0, -0.5); s.lineTo(-0.32, 0.05); s.closePath();
+  const m = new THREE.Mesh(new THREE.ShapeGeometry(s), toon(color, {wear: false})); m.material.side = THREE.DoubleSide; g.add(m);
+  const st = new THREE.Mesh(new THREE.ShapeGeometry(s), new THREE.MeshBasicMaterial({color: INK, wireframe: true})); g.add(st);
+  for (let i = 0; i < 5; i++) { const b = box(0.08, 0.04, 0.01, ['#f2d24a', '#fbf6ea'][i % 2], {hull: 0}); at(b, Math.sin(i) * 0.05, -0.55 - i * 0.14, 0); g.add(b); }
+  return g;
+}

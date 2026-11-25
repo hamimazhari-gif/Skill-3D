@@ -284,3 +284,10 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **A prop as a character:** `P.gum()` returns `{group, mouth, eyes}`; a `gumChar(g, scale, pos(t), vis(t), {talk})` helper moves it, squashes it (5th value of pos) and opens the mouth on the voiced parts of a sentence (`talkOf(si)`). Accessories (hat, sunglasses, camera, suitcase) are children switched on per shot.
 - **Inside the body:** `P.stomachSet(r)` (pink dome seen from inside, folds, green acid pool) and `P.gutTube(len, r)` (a tube open toward +z so a camera in front sees inside, with travelling squeeze rings: `update(t)`). Keep the camera inside the dome (not on its edge) or the back face clips into a flat pink plane. When the camera tracks along the tube, drive the prop with the same eased curve so it stays in frame.
 - **Long titles:** the title font drops to 46 px when a line is longer than 25 characters.
+
+## Notes from "Tes umur" (90s nostalgia list, 94 s)
+- **A numbered list story:** a score sign per item ("0/6" … "6/6") placed inside each memory's first framing; with a storyboard the screen titles carry "#1 … #6".
+- **Props:** `cardboardBox(label)`, `cassette`, `pencil`, `crtTV()` (`update(t)` static "semut", `setClear(u)` for a clear picture), `antenna`, `homePhone(color)`, `wartelBooth`, `mosque`, `kite(color)` (with a string drawn from the hand each frame).
+- **A character on a roof:** stand it on the ridge (the roof slopes hide anything placed below the ridge height) and give it its own framing from just below the eaves.
+- **A coin turns into a mountain of snacks:** 60 small boxes/balls/cylinders popping in fast around one point (0.012 s apart), heights falling off with the distance.
+- **Audio peaks:** if `volumedetect` shows max above −1 dB after the render, re-mux the audio with `alimiter=limit=0.84:level=disabled` (video copied).
