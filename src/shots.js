@@ -10,73 +10,55 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: slow pushes, close cuts onto the small things (insects, fruit, the midge).
-  {shot: 1, loc: 'bedroom', lift: false, move: 'he slaps a mosquito, the wish comes true', keys: [
-    {at: 'start', pos: [-0.5, 1.9, -0.1], look: [-0.5, 1.9, -3.2]},
-    {at: 'end', pos: [-0.5, 1.9, -0.35], look: [-0.5, 1.9, -3.2]}]},
-  {shot: 1, from: 'bumi', loc: 'space', lift: false, move: 'the Earth and its insects', keys: [
-    {at: 'start', pos: [0, 1.9, 0.6], look: [0, 1.9, -3.6]},
-    {at: 'end', pos: [0, 1.9, 0.1], look: [0, 1.9, -3.6]}]},
-  {shot: 2, loc: 'bedroom', lift: false, move: 'no more mosquitoes!', keys: [
-    {at: 'start', pos: [-0.4, 1.7, -0.2], look: [-0.5, 1.6, -3.4]},
-    {at: 'end', pos: [-0.4, 1.7, -0.45], look: [-0.5, 1.6, -3.4]}]},
-  {shot: 2, from: 'hariPertama', loc: 'bedroom', lift: false, move: 'sleeping like in heaven', keys: [
-    {at: 'start', pos: [1.25, 3.0, -2.5], look: [1.25, 0.7, -3.95]},
-    {at: 'end', pos: [1.25, 2.9, -2.65], look: [1.25, 0.7, -3.95]}]},
-  {shot: 3, loc: 'bedroom', lift: false, move: 'the next morning: but...', keys: [
-    {at: 'start', pos: [-1.0, 1.7, -0.9], look: [-1.1, 1.6, -3.4]},
-    {at: 'end', pos: [-1.0, 1.7, -1.1], look: [-1.1, 1.6, -3.4]}]},
-  {shot: 4, loc: 'garden', lift: false, move: 'plants without fruit', keys: [
-    {at: 'start', pos: [-0.1, 1.7, 0.2], look: [-0.1, 1.3, -3.4]},
-    {at: 'end', pos: [-0.1, 1.7, -0.1], look: [-0.1, 1.3, -3.4]}]},
-  {shot: 4, from: 'lebah', loc: 'garden', lift: false, move: 'close: bees and butterflies pollinate', keys: [
-    {at: 'start', pos: [0.6, 1.2, -1.4], look: [0.6, 0.85, -3.4]},
-    {at: 'end', pos: [0.6, 1.2, -1.6], look: [0.6, 0.85, -3.4]}]},
-  {shot: 5, loc: 'market', lift: false, move: 'scarce fruit', keys: [
-    {at: 'start', pos: [-0.3, 1.7, 0.3], look: [-0.3, 1.3, -3.2]},
-    {at: 'end', pos: [-0.3, 1.7, 0.0], look: [-0.3, 1.3, -3.2]}]},
-  {shot: 5, from: 'apel', loc: 'market', lift: false, move: 'close: apples, mangoes, watermelons, tomatoes', keys: [
-    {at: 'start', pos: [-0.6, 1.4, -0.3], look: [-0.6, 1.05, -2.6]},
-    {at: 'end', pos: [-0.6, 1.4, -0.45], look: [-0.6, 1.05, -2.6]}]},
-  {shot: 6, loc: 'choco', lift: false, move: 'chocolate almost gone', keys: [
-    {at: 'start', pos: [1.0, 1.75, 0.6], look: [1.0, 1.55, -3.6]},
-    {at: 'end', pos: [1.0, 1.75, 0.3], look: [1.0, 1.55, -3.6]}]},
-  {shot: 6, from: 'kakao', loc: 'choco', lift: false, move: 'the cocoa flower and the midge', keys: [
-    {at: 'start', pos: [-1.6, 1.15, -1.8], look: [-2.1, 1.15, -3.8]},
-    {at: 'end', pos: [-1.65, 1.15, -1.95], look: [-2.1, 1.15, -3.8]}]},
-  {shot: 6, from: 'kopi', loc: 'choco', lift: false, move: 'coffee too', keys: [
-    {at: 'start', pos: [0.1, 1.7, -0.9], look: [0.2, 1.6, -3.2]},
-    {at: 'end', pos: [0.1, 1.7, -1.05], look: [0.2, 1.6, -3.2]}]},
-  {shot: 7, loc: 'choco', move: 'close: "mosquitoes, come back!"', keys: [
-    {at: 'start', pos: [-0.85, 1.65, -1.5], look: [-0.9, 1.6, -2.8]},
-    {at: 'end', pos: [-0.85, 1.65, -1.6], look: [-0.9, 1.6, -2.8]}]},
-  {shot: 8, loc: 'pond', lift: false, move: 'the food chain collapses', keys: [
-    {at: 'start', pos: [0.4, 1.9, 1.0], look: [0.4, 1.0, -3.6]},
-    {at: 'end', pos: [0.4, 1.9, 0.7], look: [0.4, 1.0, -3.6]}]},
-  {shot: 8, from: 'burung', loc: 'pond', lift: false, move: 'birds, frogs, lizards, fish', keys: [
-    {at: 'start', pos: [-0.4, 1.3, -0.2], look: [-0.4, 0.5, -3.0]},
-    {at: 'end', pos: [-0.4, 1.3, -0.4], look: [-0.4, 0.5, -3.0]}]},
-  {shot: 8, from: 'terancam', loc: 'pond', lift: false, move: 'the animals that eat them', keys: [
-    {at: 'start', pos: [1.6, 1.9, 0.3], look: [1.9, 1.3, -4.0]},
-    {at: 'end', pos: [1.6, 1.9, 0.1], look: [1.9, 1.3, -4.0]}]},
-  {shot: 9, loc: 'forest', lift: false, move: 'rubbish piles up', keys: [
-    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.1, -3.6]},
-    {at: 'end', pos: [0, 1.8, 0.3], look: [0, 1.1, -3.6]}]},
-  {shot: 9, from: 'semut', loc: 'forest', lift: false, move: 'close: ants, termites, dung beetles', keys: [
-    {at: 'start', pos: [0.1, 0.9, -1.3], look: [0.1, 0.4, -2.6]},
-    {at: 'end', pos: [0.1, 0.9, -1.45], look: [0.1, 0.4, -2.6]}]},
-  {shot: 9, from: 'tanpa4', loc: 'forest', lift: false, move: 'it stinks', keys: [
-    {at: 'start', pos: [-0.3, 1.75, 0.0], look: [-0.3, 1.4, -3.0]},
-    {at: 'end', pos: [-0.3, 1.75, -0.2], look: [-0.3, 1.4, -3.0]}]},
-  {shot: 10, loc: 'stage', lift: false, move: 'hidden heroes', keys: [
-    {at: 'start', pos: [0, 1.6, 0.4], look: [0, 1.3, -3.6]},
-    {at: 'end', pos: [0, 1.55, -0.3], look: [0, 1.2, -3.6]}]},
-  {shot: 11, loc: 'bedroom', lift: false, move: '"you may come back... no biting"', keys: [
-    {at: 'start', pos: [-1.0, 1.7, -0.8], look: [-1.05, 1.75, -3.4]},
-    {at: 'end', pos: [-1.0, 1.7, -1.0], look: [-1.05, 1.75, -3.4]}]},
-  {shot: 12, loc: 'stage', lift: false, move: 'which insect helps most?', keys: [
-    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.7, -3.0]},
-    {at: 'end', pos: [0, 1.8, 0.35], look: [0, 1.7, -3.0]}]},
+  // Calm camera: slow pushes; a crane up to Monas in the snow.
+  {shot: 1, loc: 'space', lift: false, move: 'the Earth cools down', keys: [
+    {at: 'start', pos: [0.75, 1.85, 2.3], look: [0.75, 1.8, -3.5]},
+    {at: 'end', pos: [0.75, 1.85, 1.8], look: [0.75, 1.8, -3.5]}]},
+  {shot: 2, loc: 'jakarta', lift: false, move: 'Jakarta: from 30 degrees to zero', keys: [
+    {at: 'start', pos: [0.2, 1.7, 0.2], look: [0.2, 1.6, -3.2]},
+    {at: 'end', pos: [0.2, 1.7, -0.1], look: [0.2, 1.6, -3.2]}]},
+  {shot: 2, from: 'pertama', loc: 'jakarta', lift: false, move: 'snow falls on Monas', keys: [
+    {at: 'start', pos: [0, 1.4, 0.6], look: [0, 7.5, -18]},
+    {at: 'end', pos: [0, 1.4, 0.2], look: [0, 8.5, -18]}]},
+  {shot: 3, loc: 'jakarta', lift: false, move: 'close: "like abroad!"', keys: [
+    {at: 'start', pos: [-0.25, 1.25, -1.2], look: [-0.25, 1.35, -2.5]},
+    {at: 'end', pos: [-0.25, 1.25, -1.3], look: [-0.25, 1.35, -2.5]}]},
+  {shot: 4, loc: 'jakarta', lift: false, move: 'but the fun is short', keys: [
+    {at: 'start', pos: [-0.3, 1.75, 0.3], look: [-0.3, 1.5, -3.0]},
+    {at: 'end', pos: [-0.3, 1.75, 0.0], look: [-0.3, 1.5, -3.0]}]},
+  {shot: 5, loc: 'house', lift: false, move: 'a house built to stay cool', keys: [
+    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.4, -3.6]},
+    {at: 'end', pos: [0, 1.8, 0.3], look: [0, 1.4, -3.6]}]},
+  {shot: 5, from: 'keluarga', loc: 'house', lift: false, move: 'everyone hugs the rice cooker', keys: [
+    {at: 'start', pos: [0, 1.55, -0.8], look: [0, 1.15, -3.2]},
+    {at: 'end', pos: [0, 1.55, -1.0], look: [0, 1.15, -3.2]}]},
+  {shot: 6, loc: 'house', lift: false, move: 'close: "move over, my turn!"', keys: [
+    {at: 'start', pos: [-0.1, 1.5, -1.3], look: [-0.1, 1.3, -3.3]},
+    {at: 'end', pos: [-0.1, 1.5, -1.45], look: [-0.1, 1.3, -3.3]}]},
+  {shot: 7, loc: 'field', lift: false, move: 'the rice field freezes', keys: [
+    {at: 'start', pos: [-0.5, 1.35, -0.6], look: [-0.5, 0.6, -3.8]},
+    {at: 'end', pos: [-0.5, 1.3, -0.85], look: [-0.5, 0.6, -3.8]}]},
+  {shot: 7, from: 'uduk', loc: 'field', lift: false, move: 'nasi uduk costs a fortune', keys: [
+    {at: 'start', pos: [6.7, 1.7, 0.0], look: [6.7, 1.4, -3.0]},
+    {at: 'end', pos: [6.7, 1.7, -0.3], look: [6.7, 1.4, -3.0]}]},
+  {shot: 8, loc: 'space', lift: false, move: 'ice reflects sunlight, the loop', keys: [
+    {at: 'start', pos: [11.8, 2.1, 2.6], look: [11.8, 2.2, -3.8]},
+    {at: 'end', pos: [11.8, 2.1, 2.1], look: [11.8, 2.2, -3.8]}]},
+  {shot: 9, loc: 'lab', lift: false, move: 'scientists: Snowball Earth', keys: [
+    {at: 'start', pos: [-0.2, 1.75, 0.4], look: [-0.2, 1.6, -3.4]},
+    {at: 'end', pos: [-0.2, 1.75, 0.1], look: [-0.2, 1.6, -3.4]}]},
+  {shot: 9, from: 'bolaSalju', loc: 'lab', lift: false, move: 'close: the white Earth', keys: [
+    {at: 'start', pos: [0.6, 1.7, -2.0], look: [0.6, 1.65, -3.6]},
+    {at: 'end', pos: [0.6, 1.7, -2.15], look: [0.6, 1.65, -3.6]}]},
+  {shot: 10, loc: 'lab', lift: false, move: 'last ice age −6 vs −30', keys: [
+    {at: 'start', pos: [5.6, 1.75, 0.5], look: [5.6, 1.5, -3.3]},
+    {at: 'end', pos: [5.6, 1.75, 0.2], look: [5.6, 1.5, -3.3]}]},
+  {shot: 11, loc: 'jakarta', lift: false, move: 'back in the heat', keys: [
+    {at: 'start', pos: [-0.4, 1.7, -0.2], look: [-0.4, 1.5, -3.0]},
+    {at: 'end', pos: [-0.4, 1.7, -0.45], look: [-0.4, 1.5, -3.0]}]},
+  {shot: 12, loc: 'jakarta', lift: false, move: 'what would you do first?', keys: [
+    {at: 'start', pos: [-0.25, 1.85, 0.5], look: [-0.25, 1.75, -3.0]},
+    {at: 'end', pos: [-0.25, 1.85, 0.25], look: [-0.25, 1.75, -3.0]}]},
 ];
 
 export function warpU(T, t) {

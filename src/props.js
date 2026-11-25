@@ -2208,3 +2208,66 @@ export function chainTower(labels, o = {}) {
   const blocks = labels.map((t, i) => { const b = sign(t, 1.2, 0.5, {bg: cols[i % cols.length], fg: '#351f22', frame: '#351f22', depth: 0.5}); at(b, 0, 0.25 + i * 0.52, 0); g.add(b); return b; });
   return {group: g, blocks, fall(u) { blocks.forEach((b, i) => { if (i === 0) { b.visible = u <= 0; return; } const k = Math.max(0, Math.min(1, u * 1.4 - i * 0.08)); b.position.set(k * (0.5 + i * 0.35), Math.max(0.25, 0.25 + i * 0.52 - k * k * (i * 0.52 + 0.3)), k * 0.3 * (i % 2 ? 1 : -1)); b.rotation.z = -k * (0.6 + i * 0.25); }); }};
 }
+
+// ---------- "Kalau suhu Bumi turun 30 derajat" ----------
+// Monas: a tapering white obelisk on a square base cup, topped by a gold flame.
+export function monas(h = 9) {
+  const g = new THREE.Group();
+  const base = box(4.2, 0.6, 4.2, toon('#e8e0d0', {paint: {seed: 601}})); g.add(base);
+  const cup = cyl(1.3, 1.7, 1.4, toon('#f3efe6', {paint: {seed: 602}}), {seg: 4}); cup.rotation.y = Math.PI / 4; at(cup, 0, 0.6, 0); g.add(cup);
+  const cup2 = cyl(1.8, 1.25, 0.25, toon('#e8e0d0', {paint: {seed: 603}}), {seg: 4}); cup2.rotation.y = Math.PI / 4; at(cup2, 0, 2.0, 0); g.add(cup2);
+  const shaft = cyl(0.35, 0.6, h, toon('#f6f2ea', {paint: {seed: 604}}), {seg: 4}); shaft.rotation.y = Math.PI / 4; at(shaft, 0, 2.25, 0); g.add(shaft);
+  const top = cyl(0.55, 0.4, 0.35, '#c9a25a', {seg: 4}); top.rotation.y = Math.PI / 4; at(top, 0, 2.25 + h, 0); g.add(top);
+  const flame = ball(0.45, toon('#f2c23a', {emissive: '#c98a1a', emissiveIntensity: 0.5}), {sy: 1.5, hull: 0.02}); at(flame, 0, 2.25 + h + 0.9, 0); g.add(flame);
+  const tip = cone(0.25, 0.6, toon('#f2c23a', {emissive: '#c98a1a', emissiveIntensity: 0.5})); at(tip, 0, 2.25 + h + 1.4, 0); g.add(tip);
+  return g;
+}
+// Big thermometer with a red column; set(v) shows v degrees (−40..40) and the label.
+export function thermometer(h = 2.0) {
+  const g = new THREE.Group();
+  const tube = cyl(0.12, 0.12, h, new THREE.MeshBasicMaterial({color: '#f3f6f8', transparent: true, opacity: 0.35, depthWrite: false}), {hull: 0.012}); at(tube, 0, 0.2, 0); g.add(tube);
+  const bulb = ball(0.22, '#d8312a', {hull: 0.012}); at(bulb, 0, 0.18, 0); g.add(bulb);
+  const col = cyl(0.07, 0.07, 1, '#d8312a', {hull: 0}); at(col, 0, 0.2, 0.02); g.add(col);
+  for (let i = 0; i <= 8; i++) { const tk = box(0.1, 0.015, 0.01, INK, {hull: 0}); at(tk, 0.1, 0.3 + i * (h - 0.25) / 8, 0.12); g.add(tk); }
+  const red = new THREE.MeshBasicMaterial({color: '#d8312a'}); const fill = (o) => o.traverse((m) => { if (m.isMesh && !(m.material && m.material.side === THREE.BackSide)) m.material = red; }); fill(col); fill(bulb);
+  return {group: g, set(v) { const u = Math.max(0.02, Math.min(1, (v + 40) / 80)); col.scale.y = u * (h - 0.1); red.color.set(v < 5 ? '#4f8fc8' : '#d8312a'); }};
+}
+// Rice cooker (magic com): white round body, a domed lid with a handle, a small orange lamp.
+export function riceCooker(s = 1) {
+  const g = new THREE.Group();
+  g.add(cyl(0.22, 0.2, 0.28, toon('#fbfbf8', {wear: false}), {seg: 24, hull: 0.01}));
+  const lid = ball(0.22, toon('#fbfbf8', {wear: false}), {sy: 0.45, hull: 0.01}); at(lid, 0, 0.28, 0); g.add(lid);
+  const hd = box(0.14, 0.04, 0.05, '#7a8a9a', {hull: 0.005}); at(hd, 0, 0.38, 0); g.add(hd);
+  const band = cyl(0.225, 0.225, 0.04, '#e0626e', {seg: 24, hull: 0}); at(band, 0, 0.12, 0); g.add(band);
+  const lamp = ball(0.025, new THREE.MeshBasicMaterial({color: '#ffa53a'}), {hull: 0}); at(lamp, 0, 0.18, 0.21); g.add(lamp);
+  const glow = glowSprite('#ffb86a', 0.6); glow.position.y = 0.25; g.add(glow);
+  g.scale.setScalar(s); return g;
+}
+// Electric fan (kipas angin) on a stand.
+export function fan() {
+  const g = new THREE.Group(); g.add(cyl(0.2, 0.22, 0.04, '#7fc4e8', {hull: 0.006}));
+  const pole = cyl(0.025, 0.025, 1.0, '#c9ccd0', {hull: 0.004}); g.add(pole);
+  const head = new THREE.Group(); head.position.set(0, 1.05, 0); g.add(head);
+  const cage = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.012, 6, 24), new THREE.MeshBasicMaterial({color: '#7fc4e8'})); head.add(cage);
+  const blades = new THREE.Group(); head.add(blades); for (let i = 0; i < 3; i++) { const b = ball(0.09, '#7fc4e8', {sx: 1, sy: 2, sz: 0.15, hull: 0.004}); const p = new THREE.Group(); b.position.y = 0.1; p.add(b); p.rotation.z = i * 2.09; blades.add(p); }
+  g.userData.blades = blades; return g;
+}
+// Rice plants in a row (green), frozen(u) turns them pale blue and white tipped.
+export function paddy(n = 8, o = {}) {
+  const g = new THREE.Group(); const mats = []; const rr = rng(o.seed || 5);
+  for (let i = 0; i < n; i++) { const m = toon('#6abf4f', {wear: false}); mats.push(m); const cl = new THREE.Group();
+    for (let k = 0; k < 5; k++) { const l = cone(0.02, 0.45 + rr() * 0.15, m, {hull: 0.004}); l.rotation.z = (k - 2) * 0.18; cl.add(l); }
+    at(cl, (i - (n - 1) / 2) * 0.3, 0, 0); g.add(cl); }
+  return {group: g, freeze(u) { mats.forEach((m) => m.color.set(new THREE.Color('#6abf4f').lerp(new THREE.Color('#cfe6f2'), u))); }};
+}
+// Sun ball with a ring of rays.
+export function sunRays(r = 0.8) {
+  const g = new THREE.Group(); const s = ball(r, new THREE.MeshBasicMaterial({color: '#ffd24a'}), {hull: 0.03}); g.add(s);
+  g.add(glowSprite('#ffd86a', r * 5));
+  return g;
+}
+// An arrow (shaft + head) along +y, length L.
+export function arrow(L = 1, color = '#f2c23a', w = 0.06) {
+  const g = new THREE.Group(); const sh = cyl(w, w, L * 0.75, color, {hull: 0.006}); g.add(sh);
+  const hd = cone(w * 2.6, L * 0.25, color, {hull: 0.006}); hd.position.y = L * 0.75; g.add(hd); return g;
+}

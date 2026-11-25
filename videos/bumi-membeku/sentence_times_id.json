@@ -1,0 +1,487 @@
+{
+ "duration": 94.12,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Bagaimana jika... suhu di seluruh Bumi tiba-tiba turun tiga puluh derajat?",
+   "start": 0.18,
+   "end": 4.38,
+   "pred": 4.24,
+   "voiced": [
+    [
+     0.18,
+     1.18
+    ],
+    [
+     1.44,
+     4.38
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Di Indonesia, yang biasanya panasnya tiga puluh derajat... suhu langsung anjlok mendekati nol.",
+   "start": 5.4,
+   "end": 10.4,
+   "pred": 5.96,
+   "voiced": [
+    [
+     5.4,
+     6.2
+    ],
+    [
+     6.54,
+     8.3
+    ],
+    [
+     8.72,
+     10.4
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Dan untuk pertama kalinya... salju turun di atas Monas!",
+   "start": 11.06,
+   "end": 14.18,
+   "pred": 3.09,
+   "voiced": [
+    [
+     11.06,
+     12.22
+    ],
+    [
+     12.64,
+     13.06
+    ],
+    [
+     13.14,
+     14.16
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "\"Wah, salju! Akhirnya kayak di luar negeri!\"",
+   "start": 14.68,
+   "end": 17.84,
+   "pred": 2.8,
+   "voiced": [
+    [
+     14.68,
+     15.0
+    ],
+    [
+     15.22,
+     15.84
+    ],
+    [
+     16.16,
+     17.84
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Tapi kegembiraan itu cuma bertahan sebentar.",
+   "start": 18.76,
+   "end": 20.9,
+   "pred": 2.73,
+   "voiced": [
+    [
+     18.78,
+     18.94
+    ],
+    [
+     19.02,
+     20.8
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Masalah pertama, rumah kita nggak siap.",
+   "start": 21.62,
+   "end": 23.36,
+   "pred": 2.73,
+   "voiced": [
+    [
+     21.62,
+     22.36
+    ],
+    [
+     22.6,
+     23.36
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Rumah di Indonesia dibuat supaya tetap sejuk, bukan supaya hangat.",
+   "start": 24.22,
+   "end": 27.16,
+   "pred": 4.38,
+   "voiced": [
+    [
+     24.22,
+     26.0
+    ],
+    [
+     26.34,
+     27.16
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Nggak ada pemanas, nggak ada jaket tebal.",
+   "start": 27.88,
+   "end": 29.82,
+   "pred": 2.8,
+   "voiced": [
+    [
+     27.88,
+     28.82
+    ],
+    [
+     29.0,
+     29.82
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Akhirnya satu keluarga berebut memeluk... magic com.",
+   "start": 30.38,
+   "end": 32.86,
+   "pred": 3.02,
+   "voiced": [
+    [
+     30.38,
+     32.84
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "\"Minggir, Dek! Giliran Bapak yang meluk!\"",
+   "start": 33.62,
+   "end": 35.02,
+   "pred": 2.66,
+   "voiced": [
+    [
+     33.64,
+     35.02
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Masalah kedua, padi gagal tumbuh.",
+   "start": 36.02,
+   "end": 38.0,
+   "pred": 2.37,
+   "voiced": [
+    [
+     36.02,
+     36.74
+    ],
+    [
+     37.16,
+     37.98
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Padi butuh udara hangat.",
+   "start": 38.72,
+   "end": 39.78,
+   "pred": 1.44,
+   "voiced": [
+    [
+     38.72,
+     39.78
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Kalau sawah membeku, beras jadi langka, dan harga nasi uduk... melambung tinggi.",
+   "start": 40.3,
+   "end": 44.78,
+   "pred": 5.39,
+   "voiced": [
+    [
+     40.32,
+     40.98
+    ],
+    [
+     41.12,
+     41.36
+    ],
+    [
+     41.66,
+     42.42
+    ],
+    [
+     42.96,
+     43.8
+    ],
+    [
+     43.98,
+     44.78
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Masalah ketiga, dan ini yang paling berbahaya.",
+   "start": 45.64,
+   "end": 47.9,
+   "pred": 3.16,
+   "voiced": [
+    [
+     45.64,
+     46.42
+    ],
+    [
+     46.62,
+     47.08
+    ],
+    [
+     47.2,
+     47.9
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Es dan salju berwarna putih, jadi memantulkan sinar Matahari kembali ke angkasa.",
+   "start": 48.54,
+   "end": 52.6,
+   "pred": 5.24,
+   "voiced": [
+    [
+     48.54,
+     49.7
+    ],
+    [
+     50.32,
+     52.6
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Semakin banyak es, semakin sedikit panas yang diserap Bumi.",
+   "start": 53.28,
+   "end": 55.98,
+   "pred": 3.95,
+   "voiced": [
+    [
+     53.28,
+     54.36
+    ],
+    [
+     54.54,
+     55.1
+    ],
+    [
+     55.18,
+     55.98
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Semakin dingin, es pun semakin luas.",
+   "start": 56.62,
+   "end": 58.74,
+   "pred": 2.51,
+   "voiced": [
+    [
+     56.64,
+     57.42
+    ],
+    [
+     57.72,
+     58.72
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Siklus ini bisa terus berulang.",
+   "start": 59.36,
+   "end": 61.02,
+   "pred": 1.87,
+   "voiced": [
+    [
+     59.36,
+     59.92
+    ],
+    [
+     60.02,
+     61.02
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Dan ini bukan cuma khayalan.",
+   "start": 61.86,
+   "end": 63.36,
+   "pred": 1.65,
+   "voiced": [
+    [
+     61.86,
+     62.22
+    ],
+    [
+     62.4,
+     63.36
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Para ilmuwan menemukan bukti bahwa sekitar tujuh ratus juta tahun lalu, Bumi pernah hampir seluruhnya tertutup es.",
+   "start": 63.96,
+   "end": 69.9,
+   "pred": 7.32,
+   "voiced": [
+    [
+     63.96,
+     65.56
+    ],
+    [
+     65.66,
+     65.8
+    ],
+    [
+     65.88,
+     67.32
+    ],
+    [
+     67.82,
+     69.88
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Mereka menyebutnya \"Bumi Bola Salju.\"",
+   "start": 70.52,
+   "end": 72.48,
+   "pred": 2.15,
+   "voiced": [
+    [
+     70.52,
+     71.4
+    ],
+    [
+     71.6,
+     72.48
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Sebagai perbandingan, di zaman es terakhir, suhu Bumi cuma lebih dingin sekitar enam derajat dari sekarang.",
+   "start": 73.42,
+   "end": 78.74,
+   "pred": 7.25,
+   "voiced": [
+    [
+     73.42,
+     74.32
+    ],
+    [
+     74.66,
+     75.7
+    ],
+    [
+     76.08,
+     78.74
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Jadi turun tiga puluh derajat... itu benar-benar bencana besar.",
+   "start": 79.48,
+   "end": 82.54,
+   "pred": 3.59,
+   "voiced": [
+    [
+     79.48,
+     80.68
+    ],
+    [
+     81.26,
+     82.54
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Jadi lain kali kamu mengeluh soal cuaca panas... ingat, setidaknya kamu nggak perlu memeluk magic com.",
+   "start": 83.54,
+   "end": 89.06,
+   "pred": 6.32,
+   "voiced": [
+    [
+     83.54,
+     83.98
+    ],
+    [
+     84.18,
+     85.86
+    ],
+    [
+     86.32,
+     86.5
+    ],
+    [
+     87.16,
+     87.7
+    ],
+    [
+     87.88,
+     89.04
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau Indonesia bersalju, hal pertama yang kamu lakukan apa?",
+   "start": 89.98,
+   "end": 92.62,
+   "pred": 4.02,
+   "voiced": [
+    [
+     89.98,
+     91.04
+    ],
+    [
+     91.44,
+     92.62
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 93.24,
+   "end": 93.88,
+   "pred": 1.08,
+   "voiced": [
+    [
+     93.24,
+     93.84
+    ]
+   ]
+  }
+ ]
+}

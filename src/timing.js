@@ -64,30 +64,26 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau semua serangga punah" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau suhu Bumi turun 30 derajat" (Indonesian only; en mirrors id).
 const EV_ID = {
-  bagaimana: [0, 'bagaimana'], serangga0: [0, 'serangga'], bumi: [0, 'bumi'], punah: [0, 'punah'],
-  akhirnya: [1, 'akhirnya'], nyamuk1: [1, 'nyamuk'], tidur: [1, 'tidur'], obat: [1, 'obat'],
-  hariPertama: [2, 'hari'], surga: [2, 'surga'], tapi: [3, 'tapi'], bertahan: [3, 'bertahan'],
-  masalah1: [4, 'masalah'], tanaman: [4, 'tanaman'], berbuah: [4, 'berbuah'],
-  lebah: [5, 'lebah'], kupu: [5, 'kupu'], seranggaLain: [5, 'serangga'], menyerbuki: [5, 'menyerbuki'], bunga: [5, 'bunga'],
-  tanpa1: [6, 'tanpa'], langka: [6, 'langka'], apel: [7, 'apel'], mangga: [7, 'mangga'], semangka: [7, 'semangka'], tomat: [7, 'tomat'],
-  masalah2: [8, 'masalah'], menyakitkan: [8, 'menyakitkan'], cokelat: [8, 'cokelat'], hilang: [8, 'hilang'],
-  kakao: [9, 'kakao'], agas: [9, 'agas'], kopi: [10, 'kopi'], berkurang: [10, 'berkurang'],
-  apa: [11, 'apa'], nggakAda: [11, 'nggak'], kembalilah: [11, 'kembalilah'],
-  masalah3: [12, 'masalah'], runtuh: [12, 'runtuh'], burung: [13, 'burung'], katak: [13, 'katak'], kadal: [13, 'kadal'], ikan: [13, 'ikan'], makanS: [13, 'makan'],
-  kelaparan: [14, 'kelaparan'], lalu: [15, 'lalu'], terancam: [15, 'terancam'],
-  masalah4: [16, 'masalah'], menumpuk: [16, 'menumpuk'], semut: [17, 'semut'], rayap: [17, 'rayap'], kumbang: [17, 'kumbang'], mengurai: [17, 'mengurai'], daun: [17, 'daun'], bangkai: [17, 'bangkai'],
-  tanpa4: [18, 'tanpa'], bau: [18, 'bau'],
-  ternyata: [19, 'ternyata'], usir: [19, 'usir'], pahlawan: [19, 'pahlawan'], hidup: [19, 'hidup'],
-  yaSudah: [20, 'sudah'], boleh: [20, 'boleh'], jangan: [20, 'jangan'], gigit: [20, 'gigit'],
-  seranggaApa: [21, 'serangga'], berjasa: [21, 'berjasa'], tulis: [22, 'tulis'], komentar: [22, 'komentar'],
+  bagaimana: [0, 'bagaimana'], suhu0: [0, 'suhu'], bumi0: [0, 'bumi'], turun0: [0, 'turun'], tigaPuluh0: [0, 'tiga'],
+  indonesia: [1, 'indonesia'], panasnya: [1, 'panasnya'], anjlok: [1, 'anjlok'], nol: [1, 'nol'],
+  pertama: [2, 'pertama'], salju: [2, 'salju'], monas: [2, 'monas'], wah: [3, 'wah'], luarNegeri: [3, 'luar'],
+  tapi: [4, 'tapi'], sebentar: [4, 'sebentar'], masalah1: [5, 'masalah'], siap: [5, 'siap'], sejuk: [6, 'sejuk'], hangat: [6, 'hangat'],
+  pemanas: [7, 'pemanas'], jaket: [7, 'jaket'], keluarga: [8, 'keluarga'], berebut: [8, 'berebut'], magicCom: [8, 'magic'],
+  minggir: [9, 'minggir'], giliran: [9, 'giliran'], meluk: [9, 'meluk'],
+  masalah2: [10, 'masalah'], padi: [10, 'padi'], gagal: [10, 'gagal'], butuh: [11, 'butuh'], sawah: [12, 'sawah'], membeku: [12, 'membeku'], beras: [12, 'beras'], langka: [12, 'langka'], uduk: [12, 'uduk'], melambung: [12, 'melambung'],
+  masalah3: [13, 'masalah'], berbahaya: [13, 'berbahaya'], putih: [14, 'putih'], memantulkan: [14, 'memantulkan'], angkasa: [14, 'angkasa'],
+  banyakEs: [15, 'banyak'], diserap: [15, 'diserap'], dingin: [16, 'dingin'], luas: [16, 'luas'], siklus: [17, 'siklus'], berulang: [17, 'berulang'],
+  khayalan: [18, 'khayalan'], ilmuwan: [19, 'ilmuwan'], tujuhRatus: [19, 'tujuh'], tertutup: [19, 'tertutup'], bolaSalju: [20, 'bola'],
+  perbandingan: [21, 'perbandingan'], zamanEs: [21, 'zaman'], enam: [21, 'enam'], tigaPuluh2: [22, 'tiga'], bencana: [22, 'bencana'],
+  lainKali: [23, 'lain'], panas: [23, 'panas'], ingat: [23, 'ingat'], magic2: [23, 'magic'], kalau: [24, 'kalau'], lakukan: [24, 'lakukan'], komentar: [25, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {gone: 'SERANGGA PUNAH!', heaven: 'SURGA!', zzz: 'Zzz...', m1: 'MASALAH 1', m2: 'MASALAH 2', m3: 'MASALAH 3', m4: 'MASALAH 4',
-  noFruit: 'NGGAK BERBUAH', scarce: 'LANGKA', apel: 'APEL', mangga: 'MANGGA', semangka: 'SEMANGKA', tomat: 'TOMAT', empty: 'HABIS',
-  choco: 'COKELAT', chocoGone: 'COKELAT HAMPIR HILANG', midge: 'AGAS', coffee: 'PANEN KOPI BERKURANG', chain: ['SERANGGA', 'KATAK', 'ULAR', 'ELANG'],
-  hungry: 'LAPAR...', threat: 'IKUT TERANCAM', pile: 'SAMPAH ALAM MENUMPUK', smell: 'BAU!', hero: 'PAHLAWAN TERSEMBUNYI', ok: 'BOLEH KEMBALI', noBite: 'JANGAN GIGIT!',
-  question: 'SERANGGA PALING BERJASA?', comment: 'TULIS DI KOMENTAR!', shop: 'TOKO COKELAT'};
+const L_ID = {minus30: '−30°C', temp30: '30°C', temp0: '0°C', m1: 'MASALAH 1', m2: 'MASALAH 2', m3: 'MASALAH 3', notReady: 'RUMAH NGGAK SIAP', noHeater: 'NGGAK ADA PEMANAS',
+  noJacket: 'NGGAK ADA JAKET TEBAL', price1: 'NASI UDUK Rp10.000', price2: 'NASI UDUK Rp100.000!', frozen: 'SAWAH MEMBEKU', scarce: 'BERAS LANGKA',
+  reflect: 'MEMANTUL', moreIce: 'ES BERTAMBAH', colder: 'MAKIN DINGIN', cycle: 'SIKLUS BERULANG', ago: '±700 JUTA TAHUN LALU', snowball: 'BUMI BOLA SALJU',
+  iceAge: 'ZAMAN ES TERAKHIR', now: 'SEKARANG', d6: '−6°C', d30: '−30°C', disaster: 'BENCANA BESAR!', abroad: 'KAYAK DI LUAR NEGERI!',
+  question: 'HAL PERTAMA YANG KAMU LAKUKAN?', comment: 'TULIS DI KOMENTAR!', warung: 'WARUNG NASI UDUK'};
 export const LABELS = {id: L_ID, en: L_ID};

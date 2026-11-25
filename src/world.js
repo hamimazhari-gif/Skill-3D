@@ -1,4 +1,4 @@
-// All locations in one scene at different x offsets. Story: "Kalau semua serangga punah" (what if every insect vanished).
+// All locations in one scene at different x offsets. Story: "Kalau suhu Bumi turun 30 derajat" (snow on Monas, Snowball Earth).
 import * as THREE from 'three';
 import {toon, box, cyl, ball, at, sign, paintTex, pop, smooth, canvas, texFrom, INK} from './kit';
 import {makeChar, setCharDesign} from './char';
@@ -6,45 +6,41 @@ import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {space: 0, bedroom: 40, garden: 80, market: 120, choco: 160, pond: 200, forest: 240, stage: 280};
+export const LOC = {space: 0, jakarta: 40, house: 80, field: 120, lab: 160};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
-// Cast. Design: 'nimble' (new for this video; round no-sleep face, tuft hair, thin brows, long legs).
-export const CHAR_DESIGN = 'nimble';
-const ANDI = {outfit: 'tshirt', jacket: '#4f9a8a', print: '#f2d24a', print2: '#d8413a', lower: '#3f5f8a', tie: '#4f9a8a', hair: '#2b2326', hairStyle: 'tuft', hat: 'none'};
+// Cast. Design: 'cheery' (new for this video; round no-sleep face, side hair, thick brows, slim limbs).
+export const CHAR_DESIGN = 'cheery';
 const CAST = {
-  andi: ANDI,
-  andiP: {...ANDI, jacket: '#7fa6d8', print: null, lower: '#7fa6d8', hat: 'nightcap', hatColor: '#7fa6d8', hatColor2: '#fbf6ea'},
-  ibu: {hairStyle: 'hijab', hijab: '#e8a0b8', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'tshirt', jacket: '#e8a0b8', lower: '#e8a0b8', tie: '#e8a0b8'},
-  kid: {outfit: 'tshirt', jacket: '#f2d24a', lower: '#f2d24a', tie: '#f2d24a', hair: '#2b2326', hairStyle: 'fringe', hat: 'none'},
-  seller: {outfit: 'farmer', jacket: '#e8a83a', lower: '#4a4a52', pocket: '#d8982a', tie: '#e8a83a', hair: '#2b2326', hairStyle: 'side', hat: 'none', towel: '#fbf6ea', mustache: 'thin'},
+  bapak: {outfit: 'tshirt', jacket: '#d8413a', print: '#fff3df', print2: '#f2d24a', lower: '#3a4050', tie: '#d8413a', hair: '#2b2326', hairStyle: 'side', hat: 'none', mustache: 'thick'},
+  ibu: {hairStyle: 'hijab', hijab: '#4f8a6a', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'batik', jacket: '#e8c35a', print: '#fff3df', print2: '#8a4a2a', lower: '#5a4a3a', tie: '#e8c35a', round: true},
+  dek: {outfit: 'tshirt', jacket: '#4f8fc8', print: '#fff3df', print2: '#f2d24a', lower: '#3a4050', tie: '#4f8fc8', hair: '#2b2326', hairStyle: 'tuft', hat: 'none'},
+  ilmuwan: {outfit: 'shirt', jacket: '#fbf6ea', tie: '#2f6a8a', lower: '#3a3a48', pocket: '#e8e0d0', hair: '#9a9a9a', hairStyle: 'side', hat: 'none', glasses: true, mustache: 'thin'},
 };
 
-// Lighting: deep space for the Earth, a blue night bedroom (warm morning after), sunny garden and market,
-// a warm cocoa shop, a pond in the afternoon, a gloomy green-grey forest when it stinks, a hero stage.
+// Lighting: deep space for the Earth, a hot Jakarta day that turns into a cold grey-blue winter, a cold blue house
+// (warm glow from the rice cooker), a frozen field, a cool lab.
 const studio = {...LOOK_PRESETS.interiorCool, keyI: 1.9, hemiI: 0.95, fog: '#141824', grade: {sat: 1.05, contrast: 1.08, tintAmt: 0, vignette: 0.5}};
-const nightL = {...LOOK_PRESETS.interiorCool, keyI: 1.3, hemiI: 0.8, key: '#a9c4ff', grade: {sat: 0.85, contrast: 1.05, tint: '#8aa0d8', tintAmt: 0.12, vignette: 0.55}};
-const roomL = {...LOOK_PRESETS.interiorWarm, keyI: 2.4, hemiI: 1.3};
+const winter = {...LOOK_PRESETS.winter, near: 30, far: 120};
+const hot = {...LOOK_PRESETS.noon, near: 30, far: 120, grade: {sat: 1.1, contrast: 1.05, tint: '#ffd8a0', tintAmt: 0.1, vignette: 0.3}};
+const coldRoom = {...LOOK_PRESETS.interiorCool, keyI: 1.8, hemiI: 1.0, grade: {sat: 0.8, contrast: 1.05, tint: '#a8c4e8', tintAmt: 0.14, vignette: 0.5}};
 export const LOOK = {
   space: {...studio},
-  bedroom: {keys: [{at: 0, ...nightL}, {at: 'surga', ...nightL, ...MOODS.joyful}, {at: 'cut3', ...roomL, ...MOODS.sad}, {at: 'cut11', ...roomL}]},
-  garden: {keys: [{at: 0, ...LOOK_PRESETS.day}, {at: 'lebah', ...LOOK_PRESETS.day, ...MOODS.nostalgic}, {at: 'cut5', ...LOOK_PRESETS.day}]},
-  market: {...LOOK_PRESETS.day, ...MOODS.sad},
-  choco: {keys: [{at: 0, ...roomL}, {at: 'apa', ...roomL, ...MOODS.danger}]},
-  pond: {keys: [{at: 0, ...LOOK_PRESETS.goldenHour}, {at: 'kelaparan', ...LOOK_PRESETS.goldenHour, ...MOODS.sad}]},
-  forest: {...LOOK_PRESETS.overcast, grade: {sat: 0.8, contrast: 1.05, tint: '#9ab07a', tintAmt: 0.14, vignette: 0.5}},
-  stage: {...studio, ...MOODS.joyful},
+  jakarta: {keys: [{at: 0, ...hot}, {at: 'anjlok', ...winter}, {at: 'tapi', ...winter, ...MOODS.sad}, {at: 'cut11', ...hot}, {at: 'cut12', ...winter}]},
+  house: {keys: [{at: 0, ...coldRoom}, {at: 'magicCom', ...coldRoom, grade: {sat: 0.95, contrast: 1.05, tint: '#ffd0a0', tintAmt: 0.08, vignette: 0.5}}]},
+  field: {keys: [{at: 0, ...winter}, {at: 'uduk', ...LOOK_PRESETS.overcast}]},
+  lab: {keys: [{at: 0, ...LOOK_PRESETS.interiorCool, keyI: 2.2, hemiI: 1.2}, {at: 'bencana', ...LOOK_PRESETS.interiorCool, keyI: 2.2, hemiI: 1.2, ...MOODS.danger}]},
 };
 
 const under = (g, color, size = 40) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size), toon(paintTex(color, {seed: 3}))); m.rotation.x = -Math.PI / 2; m.position.y = -0.05; g.add(m); };
 
 export function storyFx(T, EVt) {
   return {
-    flashes: [{t: EVt.punah, dur: 0.35, color: '#ffffff', strength: 0.45}, {t: EVt.surga, dur: 0.35, color: '#ffe9b0', strength: 0.35},
-      {t: EVt.cokelat, dur: 0.3, color: '#ff8a7a', strength: 0.3}, {t: EVt.apa, dur: 0.3, color: '#ff8a7a', strength: 0.35}, {t: EVt.runtuh, dur: 0.3, color: '#ffffff', strength: 0.3},
-      {t: EVt.bau, dur: 0.35, color: '#b8e07a', strength: 0.35}, {t: EVt.pahlawan, dur: 0.4, color: '#ffe9b0', strength: 0.45}, {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4}],
-    shakes: [{t: EVt.punah, dur: 0.3, amp: 0.015}, {t: EVt.apa, dur: 0.4, amp: 0.02}, {t: EVt.runtuh + 0.2, dur: 0.4, amp: 0.02}],
+    flashes: [{t: EVt.tigaPuluh0, dur: 0.35, color: '#dff0ff', strength: 0.45}, {t: EVt.salju, dur: 0.35, color: '#ffffff', strength: 0.4}, {t: EVt.magicCom, dur: 0.3, color: '#ffd0a0', strength: 0.3},
+      {t: EVt.melambung, dur: 0.3, color: '#ff8a7a', strength: 0.3}, {t: EVt.bolaSalju, dur: 0.35, color: '#ffffff', strength: 0.45}, {t: EVt.bencana, dur: 0.35, color: '#ff8a7a', strength: 0.4},
+      {t: EVt.komentar, dur: 0.35, color: '#ffe9b0', strength: 0.4}],
+    shakes: [{t: EVt.tigaPuluh0, dur: 0.3, amp: 0.015}, {t: EVt.minggir, dur: 0.3, amp: 0.015}, {t: EVt.bencana, dur: 0.4, amp: 0.02}],
   };
 }
 
@@ -87,214 +83,169 @@ export function buildWorld(lang, T, EVt, L) {
   const clock = (g, txt, x, y, z, word, vis = () => true) => popSign(g, P.digitalBoard(txt, 0.9, 0.32, {color: '#ffcf4a'}), x, y, z, E(word) - 0.1, 1e9, vis);
 
 
-  const bugs = []; // insects with flapping wings
-  const bug = (g, ins, s, pos, vis) => { ins.group.scale.setScalar(s); g.add(ins.group); updaters.push((t) => { const p = pos(t); if (p) ins.group.position.set(p[0], p[1], p[2]); if (p && p[3] !== undefined) ins.group.rotation.y = p[3]; ins.flap(t); ins.group.visible = vis ? vis(t) : true; }); bugs.push(ins); return ins; };
-  const label = (g, txt, x, y, z, t0, t1, o = {}) => popSign(g, sign(txt, o.w || 1.3, o.h || 0.32, {bg: o.bg || '#fff3df', fg: o.fg || '#351f22', frame: o.frame || '#351f22'}), x, y, z, t0, t1, o.vis);
-  const problem = (g, n, x, y, z, k, until) => label(g, L['m' + n], x, y, z, E(k) - 0.1, until, {w: 1.2, h: 0.32, bg: '#2b2b33', fg: '#f2d24a', frame: '#f2d24a'});
-  const flowers = (g, cx, cz, n, seed) => { const rr = (() => { let v = seed; return () => (v = (v * 9301 + 49297) % 233280) / 233280; })();
-    for (let i = 0; i < n; i++) { const x = cx + (rr() - 0.5) * 3, z = cz + (rr() - 0.5) * 1.4; const st = cyl(0.015, 0.015, 0.5, '#4f8a4a', {hull: 0}); at(st, x, 0, z); g.add(st);
-      const f = ball(0.08, ['#e8737a', '#f2d24a', '#fbf6ea', '#b07ad8'][i % 4], {sy: 0.5, hull: 0.006}); at(f, x, 0.52, z); g.add(f); } };
+  const label = (g, txt, x, y, z, t0, t1, o = {}) => popSign(g, sign(txt, o.w || 1.3, o.h || 0.32, {bg: o.bg || '#fff3df', fg: o.fg || '#351f22', frame: o.frame || '#351f22', ...(o.sub ? {sub: o.sub} : {})}), x, y, z, t0, t1, o.vis);
+  const problem = (g, n, x, y, z, k, until) => label(g, L['m' + n], x, y, z, E(k) - 0.1, until, {w: 1.2, h: 0.32, bg: '#2b2b33', fg: '#7fc4e8', frame: '#7fc4e8'});
+  const lerpT = (t, a, b, va, vb) => va + (vb - va) * smooth((t - a) / Math.max(0.01, b - a));
+  const frost = (gl, r) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r * 1.01, 32, 16), new THREE.MeshBasicMaterial({color: '#f3f8ff', transparent: true, opacity: 0, depthWrite: false})); gl.group.add(m); return m; };
+  const iceCap = (gl, r, top) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r * 1.015, 32, 16, 0, Math.PI * 2, top ? 0 : Math.PI, Math.PI / 2), toon('#f3f8ff', {wear: false})); if (!top) m.rotation.x = 0; gl.group.add(m); return m; };
 
-  // ---------- space: the Earth loses its insects (1) ----------
+  // ---------- space: the whole Earth cools (1), the ice-albedo loop (8) ----------
   {
     const g = addLoc('space');
     under(g, '#0c0f18');
-    const bg = box(30, 14, 0.2, toon('#101526', {wear: false}), {edges: false}); at(bg, 0, -2, -9); g.add(bg);
-    const stars = P.stars ? P.stars() : null; if (stars) { at(stars, 0, 0, -8); g.add(stars); }
-    const gl = P.globe(1.15); at(gl.group, 0, 1.8, -3.6); g.add(gl.group); updaters.push((t) => { gl.group.rotation.y = t * 0.3; });
-    const fl = FX.fireLight([0, 2.6, -1.8], {intensity: 2.0, dist: 6}); g.add(fl.obj); updaters.push((t) => fl.update(t));
-    for (let i = 0; i < 16; i++) { const ins = i % 3 === 0 ? P.butterfly(['#e8737a', '#f2a93a', '#7fc4e8'][i % 3]) : P.bee();
-      const t0 = E('punah') - 0.4 + i * 0.05, a0 = i / 16 * Math.PI * 2, rad = 1.55 + (i % 3) * 0.18, yy = (i % 5 - 2) * 0.35;
-      bug(g, ins, 0.32, (t) => { const a = a0 + t * 0.9; return [Math.cos(a) * rad, 1.8 + yy + Math.sin(t * 3 + i) * 0.08, -3.6 + Math.sin(a) * rad, -a]; }, (t) => t < t0);
-      fx(g, FX.glints([0, 0, 0], t0, {n: 6, seed: i}), (t) => t > t0 - 0.05 && t < t0 + 1.2); }
-      }
+    const bg = box(40, 16, 0.2, toon('#101526', {wear: false}), {edges: false}); at(bg, 0, -3, -10); g.add(bg);
+    const st = P.stars(); at(st, 0, 0, -9); g.add(st);
+    const gl = P.globe(1.1); at(gl.group, 0, 1.8, -3.6); g.add(gl.group); updaters.push((t) => { gl.group.rotation.y = t * 0.25; });
+    const fr = frost(gl, 1.1); updaters.push((t) => { fr.material.opacity = inShots(t, 1) ? lerpT(t, E('turun0'), E('tigaPuluh0') + 1.2, 0, 0.55) : 0; });
+    const th = P.thermometer(2.0); at(th.group, 1.75, 0.6, -3.0); g.add(th.group);
+    updaters.push((t) => { th.group.visible = inShots(t, 1); th.set(lerpT(t, E('turun0'), E('tigaPuluh0') + 1.0, 15, -15)); });
+    label(g, L.minus30, 1.75, 3.0, -3.0, E('tigaPuluh0') - 0.05, cut(2), {w: 0.9, h: 0.38, bg: '#4f8fc8', fg: '#fff3df', frame: '#2f5a8a'});
+    // the albedo loop: the sun shines, ice reflects, ice grows
+    const AX = 12;
+    const gl2 = P.globe(1.1); at(gl2.group, AX + 0.6, 1.8, -3.8); g.add(gl2.group); updaters.push((t) => { gl2.group.rotation.y = t * 0.2; });
+    const capN = iceCap(gl2, 1.1, true), capS = iceCap(gl2, 1.1, false);
+    updaters.push((t) => { const k = lerpT(t, E('putih') - 0.2, E('putih') + 0.5, 0.25, 0.35) + lerpT(t, E('banyakEs'), E('banyakEs') + 1.0, 0, 0.25) + lerpT(t, E('dingin'), E('dingin') + 1.0, 0, 0.3) + lerpT(t, E('siklus'), E('berulang') + 0.8, 0, 0.1);
+      capN.scale.set(1, 1, 1); capN.geometry.dispose(); capN.geometry = new THREE.SphereGeometry(1.115, 32, 16, 0, Math.PI * 2, 0, Math.PI * Math.min(0.5, k)); capS.geometry.dispose(); capS.geometry = new THREE.SphereGeometry(1.115, 32, 16, 0, Math.PI * 2, Math.PI * (1 - Math.min(0.5, k)), Math.PI * Math.min(0.5, k)); });
+    const sun = P.sunRays(0.6); at(sun, AX - 2.0, 3.2, -4.5); g.add(sun);
+    const arrows = [0, 1, 2].map((i) => { const inA = P.arrow(1.6, '#f2c23a'); g.add(inA); const outA = P.arrow(1.4, '#bfe4ff'); g.add(outA);
+      updaters.push((t) => { const y = 2.4 - i * 0.45; at(inA, AX - 1.4, y + 0.3, -4.0, 0, 0, -1.9); inA.visible = inShots(t, 8) && t > E('putih') - 0.3 + i * 0.1;
+        at(outA, AX - 0.35, y, -3.4, 0, 0, 1.1 + i * 0.1); outA.visible = inShots(t, 8) && t > E('memantulkan') + i * 0.12; outA.scale.setScalar(pop(t, E('memantulkan') + i * 0.12, 0.3)); }); return inA; });
+    label(g, L.reflect, AX - 1.2, 0.6, -3.4, E('memantulkan') - 0.05, E('banyakEs'), {w: 1.2, bg: '#bfe4ff'});
+    label(g, L.moreIce, AX + 0.6, 3.35, -3.6, E('banyakEs') - 0.05, E('dingin'), {w: 1.3, bg: '#f3f8ff'});
+    label(g, L.colder, AX + 0.6, 3.35, -3.6, E('dingin') - 0.05, E('siklus'), {w: 1.3, bg: '#7fc4e8'});
+    label(g, L.cycle, AX + 0.6, 3.35, -3.6, E('siklus') - 0.05, cut(9), {w: 1.6, bg: '#2b2b33', fg: '#7fc4e8', frame: '#7fc4e8'});
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.04, 6, 48, Math.PI * 1.7), new THREE.MeshBasicMaterial({color: '#7fc4e8'})); g.add(ring);
+    const rh = P.arrow(0.4, '#7fc4e8', 0.05); ring.add(rh); at(rh, 1.6 * Math.cos(Math.PI * 1.7), 1.6 * Math.sin(Math.PI * 1.7), 0, 0, 0, Math.PI * 1.7);
+    updaters.push((t) => { ring.visible = inShots(t, 8) && t > E('siklus') - 0.1; at(ring, AX + 0.6, 1.8, -3.0, 0, 0, -t * 2.5); ring.scale.setScalar(pop(t, E('siklus') - 0.1, 0.4)); });
+    problem(g, 3, AX + 0.6, 3.35, -3.6, 'masalah3', E('putih') - 0.15);
+  }
 
-  // ---------- the bedroom: no more mosquitoes (2), the bad feeling (3), "you may come back" (11) ----------
+  // ---------- Jakarta: snow on Monas (2-4), back to the heat (11), the question (12) ----------
   {
-    const g = addLoc('bedroom');
+    const g = addLoc('jakarta');
+    under(g, '#8fae6a', 160);
+    const grass = box(60, 0.03, 40, toon('#8fae6a', {paint: {seed: 611, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -12); g.add(grass);
+    const plaza = box(10, 0.04, 26, toon('#d8d0c0', {paint: {seed: 612}}), {edges: false}); at(plaza, 0, -0.01, -10); g.add(plaza);
+    const mon = P.monas(10); at(mon, 0, 0, -18); g.add(mon);
+    for (let i = 0; i < 10; i++) { const tr = P.tree({seed: 620 + i, h: 2.8}); at(tr, (i % 2 ? 1 : -1) * (5.5 + (i % 3) * 1.2), 0, -4 - i * 2.2); g.add(tr); }
+    [[-12, -26, '#e8dcc0'], [-8, -30, '#bfd8e8'], [9, -28, '#f3efe6'], [13, -24, '#e0c8a8']].forEach(([x, z, c], i) => { const b = box(3.5, 7 + i * 2, 3, toon(c, {paint: {seed: 630 + i, windows: true}})); at(b, x, 0, z); g.add(b); });
+    const snowy = (t) => t > E('salju') && (t < cut(11) || t >= cut(12));
+    const cover = box(60, 0.05, 40, toon('#f3f8ff', {wear: false}), {edges: false}); at(cover, 0, 0.01, -12); g.add(cover);
+    updaters.push((t) => { const u = inShots(t, 12) ? 1 : smooth((t - E('salju') - 0.3) / 2.5); cover.visible = snowy(t) && u > 0.02; cover.position.y = -0.04 + u * 0.06; });
+    fx(g, FX.fall([0, -6, 16, 16], {n: 900, h: 9, speed: 1.2, color: '#ffffff', size: 0.09, drift: 0.4, sway: 0.4, from: E('salju') - 0.2, to: cut(11)}));
+    fx(g, FX.fall([0, -6, 16, 16], {n: 900, h: 9, speed: 1.2, color: '#ffffff', size: 0.09, drift: 0.4, sway: 0.4, seed: 13, from: cut(12), to: 1e9}));
+    const th = P.thermometer(1.6); at(th.group, 1.15, 0.0, -3.3); g.add(th.group);
+    updaters.push((t) => { th.group.visible = inShots(t, 2); th.set(lerpT(t, E('panasnya'), E('nol') + 0.5, 30, 0)); });
+    label(g, L.temp30, 1.15, 2.1, -3.3, E('panasnya') - 0.05, E('anjlok'), {w: 0.8, h: 0.34, bg: '#f2a93a'});
+    label(g, L.temp0, 1.15, 2.1, -3.3, E('anjlok') - 0.05, cut(3), {w: 0.8, h: 0.34, bg: '#7fc4e8'});
+    const fam = [['bapak', -0.75, -3.0, 0.2, 1], ['ibu', 0.15, -3.2, 0, 1], ['dek', -0.25, -2.5, 0.1, 0.7]].map(([k, x, z, y, s], i) => {
+      const c = ch(k, {seed: 1 + i, scale: s}, g, x, z, y); showWhen(c.group, (t) => !inShots(t, 11) || k === 'bapak');
+      return c; });
+    const [bapak, ibu, dek] = fam;
+    bapak.act([{t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('anjlok') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('salju') + 0.1, pose: 'pointUp', expr: 'excited'},
+      {t: cut(3), pose: 'cheer', expr: 'toothy'}, {t: E('tapi') + 0.1, pose: 'cross', expr: 'chatter'},
+      {t: cut(11), pose: 'hold', expr: 'tired'}, {t: E('ingat') + 0.05, pose: 'hips', expr: 'happy'}, {t: E('magic2') + 0.05, pose: 'present', expr: 'cheesy'},
+      {t: cut(12), pose: 'cross', expr: 'chatter'}, {t: E('kalau') + 0.1, pose: 'shrug', expr: 'cheesy'}, {t: E('komentar') - 0.15, pose: 'point', expr: 'cheesy'}]);
+    bapak.act([{t: E('tapi'), action: 'tremble', dur: 2.2}, {t: E('panas') - 0.2, action: 'tremble', dur: 0.01}]);
+    ibu.act([{t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('anjlok') + 0.15, pose: 'headHold', expr: 'shocked'}, {t: E('salju') + 0.15, pose: 'presentBoth', expr: 'excited'},
+      {t: cut(3), pose: 'cheer', expr: 'laugh'}, {t: E('tapi') + 0.15, pose: 'cross', expr: 'chatter'}, {t: cut(12), pose: 'cross', expr: 'chatter'}]);
+    ibu.act([{t: E('tapi') + 0.1, action: 'tremble', dur: 2.2}, {t: cut(12), action: 'tremble', dur: 4.0}]);
+    dek.act([{t: cut(2), pose: 'idle', expr: 'tired'}, {t: E('salju') + 0.1, pose: 'armsUp', expr: 'excited'}, {t: E('luarNegeri') - 0.1, pose: 'cheer', expr: 'cheesy'},
+      {t: E('tapi') + 0.05, pose: 'cross', expr: 'chatter'}, {t: cut(12), pose: 'armsUp', expr: 'cheesy'}]);
+    dek.act([{t: E('wah') - 0.1, action: 'jump', dur: 0.5}, {t: E('tapi') + 0.1, action: 'tremble', dur: 2.2}]);
+    speak(dek, 3, [[0, 'excited', 'armsUp'], [0.45, 'cheesy', 'cheer']]);
+    label(g, L.abroad, -0.25, 2.1, -2.8, E('luarNegeri') - 0.1, cut(4), {w: 1.9, h: 0.34, bg: '#7fc4e8', vis: (t) => inShots(t, 3)});
+    // back in the heat (11): sweat, a fan of paper, and no rice cooker to hug
+    fx(g, FX.glints([-0.75, 2.2, -3.0], E('ingat'), {n: 20}), (t) => inShots(t, 11));
+    const sweat = FX.smoke([-0.75, 2.1, -3.0], cut(11), {n: 10, every: 0.25, life: 1.2, size: 0.25, grow: 2, rise: 0.6, color: '#fff2d0', opacity: 0.4}); fx(g, sweat, (t) => inShots(t, 11));
+    const rc = P.riceCooker(1.3); g.add(rc); updaters.push((t) => { rc.visible = inShots(t, 11) && t > E('magic2') - 0.1; rc.scale.setScalar(1.3 * pop(t, E('magic2') - 0.1, 0.35)); at(rc, 0.35, 0.0, -2.9); });
+    label(g, 'NGGAK PERLU!', 0.4, 0.95, -2.85, E('magic2') + 0.2, cut(12), {w: 1.0, h: 0.26, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a', vis: (t) => inShots(t, 11)});
+    label(g, L.question, -0.25, 2.75, -2.7, E('kalau') - 0.1, 1e9, {w: 2.4, h: 0.4, fg: '#8a2a36', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
+    label(g, L.comment, -0.25, 2.32, -2.65, E('komentar') - 0.12, 1e9, {w: 1.7, h: 0.36, bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
+    fx(g, FX.confetti([-0.25, 2.9, -2.5], E('komentar') + 0.05, {seed: 21}), (t) => inShots(t, 12));
+  }
+
+  // ---------- the house: not ready for cold (5), hugging the rice cooker (6) ----------
+  {
+    const g = addLoc('house');
     under(g, '#2a2228');
-    g.add(P.room(7, 3, 6, {wall: '#c8d4e8', floor: '#a8784a', wain: '#7a8ab0'}));
-    const win = sign('', 1.1, 0.9, {bg: '#9cc6e6', frame: '#fbf6ea', wear: false}); at(win, -1.6, 1.4, -4.88); g.add(win);
-    const bed = P.bed({color: '#8a5a3a', sheet: '#7fa6c9', noBlanket: true}); at(bed, 1.25, 0, -3.7); g.add(bed);
-    const ns = box(0.45, 0.5, 0.4, toon('#8a6242', {paint: {seed: 411}})); at(ns, -0.35, 0, -4.4); g.add(ns);
-    const coil = P.mosquitoCoil(); g.add(coil);
-    updaters.push((t) => { const u = Math.max(0, t - E('obat') - 0.05); const k = Math.min(u, 1.0); at(coil, -0.35 + k * 1.6, 0.5 + k * 2.2 - k * k * 2.6, -4.4 + k * 1.0, 0, k * 8, k * 6); coil.visible = !(u > 0.95) || t > cut(11); if (t > cut(11)) at(coil, -0.35, 0.5, -4.4); });
-    const andiP = ch('andiP', {seed: 1}, g, -0.6, -3.0, 0.2); showWhen(andiP.group, (t) => (inShots(t, 1) && t < E('bumi') + 0.2) || (inShots(t, 2) && t < E('hariPertama') - 0.1));
-    // the hook: he slaps a mosquito and a wish comes true
-    const SLAP = 0.75;
-    bug(g, P.mosquito(), 0.3, (t) => { const a = t * 3; return [-0.35 + Math.cos(a) * 0.3, 2.05 + Math.sin(t * 7) * 0.06, -2.8 + Math.sin(a) * 0.2, -a]; }, (t) => t < SLAP);
-    fx(g, FX.glints([-0.4, 1.95, -2.8], SLAP, {n: 10, seed: 3}));
-    popSign(g, sign('PERMINTAAN DIKABULKAN:', 2.2, 0.62, {bg: '#7a5aa8', fg: '#fff3df', frame: '#f2d24a', sub: 'SEMUA SERANGGA HILANG!'}), -0.5, 2.5, -3.0, E('serangga0') - 0.1, E('bumi') + 0.3);
-    fx(g, FX.glints([-0.5, 2.7, -3.0], E('serangga0') - 0.05, {n: 40, color: '#f2d24a'}));
-    andiP.act([{t: 0, pose: 'idle', expr: 'annoyed'}, {t: SLAP - 0.3, pose: 'hammerUp', expr: 'gritted'}, {t: SLAP - 0.05, pose: 'hammerDown', expr: 'determined'},
-      {t: E('serangga0') + 0.05, pose: 'idle', expr: 'surprised'}, {t: E('serangga0') + 0.6, pose: 'cheer', expr: 'excited'}]);
-    andiP.act([{t: E('serangga0') + 0.6, action: 'jump', dur: 0.5}]);
-    // the party: the family cheers, the mosquito net goes
-    const fam = [['ibu', -1.6, -3.4, 0.4], ['kid', 0.25, -2.6, -0.2]].map(([k, x, z, y], i) => { const c = ch(k, {seed: 20 + i, scale: k === 'kid' ? 0.7 : 1}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 2) && t < E('hariPertama') - 0.1);
-      c.act([{t: cut(2), pose: 'cheer', expr: i ? 'toothy' : 'laugh'}, {t: E('tidur'), pose: 'armsUp', expr: 'excited'}]); c.act([{t: E('akhirnya') + 0.2 + i * 0.3, action: 'jump', dur: 0.5}, {t: E('obat') + i * 0.2, action: 'hop', dur: 0.4}]); return c; });
-    fx(g, FX.confetti([-0.5, 2.9, -2.8], E('akhirnya') + 0.1), (t) => inShots(t, 2));
-    const net = box(1.5, 1.5, 2.3, new THREE.MeshBasicMaterial({color: '#fbfbf8', transparent: true, opacity: 0.28, depthWrite: false}), {hull: 0.006}); g.add(net);
-    updaters.push((t) => { const u = smooth((t - E('obat') - 0.1) / 0.8); at(net, 1.25 + u * 1.5, 0.5 + u * 2.5, -3.7, 0, 0, u * 0.8); net.visible = u < 0.98 && t < cut(3); });
-    andiP.act([{t: cut(2), pose: 'cheer', expr: 'excited'}, {t: E('nyamuk1') + 0.05, pose: 'armsUp', expr: 'toothy'}, {t: E('obat') - 0.15, pose: 'give', expr: 'cheesy'}]);
-    andiP.act([{t: E('akhirnya'), action: 'jump', dur: 0.5}, {t: E('tidur') - 0.1, action: 'hop', dur: 0.4}]);
-    speak(andiP, 1, [[0, 'excited', 'cheer'], [0.35, 'toothy', 'armsUp'], [0.7, 'cheesy', 'give']]);
-    const sleeper = ch('andiP', {seed: 2, noFace: true, scale: 0.85}, g, 1.25, -2.8, 0); showWhen(sleeper.group, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
-    updaters.push(() => { sleeper.group.rotation.set(-Math.PI / 2, 0, 0); sleeper.group.position.y = 0.74; }); // lying on his back, head on the pillow
-    sleeper.act([{t: 0, pose: 'limp', expr: 'sleep'}, {t: E('surga'), pose: 'limp', expr: 'happy'}]);
-    const blanket = box(1.22, 0.04, 1.05, toon('#7fa6c9', {paint: {seed: 412, stains: 4}}), {hull: 0.008}); at(blanket, 1.25, 0.77, -3.2); g.add(blanket); showWhen(blanket, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
-    label(g, L.zzz, 1.85, 1.15, -4.55, E('hariPertama'), cut(3), {w: 0.6, bg: '#2b2b33', fg: '#fbf6ea', frame: '#fbf6ea', vis: (t) => inShots(t, 2)});
-    label(g, L.heaven, 1.0, 1.55, -4.85, E('surga') - 0.05, cut(3), {w: 1.2, h: 0.38, bg: '#f2d24a', vis: (t) => inShots(t, 2)});
-    fx(g, FX.glints([1.25, 1.2, -4.0], E('surga'), {n: 30}), (t) => inShots(t, 2));
-    // the next morning: something feels wrong
-    const andi3 = ch('andi', {seed: 3}, g, -1.1, -3.4, 0.25);
-    const LAND = E('jangan') - 0.2; showWhen(andi3.group, (t) => inShots(t, 3) || inShots(t, 11));
-    andi3.act([{t: cut(3), pose: 'hips', expr: 'happy'}, {t: E('tapi') + 0.1, pose: 'idle', expr: 'confused'}, {t: E('bertahan') + 0.05, pose: 'chin', expr: 'worried'},
-      {t: cut(11), pose: 'beg', expr: 'cry'}, {t: E('boleh') - 0.1, pose: 'present', expr: 'happy'}, {t: LAND + 0.1, pose: 'give', expr: 'nervous'}, {t: E('gigit') + 0.1, pose: 'give', expr: 'cheesy'}]);
-    speak(andi3, 20, [[0, 'cry', 'beg'], [0.35, 'happy', 'present'], [0.75, 'nervous', 'give']]);
-    const mq = bug(g, P.mosquito(), 0.35, (t) => { const u = smooth((t - E('yaSudah') + 0.3) / 1.0); const a = t * 2.2; const l = smooth((t - LAND + 0.5) / 0.5);
-      const fx0 = -0.6 + Math.cos(a) * 0.35 - (1 - u) * 3, fy0 = 2.2 + Math.sin(t * 5) * 0.08, fz0 = -3.1 + Math.sin(a) * 0.25; return [fx0 + (-0.55 - fx0) * l, fy0 + (1.42 - fy0) * l, fz0 + (-3.15 - fz0) * l, -a * (1 - l)]; }, (t) => inShots(t, 11));
-    [P.bee(), P.butterfly('#f2a93a'), P.bee(), P.butterfly('#7fc4e8')].forEach((ins, i) => bug(g, ins, 0.25, (t) => { const u = smooth((t - E('yaSudah') + 0.1 - i * 0.2) / 1.2); const a = t * 1.3 + i * 1.6; return [-1.1 + Math.cos(a) * 1.2 + (1 - u) * (i % 2 ? 4 : -4), 2.3 + (i % 2) * 0.3 + Math.sin(t * 4 + i) * 0.1, -3.0 + Math.sin(a) * 0.5, -a]; }, (t) => inShots(t, 11)));
-    label(g, L.ok, -1.1, 2.75, -3.2, E('boleh') - 0.1, 1e9, {w: 1.5, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a', vis: (t) => inShots(t, 11)});
-    label(g, L.noBite, -1.1, 2.4, -3.15, E('jangan') - 0.1, 1e9, {w: 1.5, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a', vis: (t) => inShots(t, 11)});
+    g.add(P.room(7, 3, 6, {wall: '#f0e0c0', floor: '#a8784a', wain: '#7a9a8a'}));
+    for (const x of [-2.0, 1.8]) { const w = sign('', 0.9, 0.9, {bg: '#bfd8e8', frame: '#fbf6ea', wear: false}); at(w, x, 1.3, -4.86); g.add(w); for (let k = 0; k < 4; k++) { const lv = box(0.85, 0.03, 0.05, '#8a6242', {hull: 0}); at(lv, x, 1.0 + k * 0.2, -4.8, 0, 0.4); g.add(lv); } }
+    const fanP = P.fan(); at(fanP, 2.4, 0, -3.8, -0.5); g.add(fanP); updaters.push((t) => { fanP.userData.blades.rotation.z = t * 12; });
+    fx(g, FX.fall([0, -3, 6, 4], {n: 120, h: 3, speed: 0.6, color: '#ffffff', size: 0.06, drift: 0.3, sway: 0.3, seed: 31}));
+    const tbl = box(0.9, 0.38, 0.6, toon('#8a5a3a', {paint: {planks: 3, seed: 641}})); at(tbl, 0, 0, -2.9); g.add(tbl);
+    const rc = P.riceCooker(1.1); at(rc, 0, 0.38, -2.9); g.add(rc);
+    const glowL = FX.fireLight([0, 1.0, -2.6], {intensity: 1.6, dist: 3}); g.add(glowL.obj); updaters.push((t) => { glowL.update(t); glowL.obj.visible = t > E('magicCom') - 0.2; });
+    const fam = [['bapak', -1.6, -3.6, 0.3, 1], ['ibu', 1.5, -3.6, -0.3, 1], ['dek', -0.6, -3.9, 0.1, 0.7]].map(([k, x, z, y, s], i) => ch(k, {seed: 10 + i, scale: s}, g, x, z, y));
+    const [bapak, ibu, dek] = fam;
+    walkPath(bapak, [[E('berebut') - 0.3, -1.6, -3.6], [E('magicCom') + 0.2, -0.55, -3.3], [E('minggir') - 0.1, -0.55, -3.3], [E('giliran'), 0.0, -3.35]]);
+    walkPath(ibu, [[E('berebut') - 0.2, 1.5, -3.6], [E('magicCom') + 0.3, 0.6, -3.35]]);
+    walkPath(dek, [[E('berebut') - 0.1, -0.6, -3.9], [E('magicCom'), 0.0, -3.4], [E('minggir') - 0.05, 0.0, -3.4], [E('minggir') + 0.4, 1.15, -3.6]], 'run');
+    problem(g, 1, 0, 2.75, -3.4, 'masalah1', E('sejuk'));
+    label(g, L.notReady, 0, 2.38, -3.35, E('siap') - 0.1, E('sejuk'), {w: 1.9, fg: '#2f5a8a'});
+    label(g, L.noHeater, 0, 2.6, -3.35, E('pemanas') - 0.1, E('jaket'), {w: 1.9, fg: '#d8413a'});
+    label(g, L.noJacket, 0, 2.6, -3.35, E('jaket') - 0.1, E('keluarga'), {w: 2.0, fg: '#d8413a'});
+    bapak.act([{t: cut(5), pose: 'cross', expr: 'chatter'}, {t: E('sejuk') + 0.1, pose: 'shrug', expr: 'worried'}, {t: E('pemanas'), pose: 'cross', expr: 'chatter'},
+      {t: E('magicCom'), pose: 'read', expr: 'happy'}, {t: E('minggir') - 0.1, pose: 'stop', expr: 'gritted'}, {t: E('giliran') + 0.1, pose: 'read', expr: 'toothy'}]);
+    ibu.act([{t: cut(5), pose: 'cross', expr: 'chatter'}, {t: E('magicCom') + 0.1, pose: 'read', expr: 'happy'}, {t: E('minggir') + 0.1, pose: 'read', expr: 'confused'}]);
+    dek.act([{t: cut(5), pose: 'cross', expr: 'chatter'}, {t: E('magicCom') + 0.05, pose: 'read', expr: 'laugh'}, {t: E('minggir') + 0.1, pose: 'headHold', expr: 'cry'}]);
+    for (const c of fam) c.act([{t: cut(5), action: 'tremble', dur: E('magicCom') - cut(5)}]);
+    speak(bapak, 9, [[0, 'gritted', 'stop'], [0.45, 'toothy', 'read']]);
+    fx(g, FX.glints([0, 0.9, -2.9], E('magicCom'), {n: 20, color: '#ffd0a0'}));
   }
 
-  // ---------- the garden: plants without fruit (4) ----------
+  // ---------- the rice field freezes, nasi uduk costs a fortune (7) ----------
   {
-    const g = addLoc('garden');
-    under(g, '#8fae6a', 120);
-    const grass = box(40, 0.03, 30, toon('#8fae6a', {paint: {seed: 421, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -8); g.add(grass);
-    g.add(P.hills('#7fa05a'));
-    for (let i = 0; i < 6; i++) { const tr = P.tree({seed: 430 + i, h: 2.6}); at(tr, -4.5 + i * 1.8, 0, -6 - (i % 2) * 1.2); g.add(tr); }
-    flowers(g, 0.4, -3.4, 30, 7);
-    const andi = ch('andi', {seed: 4}, g, -0.75, -2.6, 0.3);
-    andi.act([{t: cut(4), pose: 'idle', expr: 'confused'}, {t: E('berbuah') + 0.05, pose: 'shrug', expr: 'confused'}, {t: E('lebah') + 0.1, pose: 'point', expr: 'surprised'}, {t: E('bunga') + 0.1, pose: 'idle', expr: 'happy'}]);
-    problem(g, 1, 0.55, 2.65, -3.4, 'masalah1', E('lebah') - 0.12);
-        const b1 = bug(g, P.bee(), 0.3, (t) => { const u = t - E('lebah'); return [0.2 + Math.cos(u * 1.4) * 0.9, 0.85 + Math.sin(u * 5) * 0.12, -3.3 + Math.sin(u * 1.4) * 0.5, -u * 1.4]; }, (t) => inShots(t, 4) && t > E('lebah') - 0.1);
-    const b2 = bug(g, P.butterfly('#f2a93a'), 0.35, (t) => { const u = t - E('kupu'); return [1.1 + Math.cos(-u) * 0.7, 1.0 + Math.sin(u * 3) * 0.15, -3.6 + Math.sin(-u) * 0.4, u]; }, (t) => inShots(t, 4) && t > E('kupu') - 0.1);
-    label(g, 'DULU...', -0.4, 1.6, -3.0, E('lebah') - 0.1, cut(5), {w: 0.8, h: 0.24, bg: '#e8d8b0'});
-    fx(g, FX.glints([0.3, 0.7, -3.3], E('menyerbuki'), {n: 26, color: '#f2d24a'}), (t) => inShots(t, 4));
+    const g = addLoc('field');
+    under(g, '#8fae6a', 160);
+    const grass = box(60, 0.03, 40, toon('#7a9a6a', {paint: {seed: 651, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -12); g.add(grass);
+    g.add(P.hills('#9ab0a0'));
+    const water = box(8, 0.03, 6, toon('#8ab0c8', {wear: false}), {edges: false}); at(water, -0.5, 0.0, -4.5); g.add(water);
+    const rows = []; for (let r = 0; r < 6; r++) { const p = P.paddy(10, {seed: r + 3}); at(p.group, -0.5, 0.02, -2.4 - r * 0.6); g.add(p.group); rows.push(p); }
+    updaters.push((t) => rows.forEach((p, i) => p.freeze(smooth((t - E('membeku') + 0.2 - i * 0.05) / 1.0))));
+    const ice = box(8, 0.04, 6, new THREE.MeshBasicMaterial({color: '#e8f4ff', transparent: true, opacity: 0.6, depthWrite: false}), {edges: false}); at(ice, -0.5, 0.03, -4.5); g.add(ice); updaters.push((t) => { ice.visible = t > E('membeku'); });
+    fx(g, FX.fall([0, -5, 14, 12], {n: 500, h: 8, speed: 1.2, color: '#ffffff', size: 0.08, drift: 0.4, sway: 0.4, seed: 41}));
+    problem(g, 2, -0.5, 2.6, -3.4, 'masalah2', E('butuh'));
+    label(g, L.frozen, -0.5, 2.25, -3.35, E('membeku') - 0.1, E('uduk') - 0.15, {w: 1.6, bg: '#bfe4ff'});
+    label(g, L.scarce, -0.5, 1.85, -3.3, E('langka') - 0.1, E('uduk') - 0.15, {w: 1.4, fg: '#d8413a'});
+    // the nasi uduk stall
+    const WX = 7;
+    const st = P.stall(L.warung, {w: 2.2}); at(st, WX, 0, -3.4); g.add(st);
+    const plate = P.plate(); at(plate, WX, 0.86, -3.1); g.add(plate);
+    label(g, L.price1, WX, 1.55, -2.7, E('uduk') - 0.2, E('melambung') - 0.05, {w: 1.6, h: 0.32});
+    label(g, L.price2, WX, 1.55, -2.7, E('melambung') - 0.05, cut(8), {w: 1.8, h: 0.36, bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
+    const ar = P.arrow(1.0, '#d8312a', 0.07); g.add(ar); updaters.push((t) => { ar.visible = t > E('melambung'); at(ar, WX + 1.1, 1.3 + smooth((t - E('melambung')) / 0.6) * 0.6, -2.7); });
+    const bp = ch('bapak', {seed: 20}, g, WX - 0.9, -2.4, 0.4);
+    bp.act([{t: 0, pose: 'idle', expr: 'happy'}, {t: E('melambung') + 0.05, pose: 'headHold', expr: 'scream'}]); bp.act([{t: E('melambung'), action: 'jump', dur: 0.5}]);
   }
 
-  // ---------- the fruit market: scarce fruit (5) ----------
+  // ---------- the lab: Snowball Earth (9), the comparison (10) ----------
   {
-    const g = addLoc('market');
-    under(g, '#c9b48a', 120);
-    const ground = box(40, 0.03, 30, toon('#c9b48a', {paint: {seed: 441, stains: 30}}), {edges: false}); at(ground, 0, -0.03, -8); g.add(ground);
-    const st = P.stall('BUAH', {w: 2.4}); at(st, 0, 0, -3.2); g.add(st);
-    for (let i = 0; i < 4; i++) { const c = P.crate ? P.crate() : box(0.5, 0.3, 0.4, '#a8784a'); c.scale.setScalar(0.8); at(c, -0.9 + i * 0.6, 0.85, -3.4); g.add(c); }
-    const seller = ch('seller', {seed: 5}, g, 0.4, -3.9, -0.05);
-    seller.act([{t: cut(5), pose: 'shrug', expr: 'sad'}, {t: E('langka') + 0.05, pose: 'facepalm', expr: 'cry'}, {t: E('tomat') + 0.1, pose: 'shrug', expr: 'tired'}]);
-    const andi = ch('andi', {seed: 6}, g, -1.05, -2.2, 0.5);
-    andi.act([{t: cut(5), pose: 'point', expr: 'confused'}, {t: E('langka') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('semangka') + 0.1, pose: 'headHold', expr: 'grimace'}]);
-    [['apel', P.fruit('apple')], ['mangga', P.fruit('mango')], ['semangka', P.watermelon(0.16)], ['tomat', P.fruit('tomato')]].forEach(([k, f], i) => {
-      const x = -0.9 + i * 0.6; popSign(g, f, x, 1.05, -2.6, E(k) - 0.05);
-      label(g, L[k], x, 1.55, -2.6, E(k) - 0.05, 1e9, {w: 0.55, h: 0.18});
-      label(g, L.scarce, x, 0.8, -2.55, E(k) + 0.25, 1e9, {w: 0.55, h: 0.18, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'}); });
-  }
-
-  // ---------- the cocoa shop: chocolate almost gone (6), "mosquitoes, come back!" (7) ----------
-  {
-    const g = addLoc('choco');
+    const g = addLoc('lab');
     under(g, '#2a2228');
-    g.add(P.room(7, 3, 6, {wall: '#e8d0b0', floor: '#8a5a3a', wain: '#6a3a2a'}));
-    label(g, L.shop, 0.5, 2.6, -4.85, -1, 1e9, {w: 1.8, h: 0.4, bg: '#5a2f1f', fg: '#f2d24a', frame: '#3a1a10'});
-    for (let r = 0; r < 3; r++) { const sh = box(2.2, 0.05, 0.4, toon('#7a4a32', {paint: {seed: 450 + r}})); at(sh, 0.9, 0.7 + r * 0.55, -4.6); g.add(sh); }
-    const bars = []; for (let r = 0; r < 3; r++) for (let i = 0; i < 6; i++) { const b = box(0.22, 0.32, 0.05, ['#5a2f1f', '#8a4a2a', '#d8413a'][(i + r) % 3], {hull: 0.005}); at(b, 0.1 + i * 0.32, 0.76 + r * 0.55, -4.5); g.add(b); bars.push(b); }
-    updaters.push((t) => bars.forEach((b, i) => { const t0 = E('hilang') - 0.2 + i * 0.04; b.visible = t < t0; }));
-    fx(g, FX.glints([0.9, 1.4, -4.4], E('hilang') - 0.2, {n: 20}));
-    const pot = cyl(0.3, 0.25, 0.4, '#b5543c'); at(pot, -2.2, 0, -3.9); g.add(pot);
-    const ct = P.cacaoTree({h: 2.1, seed: 9}); at(ct, -2.2, 0.35, -3.9); g.add(ct);
-    const big = box(0.5, 0.75, 0.08, '#5a2f1f', {hull: 0.01}); const bigW = box(0.52, 0.4, 0.09, '#d8413a', {hull: 0.008}); const bigG = new THREE.Group(); at(big, 0, 0, 0); at(bigW, 0, 0.18, 0); bigG.add(big, bigW); g.add(bigG);
-    updaters.push((t) => { bigG.visible = inShots(t, 6) && t > E('cokelat') - 0.1 && t < E('hilang') + 0.4; bigG.scale.setScalar(pop(t, E('cokelat') - 0.1, 0.35)); at(bigG, 0.4, 1.5 + Math.sin(t * 2) * 0.03, -3.2, Math.sin(t) * 0.2); });
-    fx(g, FX.smoke([0.4, 1.8, -3.2], E('hilang') + 0.35, {n: 8, every: 0.03, life: 0.8, size: 0.3, grow: 2, rise: 0.3, color: '#fbf6ea', opacity: 0.7}), (t) => inShots(t, 6));
-    problem(g, 2, 0.4, 2.75, -3.4, 'masalah2', E('kakao'));
-        const mid = bug(g, P.mosquito(), 0.16, (t) => [-2.0 + Math.cos(t * 3) * 0.25, 1.2 + Math.sin(t * 6) * 0.06, -3.6 + Math.sin(t * 3) * 0.2, -t * 3], (t) => inShots(t, 6) && t > E('agas') - 0.15 && t < E('hilang') + 99 && t < E('kopi'));
-    const ring = new THREE.Mesh(new THREE.RingGeometry(0.28, 0.33, 32), new THREE.MeshBasicMaterial({color: '#f2d24a'})); g.add(ring); updaters.push((t) => { ring.visible = inShots(t, 6) && t > E('agas') - 0.1 && t < E('kopi'); ring.position.set(-2.0, 1.2, -3.3); ring.scale.setScalar(pop(t, E('agas') - 0.1, 0.3)); });
-    label(g, L.midge, -2.0, 1.75, -3.3, E('agas') - 0.1, E('kopi'), {w: 0.7, bg: '#f2d24a'});
-    const cup = P.mug('#fbf6ea'); cup.scale.setScalar(2.2); g.add(cup); updaters.push((t) => { cup.visible = inShots(t, 6) && t > E('kopi') - 0.1; at(cup, 0.4, 1.2, -3.2); cup.scale.setScalar(2.2 * pop(t, E('kopi') - 0.1, 0.35)); });
-    fx(g, FX.smoke([0.4, 1.55, -3.2], E('kopi'), {n: 10, every: 0.2, life: 1.4, size: 0.15, grow: 2, rise: 0.5, color: '#fbf6ea', opacity: 0.5}), (t) => inShots(t, 6));
-        const fr = box(0.9, 1.9, 0.7, toon('#e8eef4', {paint: {seed: 455}})); at(fr, 2.3, 0, -3.6); g.add(fr);
-    for (let r = 0; r < 3; r++) { const sh = box(0.8, 0.03, 0.55, '#c9d8e4', {hull: 0}); at(sh, 2.3, 0.4 + r * 0.45, -3.55); g.add(sh); }
-    const inner = box(0.82, 1.75, 0.02, '#c9e4f0', {hull: 0}); at(inner, 2.3, 0.08, -3.93); g.add(inner);
-    const fd = box(0.9, 1.9, 0.06, toon('#f3f6f8', {paint: {seed: 456}})); const fdp = new THREE.Group(); at(fdp, 1.85, 0, -3.22); at(fd, 0.45, 0, 0); fdp.add(fd); g.add(fdp);
-    const hd = box(0.04, 0.5, 0.05, '#9aa8b4', {hull: 0.004}); at(hd, 0.8, 0.9, 0.05); fdp.add(hd);
-    updaters.push((t) => { fdp.rotation.y = -1.9 * smooth((t - E('cokelat') + 0.3) / 0.4) * (1 - smooth((t - E('kakao') + 0.3) / 0.4)); });
-    label(g, 'KOSONG!', 2.3, 1.05, -3.3, E('hilang') - 0.1, E('kakao'), {w: 0.75, h: 0.24, fg: '#d8413a'});
-    const price1 = sign('KOPI Rp5.000', 1.3, 0.34, {bg: '#3a2a26', fg: '#fff3df', frame: '#c9a25a'}), price2 = sign('KOPI Rp50.000!', 1.3, 0.34, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
-    popSign(g, price1, 0.4, 1.85, -3.1, E('kopi') - 0.1, E('berkurang') - 0.05); popSign(g, price2, 0.4, 1.85, -3.1, E('berkurang') - 0.05, cut(7));
-    const andi = ch('andi', {seed: 7}, g, -0.9, -2.8, 0.3);
-    walkPath(andi, [[E('menyakitkan') - 0.4, -0.9, -2.8], [E('cokelat') - 0.4, 1.4, -2.7], [E('kakao') - 0.3, 1.4, -2.7], [E('kakao'), -0.9, -2.8]]);
-    andi.act([{t: cut(6), pose: 'idle', expr: 'happy'}, {t: E('menyakitkan') + 0.05, pose: 'idle', expr: 'worried'}, {t: E('hilang') + 0.1, pose: 'headHold', expr: 'shocked'},
-      {t: E('kakao') + 0.1, pose: 'point', expr: 'confused'}, {t: E('kopi') + 0.1, pose: 'headHold', expr: 'cry'},
-      {t: E('apa') - 0.1, pose: 'headHold', expr: 'scream'}, {t: E('kembalilah') - 0.25, pose: 'armsUp', expr: 'cry'}]);
-    andi.act([{t: E('hilang'), action: 'jump', dur: 0.5}, {t: E('apa'), action: 'jump', dur: 0.5}, {t: E('kembalilah'), action: 'tremble', dur: 1.0}]);
-    speak(andi, 11, [[0, 'scream', 'headHold'], [0.35, 'furious', 'headHold'], [0.65, 'cry', 'armsUp']]);
-  }
-
-  // ---------- the pond: the food chain collapses (8) ----------
-  {
-    const g = addLoc('pond');
-    under(g, '#8fae6a', 120);
-    const grass = box(40, 0.03, 30, toon('#8fae6a', {paint: {seed: 461, stains: 20}}), {edges: false}); at(grass, 0, -0.03, -8); g.add(grass);
-    const pond = cyl(1.8, 1.8, 0.04, toon('#5a8ab0', {wear: false}), {seg: 32, hull: 0.02}); pond.scale.z = 0.6; at(pond, -0.2, 0.0, -3.4); g.add(pond);
-    for (const [x, z] of [[-0.9, -3.2], [0.4, -3.7], [-0.2, -2.9]]) { const lp = cyl(0.22, 0.22, 0.02, '#4f8a4a', {seg: 16, hull: 0.006}); at(lp, x, 0.04, z); g.add(lp); }
-    for (let i = 0; i < 6; i++) { const tr = P.tree({seed: 470 + i, h: 2.6}); at(tr, -4.5 + i * 1.8, 0, -6.5 - (i % 2)); g.add(tr); }
-    const tower = P.chainTower(L.chain); at(tower.group, 2.1, 0, -4.2); g.add(tower.group);
-    updaters.push((t) => tower.fall(smooth((t - E('runtuh') + 0.1) / 1.1)));
-    fx(g, FX.dust([2.6, 0.1, -4.0], E('runtuh') + 0.6, {n: 10}));
-    problem(g, 3, -0.2, 2.75, -3.4, 'masalah3', E('burung'));
-    const animals = [['burung', P.bird(), -1.6, -2.6, 0.9], ['katak', P.frog(), -0.9, -3.2, 0.9], ['kadal', P.lizard(), 0.9, -2.6, 0.9], ['ikan', P.fish('#e8a83a'), 0.1, -3.1, 1.5]];
-    animals.forEach(([k, a, x, z, s], i) => { a.scale.setScalar(s); at(a, x, k === 'ikan' ? 0.15 : 0.04, z, k === 'kadal' ? -2.6 : 0.5); g.add(a); a.visible = false;
-      updaters.push((t) => { a.visible = t > E(k) - 0.05; const p = pop(t, E(k) - 0.05, 0.35); const sad = smooth((t - E('kelaparan')) / 0.5); a.scale.setScalar(s * p * (1 - 0.15 * sad)); a.position.y = (k === 'ikan' ? 0.15 + Math.abs(Math.sin(t * 3)) * 0.2 * (1 - sad) : 0.04); });
-      const pl = cyl(0.16, 0.13, 0.025, '#fbf8f2', {hull: 0.006}); at(pl, x + 0.15, 0.03, z + 0.3, 0, 0.5); g.add(pl); updaters.push((t) => { pl.visible = t > E('kelaparan') - 0.1; pl.scale.setScalar(pop(t, E('kelaparan') - 0.1 + i * 0.08, 0.3)); });
-      label(g, L.hungry, x, 0.95 + (i % 2) * 0.25, z + 0.1, E('kelaparan') - 0.05 + i * 0.08, cut(9), {w: 0.75, h: 0.22, fg: '#d8413a'}); });
-    label(g, L.threat, 2.1, 2.6, -3.9, E('terancam') - 0.1, cut(9), {w: 1.6, bg: '#d8413a', fg: '#fff3df', frame: '#8a1a1a'});
-  }
-
-  // ---------- the forest: nature's rubbish piles up (9) ----------
-  {
-    const g = addLoc('forest');
-    under(g, '#6f8a4a', 120);
-    const ground = box(40, 0.03, 30, toon('#7a7a4a', {paint: {seed: 481, stains: 30}}), {edges: false}); at(ground, 0, -0.03, -8); g.add(ground);
-    for (let i = 0; i < 10; i++) { const tr = P.tree({seed: 490 + i, h: 3.0}); at(tr, -5 + i * 1.1, 0, -5.5 - (i % 3) * 1.2); g.add(tr); }
-    const piles = [[-1.6, -3.4, 0.9, 1], [1.4, -3.6, 1.0, 2], [0.2, -4.6, 1.1, 3], [-2.6, -4.8, 0.8, 4]].map(([x, z, r, sd]) => { const p = P.leafPile(r, sd); at(p, x, 0, z); g.add(p); return p; });
-    updaters.push((t) => piles.forEach((p, i) => { const u = smooth((t - E('menumpuk') + 0.3 - i * 0.2) / 1.2) + smooth((t - E('tanpa4')) / 1.5) * 0.8; p.scale.set(1 + u * 0.5, 0.3 + u * 2.4 + smooth((t - E('bau') + 0.4) / 1.0) * 3.5, 1 + u * 0.5); }));
-    const poops = [[0.8, -2.8], [-0.5, -3.1], [2.0, -2.9]].map(([x, z], i) => { const p = P.poop(); at(p, x, 0, z); g.add(p); updaters.push((t) => { p.visible = t > E('kumbang') + 0.2 + i * 0.15; p.scale.setScalar(pop(t, E('kumbang') + 0.2 + i * 0.15, 0.3)); }); return p; });
-    problem(g, 4, 0, 2.75, -3.4, 'masalah4', E('semut'));
-    label(g, L.pile, 0, 2.4, -3.35, E('menumpuk') - 0.1, E('semut'), {w: 2.1, fg: '#8a5a2a'});
-    const helpers = [['semut', P.ant(), -0.6], ['rayap', P.ant('#e8d8b0'), 0.1], ['kumbang', P.beetle(), 0.8]].map(([k, ins, x], i) => {
-      bug(g, ins, 0.5, (t) => [x, 0.05, -2.6, Math.sin(t * 2 + i) * 0.4], (t) => inShots(t, 9) && t > E(k) - 0.05 && t < E('tanpa4'));
-      label(g, k.toUpperCase(), x, 0.7, -2.55, E(k) - 0.05, E('tanpa4'), {w: 0.7, h: 0.2}); });
-    fx(g, FX.smoke([0, 0.4, -3.6], E('bau') - 0.3, {n: 24, every: 0.08, life: 1.6, size: 0.4, grow: 2, rise: 0.5, drift: 0.4, color: '#9ad04a', opacity: 0.45}));
-    label(g, L.smell, 1.3, 2.3, -3.2, E('bau') - 0.05, cut(10), {w: 0.9, h: 0.36, bg: '#9ad04a'});
-    const hs = P.house(2.6, 2.4, 2.4, {color: '#e8dcc0', roof: '#b5543c', windows: 1, seed: 48}); at(hs, 2.6, 0, -6.0); g.add(hs);
-    for (const [x, z, r] of [[1.0, -2.9, 0.6], [-1.3, -3.0, -0.4]]) { const bn = new THREE.Group(); for (const s2 of [-1, 1]) { const b = cyl(0.025, 0.025, 0.3, '#f3efe6', {hull: 0.004}); at(b, 0, 0.03, 0, 0, Math.PI / 2, s2 * 0.6); bn.add(b); } at(bn, x, 0, z, r); g.add(bn); }
-    [['ibu', 0.9, -2.5, -0.3], ['kid', 0.15, -2.2, 0]].forEach(([k, x, z, y], i) => { const c = ch(k, {seed: 30 + i, scale: k === 'kid' ? 0.7 : 1}, g, x, z, y); showWhen(c.group, (t) => t > E('tanpa4') - 0.3);
-      c.act([{t: 0, pose: 'idle', expr: 'confused'}, {t: E('bau') - 0.05 + i * 0.1, pose: 'shh', expr: 'disgusted'}]); c.act([{t: E('bau'), action: 'tremble', dur: 1.2}]); });
-    const andi = ch('andi', {seed: 8}, g, -0.9, -2.4, 0.3); showWhen(andi.group, (t) => t > E('tanpa4') - 0.3);
-    andi.act([{t: 0, pose: 'idle', expr: 'confused'}, {t: E('bau') - 0.1, pose: 'shh', expr: 'disgusted'}]); andi.act([{t: E('bau'), action: 'tremble', dur: 1.2}]);
-  }
-
-  // ---------- the stage: hidden heroes (10), the question (12) ----------
-  {
-    const g = addLoc('stage');
-    under(g, '#14161c');
-    const fl0 = box(30, 0.04, 14, toon('#262a36', {paint: {seed: 501}}), {edges: false}); at(fl0, 0, -0.03, -3); g.add(fl0);
-    const wall = box(30, 9, 0.2, toon('#1e2840', {paint: {seed: 502}}), {edges: false}); at(wall, 0, 0, -6.2); g.add(wall);
-    const heights = [0.5, 0.8, 0.65, 0.4]; const kinds = [P.ant(), P.bee(), P.butterfly('#7fc4e8'), P.beetle()];
-    kinds.forEach((ins, i) => { const x = -1.35 + i * 0.9; const pd = box(0.8, heights[i], 0.8, toon(['#c9a25a', '#e8c35a', '#c9a25a', '#b08454'][i], {paint: {seed: 510 + i}})); at(pd, x, 0, -3.6); g.add(pd);
-      ins.group.add(P.cape(['#d8413a', '#3f5f8a', '#7a5aa8', '#3fb06a'][i]));
-      bug(g, ins, 0.55, (t) => [x, heights[i] + (i === 1 || i === 2 ? 0.25 + Math.sin(t * 3 + i) * 0.05 : 0.02), -3.55, Math.sin(t * 1.5 + i) * 0.3], (t) => t > E('ternyata') - 0.2 + i * 0.12);
-      const sp = P.glowSprite('#fff2c8', 1.3); at(sp, x, heights[i] + 0.6, -3.7); g.add(sp); });
-    label(g, L.hero, 0, 2.65, -3.4, E('pahlawan') - 0.1, cut(11), {w: 2.3, h: 0.42, bg: '#f2d24a'});
-    fx(g, FX.confetti([0, 3.0, -3.0], E('pahlawan')));
-    fx(g, FX.glints([0, 1.2, -3.4], E('hidup'), {n: 30}));
-    const andi = ch('andi', {seed: 9}, g, 0, -2.2, 0); showWhen(andi.group, (t) => inShots(t, 12));
-    andi.act([{t: 0, pose: 'present', expr: 'happy'}, {t: E('berjasa') - 0.1, pose: 'shrug', expr: 'thinking'}, {t: E('tulis') - 0.05, pose: 'point', expr: 'cheesy'}]);
-    speak(andi, 21, [[0, 'thinking', 'present']]); speak(andi, 22, [[0, 'cheesy', 'point']]);
-    label(g, L.question, 0, 2.95, -3.0, E('seranggaApa') - 0.1, 1e9, {w: 2.2, h: 0.4, fg: '#8a2a36', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
-    label(g, L.comment, 0, 2.52, -2.95, E('tulis') - 0.1, 1e9, {w: 1.7, h: 0.36, bg: '#e0626e', fg: '#fff3df', frame: '#8a2a36', vis: (t) => inShots(t, 12)});
-    fx(g, FX.confetti([0, 3.0, -2.6], E('komentar') + 0.05, {seed: 21}), (t) => inShots(t, 12));
+    g.add(P.room(7, 3.2, 6, {wall: '#dfe6ea', floor: '#9aa4ac', wain: '#5a7a8a', tiles: true}));
+    const stand = cyl(0.25, 0.35, 0.9, '#5a6a7a'); at(stand, 0.6, 0, -3.6); g.add(stand);
+    const sb = P.globe(0.7); at(sb.group, 0.6, 1.65, -3.6); g.add(sb.group); updaters.push((t) => { sb.group.rotation.y = t * 0.3; });
+    const sf = frost(sb, 0.7); updaters.push((t) => { sf.material.opacity = lerpT(t, E('tertutup') - 0.3, E('tertutup') + 0.8, 0, 0.92); });
+    fx(g, FX.glints([0.6, 1.7, -3.3], E('bolaSalju'), {n: 24}));
+    label(g, L.ago, 0.2, 2.75, -3.5, E('tujuhRatus') - 0.1, cut(10), {w: 2.0, bg: '#fbf6ea'});
+    label(g, L.snowball, 0.6, 0.45, -3.0, E('bolaSalju') - 0.1, cut(10), {w: 1.8, h: 0.36, bg: '#bfe4ff'});
+    const sci = ch('ilmuwan', {seed: 30}, g, -1.0, -3.0, 0.35);
+    sci.act([{t: cut(9), pose: 'idle', expr: 'thinking'}, {t: E('khayalan') + 0.05, pose: 'pointUp', expr: 'determined'}, {t: E('ilmuwan') + 0.1, pose: 'present', expr: 'proud'},
+      {t: E('bolaSalju') + 0.05, pose: 'presentBoth', expr: 'excited'}, {t: cut(10), pose: 'present', expr: 'thinking'}, {t: E('enam') + 0.1, pose: 'point', expr: 'worried'},
+      {t: E('tigaPuluh2') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('bencana'), pose: 'headHold', expr: 'scream'}]);
+    sci.act([{t: E('bencana'), action: 'jump', dur: 0.5}]);
+    // two thermometers: the last ice age (−6) and today's what-if (−30)
+    const CX = 6;
+    const room2 = P.room(7, 3.2, 6, {wall: '#dfe6ea', floor: '#9aa4ac', wain: '#5a7a8a', tiles: true}); room2.position.x = CX; g.add(room2);
+    const t1 = P.thermometer(2.0), t2 = P.thermometer(2.0); at(t1.group, CX - 0.6, 0.3, -3.4); at(t2.group, CX + 0.6, 0.3, -3.4); g.add(t1.group, t2.group);
+    updaters.push((t) => { t1.set(lerpT(t, E('zamanEs'), E('enam') + 0.4, 15, 9)); t2.set(lerpT(t, E('tigaPuluh2') - 0.2, E('tigaPuluh2') + 1.0, 15, -15)); });
+    label(g, L.iceAge, CX - 0.6, 2.75, -3.3, E('zamanEs') - 0.1, 1e9, {w: 1.1, h: 0.4, sub: L.d6});
+    label(g, 'TURUN 30°', CX + 0.6, 2.75, -3.3, E('tigaPuluh2') - 0.1, 1e9, {w: 1.1, h: 0.4, sub: L.d30, bg: '#bfe4ff'});
+    label(g, L.disaster, CX, 0.45, -2.9, E('bencana') - 0.05, 1e9, {w: 1.8, h: 0.36, bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'});
+    const sci2 = ch('ilmuwan', {seed: 31}, g, CX - 1.6, -3.0, 0.4);
+    sci2.act([{t: 0, pose: 'point', expr: 'thinking'}, {t: E('enam') + 0.1, pose: 'point', expr: 'worried'}, {t: E('tigaPuluh2') + 0.1, pose: 'headHold', expr: 'shocked'}, {t: E('bencana'), pose: 'headHold', expr: 'scream'}]);
+    sci2.act([{t: E('bencana'), action: 'jump', dur: 0.5}]);
   }
 
   return {world, chars, locGroups, update(t, camPos) {

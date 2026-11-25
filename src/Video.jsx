@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [3, 4, 5, 6, 8, 9, 10, 11, 12];
+const DIPS = [2, 5, 7, 8, 9, 11];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'SEMUA SERANGGA | PUNAH?! 🦟❌'], ['cut2', 'BEBAS NYAMUK! 🎉'], ['cut4', 'TANAMAN GAGAL | BERBUAH 🍎❌'], ['cut6', 'COKELAT & KOPI | JADI LANGKA ☕🍫'],
-  ['cut8', 'RANTAI MAKANAN | RUNTUH 🐸🐦🐟'], ['cut9', 'TIDAK ADA YANG | MENGURAI 🤢'], ['cut10', 'TERNYATA KITA | BUTUH MEREKA 🐝❤️']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,24 +146,19 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('fly_buzz'), 0.0, 0.14, 0.75], [sy('thud'), 0.72, 0.22], [sy('sparkle'), E.serangga0 - 0.1, 0.2], ['08-soft-success-chime.mp3', E.serangga0, 0.18],
-    [sy('fly_buzz'), E.bumi, 0.1, E.punah - E.bumi],
-    ...[0, 1, 2, 3, 4].map((i) => ['pop-bubble-sound-effect.mp3', E.punah - 0.4 + i * 0.16, 0.1]),
-    [sy('crowd_cheer'), E.akhirnya, 0.1, 2.0], [sy('party_horn'), E.akhirnya + 0.1, 0.12], [sy('swish'), E.obat, 0.16],
-    [sy('snore'), E.hariPertama, 0.1, 1.6], [sy('sparkle'), E.surga, 0.18],
-    [sy('uh_oh'), E.tapi, 0.12], [sy('tense_drone'), E.tapi, 0.08, 2.5],
-    [sy('birds'), C[3] + 0.1, 0.08, 3.5], ['04-soft-ui-pop.mp3', E.masalah1, 0.18], [sy('fly_buzz'), E.lebah, 0.12, 3.0], [sy('sparkle'), E.menyerbuki, 0.14],
-    ...['apel', 'mangga', 'semangka', 'tomat'].flatMap((k) => [['04-soft-ui-pop.mp3', E[k] - 0.05, 0.18], [sy('stamp'), E[k] + 0.25, 0.14]]),
-    ['04-soft-ui-pop.mp3', E.masalah2, 0.18], ['06-deep-cinematic-boom.wav', E.cokelat, 0.14], [sy('puff'), E.hilang + 0.3, 0.18],
-    [sy('creak'), E.cokelat - 0.3, 0.16], [sy('fly_buzz'), E.agas - 0.1, 0.14, 1.2], [sy('glass_tap'), E.kopi, 0.14], [sy('ka_ching'), E.berkurang, 0.16],
-    ['02-error-denied-buzz.wav', E.apa, 0.1], [sy('crowd_angry'), E.kembalilah, 0.05, 0.8],
-    ['04-soft-ui-pop.mp3', E.masalah3, 0.18], [sy('thud'), E.runtuh + 0.5, 0.2], [sy('thud'), E.runtuh + 0.75, 0.16],
-    ...['burung', 'katak', 'kadal', 'ikan'].map((k) => ['pop-bubble-sound-effect.mp3', E[k] - 0.05, 0.16]),
-    [sy('slide_whistle_down'), E.kelaparan, 0.12], [sy('alarm_bell'), E.terancam, 0.07, 0.8],
-    ['04-soft-ui-pop.mp3', E.masalah4, 0.18], [sy('rumble'), E.menumpuk, 0.1, 1.2], [sy('fly_buzz'), E.semut, 0.08, 2.0], [sy('boing'), E.bau, 0.14],
-    [sy('tada'), E.pahlawan, 0.14], [sy('crowd_cheer'), E.pahlawan + 0.1, 0.08, 1.6],
-    [sy('fly_buzz'), E.yaSudah, 0.1, 3.0],
-    ['pop-bubble-sound-effect.mp3', E.seranggaApa - 0.15, 0.2],
+    [sy('tense_drone'), 0.1, 0.1, 4.2], ['07-riser-build-up.wav', E.turun0 - 0.2, 0.1, 1.8], ['06-deep-cinematic-boom.wav', E.tigaPuluh0, 0.16],
+    [sy('crowd_murmur'), C[1] + 0.1, 0.05, 2.0], [sy('slide_whistle_down'), E.anjlok, 0.14], [sy('sparkle'), E.salju, 0.2], ['08-soft-success-chime.mp3', E.monas, 0.18],
+    [sy('crowd_cheer'), E.wah, 0.08, 1.6],
+    [sy('uh_oh'), E.tapi, 0.12], [sy('chip_hurt'), E.sebentar, 0.08],
+    ['04-soft-ui-pop.mp3', E.masalah1, 0.18], ['02-error-denied-buzz.wav', E.pemanas, 0.08], ['02-error-denied-buzz.wav', E.jaket, 0.08],
+    [sy('footsteps_run'), E.berebut - 0.2, 0.12, 1.0], [sy('sparkle'), E.magicCom, 0.18],
+    [sy('thud'), E.minggir, 0.2], [sy('boing'), E.minggir + 0.2, 0.14],
+    ['04-soft-ui-pop.mp3', E.masalah2, 0.18], [sy('tense_drone'), E.membeku - 0.1, 0.08, 1.5], [sy('ka_ching'), E.melambung, 0.16], [sy('slide_whistle_up'), E.melambung, 0.14],
+    ['04-soft-ui-pop.mp3', E.masalah3, 0.18], [sy('sparkle'), E.memantulkan, 0.14], ['07-riser-build-up.wav', E.banyakEs, 0.08, 3.0], [sy('swish'), E.siklus, 0.16],
+    ['06-digital-glitch-tech-blip.mp3', E.khayalan, 0.12], [sy('sparkle'), E.bolaSalju, 0.18],
+    [sy('tense_drone'), E.tigaPuluh2 - 0.2, 0.1, 2.2], ['06-deep-cinematic-boom.wav', E.bencana, 0.18], [sy('alarm_bell'), E.bencana + 0.1, 0.06, 0.9],
+    [sy('birds'), C[10] + 0.1, 0.1, 3.0], [sy('heart_pop'), E.magic2, 0.14],
+    ['pop-bubble-sound-effect.mp3', E.kalau - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -232,10 +226,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'KALAU SEMUA\nSERANGGA PUNAH 🐝', mid: 'COKELAT IKUT HILANG?!', bot: ''},
-  en: {top: 'KALAU SEMUA\nSERANGGA PUNAH 🐝', mid: 'COKELAT IKUT HILANG?!', bot: ''},
+  id: {top: 'KALAU BUMI\nTURUN 30°C ❄️', mid: 'SALJU DI MONAS!', bot: ''},
+  en: {top: 'KALAU BUMI\nTURUN 30°C ❄️', mid: 'SALJU DI MONAS!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.apa + 0.3, loc: 'choco', pos: [-0.5, 1.7, -0.6], look: [-0.8, 1.7, -3.0]});
+const THUMB = (EVt) => ({t: EVt.monas + 0.6, loc: 'jakarta', pos: [0, 1.4, 0.4], look: [0, 7.8, -18]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
