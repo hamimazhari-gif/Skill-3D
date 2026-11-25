@@ -274,7 +274,8 @@ const TH = {
   id: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
   en: {top: '24 JAM\nNGGAK BISA BOHONG 🤐', mid: '"BAJUNYA KAYAK TAPLAK!"', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.taplak + 0.5, loc: 'home', pos: [-0.35, 1.55, -0.3], look: [-0.9, 1.35, -3.3]});
+const THUMB = (EVt) => ({t: EVt.taplak + 0.5, loc: 'home', pos: [-0.75, 1.55, -0.1], look: [-1.3, 1.3, -3.3]});
+const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
@@ -290,8 +291,8 @@ export const Thumb = ({lang}) => {
         <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
-        {word(tx.top, 84, '#fff3df', ink, -3)}
-        {word(tx.mid, 74, '#e8a83a', ink, 2)}
+        {word(tx.top, fit(tx.top, 84), '#fff3df', ink, -3)}
+        {word(tx.mid, fit(tx.mid, 74), '#e8a83a', ink, 2)}
       </AbsoluteFill>
       {tx.bot ? <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 260}}>{word(tx.bot, 88, '#7fb35a', '#fff3df', -2)}</AbsoluteFill> : null}
     </AbsoluteFill>

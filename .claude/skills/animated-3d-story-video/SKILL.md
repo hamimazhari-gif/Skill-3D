@@ -259,3 +259,4 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Lying down:** set `c.group.rotation.z = Math.PI / 2` and the body height on a sofa each frame (the character update never writes the group rotation); frame it from the front.
 - **Lip-sync from a word:** `speak(c, sentence, exprs, fromTime)` clips the talk segments to start at a word (for "Bos bertanya, \"Ada pertanyaan?\"").
 - **Prop return shapes:** `wallClock` → `{group, set(h, m)}`, `wallet` → `{group, open(u)}`, `tv` → `{group, update(t)}`.
+- **Long renders:** `tools/render_chunks.sh Comp 4` renders in frame chunks kept on disk (a container restart or a background time limit only loses the unfinished chunk), then the audio, then joins and normalises. Run it in the background with the longest timeout.
