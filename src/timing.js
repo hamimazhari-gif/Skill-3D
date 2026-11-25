@@ -64,27 +64,30 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Roy Sullivan, disambar petir 7 kali" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Kalau semua serangga punah" (Indonesian only; en mirrors id).
 const EV_ID = {
-  pria: [0, 'pria'], petir0: [0, 'petir'], tujuh0: [0, 'tujuh'], selamat: [1, 'selamat'], semuanya: [1, 'semuanya'],
-  roy0: [2, 'roy'], penjaga: [2, 'penjaga'], amerika: [2, 'amerika'], alam: [3, 'alam'], sepertinya: [3, 'sepertinya'], menyukai: [3, 'menyukainya'],
-  s1: [4, 'sambaran'], kuku: [4, 'kuku'], copot: [4, 'copot'],
-  s2: [5, 'sambaran'], mobil: [5, 'mobil'], alis: [6, 'alisnya'], hangus: [6, 'hangus'],
-  s3: [7, 'sambaran'], bahu: [7, 'bahunya'], s4: [8, 'keempat'], rambut4: [8, 'rambutnya'],
-  sejak: [9, 'sejak'], ember: [9, 'ember'], kemana: [9, 'mana'], jaga: [10, 'jaga'], kepala: [10, 'kepalanya'], lagi: [10, 'lagi'],
-  s5: [11, 'sambaran'], bersumpah: [11, 'bersumpah'], awan: [11, 'awan'], mengikuti: [11, 'mengikutinya'],
-  menyetir: [12, 'menyetir'], kabur: [12, 'kabur'], tapi5: [12, 'tapi'], mengejar: [12, 'mengejar'], pergi: [13, 'pergi'], cari: [13, 'cari'],
-  lama: [14, 'lama'], takut: [14, 'takut'], mendung: [15, 'mendung'], menjauh: [15, 'menjauh'], maaf: [16, 'maaf'], telepon: [16, 'telepon'],
-  s6: [17, 'sambaran'], terluka: [17, 'terluka'], s7: [18, 'sambaran'], memancing: [18, 'memancing'],
-  menyambar: [19, 'menyambar'], rambut7: [19, 'rambutnya'], seolah: [19, 'seolah'], beruang: [19, 'beruang'], mencuri: [19, 'mencuri'],
-  mengusir: [20, 'mengusirnya'], ranting: [20, 'ranting'], sial: [21, 'sial'],
-  tercatat: [22, 'tercatat'], guinness: [22, 'guinness'], selamat2: [22, 'selamat'], topi: [23, 'topinya'], museum: [23, 'museum'],
-  kalau: [24, 'kalau'], berani: [24, 'berani'], mendung2: [24, 'mendung'], komentar: [25, 'komentar'],
+  bagaimana: [0, 'bagaimana'], serangga0: [0, 'serangga'], bumi: [0, 'bumi'], punah: [0, 'punah'],
+  akhirnya: [1, 'akhirnya'], nyamuk1: [1, 'nyamuk'], tidur: [1, 'tidur'], obat: [1, 'obat'],
+  hariPertama: [2, 'hari'], surga: [2, 'surga'], tapi: [3, 'tapi'], bertahan: [3, 'bertahan'],
+  masalah1: [4, 'masalah'], tanaman: [4, 'tanaman'], berbuah: [4, 'berbuah'],
+  lebah: [5, 'lebah'], kupu: [5, 'kupu'], seranggaLain: [5, 'serangga'], menyerbuki: [5, 'menyerbuki'], bunga: [5, 'bunga'],
+  tanpa1: [6, 'tanpa'], langka: [6, 'langka'], apel: [7, 'apel'], mangga: [7, 'mangga'], semangka: [7, 'semangka'], tomat: [7, 'tomat'],
+  masalah2: [8, 'masalah'], menyakitkan: [8, 'menyakitkan'], cokelat: [8, 'cokelat'], hilang: [8, 'hilang'],
+  kakao: [9, 'kakao'], agas: [9, 'agas'], kopi: [10, 'kopi'], berkurang: [10, 'berkurang'],
+  apa: [11, 'apa'], nggakAda: [11, 'nggak'], kembalilah: [11, 'kembalilah'],
+  masalah3: [12, 'masalah'], runtuh: [12, 'runtuh'], burung: [13, 'burung'], katak: [13, 'katak'], kadal: [13, 'kadal'], ikan: [13, 'ikan'], makanS: [13, 'makan'],
+  kelaparan: [14, 'kelaparan'], lalu: [15, 'lalu'], terancam: [15, 'terancam'],
+  masalah4: [16, 'masalah'], menumpuk: [16, 'menumpuk'], semut: [17, 'semut'], rayap: [17, 'rayap'], kumbang: [17, 'kumbang'], mengurai: [17, 'mengurai'], daun: [17, 'daun'], bangkai: [17, 'bangkai'],
+  tanpa4: [18, 'tanpa'], bau: [18, 'bau'],
+  ternyata: [19, 'ternyata'], usir: [19, 'usir'], pahlawan: [19, 'pahlawan'], hidup: [19, 'hidup'],
+  yaSudah: [20, 'sudah'], boleh: [20, 'boleh'], jangan: [20, 'jangan'], gigit: [20, 'gigit'],
+  seranggaApa: [21, 'serangga'], berjasa: [21, 'berjasa'], tulis: [22, 'tulis'], komentar: [22, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {seven: '7 KALI!', alive: 'SELAMAT!', park: 'SHENANDOAH NATIONAL PARK', usa: 'AMERIKA SERIKAT', ranger: 'PENJAGA TAMAN',
-  strike: (n) => `SAMBARAN ${n}/7`, toe: 'KUKU JEMPOL COPOT!', brows: 'ALIS HANGUS!', shoulder: 'BAHU TERBAKAR!', hair: 'RAMBUT TERBAKAR!', leg: 'KAKI TERLUKA!',
-  water: 'AIR', go: 'PERGI!', phone: 'LEWAT TELEPON AJA...', record: 'GUINNESS WORLD RECORDS', recordSub: 'PALING SERING DISAMBAR PETIR: 7 KALI', hats: 'TOPI ROY SULLIVAN',
-  question: 'BERANI BERDIRI DI DEKATNYA?', comment: 'TULIS DI KOMENTAR!', unlucky: 'HARI SIAL!'};
+const L_ID = {gone: 'SERANGGA PUNAH!', heaven: 'SURGA!', zzz: 'Zzz...', m1: 'MASALAH 1', m2: 'MASALAH 2', m3: 'MASALAH 3', m4: 'MASALAH 4',
+  noFruit: 'NGGAK BERBUAH', scarce: 'LANGKA', apel: 'APEL', mangga: 'MANGGA', semangka: 'SEMANGKA', tomat: 'TOMAT', empty: 'HABIS',
+  choco: 'COKELAT', chocoGone: 'COKELAT HAMPIR HILANG', midge: 'AGAS', coffee: 'PANEN KOPI BERKURANG', chain: ['SERANGGA', 'KATAK', 'ULAR', 'ELANG'],
+  hungry: 'LAPAR...', threat: 'IKUT TERANCAM', pile: 'SAMPAH ALAM MENUMPUK', smell: 'BAU!', hero: 'PAHLAWAN TERSEMBUNYI', ok: 'BOLEH KEMBALI', noBite: 'JANGAN GIGIT!',
+  question: 'SERANGGA PALING BERJASA?', comment: 'TULIS DI KOMENTAR!', shop: 'TOKO COKELAT'};
 export const LABELS = {id: L_ID, en: L_ID};

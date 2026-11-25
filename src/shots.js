@@ -10,61 +10,70 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: slow pushes; a cut to a close-up after most strikes.
-  {shot: 1, loc: 'park', lift: false, move: 'a man in a storm is struck', keys: [
-    {at: 'start', pos: [0, 1.8, 0.4], look: [0, 1.85, -2.6]},
-    {at: 'end', pos: [0, 1.75, 0.1], look: [0, 1.8, -2.6]}]},
-  {shot: 2, loc: 'park', lift: false, move: 'Roy Sullivan, park ranger', keys: [
-    {at: 'start', pos: [0, 1.7, 0.5], look: [0, 1.65, -2.6]},
-    {at: 'end', pos: [0, 1.72, 0.2], look: [0, 1.7, -2.6]}]},
-  {shot: 2, from: 'sepertinya', loc: 'park', lift: false, move: 'lightning loves him', keys: [
-    {at: 'start', pos: [0.1, 2.0, 0.6], look: [0.1, 2.6, -3.4]},
-    {at: 'end', pos: [0.1, 2.0, 0.35], look: [0.1, 2.6, -3.4]}]},
-  {shot: 3, loc: 'park', lift: false, move: 'strike 1 at the lookout tower', keys: [
-    {at: 'start', pos: [1.2, 2.3, -0.2], look: [1.6, 2.8, -5.5]},
-    {at: 'end', pos: [1.3, 1.75, -1.9], look: [1.4, 1.55, -4.9]}]},
-  {shot: 4, loc: 'road', lift: false, move: 'strike 2: the truck', keys: [
-    {at: 'start', pos: [0.2, 1.95, 0.2], look: [0, 1.45, -4.2]},
-    {at: 'end', pos: [0.2, 1.95, -0.1], look: [0, 1.45, -4.2]}]},
-  {shot: 4, from: 'alis', loc: 'road', move: 'close: no eyebrows', keys: [
-    {at: 'start', pos: [1.25, 1.62, -1.6], look: [1.3, 1.55, -2.9]},
-    {at: 'end', pos: [1.25, 1.62, -1.7], look: [1.3, 1.55, -2.9]}]},
-  {shot: 5, loc: 'park', lift: false, move: 'strikes 3 and 4 by the ranger hut', keys: [
-    {at: 'start', pos: [-1.9, 1.75, -0.4], look: [-1.9, 1.6, -3.4]},
-    {at: 'end', pos: [-1.9, 1.75, -0.65], look: [-1.9, 1.6, -3.4]}]},
-  {shot: 6, loc: 'town', lift: false, move: 'the bucket goes everywhere', keys: [
-    {at: 'start', pos: [-2.3, 1.7, -0.3], look: [-2.4, 1.55, -3.1]},
-    {at: 'end', pos: [0.3, 1.75, -0.6], look: [0.4, 1.65, -3.0]}]},
-  {shot: 7, loc: 'road', lift: false, move: 'strike 5 and the cloud that follows', keys: [
-    {at: 'start', pos: [-4, 2.4, 3.0], look: [-4, 2.4, -4.4]},
-    {at: 'menyetir', pos: [-3.6, 2.4, 3.2], look: [-3.6, 2.4, -4.4]},
-    {at: 'end', pos: [6.5, 2.4, 3.4], look: [7.0, 2.4, -4.4]}]},
-  {shot: 7, from: 'pergi', loc: 'road', move: 'close: "go away!"', keys: [
-    {at: 'start', pos: [8.3, 1.75, -0.6], look: [8.5, 2.0, -2.8]},
-    {at: 'end', pos: [8.3, 1.75, -0.75], look: [8.5, 2.0, -2.8]}]},
-  {shot: 8, loc: 'town', lift: false, move: 'friends get scared and run', keys: [
-    {at: 'start', pos: [0, 1.8, 0.5], look: [0, 1.7, -3.0]},
-    {at: 'end', pos: [0, 1.95, 1.2], look: [0, 2.0, -3.0]}]},
-  {shot: 8, from: 'maaf', loc: 'town', lift: false, move: 'far apart: a phone call', keys: [
-    {at: 'start', pos: [1.5, 1.85, 1.3], look: [1.5, 1.7, -3.0]},
-    {at: 'end', pos: [1.5, 1.85, 1.1], look: [1.5, 1.7, -3.0]}]},
-  {shot: 9, loc: 'park', lift: false, move: 'strike 6: the legs', keys: [
-    {at: 'start', pos: [0.6, 1.7, -0.2], look: [0.6, 1.55, -3.0]},
-    {at: 'end', pos: [0.6, 1.7, -0.45], look: [0.6, 1.55, -3.0]}]},
-  {shot: 10, loc: 'lake', lift: false, move: 'strike 7 while fishing, then the bear', keys: [
-    {at: 'start', pos: [0.5, 1.75, -0.6], look: [0.5, 1.65, -3.8]},
-    {at: 'beruang', pos: [-0.6, 1.8, 0.6], look: [-0.9, 1.4, -3.5]},
-    {at: 'end', pos: [-1.2, 1.8, 0.9], look: [-1.8, 1.4, -3.4]}]},
-  {shot: 11, loc: 'lake', move: 'close: a truly unlucky day', keys: [
-    {at: 'start', pos: [0.6, 1.62, -2.0], look: [0.6, 1.55, -3.6]},
-    {at: 'end', pos: [0.6, 1.62, -2.1], look: [0.6, 1.55, -3.6]}]},
-  {shot: 11, from: 'tercatat', loc: 'museum', lift: false, move: 'Guinness World Records, two burnt hats', keys: [
-    {at: 'start', pos: [0, 1.9, 0.4], look: [0, 1.9, -5.0]},
-    {at: 'topi', pos: [0, 1.75, -1.4], look: [0, 1.45, -4.5]},
-    {at: 'end', pos: [0, 1.7, -1.8], look: [0, 1.4, -4.5]}]},
-  {shot: 12, loc: 'town', lift: false, move: 'would you stand next to him?', keys: [
-    {at: 'start', pos: [0, 1.9, 0.7], look: [0, 2.05, -3.0]},
-    {at: 'end', pos: [0, 1.9, 0.45], look: [0, 2.05, -3.0]}]},
+  // Calm camera: slow pushes, close cuts onto the small things (insects, fruit, the midge).
+  {shot: 1, loc: 'space', lift: false, move: 'the Earth and its insects', keys: [
+    {at: 'start', pos: [0, 1.9, 0.6], look: [0, 1.9, -3.6]},
+    {at: 'end', pos: [0, 1.9, 0.1], look: [0, 1.9, -3.6]}]},
+  {shot: 2, loc: 'bedroom', lift: false, move: 'no more mosquitoes!', keys: [
+    {at: 'start', pos: [-0.4, 1.7, -0.2], look: [-0.5, 1.6, -3.4]},
+    {at: 'end', pos: [-0.4, 1.7, -0.45], look: [-0.5, 1.6, -3.4]}]},
+  {shot: 2, from: 'hariPertama', loc: 'bedroom', lift: false, move: 'sleeping like in heaven', keys: [
+    {at: 'start', pos: [1.05, 1.4, -1.5], look: [1.05, 0.95, -3.7]},
+    {at: 'end', pos: [1.05, 1.35, -1.7], look: [1.05, 0.95, -3.7]}]},
+  {shot: 3, loc: 'bedroom', lift: false, move: 'the next morning: but...', keys: [
+    {at: 'start', pos: [-1.0, 1.7, -0.9], look: [-1.1, 1.6, -3.4]},
+    {at: 'end', pos: [-1.0, 1.7, -1.1], look: [-1.1, 1.6, -3.4]}]},
+  {shot: 4, loc: 'garden', lift: false, move: 'plants without fruit', keys: [
+    {at: 'start', pos: [-0.1, 1.7, 0.2], look: [-0.1, 1.3, -3.4]},
+    {at: 'end', pos: [-0.1, 1.7, -0.1], look: [-0.1, 1.3, -3.4]}]},
+  {shot: 4, from: 'lebah', loc: 'garden', lift: false, move: 'close: bees and butterflies pollinate', keys: [
+    {at: 'start', pos: [0.6, 1.2, -1.4], look: [0.6, 0.85, -3.4]},
+    {at: 'end', pos: [0.6, 1.2, -1.6], look: [0.6, 0.85, -3.4]}]},
+  {shot: 5, loc: 'market', lift: false, move: 'scarce fruit', keys: [
+    {at: 'start', pos: [-0.3, 1.7, 0.3], look: [-0.3, 1.3, -3.2]},
+    {at: 'end', pos: [-0.3, 1.7, 0.0], look: [-0.3, 1.3, -3.2]}]},
+  {shot: 5, from: 'apel', loc: 'market', lift: false, move: 'close: apples, mangoes, watermelons, tomatoes', keys: [
+    {at: 'start', pos: [-0.6, 1.4, -0.3], look: [-0.6, 1.05, -2.6]},
+    {at: 'end', pos: [-0.6, 1.4, -0.45], look: [-0.6, 1.05, -2.6]}]},
+  {shot: 6, loc: 'choco', lift: false, move: 'chocolate almost gone', keys: [
+    {at: 'start', pos: [-0.2, 1.75, 0.2], look: [-0.2, 1.6, -3.6]},
+    {at: 'end', pos: [-0.2, 1.75, -0.1], look: [-0.2, 1.6, -3.6]}]},
+  {shot: 6, from: 'kakao', loc: 'choco', lift: false, move: 'the cocoa flower and the midge', keys: [
+    {at: 'start', pos: [-1.6, 1.15, -1.8], look: [-2.1, 1.15, -3.8]},
+    {at: 'end', pos: [-1.65, 1.15, -1.95], look: [-2.1, 1.15, -3.8]}]},
+  {shot: 6, from: 'kopi', loc: 'choco', lift: false, move: 'coffee too', keys: [
+    {at: 'start', pos: [0.1, 1.7, -0.9], look: [0.2, 1.6, -3.2]},
+    {at: 'end', pos: [0.1, 1.7, -1.05], look: [0.2, 1.6, -3.2]}]},
+  {shot: 7, loc: 'choco', move: 'close: "mosquitoes, come back!"', keys: [
+    {at: 'start', pos: [-0.85, 1.65, -1.5], look: [-0.9, 1.6, -2.8]},
+    {at: 'end', pos: [-0.85, 1.65, -1.6], look: [-0.9, 1.6, -2.8]}]},
+  {shot: 8, loc: 'pond', lift: false, move: 'the food chain collapses', keys: [
+    {at: 'start', pos: [0.4, 1.9, 1.0], look: [0.4, 1.0, -3.6]},
+    {at: 'end', pos: [0.4, 1.9, 0.7], look: [0.4, 1.0, -3.6]}]},
+  {shot: 8, from: 'burung', loc: 'pond', lift: false, move: 'birds, frogs, lizards, fish', keys: [
+    {at: 'start', pos: [-0.4, 1.3, -0.2], look: [-0.4, 0.5, -3.0]},
+    {at: 'end', pos: [-0.4, 1.3, -0.4], look: [-0.4, 0.5, -3.0]}]},
+  {shot: 8, from: 'terancam', loc: 'pond', lift: false, move: 'the animals that eat them', keys: [
+    {at: 'start', pos: [1.6, 1.9, 0.3], look: [1.9, 1.3, -4.0]},
+    {at: 'end', pos: [1.6, 1.9, 0.1], look: [1.9, 1.3, -4.0]}]},
+  {shot: 9, loc: 'forest', lift: false, move: 'rubbish piles up', keys: [
+    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.1, -3.6]},
+    {at: 'end', pos: [0, 1.8, 0.3], look: [0, 1.1, -3.6]}]},
+  {shot: 9, from: 'semut', loc: 'forest', lift: false, move: 'close: ants, termites, dung beetles', keys: [
+    {at: 'start', pos: [0.1, 0.9, -1.3], look: [0.1, 0.4, -2.6]},
+    {at: 'end', pos: [0.1, 0.9, -1.45], look: [0.1, 0.4, -2.6]}]},
+  {shot: 9, from: 'tanpa4', loc: 'forest', lift: false, move: 'it stinks', keys: [
+    {at: 'start', pos: [-0.3, 1.75, 0.0], look: [-0.3, 1.4, -3.0]},
+    {at: 'end', pos: [-0.3, 1.75, -0.2], look: [-0.3, 1.4, -3.0]}]},
+  {shot: 10, loc: 'stage', lift: false, move: 'hidden heroes', keys: [
+    {at: 'start', pos: [0, 1.6, 0.4], look: [0, 1.3, -3.6]},
+    {at: 'end', pos: [0, 1.55, -0.3], look: [0, 1.2, -3.6]}]},
+  {shot: 11, loc: 'bedroom', lift: false, move: '"you may come back... no biting"', keys: [
+    {at: 'start', pos: [-1.0, 1.7, -0.8], look: [-1.05, 1.75, -3.4]},
+    {at: 'end', pos: [-1.0, 1.7, -1.0], look: [-1.05, 1.75, -3.4]}]},
+  {shot: 12, loc: 'stage', lift: false, move: 'which insect helps most?', keys: [
+    {at: 'start', pos: [0, 1.8, 0.6], look: [0, 1.7, -3.0]},
+    {at: 'end', pos: [0, 1.8, 0.35], look: [0, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {
