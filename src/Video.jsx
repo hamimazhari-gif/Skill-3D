@@ -224,8 +224,8 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'TES UMUR:\nPERNAH NGALAMIN? 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
-  en: {top: 'TES UMUR:\nPERNAH NGALAMIN? 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
+  id: {top: 'NOSTALGIA\nMASA LALU 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
+  en: {top: 'NOSTALGIA\nMASA LALU 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
 };
 const THUMB = (EVt) => ({t: EVt.kiri + 0.6, loc: 'rumah', pos: [0.0, 1.8, 1.2], look: [0.2, 2.3, -4.5]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
