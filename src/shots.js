@@ -21,8 +21,8 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [-0.4, 1.7, -0.2], look: [-0.5, 1.6, -3.4]},
     {at: 'end', pos: [-0.4, 1.7, -0.45], look: [-0.5, 1.6, -3.4]}]},
   {shot: 2, from: 'hariPertama', loc: 'bedroom', lift: false, move: 'sleeping like in heaven', keys: [
-    {at: 'start', pos: [1.05, 1.4, -1.5], look: [1.05, 0.95, -3.7]},
-    {at: 'end', pos: [1.05, 1.35, -1.7], look: [1.05, 0.95, -3.7]}]},
+    {at: 'start', pos: [1.25, 3.0, -2.5], look: [1.25, 0.7, -3.95]},
+    {at: 'end', pos: [1.25, 2.9, -2.65], look: [1.25, 0.7, -3.95]}]},
   {shot: 3, loc: 'bedroom', lift: false, move: 'the next morning: but...', keys: [
     {at: 'start', pos: [-1.0, 1.7, -0.9], look: [-1.1, 1.6, -3.4]},
     {at: 'end', pos: [-1.0, 1.7, -1.1], look: [-1.1, 1.6, -3.4]}]},

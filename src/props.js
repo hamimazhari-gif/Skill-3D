@@ -620,8 +620,10 @@ export function bed(o = {}) {
   const head = box(1.4, 1.15, 0.1, toon(c, {paint: {planks: 4, seed: 82}})); at(head, 0, 0, -1.05); g.add(head);
   const foot = box(1.4, 0.6, 0.08, toon(c, {paint: {planks: 3, seed: 83}})); at(foot, 0, 0, 1.05); g.add(foot);
   const pil = ball(0.28, '#f6f1e6', {sx: 1.6, sy: 0.45, sz: 0.8}); at(pil, 0, 0.62, -0.82); g.add(pil);
-  const blanket = box(1.26, 0.3, 1.45, toon(sheet, {paint: {seed: 84, stains: 4}})); at(blanket, 0, 0.5, 0.25); g.add(blanket);
-  const fold = box(1.28, 0.08, 0.3, '#f3ece0'); at(fold, 0, 0.78, -0.4); g.add(fold);
+  if (!o.noBlanket) { // made bed (leave it out when a character lies in it)
+    const blanket = box(1.26, 0.3, 1.45, toon(sheet, {paint: {seed: 84, stains: 4}})); at(blanket, 0, 0.5, 0.25); g.add(blanket);
+    const fold = box(1.28, 0.08, 0.3, '#f3ece0'); at(fold, 0, 0.78, -0.4); g.add(fold);
+  }
   return g;
 }
 

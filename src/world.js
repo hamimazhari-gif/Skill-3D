@@ -115,7 +115,7 @@ export function buildWorld(lang, T, EVt, L) {
     under(g, '#2a2228');
     g.add(P.room(7, 3, 6, {wall: '#c8d4e8', floor: '#a8784a', wain: '#7a8ab0'}));
     const win = sign('', 1.1, 0.9, {bg: '#9cc6e6', frame: '#fbf6ea', wear: false}); at(win, -1.6, 1.4, -4.88); g.add(win);
-    const bed = P.bed({color: '#8a5a3a', sheet: '#7fa6c9'}); at(bed, 1.2, 0, -3.7, Math.PI / 2); g.add(bed);
+    const bed = P.bed({color: '#8a5a3a', sheet: '#7fa6c9', noBlanket: true}); at(bed, 1.25, 0, -3.7); g.add(bed);
     const ns = box(0.45, 0.5, 0.4, toon('#8a6242', {paint: {seed: 411}})); at(ns, -0.35, 0, -4.4); g.add(ns);
     const coil = P.mosquitoCoil(); g.add(coil);
     updaters.push((t) => { const u = Math.max(0, t - E('obat') - 0.05); const k = Math.min(u, 1.0); at(coil, -0.35 + k * 1.6, 0.5 + k * 2.2 - k * k * 2.6, -4.4 + k * 1.0, 0, k * 8, k * 6); coil.visible = !(u > 0.95) || t > cut(11); if (t > cut(11)) at(coil, -0.35, 0.5, -4.4); });
@@ -133,18 +133,18 @@ export function buildWorld(lang, T, EVt, L) {
     const fam = [['ibu', -1.6, -3.4, 0.4], ['kid', 0.25, -2.6, -0.2]].map(([k, x, z, y], i) => { const c = ch(k, {seed: 20 + i, scale: k === 'kid' ? 0.7 : 1}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 2) && t < E('hariPertama') - 0.1);
       c.act([{t: cut(2), pose: 'cheer', expr: i ? 'toothy' : 'laugh'}, {t: E('tidur'), pose: 'armsUp', expr: 'excited'}]); c.act([{t: E('akhirnya') + 0.2 + i * 0.3, action: 'jump', dur: 0.5}, {t: E('obat') + i * 0.2, action: 'hop', dur: 0.4}]); return c; });
     fx(g, FX.confetti([-0.5, 2.9, -2.8], E('akhirnya') + 0.1), (t) => inShots(t, 2));
-    const net = box(1.6, 1.5, 2.3, new THREE.MeshBasicMaterial({color: '#fbfbf8', transparent: true, opacity: 0.28, depthWrite: false}), {hull: 0.006}); g.add(net);
-    updaters.push((t) => { const u = smooth((t - E('obat') - 0.1) / 0.8); at(net, 1.2 + u * 1.5, 0.5 + u * 2.5, -3.7, Math.PI / 2, 0, u * 0.8); net.visible = u < 0.98 && t < cut(3); });
+    const net = box(1.5, 1.5, 2.3, new THREE.MeshBasicMaterial({color: '#fbfbf8', transparent: true, opacity: 0.28, depthWrite: false}), {hull: 0.006}); g.add(net);
+    updaters.push((t) => { const u = smooth((t - E('obat') - 0.1) / 0.8); at(net, 1.25 + u * 1.5, 0.5 + u * 2.5, -3.7, 0, 0, u * 0.8); net.visible = u < 0.98 && t < cut(3); });
     andiP.act([{t: cut(2), pose: 'cheer', expr: 'excited'}, {t: E('nyamuk1') + 0.05, pose: 'armsUp', expr: 'toothy'}, {t: E('obat') - 0.15, pose: 'give', expr: 'cheesy'}]);
     andiP.act([{t: E('akhirnya'), action: 'jump', dur: 0.5}, {t: E('tidur') - 0.1, action: 'hop', dur: 0.4}]);
     speak(andiP, 1, [[0, 'excited', 'cheer'], [0.35, 'toothy', 'armsUp'], [0.7, 'cheesy', 'give']]);
-    const sleeper = ch('andiP', {seed: 2, noFace: true}, g, 2.55, -3.7, 0); showWhen(sleeper.group, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
-    updaters.push(() => { sleeper.group.rotation.z = Math.PI / 2; sleeper.group.position.y = 0.86; });
+    const sleeper = ch('andiP', {seed: 2, noFace: true, scale: 0.85}, g, 1.25, -2.8, 0); showWhen(sleeper.group, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
+    updaters.push(() => { sleeper.group.rotation.set(-Math.PI / 2, 0, 0); sleeper.group.position.y = 0.74; }); // lying on his back, head on the pillow
     sleeper.act([{t: 0, pose: 'limp', expr: 'sleep'}, {t: E('surga'), pose: 'limp', expr: 'happy'}]);
-    const blanket = box(1.4, 0.24, 1.25, toon('#7fa6c9', {paint: {seed: 412}}), {hull: 0.01}); at(blanket, 1.95, 0.52, -3.7); g.add(blanket); showWhen(blanket, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
-    label(g, L.zzz, 1.45, 1.45, -3.5, E('hariPertama'), cut(3), {w: 0.8, bg: '#2b2b33', fg: '#fbf6ea', frame: '#fbf6ea', vis: (t) => inShots(t, 2)});
-    label(g, L.heaven, 1.0, 1.95, -3.5, E('surga') - 0.05, cut(3), {w: 1.2, h: 0.38, bg: '#f2d24a', vis: (t) => inShots(t, 2)});
-    fx(g, FX.glints([0.9, 1.4, -3.4], E('surga'), {n: 30}), (t) => inShots(t, 2));
+    const blanket = box(1.22, 0.04, 1.05, toon('#7fa6c9', {paint: {seed: 412, stains: 4}}), {hull: 0.008}); at(blanket, 1.25, 0.77, -3.2); g.add(blanket); showWhen(blanket, (t) => inShots(t, 2) && t >= E('hariPertama') - 0.1);
+    label(g, L.zzz, 1.85, 1.15, -4.55, E('hariPertama'), cut(3), {w: 0.6, bg: '#2b2b33', fg: '#fbf6ea', frame: '#fbf6ea', vis: (t) => inShots(t, 2)});
+    label(g, L.heaven, 1.0, 1.55, -4.85, E('surga') - 0.05, cut(3), {w: 1.2, h: 0.38, bg: '#f2d24a', vis: (t) => inShots(t, 2)});
+    fx(g, FX.glints([1.25, 1.2, -4.0], E('surga'), {n: 30}), (t) => inShots(t, 2));
     // the next morning: something feels wrong
     const andi3 = ch('andi', {seed: 3}, g, -1.1, -3.4, 0.25);
     const LAND = E('jangan') - 0.2; showWhen(andi3.group, (t) => inShots(t, 3) || inShots(t, 11));
