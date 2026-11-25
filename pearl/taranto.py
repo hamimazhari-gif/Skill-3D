@@ -18,7 +18,7 @@ def F(p, s): return ImageFont.truetype(p, int(s))
 def cl(x, a=0, b=1): return max(a, min(b, x))
 def ease(x): x = cl(x); return x*x*(3-2*x)
 def J(t, k, a=2.0):  # boiling-line jitter, changes on twos (12 fps)
-    q = int(t*12); r = np.random.default_rng(q*97 + k); return r.uniform(-a, a)
+    q = int(t*12); r = np.random.default_rng(abs(q*97 + k)); return r.uniform(-a, a)
 def wline(d, pts, t, k, fill=INK, w=5):
     pts = [(x+J(t, k+i), y+J(t, k+i+50)) for i, (x, y) in enumerate(pts)]
     d.line(pts, fill=fill, width=w, joint="curve")
