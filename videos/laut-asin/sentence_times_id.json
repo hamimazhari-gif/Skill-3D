@@ -1,0 +1,484 @@
+{
+ "duration": 94.29,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Pernah tanpa sengaja menelan air laut?",
+   "start": 0.0,
+   "end": 2.18,
+   "pred": 2.42,
+   "voiced": [
+    [
+     0.0,
+     0.48
+    ],
+    [
+     0.56,
+     2.18
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "\"Asin banget! Siapa yang numpahin garam satu truk ke laut?!\"",
+   "start": 3.28,
+   "end": 6.9,
+   "pred": 3.47,
+   "voiced": [
+    [
+     3.28,
+     4.34
+    ],
+    [
+     5.04,
+     6.9
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Tapi anehnya, air sungai rasanya tawar.",
+   "start": 8.06,
+   "end": 9.96,
+   "pred": 2.87,
+   "voiced": [
+    [
+     8.06,
+     8.72
+    ],
+    [
+     8.86,
+     9.92
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Padahal... sungai mengalir ke laut.",
+   "start": 10.5,
+   "end": 12.14,
+   "pred": 2.04,
+   "voiced": [
+    [
+     10.5,
+     11.0
+    ],
+    [
+     11.2,
+     12.14
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Kok bisa beda?",
+   "start": 12.68,
+   "end": 13.28,
+   "pred": 0.83,
+   "voiced": [
+    [
+     12.68,
+     13.26
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Semuanya dimulai dari hujan.",
+   "start": 14.58,
+   "end": 16.0,
+   "pred": 1.81,
+   "voiced": [
+    [
+     14.58,
+     16.0
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Air hujan sedikit bersifat asam, jadi saat membasahi batuan di gunung dan daratan, perlahan-lahan ia melarutkan mineral, termasuk bahan pembentuk garam.",
+   "start": 16.48,
+   "end": 24.68,
+   "pred": 10.95,
+   "voiced": [
+    [
+     16.5,
+     18.16
+    ],
+    [
+     18.56,
+     20.78
+    ],
+    [
+     21.06,
+     21.68
+    ],
+    [
+     21.76,
+     22.88
+    ],
+    [
+     23.4,
+     24.66
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Lalu sungai bekerja seperti kurir.",
+   "start": 25.58,
+   "end": 27.1,
+   "pred": 2.19,
+   "voiced": [
+    [
+     25.58,
+     26.98
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Setiap hari, sungai membawa mineral-mineral itu... menuju laut.",
+   "start": 27.66,
+   "end": 31.12,
+   "pred": 4.23,
+   "voiced": [
+    [
+     27.66,
+     28.46
+    ],
+    [
+     28.6,
+     30.12
+    ],
+    [
+     30.4,
+     30.88
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Paket garam, dikirim ke laut! Tanda tangan di sini, ya!\"",
+   "start": 32.0,
+   "end": 35.44,
+   "pred": 4.08,
+   "voiced": [
+    [
+     32.0,
+     32.76
+    ],
+    [
+     33.18,
+     33.9
+    ],
+    [
+     34.56,
+     35.32
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Tapi kenapa sungai tetap tawar?",
+   "start": 36.48,
+   "end": 37.68,
+   "pred": 1.96,
+   "voiced": [
+    [
+     36.48,
+     37.68
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Karena air sungai terus mengalir dan selalu diganti air hujan yang baru.",
+   "start": 38.36,
+   "end": 41.62,
+   "pred": 4.53,
+   "voiced": [
+    [
+     38.36,
+     39.64
+    ],
+    [
+     40.06,
+     41.62
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Garamnya ada, tapi sangat sedikit, jadi lidah kita nggak bisa merasakannya.",
+   "start": 42.18,
+   "end": 46.7,
+   "pred": 5.59,
+   "voiced": [
+    [
+     42.18,
+     43.0
+    ],
+    [
+     43.44,
+     44.22
+    ],
+    [
+     44.78,
+     45.6
+    ],
+    [
+     45.82,
+     46.7
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Nah, laut adalah tujuan akhir.",
+   "start": 47.82,
+   "end": 49.64,
+   "pred": 2.27,
+   "voiced": [
+    [
+     47.82,
+     48.2
+    ],
+    [
+     48.4,
+     49.62
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Di laut, panas Matahari menguapkan airnya menjadi awan.",
+   "start": 50.18,
+   "end": 53.0,
+   "pred": 3.93,
+   "voiced": [
+    [
+     50.18,
+     50.56
+    ],
+    [
+     50.96,
+     52.98
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Tapi garamnya... nggak ikut menguap.",
+   "start": 53.66,
+   "end": 55.32,
+   "pred": 2.11,
+   "voiced": [
+    [
+     53.66,
+     54.34
+    ],
+    [
+     54.7,
+     55.3
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Ia tertinggal di laut.",
+   "start": 55.96,
+   "end": 56.96,
+   "pred": 1.36,
+   "voiced": [
+    [
+     55.96,
+     56.28
+    ],
+    [
+     56.36,
+     56.96
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "\"Kalian duluan aja ke awan. Aku di sini aja.\"",
+   "start": 57.96,
+   "end": 61.16,
+   "pred": 2.49,
+   "voiced": [
+    [
+     57.96,
+     59.14
+    ],
+    [
+     59.64,
+     59.78
+    ],
+    [
+     59.86,
+     60.1
+    ],
+    [
+     60.42,
+     61.14
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Air menguap, turun lagi jadi hujan, membawa mineral lagi ke laut... dan proses ini terus berulang selama jutaan tahun.",
+   "start": 62.36,
+   "end": 68.66,
+   "pred": 8.0,
+   "voiced": [
+    [
+     62.36,
+     62.98
+    ],
+    [
+     63.46,
+     64.44
+    ],
+    [
+     64.76,
+     65.74
+    ],
+    [
+     66.18,
+     68.64
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Gunung berapi bawah laut juga ikut menyumbang mineral.",
+   "start": 69.3,
+   "end": 71.34,
+   "pred": 3.47,
+   "voiced": [
+    [
+     69.3,
+     71.32
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Akhirnya, laut pun jadi asin seperti sekarang.",
+   "start": 72.1,
+   "end": 74.42,
+   "pred": 3.32,
+   "voiced": [
+    [
+     72.1,
+     72.78
+    ],
+    [
+     73.0,
+     73.14
+    ],
+    [
+     73.22,
+     74.42
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Dan jumlah garamnya luar biasa.",
+   "start": 75.38,
+   "end": 77.04,
+   "pred": 1.96,
+   "voiced": [
+    [
+     75.38,
+     77.02
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Kalau seluruh garam di laut dikeruk dan disebar di atas semua daratan, tebalnya bisa sekitar seratus lima puluh meter.",
+   "start": 77.6,
+   "end": 83.54,
+   "pred": 7.85,
+   "voiced": [
+    [
+     77.6,
+     78.94
+    ],
+    [
+     79.18,
+     80.76
+    ],
+    [
+     81.3,
+     83.54
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "Setinggi gedung lima puluh lantai!",
+   "start": 84.1,
+   "end": 85.34,
+   "pred": 2.19,
+   "voiced": [
+    [
+     84.1,
+     85.34
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "\"Nak, ambil garamnya secukupnya aja. Jangan dibawa semua.\"",
+   "start": 86.36,
+   "end": 89.64,
+   "pred": 3.93,
+   "voiced": [
+    [
+     86.36,
+     86.64
+    ],
+    [
+     87.12,
+     88.42
+    ],
+    [
+     88.86,
+     89.62
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Fakta laut apa yang paling bikin kamu penasaran?",
+   "start": 90.88,
+   "end": 92.68,
+   "pred": 3.02,
+   "voiced": [
+    [
+     90.88,
+     92.64
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 93.34,
+   "end": 94.02,
+   "pred": 1.13,
+   "voiced": [
+    [
+     93.34,
+     94.0
+    ]
+   ]
+  }
+ ]
+}

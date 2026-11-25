@@ -10,49 +10,43 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: two-shots of him and the phone, close-ups on the turn.
-  {shot: 1, loc: 'kamar', lift: false, move: 'lying on the bed, a face on the phone', keys: [
-    {at: 'start', pos: [-1.0, 3.0, -2.5], look: [-1.0, 0.75, -3.75]},
-    {at: 'end', pos: [-1.0, 2.9, -2.65], look: [-1.0, 0.75, -3.75]}]},
-  {shot: 1, from: 'halo', loc: 'kamar', lift: false, move: 'close: "I want to complain"', keys: [
-    {at: 'start', pos: [0.75, 1.3, -1.6], look: [0.75, 1.15, -3.4]},
-    {at: 'end', pos: [0.75, 1.3, -1.75], look: [0.75, 1.15, -3.4]}]},
-  {shot: 2, loc: 'kamar', lift: false, move: '47 times', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 3, loc: 'kamar', lift: false, move: '9 hours a day', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 4, loc: 'kamar', lift: false, move: '300 selfies', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 5, loc: 'kamar', lift: false, move: 'a full cart and Rp12.000', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 6, loc: 'kamar', lift: false, move: '1% battery', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 7, loc: 'kamar', lift: false, move: 'he goes quiet', keys: [
-    {at: 'start', pos: [-0.6, 1.6, -1.4], look: [-0.6, 1.6, -3.1]},
-    {at: 'end', pos: [-0.6, 1.6, -1.55], look: [-0.6, 1.6, -3.1]}]},
-  {shot: 8, loc: 'kamar', lift: false, move: 'mum called three times', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 9, loc: 'kamar', lift: false, move: '9 hours vs 3 minutes', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 10, loc: 'kamar', lift: false, move: 'he puts the phone down and calls', keys: [
-    {at: 'start', pos: [-0.5, 1.6, -1.2], look: [-0.6, 1.5, -3.1]},
-    {at: 'end', pos: [-0.5, 1.6, -1.35], look: [-0.6, 1.5, -3.1]}]},
-  {shot: 10, from: 'haloBu', loc: 'dapur', lift: false, move: 'Ibu answers', keys: [
-    {at: 'start', pos: [-0.15, 1.65, -1.4], look: [-0.2, 1.6, -3.2]},
-    {at: 'end', pos: [-0.15, 1.65, -1.55], look: [-0.2, 1.6, -3.2]}]},
-  {shot: 11, loc: 'kamar', lift: false, move: 'the people inside the phone', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
-  {shot: 12, loc: 'kamar', lift: false, move: 'the question', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.6], look: [0.1, 1.5, -3.3]},
-    {at: 'end', pos: [0.1, 1.6, 0.35], look: [0.1, 1.5, -3.3]}]},
+  // Calm camera: medium shots, a track along the river, a crane up the salt layer.
+  {shot: 1, loc: 'pantai', lift: false, move: 'a mouthful of sea water', keys: [
+    {at: 'start', pos: [-0.1, 1.6, -0.6], look: [-0.1, 1.5, -3.2]},
+    {at: 'end', pos: [-0.1, 1.6, -0.85], look: [-0.1, 1.5, -3.2]}]},
+  {shot: 2, loc: 'darat', lift: false, move: 'the river tastes fresh', keys: [
+    {at: 'start', pos: [0.3, 1.6, -0.2], look: [0.0, 1.2, -3.6]},
+    {at: 'end', pos: [0.3, 1.6, -0.45], look: [0.0, 1.2, -3.6]}]},
+  {shot: 3, loc: 'darat', lift: false, move: 'rain on the rocks', keys: [
+    {at: 'start', pos: [-1.4, 2.0, -1.4], look: [-1.4, 1.0, -6.4]},
+    {at: 'end', pos: [-1.4, 1.8, -2.4], look: [-1.4, 0.8, -6.4]}]},
+  {shot: 4, loc: 'darat', lift: false, move: 'the river courier', keys: [
+    {at: 'start', pos: [-1.5, 1.4, -0.8], look: [-1.5, 0.9, -4.2]},
+    {at: 'end', pos: [3.0, 1.4, -0.8], look: [3.0, 0.9, -4.2]}]},
+  {shot: 5, loc: 'darat', lift: false, move: 'why is the river fresh', keys: [
+    {at: 'start', pos: [0.8, 1.6, -0.3], look: [0.8, 1.2, -3.6]},
+    {at: 'end', pos: [0.8, 1.6, -0.55], look: [0.8, 1.2, -3.6]}]},
+  {shot: 6, loc: 'laut', lift: false, move: 'the sun lifts the water', keys: [
+    {at: 'start', pos: [0, 1.6, 0.4], look: [0, 2.2, -4.0]},
+    {at: 'end', pos: [0, 1.8, 0.2], look: [0, 2.8, -4.0]}]},
+  {shot: 7, loc: 'laut', lift: false, move: 'close: "go on without me"', keys: [
+    {at: 'start', pos: [0.2, 0.75, -1.0], look: [0.2, 0.5, -2.9]},
+    {at: 'end', pos: [0.2, 0.75, -1.15], look: [0.2, 0.5, -2.9]}]},
+  {shot: 8, loc: 'laut', lift: false, move: 'the cycle and the volcano', keys: [
+    {at: 'start', pos: [0.6, 1.9, 0.6], look: [0.8, 1.8, -4.5]},
+    {at: 'end', pos: [0.8, 1.9, 0.3], look: [1.0, 1.8, -4.5]}]},
+  {shot: 9, loc: 'kota', lift: false, move: 'salt spread over the land', keys: [
+    {at: 'start', pos: [0, 1.7, 1.0], look: [0, 6.0, -30]},
+    {at: 'end', pos: [0, 10, 22], look: [0, 18, -30]}]},
+  {shot: 10, loc: 'kota', lift: false, move: 'as high as 50 floors', keys: [
+    {at: 'start', pos: [0, 30, 40], look: [0, 46, -36]},
+    {at: 'end', pos: [0, 34, 46], look: [0, 50, -36]}]},
+  {shot: 11, loc: 'pantai', lift: false, move: '"take only what you need"', keys: [
+    {at: 'start', pos: [-0.2, 1.55, -0.2], look: [-0.2, 1.4, -3.2]},
+    {at: 'end', pos: [-0.2, 1.55, -0.45], look: [-0.2, 1.4, -3.2]}]},
+  {shot: 12, loc: 'pantai', lift: false, move: 'the question', keys: [
+    {at: 'start', pos: [0.2, 1.7, -0.2], look: [0.2, 1.7, -3.0]},
+    {at: 'end', pos: [0.2, 1.7, -0.45], look: [0.2, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {

@@ -2449,3 +2449,12 @@ export function cart() {
   for (let i = 0; i < 9; i++) { const p = box(0.22 + (i % 3) * 0.05, 0.18, 0.2, ['#f2a93a', '#d8413a', '#3f8ad8', '#3fb06a'][i % 4], {hull: 0.005}); at(p, -0.25 + (i % 3) * 0.25, 0.5 + Math.floor(i / 3) * 0.19, (i % 2 - 0.5) * 0.2, i * 0.4); g.add(p); }
   return g;
 }
+
+// ---------- "Kenapa laut asin" ----------
+// A cute salt crystal (white cube) and a water droplet, both with faces.
+function cuteFace(g, y, z, s = 1) { for (const k of [-1, 1]) { const e = ball(0.035 * s, INK, {hull: 0}); at(e, k * 0.07 * s, y, z); g.add(e); } const m = new THREE.Mesh(new THREE.TorusGeometry(0.04 * s, 0.01 * s, 4, 12, Math.PI), new THREE.MeshBasicMaterial({color: INK})); at(m, 0, y - 0.03 * s, z); g.add(m); }
+export function saltCrystal(s = 1) { const g = new THREE.Group(); const b = box(0.3 * s, 0.3 * s, 0.3 * s, toon('#fbfbf8', {wear: false}), {hull: 0.012}); b.rotation.y = 0.3; g.add(b); cuteFace(g, 0.18 * s, 0.17 * s, s); return g; }
+export function droplet(s = 1) { const g = new THREE.Group(); const b = ball(0.16 * s, toon('#7fc4e8', {wear: false}), {sy: 1.1, hull: 0.01}); b.position.y = 0.16 * s; g.add(b); const tip = cone(0.1 * s, 0.16 * s, toon('#7fc4e8', {wear: false}), {hull: 0.01}); tip.position.y = 0.27 * s; g.add(tip); cuteFace(g, 0.18 * s, 0.15 * s, s * 0.9); return g; }
+// A mountain (cone with a snow cap) and a volcano with a glowing top.
+export function mountain(h = 4, r = 3, o = {}) { const g = new THREE.Group(); g.add(cone(r, h, toon(o.color || '#7a8a6a', {paint: {seed: o.seed || 951}}), {seg: 9})); if (!o.volcano) { const cap = cone(r * 0.32, h * 0.32, '#f3f6f8', {seg: 9}); cap.position.y = h * 0.68; g.add(cap); } else { const gl = glowSprite('#ff8a3a', r); gl.position.y = h; g.add(gl); } return g; }
+export function raft() { const g = new THREE.Group(); for (let i = 0; i < 5; i++) { const l = cyl(0.08, 0.08, 1.2, '#a8784a', {center: true, hull: 0.006}); l.rotation.z = Math.PI / 2; at(l, 0, 0.08, -0.32 + i * 0.16); g.add(l); } return g; }

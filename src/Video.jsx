@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [];
+const DIPS = [2, 6, 9, 11];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', 'KALAU HP BISA | NGOMONG JUJUR… 📱😳'], ['cut2', 'DIBUKA 47 KALI, | ISINYA SAMA 🔁'], ['cut3', '"9 JAM SEHARI, | KAMU NGAPAIN AJA?" ⏰'], ['cut4', '300 SELFIE, BEDANYA | CUMA SUDUT 2 DERAJAT 🤳'],
-  ['cut5', 'KERANJANG PENUH, | SALDO KOSONG 🛒💸'], ['cut6', '"AKU SEKARAT, KAMU | MASIH MAIN GAME?!" 🪫'], ['cut7', 'YANG PALING PENTING, JUSTRU | SERING KITA ABAIKAN 📞❤️']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,15 +146,15 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    ['09-notification-ding.wav', E.halo - 0.3, 0.18], [sy('boing'), E.protes, 0.12],
-    ...Array.from({length: 4}, (_, i) => ['04-soft-ui-pop.mp3', E.aplikasi - 0.4 + i * ((E.empat + 0.3 - E.aplikasi) / 4), 0.14]), [sy('swish'), E.kantoran - 0.2, 0.14], [sy('clock_tick'), E.sembilan, 0.14, 1.5], [sy('ka_ching'), E.digaji, 0.1],
-    [sy('page_flips'), E.galeri, 0.12, 1.2], ['02-error-denied-buzz.wav', E.penuh, 0.12],
-    ['04-soft-ui-pop.mp3', E.keranjang, 0.18], [sy('coin_drop'), E.ribu, 0.12], [sy('uh_oh'), E.doa, 0.1],
-    [sy('alarm_bell'), E.persen, 0.06, 0.8], [sy('chip_gameover'), E.game, 0.1], [sy('chip_coin'), E.game + 0.4, 0.08],
-    [sy('tense_drone'), E.terdiam, 0.08, 4.0], ['09-notification-ding.wav', E.ibumu, 0.14], ['09-notification-ding.wav', E.ibumu + 0.5, 0.14], ['09-notification-ding.wav', E.ibumu + 1.0, 0.14], [sy('swish'), E.geser + 0.2, 0.16],
-    [sy('thud'), E.meletakkan + 0.3, 0.12], [sy('phone_alarm'), E.menelepon, 0.08, 1.2], [sy('heart_pop'), E.maaf + 0.2, 0.14],
-    ['08-soft-success-chime.mp3', E.orang, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.kalau - 0.15, 0.2],
+    [sy('birds'), 0, 0.08, 2.0], [sy('puff'), E.menelan, 0.18], [sy('boing'), E.asin, 0.14],
+    [sy('birds'), C[1] + 0.1, 0.08, 3.0], [sy('sparkle'), E.tawar, 0.14], [sy('uh_oh'), E.beda, 0.1],
+    [sy('rumble'), C[2] + 0.1, 0.08, 1.5], [sy('sparkle'), E.melarutkan, 0.14],
+    ['05-airy-whoosh.mp3', C[3] + 0.2, 0.14], [sy('stamp'), E.tanda, 0.16],
+    [sy('sparkle'), E.matahari, 0.12], ...Array.from({length: 5}, (_, i) => ['pop-bubble-sound-effect.mp3', E.matahari + i * 0.25, 0.08]), ['08-soft-success-chime.mp3', E.tertinggal, 0.16],
+    [sy('heart_pop'), E.kalian, 0.12], ['06-deep-cinematic-boom.wav', E.gunung, 0.14], [sy('rumble'), E.gunung, 0.1, 1.5],
+    ['07-riser-build-up.wav', E.disebar - 0.2, 0.12, 3.0], ['06-deep-cinematic-boom.wav', E.seratus, 0.14], [sy('tada'), E.lantai, 0.12],
+    [sy('birds'), C[10] + 0.1, 0.08, 3.0],
+    ['pop-bubble-sound-effect.mp3', E.fakta - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -223,10 +222,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'KALAU HP-MU\nBISA NGOMONG... 📱', mid: '"AKU MAU PROTES!"', bot: ''},
-  en: {top: 'KALAU HP-MU\nBISA NGOMONG... 📱', mid: '"AKU MAU PROTES!"', bot: ''},
+  id: {top: 'KENAPA AIR LAUT\nASIN? 🌊', mid: 'SUNGAI KOK TAWAR?', bot: ''},
+  en: {top: 'KENAPA AIR LAUT\nASIN? 🌊', mid: 'SUNGAI KOK TAWAR?', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.protes + 0.3, loc: 'kamar', pos: [0.2, 1.5, -0.6], look: [0.2, 1.35, -3.3]});
+const THUMB = (EVt) => ({t: EVt.asin + 0.4, loc: 'pantai', pos: [-0.1, 1.55, -0.8], look: [-0.1, 1.5, -3.2]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
