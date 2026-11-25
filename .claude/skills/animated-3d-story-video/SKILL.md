@@ -291,3 +291,9 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **A character on a roof:** stand it on the ridge (the roof slopes hide anything placed below the ridge height) and give it its own framing from just below the eaves.
 - **A coin turns into a mountain of snacks:** 60 small boxes/balls/cylinders popping in fast around one point (0.012 s apart), heights falling off with the distance.
 - **Audio peaks:** if `volumedetect` shows max above −1 dB after the render, re-mux the audio with `alimiter=limit=0.84:level=disabled` (video copied).
+
+## Notes from "Tubuhmu bukan tubuh yang sama" (body science, 81 s)
+- **A reflection that moves on its own:** a second, smaller copy of the character (scale ~0.55) standing just in front of a pale blue mirror box on the wall, acting separately (waving with a sly face) while the real one is shocked.
+- **Cells as workers:** `P.cell(color, {tired})` (face, nucleus; grey tired old cells vs pink new ones) + `P.hardHat()` for mini workers; `conveyor(len, w)` (`update(t)` moves the belt) with old cells turning into new ones past a gate; a lining shown as a carpet strip that keeps being rolled out (`scale.x` loop) by a worker.
+- **Other props:** `skinSlab`, `bone`, `trafficCone`, `broom`, `redCell`, `partyHat`; a sunbeam is an open `CylinderGeometry` with low opacity plus slow `FX.fall` dust.
+- **Recolouring a reused prop:** traverse it and set `material.color` (e.g. the pink gut tube tinted red for a blood vessel).

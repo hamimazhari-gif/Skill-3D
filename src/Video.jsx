@@ -227,7 +227,7 @@ const TH = {
   id: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
   en: {top: 'TUBUHMU BUKAN\nTUBUH TAHUN LALU 🧬', mid: '330 MILIAR SEL / HARI!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.bukan0 + 0.4, loc: 'home', pos: [0.2, 1.55, -1.0], look: [0.3, 1.45, -3.6]});
+const THUMB = (EVt) => ({t: EVt.tahunLalu + 0.3, loc: 'home', pos: [0.2, 1.5, -0.9], look: [0.25, 1.35, -3.6]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

@@ -2365,3 +2365,41 @@ export function kite(color = '#d8413a') {
   for (let i = 0; i < 5; i++) { const b = box(0.08, 0.04, 0.01, ['#f2d24a', '#fbf6ea'][i % 2], {hull: 0}); at(b, Math.sin(i) * 0.05, -0.55 - i * 0.14, 0); g.add(b); }
   return g;
 }
+
+// ---------- "Tubuhmu bukan tubuh yang sama" ----------
+// A body cell with a cartoon face: a soft ball with a darker nucleus spot, eyes and a smile; o.tired adds droopy lids.
+export function cell(color = '#f2a0b0', o = {}) {
+  const g = new THREE.Group(); const b = ball(0.25, toon(color, {wear: false}), {sy: 0.9, hull: 0.015}); b.position.y = 0.23; g.add(b);
+  const nu = ball(0.08, shade(color, -0.25), {hull: 0}); at(nu, 0.1, 0.36, 0.17); g.add(nu);
+  for (const s of [-1, 1]) { const w = ball(0.05, '#fbfbf8', {hull: 0.004}); at(w, s * 0.08, 0.27, 0.21); g.add(w); const p = ball(0.025, INK, {hull: 0}); at(p, s * 0.08, 0.27, 0.255); g.add(p);
+    if (o.tired) { const lid = box(0.11, 0.03, 0.02, shade(color, -0.1), {hull: 0}); at(lid, s * 0.08, 0.29, 0.26); g.add(lid); } }
+  const m = box(0.08, 0.015, 0.01, INK, {hull: 0}); at(m, 0, 0.17, 0.235); g.add(m);
+  return g;
+}
+// Conveyor belt with rollers; update(t) moves the stripes.
+export function conveyor(len = 5, w = 0.8) {
+  const g = new THREE.Group(); const frame = box(len, 0.7, w, toon('#5a6a7a', {paint: {seed: 901}})); g.add(frame);
+  const c = canvas(256, 32), x = c.getContext('2d'); x.fillStyle = '#2b2b33'; x.fillRect(0, 0, 256, 32); x.fillStyle = '#4a4a52'; for (let i = 0; i < 8; i++) x.fillRect(i * 32, 0, 14, 32);
+  const tex = texFrom(c); tex.wrapS = THREE.RepeatWrapping; tex.repeat.set(len / 0.6, 1);
+  const belt = new THREE.Mesh(new THREE.PlaneGeometry(len, w * 0.9), new THREE.MeshBasicMaterial({map: tex})); belt.rotation.x = -Math.PI / 2; belt.position.y = 0.705; g.add(belt);
+  return {group: g, update(t) { tex.offset.x = -t * 0.4; }};
+}
+// A skin cross-section: layered slab (top layer flakes off).
+export function skinSlab(w = 3, d = 1.4) {
+  const g = new THREE.Group();
+  [['#c95a5a', 0.5], ['#f0b8a0', 0.35], ['#f6d0b8', 0.12]].reduce((y, [c, h]) => { const l = box(w, h, d, toon(c, {paint: {seed: 902 + y * 10}})); at(l, 0, y, 0); g.add(l); return y + h; }, 0);
+  return g;
+}
+// A big cartoon bone (shaft with knobbed ends), lying along x.
+export function bone(len = 2.4, r = 0.18) {
+  const g = new THREE.Group(); const m = toon('#f3efe0', {paint: {seed: 903, stains: 6}});
+  const sh = cyl(r, r, len, m, {center: true}); sh.rotation.z = Math.PI / 2; g.add(sh);
+  for (const s of [-1, 1]) for (const z of [-1, 1]) { const k = ball(r * 1.35, m, {hull: 0.015}); at(k, s * len / 2, 0, z * r * 0.9); g.add(k); }
+  return g;
+}
+export function hardHat(color = '#f2c23a') { const g = new THREE.Group(); const d = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), toon(color, {wear: false})); g.add(d); const br = cyl(0.15, 0.15, 0.015, color, {hull: 0.004}); g.add(br); return g; }
+export function trafficCone() { const g = new THREE.Group(); const c = cone(0.14, 0.45, '#f2753a', {hull: 0.008}); g.add(c); const s = cyl(0.09, 0.11, 0.06, '#fbf6ea', {hull: 0}); at(s, 0, 0.18, 0); g.add(s); const b = box(0.34, 0.04, 0.34, '#f2753a', {hull: 0.004}); g.add(b); return g; }
+export function broom() { const g = new THREE.Group(); const st = cyl(0.02, 0.02, 1.3, '#c9a06a', {hull: 0.004}); g.add(st); const hd = cone(0.16, 0.35, '#e8c35a', {hull: 0.006}); hd.rotation.z = Math.PI; hd.position.y = 0.05; g.add(hd); return g; }
+// Red blood cell: a red disc with a dimple.
+export function redCell(r = 0.25) { const g = new THREE.Group(); const t = new THREE.Mesh(new THREE.TorusGeometry(r * 0.7, r * 0.35, 12, 24), toon('#d8312a', {wear: false})); g.add(t); const c = cyl(r * 0.7, r * 0.7, r * 0.25, '#b8221a', {center: true, hull: 0}); c.rotation.x = Math.PI / 2; g.add(c); return g; }
+export function partyHat(color = '#7a5aa8') { const g = new THREE.Group(); const c = cone(0.09, 0.24, color, {hull: 0.006}); g.add(c); const p = ball(0.03, '#f2d24a', {hull: 0}); p.position.y = 0.25; g.add(p); return g; }
