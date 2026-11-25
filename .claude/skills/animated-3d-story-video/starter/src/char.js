@@ -27,10 +27,11 @@ export const DESIGNS = {
   sturdy: {head: 'round', hair: 'side', skin: '#f2d4b8', brows: 'thick', limb: [10, 6], legExtra: 0.02, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   nimble: {head: 'round', hair: 'tuft', skin: '#f7dcc8', brows: 'thin', limb: [9, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
   cheery: {head: 'round', hair: 'side', skin: '#f5d8c0', brows: 'thick', limb: [8, 5], legExtra: 0.04, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
+  perky: {head: 'round', hair: 'fringe', skin: '#f6dcc6', brows: 'thick', limb: [9, 5], legExtra: 0.03, torsoExtra: 0.11, cheeks: false, shading: true, shadows: true},
   brisk: {head: 'round', hair: 'side', skin: '#f5dcc6', brows: 'thick', limb: [9, 6], legExtra: 0.03, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy', 'nimble', 'cheery'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'lanky', 'stout', 'tidy', 'brisk', 'gamer', 'dapper', 'cozy', 'spry', 'breezy', 'sturdy', 'nimble', 'cheery', 'perky'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }

@@ -231,7 +231,7 @@ const TH = {
   id: {top: 'PERMEN KARET\nNEMPEL 7 TAHUN? 🍬', mid: 'MITOS ATAU FAKTA?', bot: ''},
   en: {top: 'PERMEN KARET\nNEMPEL 7 TAHUN? 🍬', mid: 'MITOS ATAU FAKTA?', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.kenyal + 0.4, loc: 'gut', pos: [0, 1.2, -0.6], look: [0, 0.8, -3.1]});
+const THUMB = (EVt) => ({t: EVt.nempel + 0.3, loc: 'home', pos: [0.1, 1.35, -0.6], look: [0.1, 1.25, -3.1]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

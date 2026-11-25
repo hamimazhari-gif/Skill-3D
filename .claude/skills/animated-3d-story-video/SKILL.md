@@ -279,3 +279,8 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **Freeze into ice:** a pale blue transparent box (opacity 0.3) that grows up around the character (`scale.y` from 0 to 1) with white glints; the character in `chatter` / `shocked` stays still inside.
 - **Growing ice caps on a globe:** two `SphereGeometry` caps (top and bottom) whose theta length grows with the narration.
 - **Outfit option `sarung`:** a checked cloth below the waist (any colour).
+
+## Notes from "Permen karet tertelan" (myth or fact, 77 s)
+- **A prop as a character:** `P.gum()` returns `{group, mouth, eyes}`; a `gumChar(g, scale, pos(t), vis(t), {talk})` helper moves it, squashes it (5th value of pos) and opens the mouth on the voiced parts of a sentence (`talkOf(si)`). Accessories (hat, sunglasses, camera, suitcase) are children switched on per shot.
+- **Inside the body:** `P.stomachSet(r)` (pink dome seen from inside, folds, green acid pool) and `P.gutTube(len, r)` (a tube open toward +z so a camera in front sees inside, with travelling squeeze rings: `update(t)`). Keep the camera inside the dome (not on its edge) or the back face clips into a flat pink plane. When the camera tracks along the tube, drive the prop with the same eased curve so it stays in frame.
+- **Long titles:** the title font drops to 46 px when a line is longer than 25 characters.
