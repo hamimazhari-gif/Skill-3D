@@ -103,11 +103,10 @@ function Scene({lang, thumb}) {
 }
 
 // SFX cue sheet: [file, time, volume, trimSeconds?]
-const DIPS = [4, 5, 7, 10];
+const DIPS = [2, 4, 5, 6, 7, 8, 9, 10, 12];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = [['cut1', '"PERMEN KARETNYA | KETELAN!" 😱'], ['cut2', '"NANTI NEMPEL DI | PERUT 7 TAHUN!" 😨'], ['cut3', 'MITOS ATAU FAKTA? 🤔'], ['cut5', '✅ BENAR: PERMEN KARET | SULIT DICERNA'],
-  ['cut6', '❌ MITOS: TINGGAL 7 TAHUN | ✅ KELUAR DALAM BEBERAPA HARI'], ['cut9', '⚠️ JANGAN DIJADIKAN | KEBIASAAN'], ['cut10', 'ANCAMAN EMAK | BERIKUTNYA… 😂🍉']];
+const TITLES = []; // no storyboard yet: only captions
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }
@@ -147,20 +146,17 @@ function cues(T, EVt) {
   const W = ['07-smooth-transition-whoosh.mp3', '05-airy-whoosh.mp3', sy('swish'), '08-heavy-whoosh.wav'];
   return [
     ...DIPS.map((k, i) => [W[i % W.length], C[k - 1] - 0.25, 0.16]),
-    [sy('puff'), E.ketelan - 0.35, 0.22], [sy('boing'), E.ketelan - 0.3, 0.12], [sy('uh_oh'), E.ketelan + 0.1, 0.12],
-    ['06-deep-cinematic-boom.wav', E.hah, 0.16], [sy('thud'), E.nempel, 0.12], [sy('rumble'), E.hah, 0.1, 2.0], [sy('tense_drone'), E.kalimat, 0.1, 3.0],
-    [sy('page_flips'), E.bayangkan, 0.12, 1.5], ...Array.from({length: 6}, (_, i) => ['pop-bubble-sound-effect.mp3', E.bayangkan + i * 0.1, 0.08]), [sy('clock_tick'), E.sd, 0.14, 1.0], [sy('uh_oh'), E.keluar, 0.12],
-    ['04-soft-ui-pop.mp3', E.mitos - 0.05, 0.18], ['04-soft-ui-pop.mp3', E.fakta - 0.05, 0.18],
-    [sy('frying'), C[4] + 0.2, 0.06, C[5] - C[4] - 0.4], [sy('boing'), E.kenyal, 0.14], [sy('boing'), E.kenyal + 0.4, 0.12],
-    [sy('slide_whistle_down'), E.menempel, 0.12],
-    [sy('rumble'), E.bergerak, 0.08, 2.0], ['05-airy-whoosh.mp3', E.terdorong, 0.14],
-    [sy('steam_whistle'), E.turis, 0.08], [sy('kiss'), E.dadah, 0.14], ['08-soft-success-chime.mp3', E.dadah + 0.1, 0.18],
-    ...Array.from({length: 7}, (_, i) => ['04-soft-ui-pop.mp3', C[8] + 0.3 + i * ((E.sumbatan - C[8] - 0.8) / 7), 0.1]), [sy('alarm_bell'), E.kebiasaan, 0.06, 0.8],
-    [sy('frying'), E.sulit, 0.06, 2.5],
-    ['02-error-denied-buzz.wav', E.sumbatan, 0.12], [sy('alarm_bell'), E.sumbatan + 0.1, 0.06, 0.8],
-    [sy('sparkle'), E.dikunyah, 0.16], [sy('tada'), E.lega, 0.12], [sy('uh_oh'), E.sampai, 0.12],
-    [sy('thud'), E.jangan, 0.18], [sy('boing'), E.pohon, 0.16],
-    ['pop-bubble-sound-effect.mp3', E.ancaman2 - 0.15, 0.2],
+    ['04-soft-ui-pop.mp3', E.tes - 0.05, 0.2], [sy('clock_tick'), E.hitung, 0.12, 1.5], ['02-error-denied-buzz.wav', E.tua, 0.1], [sy('boing'), E.tua + 0.1, 0.12],
+    [sy('creak'), C[1] + 0.1, 0.16], [sy('puff'), E.kardus, 0.16], [sy('sparkle'), E.harta, 0.18],
+    [sy('puff'), E.tersedak, 0.2], [sy('uh_oh'), E.kaset, 0.1], [sy('tape_rewind'), E.pensil + 0.2, 0.12, 1.5],
+    ...['no2', 'no3', 'no4', 'no5', 'no6'].map((k) => ['08-soft-success-chime.mp3', E[k], 0.16]), ['08-soft-success-chime.mp3', E.kaset, 0.14],
+    [sy('chip_error'), E.semut, 0.06, 1.0], [sy('creak'), E.antena, 0.14], [sy('tada'), E.kiri + 0.3, 0.1], ['02-error-denied-buzz.wav', E.kebanyakan, 0.1],
+    [sy('phone_alarm'), E.teleponRumah, 0.08, 1.2], [sy('heart_pop'), E.jantung, 0.14], ['06-deep-cinematic-boom.wav', E.halo, 0.14], [sy('thud'), E.ditutup, 0.2],
+    [sy('clock_tick'), E.argo, 0.16, 5.0], [sy('ka_ching'), E.jajan, 0.12],
+    [sy('crowd_cheer'), C[6] + 0.1, 0.06, 1.8], [sy('birds'), E.azan - 0.5, 0.08, 1.5], [sy('whistle_prit'), E.namaLengkap - 0.1, 0.08],
+    [sy('coin_drop'), E.limaRatus, 0.16], [sy('tada'), E.sultan, 0.14],
+    [sy('sparkle'), E.layangan, 0.16], [sy('swish'), C[9] + 0.3, 0.14], [sy('birds'), C[9] + 0.5, 0.08, 4.0],
+    ['pop-bubble-sound-effect.mp3', E.skor - 0.15, 0.2],
     [sy('boing'), E.komentar, 0.14],
     ['08-soft-success-chime.mp3', E.komentar + 0.05, 0.3],
   ];
@@ -228,10 +224,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'PERMEN KARET\nNEMPEL 7 TAHUN? 🍬', mid: 'MITOS ATAU FAKTA?', bot: ''},
-  en: {top: 'PERMEN KARET\nNEMPEL 7 TAHUN? 🍬', mid: 'MITOS ATAU FAKTA?', bot: ''},
+  id: {top: 'TES UMUR:\nPERNAH NGALAMIN? 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
+  en: {top: 'TES UMUR:\nPERNAH NGALAMIN? 📼', mid: 'LEBIH DARI 3 = TUA!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.nempel + 0.3, loc: 'home', pos: [0.1, 1.35, -0.6], look: [0.1, 1.25, -3.1]});
+const THUMB = (EVt) => ({t: EVt.kiri + 0.6, loc: 'rumah', pos: [0.0, 1.8, 1.2], look: [0.2, 2.3, -4.5]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();

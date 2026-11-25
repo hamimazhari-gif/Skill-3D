@@ -64,22 +64,24 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Permen karet tertelan" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Tes umur" (Indonesian 90s nostalgia; en mirrors id).
 const EV_ID = {
-  ma: [0, 'ma'], ketelan: [0, 'ketelan'], hah: [1, 'hah'], nempel: [1, 'nempel'], tujuhTahun: [1, 'tujuh'],
-  kalimat: [2, 'kalimat'], ketakutan: [2, 'ketakutan'], bayangkan: [3, 'bayangkan'], menelan: [3, 'menelan'], sd: [3, 'sd'], keluar: [3, 'keluar'], smp: [3, 'smp'],
-  tapi1: [4, 'tapi'], mitos: [4, 'mitos'], fakta: [4, 'fakta'],
-  benar: [5, 'benar'], sulit: [5, 'sulit'], kenyal: [6, 'kenyal'], hancur: [6, 'hancur'], cairan: [6, 'cairan'], menguraikan: [6, 'menguraikannya'], biasa: [6, 'biasa'],
-  tapi2: [7, 'tapi'], bukan: [7, 'bukan'], menempel: [7, 'menempel'],
-  faktanya: [8, 'faktanya'], bergerak: [8, 'bergerak'], mendorong: [8, 'mendorong'], terdorong: [9, 'terdorong'], keluar2: [9, 'keluar'], hari: [9, 'hari'],
-  numpang: [10, 'numpang'], turis: [10, 'turis'], pamit: [10, 'pamit'], dadah: [11, 'dadah'],
-  hatiHati: [12, 'hati'], banyak: [13, 'banyak'], kebiasaan: [13, 'kebiasaan'], sumbatan: [13, 'sumbatan'], anak: [13, 'anak'], dikunyah: [14, 'dikunyah'], ditelan: [14, 'ditelan'],
-  lega: [15, 'lega'], sampai: [15, 'sampai'], ancaman: [15, 'ancaman'], jangan: [16, 'jangan'], biji: [16, 'biji'], pohon: [16, 'pohon'],
-  ancaman2: [17, 'ancaman'], percaya: [17, 'percaya'], komentar: [18, 'komentar'],
+  tes: [0, 'tes'], hitung: [1, 'hitung'], tiga0: [2, 'tiga'], maaf0: [2, 'maaf'], tua: [2, 'tua'],
+  suatu: [3, 'suatu'], kardus: [3, 'kardus'], gudang: [3, 'gudang'], tulisannya: [4, 'tulisannya'], harta: [4, 'harta'],
+  yah: [5, 'yah'], powerbank: [5, 'powerbank'], tersedak: [6, 'tersedak'], kaset: [7, 'kaset'], pensil: [8, 'pensil'], canggih: [8, 'canggih'], kusut: [8, 'kusut'],
+  no2: [9, 'nomor'], semut: [10, 'semut'], kakek: [10, 'kakek'], atap: [10, 'atap'], antena: [10, 'antena'], operator: [11, 'operatornya'],
+  jelas: [12, 'jelas'], kiri: [13, 'kiri'], kebanyakan: [13, 'kebanyakan'],
+  no3: [14, 'nomor'], gebetan: [15, 'gebetan'], teleponRumah: [15, 'telepon'], jantung: [16, 'jantung'], bapaknya: [16, 'bapaknya'],
+  halo: [17, 'halo'], siapa: [17, 'siapa'], ditutup: [18, 'ditutup'],
+  no4: [19, 'nomor'], wartel: [20, 'wartel'], argo: [20, 'argo'], cepat: [21, 'cepat'], detik: [21, 'detik'], jajan: [21, 'jajan'],
+  no5: [22, 'nomor'], main: [23, 'main'], alarm: [24, 'alarm'], azan: [24, 'azan'], telat: [25, 'telat'], emak: [25, 'emak'], namaLengkap: [25, 'lengkap'],
+  no6: [26, 'nomor'], limaRatus: [27, 'lima'], sultan: [27, 'sultan'],
+  bertanya: [28, 'bertanya'], hp: [28, 'hp'], bosan: [28, 'bosan'], tersenyum: [29, 'tersenyum'], layangan: [30, 'layangan'], tunjukkan: [31, 'tunjukkan'],
+  sore: [32, 'sore'], bersama: [32, 'bersama'], dulu: [33, 'dulu'], segalanya: [33, 'segalanya'], skor: [34, 'skor'], komentar: [35, 'komentar'], tag: [35, 'tag'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {seven: '7 TAHUN?!', sd: 'KELAS 1 SD', smp: 'SMP', myth: 'MITOS', fact: 'FAKTA', hard: 'SULIT DICERNA', chewy: 'KENYAL', acid: 'CAIRAN LAMBUNG',
-  noStick: 'NGGAK MENEMPEL', push: 'TERUS MENDORONG', days: 'BEBERAPA HARI', exit: 'PINTU KELUAR', tour: 'NUMPANG LEWAT', careful: 'HATI-HATI!', block: 'SUMBATAN!',
-  chew: 'DIKUNYAH, BUKAN DITELAN', question: 'ANCAMAN EMAK PALING DIPERCAYA?', comment: 'TULIS DI KOMENTAR!'};
+const L_ID = {test: 'TES UMUR', rule: 'LEBIH DARI 3 = TUA', box: 'HARTA KARUN AYAH', powerbank: 'POWERBANK?', cassette: 'KASET',
+  ch: (n) => `${n}/6`, clear: 'UDAH JELAS?', left: 'KIRI DIKIT!', hello: '"HALO. INI SIAPA?!"', wartel: 'WARTEL', argo: (v) => `Rp${v}`, magrib: 'MAGRIB',
+  fullName: '"MUHAMMAD RIZKY SAPUTRA!"', coin: 'Rp500', sultan: 'SULTAN!', question: 'SKOR KAMU BERAPA DARI 6?', comment: 'TAG TEMAN MASA KECILMU!'};
 export const LABELS = {id: L_ID, en: L_ID};

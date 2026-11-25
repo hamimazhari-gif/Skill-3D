@@ -10,55 +10,61 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: close-ups for the dialogue, slow tracks through the gut.
-  {shot: 1, loc: 'home', lift: false, move: 'close: the gum went down', keys: [
-    {at: 'start', pos: [-0.55, 1.35, -1.6], look: [-0.6, 1.3, -3.0]},
-    {at: 'end', pos: [-0.55, 1.35, -1.7], look: [-0.6, 1.3, -3.0]}]},
-  {shot: 2, loc: 'home', lift: false, move: 'close: mum says seven years', keys: [
-    {at: 'start', pos: [0.65, 1.7, -1.6], look: [0.75, 1.65, -3.2]},
-    {at: 'end', pos: [0.65, 1.7, -1.7], look: [0.75, 1.65, -3.2]}]},
-  {shot: 3, loc: 'home', lift: false, move: 'a childhood fear', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.0], look: [0.1, 1.4, -3.2]},
-    {at: 'end', pos: [0.1, 1.6, -0.3], look: [0.1, 1.4, -3.2]}]},
-  {shot: 3, from: 'bayangkan', loc: 'gut', lift: false, move: 'imagined: gum stuck everywhere in the stomach', keys: [
-    {at: 'start', pos: [0, 1.5, -0.5], look: [0, 1.5, -3.6]},
-    {at: 'end', pos: [0, 1.5, -0.8], look: [0, 1.5, -3.6]}]},
-  {shot: 3, from: 'smp', loc: 'home', lift: false, move: 'grown up, the gum still on his belly', keys: [
-    {at: 'start', pos: [-0.6, 1.4, -1.1], look: [-0.6, 1.25, -3.0]},
-    {at: 'end', pos: [-0.6, 1.4, -1.25], look: [-0.6, 1.25, -3.0]}]},
-  {shot: 4, loc: 'studio', lift: false, move: 'myth or fact', keys: [
-    {at: 'start', pos: [0, 1.35, 0.7], look: [0, 1.35, -3.4]},
-    {at: 'end', pos: [0, 1.35, 0.45], look: [0, 1.35, -3.4]}]},
-  {shot: 5, loc: 'gut', lift: false, move: 'in the stomach: hard to digest', keys: [
-    {at: 'start', pos: [0, 0.8, -1.2], look: [0, 0.6, -3.1]},
-    {at: 'end', pos: [0, 0.8, -1.4], look: [0, 0.6, -3.1]}]},
-  {shot: 6, loc: 'gut', lift: false, move: 'it does not stick', keys: [
-    {at: 'start', pos: [0.8, 1.4, 0.2], look: [1.2, 1.0, -3.6]},
-    {at: 'end', pos: [0.8, 1.4, 0.0], look: [1.2, 1.0, -3.6]}]},
-  {shot: 7, loc: 'gut', lift: false, move: 'the gut keeps pushing', keys: [
-    {at: 'start', pos: [9.4, 1.05, -0.5], look: [9.4, 0.6, -3.3]},
-    {at: 'end', pos: [12.4, 1.05, -0.6], look: [12.6, 0.6, -3.3]}]},
-  {shot: 8, loc: 'gut', lift: false, move: 'the tourist waves goodbye', keys: [
-    {at: 'start', pos: [13.2, 1.05, -0.5], look: [13.4, 0.6, -3.3]},
-    {at: 'end', pos: [17.6, 1.05, -0.6], look: [18.2, 0.6, -3.3]}]},
-  {shot: 9, loc: 'home', lift: false, move: 'swallowing gum every day', keys: [
-    {at: 'start', pos: [-0.3, 1.5, -0.8], look: [-0.4, 1.4, -3.0]},
-    {at: 'end', pos: [-0.3, 1.5, -1.0], look: [-0.4, 1.4, -3.0]}]},
-  {shot: 9, from: 'sumbatan', loc: 'gut', lift: false, move: 'too much: a blockage', keys: [
-    {at: 'start', pos: [30, 1.4, 1.2], look: [30, 1.0, -3.4]},
-    {at: 'end', pos: [30, 1.4, 0.8], look: [30, 1.0, -3.4]}]},
-  {shot: 9, from: 'dikunyah', loc: 'home', lift: false, move: 'chew it, do not swallow it', keys: [
-    {at: 'start', pos: [-0.55, 1.45, -1.3], look: [-0.6, 1.4, -3.0]},
-    {at: 'end', pos: [-0.55, 1.45, -1.45], look: [-0.6, 1.4, -3.0]}]},
-  {shot: 10, loc: 'home', lift: false, move: 'relief until mum comes back', keys: [
-    {at: 'start', pos: [0.3, 1.6, 0.0], look: [0.3, 1.4, -3.2]},
-    {at: 'end', pos: [0.3, 1.6, -0.3], look: [0.3, 1.4, -3.2]}]},
-  {shot: 11, loc: 'home', lift: false, move: 'no watermelon seeds', keys: [
-    {at: 'start', pos: [0.1, 1.65, -0.6], look: [0.1, 1.55, -3.1]},
-    {at: 'end', pos: [0.1, 1.65, -0.8], look: [0.1, 1.55, -3.1]}]},
-  {shot: 12, loc: 'home', lift: false, move: 'which threat did you believe', keys: [
-    {at: 'start', pos: [0.1, 1.7, -0.2], look: [0.1, 1.6, -3.0]},
-    {at: 'end', pos: [0.1, 1.7, -0.45], look: [0.1, 1.6, -3.0]}]},
+  // Calm camera: medium shots per memory, close-ups for the punchlines.
+  {shot: 1, loc: 'studio', lift: false, move: 'the age test', keys: [
+    {at: 'start', pos: [0.35, 1.65, -0.2], look: [0.35, 1.6, -3.4]},
+    {at: 'end', pos: [0.35, 1.65, -0.45], look: [0.35, 1.6, -3.4]}]},
+  {shot: 2, loc: 'gudang', lift: false, move: 'a dusty box in the storeroom', keys: [
+    {at: 'start', pos: [-0.6, 1.5, -0.6], look: [-0.4, 1.15, -3.2]},
+    {at: 'end', pos: [-0.2, 1.45, -1.0], look: [0.2, 0.9, -3.2]}]},
+  {shot: 3, loc: 'gudang', lift: false, move: '"a retro powerbank?"', keys: [
+    {at: 'start', pos: [0.4, 1.55, -0.3], look: [0.4, 1.4, -3.2]},
+    {at: 'end', pos: [0.4, 1.55, -0.5], look: [0.4, 1.4, -3.2]}]},
+  {shot: 3, from: 'pensil', loc: 'gudang', lift: false, move: 'macro: a pencil winds the tape', keys: [
+    {at: 'start', pos: [-0.35, 1.3, -1.9], look: [-0.38, 1.22, -2.7]},
+    {at: 'end', pos: [-0.35, 1.3, -1.97], look: [-0.38, 1.22, -2.7]}]},
+  {shot: 4, loc: 'rumah', lift: false, move: 'grandpa on the roof, the TV full of ants', keys: [
+    {at: 'start', pos: [0.2, 2.4, -0.2], look: [0.4, 3.6, -6.0]},
+    {at: 'end', pos: [0.2, 2.4, -0.5], look: [0.4, 3.6, -6.0]}]},
+  {shot: 4, from: 'operator', loc: 'rumah', lift: false, move: 'close: left a bit, grandpa!', keys: [
+    {at: 'start', pos: [-0.5, 1.4, -0.6], look: [-0.6, 1.2, -2.8]},
+    {at: 'end', pos: [-0.5, 1.4, -0.75], look: [-0.6, 1.2, -2.8]}]},
+  {shot: 4, from: 'jelas', loc: 'rumah', lift: false, move: 'grandpa on the roof: "is it clear?"', keys: [
+    {at: 'start', pos: [0.6, 4.6, -4.2], look: [0.7, 5.2, -7.0]},
+    {at: 'end', pos: [0.6, 4.6, -4.35], look: [0.7, 5.2, -7.0]}]},
+  {shot: 4, from: 'kiri', loc: 'rumah', move: 'close: left a bit, grandpa!', keys: [
+    {at: 'start', pos: [-0.5, 1.4, -0.6], look: [-0.6, 1.2, -2.8]},
+    {at: 'end', pos: [-0.5, 1.4, -0.75], look: [-0.6, 1.2, -2.8]}]},
+  {shot: 5, loc: 'phone', lift: false, move: 'calling the crush', keys: [
+    {at: 'start', pos: [-0.7, 1.45, -1.0], look: [-0.7, 1.3, -3.3]},
+    {at: 'end', pos: [-0.7, 1.45, -1.2], look: [-0.7, 1.3, -3.3]}]},
+  {shot: 5, from: 'halo', loc: 'phone', lift: false, move: 'her father answers', keys: [
+    {at: 'start', pos: [5.9, 1.7, -1.3], look: [5.9, 1.65, -3.2]},
+    {at: 'end', pos: [5.9, 1.7, -1.45], look: [5.9, 1.65, -3.2]}]},
+  {shot: 5, from: 'ditutup', loc: 'phone', lift: false, move: 'he hangs up', keys: [
+    {at: 'start', pos: [-0.7, 1.45, -1.0], look: [-0.7, 1.3, -3.3]},
+    {at: 'end', pos: [-0.7, 1.45, -1.1], look: [-0.7, 1.3, -3.3]}]},
+  {shot: 6, loc: 'wartel', lift: false, move: 'the wartel meter', keys: [
+    {at: 'start', pos: [0.1, 1.6, -0.6], look: [0.1, 1.45, -3.6]},
+    {at: 'end', pos: [0.1, 1.6, -0.9], look: [0.1, 1.45, -3.6]}]},
+  {shot: 7, loc: 'kampung', lift: false, move: 'play until magrib', keys: [
+    {at: 'start', pos: [-0.5, 1.6, -0.2], look: [-0.6, 1.6, -4.0]},
+    {at: 'end', pos: [-0.5, 1.6, -0.45], look: [-0.6, 1.6, -4.0]}]},
+  {shot: 8, loc: 'warung', lift: false, move: 'Rp500: a sultan', keys: [
+    {at: 'start', pos: [-0.2, 1.5, -0.2], look: [-0.2, 1.4, -3.0]},
+    {at: 'end', pos: [-0.2, 1.5, -0.45], look: [-0.2, 1.4, -3.0]}]},
+  {shot: 9, loc: 'gudang', lift: false, move: '"no phone... not bored?"', keys: [
+    {at: 'start', pos: [0.3, 1.55, -0.2], look: [0.3, 1.45, -3.2]},
+    {at: 'end', pos: [0.3, 1.55, -0.45], look: [0.3, 1.45, -3.2]}]},
+  {shot: 10, loc: 'kampung', lift: false, move: 'flying a kite at sunset', keys: [
+    {at: 'start', pos: [10, 1.5, 0.6], look: [10, 2.3, -5.0]},
+    {at: 'end', pos: [10, 1.55, 0.3], look: [10, 3.0, -5.0]}]},
+  {shot: 11, loc: 'kampung', lift: false, move: 'we had nothing, and everything', keys: [
+    {at: 'start', pos: [10, 1.3, -0.4], look: [10, 1.6, -3.0]},
+    {at: 'end', pos: [10, 1.3, -0.6], look: [10, 1.7, -3.0]}]},
+  {shot: 12, loc: 'studio', lift: false, move: 'your score?', keys: [
+    {at: 'start', pos: [0.2, 1.6, 0.3], look: [0.2, 1.6, -3.4]},
+    {at: 'end', pos: [0.2, 1.6, 0.05], look: [0.2, 1.6, -3.4]}]},
 ];
 
 export function warpU(T, t) {

@@ -1,366 +1,635 @@
 {
- "duration": 76.52,
+ "duration": 92.92,
  "sentences": [
   {
    "shot": 1,
-   "text": "\"Ma... permen karetnya ketelan!\"",
-   "start": 0.28,
-   "end": 2.54,
-   "pred": 1.6,
+   "text": "Tes umur.",
+   "start": 0.12,
+   "end": 1.08,
+   "pred": 0.58,
    "voiced": [
     [
-     0.28,
-     0.76
+     0.12,
+     1.08
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Hitung berapa banyak yang pernah kamu alami.",
+   "start": 1.46,
+   "end": 3.4,
+   "pred": 3.07,
+   "voiced": [
+    [
+     1.5,
+     2.46
     ],
     [
-     1.18,
-     2.54
+     2.54,
+     3.38
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Kalau lebih dari tiga... maaf, kamu sudah tua.",
+   "start": 3.76,
+   "end": 6.98,
+   "pred": 3.31,
+   "voiced": [
+    [
+     3.76,
+     4.7
+    ],
+    [
+     5.04,
+     5.42
+    ],
+    [
+     5.56,
+     5.66
+    ],
+    [
+     5.76,
+     6.44
+    ],
+    [
+     6.56,
+     6.98
     ]
    ]
   },
   {
    "shot": 2,
-   "text": "\"Hah?! Nanti nempel di perut tujuh tahun!\"",
-   "start": 3.26,
-   "end": 5.54,
-   "pred": 2.16,
+   "text": "Suatu hari, seorang anak menemukan kardus berdebu di gudang.",
+   "start": 8.34,
+   "end": 11.18,
+   "pred": 4.64,
    "voiced": [
     [
-     3.26,
-     3.6
+     8.34,
+     9.98
     ],
     [
-     4.0,
-     5.52
+     10.06,
+     11.18
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Tulisannya: \"Harta karun Ayah.\"",
+   "start": 11.62,
+   "end": 13.22,
+   "pred": 1.99,
+   "voiced": [
+    [
+     11.62,
+     12.16
+    ],
+    [
+     12.36,
+     12.52
+    ],
+    [
+     12.6,
+     13.2
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Kalimat ini... mungkin pernah bikin masa kecilmu penuh ketakutan.",
-   "start": 6.5,
-   "end": 9.76,
-   "pred": 3.7,
+   "text": "\"Yah... ini powerbank jadul, ya?\"",
+   "start": 14.24,
+   "end": 16.74,
+   "pred": 2.32,
    "voiced": [
     [
-     6.5,
-     7.14
+     14.24,
+     14.46
     ],
     [
-     7.3,
-     8.06
+     14.92,
+     15.26
     ],
     [
-     8.14,
-     8.88
-    ],
-    [
-     8.96,
-     9.76
+     15.4,
+     16.74
     ]
    ]
   },
   {
    "shot": 3,
-   "text": "Bayangkan, kamu menelan permen karet waktu kelas satu SD... dan baru keluar waktu kamu sudah SMP.",
-   "start": 10.44,
-   "end": 15.78,
-   "pred": 5.79,
+   "text": "Ayahnya langsung tersedak kopi.",
+   "start": 17.46,
+   "end": 18.76,
+   "pred": 2.24,
    "voiced": [
     [
-     10.44,
-     11.08
+     17.46,
+     18.76
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Itu kaset, Nak.",
+   "start": 19.3,
+   "end": 20.2,
+   "pred": 1.41,
+   "voiced": [
+    [
+     19.3,
+     19.48
     ],
     [
-     11.48,
-     13.74
+     19.56,
+     20.2
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Dan pensil... adalah alat paling canggih untuk menggulung pitanya yang kusut.",
+   "start": 20.54,
+   "end": 24.04,
+   "pred": 5.22,
+   "voiced": [
+    [
+     20.6,
+     21.52
     ],
     [
-     14.14,
-     15.78
+     21.68,
+     22.14
+    ],
+    [
+     22.22,
+     24.04
     ]
    ]
   },
   {
    "shot": 4,
-   "text": "Tapi sebenarnya, ini mitos atau fakta?",
-   "start": 16.42,
-   "end": 19.04,
-   "pred": 2.58,
+   "text": "Nomor dua.",
+   "start": 25.12,
+   "end": 25.74,
+   "pred": 0.66,
    "voiced": [
     [
-     16.42,
-     16.76
+     25.12,
+     25.74
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Setiap TV penuh semut, kakek naik ke atap memutar antena.",
+   "start": 26.32,
+   "end": 29.82,
+   "pred": 4.31,
+   "voiced": [
+    [
+     26.32,
+     26.46
     ],
     [
-     16.98,
-     17.56
+     26.54,
+     26.66
     ],
     [
-     17.82,
-     18.2
+     26.78,
+     27.4
     ],
     [
-     18.28,
-     18.76
+     27.68,
+     27.84
     ],
     [
-     18.86,
-     19.04
+     27.92,
+     28.58
+    ],
+    [
+     28.76,
+     29.14
+    ],
+    [
+     29.26,
+     29.8
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Dan kita yang di bawah jadi operatornya.",
+   "start": 30.48,
+   "end": 32.06,
+   "pred": 2.73,
+   "voiced": [
+    [
+     30.48,
+     32.06
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Udah jelas belum?!\"",
+   "start": 32.78,
+   "end": 33.7,
+   "pred": 1.16,
+   "voiced": [
+    [
+     32.78,
+     33.7
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "\"Kiri dikit, Kek! Eh, kebanyakan!\"",
+   "start": 34.5,
+   "end": 36.24,
+   "pred": 2.98,
+   "voiced": [
+    [
+     34.5,
+     35.18
+    ],
+    [
+     35.56,
+     35.66
+    ],
+    [
+     35.78,
+     36.24
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Yang benar, permen karet memang sulit dicerna.",
-   "start": 20.24,
-   "end": 22.68,
-   "pred": 3.07,
+   "text": "Nomor tiga.",
+   "start": 37.54,
+   "end": 38.04,
+   "pred": 0.75,
    "voiced": [
     [
-     20.24,
-     20.96
-    ],
-    [
-     21.34,
-     22.68
+     37.54,
+     38.02
     ]
    ]
   },
   {
    "shot": 5,
-   "text": "Bahan karetnya dibuat supaya kenyal dan nggak hancur, jadi cairan lambung nggak bisa menguraikannya seperti makanan biasa.",
-   "start": 23.22,
-   "end": 28.74,
-   "pred": 7.67,
+   "text": "Nelepon gebetan pakai telepon rumah.",
+   "start": 38.54,
+   "end": 40.16,
+   "pred": 2.57,
    "voiced": [
     [
-     23.22,
-     25.54
+     38.54,
+     40.14
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Jantung deg-degan... dan yang ngangkat bapaknya.",
+   "start": 40.68,
+   "end": 43.34,
+   "pred": 3.15,
+   "voiced": [
+    [
+     40.68,
+     41.56
     ],
     [
-     25.9,
-     28.74
+     42.1,
+     42.6
+    ],
+    [
+     42.74,
+     43.34
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "\"Halo. Ini siapa?!\"",
+   "start": 44.14,
+   "end": 45.42,
+   "pred": 0.99,
+   "voiced": [
+    [
+     44.14,
+     44.44
+    ],
+    [
+     44.96,
+     45.42
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Telepon langsung ditutup.",
+   "start": 46.12,
+   "end": 46.92,
+   "pred": 1.82,
+   "voiced": [
+    [
+     46.14,
+     46.92
     ]
    ]
   },
   {
    "shot": 6,
-   "text": "Tapi... itu bukan berarti permen karet akan menempel di perutmu.",
-   "start": 29.48,
-   "end": 32.42,
-   "pred": 3.56,
+   "text": "Nomor empat.",
+   "start": 48.0,
+   "end": 48.56,
+   "pred": 0.83,
    "voiced": [
     [
-     29.48,
-     29.78
+     48.0,
+     48.56
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Nelepon di wartel sambil terus melirik argo.",
+   "start": 49.08,
+   "end": 51.28,
+   "pred": 3.07,
+   "voiced": [
+    [
+     49.08,
+     49.28
     ],
     [
-     30.06,
-     32.42
+     49.36,
+     51.26
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Ngomongnya harus cepat, karena setiap detik itu uang jajan.",
+   "start": 51.7,
+   "end": 54.46,
+   "pred": 4.56,
+   "voiced": [
+    [
+     51.7,
+     52.24
+    ],
+    [
+     52.34,
+     52.46
+    ],
+    [
+     52.8,
+     53.52
+    ],
+    [
+     53.7,
+     53.84
+    ],
+    [
+     53.94,
+     54.46
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Faktanya, saluran pencernaan kita terus bergerak dan mendorong apa pun yang masuk.",
-   "start": 33.12,
-   "end": 37.46,
-   "pred": 5.23,
+   "text": "Nomor lima.",
+   "start": 55.46,
+   "end": 56.02,
+   "pred": 0.75,
    "voiced": [
     [
-     33.12,
-     33.22
-    ],
-    [
-     33.34,
-     33.88
-    ],
-    [
-     34.24,
-     36.16
-    ],
-    [
-     36.34,
-     37.44
+     55.46,
+     56.02
     ]
    ]
   },
   {
    "shot": 7,
-   "text": "Permen karet yang tertelan akan ikut terdorong, dan biasanya keluar dengan sendirinya dalam beberapa hari.",
-   "start": 38.18,
-   "end": 42.62,
-   "pred": 6.69,
+   "text": "Main sampai lupa waktu.",
+   "start": 56.62,
+   "end": 57.62,
+   "pred": 1.57,
    "voiced": [
     [
-     38.18,
-     40.0
+     56.62,
+     57.6
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Alarm kita cuma satu: azan magrib.",
+   "start": 58.16,
+   "end": 60.38,
+   "pred": 2.24,
+   "voiced": [
+    [
+     58.18,
+     59.18
     ],
     [
-     40.28,
-     42.6
+     59.56,
+     60.38
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Dan kalau telat pulang... emak memanggil pakai nama lengkap.",
+   "start": 61.02,
+   "end": 63.84,
+   "pred": 3.98,
+   "voiced": [
+    [
+     61.02,
+     61.72
+    ],
+    [
+     61.82,
+     62.18
+    ],
+    [
+     62.5,
+     63.82
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "Jadi, permen karet itu cuma \"numpang lewat,\" seperti turis yang jalan-jalan... lalu pamit pulang.",
-   "start": 43.42,
-   "end": 47.44,
-   "pred": 6.07,
+   "text": "Nomor enam.",
+   "start": 64.78,
+   "end": 65.3,
+   "pred": 0.75,
    "voiced": [
     [
-     43.42,
-     43.9
-    ],
-    [
-     43.98,
-     44.86
-    ],
-    [
-     44.94,
-     45.6
-    ],
-    [
-     46.16,
-     47.44
+     64.78,
+     65.3
     ]
    ]
   },
   {
    "shot": 8,
-   "text": "\"Dadah, semuanya!\"",
-   "start": 47.88,
-   "end": 48.68,
-   "pred": 1.32,
+   "text": "Uang lima ratus rupiah sudah bikin kita merasa jadi sultan.",
+   "start": 65.76,
+   "end": 68.36,
+   "pred": 4.06,
    "voiced": [
     [
-     47.88,
-     48.68
+     65.76,
+     66.8
+    ],
+    [
+     66.94,
+     68.36
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Tapi tetap hati-hati.",
-   "start": 49.26,
-   "end": 50.22,
-   "pred": 1.19,
+   "text": "Lalu si anak bertanya, \"Ayah dulu nggak punya HP... nggak bosan?\"",
+   "start": 69.3,
+   "end": 73.74,
+   "pred": 4.47,
    "voiced": [
     [
-     49.26,
-     50.22
+     69.3,
+     70.38
+    ],
+    [
+     71.1,
+     72.34
+    ],
+    [
+     72.46,
+     72.66
+    ],
+    [
+     73.04,
+     73.74
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Kalau menelan banyak permen karet sekaligus, apalagi dijadikan kebiasaan, bisa menyebabkan sumbatan di saluran pencernaan, terutama pada anak-anak.",
-   "start": 51.2,
-   "end": 59.62,
-   "pred": 9.97,
+   "text": "Ayahnya tersenyum.",
+   "start": 74.72,
+   "end": 75.62,
+   "pred": 1.33,
    "voiced": [
     [
-     51.2,
-     52.34
-    ],
-    [
-     52.7,
-     54.52
-    ],
-    [
-     54.6,
-     56.16
-    ],
-    [
-     56.42,
-     58.46
-    ],
-    [
-     58.78,
-     59.62
+     74.72,
+     75.62
     ]
    ]
   },
   {
    "shot": 9,
-   "text": "Jadi permen karet tetap untuk dikunyah, bukan ditelan.",
-   "start": 60.18,
-   "end": 62.96,
-   "pred": 3.56,
+   "text": "Ia mengambil layangan tua dari dalam kardus.",
+   "start": 76.08,
+   "end": 77.88,
+   "pred": 3.07,
    "voiced": [
     [
-     60.18,
-     61.98
+     76.08,
+     77.86
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "\"Mau Ayah tunjukkan kenapa nggak pernah bosan?\"",
+   "start": 78.7,
+   "end": 80.56,
+   "pred": 3.15,
+   "voiced": [
+    [
+     78.7,
+     79.56
     ],
     [
-     62.38,
-     62.96
+     79.66,
+     80.54
     ]
    ]
   },
   {
    "shot": 10,
-   "text": "Dan anak kecil pun akhirnya lega... sampai emak mengeluarkan ancaman berikutnya.",
-   "start": 64.02,
-   "end": 68.06,
-   "pred": 4.6,
+   "text": "Sore itu, mereka bermain layangan bersama.",
+   "start": 81.54,
+   "end": 83.6,
+   "pred": 3.4,
    "voiced": [
     [
-     64.02,
-     65.32
-    ],
-    [
-     66.0,
-     68.04
+     81.54,
+     83.6
     ]
    ]
   },
   {
    "shot": 11,
-   "text": "\"Jangan telan biji semangka! Nanti tumbuh pohon di perutmu!\"",
-   "start": 68.86,
-   "end": 72.08,
-   "pred": 3.35,
+   "text": "Dulu kita nggak punya apa-apa... tapi rasanya punya segalanya.",
+   "start": 84.64,
+   "end": 87.94,
+   "pred": 4.06,
    "voiced": [
     [
-     68.86,
-     69.94
+     84.64,
+     85.76
     ],
     [
-     70.46,
-     72.06
+     85.84,
+     86.0
+    ],
+    [
+     86.5,
+     87.92
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Ancaman emak apa yang dulu paling kamu percaya?",
-   "start": 72.84,
-   "end": 74.94,
-   "pred": 2.72,
+   "text": "Skor kamu berapa dari enam?",
+   "start": 88.74,
+   "end": 89.9,
+   "pred": 1.82,
    "voiced": [
     [
-     72.84,
-     73.72
-    ],
-    [
-     73.8,
-     74.94
+     88.74,
+     89.88
     ]
    ]
   },
   {
    "shot": 12,
-   "text": "Tulis di komentar!",
-   "start": 75.5,
-   "end": 76.14,
-   "pred": 1.05,
+   "text": "Tulis di komentar, dan tag teman masa kecilmu!",
+   "start": 90.24,
+   "end": 92.68,
+   "pred": 3.56,
    "voiced": [
     [
-     75.5,
-     76.14
+     90.5,
+     91.24
+    ],
+    [
+     91.48,
+     91.72
+    ],
+    [
+     91.84,
+     92.66
     ]
    ]
   }
