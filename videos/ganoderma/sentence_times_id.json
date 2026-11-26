@@ -1,0 +1,173 @@
+{
+ "duration": 113.59,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Malam itu, terdengar suara keras dari kebun Pak Hasan.",
+   "start": 0.0,
+   "end": 3.12,
+   "pred": 3.8
+  },
+  {
+   "shot": 1,
+   "text": "Satu pohon sawitnya tumbang.",
+   "start": 4.0,
+   "end": 5.28,
+   "pred": 1.82
+  },
+  {
+   "shot": 1,
+   "text": "Padahal tidak ada angin dan tidak ada hujan.",
+   "start": 5.92,
+   "end": 8.14,
+   "pred": 2.74
+  },
+  {
+   "shot": 2,
+   "text": "Pagi harinya, ia melihat pangkal batang pohon itu sudah busuk dan rapuh.",
+   "start": 9.26,
+   "end": 13.2,
+   "pred": 4.94
+  },
+  {
+   "shot": 3,
+   "text": "Pak Hasan mengira itu kejadian biasa.",
+   "start": 14.5,
+   "end": 16.06,
+   "pred": 2.36
+  },
+  {
+   "shot": 3,
+   "text": "Tapi beberapa bulan kemudian, pohon di sebelahnya mulai sakit, lalu pohon berikutnya juga.",
+   "start": 16.84,
+   "end": 22.6,
+   "pred": 6.61
+  },
+  {
+   "shot": 4,
+   "text": "Daunnya pucat.",
+   "start": 23.62,
+   "end": 24.34,
+   "pred": 0.91
+  },
+  {
+   "shot": 4,
+   "text": "Pelepah tua patah dan menggantung.",
+   "start": 25.18,
+   "end": 26.82,
+   "pred": 2.2
+  },
+  {
+   "shot": 4,
+   "text": "Daun muda di pucuk tidak mau membuka, berdiri tegak seperti tombak.",
+   "start": 27.5,
+   "end": 30.86,
+   "pred": 4.64
+  },
+  {
+   "shot": 5,
+   "text": "Kakek Rahmat datang, berjongkok di pangkal pohon, lalu menunjuk sesuatu berwarna cokelat yang menempel seperti kipas.",
+   "start": 32.08,
+   "end": 38.48,
+   "pred": 8.44
+  },
+  {
+   "shot": 5,
+   "text": "\"Ini Ganoderma, Hasan. Jamur pembunuh sawit.\"",
+   "start": 39.56,
+   "end": 42.68,
+   "pred": 3.12
+  },
+  {
+   "shot": 6,
+   "text": "\"Ia menyerang dari akar, menggerogoti batang dari dalam, lalu menular ke pohon lain lewat akar yang saling bersentuhan.\"",
+   "start": 43.76,
+   "end": 50.08,
+   "pred": 8.36
+  },
+  {
+   "shot": 7,
+   "text": "Pak Hasan bertanya, \"Dari mana datangnya, Kek?\"",
+   "start": 51.14,
+   "end": 53.48,
+   "pred": 3.65
+  },
+  {
+   "shot": 7,
+   "text": "Kakek menunjuk tumpukan tunggul tua di sudut kebun, sisa pohon lama yang dibiarkan membusuk saat kebun ditanam ulang.",
+   "start": 54.72,
+   "end": 60.36,
+   "pred": 7.9
+  },
+  {
+   "shot": 7,
+   "text": "\"Di situ sarangnya.\"",
+   "start": 61.34,
+   "end": 62.24,
+   "pred": 1.14
+  },
+  {
+   "shot": 8,
+   "text": "Lalu Kakek mengajarinya cara melawan.",
+   "start": 63.3,
+   "end": 65.1,
+   "pred": 2.43
+  },
+  {
+   "shot": 9,
+   "text": "Pertama, kenali gejalanya sejak awal: daun muda tidak membuka, daun pucat, dan muncul jamur di pangkal batang.",
+   "start": 65.98,
+   "end": 73.76,
+   "pred": 8.13
+  },
+  {
+   "shot": 10,
+   "text": "Kedua, buang jamur yang tumbuh di pangkal batang supaya sporanya tidak menyebar.",
+   "start": 74.8,
+   "end": 79.36,
+   "pred": 5.55
+  },
+  {
+   "shot": 11,
+   "text": "Ketiga, buat parit isolasi di sekeliling pohon yang sakit, cukup dalam untuk memutus akarnya dari pohon sehat.",
+   "start": 80.46,
+   "end": 86.72,
+   "pred": 7.83
+  },
+  {
+   "shot": 12,
+   "text": "Keempat, pohon yang sudah parah harus dibongkar sampai ke akarnya. Jangan tinggalkan tunggul.",
+   "start": 87.76,
+   "end": 92.86,
+   "pred": 6.38
+  },
+  {
+   "shot": 13,
+   "text": "Kelima, saat menanam ulang, bersihkan semua sisa batang lama. Jangan biarkan membusuk di kebun.",
+   "start": 93.84,
+   "end": 99.64,
+   "pred": 6.84
+  },
+  {
+   "shot": 14,
+   "text": "Pak Hasan kehilangan beberapa pohon. Tapi kebunnya selamat.",
+   "start": 100.72,
+   "end": 103.74,
+   "pred": 3.8
+  },
+  {
+   "shot": 15,
+   "text": "Karena di kebun sawit, musuh paling berbahaya kadang tidak terlihat… sampai semuanya terlambat.",
+   "start": 104.88,
+   "end": 110.32,
+   "pred": 6.54
+  },
+  {
+   "shot": 15,
+   "text": "Bagikan video ini ke petani sawit yang kamu kenal.",
+   "start": 111.44,
+   "end": 113.24,
+   "pred": 3.12
+  }
+ ]
+}

@@ -1,180 +1,173 @@
 {
- "duration": 111.12,
+ "duration": 113.59,
  "sentences": [
   {
    "shot": 1,
-   "text": "Empat tahun Joko menunggu.",
+   "text": "Malam itu, terdengar suara keras dari kebun Pak Hasan.",
    "start": 0.0,
-   "end": 1.3,
-   "pred": 1.86
+   "end": 3.12,
+   "pred": 3.8
   },
   {
    "shot": 1,
-   "text": "Empat tahun ia merawat ratusan pohon sawit, menyiangi rumput, memupuk, dan berharap.",
-   "start": 2.08,
-   "end": 7.4,
-   "pred": 7.36
+   "text": "Satu pohon sawitnya tumbang.",
+   "start": 4.0,
+   "end": 5.28,
+   "pred": 1.82
+  },
+  {
+   "shot": 1,
+   "text": "Padahal tidak ada angin dan tidak ada hujan.",
+   "start": 5.92,
+   "end": 8.14,
+   "pred": 2.74
   },
   {
    "shot": 2,
-   "text": "Akhirnya, panen pertama tiba.",
-   "start": 8.5,
-   "end": 10.34,
-   "pred": 2.54
-  },
-  {
-   "shot": 2,
-   "text": "Tandannya ada, dan buahnya merah.",
-   "start": 11.18,
-   "end": 13.24,
-   "pred": 2.79
+   "text": "Pagi harinya, ia melihat pangkal batang pohon itu sudah busuk dan rapuh.",
+   "start": 9.26,
+   "end": 13.2,
+   "pred": 4.94
   },
   {
    "shot": 3,
-   "text": "Tapi saat dibawa ke pengepul, harganya jauh di bawah milik tetangganya.",
-   "start": 14.3,
-   "end": 17.8,
-   "pred": 5.5
+   "text": "Pak Hasan mengira itu kejadian biasa.",
+   "start": 14.5,
+   "end": 16.06,
+   "pred": 2.36
   },
   {
    "shot": 3,
-   "text": "\"Kenapa sawitku dihargai murah?\"",
-   "start": 19.08,
-   "end": 20.44,
+   "text": "Tapi beberapa bulan kemudian, pohon di sebelahnya mulai sakit, lalu pohon berikutnya juga.",
+   "start": 16.84,
+   "end": 22.6,
+   "pred": 6.61
+  },
+  {
+   "shot": 4,
+   "text": "Daunnya pucat.",
+   "start": 23.62,
+   "end": 24.34,
+   "pred": 0.91
+  },
+  {
+   "shot": 4,
+   "text": "Pelepah tua patah dan menggantung.",
+   "start": 25.18,
+   "end": 26.82,
    "pred": 2.2
   },
   {
    "shot": 4,
-   "text": "Kakek Rahmat mengambil satu buah sawit, lalu membelahnya dengan parang.",
-   "start": 22.14,
-   "end": 25.6,
-   "pred": 5.59
-  },
-  {
-   "shot": 4,
-   "text": "\"Lihat ini, Joko. Cangkangnya tebal. Dagingnya tipis.\"",
-   "start": 26.88,
+   "text": "Daun muda di pucuk tidak mau membuka, berdiri tegak seperti tombak.",
+   "start": 27.5,
    "end": 30.86,
-   "pred": 4.06
-  },
-  {
-   "shot": 4,
-   "text": "\"Ini sawit Dura. Minyaknya sedikit.\"",
-   "start": 31.6,
-   "end": 33.76,
-   "pred": 2.37
-  },
-  {
-   "shot": 4,
-   "text": "Joko terdiam.",
-   "start": 35.14,
-   "end": 35.76,
-   "pred": 0.93
+   "pred": 4.64
   },
   {
    "shot": 5,
-   "text": "Kakek lalu membelah buah dari kebun sebelah. Cangkangnya tipis, dagingnya tebal.",
-   "start": 37.1,
-   "end": 41.82,
-   "pred": 6.18
+   "text": "Kakek Rahmat datang, berjongkok di pangkal pohon, lalu menunjuk sesuatu berwarna cokelat yang menempel seperti kipas.",
+   "start": 32.08,
+   "end": 38.48,
+   "pred": 8.44
   },
   {
    "shot": 5,
-   "text": "\"Ini Tenera, bibit unggul hasil persilangan. Minyaknya jauh lebih banyak.\"",
-   "start": 43.06,
-   "end": 47.78,
-   "pred": 5.59
+   "text": "\"Ini Ganoderma, Hasan. Jamur pembunuh sawit.\"",
+   "start": 39.56,
+   "end": 42.68,
+   "pred": 3.12
   },
   {
    "shot": 6,
-   "text": "\"Kau beli bibit di mana?\"",
-   "start": 48.96,
-   "end": 49.8,
-   "pred": 1.52
-  },
-  {
-   "shot": 6,
-   "text": "Joko menunduk. \"Di pinggir jalan, Kek. Murah.\"",
-   "start": 50.94,
-   "end": 55.16,
-   "pred": 3.39
-  },
-  {
-   "shot": 6,
-   "text": "Kakek menghela napas.",
-   "start": 56.52,
-   "end": 57.56,
-   "pred": 1.52
-  },
-  {
-   "shot": 6,
-   "text": "\"Bibit sawit palsu tidak bisa dibedakan saat masih kecil. Kau baru tahu setelah bertahun-tahun.\"",
-   "start": 58.86,
-   "end": 64.62,
-   "pred": 6.6
+   "text": "\"Ia menyerang dari akar, menggerogoti batang dari dalam, lalu menular ke pohon lain lewat akar yang saling bersentuhan.\"",
+   "start": 43.76,
+   "end": 50.08,
+   "pred": 8.36
   },
   {
    "shot": 7,
-   "text": "Malam itu, Kakek Rahmat memberinya pelajaran yang terlambat.",
-   "start": 66.28,
-   "end": 68.5,
-   "pred": 4.82
+   "text": "Pak Hasan bertanya, \"Dari mana datangnya, Kek?\"",
+   "start": 51.14,
+   "end": 53.48,
+   "pred": 3.65
+  },
+  {
+   "shot": 7,
+   "text": "Kakek menunjuk tumpukan tunggul tua di sudut kebun, sisa pohon lama yang dibiarkan membusuk saat kebun ditanam ulang.",
+   "start": 54.72,
+   "end": 60.36,
+   "pred": 7.9
+  },
+  {
+   "shot": 7,
+   "text": "\"Di situ sarangnya.\"",
+   "start": 61.34,
+   "end": 62.24,
+   "pred": 1.14
   },
   {
    "shot": 8,
-   "text": "Pertama, beli bibit hanya dari penangkar resmi yang punya izin.",
-   "start": 69.48,
-   "end": 72.72,
-   "pred": 4.91
-  },
-  {
-   "shot": 8,
-   "text": "Kedua, minta sertifikat atau label asal benihnya.",
-   "start": 73.52,
-   "end": 76.54,
-   "pred": 3.98
+   "text": "Lalu Kakek mengajarinya cara melawan.",
+   "start": 63.3,
+   "end": 65.1,
+   "pred": 2.43
   },
   {
    "shot": 9,
-   "text": "Ketiga, jangan tergiur harga murah. Bibit unggul memang lebih mahal.",
-   "start": 77.58,
-   "end": 81.66,
-   "pred": 5.25
+   "text": "Pertama, kenali gejalanya sejak awal: daun muda tidak membuka, daun pucat, dan muncul jamur di pangkal batang.",
+   "start": 65.98,
+   "end": 73.76,
+   "pred": 8.13
   },
   {
    "shot": 10,
-   "text": "Keempat, pilih bibit yang batangnya kokoh dan daunnya segar. Singkirkan bibit yang kerdil atau bentuknya tidak normal.",
-   "start": 83.0,
-   "end": 89.06,
-   "pred": 8.89
+   "text": "Kedua, buang jamur yang tumbuh di pangkal batang supaya sporanya tidak menyebar.",
+   "start": 74.8,
+   "end": 79.36,
+   "pred": 5.55
   },
   {
    "shot": 11,
-   "text": "Kelima, kalau kebunmu sudah berbuah, belah buahnya. Cangkang tebal berarti ada yang salah.",
-   "start": 90.22,
-   "end": 95.46,
-   "pred": 7.28
+   "text": "Ketiga, buat parit isolasi di sekeliling pohon yang sakit, cukup dalam untuk memutus akarnya dari pohon sehat.",
+   "start": 80.46,
+   "end": 86.72,
+   "pred": 7.83
   },
   {
    "shot": 12,
-   "text": "Joko akhirnya menebang semua pohonnya, lalu memulai lagi dari awal.",
-   "start": 96.78,
-   "end": 100.48,
-   "pred": 5.25
-  },
-  {
-   "shot": 12,
-   "text": "Empat tahun hilang, karena satu keputusan di hari pertama.",
-   "start": 101.78,
-   "end": 104.76,
-   "pred": 4.57
+   "text": "Keempat, pohon yang sudah parah harus dibongkar sampai ke akarnya. Jangan tinggalkan tunggul.",
+   "start": 87.76,
+   "end": 92.86,
+   "pred": 6.38
   },
   {
    "shot": 13,
-   "text": "Di kebun sawit, kesalahan terbesar bukan saat panen… tapi saat memilih bibit.",
-   "start": 106.24,
-   "end": 110.78,
-   "pred": 5.84
+   "text": "Kelima, saat menanam ulang, bersihkan semua sisa batang lama. Jangan biarkan membusuk di kebun.",
+   "start": 93.84,
+   "end": 99.64,
+   "pred": 6.84
+  },
+  {
+   "shot": 14,
+   "text": "Pak Hasan kehilangan beberapa pohon. Tapi kebunnya selamat.",
+   "start": 100.72,
+   "end": 103.74,
+   "pred": 3.8
+  },
+  {
+   "shot": 15,
+   "text": "Karena di kebun sawit, musuh paling berbahaya kadang tidak terlihat… sampai semuanya terlambat.",
+   "start": 104.88,
+   "end": 110.32,
+   "pred": 6.54
+  },
+  {
+   "shot": 15,
+   "text": "Bagikan video ini ke petani sawit yang kamu kenal.",
+   "start": 111.44,
+   "end": 113.24,
+   "pred": 3.12
   }
  ]
 }

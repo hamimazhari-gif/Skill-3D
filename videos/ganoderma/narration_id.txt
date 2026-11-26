@@ -1,0 +1,25 @@
+# shot | sentence  (Ganoderma, jamur pembunuh sawit)
+1 | Malam itu, terdengar suara keras dari kebun Pak Hasan.
+1 | Satu pohon sawitnya tumbang.
+1 | Padahal tidak ada angin dan tidak ada hujan.
+2 | Pagi harinya, ia melihat pangkal batang pohon itu sudah busuk dan rapuh.
+3 | Pak Hasan mengira itu kejadian biasa.
+3 | Tapi beberapa bulan kemudian, pohon di sebelahnya mulai sakit, lalu pohon berikutnya juga.
+4 | Daunnya pucat.
+4 | Pelepah tua patah dan menggantung.
+4 | Daun muda di pucuk tidak mau membuka, berdiri tegak seperti tombak.
+5 | Kakek Rahmat datang, berjongkok di pangkal pohon, lalu menunjuk sesuatu berwarna cokelat yang menempel seperti kipas.
+5 | "Ini Ganoderma, Hasan. Jamur pembunuh sawit."
+6 | "Ia menyerang dari akar, menggerogoti batang dari dalam, lalu menular ke pohon lain lewat akar yang saling bersentuhan."
+7 | Pak Hasan bertanya, "Dari mana datangnya, Kek?"
+7 | Kakek menunjuk tumpukan tunggul tua di sudut kebun, sisa pohon lama yang dibiarkan membusuk saat kebun ditanam ulang.
+7 | "Di situ sarangnya."
+8 | Lalu Kakek mengajarinya cara melawan.
+9 | Pertama, kenali gejalanya sejak awal: daun muda tidak membuka, daun pucat, dan muncul jamur di pangkal batang.
+10 | Kedua, buang jamur yang tumbuh di pangkal batang supaya sporanya tidak menyebar.
+11 | Ketiga, buat parit isolasi di sekeliling pohon yang sakit, cukup dalam untuk memutus akarnya dari pohon sehat.
+12 | Keempat, pohon yang sudah parah harus dibongkar sampai ke akarnya. Jangan tinggalkan tunggul.
+13 | Kelima, saat menanam ulang, bersihkan semua sisa batang lama. Jangan biarkan membusuk di kebun.
+14 | Pak Hasan kehilangan beberapa pohon. Tapi kebunnya selamat.
+15 | Karena di kebun sawit, musuh paling berbahaya kadang tidak terlihat… sampai semuanya terlambat.
+15 | Bagikan video ini ke petani sawit yang kamu kenal.

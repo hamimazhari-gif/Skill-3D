@@ -106,55 +106,55 @@ function cues(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
   const E = EVt;
   return [
-    ['05-airy-whoosh.mp3', 0.0, 0.2],
-    ['04-counter-tick-number-roll.wav', 0.6, 0.2],
-    ['03-subtle-digital-impact.mp3', E.menyiangi + 0.05, 0.18],
-    ['pop-bubble-sound-effect.mp3', E.memupuk + 0.2, 0.2],
-    ['07-smooth-transition-whoosh.mp3', c(2) - 0.3, 0.2],
-    ['06-deep-cinematic-boom.wav', E.panen + 0.5, 0.26],
-    ['08-soft-success-chime.mp3', E.merah, 0.26],
-    ['08-heavy-whoosh.wav', c(3) - 0.35, 0.24],
-    ['04-soft-ui-pop.mp3', E.harga - 0.1, 0.26],
-    ['02-error-denied-buzz.wav', E.harga + 0.1, 0.24],
-    ['09-notification-ding.wav', E.tetangga, 0.22],
-    ['02-error-denied-buzz.wav', E.murah, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.mengambil + 0.1, 0.24],
-    ['03-subtle-digital-impact.mp3', E.membelah + 0.4, 0.34],
-    ['04-soft-ui-pop.mp3', E.dura - 0.15, 0.28],
-    ['02-error-denied-buzz.wav', E.dura + 0.6, 0.18],
-    ['pop-bubble-sound-effect.mp3', E.sebelah - 0.6, 0.22],
-    ['03-subtle-digital-impact.mp3', E.sebelah - 0.05, 0.34],
-    ['04-soft-ui-pop.mp3', E.tenera - 0.15, 0.28],
-    ['08-soft-success-chime.mp3', E.banyak, 0.26],
-    ['07-smooth-transition-whoosh.mp3', E.pinggir - 0.3, 0.22],
-    ['05-airy-whoosh.mp3', E.menghela, 0.2],
-    ['07-smooth-transition-whoosh.mp3', E.palsu - 0.3, 0.2],
-    ['07-riser-build-up.wav', E.dibedakan, 0.14],
-    ['06-deep-cinematic-boom.wav', E.bertahun + 0.2, 0.26],
-    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.24],
-    ['04-soft-ui-pop.mp3', E.pelajaran - 0.1, 0.26],
-    ['08-heavy-whoosh.wav', c(8) - 0.35, 0.24],
-    ['04-soft-ui-pop.mp3', E.penangkar - 0.1, 0.26],
-    ['09-notification-ding.wav', E.izin, 0.24],
-    ['pop-bubble-sound-effect.mp3', E.sertifikat - 0.05, 0.24],
-    ['pop-bubble-sound-effect.mp3', E.label - 0.05, 0.22],
-    ['04-soft-ui-pop.mp3', E.tergiur - 0.05, 0.24],
-    ['02-error-denied-buzz.wav', E.tergiur + 0.5, 0.24],
-    ['04-counter-tick-number-roll-2.wav', E.mahal - 0.1, 0.22],
-    ['08-soft-success-chime.mp3', E.kokoh, 0.22],
-    ['05-airy-whoosh.mp3', E.singkirkan + 0.15, 0.24],
-    ['03-subtle-digital-impact.mp3', E.singkirkan + 0.75, 0.26],
-    ['08-heavy-whoosh.wav', c(11) - 0.35, 0.24],
-    ['03-subtle-digital-impact.mp3', E.belah + 0.3, 0.32],
-    ['02-error-denied-buzz.wav', E.salah, 0.26],
-    ['07-smooth-transition-whoosh.mp3', c(12) - 0.3, 0.2],
-    ['06-deep-cinematic-boom.wav', E.menebang + 0.9, 0.3],
-    ['03-subtle-digital-impact.mp3', E.menebang + 1.5, 0.26],
-    ['08-soft-success-chime.mp3', E.memulai + 0.1, 0.22],
-    ['04-counter-tick-number-roll.wav', E.hilang, 0.18],
-    ['07-smooth-transition-whoosh.mp3', c(13) - 0.3, 0.2],
-    ['07-riser-build-up.wav', E.kesalahan - 0.4, 0.14],
-    ['08-soft-success-chime.mp3', E.memilih, 0.3],
+    ['05-airy-whoosh.mp3', 0.0, 0.16],
+    ['07-riser-build-up.wav', E.keras - 0.6, 0.12],
+    ['06-deep-cinematic-boom.wav', E.keras + 0.8, 0.4],
+    ['03-subtle-digital-impact.mp3', E.keras + 0.85, 0.3],
+    ['04-soft-ui-pop.mp3', E.hasan - 0.1, 0.18],
+    ['05-airy-whoosh.mp3', E.angin, 0.12],
+    ['08-heavy-whoosh.wav', c(2) - 0.35, 0.22],
+    ['03-subtle-digital-impact.mp3', E.busuk + 0.05, 0.26],
+    ['07-smooth-transition-whoosh.mp3', E.bulan - 0.2, 0.2],
+    ['04-counter-tick-number-roll.wav', E.bulan, 0.18],
+    ['02-error-denied-buzz.wav', E.sakit, 0.18],
+    ['02-error-denied-buzz.wav', E.berikutnya, 0.2],
+    ['04-soft-ui-pop.mp3', E.pucat, 0.22],
+    ['03-subtle-digital-impact.mp3', E.menggantung - 0.1, 0.24],
+    ['04-soft-ui-pop.mp3', E.tombak, 0.22],
+    ['05-airy-whoosh.mp3', c(5), 0.16],
+    ['pop-bubble-sound-effect.mp3', E.cokelat - 0.3, 0.24],
+    ['pop-bubble-sound-effect.mp3', E.kipas - 0.2, 0.2],
+    ['06-deep-cinematic-boom.wav', E.ganoderma, 0.32],
+    ['08-heavy-whoosh.wav', c(6) - 0.35, 0.22],
+    ['06-digital-glitch-tech-blip.mp3', E.akar, 0.18],
+    ['07-riser-build-up.wav', E.menular - 0.3, 0.14],
+    ['02-error-denied-buzz.wav', E.bersentuhan, 0.24],
+    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.22],
+    ['07-smooth-transition-whoosh.mp3', E.sudut - 0.2, 0.2],
+    ['06-deep-cinematic-boom.wav', E.sarang, 0.3],
+    ['08-soft-success-chime.mp3', E.melawan, 0.28],
+    ['04-soft-ui-pop.mp3', E.membuka - 0.1, 0.24],
+    ['04-soft-ui-pop.mp3', E.pucat2 - 0.1, 0.24],
+    ['04-soft-ui-pop.mp3', E.jamur1 - 0.1, 0.24],
+    ['03-subtle-digital-impact.mp3', E.buang + 0.1, 0.24],
+    ['03-subtle-digital-impact.mp3', E.buang + 0.7, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.spora, 0.22],
+    ['03-subtle-digital-impact.mp3', E.parit, 0.22],
+    ['08-heavy-whoosh.wav', E.memutus - 0.35, 0.22],
+    ['03-subtle-digital-impact.mp3', E.memutus + 0.05, 0.3],
+    ['08-heavy-whoosh.wav', c(12) - 0.35, 0.22],
+    ['07-riser-build-up.wav', E.dibongkar - 0.6, 0.14],
+    ['06-deep-cinematic-boom.wav', E.dibongkar + 0.2, 0.26],
+    ['02-error-denied-buzz.wav', E.tinggalkan, 0.24],
+    ['03-subtle-digital-impact.mp3', E.bersihkan + 0.3, 0.28],
+    ['08-soft-success-chime.mp3', E.biarkan, 0.26],
+    ['07-smooth-transition-whoosh.mp3', c(14) - 0.3, 0.2],
+    ['08-soft-success-chime.mp3', E.selamat, 0.32],
+    ['08-heavy-whoosh.wav', E.terlihat - 0.35, 0.2],
+    ['06-deep-cinematic-boom.wav', E.terlambat, 0.24],
+    ['08-heavy-whoosh.wav', E.bagikan - 0.35, 0.2],
+    ['04-soft-ui-pop.mp3', E.bagikan, 0.3],
+    ['mouse-click-sound-effect.mp3', E.bagikan + 0.5, 0.4, 0.45],
   ];
 }
 
@@ -196,18 +196,19 @@ function cards(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
   const E = EVt;
   return [
-    {t0: E.menunggu - 0.2, t1: c(2), text: '4 tahun menunggu…'},
-    {t0: E.harga, t1: c(4), text: 'Kenapa harganya murah?'},
-    {t0: E.dura - 0.1, t1: c(5), label: 'DURA', color: '#d8413a', text: 'Cangkang tebal, daging tipis, minyak sedikit'},
-    {t0: E.tenera - 0.1, t1: c(6), label: 'TENERA', text: 'Cangkang tipis, daging tebal, minyak banyak'},
-    {t0: E.palsu - 0.1, t1: c(7), text: 'Bibit palsu tak bisa dibedakan saat masih kecil'},
-    {t0: c(8) + 0.1, t1: E.kedua - 0.1, label: 'LANGKAH 1', text: 'Beli dari penangkar resmi yang berizin'},
-    {t0: E.kedua, t1: c(9), label: 'LANGKAH 2', text: 'Minta sertifikat / label asal benih'},
-    {t0: c(9) + 0.1, t1: c(10), label: 'LANGKAH 3', text: 'Jangan tergiur harga murah'},
-    {t0: c(10) + 0.1, t1: c(11), label: 'LANGKAH 4', text: 'Batang kokoh, daun segar. Buang yang kerdil'},
-    {t0: c(11) + 0.1, t1: c(12), label: 'LANGKAH 5', text: 'Belah buahnya: cangkang tebal = ada yang salah'},
-    {t0: E.hilang - 0.1, t1: c(13), text: '4 tahun hilang…'},
-    {t0: E.kesalahan - 0.2, t1: T.total + 1, text: 'Kesalahan terbesar ada saat memilih bibit 🌴'},
+    {t0: E.tumbang - 0.1, t1: c(2), text: 'Tanpa angin, tanpa hujan…'},
+    {t0: E.bulan - 0.2, t1: c(4), text: 'Beberapa bulan kemudian…'},
+    {t0: E.pucat - 0.1, t1: c(5), label: 'GEJALA', text: 'Daun pucat · pelepah patah · daun tombak'},
+    {t0: E.ganoderma - 0.1, t1: c(6), label: 'GANODERMA', color: '#d8413a', text: 'Jamur busuk pangkal batang'},
+    {t0: E.menular - 0.1, t1: c(7), text: 'Menular lewat akar yang bersentuhan'},
+    {t0: E.tunggul - 0.1, t1: c(8), text: 'Sarangnya: tunggul tua yang membusuk'},
+    {t0: c(9) + 0.1, t1: c(10), label: 'LANGKAH 1', text: 'Kenali gejalanya sejak awal'},
+    {t0: c(10) + 0.1, t1: c(11), label: 'LANGKAH 2', text: 'Buang jamur di pangkal batang'},
+    {t0: c(11) + 0.1, t1: c(12), label: 'LANGKAH 3', text: 'Buat parit isolasi di sekeliling pohon sakit'},
+    {t0: c(12) + 0.1, t1: c(13), label: 'LANGKAH 4', text: 'Bongkar pohon parah sampai ke akarnya'},
+    {t0: c(13) + 0.1, t1: c(14), label: 'LANGKAH 5', text: 'Bersihkan sisa batang lama saat tanam ulang'},
+    {t0: E.musuh - 0.2, t1: E.bagikan - 0.2, text: 'Musuh paling berbahaya kadang tidak terlihat'},
+    {t0: E.bagikan - 0.1, t1: T.total + 1, text: 'Bagikan ke petani sawit yang kamu kenal 🌴'},
   ];
 }
 const easeBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
@@ -252,8 +253,8 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [3, 7, 8, 11];
-  const dipT = [...DIPS.map((k) => T.CUTS[k - 1]), EVt.pinggir - 0.12];
+  const DIPS = [2, 6, 7, 12];
+  const dipT = [...DIPS.map((k) => T.CUTS[k - 1]), EVt.memutus - 0.12, EVt.terlihat - 0.12, EVt.bagikan - 0.12];
   for (const ct of dipT) dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2);
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
   return (
@@ -265,8 +266,11 @@ export const Story = ({lang, captions = true}) => {
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       {captions ? <Captions T={T} t={t} /> : null}
       <ScreenCard T={T} EVt={EVt} t={t} />
+      <AbsoluteFill style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', top: 1440}}>
+        <Icon kind="share" t={t} t0={EVt.bagikan} />
+      </AbsoluteFill>
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
-      <Audio src={staticFile('music/bgm_sawit.wav')} volume={0.16} />
+      <Audio src={staticFile('music/bgm_ganoderma.wav')} volume={0.16} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
         <Sequence key={i} from={Math.max(0, Math.round(at * FPS))} durationInFrames={trim ? Math.round(trim * FPS) : undefined}>
           <Audio src={staticFile(`sfx/${f}`)} volume={v} />
@@ -277,10 +281,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'BIBIT SAWIT PALSU?!', mid: '4 TAHUN SIA-SIA', tag: 'CEK CANGKANGNYA!'},
+  id: {top: 'JAMUR PEMBUNUH SAWIT!', mid: 'GANODERMA', tag: 'KENALI GEJALANYA'},
 };
-// Frozen moment: Dura and Tenera halves side by side on the block, with their tags.
-const THUMB = (EVt) => ({t: EVt.tenera + 0.6, pos: [-0.13, 1.5, 0.02], look: [-0.13, 0.56, -0.5]});
+// Frozen moment: the fan-shaped brackets on the sick palm's base with the GANODERMA tag.
+const THUMB = (EVt) => ({t: EVt.ganoderma + 0.6, pos: [2.55, 1.05, -1.05], look: [2.6, 0.45, -2.65]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);

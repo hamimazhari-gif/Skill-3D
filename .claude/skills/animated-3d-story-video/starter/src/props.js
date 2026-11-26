@@ -1195,3 +1195,58 @@ export function redX(s = 0.5) {
   for (const k of [-1, 1]) { const b = box(s * 1.2, s * 0.16, 0.03, toon('#d8413a', {wear: false}), {center: true, hull: 0.012}); b.rotation.z = k * 0.78; g.add(b); }
   return g;
 }
+
+// ---------- story props: "Ganoderma" ----------
+// Ganoderma bracket (fruiting body): a half-disc shelf, glossy brown with concentric bands and a cream rim.
+// The flat back sits on the trunk at local z=0 and the shelf sticks out along +z.
+let _ganoTex;
+function ganoTex() {
+  if (_ganoTex) return _ganoTex;
+  const c = canvas(256, 256), x = c.getContext('2d');
+  x.fillStyle = '#f1e6c8'; x.fillRect(0, 0, 256, 256);
+  const cols = ['#5a2e1a', '#7a3e22', '#8a4a26', '#6a3420', '#9a5a2e'];
+  for (let k = 0; k < 9; k++) { x.fillStyle = cols[k % cols.length]; x.beginPath(); x.arc(128, 128, 112 - k * 11, 0, 7); x.fill(); }
+  x.fillStyle = 'rgba(255,255,255,0.22)'; x.beginPath(); x.ellipse(110, 100, 50, 18, -0.5, 0, 7); x.fill();
+  _ganoTex = texFrom(c); return _ganoTex;
+}
+export function ganoBracket(r = 0.16) {
+  const g = new THREE.Group();
+  const geo = new THREE.CylinderGeometry(r, r * 0.92, r * 0.22, 26, 1, false, -Math.PI / 2, Math.PI);
+  const m = ink(geo, toon(ganoTex()), {hull: 0.008, edges: false}); m.rotation.y = Math.PI / 2; g.add(m);
+  const rim = ink(new THREE.TorusGeometry(r, r * 0.08, 6, 20, Math.PI), toon('#f6eed6', {wear: false}), {hull: 0.004, edges: false});
+  rim.rotation.x = Math.PI / 2; rim.rotation.z = 0; rim.position.y = r * 0.08; g.add(rim);
+  return g;
+}
+// A cluster of brackets around a trunk base (radius R). Returns {group, items}.
+export function ganoCluster(R = 0.32, n = 4, o = {}) {
+  const r = rng(o.seed || 3); const g = new THREE.Group(); const items = [];
+  const a0 = o.angle ?? 0, spread = o.spread ?? 1.4;
+  for (let i = 0; i < n; i++) {
+    const a = a0 + (i / Math.max(1, n - 1) - 0.5) * spread + (r() - 0.5) * 0.2;
+    const b = ganoBracket((o.size || 0.15) * (0.8 + r() * 0.45));
+    const piv = new THREE.Group(); piv.rotation.y = a; g.add(piv);
+    b.position.set(0, 0.08 + r() * 0.3, R - 0.02); piv.add(b); items.push(b);
+  }
+  return {group: g, items};
+}
+// Unopened spear leaves (daun tombak) standing straight up from a crown.
+export function spearLeaves(n = 4, h = 1.1) {
+  const g = new THREE.Group(); const r = rng(7);
+  for (let i = 0; i < n; i++) { const s = cone(0.035, h * (0.8 + r() * 0.3), '#c8cf7a', {hull: 0.008}); at(s, (r() - 0.5) * 0.16, 0, (r() - 0.5) * 0.16, 0, (r() - 0.5) * 0.12, (r() - 0.5) * 0.12); g.add(s); }
+  return g;
+}
+// Rotten, broken palm base left in the ground: a short stump with a jagged dark top.
+export function rottenStump(R = 0.3, h = 0.45) {
+  const g = new THREE.Group();
+  g.add(cyl(R * 0.95, R * 1.1, h, toon('#5a4030', {paint: {seed: 77, stains: 40, chips: 30, scratches: 10}}), {hull: 0.014}));
+  for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2; const sp = cone(0.07, 0.12 + (i % 3) * 0.08, '#4a3024', {hull: 0.006}); at(sp, Math.cos(a) * R * 0.7, h - 0.02, Math.sin(a) * R * 0.7, 0, 0, (i % 2 ? 0.3 : -0.2)); g.add(sp); }
+  const top = cyl(R * 0.85, R * 0.85, 0.02, toon('#3a2418', {paint: {seed: 78, stains: 40}}), {hull: 0}); at(top, 0, h - 0.02, 0); g.add(top);
+  return g;
+}
+// Root ball under a lifted palm: brown lump with dangling roots.
+export function rootBall(R = 0.45) {
+  const g = new THREE.Group(); const r = rng(11);
+  const b = ball(R, '#6a4a32', {sy: 0.7, seg: 14, hull: 0.012}); g.add(b);
+  for (let i = 0; i < 14; i++) { const a = r() * Math.PI * 2, l = 0.3 + r() * 0.4; const rt = cyl(0.015, 0.03, l, '#8a6a4a', {hull: 0.004}); at(rt, Math.cos(a) * R * 0.6, -R * 0.4, Math.sin(a) * R * 0.6, 0, Math.sin(a) * 2.6, -Math.cos(a) * 2.6); g.add(rt); }
+  return g;
+}
