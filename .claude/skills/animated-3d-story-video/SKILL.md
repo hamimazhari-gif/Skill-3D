@@ -311,3 +311,10 @@ Available primitives (all frame-driven and seeded; add `obj` to the location gro
 - **A time-lapse of years:** a row of signs ('−1 MILIAR TAHUN' … 'SEKARANG') popping one after another over the sentence.
 - **Huge scales:** a mountain of salt (`P.mountain` recoloured white, scaled up to ~50 m) next to a 58 m tower, seen from 60-70 m away; put big signs (14 × 3.6 m) in front of it.
 - **Props:** `saltCrystal`, `droplet`, `mountain(h, r, {volcano, color})`, `raft`; `P.sack(label)` for a labelled sack.
+
+## Notes from "Mata kedutan" (myth vs science, 78 s)
+- **An eye twitch on a character:** alternate 'sleep' (closed eyes) and 'neutral' every 0.09-0.16 s with a `twitch(a, b, step)` list of act() cues, plus small "DUG!" signs; faster for more stress. A closed-eye frame reads as sleepy in a thumbnail, so pick another moment for it.
+- **Thought bubbles:** `P.cloud(0.25)` + two small balls trailing to the head, with a prop inside (`coinPile`, `tinyPerson`, `droplet`), popping in on each speaker's line.
+- **A big eye model:** `P.eyeModel({s})` (`setLid(u)`: −0.6 rad open → closed) with a lid muscle and a nerve that sparks; the lid covers the pupil when half closed, so avoid it for close thumbnails.
+- **A week counter:** calendar signs 'MINGGU 1…4' popping one after another.
+- **Script check:** fast quoted lines in the audio can be under a second each; keep their signs short and accept the aligner when the pauses say so.

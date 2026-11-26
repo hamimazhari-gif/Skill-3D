@@ -227,7 +227,7 @@ const TH = {
   id: {top: 'MATA KEDUTAN\nTANDA REZEKI? 👁️', mid: 'INI KATA SAINS!', bot: ''},
   en: {top: 'MATA KEDUTAN\nTANDA REZEKI? 👁️', mid: 'INI KATA SAINS!', bot: ''},
 };
-const THUMB = (EVt) => ({t: EVt.korsleting + 0.15, loc: 'lab', pos: [0.1, 1.6, 0.2], look: [0.1, 1.6, -3.6]});
+const THUMB = (EVt) => ({t: EVt.kiri + 0.3, loc: 'kantor', pos: [0.2, 1.7, 0.3], look: [0.2, 1.75, -3.3]});
 const fit = (txt, size) => { const n = Math.max(...txt.split('\n').map((l) => [...l].length)); return n > 15 ? Math.round(size * 15.5 / n) : size; };
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
