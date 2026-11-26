@@ -1,4 +1,4 @@
-// All locations in one scene at different x offsets. Story: "Pak Darto dan bonggol pisang" (Indonesian).
+// All locations in one scene at different x offsets. Story: "Bibit sawit palsu" (Indonesian).
 import * as THREE from 'three';
 import {toon, box, cyl, ball, at, sign, signTex, decal, paintTex, pop, smooth, clamp01, gradientMap, rng} from './kit';
 import {makeChar, setCharDesign} from './char';
@@ -6,39 +6,37 @@ import * as P from './props';
 import * as FX from './vfx';
 import {LOOK_PRESETS, MOODS} from './lighting';
 
-export const LOC = {kebun: 0, tepi: 40, teras: 80, pagi: 120};
+export const LOC = {kebun: 0, pengepul: 40, jalan: 80, teras: 120, penangkar: 160};
 
 export {LOOK_PRESETS, MOODS} from './lighting';
 
-// Character design for this story: 'bean' (never used before) — round head, tuft hair, thicker limbs.
-export const CHAR_DESIGN = 'bean';
-const CAST = {
-  darto: {},
-  kakek: {},
-  kakekNight: {hat: 'none'},
-};
+// Character design for this story: 'reed' (new) — round head, side-swept hair, long body, thin limbs, warmer skin.
+export const CHAR_DESIGN = 'reed';
+const CAST = {joko: {}, kakek: {}, kakekNight: {hat: 'none'}, pengepul: {}, tetangga: {}, penjual: {}};
 
-// Lighting plan (camera_plan.md): a dull, overcast and sad garden while it fails (shots 1-2); the garden edge at
-// sunset ("suatu sore"), sad until "emasnya", then warmer; Kakek's porch at night lit by an oil lamp and a wall lamp
-// (moon on); Darto's yard at dawn two weeks later, sun coming up on "asam"; the garden on a fresh morning for the
-// watering, joyful when the leaves turn green, golden hour for the closing lines.
-const sad = {...LOOK_PRESETS.overcast, ...MOODS.sad, keyPos: [-5, 11, 5]};
-const fresh = {...LOOK_PRESETS.day, keyPos: [-6, 9, 7]};
-const freshJoy = {...fresh, ...MOODS.joyful};
-const golden = {...LOOK_PRESETS.goldenHour, keyPos: [-9, 5, 6], grade: {...LOOK_PRESETS.goldenHour.grade, sat: 1.14, vignette: 0.26}};
-const sunsetSad = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 0.85, vignette: 0.45}};
-const sunsetWarm = {...LOOK_PRESETS.sunset, keyPos: [-9, 5, 5], grade: {...LOOK_PRESETS.sunset.grade, sat: 1.12, vignette: 0.3}};
+// Lighting plan (camera_plan.md): the plantation in a time-lapse of days (dawn -> noon -> golden -> dawn) while Joko waits;
+// a bright harvest morning; the collector's yard at midday turning tense on "murah" and sad on "terdiam", lighter on
+// "Tenera"; the roadside flashback in a faded nostalgic grade; Kakek's porch at night (oil lamp); the official nursery
+// bright and clear; the plantation flat and grey while the palms are felled, hopeful on "memulai", golden hour to close.
+const day = {...LOOK_PRESETS.day, keyPos: [-6, 10, 7]};
+const dayJoy = {...day, ...MOODS.joyful};
+const noonL = {...LOOK_PRESETS.noon, keyPos: [-4, 13, 5]};
+const golden = {...LOOK_PRESETS.goldenHour, keyPos: [-9, 5, 6]};
+const dawnL = {...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]};
+const grey = {...LOOK_PRESETS.overcast, ...MOODS.sad, keyPos: [-5, 11, 5]};
 const porch = {...LOOK_PRESETS.night, keyI: 1.0, hemiI: 0.62, keyPos: [-6, 10, 5], hemiSky: '#7a8ac0', hemiGround: '#3a3038',
   grade: {sat: 0.95, contrast: 1.08, tint: '#8aa0e0', tintAmt: 0.06, vignette: 0.5}};
-const porchJoy = {...porch, grade: {...porch.grade, sat: 1.08, tintAmt: 0.1, vignette: 0.38}};
 
 export const LOOK = {
-  kebun: {keys: [{at: 0, ...sad}, {at: 'kecewa', ...sad}, {at: 'cut12', ...fresh, grade: {...fresh.grade, sat: 0.8, vignette: 0.38}}, {at: 'minggu', ...fresh, grade: {...fresh.grade, sat: 0.8, vignette: 0.38}}, {at: 'akar', ...freshJoy},
-    {at: 86.95, ...freshJoy}, {at: 'cut15', ...golden}]},
-  tepi: {keys: [{at: 0, ...sunsetSad}, {at: 'padahal', ...sunsetSad}, {at: 'emas', ...sunsetWarm}]},
-  teras: {keys: [{at: 0, ...porch}, {at: 'tape', ...porch}, {at: 'jadi', ...porchJoy}]},
-  pagi: {keys: [{at: 0, ...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]}, {at: 'membuka', ...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]},
-    {at: 'asam', ...LOOK_PRESETS.day, ...MOODS.joyful, keyPos: [-7, 8, 6]}]},
+  kebun: {keys: [{at: 0, ...dawnL}, {at: 'merawat', ...noonL}, {at: 'memupuk', ...golden}, {at: 'berharap', ...dawnL}, {at: 'cut2', ...dayJoy},
+    {at: 'merah', ...dayJoy}, {at: 'cut11', ...day}, {at: 'salah', ...day, ...MOODS.tense}, {at: 'cut12', ...grey}, {at: 'memulai', ...grey},
+    {at: 'keputusan', ...day}, {at: 'cut13', ...golden}]},
+  pengepul: {keys: [{at: 0, ...noonL}, {at: 'harga', ...noonL}, {at: 'murah', ...noonL, ...MOODS.tense}, {at: 'cut4', ...noonL},
+    {at: 'dura', ...noonL}, {at: 'terdiam', ...noonL, ...MOODS.sad}, {at: 'cut5', ...noonL}, {at: 'tenera', ...noonL, ...MOODS.joyful},
+    {at: 'cut6', ...noonL, ...MOODS.sad}]},
+  jalan: {...LOOK_PRESETS.day, ...MOODS.nostalgic, keyPos: [-6, 9, 6]},
+  teras: porch,
+  penangkar: {keys: [{at: 0, ...day}, {at: 'cut8', ...dayJoy}]},
 };
 
 function ground(w, d, color, paint) {
@@ -52,14 +50,17 @@ const strip = (g, w, d, x, z, color, y, paint) => { const s = ground(w, d, color
 export function storyFx(T, EVt) {
   return {
     flashes: [
-      {t: EVt.emas + 0.05, dur: 0.4, color: '#ffd36a', strength: 0.45},
-      {t: EVt.menjual2 + 0.55, dur: 0.25, color: '#fff4d6', strength: 0.25},
-      {t: EVt.menghijau + 0.1, dur: 0.35, color: '#e8ffd0', strength: 0.3},
-      {t: EVt.penyelamat + 0.05, dur: 0.4, color: '#ffe9b0', strength: 0.4},
-      {t: EVt.bagikan, dur: 0.35, color: '#fff4d6', strength: 0.3},
+      {t: EVt.panen + 0.5, dur: 0.25, color: '#fff4d6', strength: 0.25},
+      {t: EVt.murah, dur: 0.3, color: '#ff8a6a', strength: 0.25},
+      {t: EVt.membelah + 0.45, dur: 0.25, color: '#ffffff', strength: 0.3},
+      {t: EVt.sebelah - 0.05, dur: 0.25, color: '#ffffff', strength: 0.3},
+      {t: EVt.tenera, dur: 0.35, color: '#ffe9b0', strength: 0.35},
+      {t: EVt.bertahun + 0.2, dur: 0.3, color: '#fff4d6', strength: 0.3},
+      {t: EVt.salah, dur: 0.3, color: '#ff6a50', strength: 0.3},
+      {t: EVt.keputusan, dur: 0.3, color: '#fff4d6', strength: 0.25},
     ],
-    shakes: [{t: EVt.emas + 0.6, dur: 0.3, amp: 0.02}, {t: EVt.cacah + 0.3, dur: 0.25, amp: 0.012}, {t: EVt.membuka + 0.2, dur: 0.3, amp: 0.015},
-      {t: EVt.menjual2 + 0.55, dur: 0.35, amp: 0.03}],
+    shakes: [{t: EVt.panen + 0.5, dur: 0.3, amp: 0.025}, {t: EVt.membelah + 0.45, dur: 0.25, amp: 0.015}, {t: EVt.sebelah - 0.05, dur: 0.25, amp: 0.015},
+      {t: EVt.belah + 0.3, dur: 0.25, amp: 0.015}, {t: EVt.menebang + 0.9, dur: 0.4, amp: 0.035}, {t: EVt.menebang + 1.5, dur: 0.4, amp: 0.03}],
   };
 }
 
@@ -68,7 +69,7 @@ export function buildWorld(lang, T, EVt, L) {
   const world = new THREE.Group();
   const chars = [];
   const updaters = [];
-  const post = []; // run after the characters are posed (things that follow a hand)
+  const post = [];
   const locGroups = {};
   const addLoc = (name) => { const g = new THREE.Group(); g.position.x = LOC[name]; world.add(g); locGroups[name] = g; return g; };
   const ch = (name, o, parent, x, z, yaw = 0, y = 0) => {
@@ -81,276 +82,296 @@ export function buildWorld(lang, T, EVt, L) {
   const fx = (g, f, vis) => { g.add(f.obj); updaters.push((t) => { f.update(t); if (vis && !vis(t)) f.obj.visible = false; }); return f; };
   const held = (c, obj, o = {}) => { at(obj, o.x ?? 0.02, o.y ?? -0.04, o.z ?? 0.05, o.ry ?? 0, o.rx ?? 0, o.rz ?? 0); obj.traverse((m) => { m.castShadow = false; }); c.hand(o.hand ?? 1).add(obj); return obj; };
   const lerp = (a, b, u) => a + (b - a) * u;
-  const dayTex = []; for (let n = 1; n <= 14; n++) dayTex.push(signTex(String(n), {w: 512, h: 420, bg: '#f3e7d3', border: false}));
   const ramp = (t, t0, t1) => smooth((t - t0) / (t1 - t0));
-  const bananaRow = (g, list) => list.forEach(([x, z, h, b], i) => { const tr = P.bananaTree({seed: 11 + i, h: h || 2.6, bunch: !!b}); at(tr, x, 0, z, i * 1.3); g.add(tr); });
-  // A small standing tag (price-tag style board on a short stick) for in-world labels on tables.
-  const tag = (text, w, h, o = {}) => { const g = new THREE.Group(); const s = sign(text, w, h, {bg: o.bg || '#f3e7d3', frame: o.frame || '#8a5a2a', depth: 0.02}); at(s, 0, h / 2 + 0.08, 0); g.add(s); g.add(cyl(0.008, 0.008, 0.1, '#7a5236', {hull: 0.003})); return g; };
-  // Smell / gas lines: wavy translucent tubes that rise and fade, looping, between t0 and t1.
-  const smell = (g, p, t0, t1, color = '#f2c86a') => {
-    const grp = new THREE.Group(); at(grp, ...p); g.add(grp);
-    const items = [];
-    for (let i = 0; i < 3; i++) {
-      const pts = []; for (let k = 0; k <= 16; k++) pts.push(new THREE.Vector3(Math.sin(k / 16 * Math.PI * 3) * 0.04, k / 16 * 0.32, 0));
-      const mat = new THREE.MeshBasicMaterial({color, transparent: true, opacity: 0.8, depthWrite: false});
-      const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.012, 5), mat);
-      m.position.x = (i - 1) * 0.08; grp.add(m); items.push({m, mat, ph: i * 0.33});
-    }
-    updaters.push((t) => {
-      grp.visible = t > t0 && t < t1;
-      for (const q of items) { const u = ((t - t0) * 0.9 + q.ph) % 1; q.m.position.y = u * 0.25; q.mat.opacity = Math.sin(u * Math.PI) * 0.85; q.m.scale.setScalar(0.8 + u * 0.4); }
-    });
-    return grp;
+  const tag = (text, w, h, o = {}) => { const g = new THREE.Group(); const stick = o.stick ?? 0.08; const s = sign(text, w, h, {bg: o.bg || '#f3e7d3', fg: o.fg, frame: o.frame || '#8a5a2a', depth: 0.02}); at(s, 0, h / 2 + stick, 0); g.add(s); if (stick > 0) g.add(cyl(0.008, 0.008, stick + 0.02, '#7a5236', {hull: 0.003})); return g; };
+  const tufts = (g, list) => list.map(([x, z, s]) => { const t = new THREE.Group(); at(t, x, 0, z); g.add(t); for (let i = 0; i < 4; i++) { const c = cyl(0.004, 0.03, 0.35 * s, '#6f9a3a', {hull: 0.006}); at(c, (i - 1.5) * 0.05, 0, (i % 2) * 0.04, 0, 0, (i - 1.5) * 0.25); t.add(c); } return t; });
+  // chop rhythm helper: alternate hammerUp / hammerDown cues on the left arm
+  const chopCues = (t0, t1, step, expr) => { const out = []; let i = 0; for (let tt = t0; tt < t1; tt += step, i++) out.push({t: tt, pose: i % 2 ? 'hammerDown' : 'hammerUp', expr}); return out; };
+  // A cutting block (tree stump) where oil palm fruits are split.
+  const cutStation = (g, x, z, h = 0.55) => {
+    const blk = new THREE.Group(); at(blk, x, 0, z); g.add(blk);
+    blk.add(cyl(0.33, 0.36, h, toon('#9a7048', {paint: {seed: 88, stains: 20, chips: 20}}), {hull: 0.014}));
+    const top = cyl(0.33, 0.33, 0.012, '#e0c08a', {hull: 0}); at(top, 0, h, 0); blk.add(top);
+    return {blk, top: h};
+  };
+  // A whole fruit that pops onto the block and splits into two face-up halves.
+  const fruitPair = (blk, type, y, x0, tPop, tSplit) => {
+    const whole = P.fruitWhole(0.085); blk.add(whole);
+    const a = P.fruitHalf(type, 0.085), b = P.fruitHalf(type, 0.085); blk.add(a); blk.add(b);
+    return (t, cx = x0) => {
+      whole.visible = t >= tPop && t < tSplit; whole.scale.setScalar(pop(t, tPop, 0.3)); whole.position.set(cx, y + 0.085, 0);
+      const u = ramp(t, tSplit, tSplit + 0.3);
+      a.visible = b.visible = t >= tSplit;
+      a.position.set(cx - 0.02 - 0.08 * u, y, 0.0); b.position.set(cx + 0.02 + 0.08 * u, y, 0.03);
+      a.rotation.set(0, 0.3, 0); b.rotation.set(0, -0.2, 0);
+    };
   };
 
   // =====================================================================================================
-  // ---------- kebun: Pak Darto's vegetable garden (shots 1, 2, 12, 13, 14, 15) ----------
+  // ---------- kebun: Joko's oil palm plantation (shots 1, 2, 11, 12, 13) ----------
   {
     const g = addLoc('kebun');
-    g.add(ground(140, 140, '#8fb36a'));
-    strip(g, 8, 6.4, 0, -3.4, '#7a5a3a', 0.008, {stains: 30});
-    strip(g, 3, 40, 0, 2, '#b89a6a', 0.006, {stains: 30});
-    const hills = P.hills('#7fa35a'); g.add(hills);
-    // raised beds with seedlings in polybags; one shared leaf material turns yellow / green
-    const leafMat = new THREE.MeshToonMaterial({color: '#b5b84a', gradientMap: gradientMap()});
-    const plants = [];
-    const bedZ = [-1.4, -2.8, -4.2, -5.6];
-    const rr = rng(4);
-    bedZ.forEach((z, bi) => {
-      const bed = box(6.4, 0.22, 0.9, toon('#6a4a32', {paint: {seed: 61 + bi, grain: 200, stains: 24, chips: 0, scratches: 0}})); at(bed, 0, 0, z); g.add(bed);
-      for (let i = 0; i < 7; i++) {
-        const s = P.seedling(leafMat, {seed: bi * 10 + i}); at(s.group, -2.7 + i * 0.9 + (rr() - 0.5) * 0.12, 0.22, z + (rr() - 0.5) * 0.18, rr() * 6); g.add(s.group); plants.push(s);
-      }
-    });
-    const heroPlant = P.seedling(leafMat, {seed: 99, leaves: 6}); at(heroPlant.group, 0.85, 0, 0.55, 0.4); heroPlant.group.scale.setScalar(1.6); g.add(heroPlant.group); plants.push(heroPlant);
-    // the plant under the watering can (shot 12) is moved under the stream each frame
-    const wetPlant = P.seedling(leafMat, {seed: 98}); g.add(wetPlant.group); plants.push(wetPlant);
-    // background: banana trees, a hut, a few trees
-    bananaRow(g, [[-5.2, -8.2, 2.8, 1], [-3.1, -9.6, 2.5], [-1.0, -8.6, 2.9, 1], [1.4, -9.3, 2.6], [3.4, -8.3, 2.8, 1], [5.6, -9.6, 2.6], [-6.6, -5.8, 2.6], [6.7, -6.2, 2.7, 1]]);
-    const hut = P.house(2.6, 2.1, 2.2, {color: '#c9a06a', roof: '#9a7a4a', windows: 1, doorColor: '#7a4a32', seed: 7}); at(hut, -4.9, 0, -3.6, 0.55); g.add(hut);
-    for (const [x, z, s] of [[7.5, -11, 7], [-8.5, -12, 9], [9, -4, 3]]) { const tr = P.tree({seed: s, h: 2.6}); at(tr, x, 0, z); g.add(tr); }
-    // bamboo garden fence on the left, with the "DIJUAL - KEBUN INI" sign tied to it; Darto pulls it out in shot 14
-    for (let i = 0; i < 8; i++) { const p = cyl(0.04, 0.045, 1.1, '#c9a45a', {hull: 0.008}); at(p, -3.6 + i * 0.5, 0, -0.85); g.add(p); }
-    for (const y of [0.45, 0.9]) { const r = cyl(0.03, 0.03, 3.6, '#b8924a', {hull: 0.006, center: true}); at(r, -1.85, y, -0.85, 0, 0, Math.PI / 2); g.add(r); }
-    const sale = new THREE.Group(); at(sale, -0.8, 0, -0.78); g.add(sale);
-    sale.add(cyl(0.05, 0.06, 1.75, '#7a5236'));
-    const saleB = sign(L.sale, 1.0, 0.6, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', sub: L.saleSub}); at(saleB, 0, 1.5, 0.06); sale.add(saleB);
-    // fertiliser sacks next to Darto (pop on "pupuk")
-    const sacks = [[-1.55, -0.35, 0.3], [-2.08, -0.28, -0.2], [-1.82, 0.12, 0.1]].map(([x, z, ry], i) => { const s = P.sack(L.pupuk, {color: '#ece4cc'}); at(s, x, 0, z, ry); g.add(s); return s; });
-    // shot 12: a glass of MOL goes into a bucket of water (1 : 10), then the watering can
-    const bk = P.bucket('#4f7fa6', '#e8eef0', L.ratio); at(bk.group, 0.78, 0, -2.06, -0.2); g.add(bk.group);
-    const jcan12 = P.jerrycan('#3f7fc8', L.mol); at(jcan12.group, 1.25, 0, -2.18, -0.3); g.add(jcan12.group);
-    // root jar on a crate (shot 13)
-    const crate = P.crate(0.5, 0.45, 0.45, null, '#a8784a'); at(crate, -1.45, 0, 0.35, 0.2); g.add(crate);
-    const jar = P.rootJar(); at(jar.group, -1.45, 0.45, 0.35); g.add(jar.group);
-    const jarPlant = P.seedling(leafMat, {seed: 97}); at(jarPlant.group, -1.45, 0.45 + 0.09, 0.35); g.add(jarPlant.group); plants.push(jarPlant);
-    // shot 14: a row of MOL jerrycans + a basket of bonggol kept for the next batch
-    const mols = [1.55, 1.95, 2.35].map((x, i) => { const j = P.jerrycan(['#3f7fc8', '#e8a83a', '#5a9a8a'][i], L.mol); at(j.group, x, 0, -0.55 - (i % 2) * 0.1, -0.2); g.add(j.group); return j; });
-    const basket = new THREE.Group(); at(basket, 1.15, 0, -0.05); g.add(basket);
-    basket.add(cyl(0.3, 0.24, 0.3, toon('#b8925a', {paint: {stripes: {n: 14, color: '#9a7a4a'}, seed: 21}})));
-    const glowMat = toon('#a8865a', {noCache: true, paint: {seed: 34, stains: 30, chips: 20, scratches: 14}});
-    glowMat.emissive = new THREE.Color('#ffb84a'); glowMat.emissiveIntensity = 0;
-    for (const [x, z, s] of [[-0.1, 0.02, 0.6], [0.11, -0.06, 0.55], [0.0, 0.12, 0.5]]) { const b = P.bonggol(s, {seed: x * 100, mat: glowMat}); at(b, x, 0.2, z); basket.add(b); }
-    const glow = new THREE.PointLight('#ffc060', 0, 2.2, 1.5); glow.position.set(1.15, 0.75, 0.25); g.add(glow);
-
-    const darto = ch('darto', {seed: 61}, g, -0.5, -0.3, 0);
-    const can = P.wateringCan('#5a9a8a'); held(darto, can.group, {x: 0.04, y: -0.08, z: 0.06, rz: 0});
-    const cup = P.glassCup('#b8924a'); held(darto, cup, {x: 0.02, y: -0.06, z: 0.06});
-    const wal = P.wallet(); held(darto, wal.group, {x: 0.0, y: -0.02, z: 0.07}); wal.group.scale.setScalar(1.8);
-    const kakek = ch('kakek', {seed: 62}, g, 0.6, -0.3, 0);
-    darto.act([
-      {t: 0, pose: 'limp', expr: 'sad', action: 'slump', dur: 1.6},
-      {t: E('menjual') + 0.1, expr: 'worried', action: 'shake', dur: 0.8},
-      {t: cut(2), pose: 'idle', expr: 'worried'},
-      {t: E('uang') - 0.05, pose: 'give', expr: 'sad'},
-      {t: E('habis') + 0.1, expr: 'cry', action: 'shake', dur: 0.7},
-      {t: E('pupuk') + 0.1, pose: 'give', expr: 'nervous', action: 'tremble', dur: 0.5},
-      {t: E('kecewa') + 0.1, pose: 'facepalm', expr: 'cry', action: 'slump', dur: 1.3},
-      {t: cut(12), pose: 'give', expr: 'happy'},
-      {t: E('sepuluh') + 0.1, expr: 'happy', action: 'nod', dur: 0.6},
-      {t: E('menyiram') - 0.1, pose: 'give', expr: 'cheesy'},
-      {t: cut(13), pose: 'idle', expr: 'surprised'},
-      {t: E('menghijau') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
-      {t: cut(14), pose: 'hips', expr: 'smug'},
-      {t: E('tidakjadi'), pose: 'carry', expr: 'cheesy'},
-      {t: E('menjual2') + 0.35, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
-      {t: E('sejak') - 0.1, pose: 'present', expr: 'proud'},
-      {t: E('membuang') + 0.05, pose: 'hips', expr: 'smug', action: 'shake', dur: 0.7},
-      {t: E('bonggol2') + 0.1, pose: 'presentBoth', expr: 'cheesy'},
-      {t: cut(15), pose: 'wave', expr: 'happy'},
-      {t: E('sampah') + 0.1, pose: 'presentBoth', expr: 'proud'},
-      {t: E('penyelamat') + 0.1, pose: 'cheer', expr: 'toothy', action: 'jump', dur: 0.6},
-      {t: E('simpan') + 0.1, pose: 'point', expr: 'cheesy'},
-      {t: E('bagikan') + 0.05, pose: 'armsUp', expr: 'laugh', action: 'jump', dur: 0.6},
-    ]);
-    kakek.act([
-      {t: 0, pose: 'wave', expr: 'happy'},
-      {t: E('sampah') + 0.2, pose: 'present', expr: 'proud', action: 'nod', dur: 0.6},
-      {t: E('penyelamat') + 0.2, pose: 'pointUp', expr: 'cheesy'},
-      {t: E('bagikan') + 0.15, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.8},
-    ]);
-    // effects
-    fx(g, FX.dust([-0.8, 0.05, -0.75], E('tidakjadi') + 0.3, {n: 8, size: 0.4}), (t) => inShots(t, 14));
-    fx(g, FX.dust([0.6, 0.05, -0.75], E('menjual2') + 0.55, {n: 10, size: 0.5}), (t) => inShots(t, 14));
-    fx(g, FX.smoke([-0.12, 1.0, 0.05], E('habis') + 0.15, {n: 5, size: 0.16, grow: 2, rise: 0.4, life: 0.9, color: '#d8c2a0', opacity: 0.6}), (t) => inShots(t, 2));
-    fx(g, FX.glints([0, 0.7, -2.5], E('menghijau'), {n: 40, spread: 3, color: '#eaffb0'}), (t) => inShots(t, 13));
-    fx(g, FX.glints([-1.45, 0.75, 0.35], E('kuat') - 0.2, {n: 16, spread: 0.4}), (t) => inShots(t, 13));
-    fx(g, FX.glints([1.15, 0.6, -0.05], cut(15) + 0.2, {n: 26, spread: 0.6, color: '#ffe07a'}), (t) => inShots(t, 15));
-    fx(g, FX.glints([1.15, 0.6, -0.05], E('penyelamat'), {n: 22, spread: 0.6}), (t) => inShots(t, 15));
-    fx(g, FX.glints([1.15, 0.6, -0.05], E('bonggol2'), {n: 16, spread: 0.5}), (t) => inShots(t, 14));
-    fx(g, FX.confetti([0, 2.6, -0.4], E('bagikan') + 0.05, {colors: ['#e8a83a', '#7fb35a', '#f2d24a', '#c75b5b', '#f3e7d3']}), (t) => inShots(t, 15));
-    // water stream from the can (shot 12)
-    const NDROP = 40;
-    const dropGeo = new THREE.BufferGeometry(); const dropPos = new Float32Array(NDROP * 3); dropGeo.setAttribute('position', new THREE.BufferAttribute(dropPos, 3));
-    const drops = new THREE.Points(dropGeo, new THREE.PointsMaterial({color: '#cfeaff', size: 0.035, transparent: true, opacity: 0.9, depthWrite: false})); drops.frustumCulled = false; g.add(drops);
-    const splashF = fx(g, FX.splash([0, 0, 0], E('menyiram') + 0.25, {n: 50, speed: 1.0, size: 0.05, repeat: 0}), (t) => inShots(t, 12));
-    const tipW = new THREE.Vector3(), tmpV = new THREE.Vector3();
-    fx(g, FX.splash([0.78, 0.3, -2.06], E('mencampur') + 0.6, {n: 30, speed: 0.7, size: 0.04, color: '#e8dcb0'}), (t) => inShots(t, 12));
-    const darkGreen = new THREE.Color('#5fae3a'), sick0 = new THREE.Color('#b5b84a'), sick1 = new THREE.Color('#d9bf45'), tmpC = new THREE.Color();
-
-    updaters.push((t) => {
-      const s1 = inShots(t, 1, 2), s12 = inShots(t, 12), s13 = inShots(t, 13), s14 = inShots(t, 14), s15 = inShots(t, 15);
-      // --- plant health: kerdil + menguning, then menghijau and growing ---
-      let col, droop, grow;
-      if (t < cut(13)) {
-        const y = t < cut(3) ? ramp(t, E('menguning') - 0.1, E('menguning') + 0.8) : 1;
-        col = tmpC.copy(sick0).lerp(sick1, y); droop = -0.35 - 0.25 * y; grow = 0.75;
-      } else {
-        const gk = ramp(t, E('minggu'), E('akar') + 0.4), ck = ramp(t, E('menghijau') - 0.9, E('menghijau') + 0.6);
-        col = tmpC.copy(sick1).lerp(darkGreen, ck); droop = lerp(-0.6, 0.18, ck); grow = lerp(0.75, 1.7, gk);
-        if (t >= cut(14)) { col = darkGreen; droop = 0.18; grow = 1.75; }
-      }
-      leafMat.color.copy(col);
-      for (const p of plants) { p.top.scale.setScalar(grow); p.leaves.forEach((l, i) => { l.rotation.z = droop + Math.sin(t * 1.7 + i) * 0.04; }); }
-      heroPlant.group.visible = (s1 && t < E('uang') - 0.2) || s13;
-      // --- props by shot ---
-      sale.visible = !s13 && !s15;
-      // pulled out of the ground (wiggling up), then tossed down to the right
-      const lift = s14 ? ramp(t, E('tidakjadi') + 0.1, E('menjual2') + 0.1) : 0;
-      const fall = s14 ? clamp01((t - E('menjual2') - 0.15) / 0.4) : 0;
-      sale.position.set(-0.8 + 0.25 * fall, 0.45 * lift * (1 - fall) + 0.05 * fall, -0.78);
-      sale.rotation.set(0, 0, (lift > 0 && lift < 1 ? Math.sin(t * 22) * 0.06 : 0) - 1.5 * fall * fall);
-      sacks.forEach((s, i) => { s.visible = s1; s.scale.setScalar(pop(t, E('pupuk') - 0.1 + i * 0.1, 0.35)); });
-      wal.group.visible = inShots(t, 2) && t > E('uang') - 0.1 && t < E('kecewa');
-      wal.flap.rotation.x = 1.9 * ramp(t, E('uang') + 0.1, E('habis'));
-      glowMat.emissiveIntensity = s15 ? 0.35 + 0.15 * Math.sin(t * 3) : 0; glow.intensity = s15 ? 1.6 + 0.4 * Math.sin(t * 3) : 0;
-      bk.group.visible = jcan12.group.visible = s12;
-      crate.visible = jar.group.visible = jarPlant.group.visible = s13;
-      jar.roots.scale.set(lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)), lerp(0.25, 1.05, ramp(t, E('akar') - 0.1, E('kuat') + 0.3)), lerp(0.4, 1, ramp(t, E('akar'), E('kuat') + 0.3)));
-      mols.forEach((j, i) => { j.group.visible = s14 || s15; j.group.scale.setScalar(s14 ? pop(t, E('sejak') + 0.15 + i * 0.2, 0.35) : 1); });
-      basket.visible = s14 || s15; basket.scale.setScalar(s14 ? pop(t, E('bonggol2') - 0.15, 0.35) : 1);
-      // --- characters ---
-      darto.group.visible = s1 || s12 || s13 || s14 || s15;
-      kakek.group.visible = s15 && t > E('penyelamat') - 0.15;
-      if (s15 && t < E('penyelamat') - 0.15) darto.group.visible = false;
-      const canOn = s12 && t > E('menyiram') - 0.3;
-      can.group.visible = canOn; cup.visible = s12 && !canOn;
-      cup.rotation.z = -1.7 * (s12 ? ramp(t, E('mencampur') + 0.2, E('mencampur') + 0.6) * (1 - ramp(t, E('sepuluh') + 0.5, E('sepuluh') + 0.8)) : 0);
-      if (s1) darto.group.position.set(-0.15, 0, -0.25);
-      else if (s12) darto.group.position.set(0.15, 0, -2.12);
-      else if (s13) darto.group.position.set(-2.25, 0, -2.12);
-      else if (s14) darto.group.position.set(t < E('sejak') - 0.15 ? -1.35 : 0.65, 0, -0.35);
-      else darto.group.position.set(-0.5, 0, -0.3);
-      // pouring: tilt the can, droplets fall from the spout, the wet plant sits under the stream
-      const pour = s12 ? ramp(t, E('menyiram') - 0.1, E('menyiram') + 0.25) : 0;
-      can.group.rotation.z = -0.75 * pour;
-      const cupPour = s12 && t > E('mencampur') + 0.45 && t < E('sepuluh') + 0.5;
-      drops.visible = pour > 0.5 || cupPour;
-      wetPlant.group.visible = s12;
-    });
-    post.push((t) => {
-      const s12 = inShots(t, 12);
-      if (s12 && t < E('menyiram') - 0.3) {
-        g.updateMatrixWorld(true);
-        tipW.set(0.045, 0.12, 0); cup.localToWorld(tipW); g.worldToLocal(tipW);
-        for (let i = 0; i < NDROP; i++) {
-          const u = ((t * 1.8 + i / NDROP) % 1);
-          dropPos[i * 3] = lerp(tipW.x, 0.78, u) + Math.sin(i * 7.1) * 0.01; dropPos[i * 3 + 1] = lerp(tipW.y, 0.26, u * u); dropPos[i * 3 + 2] = lerp(tipW.z, -2.06, u);
-        }
-        dropGeo.attributes.position.needsUpdate = true;
-        drops.material.color.set('#b8924a');
-      } else if (s12) {
-        drops.material.color.set('#cfeaff');
-        g.updateMatrixWorld(true);
-        tipW.copy(can.tip); can.group.localToWorld(tipW); g.worldToLocal(tipW);
-        wetPlant.group.position.set(tipW.x + 0.08, 0.22, Math.max(-1.75, Math.min(-1.05, tipW.z)));
-        splashF.obj.position.set(wetPlant.group.position.x, 0.42, wetPlant.group.position.z);
-        for (let i = 0; i < NDROP; i++) {
-          const u = ((t * 1.6 + i / NDROP) % 1);
-          tmpV.set(lerp(tipW.x, wetPlant.group.position.x, u) + Math.sin(i * 7.1) * 0.02, lerp(tipW.y, 0.42, u * u), lerp(tipW.z, wetPlant.group.position.z, u) + Math.cos(i * 5.3) * 0.02);
-          dropPos[i * 3] = tmpV.x; dropPos[i * 3 + 1] = tmpV.y; dropPos[i * 3 + 2] = tmpV.z;
-        }
-        dropGeo.attributes.position.needsUpdate = true;
-      }
-    });
-  }
-
-  // =====================================================================================================
-  // ---------- tepi: the edge of the garden at sunset, a pile of cut banana trunks (shots 3, 4, 5) ----------
-  {
-    const g = addLoc('tepi');
-    g.add(ground(140, 140, '#8fae62'));
-    strip(g, 40, 1.1, 0, -0.55, '#b89a6a', 0.006, {stains: 30});
+    g.add(ground(160, 160, '#8fae62'));
     g.add(P.hills('#7a9a5a'));
-    const sun = P.sunBall(2.6, '#ffb060'); sun.position.set(-16, 4.5, -45); g.add(sun);
-    bananaRow(g, [[-3.6, -4.6, 2.7, 1], [-1.4, -5.6, 2.5], [2.2, -4.8, 2.8, 1], [4.4, -6.0, 2.6], [-6.0, -7.0, 2.6], [6.6, -3.8, 2.7, 1], [0.6, -8.4, 2.6, 1]]);
-    // fresh stumps where the trees were cut
-    for (const [x, z] of [[0.9, -2.6], [-1.6, -3.0], [3.4, -2.4]]) { const s = P.bananaLog(0.28, 0.17); s.rotation.z = Math.PI / 2; at(s, x, 0.14, z, 0, 0, Math.PI / 2); g.add(s); }
-    // bamboo fence along the back
-    for (let i = 0; i < 16; i++) { const p = cyl(0.04, 0.045, 1.0, '#c9a45a', {hull: 0.008}); at(p, -6 + i * 0.8, 0, -2.0); g.add(p); }
-    for (const y of [0.45, 0.85]) { const r = cyl(0.03, 0.03, 12.4, '#b8924a', {hull: 0.006, center: true}); at(r, 0, y, -2.0, 0, 0, Math.PI / 2); g.add(r); }
-    const bench = P.bale(1.6, 0.55, 0.42); at(bench, 0, 0, -1.25); g.add(bench);
-    // the pile of cut banana trunks right in front of Darto (hides his legs while he sits)
-    const pile = new THREE.Group(); at(pile, 0, 0, -0.02); g.add(pile);
-    const logs = [[0, -0.62, 1.9], [0.06, -0.3, 1.8], [-0.05, 0.02, 1.95], [0.03, -0.46, 1.7, 1], [-0.04, -0.14, 1.75, 1], [0.02, -0.3, 1.55, 2]];
-    for (const [x, z, len, layer = 0] of logs) { const l = P.bananaLog(len, 0.16); at(l, x, layer * 0.27, z, (x - 0.01) * 2); pile.add(l); }
-    // bonggol pile (the "gold") on the right
-    const goldMat = toon('#a8865a', {noCache: true, paint: {seed: 33, stains: 30, chips: 20, scratches: 14}});
-    goldMat.emissive = new THREE.Color('#ffb020'); goldMat.emissiveIntensity = 0;
-    const corms = [[1.55, 0.25, 1.0], [2.05, 0.05, 0.9], [1.8, -0.35, 1.05], [2.35, -0.25, 0.85], [1.35, -0.2, 0.8]].map(([x, z, s], i) => { const b = P.bonggol(s, {seed: i + 3, mat: goldMat}); at(b, x, 0, z, i * 1.1); g.add(b); return b; });
-    fx(g, FX.glints([1.85, 0.45, -0.05], E('emas') + 0.05, {n: 36, spread: 0.9, color: '#ffe07a'}), (t) => inShots(t, 5));
-    fx(g, FX.glints([1.85, 0.45, -0.05], E('bonggol') + 0.05, {n: 24, spread: 0.7, color: '#ffe07a'}), (t) => inShots(t, 5));
-    const darto = ch('darto', {seed: 63}, g, 0, -1.05, 0);
-    darto.setSit(1);
-    const kakek = ch('kakek', {seed: 64}, g, -4.6, -0.55, 0);
-    const walkEnd = E('lewat') + 0.9;
-    darto.act([
-      {t: 0, pose: 'limp', expr: 'sad'},
-      {t: E('duduk') + 0.1, action: 'slump', dur: 4.5},
-      {t: E('menatap') + 0.1, expr: 'tired'},
-      {t: E('ditebang') + 0.1, expr: 'sad'},
-      {t: E('kakek') + 0.15, pose: 'idle', expr: 'surprised'},
-      {t: E('empat') + 0.1, expr: 'neutral'},
-      {t: E('tertawa') + 0.2, pose: 'shrug', expr: 'confused'},
-      {t: E('mahal') + 0.1, pose: 'idle', expr: 'nervous', action: 'tremble', dur: 0.7},
-      {t: E('padahal') + 0.25, pose: 'idle', expr: 'surprised'},
-      {t: E('emas') + 0.1, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
-      {t: E('menunjuk') + 0.25, pose: 'idle', expr: 'surprised'},
-      {t: E('bonggol') + 0.2, pose: 'chin', expr: 'thinking'},
+    const sign1 = sign(L.kebun, 1.2, 0.36, {bg: '#efd9a8'}); const sp = new THREE.Group(); at(sp, -2.6, 0, -0.9, 0.25); g.add(sp);
+    sp.add(cyl(0.04, 0.05, 1.3, '#7a5236')); at(sign1, 0, 1.2, 0.04); sp.add(sign1);
+    const grid = [];
+    for (let row = 0; row < 4; row++) {
+      const z = -3.0 - row * 4.2, xs = row % 2 ? [-8.2, -3.8, 0.6, 5.0, 9.4] : [-6.0, -1.6, 2.8, 7.2];
+      for (const x of xs) grid.push([x, z]);
+    }
+    const palms = grid.map(([x, z], i) => {
+      const p = P.oilPalm({seed: 30 + i, h: 1.2 + (i % 3) * 0.1, len: 2.5, bunches: 3});
+      const disc = new THREE.Mesh(new THREE.CircleGeometry(1.1, 24), toon('#9a7a52', {paint: {seed: 5, stains: 20}})); disc.rotation.x = -Math.PI / 2; disc.position.set(x, 0.006, z); disc.receiveShadow = true; g.add(disc);
+      at(p.group, x, 0, z, i * 0.7);
+      const stump = cyl(0.27, 0.34, 0.35, toon('#7a6a4a', {paint: {seed: 9, stains: 20}}), {hull: 0.014}); at(stump, x, 0, z); g.add(stump);
+      const topR = cyl(0.27, 0.27, 0.01, '#e8d8a8', {hull: 0}); at(topR, x, 0.35, z); g.add(topR);
+      return {...p, x, z, stump, topR, fallDir: i % 2 ? 1 : -1, delay: (i % 5) * 0.18 + Math.floor(i / 5) * 0.05};
+    });
+    const hero = palms[2]; // (2.8, -3.0): the harvest palm
+    // the bunch that drops on "panen": starts where a crown bunch hangs (computed before the palm joins the scene)
+    hero.group.updateMatrixWorld(true);
+    const p0 = new THREE.Vector3(); hero.bunches[0].getWorldPosition(p0);
+    palms.forEach((p) => g.add(p.group));
+    const dropB = P.fruitBunch(1.0); g.add(dropB);
+    // weeds around the young palms (cleared on "menyiangi")
+    const rw = rng(9);
+    const weeds = tufts(g, Array.from({length: 26}, () => [(rw() - 0.5) * 9, -1.2 - rw() * 6, 0.8 + rw() * 0.8]));
+    const sack = P.sack('PUPUK', {color: '#ece4cc'}); at(sack, -0.4, 0, -1.4, 0.3); g.add(sack);
+    // new certified seedlings (shots 12-13), each with a small white label
+    const seedPos = []; for (let r = 0; r < 3; r++) for (let c = 0; c < 6; c++) seedPos.push([-5.5 + c * 2.2 + (r % 2) * 1.1, -2.0 - r * 2.6]);
+    const seeds = seedPos.map(([x, z], i) => {
+      const s = P.palmSeedling({seed: 50 + i}); at(s.group, x, 0, z, i * 0.4); g.add(s.group);
+      const lb = new THREE.Mesh(new THREE.PlaneGeometry(0.12, 0.07), new THREE.MeshBasicMaterial({color: '#fbf5e6'})); lb.position.set(0, 0.2, 0.172); s.group.add(lb);
+      return s;
+    });
+    // cutting block for shot 11 (Joko splits a fruit: thick shell -> wrong)
+    const st = cutStation(g, 0.0, -0.75, 0.5);
+    const pair11 = fruitPair(st.blk, 'dura', st.top, 0, E('belah') - 0.6, E('belah') + 0.3);
+    const x11 = P.redX(0.4); at(x11, 0, st.top + 0.3, 0.1); st.blk.add(x11);
+
+    const joko = ch('joko', {seed: 81}, g, 0.3, -1.6, 0);
+    const hoe = new THREE.Group(); const hh = cyl(0.018, 0.02, 0.9, '#8a5a3a', {hull: 0.005, center: true}); hh.position.y = -0.35; hoe.add(hh);
+    const hb = box(0.2, 0.14, 0.02, toon('#9aa0a6', {wear: false}), {hull: 0.006, center: true}); hb.position.set(0, -0.82, 0.06); hb.rotation.x = 1.1; hoe.add(hb);
+    held(joko, hoe, {hand: 0, x: 0, y: 0, z: 0.05});
+    const dds = P.dodos(1.15); held(joko, dds, {hand: 1, x: 0, y: 0, z: 0.05});
+    const axe = P.axe(); held(joko, axe, {hand: 0, x: 0, y: 0, z: 0.05});
+    const parang = P.golok(); held(joko, parang, {hand: 0, x: -0.01, y: -0.02, z: 0.06, rz: 0.4}); parang.scale.setScalar(1.3);
+    const kakek = ch('kakek', {seed: 82}, g, 0.7, -1.0, 0);
+    joko.act([
+      {t: 0, pose: 'idle', expr: 'thinking'},
+      {t: E('menunggu'), action: 'nod', dur: 0.5},
+      ...chopCues(E('menyiangi') - 0.1, E('memupuk') - 0.2, 0.3, 'determined'),
+      {t: E('memupuk') - 0.1, pose: 'give', expr: 'happy'},
+      {t: E('berharap') + 0.05, pose: 'chin', expr: 'thinking'},
+      {t: cut(2), pose: 'give', expr: 'determined'},
+      {t: E('panen') + 0.45, pose: 'armsUp', expr: 'cheesy', action: 'jump', dur: 0.6},
+      {t: E('merah') + 0.1, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.7},
+      {t: cut(11), pose: 'idle', expr: 'thinking'},
+      ...chopCues(E('belah') - 0.3, E('belah') + 0.35, 0.3, 'determined'),
+      {t: E('belah') + 0.5, pose: 'idle', expr: 'surprised'},
+      {t: E('salah') + 0.05, pose: 'facepalm', expr: 'grimace', action: 'shake', dur: 0.7},
+      {t: cut(12), pose: 'idle', expr: 'sad'},
+      ...chopCues(E('menebang') - 0.2, E('menebang') + 1.4, 0.32, 'gritted'),
+      {t: E('menebang') + 1.5, pose: 'idle', expr: 'sad', action: 'slump', dur: 1.0},
+      {t: E('memulai') + 0.1, pose: 'give', expr: 'determined'},
+      {t: E('hilang') + 0.1, pose: 'idle', expr: 'tired', action: 'slump', dur: 1.2},
+      {t: E('keputusan') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: cut(13), pose: 'present', expr: 'proud'},
+      {t: E('memilih') + 0.05, pose: 'point', expr: 'determined', action: 'nod', dur: 0.6},
     ]);
-    kakek.act([
-      {t: 0, pose: 'idle', expr: 'happy', action: 'walk', dur: 0},
-      {t: cut(4), pose: 'idle', expr: 'happy', action: 'walk', dur: walkEnd - cut(4)},
-      {t: E('empat') + 0.1, pose: 'hips', expr: 'proud', action: 'nod', dur: 0.6},
-      {t: E('tertawa') + 0.05, pose: 'hips', expr: 'laugh', action: 'hop', dur: 0.8},
-      {t: cut(5), pose: 'hips', expr: 'smug', action: 'talk', dur: E('situ') + 0.4 - cut(5)},
-      {t: E('mahal') + 0.1, pose: 'shrug', expr: 'scheming'},
-      {t: E('emas') + 0.1, pose: 'pointUp', expr: 'cheesy'},
-      {t: E('menunjuk') + 0.05, pose: 'point', expr: 'smug'},
-    ]);
-    fx(g, FX.dust([0, 0.05, -0.9], E('emas') + 0.6, {n: 8, size: 0.5}), (t) => inShots(t, 5));
+    kakek.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('kesalahan') + 0.1, pose: 'pointUp', expr: 'proud', action: 'nod', dur: 0.6},
+      {t: E('memilih') + 0.1, pose: 'present', expr: 'happy'}]);
+    // effects
+    fx(g, FX.sparks([0.75, 0.55, -1.4], E('memupuk') + 0.2, {n: 40, color: '#f4f0e0', size: 0.05, speed: 0.9, life: 1.0, up: 0.6, spread: 1}), (t) => inShots(t, 1));
+    fx(g, FX.dust([p0.x + 0.15, 0.05, p0.z + 0.35], E('panen') + 0.5, {n: 10, size: 0.5}), (t) => inShots(t, 2));
+    fx(g, FX.glints([p0.x + 0.15, 0.35, p0.z + 0.4], E('merah'), {n: 26, spread: 0.5, color: '#ffd07a'}), (t) => inShots(t, 2));
+    fx(g, FX.dust([-0.2, 0.05, -1.3], E('menyiangi') + 0.2, {n: 8, size: 0.4}), (t) => inShots(t, 1));
+    palms.forEach((p, i) => { if (i < 9) fx(g, FX.dust([p.x + p.fallDir * 1.6, 0.05, p.z], E('menebang') + 0.75 + p.delay, {n: 8, size: 0.7, seed: 20 + i}), (t) => inShots(t, 12)); });
+    fx(g, FX.glints([0, 0.6, -2.5], E('memulai') + 0.1, {n: 40, spread: 4, color: '#eaffb0'}), (t) => inShots(t, 12));
+    fx(g, FX.glints([0.0, 0.9, -1.4], E('memilih'), {n: 24, spread: 1.2}), (t) => inShots(t, 13));
     updaters.push((t) => {
-      darto.setSit(t < E('padahal') + 0.25 ? 1 : 0);
-      const u = ramp(t, cut(4), walkEnd);
-      kakek.group.position.x = lerp(-4.6, -1.35, u);
-      kakek.group.visible = t >= cut(4);
-      goldMat.emissiveIntensity = t < E('emas') ? 0 : 0.25 + 0.55 * Math.exp(-(t - E('emas')) * 2.5) + 0.12 * Math.sin(t * 6);
-      corms.forEach((c, i) => { c.position.y = t > E('emas') ? Math.max(0, Math.sin((t - E('emas')) * 9 - i) * 0.04 * Math.exp(-(t - E('emas')) * 2)) : 0; });
+      const s1 = inShots(t, 1), s2 = inShots(t, 2), s11 = inShots(t, 11), s12 = inShots(t, 12), s13 = inShots(t, 13);
+      // palms: time-lapse growth in shot 1, full grown with fruit in 2 and 11, felled in 12, gone in 13
+      const grow = s1 ? lerp(0.22, 1, ramp(t, 0.3, E('berharap') + 0.3)) : 1;
+      const cleared = (s12 && t > E('memulai') - 0.1) || s13;
+      palms.forEach((p) => {
+        p.group.visible = !cleared;
+        p.group.scale.setScalar(grow);
+        p.bunches.forEach((b) => { b.visible = !s1 || t > E('berharap'); });
+        const fall = s12 ? clamp01((t - E('menebang') - 0.35 - p.delay) / 0.6) : 0;
+        p.group.rotation.z = p.fallDir * 1.5 * fall * fall;
+        p.stump.visible = p.topR.visible = cleared;
+      });
+      if (s2 && t > E('panen') + 0.1) hero.bunches[0].visible = false;
+      // the cut bunch drops on "panen"
+      dropB.visible = s2 && t > E('panen') + 0.1;
+      const fu = clamp01((t - E('panen') - 0.1) / 0.4);
+      const bounce = fu >= 1 ? Math.max(0, Math.sin((t - E('panen') - 0.5) * 12) * 0.06 * Math.exp(-(t - E('panen') - 0.5) * 6)) : 0;
+      dropB.position.set(p0.x + 0.15 * fu, Math.max(0, lerp(p0.y, 0, fu * fu)) + bounce, p0.z + 0.35 * fu);
+      dropB.rotation.z = 0.6 * fu;
+      weeds.forEach((w, i) => { w.visible = s1; w.scale.setScalar(Math.max(0.0001, 1 - ramp(t, E('menyiangi') + i * 0.02, E('menyiangi') + 0.6 + i * 0.02))); });
+      sack.visible = s1;
+      seeds.forEach((s, i) => { s.group.visible = cleared; s.group.scale.setScalar(s12 ? pop(t, E('memulai') + i * 0.05, 0.35) : 1.15); });
+      st.blk.visible = s11;
+      pair11(t);
+      x11.visible = s11 && t > E('salah') - 0.1; x11.scale.setScalar(pop(t, E('salah') - 0.1, 0.3));
+      // characters + tools by shot
+      joko.group.visible = s1 || s2 || s11 || s12 || s13;
+      kakek.group.visible = s13;
+      hoe.visible = s1 && t < E('memupuk') - 0.15; dds.visible = s2; axe.visible = s12 && t < E('menebang') + 1.5; parang.visible = s11;
+      if (s1) joko.group.position.set(0.3, 0, -1.55);
+      else if (s2) joko.group.position.set(1.55, 0, -2.25);
+      else if (s11) joko.group.position.set(0.45, 0, -1.2);
+      else if (s12) { const early = t < E('memulai') - 0.12; joko.group.position.set(early ? -0.95 : 0.2, 0, early ? -2.35 : -1.3); }
+      else joko.group.position.set(-0.5, 0, -0.9);
+      kakek.group.position.set(0.65, 0, -0.9);
     });
   }
 
   // =====================================================================================================
-  // ---------- teras: Kakek Rahmat's porch at night, the old recipe (shots 6-10) ----------
+  // ---------- pengepul: the collector's yard (shots 3, 4, 5, 6) ----------
+  {
+    const g = addLoc('pengepul');
+    g.add(ground(160, 160, '#8fae62'));
+    strip(g, 14, 7, 0, -2.4, '#c9a87a', 0.006, {stains: 40});
+    g.add(P.hills('#7a9a5a'));
+    for (const [x, z] of [[-2.6, -1.4], [2.6, -1.4], [-2.6, -4.6], [2.6, -4.6]]) { const p = cyl(0.08, 0.09, 2.7, '#7a5236'); at(p, x, 0, z); g.add(p); }
+    const roof = box(5.8, 0.12, 3.8, toon('#8a5a3a', {paint: {planks: 10, seed: 41}})); at(roof, 0, 2.7, -3.0, 0, 0.1); g.add(roof);
+    const back = box(5.4, 2.6, 0.12, toon('#c9a06a', {paint: {planks: 12, seed: 42}})); at(back, 0, 0, -4.7); back.traverse((m) => { m.castShadow = false; }); g.add(back);
+    const shedSign = sign(L.pengepul, 2.0, 0.42, {bg: '#e8a83a', frame: '#8a5a2a'}); at(shedSign, 0, 2.45, -1.32); g.add(shedSign);
+    const board = P.chalkboard(1.5, 1.05, {text: L.harga, textY: 0.15, draw: (x, W, H) => {
+      x.fillStyle = '#f4efe2'; x.textAlign = 'center'; x.font = `800 ${H * 0.1}px "Inter Display"`;
+      x.fillText(L.joko, W * 0.3, H * 0.92); x.fillText(L.tetangga, W * 0.72, H * 0.92);
+      x.strokeStyle = '#f4efe2'; x.lineWidth = 6; x.beginPath(); x.moveTo(W * 0.1, H * 0.82); x.lineTo(W * 0.92, H * 0.82); x.stroke();
+    }}); at(board, -1.5, 1.6, -4.6); g.add(board);
+    const barJ = box(0.28, 0.16, 0.03, toon('#d8413a', {wear: false}), {hull: 0.008}); at(barJ, -1.5 - 0.3, 1.21, -4.55); g.add(barJ);
+    const barT = box(0.28, 0.62, 0.03, toon('#5fae3a', {wear: false}), {hull: 0.008}); at(barT, -1.5 + 0.33, 1.21, -4.55); g.add(barT);
+    // platform scale with Joko's few bunches; the neighbour's big pile; a pickup truck
+    const scale = new THREE.Group(); at(scale, 0.75, 0, -2.0); g.add(scale);
+    scale.add(box(1.0, 0.14, 0.8, '#5a6068'));
+    const dialPost = cyl(0.03, 0.03, 1.0, '#4a4a50'); at(dialPost, 0.42, 0, -0.38); scale.add(dialPost);
+    const dial = cyl(0.13, 0.13, 0.05, '#f3e7d3', {hull: 0.008, center: true}); at(dial, 0.42, 1.05, -0.36, 0, Math.PI / 2); scale.add(dial);
+    const needle = box(0.012, 0.11, 0.01, '#d8413a', {center: true, hull: 0.003}); needle.position.set(0.42, 1.05, -0.33); scale.add(needle);
+    for (const [x, z, r] of [[-0.2, 0.05, 0], [0.15, -0.1, 1.2], [0.0, 0.2, 2.3]]) { const b = P.fruitBunch(0.85); at(b, x, 0.14, z, r); scale.add(b); }
+    for (const [x, z, y, r] of [[2.3, -2.1, 0, 0], [2.75, -2.3, 0, 1], [2.5, -1.75, 0, 2], [2.1, -2.5, 0, 3], [2.55, -2.05, 0.38, 4], [2.85, -1.85, 0, 5]]) { const b = P.fruitBunch(1.05); at(b, x, y, z, r); g.add(b); }
+    const truck = P.car('#e8a83a'); at(truck, -4.4, 0, -2.6, Math.PI / 2 + 0.2); g.add(truck);
+    // coins: a few for Joko (on the scale), a pile for the neighbour (on a crate)
+    const coinsJ = P.coinPile(4, 3); at(coinsJ, 0.35, 0.14, -1.72); g.add(coinsJ);
+    const crateT = P.crate(0.6, 0.45, 0.5, null, '#a8784a'); at(crateT, 1.95, 0, -1.25); g.add(crateT);
+    const coinsT = P.coinPile(22, 5); at(coinsT, 1.95, 0.45, -1.25); g.add(coinsT);
+    // the cutting block (shots 4-5): Dura on the left, Tenera on the right
+    const st = cutStation(g, -0.15, -0.45, 0.55);
+    const dura = fruitPair(st.blk, 'dura', st.top, 0, E('mengambil') + 0.1, E('membelah') + 0.4);
+    const tenera = fruitPair(st.blk, 'tenera', st.top, 0.14, E('sebelah') - 0.6, E('sebelah') - 0.05);
+    const tagD = tag(L.dura, 0.3, 0.13, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', stick: 0.12}); at(tagD, -0.24, st.top, 0.14, 0.15); st.blk.add(tagD);
+    const tagT = tag(L.tenera, 0.36, 0.13, {bg: '#5fae3a', fg: '#fff3df', frame: '#2f5a2f', stick: 0.12}); at(tagT, 0.2, st.top, 0.16, -0.15); st.blk.add(tagT);
+    const joko = ch('joko', {seed: 83}, g, -1.0, -0.85, 0);
+    const pengepul = ch('pengepul', {seed: 84}, g, 0.85, -2.85, 0);
+    const tetangga = ch('tetangga', {seed: 85}, g, 2.0, -2.7, -0.2);
+    const kakek = ch('kakek', {seed: 86}, g, 0.32, -0.95, 0);
+    const parang = P.golok(); held(kakek, parang, {hand: 0, x: -0.01, y: -0.02, z: 0.06, rz: 0.4}); parang.scale.setScalar(1.3);
+    joko.act([
+      {t: 0, pose: 'present', expr: 'excited'},
+      {t: E('harga') + 0.1, pose: 'idle', expr: 'surprised'},
+      {t: E('tetangga') + 0.1, pose: 'idle', expr: 'shocked', action: 'jump', dur: 0.5},
+      {t: E('kenapa') - 0.05, pose: 'shrug', expr: 'cry', action: 'talk', dur: 1.2},
+      {t: cut(4), pose: 'idle', expr: 'worried'},
+      {t: E('membelah') + 0.5, pose: 'idle', expr: 'surprised'},
+      {t: E('tebal') + 0.1, pose: 'headHold', expr: 'grimace'},
+      {t: E('dura') + 0.1, pose: 'idle', expr: 'shocked', action: 'tremble', dur: 0.6},
+      {t: E('terdiam') - 0.1, pose: 'limp', expr: 'tired', action: 'slump', dur: 1.2},
+      {t: cut(5), pose: 'idle', expr: 'sad'},
+      {t: E('tipis2') + 0.1, pose: 'idle', expr: 'surprised'},
+      {t: E('tenera') + 0.1, pose: 'idle', expr: 'confused'},
+      {t: E('banyak') + 0.1, pose: 'headHold', expr: 'cry'},
+      {t: cut(6), pose: 'idle', expr: 'nervous'},
+      {t: E('menunduk') - 0.05, pose: 'limp', expr: 'sad', action: 'slump', dur: 2.5},
+      {t: E('murah2') - 0.1, pose: 'shrug', expr: 'nervous', action: 'talk', dur: 0.8},
+      {t: E('palsu'), pose: 'limp', expr: 'cry'},
+    ]);
+    pengepul.act([
+      {t: 0, pose: 'hips', expr: 'neutral'},
+      {t: E('harga') - 0.05, pose: 'stop', expr: 'annoyed', action: 'shake', dur: 0.8},
+      {t: E('tetangga') + 0.1, pose: 'present', expr: 'happy'},
+      {t: E('murah') + 0.1, pose: 'shrug', expr: 'smug'},
+    ]);
+    tetangga.act([{t: 0, pose: 'hips', expr: 'smug'}, {t: E('tetangga') + 0.15, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
+      {t: E('kenapa') + 0.2, pose: 'hips', expr: 'smug'}, {t: E('tenera') + 0.2, pose: 'present', expr: 'proud', action: 'nod', dur: 0.6}]);
+    kakek.act([
+      {t: 0, pose: 'idle', expr: 'thinking'},
+      {t: E('mengambil') - 0.05, pose: 'hammerDown', expr: 'determined'},
+      ...chopCues(E('membelah') - 0.2, E('membelah') + 0.45, 0.3, 'determined'),
+      {t: E('lihat') - 0.1, pose: 'present', expr: 'smug', action: 'talk', dur: 3.8},
+      {t: E('dura') + 0.05, pose: 'point', expr: 'annoyed', action: 'talk', dur: 1.8},
+      {t: E('terdiam'), pose: 'idle', expr: 'sad'},
+      ...chopCues(E('sebelah') - 0.5, E('sebelah') + 0.05, 0.28, 'determined'),
+      {t: E('tipis2') - 0.1, pose: 'present', expr: 'happy', action: 'talk', dur: 3.0},
+      {t: E('tenera') + 0.05, pose: 'pointUp', expr: 'proud', action: 'talk', dur: 2.6},
+      {t: E('banyak') + 0.05, pose: 'presentBoth', expr: 'cheesy'},
+      {t: cut(6), pose: 'hips', expr: 'thinking', action: 'talk', dur: 1.0},
+      {t: E('menunduk'), pose: 'hips', expr: 'confused'},
+      {t: E('menghela') - 0.1, pose: 'limp', expr: 'tired', action: 'slump', dur: 1.2},
+      {t: E('palsu') - 0.2, pose: 'present', expr: 'worried', action: 'talk', dur: 5.5},
+    ]);
+    fx(g, FX.sparks([-0.15, 0.62, -0.45], E('membelah') + 0.42, {n: 18, color: '#f2a33a', size: 0.04, speed: 0.8, life: 0.5, seed: 31}), (t) => inShots(t, 4));
+    fx(g, FX.sparks([-0.01, 0.62, -0.45], E('sebelah') - 0.05, {n: 18, color: '#f2a33a', size: 0.04, speed: 0.8, life: 0.5, seed: 32}), (t) => inShots(t, 5));
+    fx(g, FX.glints([0.0, 0.7, -0.4], E('banyak'), {n: 26, spread: 0.3, color: '#ffd84a'}), (t) => inShots(t, 5));
+    fx(g, FX.glints([1.95, 0.7, -1.25], E('tetangga') + 0.05, {n: 20, spread: 0.4, color: '#ffe07a'}), (t) => inShots(t, 3));
+    updaters.push((t) => {
+      const s45 = inShots(t, 4, 5);
+      kakek.group.visible = t >= cut(4);
+      barJ.scale.set(1, pop(t, E('harga') - 0.1, 0.4), 1); barT.scale.set(1, pop(t, E('tetangga') - 0.05, 0.4), 1);
+      coinsJ.scale.setScalar(pop(t, E('harga') + 0.05, 0.35)); coinsT.scale.setScalar(pop(t, E('tetangga'), 0.35));
+      needle.rotation.z = -0.4 + 0.25 * ramp(t, 0.5, 1.5) + Math.sin(t * 12) * 0.03 * (t < 2.5 ? 1 : 0);
+      st.blk.visible = t >= cut(4) - 0.05;
+      // Dura halves slide left when the Tenera fruit arrives
+      dura(t, t < cut(5) ? 0 : -0.14 * ramp(t, cut(5), cut(5) + 0.4));
+      tenera(t, 0.14);
+      tagD.visible = t > E('dura') - 0.15; tagD.scale.setScalar(pop(t, E('dura') - 0.15, 0.3));
+      tagT.visible = t > E('tenera') - 0.15; tagT.scale.setScalar(pop(t, E('tenera') - 0.15, 0.3));
+      parang.visible = s45;
+    });
+  }
+
+  // =====================================================================================================
+  // ---------- jalan: roadside stall, flashback (shot 6) ----------
+  {
+    const g = addLoc('jalan');
+    g.add(ground(160, 160, '#9ab06a'));
+    strip(g, 60, 2.2, 0, 1.4, '#5a5f66', 0.01, {stains: 30});
+    for (let i = 0; i < 14; i++) { const d = box(0.9, 0.012, 0.12, '#f3e7d3', {edges: false, hull: 0}); at(d, -13 + i * 2, 0.014, 1.4); g.add(d); }
+    strip(g, 60, 1.2, 0, -0.1, '#c9a87a', 0.008, {stains: 30});
+    g.add(P.hills('#86a862'));
+    [[-5.5, -6], [-1.5, -8], [3.5, -6.5], [7.0, -8.5]].forEach(([x, z], i) => { const p = P.oilPalm({seed: 60 + i, h: 1.6, fruit: false}); at(p.group, x, 0, z); g.add(p.group); });
+    const table = box(1.9, 0.7, 0.65, toon('#a8784a', {paint: {planks: 5, seed: 17}})); at(table, 0, 0, -1.15); g.add(table);
+    const umb = new THREE.Group(); at(umb, 1.2, 0, -1.6); g.add(umb);
+    umb.add(cyl(0.03, 0.03, 2.4, '#e8e4dc'));
+    const canopy = new THREE.Mesh(new THREE.ConeGeometry(1.3, 0.5, 10, 1, true), toon('#d8413a', {paint: {stripes: {n: 10, color: '#f3e7d3'}, seed: 3}, side: THREE.DoubleSide})); canopy.position.y = 2.45; umb.add(canopy);
+    const cheap = sign(L.murahSign, 1.3, 0.46, {bg: '#f6efe0', fg: '#d8413a', frame: '#8a6a4a'}); const cp = new THREE.Group(); at(cp, -1.5, 0, -0.75, 0.25); g.add(cp);
+    cp.add(cyl(0.03, 0.03, 1.4, '#8a6a4a')); at(cheap, 0, 1.25, 0.03); cp.add(cheap);
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 6; c++) { const s = P.palmSeedling({seed: 70 + r * 6 + c}); s.group.scale.setScalar(0.8); at(s.group, -2.6 + c * 0.75 + (r ? 0.35 : 0), 0, -2.1 - r * 0.6, c); g.add(s.group); }
+    // the two identical seedlings on the table (shot 6, "palsu"): tags "?" then DURA / TENERA
+    [-0.3, 0.3].forEach((x, i) => { const s = P.palmSeedling({seed: 90}); s.group.scale.setScalar(0.62); at(s.group, x, 0.7, -0.95, i * 0.2); g.add(s.group); });
+    const q = [-0.3, 0.3].map((x) => { const tq = tag('?', 0.16, 0.16, {bg: '#f2d24a', stick: 0}); at(tq, x, 0.72, -0.72); g.add(tq); return tq; });
+    const tD = tag(L.dura, 0.26, 0.12, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', stick: 0}); at(tD, -0.3, 0.72, -0.72); g.add(tD);
+    const tT = tag(L.tenera, 0.3, 0.12, {bg: '#5fae3a', fg: '#fff3df', frame: '#2f5a2f', stick: 0}); at(tT, 0.3, 0.72, -0.72); g.add(tT);
+    const penjual = ch('penjual', {seed: 87}, g, 0.55, -1.75, 0);
+    const joko = ch('joko', {seed: 88}, g, -0.75, -0.6, 0.2);
+    penjual.act([{t: 0, pose: 'presentBoth', expr: 'scheming', action: 'talk', dur: 2.0}, {t: E('murah2'), pose: 'present', expr: 'cheesy'}]);
+    joko.act([{t: 0, pose: 'give', expr: 'happy'}, {t: E('murah2') + 0.1, pose: 'give', expr: 'cheesy', action: 'nod', dur: 0.6}]);
+    fx(g, FX.glints([0, 1.0, -0.8], E('bertahun') + 0.2, {n: 24, spread: 0.6}), (t) => inShots(t, 6));
+    updaters.push((t) => {
+      const reveal = t > E('bertahun') + 0.2;
+      q.forEach((x) => { x.visible = !reveal; x.scale.setScalar(pop(t, E('palsu') - 0.1, 0.3)); });
+      tD.visible = tT.visible = reveal; tD.scale.setScalar(pop(t, E('bertahun') + 0.2, 0.3)); tT.scale.setScalar(pop(t, E('bertahun') + 0.3, 0.3));
+      const later = t > E('palsu') - 0.2;
+      penjual.group.visible = joko.group.visible = !later;
+    });
+  }
+
+  // =====================================================================================================
+  // ---------- teras: Kakek's porch at night (shot 7) ----------
   {
     const g = addLoc('teras');
     g.add(ground(140, 140, '#5a7a4a'));
@@ -358,202 +379,108 @@ export function buildWorld(lang, T, EVt, L) {
     const house = P.house(7, 2.9, 3, {color: '#b08454', roof: '#6a3a2a', windows: 2, doorX: -3.0, shutter: '#4f6a4f', doorColor: '#6a3a26', seed: 12}); at(house, 0, 0, -3.0); g.add(house);
     for (const x of [-3.3, 3.3]) { const p = cyl(0.07, 0.08, 2.9, '#6a4a32'); at(p, x, 0, -0.2); g.add(p); }
     const beam = box(7.2, 0.14, 0.16, '#6a4a32'); at(beam, 0, 2.9, -0.2); g.add(beam);
-    bananaRow(g, [[-5.5, -1.0, 2.6, 1], [5.6, -0.6, 2.7], [-6.5, 2.5, 2.5]]);
-    // table
-    // low table: both of them sit behind it on the porch floor benches (legs hidden by the table)
+    [[-5.5, -1.0], [5.8, -0.4]].forEach(([x, z], i) => { const p = P.oilPalm({seed: 70 + i, h: 1.8, fruit: false}); at(p.group, x, 0, z); g.add(p.group); });
     const table = box(2.5, 0.6, 0.75, toon('#7a5236', {paint: {planks: 6, seed: 18}})); at(table, 0, 0, -1.3); g.add(table);
     const bench = P.bale(2.6, 0.45, 0.4); at(bench, 0.4, 0, -2.15); g.add(bench);
     const TT = 0.6;
-    // oil lamp on the table + a wall lamp: the practical lights that light the faces
     const lampB = new THREE.Group(); at(lampB, -1.0, TT, -1.5); g.add(lampB);
     lampB.add(cyl(0.07, 0.09, 0.1, '#8a6a3a', {hull: 0.006}));
     const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.2, 14, 1, true), new THREE.MeshBasicMaterial({color: '#ffe0a0', transparent: true, opacity: 0.35, depthWrite: false})); glass.position.y = 0.2; lampB.add(glass);
     fx(g, FX.flame([-1.0, TT + 0.18, -1.5], {size: 0.16}));
     fx(g, FX.fireLight([-0.8, TT + 0.45, -1.1], {intensity: 5, dist: 6, color: '#ffb060'}));
-    const wl = new THREE.Group(); at(wl, 2.75, 1.95, -2.9); g.add(wl);
-    wl.add(box(0.12, 0.05, 0.14, '#4a3a30')); const wlg = cyl(0.04, 0.05, 0.12, new THREE.MeshBasicMaterial({color: '#ffd98a'}), {hull: 0.006}); at(wlg, 0, 0.05, 0.03); wl.add(wlg);
     fx(g, FX.flame([2.75, 2.12, -2.85], {size: 0.12, seed: 9}));
     fx(g, FX.fireLight([2.3, 2.1, -2.2], {intensity: 3.5, dist: 5.5, color: '#ffb060', seed: 5}));
-    // recipe chalkboard on the wall: lines appear step by step
-    const boards = [0, 1, 2, 3, 4].map((n) => {
-      const b = P.chalkboard(1.45, 1.15, {text: L.resep, textY: 0.16, draw: (x, W, H) => {
-        x.fillStyle = '#f4efe2'; x.textAlign = 'left'; x.textBaseline = 'middle';
-        x.font = `800 ${H * 0.085}px "Inter Display"`;
-        for (let i = 0; i < n; i++) { let fs = H * 0.085; while (x.measureText(L.steps[i]).width > W * 0.9 && fs > 10) { fs -= 2; x.font = `800 ${fs}px "Inter Display"`; } x.fillText(L.steps[i], W * 0.05, H * (0.38 + i * 0.16)); x.font = `800 ${H * 0.085}px "Inter Display"`; }
-        x.strokeStyle = '#f4efe2'; x.lineWidth = 6; x.beginPath(); x.moveTo(W * 0.2, H * 0.27); x.lineTo(W * 0.8, H * 0.27); x.stroke();
-      }});
-      at(b, -1.85, 1.75, -2.9); g.add(b); return b;
-    });
-    // calendar on the wall: "HARI KE" + day number
-    const cal = new THREE.Group(); at(cal, 1.95, 1.72, -2.92); g.add(cal);
-    const calB = box(0.62, 0.72, 0.03, '#f3e7d3', {center: true, hull: 0.012}); cal.add(calB);
-    const calHead = sign(L.day, 0.62, 0.2, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(calHead, 0, 0.27, 0.01); cal.add(calHead);
-    const dayD = decal(dayTex[0], 0.56, 0.46); dayD.position.set(0, -0.07, 0.02); cal.add(dayD);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.016, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); ring.position.set(0, -0.02, 0.04); ring.scale.set(1.45, 1, 1); cal.add(ring);
-    const wk2 = sign(L.weeks2, 0.56, 0.11, {bg: '#f2d24a', frame: '#8a6a2a', depth: 0.02, border: false}); at(wk2, 0, -0.33, 0.03); cal.add(wk2);
-    // chopping board + the bonggol + chopped pieces + machete
-    const board = box(0.52, 0.04, 0.34, toon('#c9a06a', {paint: {planks: 3, seed: 29}})); at(board, -0.55, TT, -1.18); g.add(board);
-    const corm = P.bonggol(0.75, {seed: 5}); at(corm, -0.55, TT + 0.04, -1.2, 0.4); g.add(corm);
-    const pr = rng(31);
-    const pieces = []; for (let i = 0; i < 16; i++) { const p = box(0.055, 0.04, 0.05, i % 3 ? '#efe4c0' : '#c9a87a', {hull: 0.004}); at(p, -0.55 + (pr() - 0.5) * 0.36, TT + 0.04, -1.18 + (pr() - 0.5) * 0.22, pr() * 3); g.add(p); pieces.push(p); }
-    const kg1 = tag(L.kg1, 0.3, 0.15); at(kg1, -0.92, TT, -1.05, 0.2); g.add(kg1);
-    // palm sugar + tag, bucket of rice-washing water + tag
-    const sugars = [[0.25, -1.02], [0.36, -1.1]].map(([x, z]) => { const s = P.palmSugar(); at(s, x, TT, z); g.add(s); return s; });
-    const kg14 = tag(L.kg14, 0.34, 0.15); at(kg14, 0.2, TT, -0.98, -0.1); g.add(kg14);
-    const bk = P.bucket('#4f9a8a', '#ece8dc', L.airBeras); at(bk.group, 0.82, TT, -1.2, -0.2); g.add(bk.group);
-    const l5 = tag(L.liter5, 0.36, 0.15, {bg: '#f2d24a'}); at(l5, 1.15, TT, -0.98, -0.25); g.add(l5);
-    // jerrycan in the middle
-    const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.2, TT, -1.38, 0.15); g.add(jc.group);
-    const tape = P.tapePlate(); at(tape, 0.7, TT, -1.1); g.add(tape);
-    const kakek = ch('kakekNight', {seed: 65}, g, -0.05, -1.9, 0);
-    const darto = ch('darto', {seed: 66}, g, 0.98, -1.9, 0);
-    kakek.setSit(1); darto.setSit(1);
-    const vf = P.vFingers('#f3d9bd'); held(kakek, vf, {hand: 1, x: 0, y: 0, z: 0.03});
-    const stick = cyl(0.012, 0.014, 0.5, '#8a6a3a', {hull: 0.005, center: true}); g.add(stick);
-    const knife = P.golok(); held(kakek, knife, {hand: 0, x: -0.01, y: -0.02, z: 0.06, rz: 0.4});
-    // chop rhythm on "cacah"
-    const chop0 = E('cacah') - 0.1, chop1 = cut(8) - 0.15;
-    const chops = []; for (let tt = chop0; tt < chop1; tt += 0.3) chops.push(tt);
-    const kCues = [
-      {t: 0, pose: 'present', expr: 'smug'},
-      {t: E('malam') + 0.2, action: 'talk', dur: 2.6},
-      {t: E('resep') + 0.1, pose: 'pointUp', expr: 'proud'},
-      {t: cut(7), pose: 'hammerDown', expr: 'happy', action: 'talk', dur: 2.2},
-      {t: E('satukilo') + 0.1, expr: 'proud', action: 'nod', dur: 0.6},
-    ];
-    chops.forEach((tt, i) => kCues.push({t: tt, pose: i % 2 ? 'hammerDown' : 'hammerUp', expr: 'excited'}));
-    kCues.push(
-      {t: cut(8), pose: 'present', expr: 'happy', action: 'talk', dur: 2.0},
-      {t: E('gula') + 0.1, pose: 'give', expr: 'smug'},
-      {t: E('air') + 0.1, pose: 'presentBoth', expr: 'proud'},
-      {t: cut(9), pose: 'present', expr: 'happy', action: 'talk', dur: 2.0},
-      {t: E('jeriken') + 0.1, pose: 'presentBoth', expr: 'proud'},
-      {t: E('tutup') + 0.1, pose: 'hips', expr: 'smug', action: 'nod', dur: 0.6},
-      {t: E('keempat') + 0.05, pose: 'pointUp', expr: 'thinking'},
-      {t: E('buka') + 0.1, pose: 'tap', expr: 'happy'},
-      {t: E('gas') + 0.05, pose: 'idle', expr: 'grimace'},
-      {t: cut(10) - 0.1, pose: 'vsign', expr: 'cheesy', action: 'talk', dur: 1.8},
-      {t: E('duaminggu') + 0.05, pose: 'vsign', expr: 'happy', action: 'nod', dur: 0.6},
-      {t: E('bau') - 0.3, pose: 'chin', expr: 'thinking', action: 'talk', dur: 1.3},
-      {t: E('tape') + 0.1, pose: 'present', expr: 'cheesy'},
-      {t: E('jadi') + 0.05, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
-    );
-    kakek.act(kCues);
-    darto.act([
-      {t: 0, pose: 'idle', expr: 'surprised'},
-      {t: E('resep') + 0.25, pose: 'chin', expr: 'thinking'},
-      {t: cut(7), pose: 'idle', expr: 'happy'},
-      {t: E('cacah') + 0.25, pose: 'idle', expr: 'surprised', action: 'hop', dur: 0.5},
-      {t: cut(8), pose: 'think', expr: 'thinking'},
-      {t: E('air') + 0.2, pose: 'idle', expr: 'happy', action: 'nod', dur: 0.6},
-      {t: cut(9), pose: 'present', expr: 'determined'},
-      {t: E('jeriken') + 0.15, pose: 'idle', expr: 'excited'},
-      {t: E('tutup') + 0.15, action: 'nod', dur: 0.5},
-      {t: E('keempat') + 0.1, pose: 'idle', expr: 'confused'},
-      {t: E('gas') + 0.05, pose: 'headHold', expr: 'disgusted', action: 'tremble', dur: 0.6},
-      {t: cut(10), pose: 'idle', expr: 'worried'},
-      {t: E('duaminggu') + 0.15, pose: 'armsUp', expr: 'shocked', action: 'jump', dur: 0.6},
-      {t: E('bau') + 0.1, pose: 'chin', expr: 'thinking'},
-      {t: E('tape') + 0.2, pose: 'idle', expr: 'cheesy'},
-      {t: E('jadi') + 0.1, pose: 'cheer', expr: 'excited', action: 'jump', dur: 0.6},
-    ]);
-    // effects: chips fly on every chop, a splash when the sugar drops in, gas puffs when the cap opens
-    chops.filter((_, i) => i % 2).forEach((tt, i) => fx(g, FX.sparks([-0.55, TT + 0.08, -1.15], tt + 0.08, {n: 14, color: '#f3e8c8', size: 0.045, speed: 0.9, life: 0.5, up: 1.0, seed: 40 + i}), (t) => inShots(t, 7)));
-    fx(g, FX.splash([0.82, TT + 0.28, -1.2], E('air') + 0.35, {n: 40, speed: 0.9, size: 0.05}), (t) => inShots(t, 8));
-    fx(g, FX.splash([0.2, TT + 0.5, -1.38], E('jeriken') - 0.3, {n: 30, speed: 0.7, size: 0.04, color: '#e8dcb0'}), (t) => inShots(t, 9));
-    const opens = [E('buka') + 0.1, E('buka') + 1.0, E('buka') + 1.9];
-    opens.forEach((tt, i) => fx(g, FX.smoke([0.11, TT + 0.55, -1.38], tt + 0.15, {n: 5, size: 0.18, grow: 2.2, rise: 0.5, life: 0.9, color: '#e8f0d8', opacity: 0.6, seed: 60 + i}), (t) => inShots(t, 9)));
-    fx(g, FX.glints([0.7, TT + 0.15, -1.1], E('tape') + 0.05, {n: 18, spread: 0.3}), (t) => inShots(t, 10));
-    smell(g, [0.7, TT + 0.1, -1.1], E('tape') + 0.1, cut(11), '#f2c86a');
-    const sugarP = sugars.map((s) => s.position.clone());
-    updaters.push((t) => {
-      const s7 = inShots(t, 7), s8 = inShots(t, 8), s9 = inShots(t, 9), s10 = inShots(t, 10);
-      // chalkboard: step lines appear with the narration
-      const step = t < E('pertama') ? 0 : t < E('kedua') ? 1 : t < E('ketiga') ? 2 : t < E('keempat') ? 3 : 4;
-      boards.forEach((b, i) => { b.visible = i === step; b.scale.setScalar(pop(t, E('resep') - 0.1, 0.4)); });
-      // bonggol: pops on "pertama", chopped into pieces on "cacah"
-      const chopU = ramp(t, chop0, chop1);
-      corm.visible = t < chop1 + 0.05; corm.scale.setScalar(t < cut(7) ? 0.0001 : 0.75 * pop(t, E('pertama'), 0.35) * (1 - 0.85 * chopU));
-      pieces.forEach((p, i) => { p.visible = t >= chop0 + (i / pieces.length) * (chop1 - chop0) && t < E('jeriken'); p.scale.setScalar(1 - ramp(t, E('ketiga') + 0.2, E('jeriken') - 0.1)); });
-      board.visible = t < cut(10);
-      kg1.visible = s7; kg1.scale.setScalar(pop(t, E('satukilo') - 0.1, 0.35));
-      knife.visible = s7;
-      // sugar pops on "gula", drops into the bucket on "air"
-      const drop = ramp(t, E('air') + 0.05, E('air') + 0.35);
-      sugars.forEach((s, i) => {
-        s.visible = t >= cut(8) && t < E('air') + 0.4; s.scale.setScalar(pop(t, E('gula') - 0.05 + i * 0.08, 0.35));
-        s.position.set(lerp(sugarP[i].x, 0.82, drop), TT + Math.sin(drop * Math.PI) * 0.25 + drop * 0.15, lerp(sugarP[i].z, -1.2, drop));
-      });
-      kg14.visible = s8; kg14.scale.setScalar(pop(t, E('gula') + 0.05, 0.35));
-      bk.group.visible = t >= cut(8) && t < cut(10); bk.group.scale.setScalar(pop(t, E('lima') - 0.15, 0.35));
-      bk.liquid.material.color.set(t > E('air') + 0.4 ? '#d8c08a' : '#ece8dc');
-      l5.visible = s8; l5.scale.setScalar(pop(t, E('lima') - 0.05, 0.35));
-      // pour the bucket toward the jerrycan
-      const tilt = s9 ? Math.sin(Math.PI * ramp(t, E('ketiga') + 0.2, E('tutup') - 0.2)) : 0;
-      bk.group.rotation.z = 1.0 * tilt; bk.group.position.set(0.82 - 0.25 * tilt, TT + 0.12 * tilt, -1.2);
-      // jerrycan + cap
-      jc.group.visible = t >= cut(9); jc.group.scale.setScalar(pop(t, E('jeriken') - 0.4, 0.35));
-      jc.group.position.x = t >= cut(10) ? 0.42 : 0.2;
-      if (s10 && t < E('bau') - 0.3) jc.group.visible = false;
-      let capUp = t < E('tutup') ? 0.16 : 0.16 * (1 - ramp(t, E('tutup'), E('tutup') + 0.2));
-      for (const o of opens) if (t > o && t < o + 0.55) capUp = Math.max(capUp, 0.12 * Math.sin(Math.PI * (t - o) / 0.55));
-      jc.cap.position.y = 0.48 + capUp; jc.cap.rotation.y = t * (capUp > 0.01 ? 6 : 0);
-      // calendar days flip "setiap hari", circle 14 on "dua minggu"
-      const day = t < E('setiap') ? 1 : 1 + Math.floor(13 * clamp01((t - E('setiap')) / (E('duaminggu') + 0.25 - E('setiap'))));
-      dayD.material.map = dayTex[day - 1];
-      ring.visible = t > E('duaminggu') + 0.25; ring.scale.set(1.25 * pop(t, E('duaminggu') + 0.25, 0.35), pop(t, E('duaminggu') + 0.25, 0.35), 1);
-      cal.rotation.z = t > E('setiap') && t < E('duaminggu') + 0.3 ? Math.sin(t * 20) * 0.02 : 0;
-      tape.visible = s10; tape.scale.setScalar(pop(t, E('tape') - 0.1, 0.35));
-      wk2.visible = ring.visible; wk2.scale.setScalar(pop(t, E('duaminggu') + 0.35, 0.35));
-      vf.visible = s10 && t < E('bau') - 0.3;
-      // stirring stick in the bucket once the sugar is in
-      stick.visible = s8 && t > E('air') + 0.35;
-      const sa = (t - E('air')) * 7;
-      stick.position.set(0.82 + Math.cos(sa) * 0.07, TT + 0.32, -1.2 + Math.sin(sa) * 0.07); stick.rotation.set(Math.sin(sa) * 0.3, 0, -Math.cos(sa) * 0.3);
-    });
+    const wl = new THREE.Group(); at(wl, 2.75, 1.95, -2.9); g.add(wl);
+    wl.add(box(0.12, 0.05, 0.14, '#4a3a30')); const wlg = cyl(0.04, 0.05, 0.12, new THREE.MeshBasicMaterial({color: '#ffd98a'}), {hull: 0.006}); at(wlg, 0, 0.05, 0.03); wl.add(wlg);
+    const lessons = P.chalkboard(1.55, 1.2, {text: L.pelajaran, textY: 0.14, draw: (x, W, H) => {
+      x.fillStyle = '#f4efe2'; x.textAlign = 'left'; x.textBaseline = 'middle';
+      L.lessons.forEach((s, i) => { let fs = H * 0.085; x.font = `800 ${fs}px "Inter Display"`; while (x.measureText(s).width > W * 0.9 && fs > 10) { fs -= 2; x.font = `800 ${fs}px "Inter Display"`; } x.fillText(s, W * 0.06, H * (0.34 + i * 0.13)); });
+      x.strokeStyle = '#f4efe2'; x.lineWidth = 6; x.beginPath(); x.moveTo(W * 0.15, H * 0.24); x.lineTo(W * 0.85, H * 0.24); x.stroke();
+    }}); at(lessons, -1.85, 1.75, -2.9); g.add(lessons);
+    const fruitD = P.fruitHalf('dura', 0.085); at(fruitD, 0.25, TT, -1.2); g.add(fruitD);
+    const sdl = P.palmSeedling({seed: 91}); sdl.group.scale.setScalar(0.55); at(sdl.group, 0.75, TT, -1.25); g.add(sdl.group);
+    const kakek = ch('kakekNight', {seed: 89}, g, -0.05, -1.9, 0);
+    const joko = ch('joko', {seed: 90}, g, 0.98, -1.9, 0);
+    kakek.setSit(1); joko.setSit(1);
+    kakek.act([{t: 0, pose: 'present', expr: 'thinking', action: 'talk', dur: 1.6}, {t: E('pelajaran') - 0.1, pose: 'pointUp', expr: 'proud', action: 'talk', dur: 1.2}]);
+    joko.act([{t: 0, pose: 'limp', expr: 'sad'}, {t: E('pelajaran') + 0.2, pose: 'chin', expr: 'determined', action: 'nod', dur: 0.6}]);
+    updaters.push((t) => { lessons.scale.setScalar(pop(t, E('pelajaran') - 0.15, 0.4)); });
   }
 
   // =====================================================================================================
-  // ---------- pagi: Darto's yard at dawn, two weeks later (shot 11) ----------
+  // ---------- penangkar: the official seed nursery (shots 8, 9, 10) ----------
   {
-    const g = addLoc('pagi');
-    g.add(ground(140, 140, '#8fb36a'));
-    strip(g, 12, 4, 0, -1.2, '#b89a6a', 0.006, {stains: 30});
-    g.add(P.hills('#86a862'));
-    const sun = P.sunBall(2.4, '#ffd08a'); sun.position.set(-14, 3, -42); g.add(sun);
-    const shed = P.house(3.4, 2.4, 2.4, {color: '#c9a06a', roof: '#8a6a3a', windows: 0, doorX: -0.9, doorColor: '#7a4a32', seed: 21}); at(shed, 0, 0, -2.85); g.add(shed);
-    bananaRow(g, [[-3.6, -3.4, 2.7, 1], [3.8, -3.8, 2.6], [-5.8, -6.0, 2.8], [5.9, -6.4, 2.6, 1]]);
-    const cal = new THREE.Group(); at(cal, 1.0, 1.55, -2.78); g.add(cal);
-    cal.add(box(0.5, 0.58, 0.03, '#f3e7d3', {center: true, hull: 0.012}));
-    const ch1 = sign(L.day, 0.5, 0.16, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(ch1, 0, 0.22, 0.01); cal.add(ch1);
-    const d14 = decal(dayTex[0], 0.46, 0.38); d14.position.set(0, -0.06, 0.02); cal.add(d14);
-    const r14 = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.014, 6, 30), new THREE.MeshBasicMaterial({color: '#d8413a'})); r14.position.set(0, -0.03, 0.04); r14.scale.set(1.45, 1, 1); cal.add(r14);
-    const bench = P.bale(1.3, 0.5, 0.45); at(bench, 0.25, 0, -0.85); g.add(bench);
-    const jc = P.jerrycan('#3f7fc8'); at(jc.group, 0.45, 0.45, -0.85, 0.15); g.add(jc.group);
-    const tape = P.tapePlate(); at(tape, -0.05, 0.45, -0.78); g.add(tape);
-    const hens = [[-1.9, -0.4, 0.6], [2.1, -1.4, 2.5], [-2.5, -1.6, -0.4]].map(([x, z, ry]) => { const c = P.chicken(); at(c, x, 0, z, ry); g.add(c); return c; });
-    const darto = ch('darto', {seed: 67}, g, -0.15, -1.35, 0);
-    darto.act([
-      {t: 0, pose: 'chin', expr: 'thinking'},
-      {t: E('kemudian') + 0.1, pose: 'chin', expr: 'nervous', action: 'nod', dur: 0.5},
-      {t: E('membuka') - 0.05, pose: 'give', expr: 'determined'},
-      {t: E('membuka') + 0.35, pose: 'armsUp', expr: 'surprised', action: 'jump', dur: 0.6},
-      {t: E('asam') + 0.1, pose: 'presentBoth', expr: 'cheesy'},
-      {t: E('tape2') + 0.1, pose: 'cheer', expr: 'toothy', action: 'hop', dur: 0.6},
+    const g = addLoc('penangkar');
+    g.add(ground(160, 160, '#8fb36a'));
+    strip(g, 9, 6, 0, -3.6, '#a88a5a', 0.008, {stains: 30});
+    g.add(P.hills('#7fa35a'));
+    for (const [x, z] of [[-4, -0.9], [4, -0.9], [-4, -6.4], [4, -6.4], [0, -6.4], [0, -0.9]]) { const p = cyl(0.05, 0.06, 2.4, '#8a8a90'); at(p, x, 0, z); g.add(p); }
+    const net = new THREE.Mesh(new THREE.PlaneGeometry(8.2, 5.7), new THREE.MeshBasicMaterial({color: '#2f5a2f', transparent: true, opacity: 0.35, side: THREE.DoubleSide, depthWrite: false}));
+    net.rotation.x = -Math.PI / 2; net.position.set(0, 2.4, -3.65); g.add(net);
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) { const s = P.palmSeedling({seed: 100 + r * 7 + c}); s.group.scale.setScalar(1.0 + (r % 2) * 0.05); at(s.group, -3.3 + c * 1.1 + (r % 2) * 0.55, 0, -2.4 - r * 1.1, c * 0.8); g.add(s.group); }
+    const ban = P.banner(L.penangkar, 2.8, 0.5, {poleH: 2.25, bg: '#3f7a3f', frame: '#1f4a1f'}); at(ban, -1.6, 0, -1.55); g.add(ban);
+    const izin = sign(L.berizin, 0.9, 0.28, {bg: '#f2d24a', frame: '#8a6a2a'}); at(izin, -1.6, 1.45, -1.5); g.add(izin);
+    // table with the certificate, the good and the bad seedling, price tags
+    const table = box(2.4, 0.75, 0.7, toon('#a8784a', {paint: {planks: 5, seed: 27}})); at(table, 0.25, 0, -0.55); g.add(table);
+    const TT = 0.75;
+    const cert = P.certificate(L.sertifikat, L.sertifikatSub, 0.46, 0.32); at(cert, 0.25, TT + 0.2, -0.75, 0, -0.25); g.add(cert);
+    const easel = box(0.04, 0.3, 0.04, '#7a5236', {hull: 0.004}); at(easel, 0.25, TT, -0.85, 0, -0.3); g.add(easel);
+    const good = P.palmSeedling({seed: 120}); good.group.scale.setScalar(0.62); at(good.group, 0.85, TT, -0.45); g.add(good.group);
+    const lbl = tag(L.label, 0.34, 0.1, {bg: '#fbf5e6', stick: 0.1}); at(lbl, 1.2, TT, -0.35, -0.3); g.add(lbl);
+    const bad = P.palmSeedling({seed: 121, bad: true}); bad.group.scale.setScalar(0.62); at(bad.group, -0.45, TT, -0.45); g.add(bad.group);
+    const tagM = tag(L.murah, 0.28, 0.12, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a'}); at(tagM, -0.45, TT, -0.2, 0.15); g.add(tagM);
+    const xM = P.redX(0.3); at(xM, -0.45, TT + 0.32, -0.12); g.add(xM);
+    const tagU = tag(L.unggul, 0.3, 0.12, {bg: '#5fae3a', fg: '#fff3df', frame: '#2f5a2f'}); at(tagU, 1.18, TT, -0.25, -0.15); g.add(tagU);
+    const coinsU = P.coinPile(12, 7); at(coinsU, 1.3, TT, -0.6); g.add(coinsU);
+    const coinsM = P.coinPile(3, 8); at(coinsM, -0.8, TT, -0.6); g.add(coinsM);
+    const basket = new THREE.Group(); at(basket, -1.55, 0, -0.35); g.add(basket);
+    basket.add(cyl(0.3, 0.24, 0.32, toon('#b8925a', {paint: {stripes: {n: 14, color: '#9a7a4a'}, seed: 21}})));
+    const afkir = sign(L.afkir, 0.4, 0.14, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', depth: 0.02}); at(afkir, 0, 0.18, 0.3); basket.add(afkir);
+    const kakek = ch('kakek', {seed: 91}, g, -0.2, -1.25, 0);
+    const joko = ch('joko', {seed: 92}, g, 1.05, -1.3, 0);
+    kakek.act([
+      {t: 0, pose: 'present', expr: 'happy', action: 'talk', dur: 2.0},
+      {t: E('penangkar') + 0.05, pose: 'point', expr: 'proud'},
+      {t: E('izin') + 0.05, pose: 'pointUp', expr: 'smug', action: 'nod', dur: 0.6},
+      {t: E('kedua') - 0.05, pose: 'present', expr: 'happy', action: 'talk', dur: 1.4},
+      {t: E('sertifikat') + 0.05, pose: 'presentBoth', expr: 'proud'},
+      {t: cut(9), pose: 'stop', expr: 'annoyed', action: 'shake', dur: 0.8},
+      {t: E('unggul') + 0.05, pose: 'present', expr: 'proud', action: 'nod', dur: 0.6},
+      {t: cut(10), pose: 'present', expr: 'thinking', action: 'talk', dur: 2.0},
+      {t: E('kokoh') + 0.05, pose: 'presentBoth', expr: 'happy'},
+      {t: E('singkirkan') - 0.1, pose: 'carry', expr: 'disgusted'},
+      {t: E('singkirkan') + 0.5, pose: 'hips', expr: 'smug', action: 'nod', dur: 0.6},
     ]);
-    fx(g, FX.smoke([0.36, 1.0, -0.85], E('membuka') + 0.2, {n: 6, size: 0.22, grow: 2.2, rise: 0.6, life: 1.0, color: '#f2e6c0', opacity: 0.6}), (t) => inShots(t, 11));
-    fx(g, FX.glints([-0.05, 0.6, -0.75], E('tape2') - 0.05, {n: 16, spread: 0.3}), (t) => inShots(t, 11));
-    smell(g, [0.36, 0.97, -0.85], E('membuka') + 0.35, cut(12), '#f2c86a');
+    joko.act([
+      {t: 0, pose: 'chin', expr: 'thinking'},
+      {t: E('izin') + 0.2, pose: 'idle', expr: 'happy', action: 'nod', dur: 0.6},
+      {t: E('label') + 0.1, pose: 'point', expr: 'excited'},
+      {t: E('tergiur') + 0.1, pose: 'idle', expr: 'nervous'},
+      {t: E('mahal') + 0.1, pose: 'shrug', expr: 'grimace'},
+      {t: E('segar') + 0.1, pose: 'chin', expr: 'thinking'},
+      {t: E('kerdil') + 0.1, pose: 'idle', expr: 'surprised', action: 'hop', dur: 0.5},
+    ]);
+    fx(g, FX.glints([-1.6, 1.6, -1.4], E('izin'), {n: 24, spread: 0.6}), (t) => inShots(t, 8));
+    fx(g, FX.glints([0.25, TT + 0.25, -0.7], E('sertifikat') + 0.05, {n: 22, spread: 0.4}), (t) => inShots(t, 8));
+    fx(g, FX.glints([0.85, TT + 0.45, -0.45], E('kokoh'), {n: 20, spread: 0.3, color: '#eaffb0'}), (t) => inShots(t, 10));
+    fx(g, FX.glints([0.85, TT + 0.45, -0.45], E('segar'), {n: 20, spread: 0.3, color: '#eaffb0'}), (t) => inShots(t, 10));
+    fx(g, FX.dust([-1.55, 0.3, -0.35], E('singkirkan') + 0.75, {n: 8, size: 0.4}), (t) => inShots(t, 10));
+    const badP = bad.group.position.clone();
     updaters.push((t) => {
-      const u = ramp(t, E('membuka') + 0.15, E('membuka') + 0.7);
-      jc.cap.position.set(-0.09 + 0.35 * u, 0.48 + Math.sin(u * Math.PI) * 0.35 - 0.48 * u * 0.0, 0.02 * u);
-      jc.cap.rotation.z = u * 4;
-      tape.scale.setScalar(pop(t, E('tape2') - 0.15, 0.35));
-      const ff = clamp01((t - cut(11) - 0.2) / (E('membuka') - 0.5 - cut(11) - 0.2));
-      d14.material.map = dayTex[Math.min(13, Math.floor(ff * 13.999))];
-      cal.rotation.z = ff > 0 && ff < 1 ? Math.sin(t * 24) * 0.03 : 0;
-      r14.visible = ff >= 1; r14.scale.set(1.45 * pop(t, E('membuka') - 0.45, 0.3), pop(t, E('membuka') - 0.45, 0.3), 1);
-      hens.forEach((h, i) => { h.rotation.z = Math.max(0, Math.sin(t * 5 + i * 2)) * 0.35; h.position.x += 0; });
+      ban.scale.setScalar(pop(t, E('penangkar') - 0.15, 0.4));
+      izin.scale.setScalar(pop(t, E('izin') - 0.1, 0.35));
+      cert.visible = easel.visible = t >= cut(8); cert.scale.setScalar(pop(t, E('sertifikat') - 0.1, 0.35));
+      lbl.scale.setScalar(pop(t, E('label') - 0.1, 0.35));
+      tagM.visible = coinsM.visible = inShots(t, 9); tagM.scale.setScalar(pop(t, E('tergiur') - 0.1, 0.35)); coinsM.scale.setScalar(pop(t, E('tergiur'), 0.35));
+      xM.visible = inShots(t, 9) && t > E('tergiur') + 0.5; xM.scale.setScalar(pop(t, E('tergiur') + 0.5, 0.3));
+      tagU.visible = coinsU.visible = inShots(t, 9); tagU.scale.setScalar(pop(t, E('unggul') - 0.1, 0.35)); coinsU.scale.setScalar(pop(t, E('mahal') - 0.1, 0.35));
+      // the stunted seedling is tossed into the AFKIR basket on "singkirkan"
+      const u = ramp(t, E('singkirkan') + 0.1, E('singkirkan') + 0.75);
+      bad.group.visible = t >= cut(9) && !(t > E('singkirkan') + 0.8);
+      bad.group.position.set(lerp(badP.x, -1.55, u), lerp(badP.y, 0.3, u) + Math.sin(u * Math.PI) * 0.6, lerp(badP.z, -0.35, u));
+      bad.group.rotation.z = u * 3;
+      basket.visible = inShots(t, 10);
+      good.group.visible = t >= cut(8);
     });
   }
 

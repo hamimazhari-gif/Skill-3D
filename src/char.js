@@ -16,9 +16,10 @@ export const DESIGNS = {
   egg: {head: 'round', hair: 'side', skin: '#fbf1e6', brows: 'thick', limb: [7, 4], legExtra: 0.04, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
   bean: {head: 'round', hair: 'tuft', skin: '#f3d9bd', brows: 'thick', limb: [10, 7], legExtra: 0, torsoExtra: 0.12, cheeks: false, shading: true, shadows: true},
   pill: {head: 'round', hair: 'fringe', skin: '#f8e6d2', brows: 'thick', limb: [8, 5], legExtra: 0.06, torsoExtra: 0.14, cheeks: false, shading: true, shadows: true},
+  reed: {head: 'round', hair: 'side', skin: '#ecc9a4', brows: 'thick', limb: [7, 4], legExtra: 0.08, torsoExtra: 0.16, cheeks: false, shading: true, shadows: true},
 };
 // Designs already used, newest last (pick one that is NOT the last entry for the next video).
-export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean'];
+export const DESIGN_HISTORY = ['classic', 'egg', 'pill', 'bean', 'reed'];
 let D = DESIGNS.classic;
 let SKIN = D.skin;
 export function setCharDesign(name) { D = DESIGNS[name] || DESIGNS.classic; SKIN = D.skin; }
@@ -381,6 +382,10 @@ export const PALETTES = {
   fanA: {jacket: '#e0b84f', lower: '#55606e', tie: '#2f5fa8', hair: '#2b2326', hat: 'none'},
   darto: {jacket: '#5f8f4e', lower: '#6b4a3a', tie: '#e8c35a', hair: '#2b2326', hat: 'none', hairStyle: 'tuft', pocket: '#4f7a40'},
   kakek: {jacket: '#b0694a', lower: '#4a3a36', tie: '#f3e7d3', hair: '#e8e4dc', hat: 'caping', hatColor: '#dcb867', glasses: true, mustache: '#f4f1ea', hairStyle: 'side'},
+  joko: {jacket: '#d9774a', lower: '#3a4a6a', tie: '#f3e7d3', hair: '#2b2326', hat: 'none', hairStyle: 'side', pocket: '#b85f36'},
+  pengepul: {jacket: '#4f7fa6', lower: '#55606e', tie: '#e8c35a', hair: '#3a2a26', hat: 'cap', hatColor: '#e8c35a', hatColor2: '#c9a43a'},
+  tetangga: {jacket: '#c75b5b', lower: '#4a3a36', tie: '#f3e7d3', hair: '#2b2326', hat: 'cap', hatColor: '#5a9a5a', hatColor2: '#3f7a3f', hairStyle: 'tuft'},
+  penjual: {jacket: '#9a6fb0', lower: '#3a3a40', tie: '#e8c35a', hair: '#2b2326', hat: 'bowler', hatColor: '#3d3a4a', mustache: '#2b2326'},
   fanB: {jacket: '#2f5fa8', lower: '#3a3a40', tie: '#f2d24a', hair: '#6a4a2a', hat: 'cap', hatColor: '#f2d24a', hatColor2: '#2f5fa8'},
 };
 

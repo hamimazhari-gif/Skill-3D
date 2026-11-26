@@ -1,17 +1,18 @@
 """Procedural background score for a story video (no samples, no licences).
-Three moods that follow the narration: sad (A minor) -> hopeful (C major) -> warm/bright (F-G-C), ending on a held C chord.
-usage: python3 -I tools/music.py src/data/sentence_times_id.json SHOTS shotB shotC out.wav
-  shotB / shotC: narration shot numbers where the hopeful / warm sections start."""
+Moods follow the narration: sad (A minor), hope (C major), warm (F-G-C); always ends on a held C chord.
+usage: python3 -I tools/music.py src/data/sentence_times_id.json "1:sad,6:hope,11:warm" out.wav
+  plan: comma-separated "<narration shot>:<mood>" — each section starts at that shot's cut."""
 import sys, json, wave
 import numpy as np
 
-src, SHOTS, sB, sC, out = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]), sys.argv[5]
+src, plan, out = sys.argv[1], sys.argv[2], sys.argv[3]
+PLAN = [(int(a), b) for a, b in (x.split(':') for x in plan.split(','))]
 d = json.load(open(src)); S = d['sentences']
 def cut(k):
     i = next(j for j, s in enumerate(S) if s['shot'] == k)
     return (S[i - 1]['end'] + S[i]['start']) / 2
 total = d['duration'] + 0.7 + 1.5
-tB, tC = cut(sB), cut(sC)
+STARTS = [0.0 if k == 1 else cut(k) for k, _ in PLAN]
 SR = 44100
 N = int(total * SR)
 L = np.zeros(N); R = np.zeros(N)
@@ -79,16 +80,17 @@ def section(t0, t1, prog, bpm, mood):
                 mel = [notes[2], notes[1], notes[0], notes[1]]
                 add(bell(hz(mel[b % 4], 5), 1.8, 0.1), tb, 0.3); add(bell(hz(notes[0], 6), 1.4, 0.06), tb + 2.5 * beat, -0.3)
 
-section(0.0, tB, ['Am', 'F', 'C', 'G'], 66, 'sad')
-section(tB, tC, ['C', 'G', 'Am', 'F'], 76, 'hope')
+MOODS = {'sad': (['Am', 'F', 'C', 'G'], 66), 'hope': (['C', 'G', 'Am', 'F'], 76), 'warm': (['F', 'G', 'Em', 'Am', 'F', 'G', 'C', 'C'], 80)}
 tEnd = d['duration'] - 1.2
-section(tC, tEnd, ['F', 'G', 'Em', 'Am', 'F', 'G', 'C', 'C'], 80, 'warm')
+for i, (k, mood) in enumerate(PLAN):
+    t0 = STARTS[i]; t1 = STARTS[i + 1] if i + 1 < len(PLAN) else tEnd
+    prog, bpm = MOODS[mood]; section(t0, t1, prog, bpm, mood)
 # closing chord + soft bell on the last line
 add(pad([hz('C', 4), hz('E', 4), hz('G', 4), hz('C', 3)], total - tEnd, 0.06), tEnd, 0)
 for k, n in enumerate(['C', 'E', 'G', 'C']): add(piano(hz(n, 4 + (k == 3)), 3.5, 0.15), tEnd + k * 0.12, -0.3 + 0.2 * k)
 add(bell(hz('C', 6), 2.5, 0.08), tEnd + 0.5, 0.2)
 # short swells into each new section
-for ts in (tB, tC):
+for ts in STARTS[1:]:
     t = np.arange(int(1.6 * SR)) / SR
     add(np.sin(2 * np.pi * hz('C', 5) * t) * (t / 1.6) ** 2 * 0.04 * np.exp(-np.maximum(0, t - 1.5) * 20), ts - 1.5, 0)
 # simple room reverb (a few feedback delays), fade in/out, normalise
@@ -103,4 +105,4 @@ L *= fade; R *= fade
 peak = max(np.abs(L).max(), np.abs(R).max()); L /= peak / 0.7; R /= peak / 0.7
 pcm = (np.stack([L, R], 1) * 32767).astype('<i2')
 w = wave.open(out, 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes()); w.close()
-print(f'wrote {out}: {total:.1f}s, sections at {tB:.2f}s (hope) and {tC:.2f}s (warm)')
+print(f'wrote {out}: {total:.1f}s, sections ' + ', '.join(f'{m}@{t:.2f}s' for (k, m), t in zip(PLAN, STARTS)))

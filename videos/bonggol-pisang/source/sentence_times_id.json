@@ -1,0 +1,187 @@
+{
+ "duration": 95.08,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Tahun itu, Pak Darto hampir menjual kebunnya.",
+   "start": 0.0,
+   "end": 2.88,
+   "pred": 3.23
+  },
+  {
+   "shot": 2,
+   "text": "Bibit-bibitnya kerdil.",
+   "start": 3.58,
+   "end": 4.82,
+   "pred": 1.43
+  },
+  {
+   "shot": 2,
+   "text": "Daunnya menguning.",
+   "start": 5.08,
+   "end": 6.26,
+   "pred": 1.2
+  },
+  {
+   "shot": 2,
+   "text": "Uangnya habis untuk membeli pupuk, tapi hasilnya tetap mengecewakan.",
+   "start": 6.76,
+   "end": 10.66,
+   "pred": 4.81
+  },
+  {
+   "shot": 3,
+   "text": "Suatu sore, ia duduk lesu di pinggir kebun, menatap tumpukan pohon pisang yang baru ditebang.",
+   "start": 11.52,
+   "end": 16.66,
+   "pred": 6.61
+  },
+  {
+   "shot": 4,
+   "text": "Lalu Kakek Rahmat lewat.",
+   "start": 17.76,
+   "end": 18.98,
+   "pred": 1.5
+  },
+  {
+   "shot": 4,
+   "text": "Tetangganya itu sudah berkebun lebih dari empat puluh tahun.",
+   "start": 19.7,
+   "end": 22.52,
+   "pred": 3.83
+  },
+  {
+   "shot": 4,
+   "text": "Ia tertawa kecil.",
+   "start": 23.18,
+   "end": 24.1,
+   "pred": 1.05
+  },
+  {
+   "shot": 5,
+   "text": "\"Kau beli pupuk mahal-mahal, Darto… padahal emasnya kau buang di situ.\"",
+   "start": 25.24,
+   "end": 29.46,
+   "pred": 4.58
+  },
+  {
+   "shot": 5,
+   "text": "Ia menunjuk ke arah bonggol pisang.",
+   "start": 30.14,
+   "end": 31.66,
+   "pred": 2.18
+  },
+  {
+   "shot": 6,
+   "text": "Malam itu, Kakek Rahmat mengajarinya sebuah resep lama.",
+   "start": 32.82,
+   "end": 35.86,
+   "pred": 3.91
+  },
+  {
+   "shot": 7,
+   "text": "Pertama, ambil bonggol pisang sekitar satu kilo, lalu cacah halus.",
+   "start": 36.6,
+   "end": 40.48,
+   "pred": 4.96
+  },
+  {
+   "shot": 8,
+   "text": "Kedua, larutkan seperempat kilo gula merah ke dalam lima liter air cucian beras.",
+   "start": 41.08,
+   "end": 45.52,
+   "pred": 5.41
+  },
+  {
+   "shot": 9,
+   "text": "Ketiga, campurkan semuanya ke dalam jeriken, lalu tutup rapat.",
+   "start": 46.14,
+   "end": 49.68,
+   "pred": 4.73
+  },
+  {
+   "shot": 9,
+   "text": "Keempat, setiap hari buka tutupnya sebentar untuk membuang gas.",
+   "start": 50.38,
+   "end": 54.14,
+   "pred": 4.43
+  },
+  {
+   "shot": 10,
+   "text": "\"Tunggu dua minggu,\" kata Kakek.",
+   "start": 55.3,
+   "end": 57.54,
+   "pred": 2.25
+  },
+  {
+   "shot": 10,
+   "text": "\"Kalau baunya sudah seperti tape, itu tandanya sudah jadi.\"",
+   "start": 58.08,
+   "end": 61.52,
+   "pred": 3.98
+  },
+  {
+   "shot": 11,
+   "text": "Dua minggu kemudian, Pak Darto membuka jeriken itu.",
+   "start": 62.02,
+   "end": 65.16,
+   "pred": 3.61
+  },
+  {
+   "shot": 11,
+   "text": "Baunya asam manis, persis seperti tape.",
+   "start": 65.66,
+   "end": 68.08,
+   "pred": 2.86
+  },
+  {
+   "shot": 12,
+   "text": "Ia mencampur satu bagian cairan itu dengan sepuluh bagian air, lalu menyiramkannya ke pangkal setiap bibit.",
+   "start": 69.08,
+   "end": 74.26,
+   "pred": 7.21
+  },
+  {
+   "shot": 13,
+   "text": "Minggu demi minggu, daun yang kuning mulai menghijau.",
+   "start": 75.26,
+   "end": 78.36,
+   "pred": 3.76
+  },
+  {
+   "shot": 13,
+   "text": "Akar-akar baru tumbuh lebih kuat.",
+   "start": 78.84,
+   "end": 80.28,
+   "pred": 2.03
+  },
+  {
+   "shot": 14,
+   "text": "Pak Darto tidak jadi menjual kebunnya.",
+   "start": 81.08,
+   "end": 83.1,
+   "pred": 2.4
+  },
+  {
+   "shot": 14,
+   "text": "Sejak hari itu, ia tidak pernah lagi membuang bonggol pisang.",
+   "start": 83.82,
+   "end": 86.62,
+   "pred": 4.21
+  },
+  {
+   "shot": 15,
+   "text": "Karena terkadang, yang kita anggap sampah justru jadi penyelamat.",
+   "start": 87.38,
+   "end": 91.18,
+   "pred": 4.58
+  },
+  {
+   "shot": 15,
+   "text": "Simpan video ini, dan bagikan ke teman yang suka berkebun.",
+   "start": 91.88,
+   "end": 94.76,
+   "pred": 3.98
+  }
+ ]
+}

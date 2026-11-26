@@ -1036,3 +1036,162 @@ export function vFingers(skin = '#f3d9bd') {
   for (const s of [-1, 1]) { const f = cyl(0.02, 0.022, 0.12, toon(skin, {wear: false}), {hull: 0.008, center: true}); at(f, s * 0.025, -0.07, 0.02, 0, 0, s * 0.22); g.add(f); }
   return g;
 }
+
+// ---------- story props: "Bibit sawit palsu" ----------
+// Pinnate frond drawn on a canvas (rachis + leaflets), used as an alpha-tested bent plane.
+const _frondTex = new Map();
+export function frondTex(color = '#4f8f3a', o = {}) {
+  const key = color + (o.sick ? 's' : '');
+  if (_frondTex.has(key)) return _frondTex.get(key);
+  const c = canvas(1024, 256), x = c.getContext('2d'); const r = rng(o.seed || 17);
+  x.lineCap = 'round';
+  const n = 26;
+  for (let i = 0; i < n; i++) {
+    const u = 0.06 + 0.92 * i / n, px = u * 1024, L = 118 * Math.sin(Math.PI * (0.15 + 0.85 * u)) * (o.sick ? 0.7 : 1);
+    for (const s of [-1, 1]) {
+      const ex = px + 60 + r() * 14, ey = 128 + s * L * (0.85 + r() * 0.15) + (o.sick ? 30 : 0);
+      x.strokeStyle = '#351f22'; x.lineWidth = 15; x.beginPath(); x.moveTo(px, 128); x.quadraticCurveTo(px + 24, 128 + s * L * 0.5, ex, ey); x.stroke();
+      x.strokeStyle = i % 2 ? color : shade(color, 0.1); x.lineWidth = 9; x.beginPath(); x.moveTo(px, 128); x.quadraticCurveTo(px + 24, 128 + s * L * 0.5, ex, ey); x.stroke();
+    }
+  }
+  x.strokeStyle = '#351f22'; x.lineWidth = 16; x.beginPath(); x.moveTo(0, 128); x.lineTo(1024, 128); x.stroke();
+  x.strokeStyle = '#8a9a52'; x.lineWidth = 9; x.beginPath(); x.moveTo(0, 128); x.lineTo(1024, 128); x.stroke();
+  const t = texFrom(c); _frondTex.set(key, t); return t;
+}
+// One arching frond of length len, base at origin, pointing along +x.
+export function frond(len = 2.2, o = {}) {
+  const geo = new THREE.PlaneGeometry(len, len * 0.32, 14, 1); geo.translate(len / 2, 0, 0); geo.rotateX(-Math.PI / 2);
+  const p = geo.attributes.position; const arch = o.arch ?? 0.45, lift = o.lift ?? 0.5;
+  for (let i = 0; i < p.count; i++) { const u = p.getX(i) / len; p.setY(i, len * (lift * u - arch * u * u)); }
+  geo.computeVertexNormals();
+  const mat = new THREE.MeshToonMaterial({map: frondTex(o.color || '#4f8f3a', o), gradientMap: gradientMap(), alphaTest: 0.5, side: THREE.DoubleSide});
+  const m = new THREE.Mesh(geo, mat); m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+// Fruit bunch (tandan buah segar): knobbly ball of red / orange / black fruitlets with spines.
+let _bunchTex;
+function bunchTex() {
+  if (_bunchTex) return _bunchTex;
+  const c = canvas(512, 256), x = c.getContext('2d'); const r = rng(5);
+  x.fillStyle = '#3a1a18'; x.fillRect(0, 0, 512, 256);
+  for (let i = 0; i < 420; i++) {
+    const px = r() * 512, py = r() * 256, rr = 9 + r() * 8, k = r();
+    x.fillStyle = k < 0.35 ? '#2a1414' : k < 0.75 ? '#c8321e' : '#f07a1e';
+    x.beginPath(); x.ellipse(px, py, rr, rr * 0.8, r() * 3, 0, 7); x.fill();
+    x.fillStyle = 'rgba(255,255,255,0.25)'; x.beginPath(); x.arc(px - rr * 0.3, py - rr * 0.3, rr * 0.25, 0, 7); x.fill();
+  }
+  _bunchTex = texFrom(c); return _bunchTex;
+}
+export function fruitBunch(s = 1) {
+  const g = new THREE.Group();
+  const geo = new THREE.SphereGeometry(0.22, 20, 14); const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) { const k = 1 + 0.07 * Math.sin(p.getX(i) * 40) * Math.cos(p.getY(i) * 37 + p.getZ(i) * 20); p.setXYZ(i, p.getX(i) * k, p.getY(i) * k * 1.2, p.getZ(i) * k); }
+  geo.computeVertexNormals(); geo.translate(0, 0.25, 0);
+  g.add(ink(geo, toon(bunchTex()), {hull: 0.014, edges: false}));
+  const stalk = cyl(0.04, 0.05, 0.14, '#6a5a3a', {hull: 0.006}); at(stalk, 0, 0.5, 0); g.add(stalk);
+  g.scale.setScalar(s);
+  return g;
+}
+// Oil palm: frond-base-scaled trunk + crown of arching fronds (+ optional bunches). Returns {group, crown, fronds, bunches}.
+let _trunkTex;
+function trunkTex() {
+  if (_trunkTex) return _trunkTex;
+  const c = canvas(256, 512), x = c.getContext('2d');
+  x.fillStyle = '#7a6a4a'; x.fillRect(0, 0, 256, 512);
+  for (let row = 0; row < 12; row++) for (let col = 0; col < 5; col++) {
+    const cx = col * 56 + (row % 2) * 28, cy = row * 46;
+    x.fillStyle = row % 3 ? '#8a7a52' : '#6a5a3e'; x.strokeStyle = '#351f22'; x.lineWidth = 5;
+    x.beginPath(); x.moveTo(cx - 24, cy + 30); x.lineTo(cx, cy - 6); x.lineTo(cx + 24, cy + 30); x.closePath(); x.fill(); x.stroke();
+  }
+  _trunkTex = texFrom(c, [2, 2]); return _trunkTex;
+}
+export function oilPalm(o = {}) {
+  const r = rng(o.seed || 3); const g = new THREE.Group(); const h = o.h ?? 1.6;
+  const trunk = ink(new THREE.CylinderGeometry(0.26, 0.34, h, 14).translate(0, h / 2, 0), toon(trunkTex()), {hull: 0.02, edges: false}); g.add(trunk);
+  const crown = new THREE.Group(); crown.position.y = h; g.add(crown);
+  const fronds = []; const n = o.fronds || 16;
+  for (let i = 0; i < n; i++) {
+    const piv = new THREE.Group(); piv.rotation.y = i * 2.4 + r() * 0.3; crown.add(piv);
+    const tier = i / n;
+    const f = frond((o.len || 2.4) * (0.85 + r() * 0.25), {lift: 0.9 - tier * 0.9, arch: 0.55 + tier * 0.25, color: o.leaf || (i % 3 ? '#4f8f3a' : '#5f9e42')});
+    f.position.y = -0.05 - tier * 0.25; piv.add(f); fronds.push(f);
+  }
+  const bunches = [];
+  if (o.fruit !== false) for (let k = 0; k < (o.bunches || 3); k++) {
+    const a = k * 2.1 + 0.5; const b = fruitBunch(0.9 + r() * 0.2); at(b, Math.cos(a) * 0.36, -0.75, Math.sin(a) * 0.36, a); crown.add(b); bunches.push(b);
+  }
+  return {group: g, crown, fronds, bunches, trunk};
+}
+// Young oil palm seedling in a big black polybag. o.bad -> stunted, droopy, twisted (abnormal).
+export function palmSeedling(o = {}) {
+  const r = rng(o.seed || 7); const g = new THREE.Group();
+  g.add(cyl(0.17, 0.15, 0.32, toon('#26262a', {paint: {seed: 72, stains: 6, chips: 0, scratches: 4}}), {hull: 0.01}));
+  const soil = cyl(0.165, 0.165, 0.02, '#5a3f2e', {hull: 0}); at(soil, 0, 0.31, 0); g.add(soil);
+  const top = new THREE.Group(); top.position.y = 0.32; g.add(top);
+  const bad = !!o.bad;
+  top.add(cyl(0.035, 0.05, bad ? 0.1 : 0.2, bad ? '#8a8a4a' : '#6f8f3a', {hull: 0.006}));
+  const n = bad ? 4 : 6;
+  for (let i = 0; i < n; i++) {
+    const piv = new THREE.Group(); piv.rotation.y = i * 2.4 + r() * 0.4; piv.position.y = bad ? 0.08 : 0.16; top.add(piv);
+    const f = frond(bad ? 0.35 : 0.7, {lift: bad ? 0.1 : 1.0, arch: bad ? 0.9 : 0.6, color: bad ? '#b5a84a' : '#5f9e42', sick: bad});
+    if (bad) f.rotation.x = (r() - 0.5) * 1.2;
+    piv.add(f);
+  }
+  return {group: g, top};
+}
+// Oil palm fruit cut in half: face-up hemisphere showing skin, flesh (mesocarp), shell and kernel. type 'dura' | 'tenera'.
+export function fruitHalf(type = 'dura', R = 0.09) {
+  const c = canvas(512, 512), x = c.getContext('2d');
+  const ring = (k, col) => { x.fillStyle = col; x.beginPath(); x.ellipse(256, 256, 250 * k, 250 * k, 0, 0, 7); x.fill(); };
+  x.clearRect(0, 0, 512, 512);
+  const L = type === 'dura' ? [0.96, 0.8, 0.42] : [0.96, 0.5, 0.39];
+  x.save();
+  ring(1.0, '#b8281a'); ring(L[0], '#f2a33a'); ring(L[1], '#4a2f22'); ring(L[2], '#f3eee0');
+  x.strokeStyle = '#351f22'; x.lineWidth = 8; for (const k of [1.0, L[1], L[2]]) { x.beginPath(); x.ellipse(256, 256, 250 * k - 4, 250 * k - 4, 0, 0, 7); x.stroke(); }
+  x.restore();
+  const g = new THREE.Group();
+  const hg = new THREE.SphereGeometry(R, 20, 10, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2); hg.scale(1, 0.7, 1.25); // bottom half only
+  const body = ink(hg, toon('#c0301e', {wear: false}), {hull: 0.006, edges: false}); body.position.y = R * 0.7; g.add(body);
+  const face = new THREE.Mesh(new THREE.CircleGeometry(R * 1.0, 32), new THREE.MeshToonMaterial({map: texFrom(c), gradientMap: gradientMap()}));
+  face.rotation.x = -Math.PI / 2; face.scale.set(1, 1.25, 1); face.position.y = R * 0.7 + 0.002; g.add(face);
+  return g;
+}
+// Whole oil palm fruit (egg-shaped, red to black).
+export function fruitWhole(R = 0.09) { return ball(R, '#c0301e', {sx: 1, sy: 1, sz: 1.25, seg: 18, hull: 0.007}); }
+// Harvesting chisel on a pole (dodos). Pole along -y from the grip, blade at the far end.
+export function dodos(len = 1.8) {
+  const g = new THREE.Group();
+  const pole = cyl(0.02, 0.022, len, '#c9a45a', {hull: 0.006, center: true}); pole.position.y = -len / 2 + 0.2; g.add(pole);
+  const blade = box(0.09, 0.14, 0.012, toon('#c8ccd0', {wear: false}), {hull: 0.005, center: true}); blade.position.y = -len + 0.13; g.add(blade);
+  return g;
+}
+// Axe (kapak): handle along -y from the grip, head at the end.
+export function axe() {
+  const g = new THREE.Group();
+  const h = cyl(0.02, 0.024, 0.7, '#8a5a3a', {hull: 0.006, center: true}); h.position.y = -0.3; g.add(h);
+  const head = box(0.18, 0.1, 0.03, toon('#9aa0a6', {wear: false}), {hull: 0.006, center: true}); head.position.set(0.06, -0.62, 0); g.add(head);
+  return g;
+}
+// A paper certificate with a red stamp (held or pinned).
+export function certificate(title, sub, w = 0.42, h = 0.3) {
+  const c = canvas(768, Math.round(768 * h / w)), x = c.getContext('2d'); const W = c.width, H = c.height;
+  x.fillStyle = '#fbf5e6'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = '#b8924a'; x.lineWidth = 16; x.strokeRect(14, 14, W - 28, H - 28);
+  x.fillStyle = '#351f22'; x.textAlign = 'center'; x.font = `900 ${H * 0.15}px "Inter Display"`; x.fillText(title, W / 2, H * 0.3);
+  x.font = `700 ${H * 0.08}px "Inter Display"`; x.fillText(sub, W / 2, H * 0.45);
+  x.fillStyle = 'rgba(53,31,34,0.35)'; for (let i = 0; i < 3; i++) x.fillRect(W * 0.15, H * (0.56 + i * 0.08), W * 0.45, H * 0.025);
+  x.strokeStyle = '#d8413a'; x.lineWidth = 12; x.beginPath(); x.arc(W * 0.78, H * 0.68, H * 0.16, 0, 7); x.stroke();
+  x.beginPath(); x.arc(W * 0.78, H * 0.68, H * 0.1, 0, 7); x.stroke();
+  const g = new THREE.Group();
+  const geo = new THREE.BoxGeometry(w, h, 0.006);
+  const side = toon('#fbf5e6', {wear: false}); const front = toon(texFrom(c));
+  const m = new THREE.Mesh(geo, [side, side, side, side, front, front]); g.add(m);
+  const hull = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color: INK, side: THREE.BackSide})); hull.scale.set(1 + 0.02 / w, 1 + 0.02 / h, 2); g.add(hull);
+  return g;
+}
+// Red X mark (two crossed bars) for "wrong" moments.
+export function redX(s = 0.5) {
+  const g = new THREE.Group();
+  for (const k of [-1, 1]) { const b = box(s * 1.2, s * 0.16, 0.03, toon('#d8413a', {wear: false}), {center: true, hull: 0.012}); b.rotation.z = k * 0.78; g.add(b); }
+  return g;
+}

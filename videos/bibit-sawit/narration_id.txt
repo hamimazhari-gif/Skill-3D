@@ -1,0 +1,26 @@
+# shot | sentence  (Bibit sawit palsu)
+1 | Empat tahun Joko menunggu.
+1 | Empat tahun ia merawat ratusan pohon sawit, menyiangi rumput, memupuk, dan berharap.
+2 | Akhirnya, panen pertama tiba.
+2 | Tandannya ada, dan buahnya merah.
+3 | Tapi saat dibawa ke pengepul, harganya jauh di bawah milik tetangganya.
+3 | "Kenapa sawitku dihargai murah?"
+4 | Kakek Rahmat mengambil satu buah sawit, lalu membelahnya dengan parang.
+4 | "Lihat ini, Joko. Cangkangnya tebal. Dagingnya tipis."
+4 | "Ini sawit Dura. Minyaknya sedikit."
+4 | Joko terdiam.
+5 | Kakek lalu membelah buah dari kebun sebelah. Cangkangnya tipis, dagingnya tebal.
+5 | "Ini Tenera, bibit unggul hasil persilangan. Minyaknya jauh lebih banyak."
+6 | "Kau beli bibit di mana?"
+6 | Joko menunduk. "Di pinggir jalan, Kek. Murah."
+6 | Kakek menghela napas.
+6 | "Bibit sawit palsu tidak bisa dibedakan saat masih kecil. Kau baru tahu setelah bertahun-tahun."
+7 | Malam itu, Kakek Rahmat memberinya pelajaran yang terlambat.
+8 | Pertama, beli bibit hanya dari penangkar resmi yang punya izin.
+8 | Kedua, minta sertifikat atau label asal benihnya.
+9 | Ketiga, jangan tergiur harga murah. Bibit unggul memang lebih mahal.
+10 | Keempat, pilih bibit yang batangnya kokoh dan daunnya segar. Singkirkan bibit yang kerdil atau bentuknya tidak normal.
+11 | Kelima, kalau kebunmu sudah berbuah, belah buahnya. Cangkang tebal berarti ada yang salah.
+12 | Joko akhirnya menebang semua pohonnya, lalu memulai lagi dari awal.
+12 | Empat tahun hilang, karena satu keputusan di hari pertama.
+13 | Di kebun sawit, kesalahan terbesar bukan saat panen… tapi saat memilih bibit.

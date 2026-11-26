@@ -107,59 +107,54 @@ function cues(T, EVt) {
   const E = EVt;
   return [
     ['05-airy-whoosh.mp3', 0.0, 0.2],
-    ['04-soft-ui-pop.mp3', E.menjual + 0.05, 0.28],
-    ['07-smooth-transition-whoosh.mp3', c(2) - 0.2, 0.2],
-    ['02-error-denied-buzz.wav', E.kerdil + 0.05, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.pupuk - 0.1, 0.28],
-    ['pop-bubble-sound-effect.mp3', E.pupuk + 0.15, 0.24],
-    ['02-error-denied-buzz.wav', E.kecewa + 0.1, 0.22],
+    ['04-counter-tick-number-roll.wav', 0.6, 0.2],
+    ['03-subtle-digital-impact.mp3', E.menyiangi + 0.05, 0.18],
+    ['pop-bubble-sound-effect.mp3', E.memupuk + 0.2, 0.2],
+    ['07-smooth-transition-whoosh.mp3', c(2) - 0.3, 0.2],
+    ['06-deep-cinematic-boom.wav', E.panen + 0.5, 0.26],
+    ['08-soft-success-chime.mp3', E.merah, 0.26],
     ['08-heavy-whoosh.wav', c(3) - 0.35, 0.24],
-    ['05-airy-whoosh.mp3', E.kakek, 0.18],
-    ['04-counter-tick-number-roll.wav', E.empat, 0.22],
-    ['pop-bubble-sound-effect.mp3', E.tertawa + 0.05, 0.22],
-    ['07-riser-build-up.wav', E.mahal - 0.3, 0.16],
-    ['06-deep-cinematic-boom.wav', E.emas + 0.05, 0.3],
-    ['08-soft-success-chime.mp3', E.emas + 0.15, 0.26],
-    ['09-notification-ding.wav', E.bonggol + 0.05, 0.24],
-    ['08-heavy-whoosh.wav', c(6) - 0.35, 0.24],
-    ['04-soft-ui-pop.mp3', E.resep, 0.28],
-    ['pop-bubble-sound-effect.mp3', E.pertama + 0.05, 0.24],
-    ['04-counter-tick-number-roll-2.wav', E.satukilo, 0.22],
-    ['03-subtle-digital-impact.mp3', E.cacah + 0.1, 0.26],
-    ['03-subtle-digital-impact.mp3', E.cacah + 0.7, 0.2],
-    ['pop-bubble-sound-effect.mp3', E.gula, 0.24],
-    ['04-soft-ui-pop.mp3', E.lima - 0.05, 0.26],
-    ['pop-bubble-sound-effect.mp3', E.air + 0.35, 0.3],
-    ['07-smooth-transition-whoosh.mp3', E.ketiga + 0.2, 0.2],
-    ['04-soft-ui-pop.mp3', E.jeriken - 0.4, 0.26],
-    ['mouse-click-sound-effect.mp3', E.tutup + 0.1, 0.4, 0.4],
-    ['04-counter-tick-number-roll.wav', E.setiap, 0.2],
-    ['05-airy-whoosh.mp3', E.buka + 0.2, 0.22],
-    ['05-airy-whoosh.mp3', E.buka + 1.1, 0.18],
-    ['05-airy-whoosh.mp3', E.buka + 2.0, 0.18],
-    ['09-notification-ding.wav', E.duaminggu + 0.25, 0.26],
-    ['pop-bubble-sound-effect.mp3', E.tape - 0.1, 0.26],
-    ['08-soft-success-chime.mp3', E.jadi + 0.05, 0.26],
+    ['04-soft-ui-pop.mp3', E.harga - 0.1, 0.26],
+    ['02-error-denied-buzz.wav', E.harga + 0.1, 0.24],
+    ['09-notification-ding.wav', E.tetangga, 0.22],
+    ['02-error-denied-buzz.wav', E.murah, 0.2],
+    ['pop-bubble-sound-effect.mp3', E.mengambil + 0.1, 0.24],
+    ['03-subtle-digital-impact.mp3', E.membelah + 0.4, 0.34],
+    ['04-soft-ui-pop.mp3', E.dura - 0.15, 0.28],
+    ['02-error-denied-buzz.wav', E.dura + 0.6, 0.18],
+    ['pop-bubble-sound-effect.mp3', E.sebelah - 0.6, 0.22],
+    ['03-subtle-digital-impact.mp3', E.sebelah - 0.05, 0.34],
+    ['04-soft-ui-pop.mp3', E.tenera - 0.15, 0.28],
+    ['08-soft-success-chime.mp3', E.banyak, 0.26],
+    ['07-smooth-transition-whoosh.mp3', E.pinggir - 0.3, 0.22],
+    ['05-airy-whoosh.mp3', E.menghela, 0.2],
+    ['07-smooth-transition-whoosh.mp3', E.palsu - 0.3, 0.2],
+    ['07-riser-build-up.wav', E.dibedakan, 0.14],
+    ['06-deep-cinematic-boom.wav', E.bertahun + 0.2, 0.26],
+    ['08-heavy-whoosh.wav', c(7) - 0.35, 0.24],
+    ['04-soft-ui-pop.mp3', E.pelajaran - 0.1, 0.26],
+    ['08-heavy-whoosh.wav', c(8) - 0.35, 0.24],
+    ['04-soft-ui-pop.mp3', E.penangkar - 0.1, 0.26],
+    ['09-notification-ding.wav', E.izin, 0.24],
+    ['pop-bubble-sound-effect.mp3', E.sertifikat - 0.05, 0.24],
+    ['pop-bubble-sound-effect.mp3', E.label - 0.05, 0.22],
+    ['04-soft-ui-pop.mp3', E.tergiur - 0.05, 0.24],
+    ['02-error-denied-buzz.wav', E.tergiur + 0.5, 0.24],
+    ['04-counter-tick-number-roll-2.wav', E.mahal - 0.1, 0.22],
+    ['08-soft-success-chime.mp3', E.kokoh, 0.22],
+    ['05-airy-whoosh.mp3', E.singkirkan + 0.15, 0.24],
+    ['03-subtle-digital-impact.mp3', E.singkirkan + 0.75, 0.26],
     ['08-heavy-whoosh.wav', c(11) - 0.35, 0.24],
-    ['06-digital-glitch-tech-blip.mp3', E.membuka + 0.15, 0.18],
-    ['05-airy-whoosh.mp3', E.membuka + 0.25, 0.24],
-    ['08-soft-success-chime.mp3', E.asam + 0.1, 0.24],
-    ['pop-bubble-sound-effect.mp3', E.tape2 - 0.15, 0.24],
-    ['07-smooth-transition-whoosh.mp3', c(12) - 0.35, 0.24],
-    ['04-soft-ui-pop.mp3', E.sepuluh, 0.24],
-    ['05-airy-whoosh.mp3', E.menyiram + 0.1, 0.2],
-    ['07-riser-build-up.wav', E.minggu - 0.2, 0.16],
-    ['08-soft-success-chime.mp3', E.menghijau + 0.1, 0.3],
-    ['04-soft-ui-pop.mp3', E.kuat - 0.2, 0.24],
-    ['03-subtle-digital-impact.mp3', E.menjual2 + 0.55, 0.32],
-    ['pop-bubble-sound-effect.mp3', E.sejak + 0.15, 0.24],
-    ['pop-bubble-sound-effect.mp3', E.sejak + 0.55, 0.22],
-    ['09-notification-ding.wav', E.bonggol2 + 0.05, 0.22],
-    ['07-smooth-transition-whoosh.mp3', c(15) - 0.3, 0.2],
-    ['08-soft-success-chime.mp3', E.penyelamat + 0.05, 0.32],
-    ['04-soft-ui-pop.mp3', E.simpan - 0.1, 0.28],
-    ['mouse-click-sound-effect.mp3', E.simpan + 0.25, 0.4, 0.45],
-    ['08-soft-success-chime.mp3', E.bagikan + 0.05, 0.3],
+    ['03-subtle-digital-impact.mp3', E.belah + 0.3, 0.32],
+    ['02-error-denied-buzz.wav', E.salah, 0.26],
+    ['07-smooth-transition-whoosh.mp3', c(12) - 0.3, 0.2],
+    ['06-deep-cinematic-boom.wav', E.menebang + 0.9, 0.3],
+    ['03-subtle-digital-impact.mp3', E.menebang + 1.5, 0.26],
+    ['08-soft-success-chime.mp3', E.memulai + 0.1, 0.22],
+    ['04-counter-tick-number-roll.wav', E.hilang, 0.18],
+    ['07-smooth-transition-whoosh.mp3', c(13) - 0.3, 0.2],
+    ['07-riser-build-up.wav', E.kesalahan - 0.4, 0.14],
+    ['08-soft-success-chime.mp3', E.memilih, 0.3],
   ];
 }
 
@@ -199,16 +194,20 @@ const Captions = ({T, t}) => {
 // Screen text cards requested by the user's scene plan (top of frame), timed to the narration.
 function cards(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
+  const E = EVt;
   return [
-    {t0: EVt.menjual - 0.1, t1: c(2), text: 'Hampir menyerah…'},
-    {t0: EVt.padahal, t1: c(6), text: '“Emasnya kau buang di situ.”'},
-    {t0: c(7) + 0.1, t1: c(8), label: 'LANGKAH 1', text: 'Bonggol pisang 1 kg, dicacah halus'},
-    {t0: c(8) + 0.1, t1: c(9), label: 'LANGKAH 2', text: 'Gula merah ¼ kg + air cucian beras 5 liter'},
-    {t0: c(9) + 0.1, t1: EVt.keempat - 0.1, label: 'LANGKAH 3', text: 'Masukkan ke jeriken, tutup rapat'},
-    {t0: EVt.keempat, t1: c(10), label: 'LANGKAH 4', text: 'Buka tutup setiap hari'},
-    {t0: c(10) + 0.1, t1: c(11), label: 'TANDA JADI', text: 'Fermentasi ±2 minggu, sudah jadi kalau bau seperti tape'},
-    {t0: c(12) + 0.1, t1: c(13), label: 'CARA PAKAI', text: '1 bagian MOL : 10 bagian air'},
-    {t0: EVt.sampah - 0.2, t1: T.total + 1, text: 'Yang kita anggap sampah justru jadi penyelamat 🍌🌱'},
+    {t0: E.menunggu - 0.2, t1: c(2), text: '4 tahun menunggu…'},
+    {t0: E.harga, t1: c(4), text: 'Kenapa harganya murah?'},
+    {t0: E.dura - 0.1, t1: c(5), label: 'DURA', color: '#d8413a', text: 'Cangkang tebal, daging tipis, minyak sedikit'},
+    {t0: E.tenera - 0.1, t1: c(6), label: 'TENERA', text: 'Cangkang tipis, daging tebal, minyak banyak'},
+    {t0: E.palsu - 0.1, t1: c(7), text: 'Bibit palsu tak bisa dibedakan saat masih kecil'},
+    {t0: c(8) + 0.1, t1: E.kedua - 0.1, label: 'LANGKAH 1', text: 'Beli dari penangkar resmi yang berizin'},
+    {t0: E.kedua, t1: c(9), label: 'LANGKAH 2', text: 'Minta sertifikat / label asal benih'},
+    {t0: c(9) + 0.1, t1: c(10), label: 'LANGKAH 3', text: 'Jangan tergiur harga murah'},
+    {t0: c(10) + 0.1, t1: c(11), label: 'LANGKAH 4', text: 'Batang kokoh, daun segar. Buang yang kerdil'},
+    {t0: c(11) + 0.1, t1: c(12), label: 'LANGKAH 5', text: 'Belah buahnya: cangkang tebal = ada yang salah'},
+    {t0: E.hilang - 0.1, t1: c(13), text: '4 tahun hilang…'},
+    {t0: E.kesalahan - 0.2, t1: T.total + 1, text: 'Kesalahan terbesar ada saat memilih bibit 🌴'},
   ];
 }
 const easeBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
@@ -221,7 +220,7 @@ const ScreenCard = ({T, EVt, t}) => {
   return (
     <AbsoluteFill style={{alignItems: 'center', top: 150, height: 'auto', bottom: 'auto', opacity: Math.min(a * 2, out)}}>
       <div style={{transform: `scale(${sc})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0}}>
-        {cur.label ? <div style={{background: '#5a9a5a', color: '#fffaf0', fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 50, letterSpacing: 2,
+        {cur.label ? <div style={{background: cur.color || '#5a9a5a', color: '#fffaf0', fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 50, letterSpacing: 2,
           padding: '8px 28px 10px', border: `7px solid ${INK}`, borderRadius: 20, marginBottom: -14, zIndex: 2, boxShadow: `6px 7px 0 ${INK}`}}>{cur.label}</div> : null}
         <div style={{maxWidth: 960, background: '#fff6e4', color: INK, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 70, lineHeight: 1.12, textAlign: 'center',
           padding: '30px 40px 32px', border: `9px solid ${INK}`, borderRadius: 30, boxShadow: `10px 12px 0 ${INK}`, letterSpacing: -0.5}}>{cur.text}</div>
@@ -253,8 +252,8 @@ export const Story = ({lang, captions = true}) => {
   const t = frame / FPS;
   // 0.4 s dip to cream at location changes
   let dip = 0;
-  const DIPS = [3, 6, 11, 12];
-  const dipT = DIPS.map((k) => T.CUTS[k - 1]);
+  const DIPS = [3, 7, 8, 11];
+  const dipT = [...DIPS.map((k) => T.CUTS[k - 1]), EVt.pinggir - 0.12];
   for (const ct of dipT) dip = Math.max(dip, 1 - Math.abs(t - ct) / 0.2);
   dip = Math.max(dip, 1 - t / 0.25); // open from cream
   return (
@@ -266,12 +265,8 @@ export const Story = ({lang, captions = true}) => {
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       {captions ? <Captions T={T} t={t} /> : null}
       <ScreenCard T={T} EVt={EVt} t={t} />
-      <AbsoluteFill style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', top: 1440, gap: 90}}>
-        <Icon kind="save" t={t} t0={EVt.simpan - 0.05} />
-        <Icon kind="share" t={t} t0={EVt.bagikan - 0.05} />
-      </AbsoluteFill>
       <Audio src={staticFile(`vo/voiceover_${lang}.wav`)} />
-      <Audio src={staticFile('music/bgm_bonggol.wav')} volume={0.16} />
+      <Audio src={staticFile('music/bgm_sawit.wav')} volume={0.16} />
       {cues(T, EVt).map(([f, at, v, trim], i) => (
         <Sequence key={i} from={Math.max(0, Math.round(at * FPS))} durationInFrames={trim ? Math.round(trim * FPS) : undefined}>
           <Audio src={staticFile(`sfx/${f}`)} volume={v} />
@@ -282,10 +277,10 @@ export const Story = ({lang, captions = true}) => {
 };
 
 const TH = {
-  id: {top: 'BONGGOL PISANG', mid: 'JADI PUPUK EMAS?!', tag: 'RESEP LAMA KAKEK'},
+  id: {top: 'BIBIT SAWIT PALSU?!', mid: '4 TAHUN SIA-SIA', tag: 'CEK CANGKANGNYA!'},
 };
-// Frozen moment: the golden bonggol pile glowing at sunset, Darto shocked behind the trunk pile.
-const THUMB = (EVt) => ({t: EVt.emas + 0.55, pos: [1.25, 1.05, 2.6], look: [0.75, 0.75, -0.4]});
+// Frozen moment: Dura and Tenera halves side by side on the block, with their tags.
+const THUMB = (EVt) => ({t: EVt.tenera + 0.6, pos: [-0.13, 1.08, 0.32], look: [-0.13, 0.56, -0.44]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
