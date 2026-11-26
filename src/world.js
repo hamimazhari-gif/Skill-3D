@@ -102,7 +102,7 @@ export function buildWorld(lang, T, EVt, L) {
       whole.visible = t >= tPop && t < tSplit; whole.scale.setScalar(pop(t, tPop, 0.3)); whole.position.set(cx, y + 0.085, 0);
       const u = ramp(t, tSplit, tSplit + 0.3);
       a.visible = b.visible = t >= tSplit;
-      a.position.set(cx - 0.02 - 0.08 * u, y, 0.0); b.position.set(cx + 0.02 + 0.08 * u, y, 0.03);
+      a.position.set(cx - 0.02 - 0.06 * u, y, 0.0); b.position.set(cx + 0.02 + 0.06 * u, y, 0.02);
       a.rotation.set(0, 0.3, 0); b.rotation.set(0, -0.2, 0);
     };
   };
@@ -263,9 +263,9 @@ export function buildWorld(lang, T, EVt, L) {
     // the cutting block (shots 4-5): Dura on the left, Tenera on the right
     const st = cutStation(g, -0.15, -0.45, 0.55);
     const dura = fruitPair(st.blk, 'dura', st.top, 0, E('mengambil') + 0.1, E('membelah') + 0.4);
-    const tenera = fruitPair(st.blk, 'tenera', st.top, 0.14, E('sebelah') - 0.6, E('sebelah') - 0.05);
-    const tagD = tag(L.dura, 0.3, 0.13, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', stick: 0.12}); at(tagD, -0.24, st.top, 0.14, 0.15); st.blk.add(tagD);
-    const tagT = tag(L.tenera, 0.36, 0.13, {bg: '#5fae3a', fg: '#fff3df', frame: '#2f5a2f', stick: 0.12}); at(tagT, 0.2, st.top, 0.16, -0.15); st.blk.add(tagT);
+    const tenera = fruitPair(st.blk, 'tenera', st.top, 0.18, E('sebelah') - 0.6, E('sebelah') - 0.05);
+    const tagD = tag(L.dura, 0.28, 0.11, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', stick: 0.0}); at(tagD, -0.18, st.top, 0.25, 0.1, -0.5); st.blk.add(tagD);
+    const tagT = tag(L.tenera, 0.32, 0.11, {bg: '#5fae3a', fg: '#fff3df', frame: '#2f5a2f', stick: 0.0}); at(tagT, 0.18, st.top, 0.25, -0.1, -0.5); st.blk.add(tagT);
     const joko = ch('joko', {seed: 83}, g, -1.0, -0.85, 0);
     const pengepul = ch('pengepul', {seed: 84}, g, 0.85, -2.85, 0);
     const tetangga = ch('tetangga', {seed: 85}, g, 2.0, -2.7, -0.2);
@@ -326,8 +326,8 @@ export function buildWorld(lang, T, EVt, L) {
       needle.rotation.z = -0.4 + 0.25 * ramp(t, 0.5, 1.5) + Math.sin(t * 12) * 0.03 * (t < 2.5 ? 1 : 0);
       st.blk.visible = t >= cut(4) - 0.05;
       // Dura halves slide left when the Tenera fruit arrives
-      dura(t, t < cut(5) ? 0 : -0.14 * ramp(t, cut(5), cut(5) + 0.4));
-      tenera(t, 0.14);
+      dura(t, t < cut(5) ? 0 : -0.18 * ramp(t, cut(5), cut(5) + 0.4));
+      tenera(t, 0.18);
       tagD.visible = t > E('dura') - 0.15; tagD.scale.setScalar(pop(t, E('dura') - 0.15, 0.3));
       tagT.visible = t > E('tenera') - 0.15; tagT.scale.setScalar(pop(t, E('tenera') - 0.15, 0.3));
       parang.visible = s45;

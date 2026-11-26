@@ -280,7 +280,7 @@ const TH = {
   id: {top: 'BIBIT SAWIT PALSU?!', mid: '4 TAHUN SIA-SIA', tag: 'CEK CANGKANGNYA!'},
 };
 // Frozen moment: Dura and Tenera halves side by side on the block, with their tags.
-const THUMB = (EVt) => ({t: EVt.tenera + 0.6, pos: [-0.13, 1.08, 0.32], look: [-0.13, 0.56, -0.44]});
+const THUMB = (EVt) => ({t: EVt.tenera + 0.6, pos: [-0.13, 1.5, 0.02], look: [-0.13, 0.56, -0.5]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
