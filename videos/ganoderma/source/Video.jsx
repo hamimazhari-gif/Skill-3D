@@ -286,7 +286,7 @@ const TH = {
   id: {top: 'JAMUR PEMBUNUH SAWIT!', mid: 'GANODERMA', tag: 'KENALI GEJALANYA'},
 };
 // Frozen moment: the fan-shaped brackets on the sick palm's base with the GANODERMA tag.
-const THUMB = (EVt) => ({t: EVt.ganoderma + 0.6, pos: [2.55, 1.05, -1.05], look: [2.6, 0.45, -2.65]});
+const THUMB = (EVt) => ({t: EVt.ganoderma + 0.6, pos: [2.95, 0.95, -1.55], look: [2.8, 0.3, -2.66]});
 export const Thumb = ({lang}) => {
   const {width, height} = useVideoConfig();
   const {EVt} = useStory(lang);
@@ -302,7 +302,7 @@ export const Thumb = ({lang}) => {
         <Scene lang={lang} thumb={THUMB(EVt)} />
       </ThreeCanvas>
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 150, gap: 34}}>
-        {word(tx.top, 96, '#fff3df', ink, -3)}
+        {word(tx.top, 74, '#fff3df', ink, -3)}
         {word(tx.mid, 90, '#e8a83a', ink, 2)}
       </AbsoluteFill>
       <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 230}}>
