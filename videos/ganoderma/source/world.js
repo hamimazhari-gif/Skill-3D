@@ -22,13 +22,14 @@ const dawnL = {...LOOK_PRESETS.dawn, keyPos: [-9, 4, 5]};
 const day = {...LOOK_PRESETS.day, keyPos: [-6, 10, 7]};
 const grey = {...LOOK_PRESETS.overcast, keyPos: [-5, 11, 5]};
 const golden = {...LOOK_PRESETS.goldenHour, keyPos: [-9, 5, 6]};
+const sunrise = {...LOOK_PRESETS.dawn, keyI: 2.5, hemiI: 1.35, keyPos: [-10, 3.5, 4], skyTop: '#9cc0e6', skyBottom: '#ffd6a0', grade: {sat: 1.12, contrast: 1.02, tint: '#ffd0a0', tintAmt: 0.08, vignette: 0.26}};
 
 export const LOOK = {
   kebun: {keys: [{at: 0, ...night}, {at: 8.6, ...night}, {at: 'cut2', ...dawnL}, {at: 'pangkal', ...dawnL}, {at: 'busuk', ...dawnL, ...MOODS.tense},
     {at: 'cut3', ...day}, {at: 'biasa', ...day}, {at: 'bulan', ...grey}, {at: 'sakit', ...grey, ...MOODS.tense}, {at: 'cut5', ...day},
     {at: 'kipas', ...day}, {at: 'ganoderma', ...day, ...MOODS.danger}, {at: 'cut7', ...day}, {at: 'tunggul', ...day}, {at: 'sarang', ...day, ...MOODS.danger},
     {at: 'cut8', ...day}, {at: 'kehilangan', ...day}, {at: 'cut14', ...golden}, {at: 'selamat', ...golden, ...MOODS.joyful},
-    {at: 'cut15', ...golden}, {at: 'terlambat', ...golden, ...MOODS.tense}, {at: 'bagikan', ...golden, ...MOODS.joyful}]},
+    {at: 104.2, ...golden, ...MOODS.joyful}, {at: 'cut15', ...sunrise}, {at: 'terlihat', ...sunrise}, {at: 'bagikan', ...sunrise, ...MOODS.joyful}]},
   akar: {keys: [{at: 0, ...day, ...MOODS.mystery}, {at: 'cut15', ...day, ...MOODS.mystery}, {at: 'terlambat', ...day, ...MOODS.danger}]},
 };
 
@@ -120,6 +121,9 @@ export function buildWorld(lang, T, EVt, L) {
     for (const [x, z, y, ry] of [[0, 0, 0, 0.2], [0.1, 0.6, 0, -0.1], [-0.1, 0.3, 0.55, 0.15]]) { const l = new THREE.Group(); at(l, x, y, z, ry); pile.add(l); const tr = cyl(0.28, 0.3, 2.0, toon('#5a4a36', {paint: {seed: 90, stains: 40, chips: 30}}), {hull: 0.014, center: true}); tr.rotation.z = Math.PI / 2; tr.position.y = 0.28; l.add(tr); }
     for (const [x, z] of [[1.3, -0.4], [-1.3, 0.9], [1.1, 1.0]]) { const s = P.rottenStump(0.28, 0.4); at(s, x, 0, z); pile.add(s); const c = P.ganoCluster(0.28, 3, {seed: x * 10 + 3, size: 0.12}); at(c.group, x, 0, z); pile.add(c.group); }
     for (const [x, y, z] of [[0.3, 0.55, 0.3], [-0.5, 0.6, 0.62], [0.6, 0.9, 0.35]]) { const b = P.ganoBracket(0.14); at(b, x, y, z); pile.add(b); }
+    // moss patches on the old trunks
+    const rm = rng(23);
+    for (let i = 0; i < 26; i++) { const m = ball(0.09 + rm() * 0.1, rm() < 0.5 ? '#6a8a3a' : '#7f9a44', {sy: 0.35, seg: 8, hull: 0.006}); at(m, (rm() - 0.5) * 1.8, 0.5 + rm() * 0.6, (rm() - 0.3) * 0.9); pile.add(m); }
     const tagS = tag(L.sarang, 0.7, 0.2, {bg: '#d8413a', fg: '#fff3df', frame: '#6a2f2a', stick: 0.9}); at(tagS, -5.0, 0, -0.6, 0.3); g.add(tagS);
     // sack for the removed brackets (step 2)
     const sack = P.sack(L.karung, {color: '#ece4cc'}); at(sack, S1.x - 0.75, 0, S1.z + 0.65, 0.2); g.add(sack);
@@ -128,6 +132,18 @@ export function buildWorld(lang, T, EVt, L) {
     const seeds = seedPos.map(([x, z], i) => { const s = P.palmSeedling({seed: 40 + i}); at(s.group, x, 0, z, i); g.add(s.group); return s; });
     // ferns around S1 base hide Kakek's legs while he crouches
     const ferns = [[S1.x - 0.75, S1.z + 0.95, 1.0], [S1.x - 0.25, S1.z + 1.15, 0.8], [S1.x - 1.25, S1.z + 0.85, 0.9]].map(([x, z, s], i) => { const f = fern(s, 3 + i); at(f, x, 0, z); g.add(f); return f; });
+    // month calendar on a post (shot 3): pages flip fast on "bulan kemudian"
+    const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL'];
+    const monthTex = MONTHS.map((m) => signTex(m, {w: 512, h: 380, bg: '#f3e7d3', border: false}));
+    const calP = new THREE.Group(); at(calP, -0.1, 0, -0.6, 0.35); g.add(calP);
+    calP.add(cyl(0.04, 0.05, 1.55, '#7a5236'));
+    const calB = box(0.6, 0.66, 0.03, '#f3e7d3', {center: true, hull: 0.012}); calB.position.set(0, 1.6, 0.04); calP.add(calB);
+    const calH = sign('BULAN', 0.6, 0.16, {bg: '#c75b5b', fg: '#fff3df', frame: '#6a2f2a', depth: 0.035, border: false}); at(calH, 0, 1.86, 0.05); calP.add(calH);
+    const calD = decal(monthTex[0], 0.54, 0.42); calD.position.set(0, 1.53, 0.06); calP.add(calD);
+    // red warning glow around the sick palms while the disease spreads (shot 3)
+    const glowMat = (o) => new THREE.MeshBasicMaterial({color: '#ff3a2a', transparent: true, opacity: o, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide});
+    const shells = [S1, S2].map((p) => { const sh = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.52, 2.4, 20, 1, true), glowMat(0.0)); sh.position.set(p.x, 1.2, p.z); g.add(sh); const ring = new THREE.Mesh(new THREE.RingGeometry(0.6, 1.2, 32), glowMat(0.0)); ring.rotation.x = -Math.PI / 2; ring.position.set(p.x, 0.02, p.z); g.add(ring); return {sh, ring}; });
+    const sunR = P.sunBall(2.6, '#ffc27a'); sunR.position.set(-14, 2.2, -42); g.add(sunR);
     // Hasan's hut, window light at night
     const hut = P.house(2.8, 2.2, 2.4, {color: '#c9a06a', roof: '#8a6a3a', windows: 1, doorColor: '#7a4a32', seed: 21}); at(hut, 6.0, 0, 0.4, -0.75); g.add(hut);
     const winL = new THREE.PointLight('#ffc070', 0, 7, 1.6); winL.position.set(5.2, 1.6, 1.4); g.add(winL);
@@ -271,6 +287,13 @@ export function buildWorld(lang, T, EVt, L) {
       seeds.forEach((s, i) => { s.group.visible = t > E('biarkan') - 0.1; s.group.scale.setScalar(s13 ? pop(t, E('biarkan') - 0.1 + i * 0.1, 0.35) : 1.1); });
       ferns.forEach((f) => { f.visible = t < cut(12); });
       winL.intensity = s1 ? 3.0 : 0;
+      calP.visible = inShots(t, 3);
+      const mi = clamp01((t - E('bulan') + 0.2) / (E('sakit') - E('bulan') + 0.2));
+      calD.material.map = monthTex[Math.min(MONTHS.length - 1, Math.floor(mi * (MONTHS.length - 0.01)))];
+      calP.rotation.z = mi > 0 && mi < 1 ? Math.sin(t * 24) * 0.03 : 0;
+      const sick1 = inShots(t, 3) ? ramp(t, E('sebelah') - 0.2, E('sebelah') + 0.6) : 0, sick2 = inShots(t, 3) ? ramp(t, E('sakit') + 0.4, E('sakit') + 1.0) : 0;
+      [sick1, sick2].forEach((k, i) => { const pulse = 0.6 + 0.4 * Math.sin(t * 7 + i); shells[i].sh.material.opacity = 0.32 * k * pulse; shells[i].ring.material.opacity = 0.4 * k * pulse; shells[i].sh.visible = shells[i].ring.visible = k > 0.01; });
+      sunR.visible = t >= cut(15);
       // characters by shot
       hasan.group.visible = (s1 && t > E('hasan') - 0.2) || (t >= cut(2) && !inShots(t, 4) && !inShots(t, 6));
       lantern.visible = s1; parang.visible = s10; hoe.visible = s11 || s13;
@@ -281,6 +304,7 @@ export function buildWorld(lang, T, EVt, L) {
       else if (s11) hasan.group.position.set(S2.x + 1.75, 0, S2.z + 0.9);
       else if (s12) hasan.group.position.set(1.4, 0, -1.6);
       else if (s13) hasan.group.position.set(-4.85, 0, -1.75);
+      else if (inShots(t, 14)) hasan.group.position.set(S2.x + 1.75, 0, S2.z + 1.05);
       else if (late) hasan.group.position.set(-0.45, 0, -0.6);
       else if (s7 || s9) hasan.group.position.set(-0.3, 0, -0.8);
       else hasan.group.position.set(1.1, 0, -1.8);
@@ -292,6 +316,7 @@ export function buildWorld(lang, T, EVt, L) {
       else if (s11) kakek.group.position.set(S2.x + 2.4, 0, S2.z + 0.2);
       else if (s12) kakek.group.position.set(0.2, 0, -1.6);
       else if (s13) kakek.group.position.set(-3.7, 0, -1.5);
+      else if (inShots(t, 14)) kakek.group.position.set(S2.x + 2.75, 0, S2.z + 0.85);
       else kakek.group.position.set(0.6, 0, -0.6);
       kakek.setSit(s5 && t > E('berjongkok') + 0.05 ? 2 : 0);
     });

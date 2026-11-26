@@ -108,6 +108,7 @@ function cues(T, EVt) {
   return [
     ['05-airy-whoosh.mp3', 0.0, 0.16],
     ['07-riser-build-up.wav', E.keras - 0.6, 0.12],
+    ['kraak-wood-crack.wav', E.keras - 0.37, 0.55],
     ['06-deep-cinematic-boom.wav', E.keras + 0.8, 0.4],
     ['03-subtle-digital-impact.mp3', E.keras + 0.85, 0.3],
     ['04-soft-ui-pop.mp3', E.hasan - 0.1, 0.18],
@@ -196,19 +197,18 @@ function cards(T, EVt) {
   const c = (k) => T.CUTS[k - 1];
   const E = EVt;
   return [
-    {t0: E.tumbang - 0.1, t1: c(2), text: 'Tanpa angin, tanpa hujan…'},
+    {t0: E.tumbang - 0.1, t1: c(2), text: 'Tanpa angin… tanpa hujan…'},
     {t0: E.bulan - 0.2, t1: c(4), text: 'Beberapa bulan kemudian…'},
-    {t0: E.pucat - 0.1, t1: c(5), label: 'GEJALA', text: 'Daun pucat · pelepah patah · daun tombak'},
-    {t0: E.ganoderma - 0.1, t1: c(6), label: 'GANODERMA', color: '#d8413a', text: 'Jamur busuk pangkal batang'},
+    {t0: E.pucat - 0.1, t1: c(5), label: 'GEJALA', color: '#d8413a', text: 'Tanda-tanda bahaya'},
+    {t0: E.ganoderma - 0.1, t1: c(6), text: 'GANODERMA', big: true},
     {t0: E.menular - 0.1, t1: c(7), text: 'Menular lewat akar yang bersentuhan'},
-    {t0: E.tunggul - 0.1, t1: c(8), text: 'Sarangnya: tunggul tua yang membusuk'},
-    {t0: c(9) + 0.1, t1: c(10), label: 'LANGKAH 1', text: 'Kenali gejalanya sejak awal'},
-    {t0: c(10) + 0.1, t1: c(11), label: 'LANGKAH 2', text: 'Buang jamur di pangkal batang'},
-    {t0: c(11) + 0.1, t1: c(12), label: 'LANGKAH 3', text: 'Buat parit isolasi di sekeliling pohon sakit'},
-    {t0: c(12) + 0.1, t1: c(13), label: 'LANGKAH 4', text: 'Bongkar pohon parah sampai ke akarnya'},
-    {t0: c(13) + 0.1, t1: c(14), label: 'LANGKAH 5', text: 'Bersihkan sisa batang lama saat tanam ulang'},
-    {t0: E.musuh - 0.2, t1: E.bagikan - 0.2, text: 'Musuh paling berbahaya kadang tidak terlihat'},
-    {t0: E.bagikan - 0.1, t1: T.total + 1, text: 'Bagikan ke petani sawit yang kamu kenal 🌴'},
+    {t0: E.sudut - 0.1, t1: c(8), text: 'Sarangnya di sini'},
+    {t0: c(9) + 0.1, t1: c(10), label: 'LANGKAH 1', text: '👁️ Kenali gejala sejak awal'},
+    {t0: c(10) + 0.1, t1: c(11), label: 'LANGKAH 2', text: '🍄 Buang jamur di pangkal'},
+    {t0: c(11) + 0.1, t1: c(12), label: 'LANGKAH 3', text: '⛏️ Buat parit isolasi'},
+    {t0: c(12) + 0.1, t1: c(13), label: 'LANGKAH 4', text: '🪓 Bongkar pohon parah sampai akar'},
+    {t0: c(13) + 0.1, t1: c(14), label: 'LANGKAH 5', text: '🧹 Bersihkan sisa batang lama'},
+    {t0: E.musuh - 0.2, t1: T.total + 1, text: 'Musuh yang tak terlihat'},
   ];
 }
 const easeBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
@@ -223,8 +223,8 @@ const ScreenCard = ({T, EVt, t}) => {
       <div style={{transform: `scale(${sc})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0}}>
         {cur.label ? <div style={{background: cur.color || '#5a9a5a', color: '#fffaf0', fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 50, letterSpacing: 2,
           padding: '8px 28px 10px', border: `7px solid ${INK}`, borderRadius: 20, marginBottom: -14, zIndex: 2, boxShadow: `6px 7px 0 ${INK}`}}>{cur.label}</div> : null}
-        <div style={{maxWidth: 960, background: '#fff6e4', color: INK, fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 70, lineHeight: 1.12, textAlign: 'center',
-          padding: '30px 40px 32px', border: `9px solid ${INK}`, borderRadius: 30, boxShadow: `10px 12px 0 ${INK}`, letterSpacing: -0.5}}>{cur.text}</div>
+        <div style={{maxWidth: 960, background: '#fff6e4', fontFamily: '"Inter Display"', fontWeight: 900, fontSize: cur.big ? 110 : 70, lineHeight: 1.12, color: cur.big ? '#d8413a' : INK, letterSpacing: cur.big ? 2 : -0.5, textAlign: 'center',
+          padding: '30px 40px 32px', border: `9px solid ${INK}`, borderRadius: 30, boxShadow: `10px 12px 0 ${INK}`, }}>{cur.text}</div>
       </div>
     </AbsoluteFill>
   );
@@ -266,6 +266,8 @@ export const Story = ({lang, captions = true}) => {
       {storyFx(T, EVt).flashes.map((f, i) => { const dt = t - f.t; const o = dt > 0 && dt < f.dur ? (1 - dt / f.dur) * (f.strength ?? 0.8) : 0; return o > 0 ? <AbsoluteFill key={'f' + i} style={{background: f.color || '#fff4d6', opacity: o, mixBlendMode: 'screen'}} /> : null; })}
       {captions ? <Captions T={T} t={t} /> : null}
       <ScreenCard T={T} EVt={EVt} t={t} />
+      {(() => { const t0 = EVt.keras + 0.1, dt = t - t0; if (dt < 0 || dt > 0.9) return null; const k = Math.min(1, dt / 0.12), o = Math.min(1, (0.9 - dt) / 0.25);
+        return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start', paddingTop: 520, opacity: o}}><div style={{fontFamily: '"Inter Display"', fontWeight: 900, fontSize: 190, color: '#ffd84a', WebkitTextStroke: `22px ${INK}`, paintOrder: 'stroke fill', textShadow: `0 12px 0 ${INK}`, transform: `rotate(-8deg) scale(${0.6 + 0.5 * k - 0.1 * Math.max(0, k - 0.8)})`, letterSpacing: 4}}>KRAAK!</div></AbsoluteFill>; })()}
       <AbsoluteFill style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', top: 1440}}>
         <Icon kind="share" t={t} t0={EVt.bagikan} />
       </AbsoluteFill>

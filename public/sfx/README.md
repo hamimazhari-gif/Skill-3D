@@ -22,3 +22,4 @@ Sound effects for the videos. Use them in Remotion with `staticFile('sfx/<file>'
 | mouse-click-sound-effect.mp3 | 3.07 s | arrow drawn or pointed (trim to the first click) |
 
 Mix: SFX under the voice-over (about -18 to -12 dB relative to the VO); no more than one accent per second.
+- `kraak-wood-crack.wav` — synthesised wood crack ("KRAAK!"): splintering clicks then a hard snap (~0.47 s in). For a tree/trunk breaking or falling. Made by code, no licence.

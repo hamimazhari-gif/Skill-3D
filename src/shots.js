@@ -124,12 +124,12 @@ export const SHOT_PLAN = [
   {shot: 13, from: 'biarkan', lift: false, loc: 'kebun', move: 'new seedlings in the cleared corner', keys: [
     {at: 'start', pos: [-4.6, 1.05, 1.4], look: [-6.0, 0.5, -1.3]},
     {at: 'end', pos: [-4.8, 1.1, 1.0], look: [-6.0, 0.5, -1.3]}]},
-  {shot: 14, loc: 'kebun', move: 'two-shot: a few trees lost', keys: [
-    {at: 'start', pos: [0.1, 1.55, 1.4], look: [0.05, 1.3, -0.6]},
-    {at: 'end', pos: [0.1, 1.5, 1.1], look: [0.05, 1.3, -0.6]}]},
+  {shot: 14, loc: 'kebun', move: 'Hasan beside the trench, healthy rows behind', keys: [
+    {at: 'start', pos: [2.3, 1.6, -3.4], look: [2.4, 1.15, -6.4]},
+    {at: 'end', pos: [2.3, 1.55, -3.8], look: [2.4, 1.15, -6.4]}]},
   {shot: 14, from: 'selamat', lift: false, loc: 'kebun', move: 'crane up: the garden is saved', keys: [
-    {at: 'start', pos: [0.2, 1.7, 1.6], look: [0.1, 1.2, -1.0]},
-    {at: 'end', pos: [0.6, 3.2, 4.2], look: [0.5, 1.2, -4.0]}]},
+    {at: 'start', pos: [2.2, 1.9, -3.6], look: [2.4, 1.3, -6.6]},
+    {at: 'end', pos: [2.6, 4.2, -1.0], look: [1.6, 1.0, -9.5]}]},
   {shot: 15, loc: 'kebun', move: 'close two-shot', keys: [
     {at: 'start', pos: [0.1, 1.5, 1.2], look: [0.05, 1.35, -0.6]},
     {at: 'end', pos: [0.08, 1.48, 0.9], look: [0.05, 1.35, -0.6]}]},
