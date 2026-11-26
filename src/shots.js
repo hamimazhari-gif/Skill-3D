@@ -18,11 +18,11 @@ export const SHOT_PLAN = [
     {at: 'start', pos: [0.2, 1.75, 1.0], look: [0.2, 1.6, -3.3]},
     {at: 'end', pos: [0.2, 1.75, 0.7], look: [0.2, 1.6, -3.3]}]},
   {shot: 3, loc: 'kantor', lift: false, move: 'but what does science say', keys: [
-    {at: 'start', pos: [0.2, 1.7, 0.6], look: [0.2, 1.6, -3.2]},
-    {at: 'end', pos: [0.2, 1.7, 0.35], look: [0.2, 1.6, -3.2]}]},
+    {at: 'start', pos: [-2.0, 1.6, -0.6], look: [-2.3, 1.4, -3.8]},
+    {at: 'end', pos: [-2.0, 1.6, -0.85], look: [-2.3, 1.4, -3.8]}]},
   {shot: 4, loc: 'lab', lift: false, move: 'the eyelid muscle and the nerve', keys: [
-    {at: 'start', pos: [0.1, 1.6, 0.4], look: [0.1, 1.6, -3.6]},
-    {at: 'end', pos: [0.1, 1.6, 0.1], look: [0.1, 1.6, -3.6]}]},
+    {at: 'start', pos: [0.0, 1.55, -0.2], look: [0.0, 1.55, -3.6]},
+    {at: 'end', pos: [0.0, 1.55, -0.45], look: [0.0, 1.55, -3.6]}]},
   {shot: 5, loc: 'kantor', lift: false, move: 'the causes are close to home', keys: [
     {at: 'start', pos: [0.1, 1.65, -0.5], look: [0.1, 1.55, -3.2]},
     {at: 'end', pos: [0.1, 1.65, -0.75], look: [0.1, 1.55, -3.2]}]},

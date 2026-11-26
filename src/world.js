@@ -15,8 +15,8 @@ export const CHAR_DESIGN = 'steady';
 const CAST = {
   raka: {outfit: 'shirt', jacket: '#bfd8e8', tie: '#2f4f8a', lower: '#3a3a48', pocket: '#a8c4d8', hair: '#2b2326', hairStyle: 'fringe', hat: 'none', lanyard: '#2f4f8a'},
   t1: {outfit: 'batik', jacket: '#8a4a2a', print: '#e8c35a', print2: '#3a2420', lower: '#2a2a33', tie: '#8a4a2a', hair: '#2b2326', hat: 'peci', hatColor: '#1f1d24', mustache: 'thick'},
-  t2: {hairStyle: 'hijab', hijab: '#7a5aa8', brooch: '#e8c35a', hat: 'none', hair: '#3a2a26', outfit: 'shirt', jacket: '#f3efe6', tie: '#7a5aa8', lower: '#3a3a48', pocket: '#e8e0d0', lanyard: '#2f4f8a'},
-  t3: {outfit: 'shirt', jacket: '#e8c35a', tie: '#3a5a3a', lower: '#3a3a48', pocket: '#d8b34a', hair: '#9a9a9a', hairStyle: 'bald', hat: 'none', glasses: true},
+  t2: {hairStyle: 'hijab', hijab: '#9a9aa2', brooch: '#e8c35a', hat: 'none', hair: '#e8e4dc', outfit: 'batik', jacket: '#7a5aa8', print: '#f2d24a', print2: '#3a2a4a', lower: '#5a4a6a', tie: '#7a5aa8', round: true, glasses: true},
+  t3: {outfit: 'shirt', jacket: '#e8c35a', tie: '#3a5a3a', lower: '#3a3a48', pocket: '#d8b34a', hair: '#2b2326', hairStyle: 'tuft', hat: 'none', lanyard: '#2f4f8a'},
   dokter: {outfit: 'shirt', jacket: '#fbfbf8', tie: '#4f8fc8', lower: '#3a4a6a', pocket: '#e8eef4', hair: '#2b2326', hairStyle: 'side', hat: 'none', glasses: true},
   bos: {outfit: 'suit', jacket: '#3a3a48', lapel: '#26262f', tie: '#d8413a', lower: '#2a2a33', hair: '#2b2326', hairStyle: 'side', hat: 'none', mustache: 'thick'},
 };
@@ -90,33 +90,40 @@ export function buildWorld(lang, T, EVt, L) {
     const mon = P.monitor('#8fd0e0'); at(mon.group || mon, 0.3, 0.77, -4.0); g.add(mon.group || mon);
     const mug = P.mug('#fbf6ea'); at(mug, 0.85, 0.77, -3.7); g.add(mug);
     const clk = P.wallClock(0.3); clk.set(17, 0); at(clk.group, 2.4, 2.2, -4.85); g.add(clk.group); updaters.push((t) => clk.set(t > E('lemburan') ? 23 : 17, t > E('lemburan') ? 30 : 0));
-    const raka = ch('raka', {seed: 1}, g, -0.2, -3.1, 0.1);
+    const raka = ch('raka', {seed: 1}, g, -0.2, -3.1, 0.1); showWhen(raka.group, (t) => !inShots(t, 3));
     raka.act([{t: 0, pose: 'idle', expr: 'neutral'}, ...twitch(0.4, 3.8), {t: 3.9, pose: 'chin', expr: 'confused'},
       {t: E('wah'), pose: 'idle', expr: 'surprised'}, {t: E('bukan') + 0.1, pose: 'shrug', expr: 'confused'}, {t: E('sedih'), pose: 'idle', expr: 'worried'},
       {t: E('tapi'), pose: 'pointUp', expr: 'thinking'},
       {t: cut(5), pose: 'chin', expr: 'thinking'}, {t: E('stres') - 0.1, pose: 'headHold', expr: 'tired'}, {t: E('kurang') - 0.1, pose: 'idle', expr: 'drowsy'}, {t: E('kopi') - 0.1, pose: 'drink', expr: 'paranoid'}, {t: E('layar') - 0.1, pose: 'tap', expr: 'tired'},
       {t: cut(7), pose: 'idle', expr: 'happy'}, {t: E('tidur2') - 0.1, pose: 'idle', expr: 'sleep'}, {t: E('kurangi') - 0.1, pose: 'stop', expr: 'determined'}, {t: E('istirahatkan') - 0.1, pose: 'cheer', expr: 'happy'},
       {t: cut(9), pose: 'beg', expr: 'cheesy'}, ...twitch(cut(9) + 0.3, E('datang') + 0.3, 0.16), {t: E('datang') + 0.4, pose: 'beg', expr: 'excited'},
-      {t: E('eh') + 0.1, pose: 'idle', expr: 'surprised'}, {t: E('kerjaan') + 0.1, pose: 'idle', expr: 'shocked'}, {t: E('malam') + 0.1, pose: 'headHold', expr: 'cry'},
+      {t: E('eh') + 0.1, pose: 'idle', expr: 'surprised'}, ...twitch(E('kerjaan'), E('malam') + 0.6, 0.09), {t: E('malam') + 0.7, pose: 'headHold', expr: 'cry'},
       {t: E('lemburan'), pose: 'headHold', expr: 'scream'}, {t: cut(12), pose: 'shrug', expr: 'nervous'}, {t: E('komentar') - 0.15, pose: 'point', expr: 'cheesy'}]);
     raka.act([{t: E('lemburan'), action: 'tremble', dur: 1.5}]);
     label(g, 'DUG!', -0.6, 2.0, -3.0, 3.3, 3.95, {w: 0.32, h: 0.16}); label(g, 'DUG!', 0.2, 2.1, -3.0, 3.5, 4.1, {w: 0.32, h: 0.16}); label(g, 'DUG!', -0.2, 2.25, -3.0, 3.68, 4.3, {w: 0.32, h: 0.16});
     // the fortune tellers
     const tellers = [['t1', -1.3, -3.4, 0.4, 3, L.rezeki], ['t2', 0.85, -3.2, -0.3, 4, L.jauh], ['t3', 1.7, -3.7, -0.4, 5, L.sedih]].map(([k, x, z, y, si, lb], i) => {
-      const c = ch(k, {seed: 10 + i}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 2) || inShots(t, 3));
+      const c = ch(k, {seed: 10 + i}, g, x, z, y); showWhen(c.group, (t) => inShots(t, 2));
       c.act([{t: 0, pose: 'idle', expr: 'neutral'}, {t: E('peramal') + i * 0.1, pose: 'chin', expr: 'scheming'}]);
       speak(c, si, [[0, ['excited', 'smug', 'sad'][i], ['pointUp', 'point', 'chin'][i]]]);
-      label(g, lb, [-0.7, 0.6, 1.25][i], 2.3 + i * 0.32, z + 0.4, T.S[si].start - 0.05, cut(4), {w: 1.3, bg: ['#f2d24a', '#7fc4e8', '#b8a0ff'][i], vis: (t) => inShots(t, 2) || inShots(t, 3)}); return c; });
+      const bub = new THREE.Group(); const cb = P.cloud(0.25, 3 + i); bub.add(cb); for (const [dx, dy, r] of [[-0.25, -0.42, 0.06], [-0.32, -0.55, 0.035]]) { const d = ball(r, '#fbfbf8', {hull: 0.004}); at(d, dx, dy, 0); bub.add(d); }
+      const icon = i === 0 ? P.coinPile(6, 3) : i === 1 ? P.tinyPerson('#4f8fc8', 0.25) : P.droplet(0.6); if (icon.group) icon.group.scale.setScalar(1); const ic = icon.group || icon; ic.scale.multiplyScalar(i === 0 ? 1.4 : 1); at(ic, 0, -0.05, 0.25); bub.add(ic);
+      g.add(bub); updaters.push((t) => { const t0 = T.S[si].start - 0.05; bub.visible = inShots(t, 2) && t > t0; bub.scale.setScalar(pop(t, t0, 0.35)); at(bub, [-0.75, 0.55, 1.3][i], 2.35 + Math.sin(t * 2 + i) * 0.03, z + 0.4); }); return c; });
     const orb = ball(0.16, new THREE.MeshBasicMaterial({color: '#c8b8ff', transparent: true, opacity: 0.85}), {hull: 0.008}); g.add(orb); const og = P.glowSprite('#b8a0ff', 0.9); g.add(og);
     updaters.push((t) => { const on = inShots(t, 2) && t > E('peramal'); orb.visible = og.visible = on; at(orb, -1.0, 1.2, -3.1); at(og, -1.0, 1.2, -3.1); });
+    const door = box(1.0, 2.1, 0.06, toon('#7a4a32', {paint: {planks: 3, seed: 1111}})); at(door, -2.6, 0, -4.88); g.add(door);
+    const sk = P.sack(''); sk.scale.setScalar(0.7); g.add(sk);
+    const waiter = ch('raka', {seed: 2}, g, -2.3, -3.6, 0.3); showWhen(waiter.group, (t) => inShots(t, 3)); held(waiter, sk, {y: -0.1, z: 0.1});
+    waiter.act([{t: 0, pose: 'carry', expr: 'cheesy'}, {t: E('tapi'), pose: 'carry', expr: 'excited'}]);
+    fx(g, FX.glints([-2.3, 2.0, -3.4], E('kepercayaan'), {n: 20}), (t) => inShots(t, 3));
     // causes (6): stress cloud, a pillow, coffee cups, the laptop glare
     const cl = P.cloud(0.22, 7, '#5a6070'); g.add(cl); updaters.push((t) => { cl.visible = inShots(t, 6) && t > E('stres') - 0.1; cl.scale.setScalar(pop(t, E('stres') - 0.1, 0.35)); at(cl, -0.2, 2.15, -3.1); });
     fx(g, FX.lightning([-0.1, 2.15, -3.1], [-0.15, 1.95, -3.1], E('stres'), {dur: 0.4, seed: 4}), (t) => inShots(t, 6));
-    const zz = sign('Zzz', 0.5, 0.24, {bg: '#2b2b33', fg: '#fbf6ea', frame: '#fbf6ea'}); popSign(g, zz, 0.45, 2.0, -3.0, E('kurang') - 0.05, cut(7));
-    const cups = [0, 1, 2, 3, 4].map((i) => { const m = P.mug(['#fbf6ea', '#e8737a', '#7fc4e8'][i % 3]); m.scale.setScalar(1.4); g.add(m); updaters.push((t) => { m.visible = inShots(t, 6) && t > E('kopi') - 0.1 + i * 0.08; at(m, 0.6 + (i % 3) * 0.17, 0.77 + Math.floor(i / 3) * 0.17, -3.65); }); return m; });
-    const glare = P.glowSprite('#bfe4ff', 1.4); g.add(glare); updaters.push((t) => { glare.visible = inShots(t, 6) && t > E('layar') - 0.1; at(glare, 0.3, 1.1, -3.85); });
-    label(g, L.stres, -0.7, 2.6, -3.0, E('stres') - 0.05, cut(7), {w: 0.7}); label(g, L.tidur, -0.85, 1.75, -3.0, E('kurang') - 0.05, cut(7), {w: 1.0}); label(g, L.kopi, 0.9, 2.6, -3.0, E('kopi') - 0.05, cut(7), {w: 0.6}); label(g, L.layar, 0.9, 2.25, -3.0, E('layar') - 0.05, cut(7), {w: 0.7});
-    // fixes (7)
+    const eb = P.bed({noBlanket: true}); eb.scale.setScalar(0.28); g.add(eb); updaters.push((t) => { eb.visible = inShots(t, 6) && t > E('kurang') - 0.1; at(eb, -0.95, 1.85, -3.0, 0.4); eb.scale.setScalar(0.28 * pop(t, E('kurang') - 0.1, 0.3)); });
+    const xs = sign('✕', 0.22, 0.22, {bg: '#d8312a', fg: '#fff3df', frame: '#8a1a1a'}); popSign(g, xs, -0.7, 2.15, -2.95, E('kurang') + 0.1, cut(7));
+    const cups = [0].map((i) => { const m = P.mug('#fbf6ea'); m.scale.setScalar(4); g.add(m); updaters.push((t) => { m.visible = inShots(t, 6) && t > E('kopi') - 0.1 + i * 0.08; at(m, 0.9, 1.75, -3.0); }); return m; });
+    const glare = P.glowSprite('#bfe4ff', 1.0); g.add(glare); const bp = P.phone(); bp.scale.setScalar(3.2); g.add(bp); updaters.push((t) => { const on = inShots(t, 6) && t > E('layar') - 0.1; glare.visible = bp.visible = on; at(bp, 0.95, 2.45, -3.0); at(glare, 0.95, 2.45, -2.9); });
+        // fixes (7)
     label(g, L.safe, -0.2, 2.6, -3.0, E('berbahaya') - 0.1, E('caranya'), {w: 1.5, bg: '#3fb06a', fg: '#fff3df', frame: '#1f6a3a'});
     [[L.fix1, 'tidur2'], [L.fix2, 'kurangi'], [L.fix3, 'istirahatkan']].forEach(([tx, k], i) => label(g, '✓ ' + tx, 0.8, 2.6 - i * 0.36, -3.0, E(k) - 0.1, cut(8), {w: 1.5, bg: '#fbfbf8', fg: '#1f6a3a'}));
     // waiting for luck (9), the boss (10), overtime (11)
@@ -143,9 +150,7 @@ export function buildWorld(lang, T, EVt, L) {
     updaters.push((t) => { const tw = t > E('otot') && t < cut(5) ? 0.2 + 0.28 * Math.abs(Math.sin(t * 22)) : 0.2; em.setLid(tw); });
     fx(g, FX.sparks([0.9, 1.75, -3.8], E('korsleting'), {n: 40, color: '#f2d24a'}));
     fx(g, FX.lightning([0.7, 1.6, -3.8], [1.3, 1.9, -3.9], E('korsleting') + 0.05, {dur: 0.5, seed: 9, color: '#f2d24a'}));
-    label(g, L.otot, -0.3, 2.8, -3.4, E('otot') - 0.1, cut(5), {w: 1.8, bg: '#e8737a', fg: '#fff3df', frame: '#8a2a36'});
-    label(g, L.short, -0.3, 0.45, -3.0, E('korsleting') - 0.1, cut(5), {w: 1.9, bg: '#f2d24a'});
-  }
+          }
 
   // ---------- the clinic: when to see a doctor (8) ----------
   {
@@ -154,9 +159,10 @@ export function buildWorld(lang, T, EVt, L) {
     g.add(P.room(7, 3, 6, {wall: '#e8f0f4', floor: '#bfc8cc', wain: '#7fb0c8', tiles: true}));
     const crs = sign('+', 0.5, 0.5, {bg: '#fbfbf8', fg: '#d8312a', frame: '#d8312a'}); at(crs, -1.8, 2.2, -4.85); g.add(crs);
     const dok = ch('dokter', {seed: 30}, g, -0.9, -3.2, 0.3);
+    ['MINGGU 1', 'MINGGU 2', 'MINGGU 3', 'MINGGU 4'].forEach((w, i) => { const span = (E('dokter') - 0.3 - cut(8)) / 4; const t0 = cut(8) + i * span; label(g, w, 0.55, 2.4, -3.2, t0, i === 3 ? cut(9) : t0 + span, {w: 1.0, h: 0.75, bg: '#fbfbf8', fg: '#d8312a', frame: '#d8312a'}); });
+    [[L.w2, 'tertutup'], [L.w3, 'menjalar']].forEach(([tx, k], i) => label(g, '⚠ ' + tx, 0.55, 1.75 - i * 0.34, -3.1, E(k) - 0.1, cut(9), {w: 1.5, bg: '#f2d24a'}));
+    const steth = sign('🩺', 0.45, 0.45, {bg: '#4f8fc8', fg: '#fff3df', frame: '#2f5a8a'}); popSign(g, steth, -0.9, 2.45, -3.0, E('dokter') - 0.2, cut(9));
     dok.act([{t: 0, pose: 'present', expr: 'thinking'}, {t: E('minggu'), pose: 'pointUp', expr: 'determined'}, {t: E('dokter') - 0.1, pose: 'present', expr: 'happy'}]);
-    [[L.w1, 'minggu'], [L.w2, 'tertutup'], [L.w3, 'menjalar']].forEach(([tx, k], i) => label(g, '⚠ ' + tx, 0.45, 2.55 - i * 0.36, -3.1, E(k) - 0.1, cut(9), {w: 1.5, bg: '#f2d24a'}));
-    label(g, L.doctor, 0.45, 1.35, -3.0, E('dokter') - 0.1, cut(9), {w: 1.7, bg: '#4f8fc8', fg: '#fff3df', frame: '#2f5a8a'});
   }
 
   return {world, chars, locGroups, update(t, camPos) {

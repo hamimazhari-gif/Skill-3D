@@ -106,7 +106,8 @@ function Scene({lang, thumb}) {
 const DIPS = [4, 5, 8, 9];
 
 // Storyboard screen text: [time (EV name or 'cutN'), text]; each stays until the next one ('' hides it).
-const TITLES = []; // no storyboard yet: only captions
+const TITLES = [['cut1', 'MATA KEDUTAN, | PERTANDA APA? 👁️'], ['cut2', '"MAU DAPAT REZEKI!" | "MAU KETEMU ORANG!" 🔮'], ['cut3', 'MENUNGGU REZEKI | DATANG… 💰⏳'], ['cut4', 'OTOT KELOPAK MATA | "KORSLETING" KECIL ⚡'],
+  ['cut6', 'STRES 😩 | KURANG TIDUR 😴 | KAFEIN ☕ | MATA LELAH 📱'], ['cut8', 'LEBIH DARI BEBERAPA | MINGGU? KE DOKTER 🩺'], ['cut10', 'TERNYATA YANG DATANG… | LEMBURAN 😭']];
 const Titles = ({T, E, t}) => {
   const at = (k) => (/^cut\d+$/.test(k) ? T.CUTS[+k.slice(3) - 1] : E[k]);
   let cur = null; for (const [k, txt] of TITLES) { const t0 = at(k) + (k === 'cut1' ? 0.2 : 0.05); if (t >= t0) cur = {txt, t0}; }

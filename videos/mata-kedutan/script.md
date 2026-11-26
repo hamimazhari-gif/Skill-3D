@@ -1,6 +1,6 @@
 # Mata kedutan — script
 
-Narasi dan voice-over dari pengguna (77,3 s), tidak diubah. Belum ada storyboard: hanya caption kata-per-kata dan label di dunia.
+Narasi dan voice-over dari pengguna (77,3 s), tidak diubah. Mengikuti storyboard pengguna (7 adegan dengan teks layar): kedutan di depan laptop + DUG, tetangga/nenek/teman kantor dengan gelembung pikiran (uang, tamu, air mata), menunggu rezeki di depan pintu dengan karung kosong, otot kelopak yang bergetar, ikon penyebab (awan stres, kasur kosong, kopi besar, HP menyala), kalender MINGGU 1-4 lalu ikon dokter, bos membawa kerjaan dan mata makin kencang berkedut. Papan di dunia yang sama dengan teks layar dihapus.
 
 | Shot | Lokasi | Isi |
 |---|---|---|
