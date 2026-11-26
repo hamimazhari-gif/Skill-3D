@@ -10,43 +10,43 @@ const LIFT = headLift(CHAR_DESIGN) - 0.03;
 const ly = (p, k) => (p.lift !== false && k.look[1] > 0.9 ? LIFT : 0);
 
 export const SHOT_PLAN = [
-  // Calm camera: medium shots, a track along the river, a crane up the salt layer.
-  {shot: 1, loc: 'pantai', lift: false, move: 'a mouthful of sea water', keys: [
-    {at: 'start', pos: [-0.2, 0.9, -1.6], look: [-0.2, 0.7, -3.8]},
-    {at: 'end', pos: [-0.2, 0.9, -1.75], look: [-0.2, 0.7, -3.8]}]},
-  {shot: 2, loc: 'darat', lift: false, move: 'the river tastes fresh', keys: [
-    {at: 'start', pos: [0.3, 1.6, -0.2], look: [0.0, 1.2, -3.6]},
-    {at: 'end', pos: [0.3, 1.6, -0.45], look: [0.0, 1.2, -3.6]}]},
-  {shot: 3, loc: 'darat', lift: false, move: 'rain on the rocks', keys: [
-    {at: 'start', pos: [-1.4, 2.0, -1.4], look: [-1.4, 1.0, -6.4]},
-    {at: 'end', pos: [-1.4, 1.8, -2.4], look: [-1.4, 0.8, -6.4]}]},
-  {shot: 4, loc: 'darat', lift: false, move: 'the river courier', keys: [
-    {at: 'start', pos: [-1.5, 1.4, -0.8], look: [-1.5, 0.9, -4.2]},
-    {at: 'end', pos: [3.0, 1.4, -0.8], look: [3.0, 0.9, -4.2]}]},
-  {shot: 5, loc: 'darat', lift: false, move: 'why is the river fresh', keys: [
-    {at: 'start', pos: [0.8, 1.6, -0.3], look: [0.8, 1.2, -3.6]},
-    {at: 'end', pos: [0.8, 1.6, -0.55], look: [0.8, 1.2, -3.6]}]},
-  {shot: 6, loc: 'laut', lift: false, move: 'the sun lifts the water', keys: [
-    {at: 'start', pos: [0, 1.6, 0.4], look: [0, 2.2, -4.0]},
-    {at: 'end', pos: [0, 1.8, 0.2], look: [0, 2.8, -4.0]}]},
-  {shot: 7, loc: 'laut', lift: false, move: 'close: "go on without me"', keys: [
-    {at: 'start', pos: [0.2, 0.75, -1.0], look: [0.2, 0.5, -2.9]},
-    {at: 'end', pos: [0.2, 0.75, -1.15], look: [0.2, 0.5, -2.9]}]},
-  {shot: 8, loc: 'laut', lift: false, move: 'the cycle and the volcano', keys: [
-    {at: 'start', pos: [0.6, 1.9, 0.6], look: [0.8, 1.8, -4.5]},
-    {at: 'end', pos: [0.8, 1.9, 0.3], look: [1.0, 1.8, -4.5]}]},
-  {shot: 9, loc: 'kota', lift: false, move: 'salt spread over the land', keys: [
-    {at: 'start', pos: [0, 2, 10], look: [-8, 14, -40]},
-    {at: 'end', pos: [0, 12, 40], look: [-8, 26, -40]}]},
-  {shot: 10, loc: 'kota', lift: false, move: 'as high as 50 floors', keys: [
-    {at: 'start', pos: [0, 24, 60], look: [-6, 40, -38]},
-    {at: 'end', pos: [0, 28, 70], look: [-6, 44, -38]}]},
-  {shot: 11, loc: 'pantai', lift: false, move: '"take only what you need"', keys: [
-    {at: 'start', pos: [-0.2, 1.55, -0.2], look: [-0.2, 1.4, -3.2]},
-    {at: 'end', pos: [-0.2, 1.55, -0.45], look: [-0.2, 1.4, -3.2]}]},
-  {shot: 12, loc: 'pantai', lift: false, move: 'the question', keys: [
-    {at: 'start', pos: [0.2, 1.7, -0.2], look: [0.2, 1.7, -3.0]},
-    {at: 'end', pos: [0.2, 1.7, -0.45], look: [0.2, 1.7, -3.0]}]},
+  // Calm camera: close-ups on the twitch, medium office shots.
+  {shot: 1, loc: 'kantor', lift: false, move: 'close: the eyelid twitches', keys: [
+    {at: 'start', pos: [-0.15, 1.75, -1.7], look: [-0.2, 1.75, -3.1]},
+    {at: 'end', pos: [-0.15, 1.75, -1.85], look: [-0.2, 1.75, -3.1]}]},
+  {shot: 2, loc: 'kantor', lift: false, move: 'everyone is a fortune teller', keys: [
+    {at: 'start', pos: [0.2, 1.75, 1.0], look: [0.2, 1.6, -3.3]},
+    {at: 'end', pos: [0.2, 1.75, 0.7], look: [0.2, 1.6, -3.3]}]},
+  {shot: 3, loc: 'kantor', lift: false, move: 'but what does science say', keys: [
+    {at: 'start', pos: [0.2, 1.7, 0.6], look: [0.2, 1.6, -3.2]},
+    {at: 'end', pos: [0.2, 1.7, 0.35], look: [0.2, 1.6, -3.2]}]},
+  {shot: 4, loc: 'lab', lift: false, move: 'the eyelid muscle and the nerve', keys: [
+    {at: 'start', pos: [0.1, 1.6, 0.4], look: [0.1, 1.6, -3.6]},
+    {at: 'end', pos: [0.1, 1.6, 0.1], look: [0.1, 1.6, -3.6]}]},
+  {shot: 5, loc: 'kantor', lift: false, move: 'the causes are close to home', keys: [
+    {at: 'start', pos: [0.1, 1.65, -0.5], look: [0.1, 1.55, -3.2]},
+    {at: 'end', pos: [0.1, 1.65, -0.75], look: [0.1, 1.55, -3.2]}]},
+  {shot: 6, loc: 'kantor', lift: false, move: 'stress, sleep, coffee, screens', keys: [
+    {at: 'start', pos: [0.0, 1.75, 0.4], look: [0.0, 1.65, -3.3]},
+    {at: 'end', pos: [0.0, 1.75, 0.15], look: [0.0, 1.65, -3.3]}]},
+  {shot: 7, loc: 'kantor', lift: false, move: 'usually harmless', keys: [
+    {at: 'start', pos: [0.2, 1.75, 0.4], look: [0.2, 1.65, -3.2]},
+    {at: 'end', pos: [0.2, 1.75, 0.15], look: [0.2, 1.65, -3.2]}]},
+  {shot: 8, loc: 'klinik', lift: false, move: 'when to see a doctor', keys: [
+    {at: 'start', pos: [-0.2, 1.7, 0.3], look: [-0.2, 1.6, -3.3]},
+    {at: 'end', pos: [-0.2, 1.7, 0.05], look: [-0.2, 1.6, -3.3]}]},
+  {shot: 9, loc: 'kantor', lift: false, move: 'waiting for luck', keys: [
+    {at: 'start', pos: [-0.15, 1.7, -1.4], look: [-0.2, 1.65, -3.1]},
+    {at: 'end', pos: [-0.15, 1.7, -1.55], look: [-0.2, 1.65, -3.1]}]},
+  {shot: 10, loc: 'kantor', lift: false, move: 'the boss brings extra work', keys: [
+    {at: 'start', pos: [0.5, 1.7, -0.1], look: [0.5, 1.6, -3.2]},
+    {at: 'end', pos: [0.5, 1.7, -0.35], look: [0.5, 1.6, -3.2]}]},
+  {shot: 11, loc: 'kantor', lift: false, move: 'close: overtime', keys: [
+    {at: 'start', pos: [-0.15, 1.7, -1.4], look: [-0.2, 1.7, -3.1]},
+    {at: 'end', pos: [-0.15, 1.7, -1.55], look: [-0.2, 1.7, -3.1]}]},
+  {shot: 12, loc: 'kantor', lift: false, move: 'the question', keys: [
+    {at: 'start', pos: [-0.2, 1.75, 0.3], look: [-0.2, 1.7, -3.0]},
+    {at: 'end', pos: [-0.2, 1.75, 0.1], look: [-0.2, 1.7, -3.0]}]},
 ];
 
 export function warpU(T, t) {

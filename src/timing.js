@@ -64,21 +64,21 @@ export function makeTiming(lang) {
   return {S, total, CUTS, wt, shotOf, frames: Math.ceil(total * FPS)};
 }
 
-// Word events: [sentenceIndex, word, occurrence]. Story: "Kenapa laut asin" (Indonesian only; en mirrors id).
+// Word events: [sentenceIndex, word, occurrence]. Story: "Mata kedutan" (Indonesian only; en mirrors id).
 const EV_ID = {
-  pernah: [0, 'pernah'], menelan: [0, 'menelan'], asin: [1, 'asin'], truk: [1, 'truk'],
-  tawar: [2, 'tawar'], mengalir: [3, 'mengalir'], beda: [4, 'beda'],
-  hujan: [5, 'hujan'], asam: [6, 'asam'], batuan: [6, 'batuan'], melarutkan: [6, 'melarutkan'], garam6: [6, 'garam'],
-  kurir: [7, 'kurir'], membawa: [8, 'membawa'], menuju: [8, 'menuju'], paket: [9, 'paket'], tanda: [9, 'tanda'],
-  kenapa: [10, 'kenapa'], diganti: [11, 'diganti'], sedikit: [12, 'sedikit'], lidah: [12, 'lidah'],
-  tujuan: [13, 'tujuan'], matahari: [14, 'matahari'], awan: [14, 'awan'], garamnya: [15, 'garamnya'], tertinggal: [16, 'tertinggal'],
-  kalian: [17, 'kalian'], disini: [17, 'sini'],
-  menguap: [18, 'menguap'], turun: [18, 'turun'], jutaan: [18, 'jutaan'], gunung: [19, 'gunung'], akhirnya: [20, 'akhirnya'],
-  jumlah: [21, 'jumlah'], dikeruk: [22, 'dikeruk'], disebar: [22, 'disebar'], seratus: [22, 'seratus'], setinggi: [23, 'setinggi'], lantai: [23, 'lantai'],
-  nak: [24, 'nak'], secukupnya: [24, 'secukupnya'], jangan: [24, 'jangan'], fakta: [25, 'fakta'], komentar: [26, 'komentar'],
+  tiba: [0, 'tiba'], kelopak: [0, 'kelopak'], dug: [1, 'dug'], peramal: [2, 'peramal'],
+  wah: [3, 'wah'], rezeki: [3, 'rezeki'], bukan: [4, 'bukan'], jauh: [4, 'jauh'], kiri: [5, 'kiri'], sedih: [5, 'sedih'],
+  kepercayaan: [6, 'kepercayaan'], tapi: [7, 'tapi'], ilmu: [7, 'ilmu'],
+  otot: [8, 'otot'], tanpa: [8, 'tanpa'], korsleting: [9, 'korsleting'], saraf: [9, 'saraf'],
+  penyebab: [10, 'penyebab'], dekat: [10, 'dekat'], stres: [11, 'stres'], kurang: [12, 'kurang'], kopi: [13, 'kopi'], layar: [14, 'layar'], laptop: [14, 'laptop'],
+  kabar: [15, 'kabar'], berbahaya: [15, 'berbahaya'], hilang: [15, 'hilang'], caranya: [16, 'caranya'], tidur2: [16, 'tidur'], kurangi: [16, 'kurangi'], istirahatkan: [16, 'istirahatkan'],
+  tapi2: [17, 'tapi'], minggu: [17, 'minggu'], tertutup: [17, 'tertutup'], menjalar: [17, 'menjalar'], dokter: [17, 'dokter'],
+  jadi: [18, 'jadi'], menunggu: [18, 'menunggu'], datang: [18, 'datang'], eh: [19, 'eh'], kerjaan: [19, 'kerjaan'], malam: [19, 'malam'],
+  ternyata: [20, 'ternyata'], lemburan: [20, 'lemburan'], kalau: [21, 'kalau'], komentar: [22, 'komentar'],
 };
 export const EV = Object.fromEntries(Object.entries(EV_ID).map(([k, v]) => [k, {id: v, en: v}]));
 
-const L_ID = {salty: 'ASIN!', fresh: 'TAWAR', acid: 'HUJAN SEDIKIT ASAM', mineral: 'MINERAL LARUT', box: 'GARAM', little: 'GARAM SANGAT SEDIKIT', evap: 'MENGUAP', stays: 'GARAM TERTINGGAL',
-  years: 'JUTAAN TAHUN', volcano: 'GUNUNG BAWAH LAUT', m150: '±150 METER', floors: '50 LANTAI', question: 'FAKTA LAUT PALING BIKIN PENASARAN?', comment: 'TULIS DI KOMENTAR!'};
+const L_ID = {rezeki: 'REZEKI?', jauh: 'KETEMU ORANG JAUH?', sedih: 'MAU SEDIH?', otot: 'OTOT KELOPAK MATA', short: 'KORSLETING SARAF',
+  stres: 'STRES', tidur: 'KURANG TIDUR', kopi: 'KOPI', layar: 'LAYAR', safe: 'BIASANYA AMAN', fix1: 'TIDUR CUKUP', fix2: 'KURANGI KOPI', fix3: 'ISTIRAHATKAN MATA',
+  w1: '> BEBERAPA MINGGU', w2: 'KELOPAK TERTUTUP', w3: 'MENJALAR KE WAJAH', doctor: 'PERIKSA KE DOKTER', lembur: 'LEMBUR!', question: 'KEDUTAN = PERTANDA APA?', comment: 'TULIS DI KOMENTAR!'};
 export const LABELS = {id: L_ID, en: L_ID};

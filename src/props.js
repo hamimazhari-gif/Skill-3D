@@ -2458,3 +2458,17 @@ export function droplet(s = 1) { const g = new THREE.Group(); const b = ball(0.1
 // A mountain (cone with a snow cap) and a volcano with a glowing top.
 export function mountain(h = 4, r = 3, o = {}) { const g = new THREE.Group(); g.add(cone(r, h, toon(o.color || '#7a8a6a', {paint: {seed: o.seed || 951}}), {seg: 9})); if (!o.volcano) { const cap = cone(r * 0.32, h * 0.32, '#f3f6f8', {seg: 9}); cap.position.y = h * 0.68; g.add(cap); } else { const gl = glowSprite('#ff8a3a', r); gl.position.y = h; g.add(gl); } return g; }
 export function raft() { const g = new THREE.Group(); for (let i = 0; i < 5; i++) { const l = cyl(0.08, 0.08, 1.2, '#a8784a', {center: true, hull: 0.006}); l.rotation.z = Math.PI / 2; at(l, 0, 0.08, -0.32 + i * 0.16); g.add(l); } return g; }
+
+// ---------- "Mata kedutan" ----------
+// A big eye model: eyeball, an upper lid (skin half shell) that can close (setLid(u)), a red lid muscle band and a nerve wire.
+export function eyeModel(o = {}) {
+  const g = new THREE.Group(); const eye = eyeball(); eye.scale.setScalar(o.s || 3); g.add(eye); const R = 0.2 * (o.s || 3);
+  const lidM = toon(o.skin || '#f4d8c2', {wear: false}); lidM.side = THREE.DoubleSide;
+  const lid = new THREE.Mesh(new THREE.SphereGeometry(R * 1.04, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.5), lidM); const lp = new THREE.Group(); lp.add(lid); g.add(lp);
+  const muscle = new THREE.Mesh(new THREE.TorusGeometry(R * 1.08, R * 0.08, 8, 32, Math.PI), toon('#d8413a', {wear: false})); muscle.rotation.z = 0; g.add(muscle);
+  const pts = [new THREE.Vector3(R * 1.1, 0, 0), new THREE.Vector3(R * 1.8, R * 0.4, -0.2), new THREE.Vector3(R * 2.4, -R * 0.2, -0.3), new THREE.Vector3(R * 3.2, R * 0.2, -0.5)];
+  const nerve = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 30, R * 0.04, 6), toon('#f2d24a', {wear: false})); g.add(nerve);
+  return {group: g, nerveEnd: pts[1], setLid(u) { lp.rotation.x = -0.6 + 2.1 * u; }};
+}
+// A stack of paper files.
+export function fileStack(n = 8) { const g = new THREE.Group(); for (let i = 0; i < n; i++) { const p = box(0.34, 0.05, 0.25, i % 3 ? '#fbf6ea' : '#f2d24a', {hull: 0.004}); at(p, (i % 2) * 0.02, i * 0.052, 0, (i % 3 - 1) * 0.08); g.add(p); } return g; }

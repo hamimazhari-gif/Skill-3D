@@ -1,0 +1,420 @@
+{
+ "duration": 77.33,
+ "sentences": [
+  {
+   "shot": 1,
+   "text": "Tiba-tiba, kelopak matamu bergerak-gerak sendiri.",
+   "start": 0.0,
+   "end": 2.68,
+   "pred": 3.1,
+   "voiced": [
+    [
+     0.1,
+     0.62
+    ],
+    [
+     0.98,
+     2.68
+    ]
+   ]
+  },
+  {
+   "shot": 1,
+   "text": "Dug... dug... dug...",
+   "start": 3.34,
+   "end": 3.7,
+   "pred": 0.59,
+   "voiced": [
+    [
+     3.34,
+     3.7
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "Dan langsung saja, semua orang jadi peramal.",
+   "start": 3.92,
+   "end": 5.98,
+   "pred": 2.77,
+   "voiced": [
+    [
+     3.92,
+     4.86
+    ],
+    [
+     5.08,
+     5.66
+    ],
+    [
+     5.74,
+     5.88
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Wah, mata kanan kedutan, mau dapat rezeki!\"",
+   "start": 6.5,
+   "end": 7.46,
+   "pred": 2.97,
+   "voiced": [
+    [
+     6.5,
+     6.68
+    ],
+    [
+     6.84,
+     7.36
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Bukan, itu tandanya mau ketemu orang jauh!\"",
+   "start": 7.58,
+   "end": 9.18,
+   "pred": 2.64,
+   "voiced": [
+    [
+     7.58,
+     9.16
+    ]
+   ]
+  },
+  {
+   "shot": 2,
+   "text": "\"Kalau mata kiri, katanya mau sedih...\"",
+   "start": 9.92,
+   "end": 12.02,
+   "pred": 2.24,
+   "voiced": [
+    [
+     9.92,
+     10.82
+    ],
+    [
+     11.08,
+     11.92
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Itu memang kepercayaan turun-temurun yang sudah lama dikenal di masyarakat kita.",
+   "start": 12.94,
+   "end": 16.06,
+   "pred": 4.48,
+   "voiced": [
+    [
+     12.94,
+     16.02
+    ]
+   ]
+  },
+  {
+   "shot": 3,
+   "text": "Tapi, apa kata ilmu pengetahuan?",
+   "start": 16.54,
+   "end": 18.64,
+   "pred": 2.11,
+   "voiced": [
+    [
+     16.54,
+     16.7
+    ],
+    [
+     16.78,
+     16.94
+    ],
+    [
+     17.18,
+     17.38
+    ],
+    [
+     17.46,
+     18.64
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Kedutan mata biasanya terjadi karena otot kecil di kelopak mata bergerak sendiri tanpa kita perintah.",
+   "start": 19.62,
+   "end": 24.24,
+   "pred": 5.67,
+   "voiced": [
+    [
+     19.62,
+     23.2
+    ],
+    [
+     23.32,
+     24.22
+    ]
+   ]
+  },
+  {
+   "shot": 4,
+   "text": "Seperti ada \"korsleting\" kecil pada saraf yang mengatur otot itu.",
+   "start": 24.82,
+   "end": 27.66,
+   "pred": 3.49,
+   "voiced": [
+    [
+     24.84,
+     27.64
+    ]
+   ]
+  },
+  {
+   "shot": 5,
+   "text": "Dan penyebab paling umumnya ternyata... sangat dekat dengan kehidupan kita.",
+   "start": 28.44,
+   "end": 31.7,
+   "pred": 4.09,
+   "voiced": [
+    [
+     28.44,
+     29.96
+    ],
+    [
+     30.18,
+     31.64
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Stres.",
+   "start": 32.44,
+   "end": 32.92,
+   "pred": 0.33,
+   "voiced": [
+    [
+     32.46,
+     32.9
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Kurang tidur.",
+   "start": 33.5,
+   "end": 34.06,
+   "pred": 0.73,
+   "voiced": [
+    [
+     33.5,
+     33.98
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Terlalu banyak minum kopi.",
+   "start": 34.62,
+   "end": 35.62,
+   "pred": 1.45,
+   "voiced": [
+    [
+     34.62,
+     35.58
+    ]
+   ]
+  },
+  {
+   "shot": 6,
+   "text": "Dan mata yang lelah karena menatap layar HP atau laptop berjam-jam.",
+   "start": 36.06,
+   "end": 39.24,
+   "pred": 3.63,
+   "voiced": [
+    [
+     36.06,
+     36.46
+    ],
+    [
+     36.54,
+     38.12
+    ],
+    [
+     38.2,
+     39.24
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Kabar baiknya, kedutan seperti ini biasanya nggak berbahaya, dan akan hilang sendiri dalam beberapa hari.",
+   "start": 40.64,
+   "end": 45.6,
+   "pred": 6.59,
+   "voiced": [
+    [
+     40.64,
+     41.42
+    ],
+    [
+     41.6,
+     43.58
+    ],
+    [
+     44.0,
+     45.58
+    ]
+   ]
+  },
+  {
+   "shot": 7,
+   "text": "Caranya, tidur yang cukup, kurangi kopi, dan istirahatkan mata dari layar.",
+   "start": 46.28,
+   "end": 50.72,
+   "pred": 5.14,
+   "voiced": [
+    [
+     46.28,
+     46.86
+    ],
+    [
+     47.24,
+     47.7
+    ],
+    [
+     47.78,
+     47.92
+    ],
+    [
+     48.38,
+     48.88
+    ],
+    [
+     48.96,
+     49.12
+    ],
+    [
+     49.3,
+     50.72
+    ]
+   ]
+  },
+  {
+   "shot": 8,
+   "text": "Tapi, kalau kedutannya berlangsung lebih dari beberapa minggu, kelopak mata sampai tertutup sendiri, atau kedutannya menjalar ke bagian wajah lain... sebaiknya periksa ke dokter.",
+   "start": 51.58,
+   "end": 59.54,
+   "pred": 10.94,
+   "voiced": [
+    [
+     51.58,
+     54.04
+    ],
+    [
+     54.36,
+     55.8
+    ],
+    [
+     56.1,
+     58.12
+    ],
+    [
+     58.48,
+     59.54
+    ]
+   ]
+  },
+  {
+   "shot": 9,
+   "text": "Jadi, waktu mata kananmu kedutan dan kamu menunggu rezeki datang...",
+   "start": 60.92,
+   "end": 64.22,
+   "pred": 3.96,
+   "voiced": [
+    [
+     60.92,
+     61.34
+    ],
+    [
+     61.6,
+     63.86
+    ],
+    [
+     63.94,
+     64.22
+    ]
+   ]
+  },
+  {
+   "shot": 10,
+   "text": "\"Eh, kamu! Ini ada kerjaan tambahan. Selesaikan malam ini, ya.\"",
+   "start": 65.14,
+   "end": 68.44,
+   "pred": 3.89,
+   "voiced": [
+    [
+     65.14,
+     65.28
+    ],
+    [
+     65.44,
+     65.64
+    ],
+    [
+     66.3,
+     67.18
+    ],
+    [
+     67.54,
+     68.42
+    ]
+   ]
+  },
+  {
+   "shot": 11,
+   "text": "Ternyata yang datang... lemburan.",
+   "start": 69.72,
+   "end": 71.82,
+   "pred": 1.71,
+   "voiced": [
+    [
+     69.72,
+     70.76
+    ],
+    [
+     71.14,
+     71.82
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Kalau matamu kedutan, kamu biasanya percaya pertanda apa?",
+   "start": 72.92,
+   "end": 75.68,
+   "pred": 3.56,
+   "voiced": [
+    [
+     72.92,
+     73.86
+    ],
+    [
+     74.1,
+     75.68
+    ]
+   ]
+  },
+  {
+   "shot": 12,
+   "text": "Tulis di komentar!",
+   "start": 76.38,
+   "end": 77.06,
+   "pred": 0.99,
+   "voiced": [
+    [
+     76.38,
+     77.06
+    ]
+   ]
+  }
+ ]
+}
